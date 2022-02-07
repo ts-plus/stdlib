@@ -1,0 +1,15 @@
+{
+  "$schema": "https://unpkg.com/@changesets/config@1.6.4/schema.json",
+  "changelog": [
+    "@changesets/changelog-github",
+    {
+      "repo": "ts-plus/stdlib"
+    }
+  ],
+  "commit": false,
+  "linked": [],
+  "access": "restricted",
+  "baseBranch": "main",
+  "updateInternalDependencies": "patch",
+  "ignore": []
+}

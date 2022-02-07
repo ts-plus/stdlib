@@ -1,0 +1,13 @@
+/.yarn/*
+!/.yarn/releases
+!/.yarn/plugins
+!/.yarn/sdks
+
+tsbuildinfo/
+node_modules/
+yarn-error.log
+.npmrc
+.DS_Store
+compiler/
+dist/
+tmp/

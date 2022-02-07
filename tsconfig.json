@@ -1,0 +1,16 @@
+{
+    "compilerOptions": {
+        "strict": true,
+        "declaration": true,
+        "target": "ES2020",
+        "module": "ESNext",
+        "outDir": "dist/esm",
+        "declarationDir": "dist/dts",
+        "incremental": true,
+        "tsBuildInfoFile": "dist/.tsbuildinfo",
+        "skipLibCheck": true
+    },
+    "include": [
+        "src/**/*.ts"
+    ]
+}
