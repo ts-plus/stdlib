@@ -3,6 +3,7 @@
   "typescript.preferences.importModuleSpecifierEnding": "js",
   "editor.formatOnSave": true,
   "eslint.format.enable": true,
+  "explorer.sortOrder": "mixed",
   "[javascript]": {
     "editor.defaultFormatter": "dbaeumer.vscode-eslint"
   },
@@ -14,6 +15,23 @@
   },
   "[typescriptreact]": {
     "editor.defaultFormatter": "dbaeumer.vscode-eslint"
+  },
+  "files.exclude": {
+    "**/.yarn*": true,
+    "**/.*.js": true,
+    "**/.swc": true,
+    "**/.changeset": true,
+    "**/yarn.lock": true,
+    "**/tsconfig.json": true,
+    "**/.*rc": true,
+    "**/.*config": true,
+    "**/.git*": true,
+    "**/.npmignore*": true,
+    "**/.husky": true,
+    "**/node_modules": true,
+    "**/LICENSE.*": true,
+    "**/lerna.json": true,
+    "**/jest.config.js": true,
   },
   "prettier.disableLanguages": [
     "javascript",

@@ -2,6 +2,7 @@
 !/.yarn/releases
 !/.yarn/plugins
 !/.yarn/sdks
+!/.yarn/patches
 
 tsbuildinfo/
 node_modules/
