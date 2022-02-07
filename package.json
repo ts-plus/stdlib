@@ -4,11 +4,21 @@
   "repository": "https://github.com/ts-plus/installer.git",
   "author": "Michael Arnaldi <arnaldimichael@gmail.com>",
   "license": "MIT",
+  "typesVersions": {
+    "*": {
+      "*": [
+        "./build/dts/*"
+      ]
+    }
+  },
   "exports": {
     "./*": {
-      "import": "./dist/esm/*.js",
-      "require": "./dist/cjs/*.js"
+      "require": "./build/cjs/*.js",
+      "import": "./build/esm/*.js"
     }
+  },
+  "ets": {
+    "typeDir": "./build/dts"
   },
   "publishConfig": {
     "access": "public"

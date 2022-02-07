@@ -22,7 +22,7 @@
     "**/.swc": true,
     "**/.changeset": true,
     "**/yarn.lock": true,
-    "**/tsconfig.json": true,
+    //"**/tsconfig.json": true,
     "**/.*rc": true,
     "**/.*config": true,
     "**/.git*": true,
