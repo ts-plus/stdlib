@@ -18,7 +18,7 @@
     "release": "changeset publish",
     "build": "yarn build:clean && yarn build:esm && yarn build:cjs",
     "build:esm": "tsc -b tsconfig.json",
-    "build:cjs": "cd dist && swc ./esm -d ./cjs",
+    "build:cjs": "cp .swcrc dist && cd dist && swc ./esm -d ./cjs",
     "build:clean": "rimraf dist",
     "postinstall": "tsplus-install",
     "swc": "swc"
