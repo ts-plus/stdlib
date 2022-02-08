@@ -11,7 +11,7 @@
 
 import { IndexOutOfBounds } from "../../exceptions/IndexOutOfBounds.js"
 import { NoSuchElement } from "../../exceptions/NoSuchElement.js"
-import { List } from "../List.js"
+import { List } from "../List/definition.js"
 
 /**
  * @tsplus type ListBuffer
