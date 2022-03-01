@@ -7,9 +7,8 @@
 tsbuildinfo/
 node_modules/
 yarn-error.log
-.npmrc
+.ultra.cache.json
 .DS_Store
-compiler/
-dist/
 tmp/
-core/
+build/
+dist/

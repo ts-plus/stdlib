@@ -46,7 +46,7 @@ export class Cons<A> implements Iterable<A>, Equals.Equals {
   }
 
   [Equals.equalsSym](that: unknown): boolean {
-    return that instanceof Cons && this.equalsWith(that, Equals.equals)
+    return that instanceof Cons && equalsWith(this, that, Equals.equals)
   }
 }
 

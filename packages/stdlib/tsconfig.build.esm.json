@@ -1,0 +1,20 @@
+{
+    "extends": "../../tsconfig.base.json",
+    "compilerOptions": {
+        "outDir": "build/esm",
+        "declarationDir": "build/dts",
+        "target": "ES2018",
+        "module": "ES6",
+        "moduleResolution": "Node",
+        "incremental": true,
+        "tsBuildInfoFile": "tsbuildinfo/esm.tsbuildinfo",
+        "declaration": true,
+        "declarationMap": true,
+        "removeComments": false,
+        "tsPlusModuleDiscoveryLocalSuffix": "js",
+        "tsPlusTracingPackageName": "@tsplus/stdlib"
+    },
+    "include": [
+        "src/**/*.ts"
+    ]
+}

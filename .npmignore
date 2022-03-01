@@ -1,7 +1,0 @@
-node_modules
-.vscode
-.yarn
-yarn.lock
-.github
-.changesets
-dist/.tsbuildinfo

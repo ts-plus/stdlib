@@ -1,4 +1,4 @@
-import { Equivalence, makeEquivalence } from "../Equivalence.js"
+import { Equivalence } from "../Equivalence.js"
 import type { Ordering } from "../Ordering.js"
 import { Ord } from "./definition.js"
 
