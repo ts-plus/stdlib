@@ -1,5 +1,5 @@
 diff --git a/pack.js b/pack.js
-index 988c1552544f433ba5ce6f8622f50ff820508b15..3e37a132cea1143cc99423a5de8a8835cb69b716 100644
+index 988c1552544f433ba5ce6f8622f50ff820508b15..1b1119b8b9d48d80468a052586deaa7d99b45a07 100644
 --- a/pack.js
 +++ b/pack.js
 @@ -47,6 +47,7 @@ const writePackageJsonContent = (0, Function_1.pipe)(TE.do, TE.bind("content", (
