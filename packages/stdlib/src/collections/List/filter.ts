@@ -6,9 +6,11 @@ import { List } from "./definition.js"
 /**
  * @tsplus fluent List filter
  */
-export function filter<A>(self: List<A>, p: Predicate<A>): List<A> {
+export function filter_<A>(self: List<A>, p: Predicate<A>): List<A> {
   return filterCommon_(self, p, false)
 }
+
+export const filter = Pipeable(filter_)
 
 function noneIn<A>(l: List<A>, p: Predicate<A>, isFlipped: boolean): List<A> {
   while (true) {

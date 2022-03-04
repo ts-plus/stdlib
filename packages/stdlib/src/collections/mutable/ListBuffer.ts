@@ -59,7 +59,7 @@ export class ListBuffer<A> implements Iterable<A> {
     return (this.first as List.Cons<A>).tail
   }
 
-  append(elem: A): this {
+  append(this: this, elem: A): this {
     const last1 = List.cons(elem, List.nil())
     if (this.len === 0) {
       this.first = last1
@@ -71,12 +71,12 @@ export class ListBuffer<A> implements Iterable<A> {
     return this
   }
 
-  prepend(elem: A): this {
+  prepend(this: this, elem: A): this {
     this.insert(0, elem)
     return this
   }
 
-  unprepend(): A {
+  unprepend(this: this): A {
     if (this.isEmpty) {
       throw new NoSuchElement()
     }
@@ -90,7 +90,7 @@ export class ListBuffer<A> implements Iterable<A> {
     return this.first
   }
 
-  insert(idx: number, elem: A): this {
+  insert(this: this, idx: number, elem: A): this {
     if (idx < 0 || idx > this.len) {
       throw new IndexOutOfBounds(idx, 0, this.len - 1)
     }
@@ -109,7 +109,7 @@ export class ListBuffer<A> implements Iterable<A> {
     return this
   }
 
-  reduce<B>(b: B, f: (b: B, a: A) => B): B {
+  reduce<B>(this: this, b: B, f: (b: B, a: A) => B): B {
     return this.first.reduce(b, f)
   }
 

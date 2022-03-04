@@ -4,7 +4,7 @@ import type { List } from "./definition.js"
 /**
  * @tsplus fluent List exists
  */
-export function exists<A>(self: List<A>, p: Predicate<A>): boolean {
+export function exists_<A>(self: List<A>, p: Predicate<A>): boolean {
   let these = self
   while (!these.isNil()) {
     if (p(these.head)) {
@@ -14,3 +14,5 @@ export function exists<A>(self: List<A>, p: Predicate<A>): boolean {
   }
   return false
 }
+
+export const exists = Pipeable(exists_)

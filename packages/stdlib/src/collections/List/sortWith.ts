@@ -5,7 +5,7 @@ import type { List } from "./definition.js"
 /**
  * @tsplus fluent List sortWith
  */
-export function sortWith<A>(self: List<A>, ord: Ord<A>): List<A> {
+export function sortWith_<A>(self: List<A>, ord: Ord<A>): List<A> {
   const len = self.length()
   const b = new ListBuffer<A>()
   if (len === 1) {
@@ -23,6 +23,8 @@ export function sortWith<A>(self: List<A>, ord: Ord<A>): List<A> {
   }
   return b.toList
 }
+
+export const sortWith = Pipeable(sortWith_)
 
 function copyToArrayWithIndex<A>(list: List<A>, arr: Array<[number, A]>): void {
   let these = list

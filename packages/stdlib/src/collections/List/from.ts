@@ -3,7 +3,7 @@ import { List } from "./definition.js"
 /**
  * Constructs a new `List` from an `Iterable`
  *
- * @tsplus fluent ListOps from
+ * @tsplus static ListOps from
  */
 export function from<A>(prefix: Iterable<A>): List<A> {
   const iter = prefix[Symbol.iterator]()

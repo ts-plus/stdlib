@@ -3,7 +3,7 @@ import { List } from "./definition.js"
 /**
  * @tsplus fluent List map
  */
-export function map<A, B>(self: List<A>, f: (a: A) => B): List<B> {
+export function map_<A, B>(self: List<A>, f: (a: A) => B): List<B> {
   if (self.isNil()) {
     return self as unknown as List<B>
   } else {
@@ -19,3 +19,5 @@ export function map<A, B>(self: List<A>, f: (a: A) => B): List<B> {
     return h
   }
 }
+
+export const map = Pipeable(map_)

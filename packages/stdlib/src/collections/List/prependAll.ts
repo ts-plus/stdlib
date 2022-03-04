@@ -3,7 +3,7 @@ import { List } from "./definition.js"
 /**
  * @tsplus fluent List prependAll
  */
-export function prependAll<A, B>(self: List<A>, prefix: List<B>): List<A | B> {
+export function prependAll_<A, B>(self: List<A>, prefix: List<B>): List<A | B> {
   if (self.isNil()) {
     return prefix
   } else if (prefix.isNil()) {
@@ -21,3 +21,5 @@ export function prependAll<A, B>(self: List<A>, prefix: List<B>): List<A | B> {
     return result
   }
 }
+
+export const prependAll = Pipeable(prependAll_)

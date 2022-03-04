@@ -5,7 +5,7 @@ import type { List } from "./definition.js"
 /**
  * @tsplus fluent List find
  */
-export function find<A>(self: List<A>, p: Predicate<A>): Option<A> {
+export function find_<A>(self: List<A>, p: Predicate<A>): Option<A> {
   let these = self
   while (!these.isNil()) {
     if (p(these.head)) {
@@ -15,3 +15,5 @@ export function find<A>(self: List<A>, p: Predicate<A>): Option<A> {
   }
   return Option.none
 }
+
+export const find = Pipeable(find_)

@@ -46,7 +46,7 @@ export class Cons<A> implements Iterable<A>, Equals.Equals {
   }
 
   [Equals.equalsSym](that: unknown): boolean {
-    return that instanceof Cons && equalsWith(this, that, Equals.equals)
+    return that instanceof Cons && equalsWith_(this, that, Equals.equals)
   }
 }
 
@@ -144,10 +144,10 @@ export function length<A>(self: List<A>): number {
 /**
  * @tsplus fluent List equalsWith
  */
-export function equalsWith<A>(
+export function equalsWith_<A, B>(
   self: List<A>,
-  that: List<A>,
-  f: (a: A, b: A) => boolean
+  that: List<B>,
+  f: (a: A, b: B) => boolean
 ): boolean {
   if (self === that) {
     return true
@@ -157,7 +157,7 @@ export function equalsWith<A>(
     const i0 = self[Symbol.iterator]()
     const i1 = that[Symbol.iterator]()
     let a: IteratorResult<A>
-    let b: IteratorResult<A>
+    let b: IteratorResult<B>
     while (!(a = i0.next()).done && !(b = i1.next()).done) {
       if (!f(a.value, b.value)) {
         return false
@@ -165,4 +165,14 @@ export function equalsWith<A>(
     }
     return true
   }
+}
+
+export const equalsWith = Pipeable(equalsWith_)
+
+/**
+ * @tsplus fluent List equals
+ * @tsplus operator List ==
+ */
+export function equals_<A, B>(self: List<A>, that: List<B>) {
+  return self.equalsWith(that, Equals.equals)
 }

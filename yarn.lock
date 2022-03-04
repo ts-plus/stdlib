@@ -811,9 +811,9 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@tsplus/installer@npm:^0.0.31":
-  version: 0.0.31
-  resolution: "@tsplus/installer@npm:0.0.31"
+"@tsplus/installer@npm:^0.0.32":
+  version: 0.0.32
+  resolution: "@tsplus/installer@npm:0.0.32"
   dependencies:
     mkdirp: ^1.0.4
     rimraf: ^3.0.2
@@ -822,7 +822,7 @@ __metadata:
     zlib: ^1.0.5
   bin:
     tsplus-install: bin/tsplus-install
-  checksum: ec47fd497777e2bf931a70baa14fcb146bc85fa4dccbf16ea2b377421c781e268b2d544797773eaa8af5fb2af269286021de5cdf02fab720b03173036fd134bd
+  checksum: 770b9f22cfd5b6c652f3d76ef8c482290995569f67c6053f80cd35d2037b0b381866dae0e3c8667c18c3afefa1303f82bbd5d3b35bd65dc36e16a7a75d70ec07
   languageName: node
   linkType: hard
 
@@ -2562,14 +2562,14 @@ __metadata:
   languageName: node
   linkType: hard
 
-"eslint-config-prettier@npm:^8.4.0":
-  version: 8.4.0
-  resolution: "eslint-config-prettier@npm:8.4.0"
+"eslint-config-prettier@npm:^8.5.0":
+  version: 8.5.0
+  resolution: "eslint-config-prettier@npm:8.5.0"
   peerDependencies:
     eslint: ">=7.0.0"
   bin:
     eslint-config-prettier: bin/cli.js
-  checksum: ee8dc343f1fed15dc0658e190a966cc23644477f2331a7f56ae2bb79dd74892e3cde8ea5c142e7a3329a8291a1de041e13ca96e54d0c85ff4a2aba13390c5f10
+  checksum: 0d0f5c32e7a0ad91249467ce71ca92394ccd343178277d318baf32063b79ea90216f4c81d1065d60f96366fdc60f151d4d68ae7811a58bd37228b84c2083f893
   languageName: node
   linkType: hard
 
@@ -6729,7 +6729,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"ts-node@npm:^10.4.0, ts-node@npm:^10.5.0":
+"ts-node@npm:^10.4.0, ts-node@npm:^10.6.0":
   version: 10.6.0
   resolution: "ts-node@npm:10.6.0"
   dependencies:
@@ -6803,7 +6803,7 @@ __metadata:
     "@changesets/cli": ^2.21.0
     "@effect-ts/build-utils": 0.38.2
     "@effect-ts/core": ^0.58.0
-    "@tsplus/installer": ^0.0.31
+    "@tsplus/installer": ^0.0.32
     "@types/node": ^17.0.21
     "@types/rimraf": ^3.0.2
     "@typescript-eslint/eslint-plugin": ^5.13.0
@@ -6814,7 +6814,7 @@ __metadata:
     concurrently: ^7.0.0
     cpx: ^1.5.0
     eslint: ^8.10.0
-    eslint-config-prettier: ^8.4.0
+    eslint-config-prettier: ^8.5.0
     eslint-import-resolver-typescript: ^2.5.0
     eslint-plugin-codegen: 0.16.1
     eslint-plugin-import: ^2.25.4
@@ -6825,7 +6825,7 @@ __metadata:
     madge: ^5.0.1
     prettier: ^2.5.1
     rimraf: ^3.0.2
-    ts-node: ^10.5.0
+    ts-node: ^10.6.0
     typescript: ^4.6.2
     ultra-runner: ^3.10.5
   languageName: unknown

@@ -5,6 +5,8 @@ import { List } from "./definition.js"
  *
  * @tsplus fluent List prepend
  */
-export function prepend<A, B>(self: List<A>, elem: B): List<A | B> {
+export function prepend_<A, B>(self: List<A>, elem: B): List<A | B> {
   return List.cons<A | B>(elem, self)
 }
+
+export const prepend = Pipeable(prepend_)
