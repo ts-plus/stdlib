@@ -1,3 +1,6 @@
+export * as Associative from "./prelude/Associative.js"
+export * as Closure from "./prelude/Closure.js"
 export * as Equivalence from "./prelude/Equivalence.js"
+export * as Identity from "./prelude/Identity.js"
 export * as Ord from "./prelude/Ord.js"
 export * as Ordering from "./prelude/Ordering.js"

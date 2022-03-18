@@ -11,7 +11,7 @@
         "moduleResolution": "node",
         "noEmit": false,
         "lib": [
-            "es2020"
+            "ES2021"
         ],
         "sourceMap": true,
         "declarationMap": true,

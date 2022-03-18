@@ -29,3 +29,6 @@ export type PredicateWithIndex<I, A> = (i: I, a: A) => boolean
 export type Erase<R, K> = R & K extends K & infer R1 ? R1 : R
 
 export interface Spreadable extends Record<PropertyKey, any> {}
+
+export type ESArray<A> = Array<A>
+export type ESIterable<A> = Iterable<A>

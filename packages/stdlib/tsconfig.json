@@ -3,7 +3,7 @@
     "compilerOptions": {
         "lib": [
             "DOM",
-            "ES2020"
+            "ES2021"
         ],
         "target": "ES2017",
         "emitDecoratorMetadata": true,
