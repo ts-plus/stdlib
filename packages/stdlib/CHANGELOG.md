@@ -1,5 +1,15 @@
 # @tsplus/stdlib
 
+## 0.0.5
+
+### Patch Changes
+
+- [`549213e`](https://github.com/ts-plus/stdlib/commit/549213e0ffddbfad0a2bf55f430dc88431c74c9b) Thanks [@mikearnaldi](https://github.com/mikearnaldi)! - Add getOption in IterableWeakMap
+
+* [`29922ab`](https://github.com/ts-plus/stdlib/commit/29922ab791229579a54b92ca4cba339e65624e0f) Thanks [@mikearnaldi](https://github.com/mikearnaldi)! - Improve Perf of IterableWeakMap constructor
+
+- [`209de14`](https://github.com/ts-plus/stdlib/commit/209de1454b6548f595aeb7e95c08e493422a19ec) Thanks [@mikearnaldi](https://github.com/mikearnaldi)! - Polyfill IterableWeakMap for older JS engines
+
 ## 0.0.3
 
 ### Patch Changes
