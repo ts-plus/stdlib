@@ -1,16 +1,57 @@
 import type { Iterable } from "../Iterable.js"
 
 /**
+ * An implementation of a weak map that supports the iterable protocol.
+ *
+ * NOTE: this is truly weak only in the case FinalizationRegistry is available,
+ * otherwise it is backed by a classical map and will not be weak (i.e. in
+ * engines that don't natively support ES2021).
+ *
  * @tsplus type IterableWeakMap
- * @tsplus companion IterableWeakMapOps
  */
-export class IterableWeakMap<K extends object, V> implements Iterable<readonly [K, V]> {
+export interface IterableWeakMap<K extends object, V> extends Iterable<[K, V]> {
+  set(this: this, key: K, value: V): void
+
+  get(this: this, key: K): V | undefined
+
+  has(this: this, key: K): boolean
+
+  delete(this: this, key: K): boolean
+
+  [Symbol.iterator](this: this): IterableIterator<[K, V]>
+
+  entries(this: this): IterableIterator<[K, V]>
+
+  keys(this: this): IterableIterator<K>
+
+  values(this: this): IterableIterator<V>
+}
+
+/**
+ * @tsplus type IterableWeakMapOps
+ */
+export interface IterableWeakMapOps {}
+export const IterableWeakMap: IterableWeakMapOps = {}
+
+/**
+ * @tsplus static IterableWeakMapOps make
+ * @tsplus static IterableWeakMapOps __call
+ */
+export function make<K extends object, V>(
+  iterable: Iterable<[K, V]>
+): IterableWeakMap<K, V> {
+  return typeof FinalizationRegistry !== "undefined"
+    ? new WeakImpl(iterable)
+    : new Map(iterable)
+}
+
+class WeakImpl<K extends object, V> {
   private weakMap = new WeakMap<K, { value: V; ref: WeakRef<K> }>()
   private refSet = new Set<WeakRef<K>>()
   private finalizationGroup = new FinalizationRegistry<{
     ref: WeakRef<K>
     set: Set<WeakRef<K>>
-  }>(IterableWeakMap.cleanup)
+  }>(WeakImpl.cleanup)
 
   private static cleanup<K extends object>({
     ref,
@@ -22,13 +63,13 @@ export class IterableWeakMap<K extends object, V> implements Iterable<readonly [
     set.delete(ref)
   }
 
-  constructor(iterable: Iterable<readonly [K, V]>) {
+  constructor(iterable: Iterable<[K, V]>) {
     for (const [key, value] of iterable) {
       this.set(key, value)
     }
   }
 
-  set(this: this, key: K, value: V) {
+  set(this: this, key: K, value: V): this {
     const ref = new WeakRef(key)
 
     this.weakMap.set(key, { value, ref })
@@ -41,14 +82,16 @@ export class IterableWeakMap<K extends object, V> implements Iterable<readonly [
       },
       ref
     )
+
+    return this
   }
 
-  get(this: this, key: K) {
+  get(this: this, key: K): V | undefined {
     const entry = this.weakMap.get(key)
     return entry && entry.value
   }
 
-  delete(this: this, key: K) {
+  delete(this: this, key: K): boolean {
     const entry = this.weakMap.get(key)
     if (!entry) {
       return false
@@ -60,36 +103,41 @@ export class IterableWeakMap<K extends object, V> implements Iterable<readonly [
     return true
   }
 
-  *[Symbol.iterator](this: this) {
+  [Symbol.iterator](this: this): IterableIterator<[K, V]> {
+    return this.entries()
+  }
+
+  *iterator(this: this): IterableIterator<[K, V]> {
     for (const ref of this.refSet) {
       const key = ref.deref()
       if (!key) continue
       const { value } = this.weakMap.get(key)!
-      yield [key, value] as const
+      yield [key, value]
     }
   }
 
-  entries(this: this) {
-    return this[Symbol.iterator]()
+  *entries(this: this): IterableIterator<[K, V]> {
+    for (const ref of this.refSet) {
+      const key = ref.deref()
+      if (!key) continue
+      const { value } = this.weakMap.get(key)!
+      yield [key, value]
+    }
   }
 
-  *keys(this: this) {
+  *keys(this: this): IterableIterator<K> {
     for (const [key] of this) {
       yield key
     }
   }
 
-  *values(this: this) {
+  *values(this: this): IterableIterator<V> {
     for (const [, value] of this) {
       yield value
     }
   }
-}
 
-/**
- * @tsplus static IterableWeakMapOps make
- * @tsplus static IterableWeakMapOps __call
- */
-export function make<K extends object, V>(iterable: Iterable<readonly [K, V]>) {
-  return new IterableWeakMap(iterable)
+  has(this: this, key: K) {
+    return this.weakMap.has(key)
+  }
 }
