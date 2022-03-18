@@ -1,3 +1,4 @@
+import { Option } from "../../data/Option.js"
 import type { Iterable } from "../Iterable.js"
 
 /**
@@ -32,6 +33,19 @@ export interface IterableWeakMap<K extends object, V> extends Iterable<[K, V]> {
  */
 export interface IterableWeakMapOps {}
 export const IterableWeakMap: IterableWeakMapOps = {}
+
+/**
+ * @tsplus index IterableWeakMap
+ * @tsplus fluent IterableWeakMap getOption
+ */
+export function getOption_<K extends object, V>(
+  self: IterableWeakMap<K, V>,
+  key: K
+): Option<V> {
+  return self.has(key) ? Option.some(self.get(key)!) : Option.none
+}
+
+export const getOption = Pipeable(getOption_)
 
 /**
  * @tsplus static IterableWeakMapOps make
