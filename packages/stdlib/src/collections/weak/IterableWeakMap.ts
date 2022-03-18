@@ -40,9 +40,7 @@ export const IterableWeakMap: IterableWeakMapOps = {}
 export function make<K extends object, V>(
   iterable: Iterable<[K, V]>
 ): IterableWeakMap<K, V> {
-  return typeof FinalizationRegistry !== "undefined"
-    ? new WeakImpl(iterable)
-    : new Map(iterable)
+  return new ConcreteImpl(iterable)
 }
 
 class WeakImpl<K extends object, V> {
@@ -141,3 +139,7 @@ class WeakImpl<K extends object, V> {
     return this.weakMap.has(key)
   }
 }
+
+const ConcreteImpl: {
+  new <K extends object, V>(iterable: Iterable<[K, V]>): IterableWeakMap<K, V>
+} = typeof FinalizationRegistry !== "undefined" ? WeakImpl : Map
