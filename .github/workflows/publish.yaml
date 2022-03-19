@@ -19,6 +19,7 @@ jobs:
           npm install -g yarn
           yarn
           yarn build
+          yarn test
         env:
           CI: "true"
       - name: Create Release Pull Request or Publish to npm

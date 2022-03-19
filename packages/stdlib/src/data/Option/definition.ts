@@ -1,7 +1,7 @@
 /* adapted from https://github.com/gcanti/fp-ts */
 
 import type { Equals } from "../../structure/Equals.js"
-import { equals, equalsSym } from "../../structure/Equals.js"
+import * as EqualsJs from "../../structure/Equals.js"
 import * as Hash from "../../structure/Hash.js"
 import type { LazyArg, Predicate, Refinement } from "../Function.js"
 import { identity } from "../Function.js"
@@ -16,7 +16,7 @@ const _someHash = Hash.hashString("tsplus/Option/Some")
 export class None implements Equals {
   readonly _tag = "None";
 
-  [equalsSym](that: unknown): boolean {
+  [EqualsJs.equalsSym](that: unknown): boolean {
     return that instanceof None
   }
   [Hash.hashSym](): number {
@@ -28,8 +28,8 @@ export class Some<A> implements Equals {
   readonly _tag = "Some"
   constructor(readonly value: A) {}
 
-  [equalsSym](that: unknown): boolean {
-    return that instanceof Some && equals(this.value, that.value)
+  [EqualsJs.equalsSym](that: unknown): boolean {
+    return that instanceof Some && EqualsJs.equals(this.value, that.value)
   }
   [Hash.hashSym](): number {
     return Hash.combine(_someHash, Hash.hashUnknown(this.value))

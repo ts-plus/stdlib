@@ -33,9 +33,14 @@
         "strictNullChecks": true,
         "baseUrl": ".",
         "target": "ES2021",
-        "types": [
-            "jest"
-        ]
+        "paths": {
+            "@tsplus/stdlib": [
+                "./packages/stdlib/src/index.ts"
+            ],
+            "@tsplus/stdlib/*": [
+                "./packages/stdlib/src/*"
+            ],
+        }
     },
     "exclude": [
         "node_modules",

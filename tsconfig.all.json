@@ -1,0 +1,12 @@
+{
+    "extends": "./tsconfig.base.json",
+    "include": [],
+    "references": [
+        {
+            "path": "packages/stdlib/tsconfig.build.json"
+        },
+        {
+            "path": "packages/stdlib/tsconfig.build-test.json"
+        }
+    ]
+}

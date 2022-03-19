@@ -1,5 +1,6 @@
-import { IterableWeakMap } from "../src/collections/weak/IterableWeakMap.js"
-import { Option } from "../src/data.js"
+import { IterableWeakMap } from "@tsplus/stdlib/collections/weak/IterableWeakMap"
+import { Option } from "@tsplus/stdlib/data"
+import { describe, expect, it } from "vitest"
 
 describe("IterableWeakMap", () => {
   it("has", () => {

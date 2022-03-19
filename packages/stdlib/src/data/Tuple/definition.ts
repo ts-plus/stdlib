@@ -1,5 +1,5 @@
 import type { Equals } from "../../structure/Equals.js"
-import { equals, equalsSym } from "../../structure/Equals.js"
+import * as EqualsJs from "../../structure/Equals.js"
 import * as Hash from "../../structure/Hash.js"
 
 export const TupleSym: unique symbol = Symbol.for("tsplus/Tuple")
@@ -20,7 +20,7 @@ export interface Tuple<T extends ReadonlyArray<unknown>>
   tuple: T
 
   [Hash.hashSym](): number
-  [equalsSym](that: unknown): boolean
+  [EqualsJs.equalsSym](that: unknown): boolean
 
   get<K extends keyof T>(i: K): T[K]
 }
@@ -38,11 +38,11 @@ export class TupleInternal<T extends readonly unknown[]> implements Tuple<T> {
     return Hash.hashArray(this.tuple)
   }
 
-  [equalsSym](that: unknown): boolean {
+  [EqualsJs.equalsSym](that: unknown): boolean {
     if (isTuple(that)) {
       return (
         this.tuple.length === that.tuple.length &&
-        this.tuple.every((v, i) => equals(v, that.tuple[i]))
+        this.tuple.every((v, i) => EqualsJs.equals(v, that.tuple[i]))
       )
     }
     return false

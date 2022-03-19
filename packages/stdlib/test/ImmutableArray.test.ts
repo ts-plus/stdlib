@@ -1,4 +1,5 @@
-import { ImmutableArray } from "../src/collections/ImmutableArray.js"
+import { ImmutableArray } from "@tsplus/stdlib/collections/ImmutableArray.js"
+import { describe, expect, it } from "vitest"
 
 describe("ImmutableArray", () => {
   it("mapImmutable", () => {

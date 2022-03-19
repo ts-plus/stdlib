@@ -48,7 +48,7 @@ module.exports = {
     "import/no-cycle": "error",
     "import/newline-after-import": "error",
     "import/no-duplicates": "error",
-    "import/no-unresolved": "error",
+    "import/no-unresolved": "off",
     "import/order": "off",
     "simple-import-sort/imports": "error",
     "sort-destructure-keys/sort-destructure-keys": "error"
