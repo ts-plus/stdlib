@@ -1,16 +1,10 @@
 {
     "extends": "../../tsconfig.base.json",
     "compilerOptions": {
-        "lib": [
-            "DOM",
-            "ES2021"
-        ],
-        "target": "ES2017",
-        "emitDecoratorMetadata": true,
-        "experimentalDecorators": true,
-        "noErrorTruncation": true
+        "noEmit": true
     },
     "include": [
-        "src/**/*"
+        "src/**/*.ts",
+        "test/**/*.ts"
     ]
 }

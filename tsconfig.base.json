@@ -32,7 +32,10 @@
         "noUncheckedIndexedAccess": true,
         "strictNullChecks": true,
         "baseUrl": ".",
-        "target": "ES2018"
+        "target": "ES2018",
+        "types": [
+            "jest"
+        ]
     },
     "exclude": [
         "node_modules",

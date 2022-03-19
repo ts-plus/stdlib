@@ -12,11 +12,11 @@
     "clean": "yarn org:rimraf build tsbuildinfo dist",
     "build-cjs": "yarn org:babel build/esm --config-file ./.babel.cjs.json --out-dir build/cjs --out-file-extension .js --source-maps",
     "build-mjs": "yarn org:babel build/esm --config-file ./.babel.mjs.json --out-dir build/mjs --out-file-extension .mjs --source-maps",
-    "build-ts": "yarn org:tsc -p tsconfig.build.esm.json",
+    "build-ts": "yarn org:tsc -p tsconfig.build.json",
     "build-post": "yarn org:build-utils pack",
     "build": "yarn build-ts && yarn org:concurrently \"yarn build-cjs\" \"yarn build-mjs\" && yarn build-post",
     "lint": "yarn org:eslint . --ext .ts,.tsx",
-    "autofix": "yarn prettier && yarn lint --fix && yarn prettier",
+    "autofix": "yarn lint --fix && yarn prettier",
     "prettier": "yarn org:prettier --write \"./{src,test,demo}/**/*.ts\"",
     "tc": "yarn org:tsc --noEmit",
     "circular": "yarn org:madge --circular --no-color --no-spinner build/esm"
