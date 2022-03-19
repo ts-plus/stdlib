@@ -1,5 +1,13 @@
 # @tsplus/stdlib
 
+## 0.0.6
+
+### Patch Changes
+
+- [`b309f2d`](https://github.com/ts-plus/stdlib/commit/b309f2d509488e61a3eacb90236ccfa9695b630a) Thanks [@mikearnaldi](https://github.com/mikearnaldi)! - Update TSPlus and improve Hash/Equals
+
+* [`050a9a3`](https://github.com/ts-plus/stdlib/commit/050a9a3a38f15415a592b093b7a1a80f26b050a6) Thanks [@mikearnaldi](https://github.com/mikearnaldi)! - Begin porting immutable array
+
 ## 0.0.5
 
 ### Patch Changes
