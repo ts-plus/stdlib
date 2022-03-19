@@ -7,6 +7,7 @@ import { hashUnknown, isHash } from "./Hash.js"
 export interface EqualsOps {
   readonly sym: unique symbol
 }
+
 export const Equals: EqualsOps = {
   sym: Symbol.for("tsplus/Equals") as EqualsOps["sym"]
 }
@@ -18,10 +19,16 @@ export interface Equals extends Hash {
   [Equals.sym](this: this, other: unknown): boolean
 }
 
+/**
+ * @tsplus static EqualsOps isEquals
+ */
 export function isEquals(u: unknown): u is Equals {
   return isHash(u) && Equals.sym in u
 }
 
+/**
+ * @tsplus static EqualsOps sameValueZeroEqual
+ */
 export function sameValueZeroEqual(a: any, b: any) {
   return a === b || (a !== a && b !== b)
 }
