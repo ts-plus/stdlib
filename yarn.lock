@@ -58,7 +58,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@babel/core@npm:^7.1.0, @babel/core@npm:^7.12.3, @babel/core@npm:^7.7.2, @babel/core@npm:^7.8.0":
+"@babel/core@npm:^7.1.0, @babel/core@npm:^7.11.6, @babel/core@npm:^7.12.3, @babel/core@npm:^7.17.8, @babel/core@npm:^7.7.2, @babel/core@npm:^7.8.0":
   version: 7.17.8
   resolution: "@babel/core@npm:7.17.8"
   dependencies:
@@ -78,29 +78,6 @@ __metadata:
     json5: ^2.1.2
     semver: ^6.3.0
   checksum: 0e686b1be444d25494424065238931f2b3df908bf072b72bab973acfd6d27a481fc280c9cd8a3c6fe2c46beee50e0d2307468d8b15b64dc4036f025e75f6609d
-  languageName: node
-  linkType: hard
-
-"@babel/core@npm:^7.11.6, @babel/core@npm:^7.17.7":
-  version: 7.17.7
-  resolution: "@babel/core@npm:7.17.7"
-  dependencies:
-    "@ampproject/remapping": ^2.1.0
-    "@babel/code-frame": ^7.16.7
-    "@babel/generator": ^7.17.7
-    "@babel/helper-compilation-targets": ^7.17.7
-    "@babel/helper-module-transforms": ^7.17.7
-    "@babel/helpers": ^7.17.7
-    "@babel/parser": ^7.17.7
-    "@babel/template": ^7.16.7
-    "@babel/traverse": ^7.17.3
-    "@babel/types": ^7.17.0
-    convert-source-map: ^1.7.0
-    debug: ^4.1.0
-    gensync: ^1.0.0-beta.2
-    json5: ^2.1.2
-    semver: ^6.3.0
-  checksum: 467838313f8c84037d08d051238005c48f6b3da6fbaed38cd2dac5fcbe3706df2857365b8a9291402b3b888c24edb9707dc6c93f0127fecc7fe49b700c35c057
   languageName: node
   linkType: hard
 
@@ -242,17 +219,6 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@babel/helpers@npm:^7.17.7":
-  version: 7.17.7
-  resolution: "@babel/helpers@npm:7.17.7"
-  dependencies:
-    "@babel/template": ^7.16.7
-    "@babel/traverse": ^7.17.3
-    "@babel/types": ^7.17.0
-  checksum: fdc93714b3eb3b7a179a5133c3d7008f36785af469bb091a2f056f1a893aeedc8654e87c5e04a5cdecb6587e6177839a4b887b832be289689ffe277d08dfd4a7
-  languageName: node
-  linkType: hard
-
 "@babel/helpers@npm:^7.17.8":
   version: 7.17.8
   resolution: "@babel/helpers@npm:7.17.8"
@@ -275,16 +241,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@babel/parser@npm:^7.0.0, @babel/parser@npm:^7.11.5, @babel/parser@npm:^7.16.7, @babel/parser@npm:^7.17.3, @babel/parser@npm:^7.17.7":
-  version: 7.17.7
-  resolution: "@babel/parser@npm:7.17.7"
-  bin:
-    parser: ./bin/babel-parser.js
-  checksum: d2612c2597838a605bcbe921fd2c7381b3ab75603c7907020df037c22a3d27f0507285da74553cd75f403300ca76642323ca2e72ba55cc4222d4a20b87505b0c
-  languageName: node
-  linkType: hard
-
-"@babel/parser@npm:^7.1.0, @babel/parser@npm:^7.14.7, @babel/parser@npm:^7.17.8":
+"@babel/parser@npm:^7.0.0, @babel/parser@npm:^7.1.0, @babel/parser@npm:^7.11.5, @babel/parser@npm:^7.14.7, @babel/parser@npm:^7.16.7, @babel/parser@npm:^7.17.3, @babel/parser@npm:^7.17.8":
   version: 7.17.8
   resolution: "@babel/parser@npm:7.17.8"
   bin:
@@ -1237,9 +1194,9 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@tsplus/installer@npm:^0.0.36":
-  version: 0.0.36
-  resolution: "@tsplus/installer@npm:0.0.36"
+"@tsplus/installer@npm:^0.0.37":
+  version: 0.0.37
+  resolution: "@tsplus/installer@npm:0.0.37"
   dependencies:
     mkdirp: ^1.0.4
     rimraf: ^3.0.2
@@ -1248,7 +1205,7 @@ __metadata:
     zlib: ^1.0.5
   bin:
     tsplus-install: bin/tsplus-install
-  checksum: 469e7a88b57fd90d1574c8a4e2609ec171b9cbd92f11f5c2bb88c200eeed4a55b89e7718cd8eb349cd715f13b0d693e5cbfbc23aa1d976b196ee8aac94e998c2
+  checksum: 1a3745e75f8cf59a76097623df7b1b55bda91d18a75661e2d098b78aae50e8e6de3e0b10a7eb8628bad47cb4e9d36bc2ea48726fc6ef8f9da9a88b93e7b35aba
   languageName: node
   linkType: hard
 
@@ -8623,13 +8580,13 @@ __metadata:
   resolution: "tsplus@workspace:."
   dependencies:
     "@babel/cli": ^7.17.6
-    "@babel/core": ^7.17.7
+    "@babel/core": ^7.17.8
     "@babel/plugin-transform-modules-commonjs": ^7.17.7
     "@changesets/changelog-github": ^0.4.3
     "@changesets/cli": ^2.21.1
     "@effect-ts/build-utils": 0.38.3
     "@effect-ts/core": ^0.58.1
-    "@tsplus/installer": ^0.0.36
+    "@tsplus/installer": ^0.0.37
     "@types/jest": ^27.4.1
     "@types/node": ^17.0.21
     "@types/rimraf": ^3.0.2
