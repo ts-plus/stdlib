@@ -1,5 +1,13 @@
 # @tsplus/stdlib
 
+## 0.0.7
+
+### Patch Changes
+
+- [`58cd4f2`](https://github.com/ts-plus/stdlib/commit/58cd4f2d8d6d1969f1ff3ba97ecd7d321a576a7b) Thanks [@mikearnaldi](https://github.com/mikearnaldi)! - Improve AutoImports
+
+* [`dbf4ca7`](https://github.com/ts-plus/stdlib/commit/dbf4ca7d503be412719c9136cc190e846f092718) Thanks [@mikearnaldi](https://github.com/mikearnaldi)! - Add Option.orElse
+
 ## 0.0.6
 
 ### Patch Changes
