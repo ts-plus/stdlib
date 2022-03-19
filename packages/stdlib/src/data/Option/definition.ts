@@ -1,14 +1,13 @@
 /* adapted from https://github.com/gcanti/fp-ts */
 
-import type { Equals } from "../../structure/Equals.js"
-import * as EqualsJs from "../../structure/Equals.js"
-import * as Hash from "../../structure/Hash.js"
+import { Equals } from "../../structure/Equals.js"
+import { Hash } from "../../structure/Hash.js"
 import type { LazyArg, Predicate, Refinement } from "../Function.js"
 import { identity } from "../Function.js"
 import { Tuple } from "../Tuple/definition.js"
 
-const _noneHash = Hash.hashString("tsplus/Option/None")
-const _someHash = Hash.hashString("tsplus/Option/Some")
+const _noneHash = Hash.string("tsplus/Option/None")
+const _someHash = Hash.string("tsplus/Option/Some")
 
 /**
  * Definitions
@@ -16,10 +15,10 @@ const _someHash = Hash.hashString("tsplus/Option/Some")
 export class None implements Equals {
   readonly _tag = "None";
 
-  [EqualsJs.equalsSym](that: unknown): boolean {
+  [Equals.sym](that: unknown): boolean {
     return that instanceof None
   }
-  [Hash.hashSym](): number {
+  [Hash.sym](): number {
     return _noneHash
   }
 }
@@ -28,11 +27,11 @@ export class Some<A> implements Equals {
   readonly _tag = "Some"
   constructor(readonly value: A) {}
 
-  [EqualsJs.equalsSym](that: unknown): boolean {
-    return that instanceof Some && EqualsJs.equals(this.value, that.value)
+  [Equals.sym](that: unknown): boolean {
+    return that instanceof Some && Equals.equals(this.value, that.value)
   }
-  [Hash.hashSym](): number {
-    return Hash.combine(_someHash, Hash.hashUnknown(this.value))
+  [Hash.sym](): number {
+    return Hash.combine(_someHash, Hash.unknown(this.value))
   }
 }
 

@@ -3,31 +3,55 @@
 import { isDefined } from "../utilities/Guards.js"
 import { RandomPCG } from "../utilities/RandomPCG.js"
 
-export const hashSym = Symbol.for("tsplus/Hash")
+/**
+ * @tsplus type HashOps
+ */
+export interface HashOps {
+  readonly sym: unique symbol
+}
+
+export const Hash: HashOps = {
+  sym: Symbol.for("tsplus/Hash") as HashOps["sym"]
+}
 
 /**
  * @tsplus type Hash
  */
 export interface Hash {
-  [hashSym](this: this): number
+  [Hash.sym](this: this): number
 }
 
+/**
+ * @tsplus static HashOps isHash
+ */
 export function isHash(u: unknown): u is Hash {
-  return typeof u === "object" && u !== null && hashSym in u
+  return typeof u === "object" && u !== null && Hash.sym in u
 }
 
+/**
+ * @tsplus static HashOps optimize
+ */
 export function optimize(n: number) {
   return (n & 0xbfffffff) | ((n >>> 1) & 0x40000000)
 }
 
+/**
+ * @tsplus static HashOps unknown
+ */
 export function hashUnknown(arg: unknown): number {
   return optimize(_hash(arg))
 }
 
+/**
+ * @tsplus static HashOps array
+ */
 export function hashArray(arr: readonly unknown[]): number {
   return optimize(_hashArray(arr))
 }
 
+/**
+ * @tsplus static HashOps args
+ */
 export function hashArgs(...args: unknown[]): number
 export function hashArgs(): number {
   let h = 5381
@@ -38,34 +62,58 @@ export function hashArgs(): number {
   return optimize(h)
 }
 
+/**
+ * @tsplus static HashOps combine
+ */
 export function combine(a: number, b: number): number {
   return optimize(_combineHash(a, b))
 }
 
+/**
+ * @tsplus static HashOps object
+ */
 export function hashObject(value: object): number {
   return optimize(_hashObject(value))
 }
 
+/**
+ * @tsplus static HashOps miscRef
+ */
 export function hashMiscRef(o: Object): number {
   return optimize(_hashMiscRef(o))
 }
 
+/**
+ * @tsplus static HashOps iterator
+ */
 export function hashIterator(it: Iterator<any>): number {
   return optimize(_hashIterator(it))
 }
 
+/**
+ * @tsplus static HashOps painObject
+ */
 export function hashPlainObject(o: object): number {
   return optimize(_hashPlainObject(o))
 }
 
+/**
+ * @tsplus static HashOps number
+ */
 export function hashNumber(n: number): number {
   return optimize(_hashNumber(n))
 }
 
+/**
+ * @tsplus static HashOps string
+ */
 export function hashString(str: string): number {
   return optimize(_hashString(str))
 }
 
+/**
+ * @tsplus static HashOps random
+ */
 export function hashRandom(): number {
   return optimize(randomInt())
 }
@@ -124,7 +172,7 @@ function _hashObject(value: object): number {
   let h = CACHE.get(value)
   if (isDefined(h)) return h
   if (isHash(value)) {
-    h = value[hashSym]()
+    h = value[Hash.sym]()
   } else {
     h = hashRandom()
   }

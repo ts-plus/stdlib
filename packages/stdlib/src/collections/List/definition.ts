@@ -8,10 +8,10 @@
  * Licensed under Apache License 2.0
  * (http://www.apache.org/licenses/LICENSE-2.0).
  */
-import * as Equals from "../../structure/Equals.js"
-import * as Hash from "../../structure/Hash.js"
+import { Equals } from "../../structure/Equals.js"
+import { Hash } from "../../structure/Hash.js"
 
-export class Cons<A> implements Iterable<A>, Equals.Equals {
+export class Cons<A> implements Iterable<A>, Equals {
   readonly _tag = "Cons"
   constructor(readonly head: A, public tail: List<A>) {}
 
@@ -41,16 +41,16 @@ export class Cons<A> implements Iterable<A>, Equals.Equals {
     }
   }
 
-  [Hash.hashSym](): number {
-    return Hash.hashIterator(this[Symbol.iterator]())
+  [Hash.sym](): number {
+    return Hash.iterator(this[Symbol.iterator]())
   }
 
-  [Equals.equalsSym](that: unknown): boolean {
+  [Equals.sym](that: unknown): boolean {
     return that instanceof Cons && equalsWith_(this, that, Equals.equals)
   }
 }
 
-export class Nil<A> implements Iterable<A>, Equals.Equals {
+export class Nil<A> implements Iterable<A>, Equals {
   readonly _tag = "Nil";
   [Symbol.iterator](): Iterator<A> {
     return {
@@ -60,11 +60,11 @@ export class Nil<A> implements Iterable<A>, Equals.Equals {
     }
   }
 
-  [Hash.hashSym](): number {
-    return Hash.hashIterator(this[Symbol.iterator]())
+  [Hash.sym](): number {
+    return Hash.iterator(this[Symbol.iterator]())
   }
 
-  [Equals.equalsSym](that: unknown): boolean {
+  [Equals.sym](that: unknown): boolean {
     return that instanceof Nil
   }
 }
