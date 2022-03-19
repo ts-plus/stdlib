@@ -17,6 +17,10 @@ describe("Option", () => {
     expect(Option.some(0).flatMap((n) => Option.some(n + 1)).value).toEqual(1)
   })
   it("zip", () => {
-    expect(Option.some(1).zip(Option.some(2))).toEqual(Option.some(Tuple(1, 2)))
+    expect(Option.some(1) + Option.some(2)).toEqual(Option.some(Tuple(1, 2)))
+  })
+  it("orElse", () => {
+    expect(Option.some(1) | Option.some(2)).toEqual(Option.some(1))
+    expect(Option.none | Option.some(2)).toEqual(Option.some(2))
   })
 })

@@ -254,6 +254,19 @@ export function getOrElse<A, B>(ma: Option<A>, onNone: LazyArg<B>): A | B {
 }
 
 /**
+ * @tsplus operator tsplus/Option |
+ * @tsplus fluent tsplus/Option orElse
+ */
+export function orElse_<A, B>(
+  self: Option<A>,
+  onNone: LazyArg<Option<B>>
+): Option<A | B> {
+  return self._tag === "None" ? onNone() : self
+}
+
+export const orElse = Pipeable(orElse_)
+
+/**
  * Returns a `Refinement` (i.e. a custom type guard) from a `Option` returning
  * function.
  *
