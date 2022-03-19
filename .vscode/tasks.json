@@ -2,6 +2,13 @@
     "version": "2.0.0",
     "tasks": [
         {
+            "label": "clean",
+            "type": "shell",
+            "command": "yarn clean",
+            "isBackground": false,
+            "problemMatcher": []
+        },
+        {
             "label": "build-watch",
             "type": "shell",
             "command": "yarn build-watch",
@@ -24,17 +31,7 @@
             ],
             "type": "shell",
             "command": "yarn test",
-            "problemMatcher": {
-                "owner": "custom",
-                "pattern": [
-                    {
-                        "regexp": "^PATTERN WON'T MATCH, BUT NEEDED TO BE A VALID PROBLEM MATCHER$",
-                        "file": 1,
-                        "location": 2,
-                        "message": 3
-                    }
-                ],
-            }
+            "problemMatcher": []
         }
     ]
 }

@@ -7261,8 +7261,8 @@ __metadata:
     ts-node: ^10.7.0
     typescript: ^4.6.2
     ultra-runner: ^3.10.5
-    vite: ^2.7.13
-    vitest: "https://github.com/mikearnaldi/vitest/raw/f0fd85f779aaefabfcd5a1309bf558e21c9d09f0/packages/vitest/dev/vitest-0.7.6.tgz"
+    vite: ^2.8.6
+    vitest: 0.7.6
   languageName: unknown
   linkType: soft
 
@@ -7552,7 +7552,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"vite@npm:^2.7.10, vite@npm:^2.7.13":
+"vite@npm:^2.7.10, vite@npm:^2.8.6":
   version: 2.8.6
   resolution: "vite@npm:2.8.6"
   dependencies:

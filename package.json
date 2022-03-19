@@ -66,11 +66,12 @@
     "ts-node": "^10.7.0",
     "typescript": "^4.6.2",
     "ultra-runner": "^3.10.5",
-    "vite": "^2.7.13",
-    "vitest": "https://github.com/mikearnaldi/vitest/raw/f0fd85f779aaefabfcd5a1309bf558e21c9d09f0/packages/vitest/dev/vitest-0.7.6.tgz"
+    "vite": "^2.8.6",
+    "vitest": "0.7.6"
   },
   "resolutions": {
     "eslint-plugin-codegen": "patch:eslint-plugin-codegen@0.16.1#.yarn/patches/eslint-plugin-codegen.patch",
-    "@effect-ts/build-utils@0.38.3": "patch:@effect-ts/build-utils@0.38.3#.yarn/patches/effect-ts-build-utils.patch"
+    "@effect-ts/build-utils@0.38.3": "patch:@effect-ts/build-utils@0.38.3#.yarn/patches/effect-ts-build-utils.patch",
+    "vitest": "https://github.com/mikearnaldi/vitest/raw/f0fd85f779aaefabfcd5a1309bf558e21c9d09f0/packages/vitest/dev/vitest-0.7.6.tgz"
   }
 }
