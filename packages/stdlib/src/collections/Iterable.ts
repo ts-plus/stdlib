@@ -338,6 +338,6 @@ export const corresponds = Pipeable(corresponds_)
  * @tsplus static IterableOps make
  * @tsplus static IterableOps __call
  */
-export function make<A extends readonly A[]>(...as: A): Iterable<A[number]> {
+export function make<A extends readonly any[]>(...as: A): Iterable<A[number]> {
   return as
 }
