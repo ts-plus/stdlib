@@ -47,6 +47,7 @@
     "@typescript-eslint/parser": "^5.15.0",
     "babel-plugin-annotate-pure-calls": "^0.4.0",
     "babel-plugin-replace-import-extension": "^1.1.2",
+    "c8": "^7.11.0",
     "chalk": "5.0.1",
     "concurrently": "^7.0.0",
     "cpx": "^1.5.0",

@@ -27,7 +27,7 @@ jobs:
           CI: "true"
       - name: Test
         run: |
-          yarn test --run
+          yarn test --run --coverage
         env:
           CI: "true"
       - name: Create Release Pull Request or Publish to npm

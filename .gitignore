@@ -4,6 +4,7 @@
 !/.yarn/sdks
 !/.yarn/patches
 
+coverage/
 tsbuildinfo/
 node_modules/
 yarn-error.log
