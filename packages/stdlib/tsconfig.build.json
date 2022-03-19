@@ -7,7 +7,7 @@
         "module": "ES6",
         "moduleResolution": "Node",
         "incremental": true,
-        "tsBuildInfoFile": "tsbuildinfo/esm.tsbuildinfo",
+        "tsBuildInfoFile": "build/tsbuildinfo/esm.tsbuildinfo",
         "declaration": true,
         "declarationMap": true,
         "removeComments": false,

@@ -25,6 +25,13 @@
             }
         },
         {
+            "label": "build",
+            "type": "shell",
+            "command": "yarn build",
+            "problemMatcher": [],
+            "isBackground": false
+        },
+        {
             "label": "test-watch",
             "dependsOn": [
                 "build-watch"
