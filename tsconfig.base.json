@@ -32,7 +32,7 @@
         "noUncheckedIndexedAccess": true,
         "strictNullChecks": true,
         "baseUrl": ".",
-        "target": "ES2018",
+        "target": "ES2021",
         "types": [
             "jest"
         ]
