@@ -14,11 +14,19 @@ jobs:
         uses: actions/setup-node@v1
         with:
           node-version: 12.x
-      - name: Build
+      - name: Install
         run: |
           npm install -g yarn
           yarn
+        env:
+          CI: "true"
+      - name: Build
+        run: |
           yarn build
+        env:
+          CI: "true"
+      - name: Test
+        run: |
           yarn test --run
         env:
           CI: "true"
