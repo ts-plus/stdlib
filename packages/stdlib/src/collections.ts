@@ -1,5 +1,5 @@
-export * as ImmutableArray from "./collections/ImmutableArray.js"
-export * as Iterable from "./collections/Iterable.js"
-export * as List from "./collections/List.js"
+export * as immutableArray from "./collections/ImmutableArray.js"
+export * as iterable from "./collections/Iterable.js"
+export * as list from "./collections/List.js"
 export * as mutable from "./collections/mutable.js"
 export * as weak from "./collections/weak.js"

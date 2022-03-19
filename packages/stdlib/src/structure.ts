@@ -1,2 +1,2 @@
-export * as Hash from "./structure/Hash.js"
-export * as Equals from "./structure/Equals.js"
+export * as hash from "./structure/Hash.js"
+export * as equals from "./structure/Equals.js"

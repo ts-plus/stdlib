@@ -1,5 +1,5 @@
 import { IterableWeakMap } from "@tsplus/stdlib/collections/weak/IterableWeakMap"
-import { Option } from "@tsplus/stdlib/data"
+import { Option } from "@tsplus/stdlib/data/Option"
 import { describe, expect, it } from "vitest"
 
 describe("IterableWeakMap", () => {
