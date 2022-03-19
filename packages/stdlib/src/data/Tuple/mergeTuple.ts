@@ -1,4 +1,4 @@
-import { Tuple } from "./definition.js"
+import { Tuple } from "@tsplus/stdlib/data/Tuple/definition"
 
 export type MergeTuple<A, B> = A extends Tuple<infer TA>
   ? B extends Tuple<infer TB>

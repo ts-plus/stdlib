@@ -1,4 +1,4 @@
-export * as guard from "./utilities/Guards.js"
-export * as lazy from "./utilities/Lazy.js"
-export * as randomPCG from "./utilities/RandomPCG.js"
-export * as types from "./utilities/Types.js"
+export * as guard from "@tsplus/stdlib/utilities/Guards"
+export * as lazy from "@tsplus/stdlib/utilities/Lazy"
+export * as randomPCG from "@tsplus/stdlib/utilities/RandomPCG"
+export * as types from "@tsplus/stdlib/utilities/Types"

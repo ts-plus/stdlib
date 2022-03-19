@@ -1,7 +1,7 @@
 // forked from https://github.com/frptools
 
-import { isDefined } from "../utilities/Guards.js"
-import { RandomPCG } from "../utilities/RandomPCG.js"
+import { isDefined } from "@tsplus/stdlib/utilities/Guards"
+import { RandomPCG } from "@tsplus/stdlib/utilities/RandomPCG"
 
 /**
  * @tsplus type HashOps

@@ -1,4 +1,4 @@
-import type { List } from "./definition.js"
+import type { List } from "@tsplus/stdlib/collections/List/definition"
 
 /**
  * @tsplus fluent List concat

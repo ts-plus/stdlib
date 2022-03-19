@@ -1,5 +1,5 @@
-import { Option } from "../../data/Option.js"
-import type { Iterable } from "../Iterable.js"
+import type { Iterable } from "@tsplus/stdlib/collections/Iterable"
+import { Option } from "@tsplus/stdlib/data/Option"
 
 /**
  * An implementation of a weak map that supports the iterable protocol.

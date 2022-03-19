@@ -9,9 +9,9 @@
  * (http://www.apache.org/licenses/LICENSE-2.0).
  */
 
-import { IndexOutOfBounds } from "../../exceptions/IndexOutOfBounds.js"
-import { NoSuchElement } from "../../exceptions/NoSuchElement.js"
-import { List } from "../List/definition.js"
+import { List } from "@tsplus/stdlib/collections/List/definition"
+import { IndexOutOfBounds } from "@tsplus/stdlib/exceptions/IndexOutOfBounds"
+import { NoSuchElement } from "@tsplus/stdlib/exceptions/NoSuchElement"
 
 /**
  * @tsplus type ListBuffer

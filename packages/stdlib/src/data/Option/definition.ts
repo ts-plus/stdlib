@@ -1,10 +1,10 @@
 /* adapted from https://github.com/gcanti/fp-ts */
 
-import { Equals } from "../../structure/Equals.js"
-import { Hash } from "../../structure/Hash.js"
-import type { LazyArg, Predicate, Refinement } from "../Function.js"
-import { identity } from "../Function.js"
-import { Tuple } from "../Tuple/definition.js"
+import type { LazyArg, Predicate, Refinement } from "@tsplus/stdlib/data/Function"
+import { identity } from "@tsplus/stdlib/data/Function"
+import { Tuple } from "@tsplus/stdlib/data/Tuple/definition"
+import { Equals } from "@tsplus/stdlib/structure/Equals"
+import { Hash } from "@tsplus/stdlib/structure/Hash"
 
 const _noneHash = Hash.string("tsplus/Option/None")
 const _someHash = Hash.string("tsplus/Option/Some")

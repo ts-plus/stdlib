@@ -1,4 +1,4 @@
-import type { Tuple } from "./definition.js"
+import type { Tuple } from "@tsplus/stdlib/data/Tuple/definition"
 
 /**
  * Gets an element from the tuple.

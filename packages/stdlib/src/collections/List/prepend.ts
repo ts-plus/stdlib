@@ -1,4 +1,4 @@
-import { List } from "./definition.js"
+import { List } from "@tsplus/stdlib/collections/List/definition"
 
 /**
  * Inserts an element at the beginning of a `List`, returning a new `List`

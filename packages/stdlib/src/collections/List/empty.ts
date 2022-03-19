@@ -1,4 +1,4 @@
-import { List } from "./definition.js"
+import { List } from "@tsplus/stdlib/collections/List/definition"
 
 /**
  * Returns the empty `List`

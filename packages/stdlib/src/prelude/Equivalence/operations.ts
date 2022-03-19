@@ -1,6 +1,6 @@
-import type { Tuple } from "../../data/Tuple/definition.js"
-import type { ForcedTuple } from "../../utilities/Types.js"
-import { Equivalence } from "./definition.js"
+import type { Tuple } from "@tsplus/stdlib/data/Tuple/definition"
+import { Equivalence } from "@tsplus/stdlib/prelude/Equivalence/definition"
+import type { ForcedTuple } from "@tsplus/stdlib/utilities/Types"
 
 /**
  * Constructs an `Equal[A]` from a function. The instance will be optimized

@@ -1,4 +1,4 @@
-import type { Ordering } from "./definition.js"
+import type { Ordering } from "@tsplus/stdlib/prelude/Ordering/definition"
 
 /**
  * `number` => `Ordering`

@@ -1,5 +1,5 @@
-import type { Predicate } from "../../data/Predicate.js"
-import type { List } from "./definition.js"
+import type { List } from "@tsplus/stdlib/collections/List/definition"
+import type { Predicate } from "@tsplus/stdlib/data/Predicate"
 
 /**
  * @tsplus fluent List exists

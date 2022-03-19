@@ -1,6 +1,6 @@
-import type { Ord } from "../../prelude/Ord.js"
-import { ListBuffer } from "../mutable/ListBuffer.js"
-import type { List } from "./definition.js"
+import type { List } from "@tsplus/stdlib/collections/List/definition"
+import { ListBuffer } from "@tsplus/stdlib/collections/mutable/ListBuffer"
+import type { Ord } from "@tsplus/stdlib/prelude/Ord"
 
 /**
  * @tsplus fluent List sortWith

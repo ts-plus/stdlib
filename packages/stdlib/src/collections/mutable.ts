@@ -1,1 +1,1 @@
-export * as ListBuffer from "./mutable/ListBuffer.js"
+export * as ListBuffer from "@tsplus/stdlib/collections/mutable/ListBuffer"

@@ -1,4 +1,4 @@
-import type { Tuple } from "../data/Tuple/definition.js"
+import type { Tuple } from "@tsplus/stdlib/data/Tuple/definition"
 
 export type MergeRecord<K, H> = {
   readonly [k in keyof K | keyof H]: k extends keyof K

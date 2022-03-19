@@ -1,5 +1,5 @@
-import type { Hash } from "./Hash.js"
-import { hashUnknown, isHash } from "./Hash.js"
+import type { Hash } from "@tsplus/stdlib/structure/Hash"
+import { hashUnknown, isHash } from "@tsplus/stdlib/structure/Hash"
 
 /**
  * @tsplus type EqualsOps

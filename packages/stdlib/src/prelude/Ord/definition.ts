@@ -1,4 +1,4 @@
-import type { Ordering } from "../Ordering.js"
+import type { Ordering } from "@tsplus/stdlib/prelude/Ordering/definition"
 
 /**
  * `Ord[A]` provides implicit evidence that values of type `A` have a total

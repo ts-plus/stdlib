@@ -1,6 +1,6 @@
-import { Equivalence } from "../Equivalence.js"
-import type { Ordering } from "../Ordering.js"
-import { Ord } from "./definition.js"
+import { Equivalence } from "@tsplus/stdlib/prelude/Equivalence"
+import { Ord } from "@tsplus/stdlib/prelude/Ord/definition"
+import type { Ordering } from "@tsplus/stdlib/prelude/Ordering"
 
 /**
  * Creates Ord[A] from a compare function

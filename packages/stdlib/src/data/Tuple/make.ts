@@ -1,5 +1,5 @@
-import type { Tuple } from "./definition.js"
-import { TupleInternal } from "./definition.js"
+import type { Tuple } from "@tsplus/stdlib/data/Tuple/definition"
+import { TupleInternal } from "@tsplus/stdlib/data/Tuple/definition"
 
 /**
  * Creates a new `Tuple`.

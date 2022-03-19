@@ -1,5 +1,5 @@
-import type { Ordering } from "../Ordering.js"
-import { Ord } from "./definition.js"
+import { Ord } from "@tsplus/stdlib/prelude/Ord/definition"
+import type { Ordering } from "@tsplus/stdlib/prelude/Ordering"
 
 const compare = (x: any, y: any): Ordering => {
   return x < y ? -1 : x > y ? 1 : 0

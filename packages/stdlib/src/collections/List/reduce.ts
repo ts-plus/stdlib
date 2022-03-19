@@ -1,4 +1,4 @@
-import type { List } from "../List.js"
+import type { List } from "@tsplus/stdlib/collections/List/definition"
 
 /**
  * @tsplus fluent List reduce

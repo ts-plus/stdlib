@@ -1,6 +1,6 @@
-import type { ForcedArray } from "../../utilities/Types.js"
-import type { Tuple } from "./definition.js"
-import { TupleInternal } from "./definition.js"
+import type { Tuple } from "@tsplus/stdlib/data/Tuple/definition"
+import { TupleInternal } from "@tsplus/stdlib/data/Tuple/definition"
+import type { ForcedArray } from "@tsplus/stdlib/utilities/Types"
 
 /**
  * Replaces the element in position `I`.

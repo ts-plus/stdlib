@@ -1,4 +1,4 @@
-import { Exception } from "./Exception.js"
+import { Exception } from "@tsplus/stdlib/exceptions/Exception"
 
 export const IndexOutOfBoundsTag = "IndexOutOfBounds"
 

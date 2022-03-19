@@ -1,5 +1,5 @@
-import { Option } from "../../data/Option.js"
-import type { List } from "./definition.js"
+import type { List } from "@tsplus/stdlib/collections/List/definition"
+import { Option } from "@tsplus/stdlib/data/Option"
 
 /**
  * @tsplus fluent List tail

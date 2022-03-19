@@ -1,1 +1,1 @@
-export * as WeakMapIterable from "./weak/IterableWeakMap.js"
+export * as WeakMapIterable from "@tsplus/stdlib/collections/weak/IterableWeakMap"

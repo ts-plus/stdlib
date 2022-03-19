@@ -1,5 +1,5 @@
-import type { ESReadonlyArray } from "../utilities/Types.js"
-import { ESArray } from "../utilities/Types.js"
+import type { ESReadonlyArray } from "@tsplus/stdlib/utilities/Types"
+import { ESArray } from "@tsplus/stdlib/utilities/Types"
 
 declare global {
   /**

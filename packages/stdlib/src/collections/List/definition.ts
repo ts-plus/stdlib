@@ -8,8 +8,8 @@
  * Licensed under Apache License 2.0
  * (http://www.apache.org/licenses/LICENSE-2.0).
  */
-import { Equals } from "../../structure/Equals.js"
-import { Hash } from "../../structure/Hash.js"
+import { Equals } from "@tsplus/stdlib/structure/Equals"
+import { Hash } from "@tsplus/stdlib/structure/Hash"
 
 export class Cons<A> implements Iterable<A>, Equals {
   readonly _tag = "Cons"

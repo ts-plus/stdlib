@@ -1,4 +1,4 @@
-import type { Closure } from "../Closure/definition.js"
+import type { Closure } from "@tsplus/stdlib/prelude/Closure/definition"
 
 /**
  * The `Associative[A]` type class describes an associative binary operator

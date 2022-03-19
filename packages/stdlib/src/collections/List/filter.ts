@@ -1,7 +1,7 @@
 /* eslint-disable no-constant-condition */
-import { unsafeCoerce } from "../../data/Function.js"
-import type { Predicate } from "../../data/Predicate.js"
-import { List } from "./definition.js"
+import { List } from "@tsplus/stdlib/collections/List/definition"
+import { unsafeCoerce } from "@tsplus/stdlib/data/Function"
+import type { Predicate } from "@tsplus/stdlib/data/Predicate"
 
 /**
  * @tsplus fluent List filter

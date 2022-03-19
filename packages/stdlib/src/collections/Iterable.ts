@@ -1,6 +1,6 @@
-import { Tuple } from "../data/Tuple/definition.js"
-import type { Identity } from "../prelude/Identity.js"
-import type { ESIterable } from "../utilities/Types.js"
+import { Tuple } from "@tsplus/stdlib/data/Tuple"
+import type { Identity } from "@tsplus/stdlib/prelude/Identity"
+import type { ESIterable } from "@tsplus/stdlib/utilities/Types"
 
 declare global {
   /**

@@ -1,4 +1,4 @@
-export * as function from "./data/Function.js"
-export * as option from "./data/Option.js"
-export * as predicate from "./data/Predicate.js"
-export * as tuple from "./data/Tuple.js"
+export * as function from "@tsplus/stdlib/data/Function"
+export * as option from "@tsplus/stdlib/data/Option"
+export * as predicate from "@tsplus/stdlib/data/Predicate"
+export * as tuple from "@tsplus/stdlib/data/Tuple"
