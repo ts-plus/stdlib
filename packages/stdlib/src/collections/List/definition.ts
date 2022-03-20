@@ -101,7 +101,7 @@ export function unify<X extends List<any>>(
 /**
  * @tsplus static ListOps nil
  */
-export function nil<A>(): Nil<A> {
+export function nil<A = never>(): Nil<A> {
   return _Nil
 }
 

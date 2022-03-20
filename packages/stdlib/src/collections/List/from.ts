@@ -21,3 +21,13 @@ export function from<A>(prefix: Iterable<A>): List<A> {
     return List.nil()
   }
 }
+
+/**
+ * Constructs a new `List` from an `Iterable`
+ *
+ * @tsplus static ListOps __call
+ * @tsplus static ListOps make
+ */
+export function make<As extends readonly any[]>(...prefix: As): List<As[number]> {
+  return from(prefix)
+}

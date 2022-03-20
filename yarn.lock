@@ -825,9 +825,9 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@tsplus/installer@npm:^0.0.39":
-  version: 0.0.39
-  resolution: "@tsplus/installer@npm:0.0.39"
+"@tsplus/installer@npm:^0.0.41":
+  version: 0.0.41
+  resolution: "@tsplus/installer@npm:0.0.41"
   dependencies:
     mkdirp: ^1.0.4
     rimraf: ^3.0.2
@@ -836,7 +836,7 @@ __metadata:
     zlib: ^1.0.5
   bin:
     tsplus-install: bin/tsplus-install
-  checksum: 0169bc39ad29ebcbe8ebb37cb96272f58f4937434c17fc23418f14c6a8a5aaf20d96407eef9c6fa74c73b4d3aa31a4b2411fe5be641c073d924c596eb30bbb98
+  checksum: 850809568e92ee9b13066a9bdeee6a62a3d91fcf4c3ce1e57ec8e72acf5c31fba85c6c5c765e7993191f527685164ed05f8054d74da751ff23d1fe2872260e9e
   languageName: node
   linkType: hard
 
@@ -1111,7 +1111,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@typescript-eslint/utils@npm:5.15.0, @typescript-eslint/utils@npm:^5.10.0":
+"@typescript-eslint/utils@npm:5.15.0":
   version: 5.15.0
   resolution: "@typescript-eslint/utils@npm:5.15.0"
   dependencies:
@@ -2979,23 +2979,6 @@ __metadata:
   peerDependencies:
     eslint: ^2 || ^3 || ^4 || ^5 || ^6 || ^7.2.0 || ^8
   checksum: 0af24f5c7c6ca692f42e3947127f0ae7dfe44f1e02740f7cbe988b510a9c52bab0065d7df04e2d953dcc88a4595a00cbdcf14018acf8cd75cfd47b72efcbb734
-  languageName: node
-  linkType: hard
-
-"eslint-plugin-jest@npm:^26.1.1":
-  version: 26.1.1
-  resolution: "eslint-plugin-jest@npm:26.1.1"
-  dependencies:
-    "@typescript-eslint/utils": ^5.10.0
-  peerDependencies:
-    "@typescript-eslint/eslint-plugin": ^5.0.0
-    eslint: ^6.0.0 || ^7.0.0 || ^8.0.0
-  peerDependenciesMeta:
-    "@typescript-eslint/eslint-plugin":
-      optional: true
-    jest:
-      optional: true
-  checksum: efed65bd6b83f15f38e3d8447d0dbbac18c10d6e4c4853c8d0539f5bc8e898cca8136b1e706899b756ea995ed189445b7f15d0fffeb983890608c33e752670d7
   languageName: node
   linkType: hard
 
@@ -7235,7 +7218,7 @@ __metadata:
     "@changesets/cli": ^2.21.1
     "@effect-ts/build-utils": 0.38.3
     "@effect-ts/core": ^0.58.1
-    "@tsplus/installer": ^0.0.39
+    "@tsplus/installer": ^0.0.41
     "@types/node": ^17.0.21
     "@types/rimraf": ^3.0.2
     "@typescript-eslint/eslint-plugin": ^5.15.0
@@ -7251,7 +7234,6 @@ __metadata:
     eslint-import-resolver-typescript: ^2.5.0
     eslint-plugin-codegen: 0.16.1
     eslint-plugin-import: ^2.25.4
-    eslint-plugin-jest: ^26.1.1
     eslint-plugin-prettier: ^4.0.0
     eslint-plugin-simple-import-sort: ^7.0.0
     eslint-plugin-sort-destructure-keys: ^1.4.0
