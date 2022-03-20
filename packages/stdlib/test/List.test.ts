@@ -18,4 +18,10 @@ describe("List", () => {
   it("equals", () => {
     expect(List(0, 1, 2) == List(0, 1, 2)).toEqual(true)
   })
+  it("map", () => {
+    expect(List(1, 2, 3).map((n) => n + 1) == List(2, 3, 4)).toEqual(true)
+  })
+  it("flatMap", () => {
+    expect(List(1, 2, 3).flatMap((n) => List(n + 1)) == List(2, 3, 4)).toEqual(true)
+  })
 })
