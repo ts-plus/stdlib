@@ -11,6 +11,9 @@
 import { Equals } from "@tsplus/stdlib/structure/Equals"
 import { Hash } from "@tsplus/stdlib/structure/Hash"
 
+/**
+ * @tsplus type List/Cons
+ */
 export class Cons<A> implements Iterable<A>, Equals {
   readonly _tag = "Cons"
   constructor(readonly head: A, public tail: List<A>) {}
@@ -50,6 +53,9 @@ export class Cons<A> implements Iterable<A>, Equals {
   }
 }
 
+/**
+ * @tsplus type List/Nil
+ */
 export class Nil<A> implements Iterable<A>, Equals {
   readonly _tag = "Nil";
   [Symbol.iterator](): Iterator<A> {

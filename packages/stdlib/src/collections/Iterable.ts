@@ -120,7 +120,7 @@ export function zip_<A, B>(fa: Iterable<A>, fb: Iterable<B>): Iterable<Tuple<[A,
 export const zip = Pipeable(zip_)
 
 /**
- * @tsplus fluent Iterable chain
+ * @tsplus fluent Iterable flatMap
  */
 export function chain_<A, B>(i: Iterable<A>, f: (a: A) => Iterable<B>): Iterable<B> {
   return {
