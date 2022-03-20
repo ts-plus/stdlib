@@ -177,7 +177,6 @@ export const equalsWith = Pipeable(equalsWith_)
 
 /**
  * @tsplus fluent List equals
- * @tsplus operator List ==
  */
 export function equals_<A, B>(self: List<A>, that: List<B>) {
   return self.equalsWith(that, Equals.equals)

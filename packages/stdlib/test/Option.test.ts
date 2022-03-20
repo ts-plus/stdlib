@@ -23,4 +23,8 @@ describe("Option", () => {
     expect(Option.some(1) | Option.some(2)).toEqual(Option.some(1))
     expect(Option.none | Option.some(2)).toEqual(Option.some(2))
   })
+  it("equals", () => {
+    expect(Option.some(0) == Option.some(0)).toEqual(true)
+    expect(Option.some(0) == Option.some(1)).toEqual(false)
+  })
 })

@@ -35,6 +35,7 @@ export function sameValueZeroEqual(a: any, b: any) {
 
 /**
  * @tsplus static EqualsOps equals
+ * @tsplus operator Equals ==
  */
 export function equals(a: unknown, b: unknown): boolean {
   if (!sameValueZeroEqual(hashUnknown(a), hashUnknown(b))) {
