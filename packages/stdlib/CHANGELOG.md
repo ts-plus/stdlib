@@ -1,5 +1,13 @@
 # @tsplus/stdlib
 
+## 0.0.9
+
+### Patch Changes
+
+- [`b1769bf`](https://github.com/ts-plus/stdlib/commit/b1769bf89b48ba423f44fc91f0c4a2b7f3b281aa) Thanks [@mikearnaldi](https://github.com/mikearnaldi)! - Add == operator to Equals
+
+* [`771365a`](https://github.com/ts-plus/stdlib/commit/771365ac57013de91ff8f439bd67c072e5850794) Thanks [@mikearnaldi](https://github.com/mikearnaldi)! - Add fluent asList to Iterable
+
 ## 0.0.8
 
 ### Patch Changes
