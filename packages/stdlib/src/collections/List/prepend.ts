@@ -14,7 +14,7 @@ export const prepend = Pipeable(prepend_)
 /**
  * Inserts an element at the beginning of a `List`, returning a new `List`
  *
- * @tsplus operator List +
+ * @tsplus operator List + 1.0
  */
 export function prependOperator<A>(elem: A, list: List<A>): List<A> {
   return List.cons(elem, list)
