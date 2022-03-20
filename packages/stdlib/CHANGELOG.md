@@ -1,5 +1,11 @@
 # @tsplus/stdlib
 
+## 0.0.8
+
+### Patch Changes
+
+- [`824c57e`](https://github.com/ts-plus/stdlib/commit/824c57ef24b620e4b9948026edc224257eb2c5bb) Thanks [@mikearnaldi](https://github.com/mikearnaldi)! - Improve List operators, Upgrade tsplus
+
 ## 0.0.7
 
 ### Patch Changes
