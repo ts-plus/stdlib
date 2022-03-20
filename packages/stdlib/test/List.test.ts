@@ -15,4 +15,7 @@ describe("List", () => {
     builder.append(2)
     expect(Array.from(builder.build())).toEqual([0, 1, 2])
   })
+  it("equals", () => {
+    expect(List(0, 1, 2) == List(0, 1, 2)).toEqual(true)
+  })
 })
