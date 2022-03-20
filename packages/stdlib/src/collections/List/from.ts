@@ -4,6 +4,7 @@ import { List } from "@tsplus/stdlib/collections/List/definition"
  * Constructs a new `List` from an `Iterable`
  *
  * @tsplus static ListOps from
+ * @tsplus fluent Iterable asList
  */
 export function from<A>(prefix: Iterable<A>): List<A> {
   const iter = prefix[Symbol.iterator]()

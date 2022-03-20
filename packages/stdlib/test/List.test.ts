@@ -25,6 +25,10 @@ describe("List", () => {
     expect(List(1, 2, 3).flatMap((n) => List(n + 1)) == List(2, 3, 4)).toEqual(true)
   })
   it("flatMap Iterable", () => {
-    expect(List.from(List(0, 1).flatMap((n) => [n + 1])) == List(1, 2)).toEqual(true)
+    expect(
+      List(0, 1)
+        .flatMap((n) => [n + 1])
+        .asList() == List(1, 2)
+    ).toEqual(true)
   })
 })
