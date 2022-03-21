@@ -25,6 +25,12 @@ export interface ImmutableArrayConstructor {
   <A extends any[]>(...as: A): ImmutableArray<A[number]>
   isArray(arg: any): arg is ImmutableArray<any>
   readonly prototype: ImmutableArray<any>
+  from<T>(iterable: Iterable<T> | ArrayLike<T>): ImmutableArray<T>
+  from<T, U>(
+    iterable: Iterable<T> | ArrayLike<T>,
+    mapfn: (v: T, k: number) => U,
+    thisArg?: any
+  ): ImmutableArray<T>
 }
 
 export type ImmutableArray<A> = ESReadonlyArray<A>

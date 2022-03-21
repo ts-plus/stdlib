@@ -18,7 +18,8 @@
     "autofix": "yarn lint --fix && yarn prettier",
     "prettier": "yarn org:prettier --write \"./{src,test,demo}/**/*.ts\"",
     "tc": "yarn org:tsc --noEmit",
-    "circular": "yarn org:madge --circular --no-color --no-spinner build/esm"
+    "circular": "yarn org:madge --circular --no-color --no-spinner build/esm",
+    "run": "yarn org:ts-node -r tsconfig-paths/register src/main.ts"
   },
   "config": {
     "side": [],
