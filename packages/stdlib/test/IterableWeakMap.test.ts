@@ -25,9 +25,9 @@ describe("IterableWeakMap", () => {
       [a, 0],
       [b, 1]
     ])
-    expect(map.getOption(a)).toEqual(Option.some(0))
-    expect(map.getOption(b)).toEqual(Option.some(1))
-    expect(map.getOption(c)).toEqual(Option.none)
+    expect(map[a]).toEqual(Option.some(0))
+    expect(map[b]).toEqual(Option.some(1))
+    expect(map[c]).toEqual(Option.none)
   })
   it("keys", () => {
     const a = {}
