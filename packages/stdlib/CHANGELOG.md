@@ -1,5 +1,11 @@
 # @tsplus/stdlib
 
+## 0.0.10
+
+### Patch Changes
+
+- [`565e887`](https://github.com/ts-plus/stdlib/commit/565e88797404cd6417cc985785fd0cf9729b078f) Thanks [@mikearnaldi](https://github.com/mikearnaldi)! - Early return in Equals.equals if referentially identical
+
 ## 0.0.9
 
 ### Patch Changes
