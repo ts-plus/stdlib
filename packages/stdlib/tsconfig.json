@@ -9,6 +9,9 @@
         "node/**/*.ts",
         "test/**/*.ts"
     ],
+    "files": [
+        "./global.d.ts"
+    ],
     "ts-node": {
         "files": true,
         "require": [
