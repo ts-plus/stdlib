@@ -49,6 +49,7 @@ export function make<A extends readonly any[]>(...as: A): ImmutableArray<A[numbe
 
 /**
  * @tsplus static ImmutableArrayOps from
+ * @tsplus fluent Iterable asImmutableArray
  */
 export function from<A>(iterable: Iterable<A>): ImmutableArray<A> {
   return new ImmutableArray(Array.from(iterable))

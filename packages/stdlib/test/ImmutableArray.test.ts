@@ -28,4 +28,11 @@ describe("ImmutableArray", () => {
       ImmutableArray(0, 1) + ImmutableArray(2, 3) == ImmutableArray(0, 1, 2, 3)
     )
   })
+  it("flatMap Iterable", () => {
+    assert.isTrue(
+      ImmutableArray(0, 1)
+        .flatMap((n) => [n + 1])
+        .asImmutableArray() == ImmutableArray(1, 2)
+    )
+  })
 })
