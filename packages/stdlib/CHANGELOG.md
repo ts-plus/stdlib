@@ -1,5 +1,11 @@
 # @tsplus/stdlib
 
+## 0.0.13
+
+### Patch Changes
+
+- [`fa7f305`](https://github.com/ts-plus/stdlib/commit/fa7f3053ca89e8258361247712bee666a45675e5) Thanks [@mikearnaldi](https://github.com/mikearnaldi)! - Update TSPlus to global imports
+
 ## 0.0.12
 
 ### Patch Changes
