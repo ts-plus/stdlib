@@ -5,6 +5,13 @@
     },
     "include": [
         "src/**/*.ts",
+        "node/**/*.ts",
         "test/**/*.ts"
-    ]
+    ],
+    "ts-node": {
+        "files": true,
+        "require": [
+            "tsconfig-paths/register"
+        ]
+    }
 }

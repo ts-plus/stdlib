@@ -825,6 +825,21 @@ __metadata:
   languageName: node
   linkType: hard
 
+"@tsplus/installer@npm:^0.0.46":
+  version: 0.0.46
+  resolution: "@tsplus/installer@npm:0.0.46"
+  dependencies:
+    mkdirp: ^1.0.4
+    rimraf: ^3.0.2
+    tar: ^6.1.11
+    ts-node: ^10.4.0
+    zlib: ^1.0.5
+  bin:
+    tsplus-install: bin/tsplus-install
+  checksum: 9bfc8bfb145dbdd3945a88e7a41e7b29d2fb9a0f1128a4b5145fa97cf918261c3813139bb8f8007eb137ae999c56999130b937b120bbbd03803f0411750df529
+  languageName: node
+  linkType: hard
+
 "@tsplus/stdlib@workspace:packages/stdlib":
   version: 0.0.0-use.local
   resolution: "@tsplus/stdlib@workspace:packages/stdlib"
@@ -7124,7 +7139,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"ts-node@npm:^10.7.0":
+"ts-node@npm:^10.4.0, ts-node@npm:^10.7.0":
   version: 10.7.0
   resolution: "ts-node@npm:10.7.0"
   dependencies:
@@ -7162,7 +7177,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"tsconfig-paths@npm:^3.12.0, tsconfig-paths@npm:^3.14.0, tsconfig-paths@npm:^3.9.0":
+"tsconfig-paths@npm:^3.12.0, tsconfig-paths@npm:^3.9.0":
   version: 3.14.0
   resolution: "tsconfig-paths@npm:3.14.0"
   dependencies:
@@ -7199,6 +7214,7 @@ __metadata:
     "@changesets/cli": ^2.21.1
     "@effect-ts/build-utils": 0.38.3
     "@effect-ts/core": ^0.58.1
+    "@tsplus/installer": ^0.0.46
     "@types/node": ^17.0.21
     "@types/rimraf": ^3.0.2
     "@typescript-eslint/eslint-plugin": ^5.15.0
@@ -7221,11 +7237,10 @@ __metadata:
     prettier: ^2.6.0
     rimraf: ^3.0.2
     ts-node: ^10.7.0
-    tsconfig-paths: ^3.14.0
     typescript: ^4.6.2
     ultra-runner: ^3.10.5
     vite: ^2.8.6
-    vitest: 0.7.6
+    vitest: 0.7.7
   languageName: unknown
   linkType: soft
 
@@ -7316,23 +7331,43 @@ __metadata:
   languageName: node
   linkType: hard
 
-"typescript@file:./typescript-4.7.0-tsplus.20220321.2.tgz::locator=tsplus%40workspace%3A.":
-  version: 4.7.0-tsplus.20220321
-  resolution: "typescript@file:./typescript-4.7.0-tsplus.20220321.2.tgz::locator=tsplus%40workspace%3A."
+"typescript@npm:^3.9.10, typescript@npm:^3.9.5, typescript@npm:^3.9.7":
+  version: 3.9.10
+  resolution: "typescript@npm:3.9.10"
   bin:
-    tsc: ./bin/tsc
-    tsserver: ./bin/tsserver
-  checksum: dc46d035c57ac5970042908281df71e7eebf3c21a4c690777afc74adfb9d87ac99e463f8de5599fb2d1c91505a37313d69dd79cd593f279cefa636878cebdab4
+    tsc: bin/tsc
+    tsserver: bin/tsserver
+  checksum: 46c842e2cd4797b88b66ef06c9c41dd21da48b95787072ccf39d5f2aa3124361bc4c966aa1c7f709fae0509614d76751455b5231b12dbb72eb97a31369e1ff92
   languageName: node
   linkType: hard
 
-"typescript@patch:typescript@file%3A./typescript-4.7.0-tsplus.20220321.2.tgz%3A%3Alocator=tsplus%2540workspace%253A.#~builtin<compat/typescript>":
-  version: 4.7.0-tsplus.20220321
-  resolution: "typescript@patch:typescript@file%3A./typescript-4.7.0-tsplus.20220321.2.tgz%3A%3Alocator=tsplus%2540workspace%253A.#~builtin<compat/typescript>::version=4.7.0-tsplus.20220321&hash=493e53"
+"typescript@npm:^4.6.2":
+  version: 4.6.2
+  resolution: "typescript@npm:4.6.2"
   bin:
-    tsc: ./bin/tsc
-    tsserver: ./bin/tsserver
-  checksum: 0e76bb3aa059fc4f68e293c82868c162a4b8a8c4ad9d91ee90a799eade632a934fe92065081ba0a4cc4b4d7b74976c8f7e28a61fc6767404e7bc0e95c487c404
+    tsc: bin/tsc
+    tsserver: bin/tsserver
+  checksum: 8a44ed7e6f6c4cb1ebe8cf236ecda2fb119d84dcf0fbd77e707b2dfea1bbcfc4e366493a143513ce7f57203c75da9d4e20af6fe46de89749366351046be7577c
+  languageName: node
+  linkType: hard
+
+"typescript@patch:typescript@^3.9.10#~builtin<compat/typescript>, typescript@patch:typescript@^3.9.5#~builtin<compat/typescript>, typescript@patch:typescript@^3.9.7#~builtin<compat/typescript>":
+  version: 3.9.10
+  resolution: "typescript@patch:typescript@npm%3A3.9.10#~builtin<compat/typescript>::version=3.9.10&hash=493e53"
+  bin:
+    tsc: bin/tsc
+    tsserver: bin/tsserver
+  checksum: dc7141ab555b23a8650a6787f98845fc11692063d02b75ff49433091b3af2fe3d773650dea18389d7c21f47d620fb3b110ea363dab4ab039417a6ccbbaf96fc2
+  languageName: node
+  linkType: hard
+
+"typescript@patch:typescript@^4.6.2#~builtin<compat/typescript>":
+  version: 4.6.2
+  resolution: "typescript@patch:typescript@npm%3A4.6.2#~builtin<compat/typescript>::version=4.6.2&hash=493e53"
+  bin:
+    tsc: bin/tsc
+    tsserver: bin/tsserver
+  checksum: efb83260a22ee49d4c8bdc59b3cefe54fdf51d6f563f5c3a35aa3d5e46fb12f3f1d33a36d6f9f64171e567ead1847e99cb612d0a9a74e7d44e16cad9d0bbc937
   languageName: node
   linkType: hard
 
@@ -7495,7 +7530,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"vite@npm:^2.7.10, vite@npm:^2.8.6":
+"vite@npm:^2.8.6":
   version: 2.8.6
   resolution: "vite@npm:2.8.6"
   dependencies:
@@ -7524,9 +7559,9 @@ __metadata:
   languageName: node
   linkType: hard
 
-"vitest@https://github.com/mikearnaldi/vitest/raw/f0fd85f779aaefabfcd5a1309bf558e21c9d09f0/packages/vitest/dev/vitest-0.7.6.tgz":
-  version: 0.7.6
-  resolution: "vitest@https://github.com/mikearnaldi/vitest/raw/f0fd85f779aaefabfcd5a1309bf558e21c9d09f0/packages/vitest/dev/vitest-0.7.6.tgz"
+"vitest@npm:0.7.7":
+  version: 0.7.7
+  resolution: "vitest@npm:0.7.7"
   dependencies:
     "@types/chai": ^4.3.0
     "@types/chai-subset": ^1.3.3
@@ -7534,7 +7569,7 @@ __metadata:
     local-pkg: ^0.4.1
     tinypool: ^0.1.2
     tinyspy: ^0.3.0
-    vite: ^2.7.10
+    vite: ^2.8.6
   peerDependencies:
     "@vitest/ui": "*"
     c8: "*"
@@ -7550,8 +7585,8 @@ __metadata:
     jsdom:
       optional: true
   bin:
-    vitest: ./vitest.mjs
-  checksum: 523d4f21e1b389d2ce533beef6f43abe1d2dbd7c186fb3765e95e19f66beb30b2f3c69fecd32902b1695b5018a39023685c2dbca9819d2fc2459a572c34f7aea
+    vitest: vitest.mjs
+  checksum: c9e8afcb61d83736a3670a956a77603e547454a26d083babcb08a1e1325ec58e3044d9c5668271d170063a2878574a6eef98bc1618f5d443582058f14de60399
   languageName: node
   linkType: hard
 
@@ -7788,5 +7823,12 @@ __metadata:
   version: 0.1.0
   resolution: "yocto-queue@npm:0.1.0"
   checksum: f77b3d8d00310def622123df93d4ee654fc6a0096182af8bd60679ddcdfb3474c56c6c7190817c84a2785648cdee9d721c0154eb45698c62176c322fb46fc700
+  languageName: node
+  linkType: hard
+
+"zlib@npm:^1.0.5":
+  version: 1.0.5
+  resolution: "zlib@npm:1.0.5"
+  checksum: 5ef5693a1deb70f65845424f5ecce1ee956e50320aa438126759fd28ec8a25ae876acb3b179b4f5050427e7e0dfcd9e45bdae23f055b2d732bc2fe1dbe4da169
   languageName: node
   linkType: hard
