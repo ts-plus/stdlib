@@ -582,45 +582,45 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@effect-ts/build-utils@npm:0.38.3":
-  version: 0.38.3
-  resolution: "@effect-ts/build-utils@npm:0.38.3"
+"@effect-ts/build-utils@npm:0.39.0":
+  version: 0.39.0
+  resolution: "@effect-ts/build-utils@npm:0.39.0"
   peerDependencies:
     "@effect-ts/core": ">= 0.28.9"
-    chalk: ">= 4.1.0"
     cpx: ">= 1.5.0"
+    picocolors: ^1.0.0
   bin:
     build-utils: build-utils
-  checksum: 9e441c1850d43051ee62887638dd85ca43c953b75ba46e0f263167420f888c1f53d0e5a8c55b96de0aa73cdabed9e9b1dfb5e0cbe9b65cebaba82d2432aea306
+  checksum: 7a938d61eab77b659d01e6a803c9cb2b23a9bd2a8b1246009f907067344a1f1b4d9a21feb59b799b38c661cbe53ec324663b5288a895c2ef15f5ad4a2c4330e6
   languageName: node
   linkType: hard
 
-"@effect-ts/build-utils@patch:@effect-ts/build-utils@0.38.3#.yarn/patches/effect-ts-build-utils.patch::locator=tsplus%40workspace%3A.":
-  version: 0.38.3
-  resolution: "@effect-ts/build-utils@patch:@effect-ts/build-utils@npm%3A0.38.3#.yarn/patches/effect-ts-build-utils.patch::version=0.38.3&hash=08e622&locator=tsplus%40workspace%3A."
+"@effect-ts/build-utils@patch:@effect-ts/build-utils@npm:0.39.0#.yarn/patches/@effect-ts-build-utils-npm-0.39.0-0001b7d917::locator=tsplus%40workspace%3A.":
+  version: 0.39.0
+  resolution: "@effect-ts/build-utils@patch:@effect-ts/build-utils@npm%3A0.39.0#.yarn/patches/@effect-ts-build-utils-npm-0.39.0-0001b7d917::version=0.39.0&hash=08e622&locator=tsplus%40workspace%3A."
   peerDependencies:
     "@effect-ts/core": ">= 0.28.9"
-    chalk: ">= 4.1.0"
     cpx: ">= 1.5.0"
+    picocolors: ^1.0.0
   bin:
     build-utils: build-utils
-  checksum: c61c6fa9c032b6ab6affcf85972afa33fed42ecfada00dd47e14557127bedd0c91832f5bb203d2ca11cf5f854e3b2dfee335387163fe6ba79d4911cbb41c6628
+  checksum: 57b9bee56011838eba267d9246162b50ea37f6a25f6a3cea5e88ed8d494151044cc163e090f375b4bff6b533ad4c871d2295e251f65bffd395e891b387244278
   languageName: node
   linkType: hard
 
-"@effect-ts/core@npm:^0.58.1":
-  version: 0.58.1
-  resolution: "@effect-ts/core@npm:0.58.1"
+"@effect-ts/core@npm:^0.59.0":
+  version: 0.59.0
+  resolution: "@effect-ts/core@npm:0.59.0"
   dependencies:
-    "@effect-ts/system": ^0.55.1
-  checksum: 46afc9a192c942871a822a1be76b0880bdb2657dba088e7d721d8910db70e435c115081917c1984fed2ed3816fca37dd44623e93b73b254926b30f9af5c65438
+    "@effect-ts/system": ^0.56.0
+  checksum: 307837ab5cd8a3ade00df89932ce8e1256a1d3180c59661cb45e73ca375334e489c594168a8b32569f6d023e849cfe4b2df0c4db736b638c4068139995764dfc
   languageName: node
   linkType: hard
 
-"@effect-ts/system@npm:^0.55.1":
-  version: 0.55.1
-  resolution: "@effect-ts/system@npm:0.55.1"
-  checksum: a494fefb15c804d9b1127d2a383956fb328fec36a28bdcf2384bb1edb51882eaa9b863cd7ed1be2258c145627805d1d861f5197e81f4aac8c3c2cd39b449e0a3
+"@effect-ts/system@npm:^0.56.0":
+  version: 0.56.0
+  resolution: "@effect-ts/system@npm:0.56.0"
+  checksum: 15cdd85245c946e64e87edb78b47e54dbce69a9e376161ea1c3db3523bb456b54a6d980fae5baa5f46aab4778a1e9e34f92b175a7f578bbc04a01a7c44dea723
   languageName: node
   linkType: hard
 
@@ -825,9 +825,9 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@tsplus/installer@npm:^0.0.47":
-  version: 0.0.47
-  resolution: "@tsplus/installer@npm:0.0.47"
+"@tsplus/installer@npm:^0.0.48":
+  version: 0.0.48
+  resolution: "@tsplus/installer@npm:0.0.48"
   dependencies:
     mkdirp: ^1.0.4
     rimraf: ^3.0.2
@@ -836,7 +836,7 @@ __metadata:
     zlib: ^1.0.5
   bin:
     tsplus-install: bin/tsplus-install
-  checksum: d7af51ac7d5b32e78668297bab8d40ea5b6014f30d47c60e4bde0778b86a79aa6c6cdc4664038fea981ad61d6e946cd5d4b442f44b06e54cb892876f936a0861
+  checksum: 78c23d684c2db44f6da065469153af7a8f09bd42f8bc0fd7bd577fc764e9c7d583dacfa1293c291de20162b7d0c2db30f20fcadfff80b8dcdc3305968a9a9cfa
   languageName: node
   linkType: hard
 
@@ -934,7 +934,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@types/node@npm:*, @types/node@npm:^17.0.21":
+"@types/node@npm:*, @types/node@npm:^17.0.22":
   version: 17.0.22
   resolution: "@types/node@npm:17.0.22"
   checksum: 72d1fc8bdc37f0c18b1160e7207b52fb569d0e2b459ac9a4cbd3ca40e478ffe1455efc2c6a253c81e0a7a7c7a899716535d9970cd9521f87d6050b7de04b9ba3
@@ -995,7 +995,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@typescript-eslint/eslint-plugin@npm:^5.15.0":
+"@typescript-eslint/eslint-plugin@npm:^5.16.0":
   version: 5.16.0
   resolution: "@typescript-eslint/eslint-plugin@npm:5.16.0"
   dependencies:
@@ -1018,7 +1018,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@typescript-eslint/parser@npm:^5.15.0":
+"@typescript-eslint/parser@npm:^5.16.0":
   version: 5.16.0
   resolution: "@typescript-eslint/parser@npm:5.16.0"
   dependencies:
@@ -1770,13 +1770,6 @@ __metadata:
     pathval: ^1.1.1
     type-detect: ^4.0.5
   checksum: acff93fd537f96d4a4d62dd83810285dffcfccb5089e1bf2a1205b28ec82d93dff551368722893cf85004282df10ee68802737c33c90c5493957ed449ed7ce71
-  languageName: node
-  linkType: hard
-
-"chalk@npm:5.0.1":
-  version: 5.0.1
-  resolution: "chalk@npm:5.0.1"
-  checksum: 7b45300372b908f0471fbf7389ce2f5de8d85bb949026fd51a1b95b10d0ed32c7ed5aab36dd5e9d2bf3191867909b4404cef75c5f4d2d1daeeacd301dd280b76
   languageName: node
   linkType: hard
 
@@ -2937,9 +2930,9 @@ __metadata:
   languageName: node
   linkType: hard
 
-"eslint-plugin-codegen@patch:eslint-plugin-codegen@0.16.1#.yarn/patches/eslint-plugin-codegen.patch::locator=tsplus%40workspace%3A.":
+"eslint-plugin-codegen@patch:eslint-plugin-codegen@npm:0.16.1#.yarn/patches/eslint-plugin-codegen-npm-0.16.1-87770191cd::locator=tsplus%40workspace%3A.":
   version: 0.16.1
-  resolution: "eslint-plugin-codegen@patch:eslint-plugin-codegen@npm%3A0.16.1#.yarn/patches/eslint-plugin-codegen.patch::version=0.16.1&hash=958be8&locator=tsplus%40workspace%3A."
+  resolution: "eslint-plugin-codegen@patch:eslint-plugin-codegen@npm%3A0.16.1#.yarn/patches/eslint-plugin-codegen-npm-0.16.1-87770191cd::version=0.16.1&hash=d4982a&locator=tsplus%40workspace%3A."
   dependencies:
     "@babel/core": ^7.11.6
     "@babel/generator": ~7.12.0
@@ -7212,17 +7205,16 @@ __metadata:
     "@babel/plugin-transform-modules-commonjs": ^7.17.7
     "@changesets/changelog-github": ^0.4.3
     "@changesets/cli": ^2.21.1
-    "@effect-ts/build-utils": 0.38.3
-    "@effect-ts/core": ^0.58.1
-    "@tsplus/installer": ^0.0.47
-    "@types/node": ^17.0.21
+    "@effect-ts/build-utils": 0.39.0
+    "@effect-ts/core": ^0.59.0
+    "@tsplus/installer": ^0.0.48
+    "@types/node": ^17.0.22
     "@types/rimraf": ^3.0.2
-    "@typescript-eslint/eslint-plugin": ^5.15.0
-    "@typescript-eslint/parser": ^5.15.0
+    "@typescript-eslint/eslint-plugin": ^5.16.0
+    "@typescript-eslint/parser": ^5.16.0
     babel-plugin-annotate-pure-calls: ^0.4.0
     babel-plugin-replace-import-extension: ^1.1.2
     c8: ^7.11.0
-    chalk: 5.0.1
     concurrently: ^7.0.0
     cpx: ^1.5.0
     eslint: ^8.11.0
@@ -7234,6 +7226,7 @@ __metadata:
     eslint-plugin-simple-import-sort: ^7.0.0
     eslint-plugin-sort-destructure-keys: ^1.4.0
     madge: ^5.0.1
+    picocolors: ^1.0.0
     prettier: ^2.6.0
     rimraf: ^3.0.2
     ts-node: ^10.7.0
