@@ -14,8 +14,12 @@ declare global {
  * @tsplus type ImmutableArray
  * @tsplus companion ImmutableArrayOps
  */
-export class ImmutableArray<A> implements Equals {
+export class ImmutableArray<A> implements Equals, Iterable<A> {
   constructor(readonly array: ReadonlyArray<A>) {}
+
+  [Symbol.iterator](): Iterator<A> {
+    return this.array[Symbol.iterator]()
+  }
 
   [Equals.sym](this: this, other: unknown): boolean {
     return (
@@ -24,6 +28,7 @@ export class ImmutableArray<A> implements Equals {
       this.array.every((v, i) => Equals.equals(v, other.array[i]))
     )
   }
+
   [Hash.sym](this: this): number {
     return Hash.array(this.array)
   }
