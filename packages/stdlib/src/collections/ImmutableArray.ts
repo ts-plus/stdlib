@@ -127,7 +127,6 @@ export const prepend = Pipeable(prepend_)
 /**
  * Appends `a` to ImmutableArray<A>
  *
- * @tsplus operator ImmutableArray + 1.0
  * @tsplus fluent ImmutableArray append
  */
 export function append_<A, B>(self: ImmutableArray<A>, a: B): ImmutableArray<A | B> {
@@ -135,3 +134,9 @@ export function append_<A, B>(self: ImmutableArray<A>, a: B): ImmutableArray<A |
 }
 
 export const append = Pipeable(append_)
+
+/**
+ * @tsplus operator ImmutableArray + 1.0
+ */
+export const appendOperator: <A>(self: ImmutableArray<A>, a: A) => ImmutableArray<A> =
+  append_
