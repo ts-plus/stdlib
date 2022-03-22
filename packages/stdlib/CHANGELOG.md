@@ -1,5 +1,15 @@
 # @tsplus/stdlib
 
+## 0.0.14
+
+### Patch Changes
+
+- [`b2866f1`](https://github.com/ts-plus/stdlib/commit/b2866f17dec1fb81f35a5c3da7178a30e900d297) Thanks [@mikearnaldi](https://github.com/mikearnaldi)! - Implement minumal Duration module
+
+* [`fb8bfc8`](https://github.com/ts-plus/stdlib/commit/fb8bfc8bd4ce85ce14df23d5ebc4284ca8e1e9f6) Thanks [@mikearnaldi](https://github.com/mikearnaldi)! - Implement Iterable in ImmutableArray
+
+- [`d0bfc6b`](https://github.com/ts-plus/stdlib/commit/d0bfc6b18cbc3df1ac05707a597ba796d59dacdc) Thanks [@mikearnaldi](https://github.com/mikearnaldi)! - Restrict duration inputs to integers
+
 ## 0.0.13
 
 ### Patch Changes
