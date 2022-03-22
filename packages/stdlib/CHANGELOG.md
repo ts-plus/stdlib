@@ -1,5 +1,15 @@
 # @tsplus/stdlib
 
+## 0.0.12
+
+### Patch Changes
+
+- [`efce9a6`](https://github.com/ts-plus/stdlib/commit/efce9a661abceadfdc9faade2bb5de59fd9bea55) Thanks [@mikearnaldi](https://github.com/mikearnaldi)! - Improve Array operators
+
+* [`efce9a6`](https://github.com/ts-plus/stdlib/commit/efce9a661abceadfdc9faade2bb5de59fd9bea55) Thanks [@mikearnaldi](https://github.com/mikearnaldi)! - Extend immutable array index
+
+- [`2f05fe9`](https://github.com/ts-plus/stdlib/commit/2f05fe98ca6667ec04c39adddcf9bdc3957dac37) Thanks [@mikearnaldi](https://github.com/mikearnaldi)! - Make operators more strict
+
 ## 0.0.11
 
 ### Patch Changes
