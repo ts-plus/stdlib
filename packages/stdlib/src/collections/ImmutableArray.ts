@@ -80,3 +80,58 @@ export function get_<A>(
 }
 
 export const get = Pipeable(get_)
+
+/**
+ * @tsplus operator ImmutableArray &
+ * @tsplus fluent ImmutableArray concat
+ */
+export function concat_<A, B>(
+  self: ImmutableArray<A>,
+  that: ImmutableArray<B>
+): ImmutableArray<A | B> {
+  return new ImmutableArray([...self.array, ...that.array])
+}
+
+export const concat = Pipeable(concat_)
+
+/**
+ * Concatenates two ImmutableArray together
+ *
+ * @tsplus operator ImmutableArray +
+ */
+export const concatOperator: <A>(
+  self: ImmutableArray<A>,
+  that: ImmutableArray<A>
+) => ImmutableArray<A> = concat_
+
+/**
+ * Prepends `a` to ImmutableArray<A>
+ *
+ * @tsplus operator ImmutableArray + 1.0
+ */
+export function prependOperator<A>(a: A, self: ImmutableArray<A>): ImmutableArray<A> {
+  return new ImmutableArray([a, ...self.array])
+}
+
+/**
+ * Prepends `a` to ImmutableArray<A>
+ *
+ * @tsplus fluent ImmutableArray prepend
+ */
+export function prepend_<A, B>(self: ImmutableArray<A>, a: B): ImmutableArray<A | B> {
+  return new ImmutableArray([a, ...self.array])
+}
+
+export const prepend = Pipeable(prepend_)
+
+/**
+ * Appends `a` to ImmutableArray<A>
+ *
+ * @tsplus operator ImmutableArray + 1.0
+ * @tsplus fluent ImmutableArray append
+ */
+export function append_<A, B>(self: ImmutableArray<A>, a: B): ImmutableArray<A | B> {
+  return new ImmutableArray([...self.array, a])
+}
+
+export const append = Pipeable(append_)

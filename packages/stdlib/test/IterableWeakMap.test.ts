@@ -1,6 +1,6 @@
 import { IterableWeakMap } from "@tsplus/stdlib/collections/weak/IterableWeakMap"
 import { Option } from "@tsplus/stdlib/data/Option"
-import { describe, expect, it } from "vitest"
+import { assert, describe, it } from "vitest"
 
 describe("IterableWeakMap", () => {
   it("has", () => {
@@ -11,11 +11,11 @@ describe("IterableWeakMap", () => {
       [a, 0],
       [b, 1]
     ])
-    expect(map.has(a)).toEqual(true)
-    expect(map.has(b)).toEqual(true)
-    expect(map.has(c)).toEqual(false)
+    assert.isTrue(map.has(a))
+    assert.isTrue(map.has(b))
+    assert.isFalse(map.has(c))
     map.set(c, 2)
-    expect(map.has(c)).toEqual(true)
+    assert.isTrue(map.has(c))
   })
   it("getOption", () => {
     const a = {}
@@ -25,9 +25,9 @@ describe("IterableWeakMap", () => {
       [a, 0],
       [b, 1]
     ])
-    expect(map[a]).toEqual(Option.some(0))
-    expect(map[b]).toEqual(Option.some(1))
-    expect(map[c]).toEqual(Option.none)
+    assert.isTrue(map[a] == Option.some(0))
+    assert.isTrue(map[b] == Option.some(1))
+    assert.isTrue(map[c] == Option.none)
   })
   it("keys", () => {
     const a = {}
@@ -38,9 +38,9 @@ describe("IterableWeakMap", () => {
       [b, 1]
     ])
     const keys = new Set(map.keys())
-    expect(keys.has(a)).toEqual(true)
-    expect(keys.has(b)).toEqual(true)
-    expect(keys.has(c)).toEqual(false)
+    assert.isTrue(keys.has(a))
+    assert.isTrue(keys.has(b))
+    assert.isFalse(keys.has(c))
   })
   it("values", () => {
     const a = {}
@@ -50,8 +50,8 @@ describe("IterableWeakMap", () => {
       [b, 1]
     ])
     const keys = new Set(map.values())
-    expect(keys.has(0)).toEqual(true)
-    expect(keys.has(1)).toEqual(true)
-    expect(keys.has(2)).toEqual(false)
+    assert.isTrue(keys.has(0))
+    assert.isTrue(keys.has(1))
+    assert.isFalse(keys.has(2))
   })
 })
