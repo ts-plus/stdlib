@@ -19,7 +19,7 @@
     "prettier": "yarn org:prettier --write \"./{src,test,demo}/**/*.ts\"",
     "tc": "yarn org:tsc --noEmit",
     "circular": "yarn org:madge --circular --no-color --no-spinner build/esm",
-    "run": "yarn org:ts-node -r tsconfig-paths/register src/main.ts"
+    "dev": "yarn org:ts-node node/main.ts"
   },
   "config": {
     "side": [],
