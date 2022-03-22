@@ -1,4 +1,5 @@
 import type { Iterable } from "@tsplus/stdlib/collections/Iterable"
+import { Option } from "@tsplus/stdlib/data/Option"
 import { Equals } from "@tsplus/stdlib/structure/Equals"
 import { Hash } from "@tsplus/stdlib/structure/Hash"
 
@@ -66,3 +67,16 @@ export const map = Pipeable(map_)
 export function immutable<A>(self: Array<A>): ImmutableArray<A> {
   return new ImmutableArray(self.slice(0, self.length))
 }
+
+/**
+ * @tsplus index ImmutableArray
+ * @tsplus fluent ImmutableArray get
+ */
+export function get_<A>(
+  self: ImmutableArray<A>,
+  index: number
+): Option<NonNullable<A>> {
+  return Option.fromNullable(self.array[index])
+}
+
+export const get = Pipeable(get_)
