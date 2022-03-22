@@ -1,5 +1,5 @@
-// codegen:start {preset: barrel, include: ./exceptions/*.ts}
-export * from "./exceptions/Exception.js"
-export * from "./exceptions/IndexOutOfBounds.js"
-export * from "./exceptions/NoSuchElement.js"
+// codegen:start {preset: barrel, include: ./exceptions/*.ts, prefix: "@tsplus/stdlib"}
+export * from "@tsplus/stdlib/exceptions/Exception"
+export * from "@tsplus/stdlib/exceptions/IndexOutOfBounds"
+export * from "@tsplus/stdlib/exceptions/NoSuchElement"
 // codegen:end

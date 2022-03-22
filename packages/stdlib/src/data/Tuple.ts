@@ -1,12 +1,12 @@
-// codegen:start {preset: barrel, include: ./Tuple/*.ts}
-export * from "./Tuple/append.js"
-export * from "./Tuple/at.js"
-export * from "./Tuple/concat.js"
-export * from "./Tuple/definition.js"
-export * from "./Tuple/fromNative.js"
-export * from "./Tuple/make.js"
-export * from "./Tuple/mergeTuple.js"
-export * from "./Tuple/prepend.js"
-export * from "./Tuple/toNative.js"
-export * from "./Tuple/update.js"
+// codegen:start {preset: barrel, include: ./Tuple/*.ts, prefix: "@tsplus/stdlib/data"}
+export * from "@tsplus/stdlib/data/Tuple/append"
+export * from "@tsplus/stdlib/data/Tuple/at"
+export * from "@tsplus/stdlib/data/Tuple/concat"
+export * from "@tsplus/stdlib/data/Tuple/definition"
+export * from "@tsplus/stdlib/data/Tuple/fromNative"
+export * from "@tsplus/stdlib/data/Tuple/make"
+export * from "@tsplus/stdlib/data/Tuple/mergeTuple"
+export * from "@tsplus/stdlib/data/Tuple/prepend"
+export * from "@tsplus/stdlib/data/Tuple/toNative"
+export * from "@tsplus/stdlib/data/Tuple/update"
 // codegen:end
