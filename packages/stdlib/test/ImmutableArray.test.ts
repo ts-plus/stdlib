@@ -3,6 +3,6 @@ import { describe, expect, it } from "vitest"
 
 describe("ImmutableArray", () => {
   it("mapImmutable", () => {
-    expect(ImmutableArray(0, 1).mapImmutable((n) => n + 1)).toEqual([1, 2])
+    expect(ImmutableArray(0, 1).map((n) => n + 1)).toEqual([1, 2].immutable())
   })
 })

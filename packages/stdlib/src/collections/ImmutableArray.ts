@@ -1,40 +1,32 @@
-import type { ESReadonlyArray } from "@tsplus/stdlib/utilities/Types"
-import { ESArray } from "@tsplus/stdlib/utilities/Types"
+import type { Iterable } from "@tsplus/stdlib/collections/Iterable"
+import { Equals } from "@tsplus/stdlib/structure/Equals"
+import { Hash } from "@tsplus/stdlib/structure/Hash"
 
 declare global {
   /**
    * @tsplus type Array
    */
   export interface Array<T> {}
-  /**
-   * @tsplus type ImmutableArray
-   */
-  export interface ReadonlyArray<T> {}
 }
 
 /**
- * @tsplus type ImmutableArrayOps
+ * @tsplus type ImmutableArray
+ * @tsplus companion ImmutableArrayOps
  */
-export interface ImmutableArrayConstructor {
-  new (arrayLength?: number): ImmutableArray<any>
-  new <T>(arrayLength: number): ImmutableArray<T>
-  new <T>(...items: T[]): ImmutableArray<T>
-  (arrayLength?: number): ImmutableArray<any>
-  <T>(arrayLength: number): ImmutableArray<T>
-  <T>(...items: T[]): ImmutableArray<T>
-  <A extends any[]>(...as: A): ImmutableArray<A[number]>
-  isArray(arg: any): arg is ImmutableArray<any>
-  readonly prototype: ImmutableArray<any>
-  from<T>(iterable: Iterable<T> | ArrayLike<T>): ImmutableArray<T>
-  from<T, U>(
-    iterable: Iterable<T> | ArrayLike<T>,
-    mapfn: (v: T, k: number) => U,
-    thisArg?: any
-  ): ImmutableArray<T>
-}
+export class ImmutableArray<A> implements Equals {
+  constructor(readonly array: ReadonlyArray<A>) {}
 
-export type ImmutableArray<A> = ESReadonlyArray<A>
-export const ImmutableArray: ImmutableArrayConstructor = ESArray
+  [Equals.sym](this: this, other: unknown): boolean {
+    return (
+      other instanceof ImmutableArray &&
+      this.array.length === other.array.length &&
+      this.array.every((v, i) => Equals.equals(v, other.array[i]))
+    )
+  }
+  [Hash.sym](this: this): number {
+    return Hash.array(this.array)
+  }
+}
 
 /**
  * @tsplus type ImmutableArrayOps
@@ -42,21 +34,28 @@ export const ImmutableArray: ImmutableArrayConstructor = ESArray
 export interface ReadonlyArrayOps {}
 
 /**
+ * @tsplus static ImmutableArrayOps __call
  * @tsplus static ImmutableArrayOps make
  */
 export function make<A extends readonly any[]>(...as: A): ImmutableArray<A[number]> {
-  return as
+  return new ImmutableArray(as)
 }
 
 /**
- * @tsplus fluent Array mapImmutable
- * @tsplus fluent ImmutableArray mapImmutable
+ * @tsplus static ImmutableArrayOps from
+ */
+export function from<A>(iterable: Iterable<A>): ImmutableArray<A> {
+  return new ImmutableArray(Array.from(iterable))
+}
+
+/**
+ * @tsplus fluent ImmutableArray map
  */
 export function map_<A, B>(
   i: ImmutableArray<A>,
   f: (a: A, k: number) => B
 ): ImmutableArray<B> {
-  return i.map(f)
+  return new ImmutableArray(i.array.map(f))
 }
 
 export const map = Pipeable(map_)
@@ -65,5 +64,5 @@ export const map = Pipeable(map_)
  * @tsplus fluent Array immutable
  */
 export function immutable<A>(self: Array<A>): ImmutableArray<A> {
-  return self.slice(0, self.length)
+  return new ImmutableArray(self.slice(0, self.length))
 }
