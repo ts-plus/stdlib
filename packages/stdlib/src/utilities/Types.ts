@@ -35,3 +35,12 @@ export type ESReadonlyArray<A> = ReadonlyArray<A>
 export const ESArray = Array
 
 export type ESIterable<A> = Iterable<A>
+
+export type IsInt<N extends number> = N & (`${N}` extends `${bigint}` ? N : never)
+
+declare global {
+  /**
+   * @tsplus type number
+   */
+  export interface Number {}
+}
