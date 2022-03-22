@@ -40,6 +40,9 @@
             "@tsplus/stdlib/*": [
                 "./packages/stdlib/src/*"
             ],
+            "@tsplus-tests/stdlib/*": [
+                "./packages/stdlib/test/*"
+            ],
         }
     },
     "exclude": [

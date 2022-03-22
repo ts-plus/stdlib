@@ -11,8 +11,7 @@
         "declaration": true,
         "declarationMap": true,
         "removeComments": false,
-        "tsPlusModuleDiscoveryLocalSuffix": "js",
-        "tsPlusTracingPackageName": "@tsplus/stdlib",
+        "tsPlusConfig": "../../tsplus.config.json",
         "composite": true,
         "rootDir": "./src"
     },

@@ -5,7 +5,8 @@ import { defineConfig } from "vite"
 export default defineConfig({
   resolve: {
     alias: {
-      "@tsplus/stdlib": path.resolve(__dirname, "./packages/stdlib/build/esm")
+      "@tsplus/stdlib": path.resolve(__dirname, "./packages/stdlib/build/esm"),
+      "@tsplus-tests/stdlib": path.resolve(__dirname, "./packages/stdlib/build/tests")
     }
   },
   test: {
