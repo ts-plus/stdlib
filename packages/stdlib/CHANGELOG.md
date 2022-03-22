@@ -1,5 +1,13 @@
 # @tsplus/stdlib
 
+## 0.0.11
+
+### Patch Changes
+
+- [`d94fa6e`](https://github.com/ts-plus/stdlib/commit/d94fa6e7ed52a15a77445aecb04f99559e1a53f8) Thanks [@mikearnaldi](https://github.com/mikearnaldi)! - Improve equals definition
+
+* [`dce722d`](https://github.com/ts-plus/stdlib/commit/dce722de1c58b37cee3d217176fa5d45f9dc32fa) Thanks [@mikearnaldi](https://github.com/mikearnaldi)! - Refactor ImmutableArray to use a wrapper and implement Equals
+
 ## 0.0.10
 
 ### Patch Changes
