@@ -43,12 +43,13 @@ describe("Option", () => {
     );
   });
   it("via", () => {
+    const result = Option(0)
+      >>> Option.$.map((n) => n + 1)
+      >>> Option.$.map((n) => n + 1)
+      >>> Option.$.flatMap((n) => Option(`ok: ${n}`));
+
     assert.isTrue(
-      Option(0)
-          >>> Option.$.map((n) => n + 1)
-          >>> Option.$.map((n) => n + 1)
-          >>> Option.$.flatMap((n) => Option(`ok: ${n}`))
-        == Option("ok: 2")
+      result == Option("ok: 2")
     );
   });
 });
