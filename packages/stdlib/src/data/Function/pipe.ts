@@ -1,6 +1,6 @@
 /**
  * @tsplus macro pipe
- * @tsplus fluent global via
+ * @tsplus fluent global pipe
  */
 export function pipe<A>(a: A): A
 export function pipe<A, B>(a: A, ab: (a: A) => B): B
