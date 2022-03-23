@@ -42,4 +42,13 @@ describe("Option", () => {
         == Option.some(2)
     );
   });
+  it("via", () => {
+    assert.isTrue(
+      Option(0)
+          >>> Option.$.map((n) => n + 1)
+          >>> Option.$.map((n) => n + 1)
+          >>> Option.$.flatMap((n) => Option(`ok: ${n}`))
+        == Option("ok: 2")
+    );
+  });
 });

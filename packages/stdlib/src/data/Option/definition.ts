@@ -109,9 +109,18 @@ export function some<A>(a: A): Option<A> {
  *
  * @tsplus fluent Option ap
  */
-export function ap<A, B>(fab: Option<(a: A) => B>, fa: Option<A>): Option<B> {
-  return isNone(fab) ? none : isNone(fa) ? none : some(fab.value(fa.value));
+export function ap_<A, B>(fab: Option<(a: A) => B>, fa: Option<A>): Option<B> {
+  return isNone(fab) ?
+    none :
+    isNone(fa) ?
+    none :
+    some(fab.value(fa.value));
 }
+
+/**
+ * @tsplus static Option/Aspects ap
+ */
+export const ap = Pipeable(ap_);
 
 /**
  * Zips `Option<A>` and `Option<B>` into `Option<Tuple<[A, B]>>`.
@@ -119,9 +128,14 @@ export function ap<A, B>(fab: Option<(a: A) => B>, fa: Option<A>): Option<B> {
  * @tsplus operator Option +
  * @tsplus fluent Option zip
  */
-export function zip<A, B>(fa: Option<A>, fb: Option<B>): Option<Tuple<[A, B]>> {
-  return chain(fa, (a) => fb.map((b) => Tuple(a, b)));
+export function zip_<A, B>(fa: Option<A>, fb: Option<B>): Option<Tuple<[A, B]>> {
+  return fa.flatMap((a) => fb.map((b) => Tuple(a, b)));
 }
+
+/**
+ * @tsplus static Option/Aspects zip
+ */
+export const zip = Pipeable(zip_);
 
 /**
  * Apply both and return first.
@@ -129,12 +143,14 @@ export function zip<A, B>(fa: Option<A>, fb: Option<B>): Option<Tuple<[A, B]>> {
  * @tsplus operator Option <
  * @tsplus fluent Option zipLeft
  */
-export function zipLeft<A, B>(fa: Option<A>, fb: Option<B>): Option<A> {
-  return ap(
-    fa.map((a) => () => a),
-    fb
-  );
+export function zipLeft_<A, B>(fa: Option<A>, fb: Option<B>): Option<A> {
+  return fa.map((a) => () => a).ap(fb);
 }
+
+/**
+ * @tsplus static Option/Aspects zipLeft
+ */
+export const zipLeft = Pipeable(zipLeft_);
 
 /**
  * Apply both and return second.
@@ -142,47 +158,61 @@ export function zipLeft<A, B>(fa: Option<A>, fb: Option<B>): Option<A> {
  * @tsplus operator Option >
  * @tsplus fluent Option zipRight
  */
-export function zipRight<A, B>(fa: Option<A>, fb: Option<B>): Option<B> {
-  return ap(
-    fa.map(() => (b: B) => b),
-    fb
-  );
+export function zipRight_<A, B>(fa: Option<A>, fb: Option<B>): Option<B> {
+  return fa.map(() => (b: B) => b).ap(fb);
 }
+
+/**
+ * @tsplus static Option/Aspects zipRight
+ */
+export const zipRight = Pipeable(zipRight_);
 
 /**
  * Builds a new option constructed using the value of self.
  *
  * @tsplus fluent Option flatMap
  */
-export function chain<A, B>(self: Option<A>, f: (a: A) => Option<B>): Option<B> {
+export function flatMap_<A, B>(self: Option<A>, f: (a: A) => Option<B>): Option<B> {
   return isNone(self) ? none : f(self.value);
 }
+
+/**
+ * @tsplus static Option/Aspects flatMap
+ */
+export const flatMap = Pipeable(flatMap_);
 
 /**
  * Like chain but ignores the constructed outout.
  *
  * @tsplus fluent Option tap
  */
-export function tap<A>(ma: Option<A>, f: (a: A) => Option<any>): Option<A> {
-  return chain(ma, (a) => f(a).map(() => a));
+export function tap_<A>(ma: Option<A>, f: (a: A) => Option<any>): Option<A> {
+  return ma.flatMap((a) => f(a).map(() => a));
 }
+
+/**
+ * @tsplus static Option/Aspects tap
+ */
+export const tap = Pipeable(tap_);
 
 /**
  * Flattens nested options.
  *
  * @tsplus fluent Option flatten
+ * @tsplus static Option/Aspects flatten
  */
 export function flatten<A>(fa: Option<Option<A>>): Option<A> {
-  return chain(fa, identity);
+  return fa.flatMap(identity);
 }
 
 /**
  * Wraps this option into a second one.
  *
  * @tsplus fluent Option duplicate
+ * @tsplus static Option/Aspects duplicate
  */
 export function duplicate<A>(ma: Option<A>): Option<Option<A>> {
-  return isNone(ma) ? none : some(ma);
+  return ma.isNone() ? Option.none : Option.some(ma);
 }
 
 /**
@@ -190,18 +220,28 @@ export function duplicate<A>(ma: Option<A>): Option<Option<A>> {
  *
  * @tsplus fluent Option exists
  */
-export function exists<A>(ma: Option<A>, predicate: Predicate<A>): boolean {
-  return isNone(ma) ? false : predicate(ma.value);
+export function exists_<A>(ma: Option<A>, predicate: Predicate<A>): boolean {
+  return ma.isNone() ? false : predicate(ma.value);
 }
+
+/**
+ * @tsplus static Option/Aspects exists
+ */
+export const exists = Pipeable(exists_);
 
 /**
  * Apply `Option<A> => B` in case self is some returning `Option<B>`.
  *
  * @tsplus fluent Option extend
  */
-export function extend<A, B>(self: Option<A>, f: (fa: Option<A>) => B): Option<B> {
-  return isNone(self) ? none : some(f(self));
+export function extend_<A, B>(self: Option<A>, f: (fa: Option<A>) => B): Option<B> {
+  return self.isNone() ? Option.none : Option.some(f(self));
 }
+
+/**
+ * @tsplus static Option/Aspects extend
+ */
+export const extend = Pipeable(extend_);
 
 /**
  * Takes a default value, a function, and an `Option` value, if the `Option`
@@ -210,13 +250,18 @@ export function extend<A, B>(self: Option<A>, f: (fa: Option<A>) => B): Option<B
  *
  * @tsplus fluent Option fold
  */
-export function fold<A, B, C>(
+export function fold_<A, B, C>(
   ma: Option<A>,
   onNone: LazyArg<B>,
   onSome: (a: A) => C
 ): B | C {
-  return isNone(ma) ? onNone() : onSome(ma.value);
+  return ma.isNone() ? onNone() : onSome(ma.value);
 }
+
+/**
+ * @tsplus static Option/Aspects fold
+ */
+export const fold = Pipeable(fold_);
 
 // /**
 //  * Constructs `Option<A>` from `Either<E, A>` discarding `E`.
@@ -234,7 +279,7 @@ export function fold<A, B, C>(
  * @tsplus static Option/Ops fromNullable
  */
 export function fromNullable<A>(a: A): Option<NonNullable<A>> {
-  return a == null ? none : some(a as NonNullable<A>);
+  return a == null ? Option.none : Option.some(a as NonNullable<A>);
 }
 
 /**
@@ -248,7 +293,7 @@ export function fromPredicate<A, B extends A>(
 ): Option<B>;
 export function fromPredicate<A>(a: A, predicate: Predicate<A>): Option<A>;
 export function fromPredicate<A>(a: A, predicate: Predicate<A>): Option<A> {
-  return predicate(a) ? some(a) : none;
+  return predicate(a) ? Option.some(a) : Option.none;
 }
 
 // /**
@@ -263,9 +308,14 @@ export function fromPredicate<A>(a: A, predicate: Predicate<A>): Option<A> {
  *
  * @tsplus fluent Option getOrElse
  */
-export function getOrElse<A, B>(ma: Option<A>, onNone: LazyArg<B>): A | B {
-  return ma._tag === "None" ? onNone() : ma.value;
+export function getOrElse_<A, B>(self: Option<A>, onNone: LazyArg<B>): A | B {
+  return self.isNone() ? onNone() : self.value;
 }
+
+/**
+ * @tsplus static Option/Aspects getOrElse
+ */
+export const getOrElse = Pipeable(getOrElse_);
 
 /**
  * @tsplus operator Option |
@@ -275,9 +325,12 @@ export function orElse_<A, B>(
   self: Option<A>,
   onNone: LazyArg<Option<B>>
 ): Option<A | B> {
-  return self._tag === "None" ? onNone() : self;
+  return self.isNone() ? onNone() : self;
 }
 
+/**
+ * @tsplus static Option/Aspects orElse
+ */
 export const orElse = Pipeable(orElse_);
 
 /**
@@ -291,7 +344,7 @@ export const orElse = Pipeable(orElse_);
 export function getRefinement<A, B extends A>(
   getOption: (a: A) => Option<B>
 ): Refinement<A, B> {
-  return (a: A): a is B => isSome(getOption(a));
+  return (a: A): a is B => getOption(a).isSome();
 }
 
 // /**
@@ -325,7 +378,7 @@ export function isSome<A>(fa: Option<A>): fa is Some<A> {
  * @tsplus fluent Option map
  */
 export function map_<A, B>(ma: Option<A>, f: (a: A) => B): Option<B> {
-  return isNone(ma) ? none : some(f(ma.value));
+  return ma.isNone() ? Option.none : Option.some(f(ma.value));
 }
 
 /**
@@ -338,12 +391,17 @@ export const map = Pipeable(map_);
  *
  * @tsplus fluent Option mapNullable
  */
-export function mapNullable<A, B>(
+export function mapNullable_<A, B>(
   ma: Option<A>,
   f: (a: A) => B | null | undefined
 ): Option<B> {
-  return isNone(ma) ? none : fromNullable(f(ma.value));
+  return ma.isNone() ? Option.none : Option.fromNullable(f(ma.value));
 }
+
+/**
+ * @tsplus static Option/Aspects mapNullable
+ */
+export const mapNullable = Pipeable(mapNullable_);
 
 /**
  * Extracts the value out of the structure, if it exists. Otherwise returns
@@ -352,7 +410,7 @@ export function mapNullable<A, B>(
  * @tsplus fluent Option toNullable
  */
 export function toNullable<A>(ma: Option<A>): A | null {
-  return isNone(ma) ? null : ma.value;
+  return ma.isNone() ? null : ma.value;
 }
 
 /**
@@ -362,7 +420,7 @@ export function toNullable<A>(ma: Option<A>): A | null {
  * @tsplus getter Option value
  */
 export function toUndefined<A>(ma: Option<A>): A | undefined {
-  return isNone(ma) ? undefined : ma.value;
+  return ma.isNone() ? undefined : ma.value;
 }
 
 /**
@@ -373,8 +431,16 @@ export function toUndefined<A>(ma: Option<A>): A | undefined {
  */
 export function tryCatch<A>(f: LazyArg<A>): Option<A> {
   try {
-    return some(f());
+    return Option.some(f());
   } catch (e) {
-    return none;
+    return Option.none;
   }
+}
+
+/**
+ * @tsplus fluent Option via
+ * @tsplus operator Option >>>
+ */
+export function via<A, B>(self: Option<A>, f: (a: Option<A>) => B): B {
+  return f(self);
 }
