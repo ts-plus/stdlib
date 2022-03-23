@@ -5,12 +5,10 @@ import { assert, describe, it } from "vitest";
 describe("Option", () => {
   it("equals", () => {
     assert.isTrue(
-      Option.some(0)
-        == Option.some(0)
+      Option.some(0) == Option.some(0)
     );
     assert.isFalse(
-      Option.some(0)
-        == Option.some(1)
+      Option.some(0) == Option.some(1)
     );
   });
   it("value defined", () => {
