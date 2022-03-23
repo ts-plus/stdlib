@@ -825,9 +825,9 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@tsplus/installer@npm:^0.0.49":
-  version: 0.0.49
-  resolution: "@tsplus/installer@npm:0.0.49"
+"@tsplus/installer@npm:^0.0.50":
+  version: 0.0.50
+  resolution: "@tsplus/installer@npm:0.0.50"
   dependencies:
     mkdirp: ^1.0.4
     rimraf: ^3.0.2
@@ -836,7 +836,7 @@ __metadata:
     zlib: ^1.0.5
   bin:
     tsplus-install: bin/tsplus-install
-  checksum: f853774931b81b9d8a9ce83a33fe8164f372590d41e4801e53183bcf7a5653d51c6892a8dc65c8e2d48dfb4097d7c251d99bd1ce5849e81b6d1a06d937757c12
+  checksum: e23b63538110e0a64d370c3fea4aa4afc35b742b0e1c351f7c121cb4efa7ceaa8e447229ca1ec39b5d2312180c680ed5dc10f554f93877b5188d42a424f03250
   languageName: node
   linkType: hard
 
@@ -934,10 +934,10 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@types/node@npm:*, @types/node@npm:^17.0.22":
-  version: 17.0.22
-  resolution: "@types/node@npm:17.0.22"
-  checksum: 72d1fc8bdc37f0c18b1160e7207b52fb569d0e2b459ac9a4cbd3ca40e478ffe1455efc2c6a253c81e0a7a7c7a899716535d9970cd9521f87d6050b7de04b9ba3
+"@types/node@npm:*, @types/node@npm:^17.0.23":
+  version: 17.0.23
+  resolution: "@types/node@npm:17.0.23"
+  checksum: a3517554737cbb042e76c30d0e5482192ac4d9bea0eeb086e2622d9cabf460a0eb52a696b99fcd18e7fcc93c96db6cc7ae507f6608f256ef0b5c1d8c87a5a470
   languageName: node
   linkType: hard
 
@@ -2883,9 +2883,9 @@ __metadata:
   languageName: node
   linkType: hard
 
-"eslint-import-resolver-typescript@npm:^2.6.0":
-  version: 2.6.0
-  resolution: "eslint-import-resolver-typescript@npm:2.6.0"
+"eslint-import-resolver-typescript@npm:^2.7.0":
+  version: 2.7.0
+  resolution: "eslint-import-resolver-typescript@npm:2.7.0"
   dependencies:
     debug: ^4.3.4
     glob: ^7.2.0
@@ -2895,7 +2895,7 @@ __metadata:
   peerDependencies:
     eslint: "*"
     eslint-plugin-import: "*"
-  checksum: 5492a2d2dee28d8ff2f739758eb6c509154ccfc714005d926ab774d9041f2a273e10a03d9f7ac53195fc74d26b8d40df1d2cbf3214f68c5dfad66567823d7ca6
+  checksum: 6f1ec8018c06e5ec9f3d38f324520df98d5642fc22b6233584794c124dc8f0a92bdcf37d82aa168bf7b981840ac86cb381ffc25db10cbe4dc24482ea1bef17e8
   languageName: node
   linkType: hard
 
@@ -7207,8 +7207,8 @@ __metadata:
     "@changesets/cli": ^2.21.1
     "@effect-ts/build-utils": 0.39.0
     "@effect-ts/core": ^0.59.0
-    "@tsplus/installer": ^0.0.49
-    "@types/node": ^17.0.22
+    "@tsplus/installer": ^0.0.50
+    "@types/node": ^17.0.23
     "@types/rimraf": ^3.0.2
     "@typescript-eslint/eslint-plugin": ^5.16.0
     "@typescript-eslint/parser": ^5.16.0
@@ -7219,7 +7219,7 @@ __metadata:
     cpx: ^1.5.0
     eslint: ^8.11.0
     eslint-config-prettier: ^8.5.0
-    eslint-import-resolver-typescript: ^2.6.0
+    eslint-import-resolver-typescript: ^2.7.0
     eslint-plugin-codegen: 0.16.1
     eslint-plugin-import: ^2.25.4
     eslint-plugin-prettier: ^4.0.0
@@ -7233,7 +7233,7 @@ __metadata:
     typescript: ^4.6.2
     ultra-runner: ^3.10.5
     vite: ^2.8.6
-    vitest: 0.7.9
+    vitest: 0.7.10
   languageName: unknown
   linkType: soft
 
@@ -7552,9 +7552,9 @@ __metadata:
   languageName: node
   linkType: hard
 
-"vitest@npm:0.7.9":
-  version: 0.7.9
-  resolution: "vitest@npm:0.7.9"
+"vitest@npm:0.7.10":
+  version: 0.7.10
+  resolution: "vitest@npm:0.7.10"
   dependencies:
     "@types/chai": ^4.3.0
     "@types/chai-subset": ^1.3.3
@@ -7579,7 +7579,7 @@ __metadata:
       optional: true
   bin:
     vitest: vitest.mjs
-  checksum: ec6b61a68a5013e56d14587f13850617cb302ceb495fde2fc213d915ea26230cb7facd87e481bf5962c3cfb149160d3c31ae7fda3d57214f7b893820069e331f
+  checksum: cabe891d741ea8879cfe64ea37a0783054f484640a63994869d83155b918317b1503068da985408073349b2508bd0f29acfabdba42d6a394f8c57a25e0d17725
   languageName: node
   linkType: hard
 

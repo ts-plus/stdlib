@@ -137,3 +137,5 @@ export function literal<K extends string>(k: K): K {
 export function hole<T>(): T {
   throw new Error("Hole should never be called")
 }
+
+export * from "@tsplus/stdlib/data/Function/pipe"
