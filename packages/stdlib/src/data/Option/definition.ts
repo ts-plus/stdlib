@@ -46,10 +46,19 @@ export class Some<A> implements Equals {
 export type Option<A> = None | Some<A>;
 
 /**
- * @tsplus type OptionOps
+ * @tsplus type Option/Ops
  */
-export interface OptionOps {}
-export const Option: OptionOps = {};
+export interface OptionOps {
+  $: OptionAspects;
+}
+export const Option: OptionOps = {
+  $: {}
+};
+
+/**
+ * @tsplus type Option/Aspects
+ */
+export interface OptionAspects {}
 
 /**
  * @tsplus unify Option
@@ -64,7 +73,7 @@ export function unifyOption<X extends Option<any>>(
  * Constructs a new `Option` from a nullable type. If the value is `null` or
  * `undefined`, returns `None`, otherwise returns the value wrapped in a `Some`.
  *
- * @tsplus static OptionOps __call
+ * @tsplus static Option/Ops __call
  */
 export function apply<A>(a: A): Option<NonNullable<A>> {
   return Option.fromNullable(a);
@@ -73,14 +82,14 @@ export function apply<A>(a: A): Option<NonNullable<A>> {
 /**
  * Constructs `None`.
  *
- * @tsplus static OptionOps none
+ * @tsplus static Option/Ops none
  */
 export const none: Option<never> = new None();
 
 /**
  * Constructs `None`.
  *
- * @tsplus static OptionOps emptyOf
+ * @tsplus static Option/Ops emptyOf
  */
 export function emptyOf<A>(): Option<A> {
   return none;
@@ -89,7 +98,7 @@ export function emptyOf<A>(): Option<A> {
 /**
  * Constructs `Some<A>`.
  *
- * @tsplus static OptionOps some
+ * @tsplus static Option/Ops some
  */
 export function some<A>(a: A): Option<A> {
   return new Some(a);
@@ -111,7 +120,7 @@ export function ap<A, B>(fab: Option<(a: A) => B>, fa: Option<A>): Option<B> {
  * @tsplus fluent Option zip
  */
 export function zip<A, B>(fa: Option<A>, fb: Option<B>): Option<Tuple<[A, B]>> {
-  return chain(fa, (a) => map(fb, (b) => Tuple(a, b)));
+  return chain(fa, (a) => fb.map((b) => Tuple(a, b)));
 }
 
 /**
@@ -122,7 +131,7 @@ export function zip<A, B>(fa: Option<A>, fb: Option<B>): Option<Tuple<[A, B]>> {
  */
 export function zipLeft<A, B>(fa: Option<A>, fb: Option<B>): Option<A> {
   return ap(
-    map(fa, (a) => () => a),
+    fa.map((a) => () => a),
     fb
   );
 }
@@ -135,7 +144,7 @@ export function zipLeft<A, B>(fa: Option<A>, fb: Option<B>): Option<A> {
  */
 export function zipRight<A, B>(fa: Option<A>, fb: Option<B>): Option<B> {
   return ap(
-    map(fa, () => (b: B) => b),
+    fa.map(() => (b: B) => b),
     fb
   );
 }
@@ -155,7 +164,7 @@ export function chain<A, B>(self: Option<A>, f: (a: A) => Option<B>): Option<B> 
  * @tsplus fluent Option tap
  */
 export function tap<A>(ma: Option<A>, f: (a: A) => Option<any>): Option<A> {
-  return chain(ma, (a) => map(f(a), () => a));
+  return chain(ma, (a) => f(a).map(() => a));
 }
 
 /**
@@ -212,7 +221,7 @@ export function fold<A, B, C>(
 // /**
 //  * Constructs `Option<A>` from `Either<E, A>` discarding `E`.
 //  *
-//  * @tsplus static OptionOps fromEither
+//  * @tsplus static Option/Ops fromEither
 //  */
 // export function fromEither<E, A>(ma: Either<E, A>): Option<A> {
 //   return ma._tag === "Left" ? none : some(ma.right)
@@ -222,7 +231,7 @@ export function fold<A, B, C>(
  * Constructs a new `Option` from a nullable type. If the value is `null` or
  * `undefined`, returns `None`, otherwise returns the value wrapped in a `Some`.
  *
- * @tsplus static OptionOps fromNullable
+ * @tsplus static Option/Ops fromNullable
  */
 export function fromNullable<A>(a: A): Option<NonNullable<A>> {
   return a == null ? none : some(a as NonNullable<A>);
@@ -231,7 +240,7 @@ export function fromNullable<A>(a: A): Option<NonNullable<A>> {
 /**
  * Returns a smart constructor based on the given predicate.
  *
- * @tsplus static OptionOps fromPredicate
+ * @tsplus static Option/Ops fromPredicate
  */
 export function fromPredicate<A, B extends A>(
   a: A,
@@ -277,7 +286,7 @@ export const orElse = Pipeable(orElse_);
  *
  * This function ensures that a custom type guard definition is type-safe.
  *
- * @tsplus static OptionOps getRefinement
+ * @tsplus static Option/Ops getRefinement
  */
 export function getRefinement<A, B extends A>(
   getOption: (a: A) => Option<B>
@@ -315,9 +324,14 @@ export function isSome<A>(fa: Option<A>): fa is Some<A> {
  *
  * @tsplus fluent Option map
  */
-export function map<A, B>(ma: Option<A>, f: (a: A) => B): Option<B> {
+export function map_<A, B>(ma: Option<A>, f: (a: A) => B): Option<B> {
   return isNone(ma) ? none : some(f(ma.value));
 }
+
+/**
+ * @tsplus static Option/Aspects map
+ */
+export const map = Pipeable(map_);
 
 /**
  * This is `chain` + `fromNullable`, useful when working with optional values.
@@ -355,7 +369,7 @@ export function toUndefined<A>(ma: Option<A>): A | undefined {
  * Transforms an exception into an `Option`. If `f` throws, returns `None`,
  * otherwise returns the output wrapped in `Some`.
  *
- * @tsplus static OptionOps tryCatch
+ * @tsplus static Option/Ops tryCatch
  */
 export function tryCatch<A>(f: LazyArg<A>): Option<A> {
   try {
