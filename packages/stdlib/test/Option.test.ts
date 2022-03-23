@@ -28,7 +28,7 @@ describe("Option", () => {
   });
   it("zip", () => {
     assert.isTrue(
-      Option.some(1) + Option.some(2)
+      (Option.some(1) + Option.some(2))
         == Option.some(Tuple(1, 2))
     );
   });
