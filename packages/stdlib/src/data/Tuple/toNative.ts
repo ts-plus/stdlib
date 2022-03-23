@@ -1,4 +1,4 @@
-import type { Tuple } from "@tsplus/stdlib/data/Tuple/definition"
+import type { Tuple } from "@tsplus/stdlib/data/Tuple/definition";
 
 /**
  * Converts to native tuple type.
@@ -6,5 +6,5 @@ import type { Tuple } from "@tsplus/stdlib/data/Tuple/definition"
  * @tsplus fluent tsplus/Tuple toNative
  */
 export function toNative<Ks extends readonly unknown[]>(self: Tuple<Ks>): Ks {
-  return self.tuple
+  return self.tuple;
 }

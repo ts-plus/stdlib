@@ -1,13 +1,22 @@
-import { assert, describe, it } from "vitest"
+import { assert, describe, it } from "vitest";
 
 describe("Duration", () => {
   it("equals", () => {
-    assert.isTrue((1).hours == (60).minutes)
-  })
+    assert.isTrue(
+      (1).hours
+        == (60).minutes
+    );
+  });
   it("times", () => {
-    assert.isTrue((1).minutes == (1).seconds * 60)
-  })
+    assert.isTrue(
+      (1).minutes
+        == (1).seconds * 60
+    );
+  });
   it("add", () => {
-    assert.isTrue((1).minutes == (30).seconds + (30).seconds)
-  })
-})
+    assert.isTrue(
+      (1).minutes
+        == (30).seconds + (30).seconds
+    );
+  });
+});

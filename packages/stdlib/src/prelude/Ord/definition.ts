@@ -1,4 +1,4 @@
-import type { Ordering } from "@tsplus/stdlib/prelude/Ordering/definition"
+import type { Ordering } from "@tsplus/stdlib/prelude/Ordering/definition";
 
 /**
  * `Ord[A]` provides implicit evidence that values of type `A` have a total
@@ -7,11 +7,11 @@ import type { Ordering } from "@tsplus/stdlib/prelude/Ordering/definition"
  * @tsplus type Ord
  */
 export interface Ord<A> {
-  readonly compare: (x: A, y: A) => Ordering
+  readonly compare: (x: A, y: A) => Ordering;
 }
 
 /**
  * @tsplus type OrdOps
  */
 export interface OrdOps {}
-export const Ord: OrdOps = {}
+export const Ord: OrdOps = {};

@@ -1,4 +1,4 @@
-import type { Tuple } from "@tsplus/stdlib/data/Tuple/definition"
+import type { Tuple } from "@tsplus/stdlib/data/Tuple/definition";
 
 /**
  * Gets an element from the tuple.
@@ -9,5 +9,5 @@ export function at<Ks extends unknown[], I extends keyof Ks>(
   self: Tuple<Ks>,
   i: I
 ): Ks[I] {
-  return self.get(i)
+  return self.get(i);
 }

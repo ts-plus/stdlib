@@ -1,5 +1,5 @@
-import type { Tuple } from "@tsplus/stdlib/data/Tuple/definition"
-import { TupleInternal } from "@tsplus/stdlib/data/Tuple/definition"
+import type { Tuple } from "@tsplus/stdlib/data/Tuple/definition";
+import { TupleInternal } from "@tsplus/stdlib/data/Tuple/definition";
 
 /**
  * Converts from native tuple type.
@@ -7,5 +7,5 @@ import { TupleInternal } from "@tsplus/stdlib/data/Tuple/definition"
  * @tsplus static tsplus/TupleOps fromNative
  */
 export function fromNative<Ks extends readonly unknown[]>(self: Ks): Tuple<Ks> {
-  return new TupleInternal(self)
+  return new TupleInternal(self);
 }

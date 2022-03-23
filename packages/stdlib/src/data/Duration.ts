@@ -1,6 +1,6 @@
-import { Equals } from "@tsplus/stdlib/structure/Equals"
-import { Hash } from "@tsplus/stdlib/structure/Hash"
-import type { IsInt } from "@tsplus/stdlib/utilities/Types"
+import { Equals } from "@tsplus/stdlib/structure/Equals";
+import { Hash } from "@tsplus/stdlib/structure/Hash";
+import type { IsInt } from "@tsplus/stdlib/utilities/Types";
 
 /**
  * @tsplus type Duration
@@ -10,11 +10,11 @@ export class Duration implements Equals, Hash {
   constructor(readonly millis: number) {}
 
   [Equals.sym](this: this, other: unknown): boolean {
-    return other instanceof Duration && this.millis === other.millis
+    return other instanceof Duration && this.millis === other.millis;
   }
 
   [Hash.sym](this: this): number {
-    return Hash.number(this.millis)
+    return Hash.number(this.millis);
   }
 }
 
@@ -23,7 +23,7 @@ export class Duration implements Equals, Hash {
  * @tsplus static DurationOps millis
  */
 export function millis<N extends number>(self: IsInt<N>) {
-  return new Duration(self)
+  return new Duration(self);
 }
 
 /**
@@ -31,7 +31,7 @@ export function millis<N extends number>(self: IsInt<N>) {
  * @tsplus static DurationOps seconds
  */
 export function seconds<N extends number>(self: IsInt<N>) {
-  return new Duration(self * 1000)
+  return new Duration(self * 1000);
 }
 
 /**
@@ -39,7 +39,7 @@ export function seconds<N extends number>(self: IsInt<N>) {
  * @tsplus static DurationOps minutes
  */
 export function minutes<N extends number>(self: IsInt<N>) {
-  return new Duration(self * 60_000)
+  return new Duration(self * 60_000);
 }
 
 /**
@@ -47,7 +47,7 @@ export function minutes<N extends number>(self: IsInt<N>) {
  * @tsplus static DurationOps hours
  */
 export function hours<N extends number>(self: IsInt<N>) {
-  return new Duration(self * 3_600_000)
+  return new Duration(self * 3_600_000);
 }
 
 /**
@@ -55,7 +55,7 @@ export function hours<N extends number>(self: IsInt<N>) {
  * @tsplus static DurationOps days
  */
 export function days<N extends number>(self: IsInt<N>) {
-  return new Duration(self * 86_400_000)
+  return new Duration(self * 86_400_000);
 }
 
 /**
@@ -63,14 +63,14 @@ export function days<N extends number>(self: IsInt<N>) {
  * @tsplus fluent Duration times
  */
 export function times<N extends number>(self: Duration, times: IsInt<N>) {
-  return new Duration(self.millis * times)
+  return new Duration(self.millis * times);
 }
 
 /**
  * @tsplus operator Duration *
  */
 export function timesInverted<N extends number>(times: IsInt<N>, self: Duration) {
-  return new Duration(self.millis * times)
+  return new Duration(self.millis * times);
 }
 
 /**
@@ -78,7 +78,7 @@ export function timesInverted<N extends number>(times: IsInt<N>, self: Duration)
  * @tsplus fluent Duration add
  */
 export function add(self: Duration, that: Duration) {
-  return new Duration(self.millis + that.millis)
+  return new Duration(self.millis + that.millis);
 }
 
 /**
@@ -86,5 +86,5 @@ export function add(self: Duration, that: Duration) {
  * @tsplus fluent Duration add
  */
 export function subtract(self: Duration, that: Duration) {
-  return new Duration(self.millis - that.millis)
+  return new Duration(self.millis - that.millis);
 }

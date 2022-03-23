@@ -1,4 +1,4 @@
-import { List } from "@tsplus/stdlib/collections/List/definition"
+import { List } from "@tsplus/stdlib/collections/List/definition";
 
 /**
  * Returns the empty `List`
@@ -6,5 +6,5 @@ import { List } from "@tsplus/stdlib/collections/List/definition"
  * @tsplus static ListOps empty
  */
 export function empty<A>(): List<A> {
-  return List.nil()
+  return List.nil();
 }

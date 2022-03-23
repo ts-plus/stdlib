@@ -1,16 +1,16 @@
-import type { List } from "@tsplus/stdlib/collections/List/definition"
+import type { List } from "@tsplus/stdlib/collections/List/definition";
 
 /**
  * @tsplus fluent List reduce
  */
 export function reduce_<A, B>(self: List<A>, b: B, f: (b: B, a: A) => B): B {
-  let acc = b
-  let these = self
+  let acc = b;
+  let these = self;
   while (!these.isNil()) {
-    acc = f(acc, these.head)
-    these = these.tail
+    acc = f(acc, these.head);
+    these = these.tail;
   }
-  return acc
+  return acc;
 }
 
-export const reduce = Pipeable(reduce_)
+export const reduce = Pipeable(reduce_);

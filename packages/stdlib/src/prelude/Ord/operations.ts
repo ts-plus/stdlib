@@ -1,6 +1,6 @@
-import { Equivalence } from "@tsplus/stdlib/prelude/Equivalence"
-import { Ord } from "@tsplus/stdlib/prelude/Ord/definition"
-import type { Ordering } from "@tsplus/stdlib/prelude/Ordering"
+import { Equivalence } from "@tsplus/stdlib/prelude/Equivalence";
+import { Ord } from "@tsplus/stdlib/prelude/Ord/definition";
+import type { Ordering } from "@tsplus/stdlib/prelude/Ordering";
 
 /**
  * Creates Ord[A] from a compare function
@@ -11,7 +11,7 @@ import type { Ordering } from "@tsplus/stdlib/prelude/Ordering"
 export function makeOrd<A>(compare: (x: A, y: A) => Ordering): Ord<A> {
   return {
     compare
-  }
+  };
 }
 
 /**
@@ -20,7 +20,7 @@ export function makeOrd<A>(compare: (x: A, y: A) => Ordering): Ord<A> {
  * @tsplus fluent Ord contramap
  */
 export function contramap<A, B>(fa: Ord<A>, f: (b: B) => A): Ord<B> {
-  return Ord((x, y) => fa.compare(f(x), f(y)))
+  return Ord((x, y) => fa.compare(f(x), f(y)));
 }
 
 /**
@@ -29,7 +29,7 @@ export function contramap<A, B>(fa: Ord<A>, f: (b: B) => A): Ord<B> {
  * @tsplus getter Ord gt
  */
 export function gt<A>(O: Ord<A>): (x: A, y: A) => boolean {
-  return (x, y) => O.compare(x, y) === 1
+  return (x, y) => O.compare(x, y) === 1;
 }
 
 /**
@@ -38,7 +38,7 @@ export function gt<A>(O: Ord<A>): (x: A, y: A) => boolean {
  * @tsplus getter Ord leq
  */
 export function leq<A>(O: Ord<A>): (x: A, y: A) => boolean {
-  return (x, y) => O.compare(x, y) !== 1
+  return (x, y) => O.compare(x, y) !== 1;
 }
 
 /**
@@ -47,7 +47,7 @@ export function leq<A>(O: Ord<A>): (x: A, y: A) => boolean {
  * @tsplus getter Ord lt
  */
 export function lt<A>(O: Ord<A>): (x: A, y: A) => boolean {
-  return (x, y) => O.compare(x, y) === -1
+  return (x, y) => O.compare(x, y) === -1;
 }
 
 /**
@@ -56,7 +56,7 @@ export function lt<A>(O: Ord<A>): (x: A, y: A) => boolean {
  * @tsplus getter Ord max
  */
 export function max<A>(O: Ord<A>): (x: A, y: A) => A {
-  return (x, y) => (O.compare(x, y) === -1 ? y : x)
+  return (x, y) => (O.compare(x, y) === -1 ? y : x);
 }
 
 /**
@@ -65,7 +65,7 @@ export function max<A>(O: Ord<A>): (x: A, y: A) => A {
  * @tsplus getter Ord min
  */
 export function min<A>(O: Ord<A>): (x: A, y: A) => A {
-  return (x, y) => (O.compare(x, y) === 1 ? y : x)
+  return (x, y) => (O.compare(x, y) === 1 ? y : x);
 }
 
 /**
@@ -74,9 +74,9 @@ export function min<A>(O: Ord<A>): (x: A, y: A) => A {
  * @tsplus getter Ord between
  */
 export function between<A>(O: Ord<A>): (low: A, hi: A) => (x: A) => boolean {
-  const lessThanO = lt(O)
-  const greaterThanO = gt(O)
-  return (low, hi) => (x) => lessThanO(x, low) || greaterThanO(x, hi) ? false : true
+  const lessThanO = lt(O);
+  const greaterThanO = gt(O);
+  return (low, hi) => (x) => lessThanO(x, low) || greaterThanO(x, hi) ? false : true;
 }
 
 /**
@@ -85,9 +85,9 @@ export function between<A>(O: Ord<A>): (low: A, hi: A) => (x: A) => boolean {
  * @tsplus getter Ord clamp
  */
 export function clamp<A>(O: Ord<A>): (low: A, hi: A) => (x: A) => A {
-  const minO = min(O)
-  const maxO = max(O)
-  return (low, hi) => (x) => maxO(minO(x, hi), low)
+  const minO = min(O);
+  const maxO = max(O);
+  return (low, hi) => (x) => maxO(minO(x, hi), low);
 }
 
 /**
@@ -96,7 +96,7 @@ export function clamp<A>(O: Ord<A>): (low: A, hi: A) => (x: A) => A {
  * @tsplus getter Ord inverted
  */
 export function inverted<A>(O: Ord<A>) {
-  return Ord<A>((x, y) => O.compare(y, x))
+  return Ord<A>((x, y) => O.compare(y, x));
 }
 
 /**
@@ -105,5 +105,5 @@ export function inverted<A>(O: Ord<A>) {
  * @tsplus getter Ord equivalence
  */
 export function getEquivalence<A>(O: Ord<A>): Equivalence<A> {
-  return Equivalence((x, y) => O.compare(x, y) === 0)
+  return Equivalence((x, y) => O.compare(x, y) === 0);
 }

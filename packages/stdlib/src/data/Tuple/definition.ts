@@ -1,40 +1,38 @@
-import { Equals } from "@tsplus/stdlib/structure/Equals"
-import { Hash } from "@tsplus/stdlib/structure/Hash"
+import { Equals } from "@tsplus/stdlib/structure/Equals";
+import { Hash } from "@tsplus/stdlib/structure/Hash";
 
-export const TupleSym: unique symbol = Symbol.for("tsplus/Tuple")
-export type TupleSym = typeof TupleSym
+export const TupleSym: unique symbol = Symbol.for("tsplus/Tuple");
+export type TupleSym = typeof TupleSym;
 
 /**
  * A `Tuple` represents an immutable, finite ordered sequence of elements.
  *
  * @tsplus type tsplus/Tuple
  */
-export interface Tuple<T extends ReadonlyArray<unknown>>
-  extends Iterable<T[number]>,
-    Equals {
-  readonly [TupleSym]: TupleSym
+export interface Tuple<T extends ReadonlyArray<unknown>> extends Iterable<T[number]>, Equals {
+  readonly [TupleSym]: TupleSym;
 
-  [Symbol.iterator](): IterableIterator<T[number]>
+  [Symbol.iterator](): IterableIterator<T[number]>;
 
-  tuple: T
+  tuple: T;
 
-  [Hash.sym](): number
-  [Equals.sym](that: unknown): boolean
+  [Hash.sym](): number;
+  [Equals.sym](that: unknown): boolean;
 
-  get<K extends keyof T>(i: K): T[K]
+  get<K extends keyof T>(i: K): T[K];
 }
 
 export class TupleInternal<T extends readonly unknown[]> implements Tuple<T> {
-  readonly [TupleSym]: TupleSym = TupleSym
+  readonly [TupleSym]: TupleSym = TupleSym;
 
   constructor(readonly tuple: T) {}
 
   [Symbol.iterator](): IterableIterator<T[number]> {
-    return this.tuple[Symbol.iterator]()
+    return this.tuple[Symbol.iterator]();
   }
 
   [Hash.sym](): number {
-    return Hash.array(this.tuple)
+    return Hash.array(this.tuple);
   }
 
   [Equals.sym](that: unknown): boolean {
@@ -42,13 +40,13 @@ export class TupleInternal<T extends readonly unknown[]> implements Tuple<T> {
       return (
         this.tuple.length === that.tuple.length &&
         this.tuple.every((v, i) => Equals.equals(v, that.tuple[i]))
-      )
+      );
     }
-    return false
+    return false;
   }
 
   get<K extends keyof T>(i: K): T[K] {
-    return this.tuple[i]
+    return this.tuple[i];
   }
 }
 
@@ -56,7 +54,7 @@ export class TupleInternal<T extends readonly unknown[]> implements Tuple<T> {
  * @tsplus type tsplus/TupleOps
  */
 export interface TupleOps {}
-export const Tuple: TupleOps = {}
+export const Tuple: TupleOps = {};
 
 /**
  * @tsplus unify tsplus/Tuple
@@ -64,7 +62,7 @@ export const Tuple: TupleOps = {}
 export function unifyTuple<X extends Tuple<any>>(
   self: X
 ): Tuple<[X] extends [Tuple<infer A>] ? A : never> {
-  return self
+  return self;
 }
 
 /**
@@ -73,5 +71,5 @@ export function unifyTuple<X extends Tuple<any>>(
  * @tsplus static tsplus/TupleOps isTuple
  */
 export function isTuple(self: unknown): self is Tuple<unknown[]> {
-  return typeof self === "object" && self != null && TupleSym in self
+  return typeof self === "object" && self != null && TupleSym in self;
 }

@@ -1,1 +1,1 @@
-import type {} from "@tsplus/stdlib"
+import type {} from "@tsplus/stdlib";

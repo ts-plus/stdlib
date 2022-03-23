@@ -1,18 +1,18 @@
-import type { List } from "@tsplus/stdlib/collections/List/definition"
-import type { Predicate } from "@tsplus/stdlib/data/Predicate"
+import type { List } from "@tsplus/stdlib/collections/List/definition";
+import type { Predicate } from "@tsplus/stdlib/data/Predicate";
 
 /**
  * @tsplus fluent List exists
  */
 export function exists_<A>(self: List<A>, p: Predicate<A>): boolean {
-  let these = self
+  let these = self;
   while (!these.isNil()) {
     if (p(these.head)) {
-      return true
+      return true;
     }
-    these = these.tail
+    these = these.tail;
   }
-  return false
+  return false;
 }
 
-export const exists = Pipeable(exists_)
+export const exists = Pipeable(exists_);

@@ -20,10 +20,25 @@ module.exports = {
     "eslint:recommended",
     "plugin:@typescript-eslint/eslint-recommended",
     "plugin:@typescript-eslint/recommended",
-    "plugin:prettier/recommended"
+    "plugin:@phaphoso/dprint/recommended"
   ],
   plugins: ["import", "sort-destructure-keys", "simple-import-sort", "codegen"],
   rules: {
+    "@phaphoso/dprint/dprint": [
+      "error",
+      {
+        config: {
+          // The TypeScript configuration of dprint
+          // See also https://dprint.dev/plugins/typescript/config/,
+          "indentWidth": 2,
+          "semiColons": "always",
+          "quoteStyle": "alwaysDouble",
+          "trailingCommas": "never",
+          "operatorPosition": "maintain",
+          "useParentheses": "preferNone"
+        }
+      }
+    ],
     "codegen/codegen": "error",
     "no-fallthrough": "off",
     "no-irregular-whitespace": "off",
@@ -53,4 +68,4 @@ module.exports = {
     "simple-import-sort/imports": "error",
     "sort-destructure-keys/sort-destructure-keys": "error"
   }
-}
+};

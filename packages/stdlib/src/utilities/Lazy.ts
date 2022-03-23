@@ -1,12 +1,12 @@
 export function lazy<A>(f: () => A): () => A {
-  let tmp: A | undefined
-  let done = false
+  let tmp: A | undefined;
+  let done = false;
   return () => {
     if (done) {
-      return tmp!
+      return tmp!;
     }
-    tmp = f()
-    done = true
-    return tmp!
-  }
+    tmp = f();
+    done = true;
+    return tmp!;
+  };
 }

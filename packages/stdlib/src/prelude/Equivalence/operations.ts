@@ -1,6 +1,6 @@
-import type { Tuple } from "@tsplus/stdlib/data/Tuple/definition"
-import { Equivalence } from "@tsplus/stdlib/prelude/Equivalence/definition"
-import type { ForcedTuple } from "@tsplus/stdlib/utilities/Types"
+import type { Tuple } from "@tsplus/stdlib/data/Tuple/definition";
+import { Equivalence } from "@tsplus/stdlib/prelude/Equivalence/definition";
+import type { ForcedTuple } from "@tsplus/stdlib/utilities/Types";
 
 /**
  * Constructs an `Equal[A]` from a function. The instance will be optimized
@@ -12,7 +12,7 @@ import type { ForcedTuple } from "@tsplus/stdlib/utilities/Types"
 export function makeEquivalence<A>(f: (x: A, y: A) => boolean): Equivalence<A> {
   return {
     equals: f
-  }
+  };
 }
 
 /**
@@ -22,7 +22,7 @@ export function makeEquivalence<A>(f: (x: A, y: A) => boolean): Equivalence<A> {
  *
  * @tsplus static EquivalenceOps any
  */
-export const any: Equivalence<unknown> = Equivalence(() => true)
+export const any: Equivalence<unknown> = Equivalence(() => true);
 
 /**
  * Equality for `Nothing` values. Note that since there are not values of
@@ -31,7 +31,7 @@ export const any: Equivalence<unknown> = Equivalence(() => true)
  *
  * @tsplus static EquivalenceOps never
  */
-export const never: Equivalence<never> = Equivalence(() => false)
+export const never: Equivalence<never> = Equivalence(() => false);
 
 /**
  * Constructs an `Equal[(A, B)]` given an `Equal[A]` and `Equal[B]` by first
@@ -44,7 +44,7 @@ export function both<A, B>(
 ): Equivalence<Tuple<[A, B]>> {
   return Equivalence(
     ({ tuple: [x0, x1] }, { tuple: [y0, y1] }) => fa.equals(x0, y0) && fb.equals(x1, y1)
-  )
+  );
 }
 
 // /**
@@ -73,7 +73,7 @@ export function both<A, B>(
 export function contramap<A, B>(
   f: (a: B) => A
 ): (fa: Equivalence<A>) => Equivalence<B> {
-  return (fa) => Equivalence((x, y) => fa.equals(f(x), f(y)))
+  return (fa) => Equivalence((x, y) => fa.equals(f(x), f(y)));
 }
 
 /**
@@ -81,7 +81,7 @@ export function contramap<A, B>(
  * embodied in the implementation of `equals` for values of type `A`.
  */
 export function strict<A>() {
-  return makeEquivalence<A>((x, y) => x === y)
+  return makeEquivalence<A>((x, y) => x === y);
 }
 
 /**
@@ -89,35 +89,35 @@ export function strict<A>() {
  *
  * @tsplus static EquivalenceOps number
  */
-export const number = strict<number>()
+export const number = strict<number>();
 
 /**
  * Equality for `string` values.
  *
  * @tsplus static EquivalenceOps string
  */
-export const string = strict<string>()
+export const string = strict<string>();
 
 /**
  * Equality for `symbol` values.
  *
  * @tsplus static EquivalenceOps symbol
  */
-export const symbol = strict<symbol>()
+export const symbol = strict<symbol>();
 
 /**
  * Equality for `boolean` values.
  *
  * @tsplus static EquivalenceOps boolean
  */
-export const boolean = strict<boolean>()
+export const boolean = strict<boolean>();
 
 /**
  * Equality for `Date` values.
  *
  * @tsplus static EquivalenceOps date
  */
-export const date: Equivalence<Date> = contramap((date: Date) => date.valueOf())(number)
+export const date: Equivalence<Date> = contramap((date: Date) => date.valueOf())(number);
 
 /**
  * Derives an `Equal[Array[A]]` given an `Equal[A]`.
@@ -131,14 +131,14 @@ export function array<A>(EqA: Equivalence<A>): Equivalence<readonly A[]> {
       if (x.length === y.length) {
         for (let i = 0; i < x.length; i++) {
           if (!EqA.equals(x[i]!, y[i]!)) {
-            return false
+            return false;
           }
         }
-        return true
+        return true;
       }
-      return false
+      return false;
     }
-  }
+  };
 }
 
 /**
@@ -149,11 +149,13 @@ export function array<A>(EqA: Equivalence<A>): Equivalence<readonly A[]> {
 export function tuple<T extends ReadonlyArray<Equivalence<any>>>(
   ...eqs: T
 ): Equivalence<
-  ForcedTuple<{
-    [K in keyof T]: T[K] extends Equivalence<infer A> ? A : never
-  }>
+  ForcedTuple<
+    {
+      [K in keyof T]: T[K] extends Equivalence<infer A> ? A : never;
+    }
+  >
 > {
-  return Equivalence((x, y) => eqs.every((E, i) => E.equals(x.get(i), y.get(i))))
+  return Equivalence((x, y) => eqs.every((E, i) => E.equals(x.get(i), y.get(i))));
 }
 
 /**
@@ -161,15 +163,17 @@ export function tuple<T extends ReadonlyArray<Equivalence<any>>>(
  *
  * @tsplus static EquivalenceOps struct
  */
-export function struct<O extends Record<string, any>>(eqs: {
-  [K in keyof O]: Equivalence<O[K]>
-}): Equivalence<O> {
+export function struct<O extends Record<string, any>>(
+  eqs: {
+    [K in keyof O]: Equivalence<O[K]>;
+  }
+): Equivalence<O> {
   return Equivalence((x, y) => {
     for (const k in eqs) {
       if (!eqs[k].equals(x[k], y[k])) {
-        return false
+        return false;
       }
     }
-    return true
-  })
+    return true;
+  });
 }

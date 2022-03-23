@@ -1,13 +1,13 @@
 /* adapted from https://github.com/gcanti/fp-ts */
 
-import type { LazyArg, Predicate, Refinement } from "@tsplus/stdlib/data/Function"
-import { identity } from "@tsplus/stdlib/data/Function"
-import { Tuple } from "@tsplus/stdlib/data/Tuple/definition"
-import { Equals } from "@tsplus/stdlib/structure/Equals"
-import { Hash } from "@tsplus/stdlib/structure/Hash"
+import type { LazyArg, Predicate, Refinement } from "@tsplus/stdlib/data/Function";
+import { identity } from "@tsplus/stdlib/data/Function";
+import { Tuple } from "@tsplus/stdlib/data/Tuple/definition";
+import { Equals } from "@tsplus/stdlib/structure/Equals";
+import { Hash } from "@tsplus/stdlib/structure/Hash";
 
-const _noneHash = Hash.string("Option/None")
-const _someHash = Hash.string("Option/Some")
+const _noneHash = Hash.string("Option/None");
+const _someHash = Hash.string("Option/Some");
 
 /**
  * Definitions
@@ -18,10 +18,10 @@ export class None implements Equals {
   readonly _tag = "None";
 
   [Equals.sym](that: unknown): boolean {
-    return that instanceof None
+    return that instanceof None;
   }
   [Hash.sym](): number {
-    return _noneHash
+    return _noneHash;
   }
 }
 
@@ -29,27 +29,27 @@ export class None implements Equals {
  * @tsplus type Option/Some
  */
 export class Some<A> implements Equals {
-  readonly _tag = "Some"
+  readonly _tag = "Some";
   constructor(readonly value: A) {}
 
   [Equals.sym](that: unknown): boolean {
-    return that instanceof Some && Equals.equals(this.value, that.value)
+    return that instanceof Some && Equals.equals(this.value, that.value);
   }
   [Hash.sym](): number {
-    return Hash.combine(_someHash, Hash.unknown(this.value))
+    return Hash.combine(_someHash, Hash.unknown(this.value));
   }
 }
 
 /**
  * @tsplus type Option
  */
-export type Option<A> = None | Some<A>
+export type Option<A> = None | Some<A>;
 
 /**
  * @tsplus type OptionOps
  */
 export interface OptionOps {}
-export const Option: OptionOps = {}
+export const Option: OptionOps = {};
 
 /**
  * @tsplus unify Option
@@ -57,7 +57,7 @@ export const Option: OptionOps = {}
 export function unifyOption<X extends Option<any>>(
   self: X
 ): Option<[X] extends [Option<infer A>] ? A : never> {
-  return self
+  return self;
 }
 
 /**
@@ -67,7 +67,7 @@ export function unifyOption<X extends Option<any>>(
  * @tsplus static OptionOps __call
  */
 export function apply<A>(a: A): Option<NonNullable<A>> {
-  return Option.fromNullable(a)
+  return Option.fromNullable(a);
 }
 
 /**
@@ -75,7 +75,7 @@ export function apply<A>(a: A): Option<NonNullable<A>> {
  *
  * @tsplus static OptionOps none
  */
-export const none: Option<never> = new None()
+export const none: Option<never> = new None();
 
 /**
  * Constructs `None`.
@@ -83,7 +83,7 @@ export const none: Option<never> = new None()
  * @tsplus static OptionOps emptyOf
  */
 export function emptyOf<A>(): Option<A> {
-  return none
+  return none;
 }
 
 /**
@@ -92,7 +92,7 @@ export function emptyOf<A>(): Option<A> {
  * @tsplus static OptionOps some
  */
 export function some<A>(a: A): Option<A> {
-  return new Some(a)
+  return new Some(a);
 }
 
 /**
@@ -101,7 +101,7 @@ export function some<A>(a: A): Option<A> {
  * @tsplus fluent Option ap
  */
 export function ap<A, B>(fab: Option<(a: A) => B>, fa: Option<A>): Option<B> {
-  return isNone(fab) ? none : isNone(fa) ? none : some(fab.value(fa.value))
+  return isNone(fab) ? none : isNone(fa) ? none : some(fab.value(fa.value));
 }
 
 /**
@@ -111,7 +111,7 @@ export function ap<A, B>(fab: Option<(a: A) => B>, fa: Option<A>): Option<B> {
  * @tsplus fluent Option zip
  */
 export function zip<A, B>(fa: Option<A>, fb: Option<B>): Option<Tuple<[A, B]>> {
-  return chain(fa, (a) => map(fb, (b) => Tuple(a, b)))
+  return chain(fa, (a) => map(fb, (b) => Tuple(a, b)));
 }
 
 /**
@@ -124,7 +124,7 @@ export function zipLeft<A, B>(fa: Option<A>, fb: Option<B>): Option<A> {
   return ap(
     map(fa, (a) => () => a),
     fb
-  )
+  );
 }
 
 /**
@@ -137,7 +137,7 @@ export function zipRight<A, B>(fa: Option<A>, fb: Option<B>): Option<B> {
   return ap(
     map(fa, () => (b: B) => b),
     fb
-  )
+  );
 }
 
 /**
@@ -146,7 +146,7 @@ export function zipRight<A, B>(fa: Option<A>, fb: Option<B>): Option<B> {
  * @tsplus fluent Option flatMap
  */
 export function chain<A, B>(self: Option<A>, f: (a: A) => Option<B>): Option<B> {
-  return isNone(self) ? none : f(self.value)
+  return isNone(self) ? none : f(self.value);
 }
 
 /**
@@ -155,7 +155,7 @@ export function chain<A, B>(self: Option<A>, f: (a: A) => Option<B>): Option<B> 
  * @tsplus fluent Option tap
  */
 export function tap<A>(ma: Option<A>, f: (a: A) => Option<any>): Option<A> {
-  return chain(ma, (a) => map(f(a), () => a))
+  return chain(ma, (a) => map(f(a), () => a));
 }
 
 /**
@@ -164,7 +164,7 @@ export function tap<A>(ma: Option<A>, f: (a: A) => Option<any>): Option<A> {
  * @tsplus fluent Option flatten
  */
 export function flatten<A>(fa: Option<Option<A>>): Option<A> {
-  return chain(fa, identity)
+  return chain(fa, identity);
 }
 
 /**
@@ -173,7 +173,7 @@ export function flatten<A>(fa: Option<Option<A>>): Option<A> {
  * @tsplus fluent Option duplicate
  */
 export function duplicate<A>(ma: Option<A>): Option<Option<A>> {
-  return isNone(ma) ? none : some(ma)
+  return isNone(ma) ? none : some(ma);
 }
 
 /**
@@ -182,7 +182,7 @@ export function duplicate<A>(ma: Option<A>): Option<Option<A>> {
  * @tsplus fluent Option exists
  */
 export function exists<A>(ma: Option<A>, predicate: Predicate<A>): boolean {
-  return isNone(ma) ? false : predicate(ma.value)
+  return isNone(ma) ? false : predicate(ma.value);
 }
 
 /**
@@ -191,7 +191,7 @@ export function exists<A>(ma: Option<A>, predicate: Predicate<A>): boolean {
  * @tsplus fluent Option extend
  */
 export function extend<A, B>(self: Option<A>, f: (fa: Option<A>) => B): Option<B> {
-  return isNone(self) ? none : some(f(self))
+  return isNone(self) ? none : some(f(self));
 }
 
 /**
@@ -206,7 +206,7 @@ export function fold<A, B, C>(
   onNone: LazyArg<B>,
   onSome: (a: A) => C
 ): B | C {
-  return isNone(ma) ? onNone() : onSome(ma.value)
+  return isNone(ma) ? onNone() : onSome(ma.value);
 }
 
 // /**
@@ -225,7 +225,7 @@ export function fold<A, B, C>(
  * @tsplus static OptionOps fromNullable
  */
 export function fromNullable<A>(a: A): Option<NonNullable<A>> {
-  return a == null ? none : some(a as NonNullable<A>)
+  return a == null ? none : some(a as NonNullable<A>);
 }
 
 /**
@@ -236,10 +236,10 @@ export function fromNullable<A>(a: A): Option<NonNullable<A>> {
 export function fromPredicate<A, B extends A>(
   a: A,
   refinement: Refinement<A, B>
-): Option<B>
-export function fromPredicate<A>(a: A, predicate: Predicate<A>): Option<A>
+): Option<B>;
+export function fromPredicate<A>(a: A, predicate: Predicate<A>): Option<A>;
 export function fromPredicate<A>(a: A, predicate: Predicate<A>): Option<A> {
-  return predicate(a) ? some(a) : none
+  return predicate(a) ? some(a) : none;
 }
 
 // /**
@@ -255,7 +255,7 @@ export function fromPredicate<A>(a: A, predicate: Predicate<A>): Option<A> {
  * @tsplus fluent Option getOrElse
  */
 export function getOrElse<A, B>(ma: Option<A>, onNone: LazyArg<B>): A | B {
-  return ma._tag === "None" ? onNone() : ma.value
+  return ma._tag === "None" ? onNone() : ma.value;
 }
 
 /**
@@ -266,10 +266,10 @@ export function orElse_<A, B>(
   self: Option<A>,
   onNone: LazyArg<Option<B>>
 ): Option<A | B> {
-  return self._tag === "None" ? onNone() : self
+  return self._tag === "None" ? onNone() : self;
 }
 
-export const orElse = Pipeable(orElse_)
+export const orElse = Pipeable(orElse_);
 
 /**
  * Returns a `Refinement` (i.e. a custom type guard) from a `Option` returning
@@ -282,7 +282,7 @@ export const orElse = Pipeable(orElse_)
 export function getRefinement<A, B extends A>(
   getOption: (a: A) => Option<B>
 ): Refinement<A, B> {
-  return (a: A): a is B => isSome(getOption(a))
+  return (a: A): a is B => isSome(getOption(a));
 }
 
 // /**
@@ -298,7 +298,7 @@ export function getRefinement<A, B extends A>(
  * @tsplus fluent Option isNone
  */
 export function isNone<A>(fa: Option<A>): fa is None {
-  return fa._tag === "None"
+  return fa._tag === "None";
 }
 
 /**
@@ -307,7 +307,7 @@ export function isNone<A>(fa: Option<A>): fa is None {
  * @tsplus fluent Option isSome
  */
 export function isSome<A>(fa: Option<A>): fa is Some<A> {
-  return fa._tag === "Some"
+  return fa._tag === "Some";
 }
 
 /**
@@ -316,7 +316,7 @@ export function isSome<A>(fa: Option<A>): fa is Some<A> {
  * @tsplus fluent Option map
  */
 export function map<A, B>(ma: Option<A>, f: (a: A) => B): Option<B> {
-  return isNone(ma) ? none : some(f(ma.value))
+  return isNone(ma) ? none : some(f(ma.value));
 }
 
 /**
@@ -328,7 +328,7 @@ export function mapNullable<A, B>(
   ma: Option<A>,
   f: (a: A) => B | null | undefined
 ): Option<B> {
-  return isNone(ma) ? none : fromNullable(f(ma.value))
+  return isNone(ma) ? none : fromNullable(f(ma.value));
 }
 
 /**
@@ -338,7 +338,7 @@ export function mapNullable<A, B>(
  * @tsplus fluent Option toNullable
  */
 export function toNullable<A>(ma: Option<A>): A | null {
-  return isNone(ma) ? null : ma.value
+  return isNone(ma) ? null : ma.value;
 }
 
 /**
@@ -348,7 +348,7 @@ export function toNullable<A>(ma: Option<A>): A | null {
  * @tsplus getter Option value
  */
 export function toUndefined<A>(ma: Option<A>): A | undefined {
-  return isNone(ma) ? undefined : ma.value
+  return isNone(ma) ? undefined : ma.value;
 }
 
 /**
@@ -359,8 +359,8 @@ export function toUndefined<A>(ma: Option<A>): A | undefined {
  */
 export function tryCatch<A>(f: LazyArg<A>): Option<A> {
   try {
-    return some(f())
+    return some(f());
   } catch (e) {
-    return none
+    return none;
   }
 }

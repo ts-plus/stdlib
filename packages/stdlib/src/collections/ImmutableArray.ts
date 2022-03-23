@@ -1,7 +1,7 @@
-import type { Iterable } from "@tsplus/stdlib/collections/Iterable"
-import { Option } from "@tsplus/stdlib/data/Option"
-import { Equals } from "@tsplus/stdlib/structure/Equals"
-import { Hash } from "@tsplus/stdlib/structure/Hash"
+import type { Iterable } from "@tsplus/stdlib/collections/Iterable";
+import { Option } from "@tsplus/stdlib/data/Option";
+import { Equals } from "@tsplus/stdlib/structure/Equals";
+import { Hash } from "@tsplus/stdlib/structure/Hash";
 
 declare global {
   /**
@@ -18,7 +18,7 @@ export class ImmutableArray<A> implements Equals, Iterable<A> {
   constructor(readonly array: ReadonlyArray<A>) {}
 
   [Symbol.iterator](): Iterator<A> {
-    return this.array[Symbol.iterator]()
+    return this.array[Symbol.iterator]();
   }
 
   [Equals.sym](this: this, other: unknown): boolean {
@@ -26,11 +26,11 @@ export class ImmutableArray<A> implements Equals, Iterable<A> {
       other instanceof ImmutableArray &&
       this.array.length === other.array.length &&
       this.array.every((v, i) => Equals.equals(v, other.array[i]))
-    )
+    );
   }
 
   [Hash.sym](this: this): number {
-    return Hash.array(this.array)
+    return Hash.array(this.array);
   }
 }
 
@@ -44,7 +44,7 @@ export interface ReadonlyArrayOps {}
  * @tsplus static ImmutableArrayOps make
  */
 export function make<A extends readonly any[]>(...as: A): ImmutableArray<A[number]> {
-  return new ImmutableArray(as)
+  return new ImmutableArray(as);
 }
 
 /**
@@ -52,7 +52,7 @@ export function make<A extends readonly any[]>(...as: A): ImmutableArray<A[numbe
  * @tsplus fluent Iterable asImmutableArray
  */
 export function from<A>(iterable: Iterable<A>): ImmutableArray<A> {
-  return new ImmutableArray(Array.from(iterable))
+  return new ImmutableArray(Array.from(iterable));
 }
 
 /**
@@ -62,16 +62,16 @@ export function map_<A, B>(
   i: ImmutableArray<A>,
   f: (a: A, k: number) => B
 ): ImmutableArray<B> {
-  return new ImmutableArray(i.array.map(f))
+  return new ImmutableArray(i.array.map(f));
 }
 
-export const map = Pipeable(map_)
+export const map = Pipeable(map_);
 
 /**
  * @tsplus fluent Array immutable
  */
 export function immutable<A>(self: Array<A>): ImmutableArray<A> {
-  return new ImmutableArray(self.slice(0, self.length))
+  return new ImmutableArray(self.slice(0, self.length));
 }
 
 /**
@@ -82,10 +82,10 @@ export function get_<A>(
   self: ImmutableArray<A>,
   index: number
 ): Option<NonNullable<A>> {
-  return Option.fromNullable(self.array[index])
+  return Option.fromNullable(self.array[index]);
 }
 
-export const get = Pipeable(get_)
+export const get = Pipeable(get_);
 
 /**
  * @tsplus operator ImmutableArray &
@@ -95,10 +95,10 @@ export function concat_<A, B>(
   self: ImmutableArray<A>,
   that: ImmutableArray<B>
 ): ImmutableArray<A | B> {
-  return new ImmutableArray([...self.array, ...that.array])
+  return new ImmutableArray([...self.array, ...that.array]);
 }
 
-export const concat = Pipeable(concat_)
+export const concat = Pipeable(concat_);
 
 /**
  * Concatenates two ImmutableArray together
@@ -108,7 +108,7 @@ export const concat = Pipeable(concat_)
 export const concatOperator: <A>(
   self: ImmutableArray<A>,
   that: ImmutableArray<A>
-) => ImmutableArray<A> = concat_
+) => ImmutableArray<A> = concat_;
 
 /**
  * Prepends `a` to ImmutableArray<A>
@@ -116,7 +116,7 @@ export const concatOperator: <A>(
  * @tsplus operator ImmutableArray + 1.0
  */
 export function prependOperator<A>(a: A, self: ImmutableArray<A>): ImmutableArray<A> {
-  return new ImmutableArray([a, ...self.array])
+  return new ImmutableArray([a, ...self.array]);
 }
 
 /**
@@ -125,10 +125,10 @@ export function prependOperator<A>(a: A, self: ImmutableArray<A>): ImmutableArra
  * @tsplus fluent ImmutableArray prepend
  */
 export function prepend_<A, B>(self: ImmutableArray<A>, a: B): ImmutableArray<A | B> {
-  return new ImmutableArray([a, ...self.array])
+  return new ImmutableArray([a, ...self.array]);
 }
 
-export const prepend = Pipeable(prepend_)
+export const prepend = Pipeable(prepend_);
 
 /**
  * Appends `a` to ImmutableArray<A>
@@ -136,13 +136,12 @@ export const prepend = Pipeable(prepend_)
  * @tsplus fluent ImmutableArray append
  */
 export function append_<A, B>(self: ImmutableArray<A>, a: B): ImmutableArray<A | B> {
-  return new ImmutableArray([...self.array, a])
+  return new ImmutableArray([...self.array, a]);
 }
 
-export const append = Pipeable(append_)
+export const append = Pipeable(append_);
 
 /**
  * @tsplus operator ImmutableArray + 1.0
  */
-export const appendOperator: <A>(self: ImmutableArray<A>, a: A) => ImmutableArray<A> =
-  append_
+export const appendOperator: <A>(self: ImmutableArray<A>, a: A) => ImmutableArray<A> = append_;
