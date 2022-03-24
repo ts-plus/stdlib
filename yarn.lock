@@ -608,19 +608,19 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@effect-ts/core@npm:^0.59.1":
-  version: 0.59.1
-  resolution: "@effect-ts/core@npm:0.59.1"
+"@effect-ts/core@npm:^0.59.2":
+  version: 0.59.2
+  resolution: "@effect-ts/core@npm:0.59.2"
   dependencies:
-    "@effect-ts/system": ^0.56.1
-  checksum: 547ac14790266ef991cba43882a142fd102c85583e5a32e028e0b38edcd20cb849c60ae4e3d8059268f6b0bb194075951e34cd65b1ed28a4bdfff2a4a2135f4e
+    "@effect-ts/system": ^0.56.2
+  checksum: 42b6d212e72bda71ba1e7457eee24647987bb557ee8f963027de883a0244765e81a21d8a5cb0c40645a55739dfb125788d60426d8ff31b562c2e7cf97dc49fe6
   languageName: node
   linkType: hard
 
-"@effect-ts/system@npm:^0.56.1":
-  version: 0.56.1
-  resolution: "@effect-ts/system@npm:0.56.1"
-  checksum: 5063a3e9fc84cd9717f07e601e8b4ac1ef5be37301cce2f8afab26d7a0f4766360c331bca0e65174d8cc4b5d72ed589811d12894a6fc73f36a839a8ee86e7f0c
+"@effect-ts/system@npm:^0.56.2":
+  version: 0.56.2
+  resolution: "@effect-ts/system@npm:0.56.2"
+  checksum: d2ece0f6c5692aaa4eab8ada29c16a3b05e7d13fa545a70ab19c07b4a148b3e6bd84526a566e4b9d52eca4d699209e906ad484a21dab89b9adcfa4d411da4edf
   languageName: node
   linkType: hard
 
@@ -837,9 +837,9 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@tsplus/installer@npm:^0.0.52":
-  version: 0.0.52
-  resolution: "@tsplus/installer@npm:0.0.52"
+"@tsplus/installer@npm:^0.0.53":
+  version: 0.0.53
+  resolution: "@tsplus/installer@npm:0.0.53"
   dependencies:
     mkdirp: ^1.0.4
     rimraf: ^3.0.2
@@ -848,7 +848,7 @@ __metadata:
     zlib: ^1.0.5
   bin:
     tsplus-install: bin/tsplus-install
-  checksum: 33c1e647e702eab788bbe52ff8989f3492aa032ea171414611b861826f2f3198281e0a675737e0c910d83837d79639913fb11081953f07669314e88eab762df5
+  checksum: 67637c677078a28a391c506b91cf3ed307c7b1095511877235eb5a03c232c5853a3790e06e7d1835c5af729d5ac56bade545376923cda6b52f82e80472952f84
   languageName: node
   linkType: hard
 
@@ -7175,10 +7175,10 @@ __metadata:
     "@babel/plugin-transform-modules-commonjs": ^7.17.7
     "@changesets/changelog-github": ^0.4.3
     "@changesets/cli": ^2.21.1
-    "@effect-ts/build-utils": 0.39.1
-    "@effect-ts/core": ^0.59.1
+    "@effect-ts/build-utils": 0.39.2
+    "@effect-ts/core": ^0.59.2
     "@phaphoso/eslint-plugin-dprint": ^0.5.2
-    "@tsplus/installer": ^0.0.52
+    "@tsplus/installer": ^0.0.53
     "@types/node": ^17.0.23
     "@types/rimraf": ^3.0.2
     "@typescript-eslint/eslint-plugin": ^5.16.0
