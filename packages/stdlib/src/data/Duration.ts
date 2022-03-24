@@ -88,3 +88,48 @@ export function add(self: Duration, that: Duration) {
 export function subtract(self: Duration, that: Duration) {
   return new Duration(self.millis - that.millis);
 }
+
+/**
+ * @tsplus operator Duration <
+ */
+export function lowerThen_(self: Duration, that: Duration) {
+  return self.millis < that.millis;
+}
+
+export const lowerThen = Pipeable(lowerThen_);
+
+/**
+ * @tsplus operator Duration <=
+ */
+export function lowerThenOrEqual_(self: Duration, that: Duration) {
+  return self.millis <= that.millis;
+}
+
+export const lowerThenOrEqual = Pipeable(lowerThenOrEqual_);
+
+/**
+ * @tsplus operator Duration >
+ */
+export function greaterThen_(self: Duration, that: Duration) {
+  return self.millis > that.millis;
+}
+
+export const greaterThen = Pipeable(greaterThen_);
+
+/**
+ * @tsplus operator Duration >=
+ */
+export function greaterThenOrEqual_(self: Duration, that: Duration) {
+  return self.millis >= that.millis;
+}
+
+export const greaterThenOrEqual = Pipeable(greaterThenOrEqual_);
+
+/**
+ * @tsplus operator Duration ==
+ */
+export function equals_(self: Duration, that: Duration) {
+  return self.millis === that.millis;
+}
+
+export const equals = Pipeable(equals_);

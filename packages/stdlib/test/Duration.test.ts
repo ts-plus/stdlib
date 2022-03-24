@@ -19,4 +19,48 @@ describe("Duration", () => {
         == (30).seconds + (30).seconds
     );
   });
+  it(">", () => {
+    assert.isTrue(
+      (30).seconds > (20).seconds
+    );
+    assert.isFalse(
+      (30).seconds > (30).seconds
+    );
+    assert.isFalse(
+      (30).seconds > (1).minutes
+    );
+  });
+  it(">=", () => {
+    assert.isTrue(
+      (30).seconds >= (20).seconds
+    );
+    assert.isTrue(
+      (30).seconds >= (30).seconds
+    );
+    assert.isFalse(
+      (30).seconds >= (1).minutes
+    );
+  });
+  it("<", () => {
+    assert.isTrue(
+      (20).seconds < (30).seconds
+    );
+    assert.isFalse(
+      (30).seconds < (30).seconds
+    );
+    assert.isFalse(
+      (1).minutes < (30).seconds
+    );
+  });
+  it("<=", () => {
+    assert.isTrue(
+      (20).seconds <= (30).seconds
+    );
+    assert.isTrue(
+      (30).seconds <= (30).seconds
+    );
+    assert.isFalse(
+      (1).minutes <= (30).seconds
+    );
+  });
 });
