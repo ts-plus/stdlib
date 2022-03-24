@@ -1,5 +1,13 @@
 # @tsplus/stdlib
 
+## 0.0.16
+
+### Patch Changes
+
+- [`b8b6d27`](https://github.com/ts-plus/stdlib/commit/b8b6d271b4e8fc45401630b806da38a123179d97) Thanks [@mikearnaldi](https://github.com/mikearnaldi)! - Add Option pipe operator (>>>) and aspects (Option.\$)
+
+* [`c585433`](https://github.com/ts-plus/stdlib/commit/c5854332f38836cb4b4204f5cb2345d2f1a61d18) Thanks [@mikearnaldi](https://github.com/mikearnaldi)! - Add more operators to Duration
+
 ## 0.0.15
 
 ### Patch Changes
