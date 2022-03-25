@@ -59,12 +59,22 @@ export function days<N extends number>(self: IsInt<N>) {
 }
 
 /**
+ * @tsplus getter number weeks
+ * @tsplus static DurationOps weeks
+ */
+export function weeks<N extends number>(self: IsInt<N>) {
+  return new Duration(self * 604_800_000);
+}
+
+/**
  * @tsplus operator Duration *
  * @tsplus fluent Duration times
  */
-export function times<N extends number>(self: Duration, times: IsInt<N>) {
+export function times_<N extends number>(self: Duration, times: IsInt<N>) {
   return new Duration(self.millis * times);
 }
+
+export const times = Pipeable(times_);
 
 /**
  * @tsplus operator Duration *
@@ -77,20 +87,25 @@ export function timesInverted<N extends number>(times: IsInt<N>, self: Duration)
  * @tsplus operator Duration +
  * @tsplus fluent Duration add
  */
-export function add(self: Duration, that: Duration) {
+export function add_(self: Duration, that: Duration) {
   return new Duration(self.millis + that.millis);
 }
 
+export const add = Pipeable(add_);
+
 /**
  * @tsplus operator Duration -
- * @tsplus fluent Duration add
+ * @tsplus fluent Duration subtract
  */
-export function subtract(self: Duration, that: Duration) {
+export function subtract_(self: Duration, that: Duration) {
   return new Duration(self.millis - that.millis);
 }
 
+export const subtract = Pipeable(subtract_);
+
 /**
  * @tsplus operator Duration <
+ * @tsplus fluent Duration lowerThen
  */
 export function lowerThen_(self: Duration, that: Duration) {
   return self.millis < that.millis;
@@ -100,6 +115,7 @@ export const lowerThen = Pipeable(lowerThen_);
 
 /**
  * @tsplus operator Duration <=
+ * @tsplus fluent Duration lowerThenOrEqual
  */
 export function lowerThenOrEqual_(self: Duration, that: Duration) {
   return self.millis <= that.millis;
@@ -109,6 +125,7 @@ export const lowerThenOrEqual = Pipeable(lowerThenOrEqual_);
 
 /**
  * @tsplus operator Duration >
+ * @tsplus fluent Duration greaterThen
  */
 export function greaterThen_(self: Duration, that: Duration) {
   return self.millis > that.millis;
@@ -118,6 +135,7 @@ export const greaterThen = Pipeable(greaterThen_);
 
 /**
  * @tsplus operator Duration >=
+ * @tsplus fluent Duration greaterThenOrEqual
  */
 export function greaterThenOrEqual_(self: Duration, that: Duration) {
   return self.millis >= that.millis;
@@ -127,6 +145,7 @@ export const greaterThenOrEqual = Pipeable(greaterThenOrEqual_);
 
 /**
  * @tsplus operator Duration ==
+ * @tsplus fluent Duration equals
  */
 export function equals_(self: Duration, that: Duration) {
   return self.millis === that.millis;
