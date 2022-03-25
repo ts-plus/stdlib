@@ -1,5 +1,7 @@
+import { identity } from "@tsplus/stdlib/data/Function";
 import { Tuple } from "@tsplus/stdlib/data/Tuple";
-import type { Identity } from "@tsplus/stdlib/prelude/Identity";
+import type { AssociativeIdentity } from "@tsplus/stdlib/prelude/AssociativeIdentity";
+import { Equals } from "@tsplus/stdlib/structure/Equals";
 import type { ESIterable } from "@tsplus/stdlib/utilities/Types";
 
 declare global {
@@ -51,9 +53,11 @@ function* genChain<A, B>(iterator: Iterator<A>, mapping: (a: A) => Iterable<B>) 
 }
 
 /**
+ * Zips the values of both iterators with the provided zipper function
+ *
  * @tsplus fluent Iterable zipWith
  */
-export function zipWith<A, B, C>(
+export function zipWith_<A, B, C>(
   self: Iterable<A>,
   that: Iterable<B>,
   zipper: (a: A, b: B) => C
@@ -100,6 +104,13 @@ export function zipWith<A, B, C>(
 }
 
 /**
+ * Zips the values of both iterators with the provided zipper function
+ */
+export const zipWith = Pipeable(zipWith_);
+
+/**
+ * Maps the values of the iterator using the provided function
+ *
  * @tsplus fluent Iterable map
  */
 export function map_<A, B>(i: Iterable<A>, f: (a: A, k: number) => B): Iterable<B> {
@@ -108,38 +119,58 @@ export function map_<A, B>(i: Iterable<A>, f: (a: A, k: number) => B): Iterable<
   };
 }
 
+/**
+ * Maps the values of the iterator using the provided function
+ */
 export const map = Pipeable(map_);
 
 /**
+ * Zips the two iterators into an iterator of a tuple
+ *
  * @tsplus fluent Iterable zip
  */
 export function zip_<A, B>(fa: Iterable<A>, fb: Iterable<B>): Iterable<Tuple<[A, B]>> {
-  return zipWith(fa, fb, Tuple.make);
+  return fa.zipWith(fb, Tuple.make);
 }
 
+/**
+ * Zips the two iterators into an iterator of a tuple
+ */
 export const zip = Pipeable(zip_);
 
 /**
+ * Maps the iterator using the provided function and flatten its result
+ *
  * @tsplus fluent Iterable flatMap
  */
-export function chain_<A, B>(i: Iterable<A>, f: (a: A) => Iterable<B>): Iterable<B> {
+export function flatMap_<A, B>(i: Iterable<A>, f: (a: A) => Iterable<B>): Iterable<B> {
   return {
     [Symbol.iterator]: () => genChain(i[Symbol.iterator](), f)
   };
 }
 
-export const chain = Pipeable(chain_);
+/**
+ * Maps the iterator using the provided function and flatten its result
+ */
+export const flatMap = Pipeable(flatMap_);
 
 /**
+ * Applicative's apply
+ *
  * @tsplus fluent Iterable ap
  */
 export function ap_<A, B>(fab: Iterable<(a: A) => B>, fa: Iterable<A>): Iterable<B> {
-  return chain_(fab, (f) => map_(fa, f));
+  return flatMap_(fab, (f) => map_(fa, f));
 }
 
+/**
+ * Applicative's apply
+ */
 export const ap = Pipeable(ap_);
 
 /**
+ * Creates an iterator of a single value
+ *
  * @tsplus static IterableOps of
  */
 export function of<A>(a: A): Iterable<A> {
@@ -149,6 +180,8 @@ export function of<A>(a: A): Iterable<A> {
 }
 
 /**
+ * Takes the fist n elements
+ *
  * @tsplus fluent Iterable take
  */
 export function take_<A>(a: Iterable<A>, n: number): Iterable<A> {
@@ -165,9 +198,14 @@ export function take_<A>(a: Iterable<A>, n: number): Iterable<A> {
   };
 }
 
+/**
+ * Takes the fist n elements
+ */
 export const take = Pipeable(take_);
 
 /**
+ * Skips the first n elements
+ *
  * @tsplus fluent Iterable skip
  */
 export function skip_<A>(a: Iterable<A>, n: number): Iterable<A> {
@@ -183,9 +221,14 @@ export function skip_<A>(a: Iterable<A>, n: number): Iterable<A> {
   };
 }
 
+/**
+ * Skips the first n elements
+ */
 export const skip = Pipeable(skip_);
 
 /**
+ * Empty iterator
+ *
  * @tsplus static IterableOps never
  */
 export const never: Iterable<never> = {
@@ -194,37 +237,14 @@ export const never: Iterable<never> = {
 };
 
 /**
- * @tsplus fluent Iterable foldMap
+ * Loops over the iterator accumulating a result using the provided function giving access to the element index
+ *
+ * @tsplus fluent Iterable reduceWithIndex
  */
-export function foldMap_<M, A>(
-  self: Iterable<A>,
-  M: Identity<M>,
-  f: (a: A, k: number) => M
-): M {
-  let res = M.identity;
-  let n = -1;
-  const iterator = self[Symbol.iterator]();
-  // eslint-disable-next-line no-constant-condition
-  while (true) {
-    const result = iterator.next();
-    if (result.done) {
-      break;
-    }
-    n += 1;
-    res = M.combine(res, f(result.value, n));
-  }
-  return res;
-}
-
-export const foldMap = Pipeable(foldMap_);
-
-/**
- * @tsplus fluent Iterable reduce
- */
-export function reduce_<A, B>(
+export function reduceWithIndex_<A, B>(
   self: Iterable<A>,
   b: B,
-  f: (b: B, a: A, i: number) => B
+  f: (b: B, a: A, index: number) => B
 ): B {
   let res = b;
   let n = -1;
@@ -241,7 +261,96 @@ export function reduce_<A, B>(
   return res;
 }
 
+/**
+ * Loops over the iterator accumulating a result using the provided function giving access to the element index
+ */
+export const reduceWithIndex = Pipeable(reduceWithIndex_);
+
+/**
+ * Loops over the iterator accumulating a result using the provided function
+ *
+ * @tsplus fluent Iterable reduce
+ */
+export function reduce_<A, B>(
+  self: Iterable<A>,
+  b: B,
+  f: (b: B, a: A) => B
+): B {
+  let res = b;
+  const iterator = self[Symbol.iterator]();
+  // eslint-disable-next-line no-constant-condition
+  while (true) {
+    const result = iterator.next();
+    if (result.done) {
+      break;
+    }
+    res = f(res, result.value);
+  }
+  return res;
+}
+
+/**
+ * Loops over the iterator accumulating a result using the provided function
+ */
 export const reduce = Pipeable(reduce_);
+
+/**
+ * Loops over the iterator accumulating a result using the provided function and AssociativeIdentity giving access to the element index
+ *
+ * @tsplus fluent Iterable foldMapWithIndex
+ */
+export function foldMapWithIndex_<M, A>(
+  self: Iterable<A>,
+  M: AssociativeIdentity<M>,
+  f: (a: A, index: number) => M
+): M {
+  let res = M.identity;
+  let n = -1;
+  const iterator = self[Symbol.iterator]();
+  // eslint-disable-next-line no-constant-condition
+  while (true) {
+    const result = iterator.next();
+    if (result.done) {
+      break;
+    }
+    n += 1;
+    res = M.combine(res, f(result.value, n));
+  }
+  return res;
+}
+
+/**
+ * Loops over the iterator accumulating a result using the provided function and AssociativeIdentity giving access to the element index
+ */
+export const foldMapWithIndex = Pipeable(foldMapWithIndex_);
+
+/**
+ * Loops over the iterator accumulating a result using the provided function and AssociativeIdentity
+ *
+ * @tsplus fluent Iterable foldMap
+ */
+export function foldMap_<M, A>(
+  self: Iterable<A>,
+  M: AssociativeIdentity<M>,
+  f: (a: A) => M
+): M {
+  let res = M.identity;
+  const iterator = self[Symbol.iterator]();
+  // eslint-disable-next-line no-constant-condition
+  while (true) {
+    const result = iterator.next();
+    if (result.done) {
+      break;
+    }
+    res = M.combine(res, f(result.value));
+  }
+  return res;
+}
+
+/**
+ * Loops over the iterator accumulating a result using the provided function and AssociativeIdentity
+ */
+export const foldMap = Pipeable(foldMap_);
 
 // export function reduceRight<A, B>(b: B, f: (a: A, b: B, i: number) => B) {
 //   return (fa: Iterable<A>): B => {
@@ -258,9 +367,12 @@ export const reduce = Pipeable(reduce_);
 // }
 
 /**
+ * Concats iterators together
+ *
  * @tsplus fluent Iterable concat
+ * @tsplus operator Iterable &
  */
-export function concat_<A>(self: Iterable<A>, that: Iterable<A>): Iterable<A> {
+export function concat_<A, B>(self: Iterable<A>, that: Iterable<B>): Iterable<A | B> {
   return {
     *[Symbol.iterator]() {
       for (const x of self) {
@@ -273,13 +385,91 @@ export function concat_<A>(self: Iterable<A>, that: Iterable<A>): Iterable<A> {
   };
 }
 
+/**
+ * Concats iterators together
+ */
 export const concat = Pipeable(concat_);
 
 /**
+ * Concats iterators together that are strictly of the same type
+ *
+ * @tsplus operator Iterable +
+ */
+export const concatOperator: <A>(self: Iterable<A>, that: Iterable<A>) => Iterable<A> = concat_;
+
+/**
+ * Prepends a value to an iterator
+ *
+ * @tsplus fluent Iterable prepend
+ */
+export function prepend_<A, B>(self: Iterable<A>, that: B): Iterable<A | B> {
+  return {
+    *[Symbol.iterator]() {
+      yield that;
+      for (const x of self) {
+        yield x;
+      }
+    }
+  };
+}
+
+/**
+ * Prepends a value to an iterator
+ */
+export const prepend = Pipeable(prepend_);
+
+/**
+ * Prepends a value to an iterator
+ *
+ * @tsplus operator Iterable >
+ */
+export function prependOperator<A, B>(a: A, self: Iterable<B>): Iterable<A | B> {
+  return prepend_(self, a);
+}
+
+/**
+ * Prepends a value to an iterator of the same type
+ *
+ * @tsplus operator Iterable + 1.0
+ */
+export const prependOperatorStrict: <A>(a: A, self: Iterable<A>) => Iterable<A> = prependOperator;
+
+/**
+ * Appends a value to an iterator
+ *
+ * @tsplus fluent Iterable append
+ * @tsplus operator Iterable <
+ */
+export function append_<A, B>(self: Iterable<A>, that: B): Iterable<A | B> {
+  return {
+    *[Symbol.iterator]() {
+      yield that;
+      for (const x of self) {
+        yield x;
+      }
+    }
+  };
+}
+
+/**
+ * Appends a value to an iterator
+ */
+export const append = Pipeable(append_);
+
+/**
+ * Appends a value to an iterator of the same type
+ *
+ * @tsplus operator Iterable + 1.0
+ */
+export const appendOperatorStrict: <A>(self: Iterable<A>, a: A) => Iterable<A> = append_;
+
+/**
+ * Flattens nested iterators
+ *
  * @tsplus fluent Iterable flatten
  */
 export function flatten<A>(a: Iterable<Iterable<A>>) {
-  return chain_(a, (x) => x);
+  return flatMap_(a, identity);
 }
 
 // export function partitionMap<A, A1, A2>(f: (a: A) => Either<A1, A2>) {
@@ -306,9 +496,11 @@ export function unfold<A>(a: A, f: (a: A) => A): Iterable<A> {
 }
 
 /**
- * @tsplus fluent Iterable corresponds
+ * Compares each element of the iterators using the provided function
+ *
+ * @tsplus fluent Iterable equalsWith
  */
-export function corresponds_<A, B>(
+export function equalsWith_<A, B>(
   self: Iterable<A>,
   that: Iterable<B>,
   f: (a: A, b: B) => boolean
@@ -332,7 +524,25 @@ export function corresponds_<A, B>(
   throw new Error("Bug");
 }
 
-export const corresponds = Pipeable(corresponds_);
+/**
+ * Compares each element of the iterators using the provided function
+ */
+export const equalsWith = Pipeable(equalsWith_);
+
+/**
+ * Compares the iterators using value equality
+ *
+ * @tsplus operator Iterable ==
+ * @tsplus fluent Iterable equals
+ */
+export function equals_<A, B>(self: Iterable<A>, that: Iterable<B>) {
+  return self.equalsWith(that, Equals.equals);
+}
+
+/**
+ * Compares the iterators using value equality
+ */
+export const equals = Pipeable(equals_);
 
 /**
  * @tsplus static IterableOps make

@@ -176,8 +176,11 @@ export function equalsWith_<A, B>(
 export const equalsWith = Pipeable(equalsWith_);
 
 /**
+ * @tsplus operator List ==
  * @tsplus fluent List equals
  */
 export function equals_<A, B>(self: List<A>, that: List<B>) {
   return self.equalsWith(that, Equals.equals);
 }
+
+export const equals = Pipeable(equals_);

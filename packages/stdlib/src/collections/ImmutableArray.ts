@@ -115,7 +115,16 @@ export const concatOperator: <A>(
  *
  * @tsplus operator ImmutableArray + 1.0
  */
-export function prependOperator<A>(a: A, self: ImmutableArray<A>): ImmutableArray<A> {
+export function prependOperatorStrict<A>(a: A, self: ImmutableArray<A>): ImmutableArray<A> {
+  return new ImmutableArray([a, ...self.array]);
+}
+
+/**
+ * Prepends `a` to ImmutableArray<A>
+ *
+ * @tsplus operator ImmutableArray >
+ */
+export function prependOperator<A, B>(a: A, self: ImmutableArray<B>): ImmutableArray<A | B> {
   return new ImmutableArray([a, ...self.array]);
 }
 
@@ -134,6 +143,7 @@ export const prepend = Pipeable(prepend_);
  * Appends `a` to ImmutableArray<A>
  *
  * @tsplus fluent ImmutableArray append
+ * @tsplus operator ImmutableArray <
  */
 export function append_<A, B>(self: ImmutableArray<A>, a: B): ImmutableArray<A | B> {
   return new ImmutableArray([...self.array, a]);

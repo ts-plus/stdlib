@@ -16,6 +16,15 @@ export const prepend = Pipeable(prepend_);
  *
  * @tsplus operator List +
  */
-export function prependOperator<A>(elem: A, list: List<A>): List<A> {
+export function prependOperatorStrict<A>(elem: A, list: List<A>): List<A> {
   return List.cons(elem, list);
+}
+
+/**
+ * Inserts an element at the beginning of a `List`, returning a new `List`
+ *
+ * @tsplus operator List >
+ */
+export function prependOperator<A, B>(elem: A, list: List<B>): List<A | B> {
+  return List.cons<A | B>(elem, list);
 }
