@@ -1,16 +1,15 @@
 {
     "extends": "../../tsconfig.base.json",
     "compilerOptions": {
-        "noEmit": true,
         "tsPlusConfig": "../../tsplus.config.json"
     },
-    "include": [
-        "src/**/*.ts",
-        "node/**/*.ts",
-        "test/**/*.ts"
-    ],
-    "files": [
-        "./global.d.ts"
+    "references": [
+        {
+            "path": "./tsconfig.build.json"
+        },
+        {
+            "path": "./tsconfig.build-test.json"
+        }
     ],
     "ts-node": {
         "files": true,

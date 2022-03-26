@@ -1,5 +1,6 @@
 {
     "compilerOptions": {
+        "composite": true,
         "downlevelIteration": true,
         "resolveJsonModule": true,
         "esModuleInterop": true,
@@ -45,6 +46,7 @@
             ],
         }
     },
+    "include": [],
     "exclude": [
         "node_modules",
         "build",
