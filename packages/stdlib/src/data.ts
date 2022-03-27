@@ -1,4 +1,5 @@
 export * as duration from "@tsplus/stdlib/data/Duration";
+export * as environment from "@tsplus/stdlib/data/Environment";
 export * as function from "@tsplus/stdlib/data/Function";
 export * as option from "@tsplus/stdlib/data/Option";
 export * as predicate from "@tsplus/stdlib/data/Predicate";
