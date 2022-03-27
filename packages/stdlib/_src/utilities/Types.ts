@@ -40,3 +40,5 @@ declare global {
    */
   export interface Number {}
 }
+
+export type OrElse<A, B> = [A] extends [never] ? B : A;

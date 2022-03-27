@@ -1,5 +1,5 @@
 import type { Option } from "@tsplus/stdlib/data/Option";
-import type { UnionToIntersection } from "@tsplus/stdlib/utilities/Types";
+import type { OrElse, UnionToIntersection } from "@tsplus/stdlib/utilities/Types";
 
 export const WithSymbol: unique symbol = Symbol();
 export type WithSymbol = typeof WithSymbol;
@@ -58,8 +58,7 @@ export interface Extractor<A> {
 }
 
 export declare namespace Service {
-  export type IfDefined<A, B> = [A] extends [never] ? B : A;
-  export type From<A> = IfDefined<Extractor<A>[keyof Extractor<A>], A>;
+  export type From<A> = OrElse<Extractor<A>[keyof Extractor<A>], A>;
 }
 
 /**
