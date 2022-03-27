@@ -1,4 +1,4 @@
-import { IterableWeakMap } from "@tsplus/stdlib/collections/weak/IterableWeakMap";
+import { IterableWeakMap } from "packages/stdlib/_src/collections/weak/IterableWeakMap";
 import { Option } from "@tsplus/stdlib/data/Option";
 import { assert, describe, it } from "vitest";
 

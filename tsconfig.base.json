@@ -39,13 +39,16 @@
         "removeComments": false,
         "paths": {
             "@tsplus/stdlib": [
-                "./packages/stdlib/src/index.ts"
+                "./packages/stdlib/_src/index.ts"
+            ],
+            "@tsplus/stdlib/test/*": [
+                "./packages/stdlib/_test/*"
+            ],
+            "@tsplus/stdlib/example/*": [
+                "./packages/stdlib/_example/*"
             ],
             "@tsplus/stdlib/*": [
-                "./packages/stdlib/src/*"
-            ],
-            "@tsplus-tests/stdlib/*": [
-                "./packages/stdlib/test/*"
+                "./packages/stdlib/_src/*"
             ],
         }
     },

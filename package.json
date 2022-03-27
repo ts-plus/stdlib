@@ -66,6 +66,7 @@
     "vitest": "0.7.11"
   },
   "resolutions": {
-    "eslint-plugin-codegen": "patch:eslint-plugin-codegen@npm:0.16.1#.yarn/patches/eslint-plugin-codegen-npm-0.16.1-87770191cd"
+    "eslint-plugin-codegen": "patch:eslint-plugin-codegen@npm:0.16.1#.yarn/patches/eslint-plugin-codegen-npm-0.16.1-87770191cd",
+    "@effect-ts/build-utils": "patch:@effect-ts/build-utils@npm:0.39.2#.yarn/patches/@effect-ts-build-utils-npm-0.39.2-f802d4baa8"
   }
 }

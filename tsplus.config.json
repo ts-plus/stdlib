@@ -1,9 +1,9 @@
 {
     "importMap": {
-        "^(.*)/packages/([^/]*)/src(.*)/index\\.ts$": "@tsplus/$2$3",
-        "^(.*)/packages/([^/]*)/src(.*)\\.ts$": "@tsplus/$2$3",
-        "^(.*)/packages/([^/]*)/test/(.*)\\.ts$": "@tsplus/$2/test/$3",
-        "^(.*)/packages/([^/]*)/examples/(.*)\\.ts$": "@tsplus/$2/examples/$3"
+        "^(.*)/packages/([^/]*)/_src(.*)/index\\.ts$": "@tsplus/$2$3",
+        "^(.*)/packages/([^/]*)/_src(.*)\\.ts$": "@tsplus/$2$3",
+        "^(.*)/packages/([^/]*)/_test/(.*)\\.ts$": "@tsplus/$2/test/$3",
+        "^(.*)/packages/([^/]*)/_examples/(.*)\\.ts$": "@tsplus/$2/examples/$3"
     },
     "traceMap": {
         "^(.*)/packages/([^/]*)/(.*)$": "(@tsplus/$2) $3"

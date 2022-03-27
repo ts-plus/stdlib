@@ -5,10 +5,10 @@
         "declarationDir": "build/test-dts",
         "tsBuildInfoFile": "build/tsbuildinfo/test.tsbuildinfo",
         "tsPlusConfig": "../../tsplus.config.json",
-        "rootDir": "test"
+        "rootDir": "_test"
     },
     "include": [
-        "test/**/*.ts"
+        "_test/**/*.ts"
     ],
     "files": [
         "./global.d.ts"

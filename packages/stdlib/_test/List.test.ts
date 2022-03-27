@@ -1,4 +1,4 @@
-import { List } from "@tsplus/stdlib/collections/List";
+import { List } from "packages/stdlib/_src/collections/List";
 import { assert, describe, it } from "vitest";
 
 describe("List", () => {

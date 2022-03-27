@@ -595,6 +595,19 @@ __metadata:
   languageName: node
   linkType: hard
 
+"@effect-ts/build-utils@patch:@effect-ts/build-utils@npm:0.39.2#.yarn/patches/@effect-ts-build-utils-npm-0.39.2-f802d4baa8::locator=tsplus%40workspace%3A.":
+  version: 0.39.2
+  resolution: "@effect-ts/build-utils@patch:@effect-ts/build-utils@npm%3A0.39.2#.yarn/patches/@effect-ts-build-utils-npm-0.39.2-f802d4baa8::version=0.39.2&hash=75edf1&locator=tsplus%40workspace%3A."
+  peerDependencies:
+    "@effect-ts/core": ">= 0.28.9"
+    cpx: ">= 1.5.0"
+    picocolors: ^1.0.0
+  bin:
+    build-utils: build-utils
+  checksum: 8ff73b3b4c56ef6249a4ce4d43075fd059ab2786c074504306f6d61187a7a520a47475b9494da3687673e4f7f310136e541cade5cdbde8e954f0e78d48c47c38
+  languageName: node
+  linkType: hard
+
 "@effect-ts/core@npm:^0.59.2":
   version: 0.59.2
   resolution: "@effect-ts/core@npm:0.59.2"
