@@ -1,5 +1,19 @@
 # @tsplus/stdlib
 
+## 0.0.17
+
+### Patch Changes
+
+- [`2cd4270`](https://github.com/ts-plus/stdlib/commit/2cd4270865b226296edadc64354164cc02cd2d41) Thanks [@mikearnaldi](https://github.com/mikearnaldi)! - Rename Identity to AssociativeIdentity
+
+* [`a9e50e2`](https://github.com/ts-plus/stdlib/commit/a9e50e26cfedbada04af8ff308e821ccc2452f51) Thanks [@mikearnaldi](https://github.com/mikearnaldi)! - Add zipWith to Option
+
+- [`a9e50e2`](https://github.com/ts-plus/stdlib/commit/a9e50e26cfedbada04af8ff308e821ccc2452f51) Thanks [@mikearnaldi](https://github.com/mikearnaldi)! - Begin Environment Module
+
+* [`2cd4270`](https://github.com/ts-plus/stdlib/commit/2cd4270865b226296edadc64354164cc02cd2d41) Thanks [@mikearnaldi](https://github.com/mikearnaldi)! - Improve operators on collections
+
+- [`5092f82`](https://github.com/ts-plus/stdlib/commit/5092f8225b8dd357260ed9513b31d69d067c8828) Thanks [@mikearnaldi](https://github.com/mikearnaldi)! - Add missing fluent methods and pipeables on Duration
+
 ## 0.0.16
 
 ### Patch Changes

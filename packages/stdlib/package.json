@@ -1,6 +1,6 @@
 {
   "name": "@tsplus/stdlib",
-  "version": "0.0.16",
+  "version": "0.0.17",
   "type": "module",
   "repository": "https://github.com/ts-plus/installer.git",
   "author": "Michael Arnaldi <arnaldimichael@gmail.com>",
