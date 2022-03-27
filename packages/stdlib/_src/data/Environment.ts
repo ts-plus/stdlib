@@ -5,19 +5,19 @@ export const WithSymbol: unique symbol = Symbol();
 export type WithSymbol = typeof WithSymbol;
 
 /**
- * @tsplus type With
+ * @tsplus type Has
  */
-export interface With<Service> {
+export interface Has<Service> {
   [WithSymbol](): Service;
 }
 
 export interface ServiceOf<T> {
-  (service: T): With<T>;
+  (service: T): Service.Has<T>;
 }
 
 export interface ServiceAccess<T> {
-  readonly get: <R extends With<T>>(environment: R) => T;
-  readonly in: <R>(environment: R) => environment is R & With<T>;
+  readonly get: <R extends Service.Has<T>>(environment: R) => T;
+  readonly in: <R>(environment: R) => environment is R & Service.Has<T>;
 }
 
 /**
@@ -33,7 +33,7 @@ export interface ServiceOps {
 }
 
 export const Service: ServiceOps = <T>(key: PropertyKey): Service<T> => {
-  const of: ServiceOf<T> = (r: T) => ({ [key]: r } as any as With<T>);
+  const of: ServiceOf<T> = (r: T) => ({ [key]: r } as any as Service.Has<T>);
   const access: ServiceAccess<T> = {
     get: (r) => r[key],
     in: (environment): environment is any =>
@@ -46,19 +46,22 @@ export interface Extractor<A> {
   Option: [A] extends [Option<infer X>] ? X : never;
 }
 
+type HasInternal<A> = Has<A>;
+
 export declare namespace Service {
   export type From<A> = OrElse<Extractor<A>[keyof Extractor<A>], A>;
   export type All<Services extends unknown[]> = UnionToIntersection<
     {
-      [k in keyof Services]: Services[k] extends With<any> ? Services[k] : With<Services[k]>;
+      [k in keyof Services]: Services[k] extends Has<any> ? Services[k] : Has<Services[k]>;
     }[number]
   >;
+  export type Has<A> = HasInternal<A>;
 }
 
 /**
- * @tsplus operator With &
- * @tsplus fluent With merge
+ * @tsplus operator Has &
+ * @tsplus fluent Has merge
  */
-export function merge<A extends With<any>, B extends With<any>>(self: A, that: B): A & B {
+export function merge<A extends Service.Has<any>, B extends Service.Has<any>>(self: A, that: B): A & B {
   return { ...self, ...that };
 }
