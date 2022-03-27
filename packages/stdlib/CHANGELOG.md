@@ -1,5 +1,13 @@
 # @tsplus/stdlib
 
+## 0.0.19
+
+### Patch Changes
+
+- [`9b02c1e`](https://github.com/ts-plus/stdlib/commit/9b02c1ef613978f0f5ba9f492f35316b0623fedb) Thanks [@mikearnaldi](https://github.com/mikearnaldi)! - Improve Service Aliases
+
+* [`bfb0a1f`](https://github.com/ts-plus/stdlib/commit/bfb0a1fc58d65a325ec5688b099680be89c931f3) Thanks [@mikearnaldi](https://github.com/mikearnaldi)! - Re-export Has from Service
+
 ## 0.0.18
 
 ### Patch Changes
