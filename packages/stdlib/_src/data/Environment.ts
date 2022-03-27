@@ -11,17 +11,6 @@ export interface With<Service> {
   [WithSymbol](): Service;
 }
 
-export type Environment<Services extends unknown[]> = UnionToIntersection<
-  {
-    [k in keyof Services]: Services[k] extends With<any> ? Services[k] : With<Services[k]>;
-  }[number]
->;
-
-export type Env = Environment<[
-  number,
-  string
-]>;
-
 export interface ServiceOf<T> {
   (service: T): With<T>;
 }
@@ -59,6 +48,11 @@ export interface Extractor<A> {
 
 export declare namespace Service {
   export type From<A> = OrElse<Extractor<A>[keyof Extractor<A>], A>;
+  export type All<Services extends unknown[]> = UnionToIntersection<
+    {
+      [k in keyof Services]: Services[k] extends With<any> ? Services[k] : With<Services[k]>;
+    }[number]
+  >;
 }
 
 /**

@@ -16,7 +16,10 @@ describe("Environment", () => {
     interface ServiceB extends Service.From<typeof makeServiceB> {}
     const ServiceB = Service<ServiceB>(Symbol());
 
-    const merged = ServiceA(makeServiceA) & ServiceB(makeServiceB.value!);
+    const merged: Service.All<[
+      ServiceA,
+      ServiceB
+    ]> = ServiceA(makeServiceA) & ServiceB(makeServiceB.value!);
 
     assert.isTrue(ServiceA.in(merged));
     assert.isFalse(ServiceA.in({}));
