@@ -1,5 +1,11 @@
 # @tsplus/stdlib
 
+## 0.0.18
+
+### Patch Changes
+
+- [`66fa8c9`](https://github.com/ts-plus/stdlib/commit/66fa8c93dea82a9b98cee74a0fb4dab2c149b349) Thanks [@mikearnaldi](https://github.com/mikearnaldi)! - Extract OrElse type utility
+
 ## 0.0.17
 
 ### Patch Changes
