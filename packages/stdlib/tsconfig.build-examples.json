@@ -1,14 +1,14 @@
 {
     "extends": "../../tsconfig.base.json",
     "compilerOptions": {
-        "outDir": "build/test",
-        "declarationDir": "build/test-dts",
-        "tsBuildInfoFile": "build/tsbuildinfo/test.tsbuildinfo",
+        "outDir": "build/examples",
+        "declarationDir": "build/examples-dts",
+        "tsBuildInfoFile": "build/tsbuildinfo/examples.tsbuildinfo",
         "tsPlusConfig": "../../tsplus.config.json",
-        "rootDir": "test"
+        "rootDir": "examples"
     },
     "include": [
-        "test/**/*.ts"
+        "examples/**/*.ts"
     ],
     "files": [
         "./global.d.ts"

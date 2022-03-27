@@ -9,6 +9,9 @@
         },
         {
             "path": "./tsconfig.build-test.json"
+        },
+        {
+            "path": "./tsconfig.build-examples.json"
         }
     ],
     "ts-node": {

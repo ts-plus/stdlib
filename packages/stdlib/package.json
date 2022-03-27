@@ -1,6 +1,7 @@
 {
   "name": "@tsplus/stdlib",
   "version": "0.0.16",
+  "type": "module",
   "repository": "https://github.com/ts-plus/installer.git",
   "author": "Michael Arnaldi <arnaldimichael@gmail.com>",
   "license": "MIT",
@@ -17,14 +18,24 @@
     "lint": "yarn org:eslint . --ext .ts,.tsx",
     "autofix": "yarn lint --fix",
     "tc": "yarn org:tsc --noEmit",
-    "circular": "yarn org:madge --circular --no-color --no-spinner build/esm",
-    "dev": "yarn org:ts-node node/main.ts"
+    "circular": "yarn org:madge --circular --no-color --no-spinner build/esm"
+  },
+  "exports": {
+    ".": {
+      "import": "./build/esm/index.js"
+    },
+    "./examples/*": {
+      "import": "./build/examples/*.js"
+    },
+    "./test/*": {
+      "import": "./build/test/*.js"
+    },
+    "./*": {
+      "import": "./build/esm/*.js"
+    }
   },
   "config": {
     "side": [],
     "modules": []
-  },
-  "tsplus": {
-    "typeDir": "./build/dts"
   }
 }

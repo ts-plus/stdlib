@@ -3,17 +3,9 @@
     "compilerOptions": {
         "outDir": "build/esm",
         "declarationDir": "build/dts",
-        "target": "ES2021",
-        "module": "ES6",
-        "moduleResolution": "Node",
-        "incremental": true,
         "tsBuildInfoFile": "build/tsbuildinfo/esm.tsbuildinfo",
-        "declaration": true,
-        "declarationMap": true,
-        "removeComments": false,
         "tsPlusConfig": "../../tsplus.config.json",
-        "composite": true,
-        "rootDir": "./src"
+        "rootDir": "src"
     },
     "include": [
         "src/**/*.ts"

@@ -34,6 +34,9 @@
         "strictNullChecks": true,
         "baseUrl": ".",
         "target": "ES2021",
+        "module": "ES6",
+        "incremental": true,
+        "removeComments": false,
         "paths": {
             "@tsplus/stdlib": [
                 "./packages/stdlib/src/index.ts"

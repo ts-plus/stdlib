@@ -40,7 +40,7 @@
     "@effect-ts/build-utils": "0.39.2",
     "@effect-ts/core": "^0.59.2",
     "@phaphoso/eslint-plugin-dprint": "^0.5.2",
-    "@tsplus/installer": "^0.0.53",
+    "@tsplus/installer": "^0.0.54",
     "@types/node": "^17.0.23",
     "@types/rimraf": "^3.0.2",
     "@typescript-eslint/eslint-plugin": "^5.16.0",
@@ -50,8 +50,8 @@
     "c8": "^7.11.0",
     "concurrently": "^7.0.0",
     "cpx": "^1.5.0",
-    "dprint": "^0.23.1",
-    "eslint": "^8.11.0",
+    "dprint": "^0.24.0",
+    "eslint": "^8.12.0",
     "eslint-import-resolver-typescript": "^2.7.0",
     "eslint-plugin-codegen": "0.16.1",
     "eslint-plugin-import": "^2.25.4",
@@ -61,13 +61,12 @@
     "picocolors": "^1.0.0",
     "rimraf": "^3.0.2",
     "ts-node": "^10.7.0",
-    "typescript": "^4.6.2",
+    "typescript": "^4.6.3",
     "ultra-runner": "^3.10.5",
     "vite": "^2.8.6",
-    "vitest": "0.7.10"
+    "vitest": "0.7.11"
   },
   "resolutions": {
-    "@effect-ts/build-utils": "patch:@effect-ts/build-utils@npm:0.39.0#.yarn/patches/@effect-ts-build-utils-npm-0.39.0-0001b7d917",
     "eslint-plugin-codegen": "patch:eslint-plugin-codegen@npm:0.16.1#.yarn/patches/eslint-plugin-codegen-npm-0.16.1-87770191cd"
   }
 }

@@ -34,7 +34,7 @@ jobs:
       - name: TS Node
         run: |
           cd packages/stdlib
-          yarn dev
+          yarn org:ts-node examples/main.ts
         env:
           CI: "true"
       - name: Create Release Pull Request or Publish to npm
