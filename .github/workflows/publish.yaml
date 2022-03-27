@@ -31,10 +31,10 @@ jobs:
           yarn test --run --coverage
         env:
           CI: "true"
-      - name: TS Node
+      - name: Examples
         run: |
           cd packages/stdlib
-          yarn org:ts-node examples/main.ts
+          node build/examples/main.js
         env:
           CI: "true"
       - name: Create Release Pull Request or Publish to npm
