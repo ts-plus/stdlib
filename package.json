@@ -26,7 +26,7 @@
     "org:eslint": "cd $INIT_CWD && eslint",
     "org:concurrently": "cd $INIT_CWD && concurrently",
     "org:build-utils": "cd $INIT_CWD && build-utils",
-    "org:ts-node": "cd $INIT_CWD && ts-node",
+    "org:ts-node": "cd $INIT_CWD && node --loader ts-node/esm --no-warnings",
     "org:babel": "cd $INIT_CWD && babel",
     "org:madge": "cd $INIT_CWD && madge"
   },
