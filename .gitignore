@@ -5,7 +5,7 @@
 !/.yarn/patches
 
 coverage/
-tsbuildinfo/
+*.tsbuildinfo
 node_modules/
 yarn-error.log
 .ultra.cache.json

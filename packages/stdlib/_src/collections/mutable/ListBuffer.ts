@@ -9,7 +9,6 @@
  * (http://www.apache.org/licenses/LICENSE-2.0).
  */
 
-import { List } from "@tsplus/stdlib/collections/List/definition";
 import { IndexOutOfBounds } from "@tsplus/stdlib/exceptions/IndexOutOfBounds";
 import { NoSuchElement } from "@tsplus/stdlib/exceptions/NoSuchElement";
 

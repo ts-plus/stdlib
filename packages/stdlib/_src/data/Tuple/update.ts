@@ -1,4 +1,3 @@
-import type { Tuple } from "@tsplus/stdlib/data/Tuple/definition";
 import { TupleInternal } from "@tsplus/stdlib/data/Tuple/definition";
 import type { ForcedArray } from "@tsplus/stdlib/utilities/Types";
 

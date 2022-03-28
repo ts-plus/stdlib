@@ -1,4 +1,3 @@
-import type { List } from "@tsplus/stdlib/collections/List/definition";
 import type { Predicate } from "@tsplus/stdlib/data/Predicate";
 
 /**

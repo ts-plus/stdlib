@@ -1,4 +1,3 @@
-import type { Tuple } from "@tsplus/stdlib/data/Tuple/definition";
 import { Equivalence } from "@tsplus/stdlib/prelude/Equivalence/definition";
 import type { ForcedTuple } from "@tsplus/stdlib/utilities/Types";
 

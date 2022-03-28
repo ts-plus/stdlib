@@ -1,6 +1,5 @@
 /* eslint-disable no-constant-condition */
-import { List } from "@tsplus/stdlib/collections/List/definition";
-import { unsafeCoerce } from "@tsplus/stdlib/data/Function";
+
 import type { Predicate } from "@tsplus/stdlib/data/Predicate";
 
 /**

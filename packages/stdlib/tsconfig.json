@@ -1,7 +1,8 @@
 {
     "extends": "../../tsconfig.base.json",
     "compilerOptions": {
-        "tsPlusConfig": "../../tsplus.config.json"
+        "tsPlusConfig": "../../tsplus.config.json",
+        "tsBuildInfoFile": "build/tsbuildinfo/tsconfig.tsbuildinfo",
     },
     "references": [
         {

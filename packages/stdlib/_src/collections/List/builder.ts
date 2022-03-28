@@ -1,5 +1,3 @@
-import { ListBuffer } from "@tsplus/stdlib/collections/mutable/ListBuffer";
-
 export class ListBuilder<A> {
   constructor(private buffer: ListBuffer<A>) {}
 
