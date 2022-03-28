@@ -26,6 +26,11 @@ jobs:
           yarn build
         env:
           CI: "true"
+      - name: Check Circular Dependencies
+        run: |
+          yarn circular
+        env:
+          CI: "true"
       - name: Test
         run: |
           yarn test --run --coverage
