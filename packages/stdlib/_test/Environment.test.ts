@@ -1,5 +1,3 @@
-import { Service } from "@tsplus/stdlib/data/Environment";
-import { Option } from "@tsplus/stdlib/data/Option";
 import { assert, describe, it } from "vitest";
 
 describe("Environment", () => {

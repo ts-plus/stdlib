@@ -1,12 +1,10 @@
 import { Equals } from "@tsplus/stdlib/structure/Equals";
-import { Hash } from "@tsplus/stdlib/structure/Hash";
-import type { IsInt } from "@tsplus/stdlib/utilities/Types";
 
 /**
  * @tsplus type Duration
  * @tsplus companion DurationOps
  */
-export class Duration implements Equals, Hash {
+export class Duration implements Equals {
   constructor(readonly millis: number) {}
 
   [Equals.sym](this: this, other: unknown): boolean {

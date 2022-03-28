@@ -1,5 +1,3 @@
-import type { Ord } from "@tsplus/stdlib/prelude/Ord";
-
 /**
  * @tsplus fluent List sortWith
  */

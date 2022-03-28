@@ -1,8 +1,3 @@
-import { identity } from "@tsplus/stdlib/data/Function";
-import type { AssociativeIdentity } from "@tsplus/stdlib/prelude/AssociativeIdentity";
-import { Equals } from "@tsplus/stdlib/structure/Equals";
-import type { ESIterable } from "@tsplus/stdlib/utilities/Types";
-
 declare global {
   /**
    * @tsplus type Iterable

@@ -1,10 +1,6 @@
 /* adapted from https://github.com/gcanti/fp-ts */
 
-import type { LazyArg } from "@tsplus/stdlib/data/Function";
-import { identity } from "@tsplus/stdlib/data/Function";
-import type { Predicate } from "@tsplus/stdlib/data/Predicate";
 import { Equals } from "@tsplus/stdlib/structure/Equals";
-import { Hash } from "@tsplus/stdlib/structure/Hash";
 
 const _noneHash = Hash.string("Option/None");
 const _someHash = Hash.string("Option/Some");

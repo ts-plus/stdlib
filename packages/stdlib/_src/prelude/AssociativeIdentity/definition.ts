@@ -1,5 +1,3 @@
-import type { Associative } from "@tsplus/stdlib/prelude/Associative/definition";
-
 /**
  * Equivalent to a Monoid
  */

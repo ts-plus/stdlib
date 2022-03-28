@@ -1,5 +1,4 @@
 import { Equals } from "@tsplus/stdlib/structure/Equals";
-import { Hash } from "@tsplus/stdlib/structure/Hash";
 
 export const TupleSym: unique symbol = Symbol.for("tsplus/Tuple");
 export type TupleSym = typeof TupleSym;
