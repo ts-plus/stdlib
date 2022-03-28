@@ -1,5 +1,3 @@
-import { TupleInternal } from "@tsplus/stdlib/data/Tuple/definition";
-
 /**
  * Creates a new `Tuple`.
  *
@@ -7,5 +5,5 @@ import { TupleInternal } from "@tsplus/stdlib/data/Tuple/definition";
  * @tsplus static tsplus/TupleOps make
  */
 export function make<Ks extends unknown[]>(...args: Ks): Tuple<Ks> {
-  return new TupleInternal(args);
+  return new Tuple(args);
 }

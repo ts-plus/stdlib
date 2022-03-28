@@ -1,5 +1,3 @@
-import { assert, describe, it } from "vitest";
-
 describe("Environment", () => {
   it("merges services", () => {
     const makeServiceA = {

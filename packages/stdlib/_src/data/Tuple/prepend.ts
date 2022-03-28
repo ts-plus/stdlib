@@ -1,5 +1,3 @@
-import { TupleInternal } from "@tsplus/stdlib/data/Tuple/definition";
-
 /**
  * Prepends a value to a tuple.
  *
@@ -9,5 +7,5 @@ export function prepend<Ks extends unknown[], K>(
   self: Tuple<Ks>,
   k: K
 ): Tuple<[K, ...Ks]> {
-  return new TupleInternal([k, ...self.tuple]);
+  return new Tuple([k, ...self.tuple]);
 }

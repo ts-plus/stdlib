@@ -1,5 +1,3 @@
-import { TupleInternal } from "@tsplus/stdlib/data/Tuple/definition";
-
 /**
  * Replaces the element in position `I`.
  *
@@ -25,5 +23,5 @@ export function update<Ks extends readonly unknown[], I extends keyof Ks & numbe
       r[k] = self.tuple[k];
     }
   }
-  return new TupleInternal(r) as any;
+  return new Tuple(r) as any;
 }
