@@ -3,4 +3,4 @@
  */
 import { assert, describe, it } from "vitest";
 
-import {} from "../../prelude";
+import {} from "./tsplus.prelude";

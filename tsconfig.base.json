@@ -53,7 +53,7 @@
         }
     },
     "files": [
-        "./prelude.d.ts"
+        "./tsplus.prelude.d.ts"
     ],
     "include": [],
     "exclude": [
