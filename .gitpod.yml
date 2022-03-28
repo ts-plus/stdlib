@@ -1,5 +1,5 @@
 tasks:
-  - init: yarn && yarn build
+  - init: yarn && yarn build && npm i @recordreplay/replay-node-cli --global && npm i @recordreplay/replay --global
 github:
   prebuilds:
     addCheck: true

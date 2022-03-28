@@ -7,21 +7,9 @@ export type TupleSym = typeof TupleSym;
  * A `Tuple` represents an immutable, finite ordered sequence of elements.
  *
  * @tsplus type tsplus/Tuple
+ * @tsplus companion tsplus/TupleOps
  */
-export interface Tuple<T extends ReadonlyArray<unknown>> extends Iterable<T[number]>, Equals {
-  readonly [TupleSym]: TupleSym;
-
-  [Symbol.iterator](): IterableIterator<T[number]>;
-
-  tuple: T;
-
-  [Hash.sym](): number;
-  [Equals.sym](that: unknown): boolean;
-
-  get<K extends keyof T>(i: K): T[K];
-}
-
-export class TupleInternal<T extends readonly unknown[]> implements Tuple<T> {
+export class Tuple<T extends readonly unknown[]> implements Iterable<T[number]>, Equals {
   readonly [TupleSym]: TupleSym = TupleSym;
 
   constructor(readonly tuple: T) {}
@@ -48,12 +36,6 @@ export class TupleInternal<T extends readonly unknown[]> implements Tuple<T> {
     return this.tuple[i];
   }
 }
-
-/**
- * @tsplus type tsplus/TupleOps
- */
-export interface TupleOps {}
-export const Tuple: TupleOps = {};
 
 /**
  * @tsplus unify tsplus/Tuple

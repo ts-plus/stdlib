@@ -1,5 +1,3 @@
-import { Hash } from "@tsplus/stdlib/structure/Hash";
-
 /**
  * @tsplus type EqualsOps
  */

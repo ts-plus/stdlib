@@ -1,5 +1,3 @@
-import { TupleInternal } from "@tsplus/stdlib/data/Tuple/definition";
-
 /**
  * Concatenates two tuples.
  *
@@ -10,5 +8,5 @@ export function concat<Ks extends unknown[], Hs extends unknown[]>(
   self: Tuple<Ks>,
   that: Tuple<Hs>
 ): Tuple<[...Ks, ...Hs]> {
-  return new TupleInternal([...self.tuple, ...that.tuple]);
+  return new Tuple([...self.tuple, ...that.tuple]);
 }

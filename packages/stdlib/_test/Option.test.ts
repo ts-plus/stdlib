@@ -1,5 +1,3 @@
-import { assert, describe, it } from "vitest";
-
 describe("Option", () => {
   it("equals", () => {
     assert.isTrue(

@@ -1,6 +1,3 @@
-/**
- * @tsplus global
- */
 import {} from "@tsplus/stdlib";
 /**
  * @tsplus global
@@ -41,7 +38,7 @@ import { Option } from "@tsplus/stdlib/data/Option/definition";
 /**
  * @tsplus global
  */
-import type { Predicate } from "@tsplus/stdlib/data/Predicate";
+import { Predicate } from "@tsplus/stdlib/data/Predicate";
 /**
  * @tsplus global
  */
