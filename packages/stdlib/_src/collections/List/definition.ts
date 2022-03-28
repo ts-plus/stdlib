@@ -9,8 +9,6 @@
  * (http://www.apache.org/licenses/LICENSE-2.0).
  */
 
-import { Equals } from "@tsplus/stdlib/structure/Equals";
-
 /**
  * @tsplus type List/Cons
  */

@@ -1,5 +1,3 @@
-import { Equals } from "@tsplus/stdlib/structure/Equals";
-
 declare global {
   /**
    * @tsplus type Array

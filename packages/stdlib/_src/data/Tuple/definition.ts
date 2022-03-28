@@ -1,5 +1,3 @@
-import { Equals } from "@tsplus/stdlib/structure/Equals";
-
 export const TupleSym: unique symbol = Symbol.for("tsplus/Tuple");
 export type TupleSym = typeof TupleSym;
 

@@ -1,7 +1,5 @@
 /* adapted from https://github.com/gcanti/fp-ts */
 
-import { Equals } from "@tsplus/stdlib/structure/Equals";
-
 const _noneHash = Hash.string("Option/None");
 const _someHash = Hash.string("Option/Some");
 

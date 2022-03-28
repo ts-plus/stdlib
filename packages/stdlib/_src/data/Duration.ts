@@ -1,5 +1,3 @@
-import { Equals } from "@tsplus/stdlib/structure/Equals";
-
 /**
  * @tsplus type Duration
  * @tsplus companion DurationOps
