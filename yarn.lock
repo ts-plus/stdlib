@@ -2337,7 +2337,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"dependency-tree@npm:^8.1.1":
+"dependency-tree@npm:8.1.2":
   version: 8.1.2
   resolution: "dependency-tree@npm:8.1.2"
   dependencies:
@@ -2349,6 +2349,21 @@ __metadata:
   bin:
     dependency-tree: bin/cli.js
   checksum: e26dffd0332b80ac6303fa4073dcd8f3df05c1584e26fe8fd15f59572f0427e8618757e9797d8963578648f80eb9d4f4496f25bbbb5984329b4c55e49e51d7be
+  languageName: node
+  linkType: hard
+
+"dependency-tree@patch:dependency-tree@npm:8.1.2#.yarn/patches/dependency-tree-npm-8.1.2-dd336d8e28::locator=tsplus%40workspace%3A.":
+  version: 8.1.2
+  resolution: "dependency-tree@patch:dependency-tree@npm%3A8.1.2#.yarn/patches/dependency-tree-npm-8.1.2-dd336d8e28::version=8.1.2&hash=461f6f&locator=tsplus%40workspace%3A."
+  dependencies:
+    commander: ^2.20.3
+    debug: ^4.3.1
+    filing-cabinet: ^3.0.1
+    precinct: ^8.0.0
+    typescript: ^3.9.7
+  bin:
+    dependency-tree: bin/cli.js
+  checksum: 2e57827f225dec27b32ad3c594ebdab5f7bb41db0672ce509d9e285a2d892c20900ae7c146b45630752665088207c16a5c8f1f35241bb4c23cfa235e3930acb5
   languageName: node
   linkType: hard
 

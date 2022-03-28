@@ -18,7 +18,7 @@
     "lint": "yarn org:eslint . --ext .ts,.tsx",
     "autofix": "yarn lint --fix",
     "tc": "yarn org:tsc --noEmit",
-    "circular": "yarn org:madge --circular --no-color --no-spinner build/esm"
+    "circular": "yarn org:madge --circular --no-color --no-spinner --warning build/esm"
   },
   "exports": {
     ".": {
