@@ -10,9 +10,6 @@
     "include": [
         "_test/**/*.ts"
     ],
-    "files": [
-        "./global.d.ts"
-    ],
     "references": [
         {
             "path": "./tsconfig.build.json"

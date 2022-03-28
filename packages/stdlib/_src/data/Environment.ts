@@ -1,6 +1,3 @@
-import type { Option } from "@tsplus/stdlib/data/Option";
-import type { OrElse, UnionToIntersection } from "@tsplus/stdlib/utilities/Types";
-
 export const WithSymbol: unique symbol = Symbol();
 export type WithSymbol = typeof WithSymbol;
 

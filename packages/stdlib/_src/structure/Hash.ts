@@ -1,8 +1,5 @@
 // forked from https://github.com/frptools
 
-import { isDefined } from "@tsplus/stdlib/utilities/Guards";
-import { RandomPCG } from "@tsplus/stdlib/utilities/RandomPCG";
-
 /**
  * @tsplus type HashOps
  */

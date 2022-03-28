@@ -1,6 +1,4 @@
-import type { Iterable } from "@tsplus/stdlib/collections/Iterable";
 import { Equals } from "@tsplus/stdlib/structure/Equals";
-import { Hash } from "@tsplus/stdlib/structure/Hash";
 
 declare global {
   /**

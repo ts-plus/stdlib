@@ -1,5 +1,4 @@
-import type { Hash } from "@tsplus/stdlib/structure/Hash";
-import { hashUnknown, isHash } from "@tsplus/stdlib/structure/Hash";
+import { Hash } from "@tsplus/stdlib/structure/Hash";
 
 /**
  * @tsplus type EqualsOps
@@ -23,7 +22,7 @@ export interface Equals extends Hash {
  * @tsplus static EqualsOps isEquals
  */
 export function isEquals(u: unknown): u is Equals {
-  return isHash(u) && Equals.sym in u;
+  return Hash.isHash(u) && Equals.sym in u;
 }
 
 /**
@@ -43,7 +42,7 @@ export function equals(a: unknown, b: unknown): boolean {
   if (a === b) {
     return true;
   }
-  if (!sameValueZeroEqual(hashUnknown(a), hashUnknown(b))) {
+  if (!sameValueZeroEqual(Hash.unknown(a), Hash.unknown(b))) {
     return false;
   } else if (isEquals(a)) {
     return a[Equals.sym](b);

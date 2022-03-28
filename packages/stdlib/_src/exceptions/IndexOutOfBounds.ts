@@ -1,5 +1,3 @@
-import { Exception } from "@tsplus/stdlib/exceptions/Exception";
-
 export const IndexOutOfBoundsTag = "IndexOutOfBounds";
 
 export class IndexOutOfBounds extends Exception {

@@ -1,5 +1,4 @@
 import { TupleInternal } from "@tsplus/stdlib/data/Tuple/definition";
-import type { ForcedArray } from "@tsplus/stdlib/utilities/Types";
 
 /**
  * Replaces the element in position `I`.

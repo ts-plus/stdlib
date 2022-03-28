@@ -1,5 +1,3 @@
-import type { Ordering } from "@tsplus/stdlib/prelude/Ordering/definition";
-
 /**
  * `number` => `Ordering`
  */

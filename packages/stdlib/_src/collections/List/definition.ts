@@ -9,7 +9,6 @@
  * (http://www.apache.org/licenses/LICENSE-2.0).
  */
 import { Equals } from "@tsplus/stdlib/structure/Equals";
-import { Hash } from "@tsplus/stdlib/structure/Hash";
 
 /**
  * @tsplus type List/Cons

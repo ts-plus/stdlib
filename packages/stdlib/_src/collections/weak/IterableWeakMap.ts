@@ -1,5 +1,3 @@
-import type { Iterable } from "@tsplus/stdlib/collections/Iterable";
-
 /**
  * An implementation of a weak map that supports the iterable protocol.
  *

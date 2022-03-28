@@ -1,7 +1,3 @@
-/* eslint-disable no-constant-condition */
-
-import type { Predicate } from "@tsplus/stdlib/data/Predicate";
-
 /**
  * @tsplus fluent List filter
  */
@@ -12,6 +8,7 @@ export function filter_<A>(self: List<A>, p: Predicate<A>): List<A> {
 export const filter = Pipeable(filter_);
 
 function noneIn<A>(l: List<A>, p: Predicate<A>, isFlipped: boolean): List<A> {
+  /* eslint-disable no-constant-condition */
   while (true) {
     if (l.isNil()) {
       return List.nil();
@@ -31,6 +28,7 @@ function allIn<A>(
   p: Predicate<A>,
   isFlipped: boolean
 ): List<A> {
+  /* eslint-disable no-constant-condition */
   while (true) {
     if (remaining.isNil()) {
       return start;

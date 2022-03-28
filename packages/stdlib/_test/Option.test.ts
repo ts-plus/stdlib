@@ -1,5 +1,3 @@
-import { Option } from "@tsplus/stdlib/data/Option";
-import { Tuple } from "packages/stdlib/_src/data/Tuple";
 import { assert, describe, it } from "vitest";
 
 describe("Option", () => {

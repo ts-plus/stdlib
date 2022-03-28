@@ -1,6 +1,3 @@
-import { Equivalence } from "@tsplus/stdlib/prelude/Equivalence/definition";
-import type { ForcedTuple } from "@tsplus/stdlib/utilities/Types";
-
 /**
  * Constructs an `Equal[A]` from a function. The instance will be optimized
  * to first compare the values for reference equality and then compare the

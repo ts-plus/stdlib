@@ -1,5 +1,3 @@
-import type { Predicate } from "@tsplus/stdlib/data/Predicate";
-
 /**
  * @tsplus fluent List exists
  */

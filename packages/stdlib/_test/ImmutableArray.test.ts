@@ -1,5 +1,3 @@
-import { ImmutableArray } from "packages/stdlib/_src/collections/ImmutableArray";
-import { Option } from "@tsplus/stdlib/data/Option";
 import { assert, describe, it } from "vitest";
 
 describe("ImmutableArray", () => {
