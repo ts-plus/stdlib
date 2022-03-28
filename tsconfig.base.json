@@ -44,8 +44,8 @@
             "@tsplus/stdlib/test/*": [
                 "./packages/stdlib/_test/*"
             ],
-            "@tsplus/stdlib/example/*": [
-                "./packages/stdlib/_example/*"
+            "@tsplus/stdlib/examples/*": [
+                "./packages/stdlib/_examples/*"
             ],
             "@tsplus/stdlib/*": [
                 "./packages/stdlib/_src/*"

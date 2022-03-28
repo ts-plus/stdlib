@@ -16,7 +16,7 @@
     "build-pack": "ultra -r build-pack",
     "build-all": "tsc -b tsconfig.json",
     "build-watch": "tsc -b tsconfig.json --watch",
-    "circular": "ultra -r circular",
+    "circular": "yarn org:madge --ts-config ./tsconfig.madge.json --circular --no-color --no-spinner --warning packages/*/build/esm packages/*/build/test packages/*/build/examples",
     "test": "vitest",
     "autofix": "ultra -r autofix",
     "lint": "ultra -r lint",
@@ -67,7 +67,6 @@
   },
   "resolutions": {
     "eslint-plugin-codegen": "patch:eslint-plugin-codegen@npm:0.16.1#.yarn/patches/eslint-plugin-codegen-npm-0.16.1-87770191cd",
-    "@effect-ts/build-utils": "patch:@effect-ts/build-utils@npm:0.39.2#.yarn/patches/@effect-ts-build-utils-npm-0.39.2-f802d4baa8",
-    "dependency-tree": "patch:dependency-tree@npm:8.1.2#.yarn/patches/dependency-tree-npm-8.1.2-dd336d8e28"
+    "@effect-ts/build-utils": "patch:@effect-ts/build-utils@npm:0.39.2#.yarn/patches/@effect-ts-build-utils-npm-0.39.2-f802d4baa8"
   }
 }

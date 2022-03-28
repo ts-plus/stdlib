@@ -17,8 +17,7 @@
     "build-pack": "yarn org:concurrently \"yarn build-cjs\" \"yarn build-mjs\" && yarn build-post",
     "lint": "yarn org:eslint . --ext .ts,.tsx",
     "autofix": "yarn lint --fix",
-    "tc": "yarn org:tsc --noEmit",
-    "circular": "yarn org:madge --circular --no-color --no-spinner --warning build/esm"
+    "tc": "yarn org:tsc --noEmit"
   },
   "exports": {
     ".": {

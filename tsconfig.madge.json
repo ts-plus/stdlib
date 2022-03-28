@@ -1,0 +1,26 @@
+{
+    "compilerOptions": {
+        "noEmit": true,
+        "allowJs": true,
+        "baseUrl": ".",
+        "paths": {
+            "@tsplus/stdlib": [
+                "./packages/stdlib/build/esm/index.js"
+            ],
+            "@tsplus/stdlib/test/*": [
+                "./packages/stdlib/build/test/*"
+            ],
+            "@tsplus/stdlib/examples/*": [
+                "./packages/stdlib/build/examples/*"
+            ],
+            "@tsplus/stdlib/*": [
+                "./packages/stdlib/build/esm/*"
+            ],
+        }
+    },
+    "include": [
+        "./packages/stdlib/build/esm/**/*.js",
+        "./packages/stdlib/build/test/**/*.js",
+        "./packages/stdlib/build/examples/**/*.js"
+    ]
+}
