@@ -1,5 +1,3 @@
-import { Tuple } from "@tsplus/stdlib/data/Tuple/definition";
-
 export type MergeTuple<A, B> = A extends Tuple<infer TA> ? B extends Tuple<infer TB> ? Tuple<[...TA, ...TB]>
 : Tuple<[...TA, B]>
   : B extends Tuple<infer TB> ? Tuple<[A, ...TB]>

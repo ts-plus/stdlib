@@ -1,5 +1,3 @@
-import type { Tuple } from "@tsplus/stdlib/data/Tuple/definition";
-
 export type MergeRecord<K, H> = {
   readonly [k in keyof K | keyof H]: k extends keyof K ? K[k]
     : k extends keyof H ? H[k]
@@ -30,7 +28,7 @@ export type ESArray<A> = Array<A>;
 export type ESReadonlyArray<A> = ReadonlyArray<A>;
 export const ESArray = Array;
 
-export type ESIterable<A> = Iterable<A>;
+export type ESIterable<A> = globalThis.Iterable<A>;
 
 export type IsInt<N extends number> = N & (`${N}` extends `${bigint}` ? N : never);
 

@@ -1,5 +1,3 @@
-import { List } from "@tsplus/stdlib/collections/List/definition";
-
 /**
  * @tsplus fluent List flatMap
  */

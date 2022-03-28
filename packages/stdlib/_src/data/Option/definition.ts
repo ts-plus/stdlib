@@ -1,8 +1,8 @@
 /* adapted from https://github.com/gcanti/fp-ts */
 
-import type { LazyArg, Predicate, Refinement } from "@tsplus/stdlib/data/Function";
+import type { LazyArg } from "@tsplus/stdlib/data/Function";
 import { identity } from "@tsplus/stdlib/data/Function";
-import { Tuple } from "@tsplus/stdlib/data/Tuple/definition";
+import type { Predicate } from "@tsplus/stdlib/data/Predicate";
 import { Equals } from "@tsplus/stdlib/structure/Equals";
 import { Hash } from "@tsplus/stdlib/structure/Hash";
 

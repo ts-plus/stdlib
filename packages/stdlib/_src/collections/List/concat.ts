@@ -1,5 +1,3 @@
-import type { List } from "@tsplus/stdlib/collections/List/definition";
-
 /**
  * Concatenates two lists together
  *

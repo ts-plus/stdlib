@@ -1,5 +1,3 @@
-import type { Tuple } from "@tsplus/stdlib/data/Tuple/definition";
-
 /**
  * Gets an element from the tuple.
  *

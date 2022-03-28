@@ -1,5 +1,4 @@
 import { identity } from "@tsplus/stdlib/data/Function";
-import { Tuple } from "@tsplus/stdlib/data/Tuple";
 import type { AssociativeIdentity } from "@tsplus/stdlib/prelude/AssociativeIdentity";
 import { Equals } from "@tsplus/stdlib/structure/Equals";
 import type { ESIterable } from "@tsplus/stdlib/utilities/Types";

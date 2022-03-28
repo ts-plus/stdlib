@@ -1,5 +1,4 @@
 import type { Iterable } from "@tsplus/stdlib/collections/Iterable";
-import { Option } from "@tsplus/stdlib/data/Option";
 import { Equals } from "@tsplus/stdlib/structure/Equals";
 import { Hash } from "@tsplus/stdlib/structure/Hash";
 

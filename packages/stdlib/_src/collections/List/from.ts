@@ -1,5 +1,3 @@
-import { List } from "@tsplus/stdlib/collections/List/definition";
-
 /**
  * Constructs a new `List` from an `Iterable`
  *

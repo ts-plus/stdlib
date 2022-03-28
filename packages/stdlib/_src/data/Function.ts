@@ -15,13 +15,6 @@ export interface Lazy<A> {
 }
 
 /**
- * Models (a: A) => boolean
- */
-export interface Predicate<A> {
-  (a: A): boolean;
-}
-
-/**
  * Models (a: A) => a is B
  */
 export interface Refinement<A, B extends A> {
