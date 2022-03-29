@@ -1,5 +1,11 @@
 # @tsplus/stdlib
 
+## 0.0.22
+
+### Patch Changes
+
+- [`f4e7936`](https://github.com/ts-plus/stdlib/commit/f4e7936b5958decbe32a6a659f5297e2874c7de5) Thanks [@mikearnaldi](https://github.com/mikearnaldi)! - Don't enforce behaviour for Collection.equal as it is abstract
+
 ## 0.0.21
 
 ### Patch Changes
