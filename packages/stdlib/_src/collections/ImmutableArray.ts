@@ -150,3 +150,14 @@ export const append = Pipeable(append_);
  * @tsplus operator ImmutableArray + 1.0
  */
 export const appendOperator: <A>(self: ImmutableArray<A>, a: A) => ImmutableArray<A> = append_;
+
+/**
+ * @tsplus operator ImmutableArray ==
+ * @tsplus fluent ImmutableArray equals
+ */
+export function equals_<A, B>(self: ImmutableArray<A>, that: ImmutableArray<B>): boolean {
+  return self.array.length === that.array.length &&
+    self.array.every((v, i) => Equals.equals(v, that.array[i]));
+}
+
+export const equals = Pipeable(equals_);
