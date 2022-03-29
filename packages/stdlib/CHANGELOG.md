@@ -1,5 +1,13 @@
 # @tsplus/stdlib
 
+## 0.0.24
+
+### Patch Changes
+
+- [`6c75520`](https://github.com/ts-plus/stdlib/commit/6c755200e20ab65ca8fc6ff880d2a555004044ae) Thanks [@mikearnaldi](https://github.com/mikearnaldi)! - Add pipeable \_\_call to modules
+
+* [`3acfd4a`](https://github.com/ts-plus/stdlib/commit/3acfd4a37bebc1e0d6a6c3e32d9798c315735382) Thanks [@mikearnaldi](https://github.com/mikearnaldi)! - Remove pipe operator from option as >>> in favour of callable pipe
+
 ## 0.0.23
 
 ### Patch Changes
