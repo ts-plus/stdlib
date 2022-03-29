@@ -1,5 +1,11 @@
 # @tsplus/stdlib
 
+## 0.0.22
+
+### Patch Changes
+
+- [`4ef2a56`](https://github.com/ts-plus/stdlib/commit/4ef2a562da44577270073b0a9b21c95a1b08e802) Thanks [@mikearnaldi](https://github.com/mikearnaldi)! - Fix Collection Append
+
 ## 0.0.21
 
 ### Patch Changes
