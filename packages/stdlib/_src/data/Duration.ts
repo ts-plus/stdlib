@@ -148,3 +148,9 @@ export function equals_(self: Duration, that: Duration) {
 }
 
 export const equals = Pipeable(equals_);
+
+/**
+ * @tsplus macro pipe
+ * @tsplus fluent Duration __call
+ */
+export const durationPipe: typeof pipe = pipe;

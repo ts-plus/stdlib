@@ -52,3 +52,9 @@ export function unifyTuple<X extends Tuple<any>>(
 export function isTuple(self: unknown): self is Tuple<unknown[]> {
   return typeof self === "object" && self != null && TupleSym in self;
 }
+
+/**
+ * @tsplus macro pipe
+ * @tsplus fluent Tuple __call
+ */
+export const tuplePipe: typeof pipe = pipe;

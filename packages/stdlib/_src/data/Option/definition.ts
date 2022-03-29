@@ -454,3 +454,9 @@ export function via<A, B>(self: A, f: (a: A) => B): B;
 export function via<A, B>(self: A, f: (a: A) => B): B {
   return f(self);
 }
+
+/**
+ * @tsplus macro pipe
+ * @tsplus fluent Option __call
+ */
+export const optionPipe: typeof pipe = pipe;

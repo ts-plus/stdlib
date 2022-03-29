@@ -168,3 +168,9 @@ export const equals = Pipeable(equals_);
 export function asCollection<A>(self: ImmutableArray<A>): Collection<A> {
   return self;
 }
+
+/**
+ * @tsplus macro pipe
+ * @tsplus fluent ImmutableArray __call
+ */
+export const immutableArrayPipe: typeof pipe = pipe;

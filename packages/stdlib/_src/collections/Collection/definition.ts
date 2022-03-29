@@ -12,3 +12,9 @@ export type Collection<A> = ESIterable<A>;
  */
 export interface CollectionOps {}
 export const Collection: CollectionOps = {};
+
+/**
+ * @tsplus macro pipe
+ * @tsplus fluent Collection __call
+ */
+export const collectionPipe: typeof pipe = pipe;
