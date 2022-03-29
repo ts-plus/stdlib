@@ -422,10 +422,10 @@ export const prependOperatorStrict: <A>(a: A, self: Collection<A>) => Collection
 export function append_<A, B>(self: Collection<A>, that: B): Collection<A | B> {
   return {
     *[Symbol.iterator]() {
-      yield that;
       for (const x of self) {
         yield x;
       }
+      yield that;
     }
   };
 }
