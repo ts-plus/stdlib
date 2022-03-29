@@ -2,9 +2,18 @@
  * @tsplus macro pipe
  * @tsplus fluent global pipe
  */
-export function pipe<A>(a: A): A;
-export function pipe<A, B>(a: A, ab: (a: A) => B): B;
-export function pipe<A, B, C>(a: A, ab: (a: A) => B, bc: (b: B) => C): C;
+export function pipe<A>(
+  a: A
+): A;
+export function pipe<A, B>(
+  a: A,
+  ab: (a: A) => B
+): B;
+export function pipe<A, B, C>(
+  a: A,
+  ab: (a: A) => B,
+  bc: (b: B) => C
+): C;
 export function pipe<A, B, C, D>(
   a: A,
   ab: (a: A) => B,
