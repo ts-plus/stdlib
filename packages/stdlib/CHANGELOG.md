@@ -1,5 +1,11 @@
 # @tsplus/stdlib
 
+## 0.0.21
+
+### Patch Changes
+
+- [`9bfdbef`](https://github.com/ts-plus/stdlib/commit/9bfdbefe9c7991caa3dda10a154822800fdecb5a) Thanks [@mikearnaldi](https://github.com/mikearnaldi)! - Add equals to ImmutableArray
+
 ## 0.0.20
 
 ### Patch Changes
