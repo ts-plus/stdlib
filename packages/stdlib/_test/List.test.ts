@@ -42,4 +42,7 @@ describe("List", () => {
         == List(1, 2)
     );
   });
+  it("asCollection", () => {
+    assert.isTrue(List(0, 1).asCollection() == List(0, 1));
+  });
 });

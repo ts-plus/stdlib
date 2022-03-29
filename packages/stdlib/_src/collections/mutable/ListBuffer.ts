@@ -11,6 +11,7 @@
 
 /**
  * @tsplus type ListBuffer
+ * @tsplus companion ListBufferOps
  */
 export class ListBuffer<A> implements Collection<A> {
   private first: List<A> = List.nil();
@@ -130,4 +131,11 @@ export class ListBuffer<A> implements Collection<A> {
       return p;
     }
   }
+}
+
+/**
+ * @tsplus fluent ListBuffer asCollection
+ */
+export function asCollection<A>(self: ListBuffer<A>): Collection<A> {
+  return self;
 }

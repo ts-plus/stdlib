@@ -1,4 +1,5 @@
 // codegen:start {preset: barrel, include: ./List/*.ts, prefix: "@tsplus/stdlib/collections"}
+export * from "@tsplus/stdlib/collections/List/asCollection";
 export * from "@tsplus/stdlib/collections/List/builder";
 export * from "@tsplus/stdlib/collections/List/concat";
 export * from "@tsplus/stdlib/collections/List/definition";

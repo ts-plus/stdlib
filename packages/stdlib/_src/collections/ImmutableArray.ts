@@ -161,3 +161,10 @@ export function equals_<A, B>(self: ImmutableArray<A>, that: ImmutableArray<B>):
 }
 
 export const equals = Pipeable(equals_);
+
+/**
+ * @tsplus fluent ImmutableArray asCollection
+ */
+export function asCollection<A>(self: ImmutableArray<A>): Collection<A> {
+  return self;
+}

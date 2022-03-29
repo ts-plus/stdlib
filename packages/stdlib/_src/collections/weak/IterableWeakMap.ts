@@ -154,3 +154,10 @@ class WeakImpl<K extends object, V> {
 const ConcreteImpl: {
   new<K extends object, V>(iterable: Collection<[K, V]>): IterableWeakMap<K, V>;
 } = typeof FinalizationRegistry !== "undefined" ? WeakImpl : Map;
+
+/**
+ * @tsplus fluent IterableWeakMap asCollection
+ */
+export function asCollection<K extends object, V>(self: IterableWeakMap<K, V>): Collection<[K, V]> {
+  return self;
+}
