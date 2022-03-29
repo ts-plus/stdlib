@@ -7,7 +7,7 @@ export type TupleSym = typeof TupleSym;
  * @tsplus type tsplus/Tuple
  * @tsplus companion tsplus/TupleOps
  */
-export class Tuple<T extends readonly unknown[]> implements Iterable<T[number]>, Equals {
+export class Tuple<T extends readonly unknown[]> implements Collection<T[number]>, Equals {
   readonly [TupleSym]: TupleSym = TupleSym;
 
   constructor(readonly tuple: T) {}

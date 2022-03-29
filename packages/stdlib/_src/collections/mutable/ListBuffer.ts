@@ -12,7 +12,7 @@
 /**
  * @tsplus type ListBuffer
  */
-export class ListBuffer<A> implements Iterable<A> {
+export class ListBuffer<A> implements Collection<A> {
   private first: List<A> = List.nil();
   private last0: List.Cons<A> | undefined = undefined;
   private len = 0;
@@ -25,7 +25,7 @@ export class ListBuffer<A> implements Iterable<A> {
     return new ListBuffer();
   }
 
-  static from<A>(as: Iterable<A>): ListBuffer<A> {
+  static from<A>(as: Collection<A>): ListBuffer<A> {
     const buf = new ListBuffer<A>();
     for (const a of as) {
       buf.append(a);

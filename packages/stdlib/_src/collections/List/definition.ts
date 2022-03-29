@@ -12,7 +12,7 @@
 /**
  * @tsplus type List/Cons
  */
-export class Cons<A> implements Iterable<A>, Equals {
+export class Cons<A> implements Collection<A>, Equals {
   readonly _tag = "Cons";
   constructor(readonly head: A, public tail: List<A>) {}
 
@@ -54,7 +54,7 @@ export class Cons<A> implements Iterable<A>, Equals {
 /**
  * @tsplus type List/Nil
  */
-export class Nil<A> implements Iterable<A>, Equals {
+export class Nil<A> implements Collection<A>, Equals {
   readonly _tag = "Nil";
   [Symbol.iterator](): Iterator<A> {
     return {

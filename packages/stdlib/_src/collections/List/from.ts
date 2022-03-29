@@ -2,9 +2,9 @@
  * Constructs a new `List` from an `Iterable`
  *
  * @tsplus static ListOps from
- * @tsplus fluent Iterable asList
+ * @tsplus fluent Collection asList
  */
-export function from<A>(prefix: Iterable<A>): List<A> {
+export function from<A>(prefix: Collection<A>): List<A> {
   const iter = prefix[Symbol.iterator]();
   let a: IteratorResult<A>;
   if (!(a = iter.next()).done) {

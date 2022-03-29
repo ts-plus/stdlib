@@ -2,11 +2,11 @@ import {} from "@tsplus/stdlib";
 /**
  * @tsplus global
  */
-import { ImmutableArray } from "@tsplus/stdlib/collections/ImmutableArray";
+import { Collection } from "@tsplus/stdlib/collections/Collection";
 /**
  * @tsplus global
  */
-import { Iterable } from "@tsplus/stdlib/collections/Iterable";
+import { ImmutableArray } from "@tsplus/stdlib/collections/ImmutableArray";
 /**
  * @tsplus global
  */

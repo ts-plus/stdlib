@@ -2,7 +2,7 @@ export function isDefined<T>(value: T | undefined): value is T {
   return value !== void 0;
 }
 
-export function isIterable(value: object): value is Iterable<unknown> {
+export function isIterable(value: object): value is Collection<unknown> {
   return Symbol.iterator in <any> value;
 }
 

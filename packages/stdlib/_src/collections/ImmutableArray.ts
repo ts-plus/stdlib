@@ -9,7 +9,7 @@ declare global {
  * @tsplus type ImmutableArray
  * @tsplus companion ImmutableArrayOps
  */
-export class ImmutableArray<A> implements Equals, Iterable<A> {
+export class ImmutableArray<A> implements Equals, Collection<A> {
   constructor(readonly array: ReadonlyArray<A>) {}
 
   [Symbol.iterator](): Iterator<A> {
@@ -44,9 +44,9 @@ export function make<A extends readonly any[]>(...as: A): ImmutableArray<A[numbe
 
 /**
  * @tsplus static ImmutableArrayOps from
- * @tsplus fluent Iterable asImmutableArray
+ * @tsplus fluent Collection asImmutableArray
  */
-export function from<A>(iterable: Iterable<A>): ImmutableArray<A> {
+export function from<A>(iterable: Collection<A>): ImmutableArray<A> {
   return new ImmutableArray(Array.from(iterable));
 }
 

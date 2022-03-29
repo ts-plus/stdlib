@@ -1,17 +1,17 @@
 declare global {
   /**
-   * @tsplus type Iterable
+   * @tsplus type Collection
    */
   export interface Iterable<T> {}
 }
 
-export type Iterable<A> = ESIterable<A>;
+export type Collection<A> = ESIterable<A>;
 
 /**
- * @tsplus type IterableOps
+ * @tsplus type CollectionOps
  */
-export interface IterableOps {}
-export const Iterable: IterableOps = {};
+export interface CollectionOps {}
+export const Collection: CollectionOps = {};
 
 function* genOf<A>(a: A) {
   yield a;
@@ -29,7 +29,7 @@ function* genMap<A, B>(iterator: Iterator<A>, mapping: (a: A, i: number) => B) {
   }
 }
 
-function* genChain<A, B>(iterator: Iterator<A>, mapping: (a: A) => Iterable<B>) {
+function* genChain<A, B>(iterator: Iterator<A>, mapping: (a: A) => Collection<B>) {
   while (true) {
     const result = iterator.next();
     if (result.done) {
@@ -49,13 +49,13 @@ function* genChain<A, B>(iterator: Iterator<A>, mapping: (a: A) => Iterable<B>) 
 /**
  * Zips the values of both iterators with the provided zipper function
  *
- * @tsplus fluent Iterable zipWith
+ * @tsplus fluent Collection zipWith
  */
 export function zipWith_<A, B, C>(
-  self: Iterable<A>,
-  that: Iterable<B>,
+  self: Collection<A>,
+  that: Collection<B>,
   zipper: (a: A, b: B) => C
-): Iterable<C> {
+): Collection<C> {
   // inspired from "Closing Iterables is a Leaky Abstraction" by Reginald Braithwaite
   // https://raganwald.com/2017/07/22/closing-iterables-is-a-leaky-abstraction.html
   return {
@@ -105,9 +105,9 @@ export const zipWith = Pipeable(zipWith_);
 /**
  * Maps the values of the iterator using the provided function
  *
- * @tsplus fluent Iterable map
+ * @tsplus fluent Collection map
  */
-export function map_<A, B>(i: Iterable<A>, f: (a: A, k: number) => B): Iterable<B> {
+export function map_<A, B>(i: Collection<A>, f: (a: A, k: number) => B): Collection<B> {
   return {
     [Symbol.iterator]: () => genMap(i[Symbol.iterator](), f)
   };
@@ -121,9 +121,9 @@ export const map = Pipeable(map_);
 /**
  * Zips the two iterators into an iterator of a tuple
  *
- * @tsplus fluent Iterable zip
+ * @tsplus fluent Collection zip
  */
-export function zip_<A, B>(fa: Iterable<A>, fb: Iterable<B>): Iterable<Tuple<[A, B]>> {
+export function zip_<A, B>(fa: Collection<A>, fb: Collection<B>): Collection<Tuple<[A, B]>> {
   return fa.zipWith(fb, Tuple.make);
 }
 
@@ -135,9 +135,9 @@ export const zip = Pipeable(zip_);
 /**
  * Maps the iterator using the provided function and flatten its result
  *
- * @tsplus fluent Iterable flatMap
+ * @tsplus fluent Collection flatMap
  */
-export function flatMap_<A, B>(i: Iterable<A>, f: (a: A) => Iterable<B>): Iterable<B> {
+export function flatMap_<A, B>(i: Collection<A>, f: (a: A) => Collection<B>): Collection<B> {
   return {
     [Symbol.iterator]: () => genChain(i[Symbol.iterator](), f)
   };
@@ -151,9 +151,9 @@ export const flatMap = Pipeable(flatMap_);
 /**
  * Applicative's apply
  *
- * @tsplus fluent Iterable ap
+ * @tsplus fluent Collection ap
  */
-export function ap_<A, B>(fab: Iterable<(a: A) => B>, fa: Iterable<A>): Iterable<B> {
+export function ap_<A, B>(fab: Collection<(a: A) => B>, fa: Collection<A>): Collection<B> {
   return flatMap_(fab, (f) => map_(fa, f));
 }
 
@@ -165,9 +165,9 @@ export const ap = Pipeable(ap_);
 /**
  * Creates an iterator of a single value
  *
- * @tsplus static IterableOps of
+ * @tsplus static CollectionOps of
  */
-export function of<A>(a: A): Iterable<A> {
+export function of<A>(a: A): Collection<A> {
   return {
     [Symbol.iterator]: () => genOf(a)
   };
@@ -176,9 +176,9 @@ export function of<A>(a: A): Iterable<A> {
 /**
  * Takes the fist n elements
  *
- * @tsplus fluent Iterable take
+ * @tsplus fluent Collection take
  */
-export function take_<A>(a: Iterable<A>, n: number): Iterable<A> {
+export function take_<A>(a: Collection<A>, n: number): Collection<A> {
   return {
     *[Symbol.iterator]() {
       let i = 0;
@@ -200,9 +200,9 @@ export const take = Pipeable(take_);
 /**
  * Skips the first n elements
  *
- * @tsplus fluent Iterable skip
+ * @tsplus fluent Collection skip
  */
-export function skip_<A>(a: Iterable<A>, n: number): Iterable<A> {
+export function skip_<A>(a: Collection<A>, n: number): Collection<A> {
   return {
     *[Symbol.iterator]() {
       let i = 0;
@@ -223,9 +223,9 @@ export const skip = Pipeable(skip_);
 /**
  * Empty iterator
  *
- * @tsplus static IterableOps never
+ * @tsplus static CollectionOps never
  */
-export const never: Iterable<never> = {
+export const never: Collection<never> = {
   // eslint-disable-next-line @typescript-eslint/no-empty-function
   *[Symbol.iterator]() {}
 };
@@ -233,10 +233,10 @@ export const never: Iterable<never> = {
 /**
  * Loops over the iterator accumulating a result using the provided function giving access to the element index
  *
- * @tsplus fluent Iterable reduceWithIndex
+ * @tsplus fluent Collection reduceWithIndex
  */
 export function reduceWithIndex_<A, B>(
-  self: Iterable<A>,
+  self: Collection<A>,
   b: B,
   f: (b: B, a: A, index: number) => B
 ): B {
@@ -263,10 +263,10 @@ export const reduceWithIndex = Pipeable(reduceWithIndex_);
 /**
  * Loops over the iterator accumulating a result using the provided function
  *
- * @tsplus fluent Iterable reduce
+ * @tsplus fluent Collection reduce
  */
 export function reduce_<A, B>(
-  self: Iterable<A>,
+  self: Collection<A>,
   b: B,
   f: (b: B, a: A) => B
 ): B {
@@ -291,10 +291,10 @@ export const reduce = Pipeable(reduce_);
 /**
  * Loops over the iterator accumulating a result using the provided function and AssociativeIdentity giving access to the element index
  *
- * @tsplus fluent Iterable foldMapWithIndex
+ * @tsplus fluent Collection foldMapWithIndex
  */
 export function foldMapWithIndex_<M, A>(
-  self: Iterable<A>,
+  self: Collection<A>,
   M: AssociativeIdentity<M>,
   f: (a: A, index: number) => M
 ): M {
@@ -321,10 +321,10 @@ export const foldMapWithIndex = Pipeable(foldMapWithIndex_);
 /**
  * Loops over the iterator accumulating a result using the provided function and AssociativeIdentity
  *
- * @tsplus fluent Iterable foldMap
+ * @tsplus fluent Collection foldMap
  */
 export function foldMap_<M, A>(
-  self: Iterable<A>,
+  self: Collection<A>,
   M: AssociativeIdentity<M>,
   f: (a: A) => M
 ): M {
@@ -347,13 +347,13 @@ export function foldMap_<M, A>(
 export const foldMap = Pipeable(foldMap_);
 
 // export function reduceRight<A, B>(b: B, f: (a: A, b: B, i: number) => B) {
-//   return (fa: Iterable<A>): B => {
+//   return (fa: Collection<A>): B => {
 //     return A.reduceRightWithIndex_(Array.from(fa), b, (i, a, b) => f(a, b, i))
 //   }
 // }
 //
 // export function reduceRight_<A, B>(
-//   fa: Iterable<A>,
+//   fa: Collection<A>,
 //   b: B,
 //   f: (a: A, b: B, i: number) => B
 // ): B {
@@ -363,10 +363,10 @@ export const foldMap = Pipeable(foldMap_);
 /**
  * Concats iterators together
  *
- * @tsplus fluent Iterable concat
- * @tsplus operator Iterable &
+ * @tsplus fluent Collection concat
+ * @tsplus operator Collection &
  */
-export function concat_<A, B>(self: Iterable<A>, that: Iterable<B>): Iterable<A | B> {
+export function concat_<A, B>(self: Collection<A>, that: Collection<B>): Collection<A | B> {
   return {
     *[Symbol.iterator]() {
       for (const x of self) {
@@ -387,16 +387,16 @@ export const concat = Pipeable(concat_);
 /**
  * Concats iterators together that are strictly of the same type
  *
- * @tsplus operator Iterable +
+ * @tsplus operator Collection +
  */
-export const concatOperator: <A>(self: Iterable<A>, that: Iterable<A>) => Iterable<A> = concat_;
+export const concatOperator: <A>(self: Collection<A>, that: Collection<A>) => Collection<A> = concat_;
 
 /**
  * Prepends a value to an iterator
  *
- * @tsplus fluent Iterable prepend
+ * @tsplus fluent Collection prepend
  */
-export function prepend_<A, B>(self: Iterable<A>, that: B): Iterable<A | B> {
+export function prepend_<A, B>(self: Collection<A>, that: B): Collection<A | B> {
   return {
     *[Symbol.iterator]() {
       yield that;
@@ -415,26 +415,26 @@ export const prepend = Pipeable(prepend_);
 /**
  * Prepends a value to an iterator
  *
- * @tsplus operator Iterable >
+ * @tsplus operator Collection >
  */
-export function prependOperator<A, B>(a: A, self: Iterable<B>): Iterable<A | B> {
+export function prependOperator<A, B>(a: A, self: Collection<B>): Collection<A | B> {
   return prepend_(self, a);
 }
 
 /**
  * Prepends a value to an iterator of the same type
  *
- * @tsplus operator Iterable + 1.0
+ * @tsplus operator Collection + 1.0
  */
-export const prependOperatorStrict: <A>(a: A, self: Iterable<A>) => Iterable<A> = prependOperator;
+export const prependOperatorStrict: <A>(a: A, self: Collection<A>) => Collection<A> = prependOperator;
 
 /**
  * Appends a value to an iterator
  *
- * @tsplus fluent Iterable append
- * @tsplus operator Iterable <
+ * @tsplus fluent Collection append
+ * @tsplus operator Collection <
  */
-export function append_<A, B>(self: Iterable<A>, that: B): Iterable<A | B> {
+export function append_<A, B>(self: Collection<A>, that: B): Collection<A | B> {
   return {
     *[Symbol.iterator]() {
       yield that;
@@ -453,30 +453,30 @@ export const append = Pipeable(append_);
 /**
  * Appends a value to an iterator of the same type
  *
- * @tsplus operator Iterable + 1.0
+ * @tsplus operator Collection + 1.0
  */
-export const appendOperatorStrict: <A>(self: Iterable<A>, a: A) => Iterable<A> = append_;
+export const appendOperatorStrict: <A>(self: Collection<A>, a: A) => Collection<A> = append_;
 
 /**
  * Flattens nested iterators
  *
- * @tsplus fluent Iterable flatten
+ * @tsplus fluent Collection flatten
  */
-export function flatten<A>(a: Iterable<Iterable<A>>) {
+export function flatten<A>(a: Collection<Collection<A>>) {
   return flatMap_(a, identity);
 }
 
 // export function partitionMap<A, A1, A2>(f: (a: A) => Either<A1, A2>) {
-//   return (as: Iterable<A>): Tp.Tuple<[Iterable<A1>, Iterable<A2>]> =>
+//   return (as: Collection<A>): Tp.Tuple<[Collection<A1>, Collection<A2>]> =>
 //     A.separate(Array.from(map_(as, f)))
 // }
 
 /**
  * Infinite sequence produced by repeated application of f to a
  *
- * @tsplus static IterableOps unfold
+ * @tsplus static CollectionOps unfold
  */
-export function unfold<A>(a: A, f: (a: A) => A): Iterable<A> {
+export function unfold<A>(a: A, f: (a: A) => A): Collection<A> {
   return {
     *[Symbol.iterator]() {
       yield a;
@@ -492,11 +492,11 @@ export function unfold<A>(a: A, f: (a: A) => A): Iterable<A> {
 /**
  * Compares each element of the iterators using the provided function
  *
- * @tsplus fluent Iterable equalsWith
+ * @tsplus fluent Collection equalsWith
  */
 export function equalsWith_<A, B>(
-  self: Iterable<A>,
-  that: Iterable<B>,
+  self: Collection<A>,
+  that: Collection<B>,
   f: (a: A, b: B) => boolean
 ) {
   const leftIt = self[Symbol.iterator]();
@@ -526,10 +526,10 @@ export const equalsWith = Pipeable(equalsWith_);
 /**
  * Compares the iterators using value equality
  *
- * @tsplus operator Iterable ==
- * @tsplus fluent Iterable equals
+ * @tsplus operator Collection ==
+ * @tsplus fluent Collection equals
  */
-export function equals_<A, B>(self: Iterable<A>, that: Iterable<B>) {
+export function equals_<A, B>(self: Collection<A>, that: Collection<B>) {
   return self.equalsWith(that, Equals.equals);
 }
 
@@ -539,9 +539,9 @@ export function equals_<A, B>(self: Iterable<A>, that: Iterable<B>) {
 export const equals = Pipeable(equals_);
 
 /**
- * @tsplus static IterableOps make
- * @tsplus static IterableOps __call
+ * @tsplus static CollectionOps make
+ * @tsplus static CollectionOps __call
  */
-export function make<A extends readonly any[]>(...as: A): Iterable<A[number]> {
+export function make<A extends readonly any[]>(...as: A): Collection<A[number]> {
   return as;
 }

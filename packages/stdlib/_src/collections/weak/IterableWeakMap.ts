@@ -1,5 +1,5 @@
 /**
- * An implementation of a weak map that supports the iterable protocol.
+ * An implementation of a weak map that supports the Collection protocol.
  *
  * NOTE: this is truly weak only in the case FinalizationRegistry is available,
  * otherwise it is backed by a classical map and will not be weak (i.e. in
@@ -7,7 +7,7 @@
  *
  * @tsplus type IterableWeakMap
  */
-export interface IterableWeakMap<K extends object, V> extends Iterable<[K, V]> {
+export interface IterableWeakMap<K extends object, V> extends Collection<[K, V]> {
   set(this: this, key: K, value: V): void;
 
   get(this: this, key: K): V | undefined;
@@ -49,7 +49,7 @@ export const getOption = Pipeable(getOption_);
  * @tsplus static IterableWeakMapOps __call
  */
 export function make<K extends object, V>(
-  iterable: Iterable<[K, V]>
+  iterable: Collection<[K, V]>
 ): IterableWeakMap<K, V> {
   return new ConcreteImpl(iterable);
 }
@@ -72,7 +72,7 @@ class WeakImpl<K extends object, V> {
     set.delete(ref);
   }
 
-  constructor(iterable: Iterable<[K, V]>) {
+  constructor(iterable: Collection<[K, V]>) {
     for (const [key, value] of iterable) {
       this.set(key, value);
     }
@@ -152,5 +152,5 @@ class WeakImpl<K extends object, V> {
 }
 
 const ConcreteImpl: {
-  new<K extends object, V>(iterable: Iterable<[K, V]>): IterableWeakMap<K, V>;
+  new<K extends object, V>(iterable: Collection<[K, V]>): IterableWeakMap<K, V>;
 } = typeof FinalizationRegistry !== "undefined" ? WeakImpl : Map;
