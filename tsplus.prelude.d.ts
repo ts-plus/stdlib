@@ -2,7 +2,7 @@ import {} from "@tsplus/stdlib";
 /**
  * @tsplus global
  */
-import { Collection } from "@tsplus/stdlib/collections/Collection";
+import { Collection } from "@tsplus/stdlib/collections/Collection/definition";
 /**
  * @tsplus global
  */
