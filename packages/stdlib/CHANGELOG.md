@@ -1,5 +1,11 @@
 # @tsplus/stdlib
 
+## 0.0.23
+
+### Patch Changes
+
+- [`0961dce`](https://github.com/ts-plus/stdlib/commit/0961dce919701881b63e494c9d6ac341f44addd8) Thanks [@mikearnaldi](https://github.com/mikearnaldi)! - Add asCollection to collections
+
 ## 0.0.22
 
 ### Patch Changes
