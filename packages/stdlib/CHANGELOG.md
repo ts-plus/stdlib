@@ -1,5 +1,11 @@
 # @tsplus/stdlib
 
+## 0.0.20
+
+### Patch Changes
+
+- [`72260fe`](https://github.com/ts-plus/stdlib/commit/72260fe5da6e19b6aa7318f54162acba8d90c837) Thanks [@mikearnaldi](https://github.com/mikearnaldi)! - Rename Iterable to Collection
+
 ## 0.0.19
 
 ### Patch Changes
