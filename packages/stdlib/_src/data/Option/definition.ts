@@ -446,16 +446,6 @@ export function tryCatch<A>(f: LazyArg<A>): Option<A> {
 }
 
 /**
- * @tsplus fluent Option via
- * @tsplus operator Option >>>
- */
-export function via<A, B>(self: Option<A>, f: (a: Option<A>) => Option<B>): Option<B>;
-export function via<A, B>(self: A, f: (a: A) => B): B;
-export function via<A, B>(self: A, f: (a: A) => B): B {
-  return f(self);
-}
-
-/**
  * @tsplus macro pipe
  * @tsplus fluent Option __call
  */
