@@ -6,6 +6,5 @@ console.log(
     Option.$.map((n) => `res: ${n}`)
   ) == Option("res: 1")
 );
-
 console.log(List(0, 1, 2) == 0 + (1 + List(2)));
 console.log(List(0, 1, 2) == List(0, 1) + 2);

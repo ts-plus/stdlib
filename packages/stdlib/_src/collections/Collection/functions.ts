@@ -514,6 +514,8 @@ export const equalsWith = Pipeable(equalsWith_);
  * @tsplus operator Collection ==
  * @tsplus fluent Collection equals
  */
+export function equals_<A>(self: Collection<A>, that: Collection<A>): boolean;
+export function equals_<A, B>(self: Collection<A>, that: Collection<B>): boolean;
 export function equals_<A, B>(self: Collection<A>, that: Collection<B>) {
   return self.equalsWith(that, Equals.equals);
 }
