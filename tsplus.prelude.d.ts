@@ -10,10 +10,14 @@ import { Collection } from "@tsplus/stdlib/collections/Collection/definition";
 /**
  * @tsplus global
  */
+import { HashMap } from "@tsplus/stdlib/collections/HashMap/definition";
 /**
  * @tsplus global
  */
 import { HashSet } from "@tsplus/stdlib/collections/HashSet/definition";
+/**
+ * @tsplus global
+ */
 import { ImmutableArray } from "@tsplus/stdlib/collections/ImmutableArray";
 /**
  * @tsplus global
@@ -63,6 +67,10 @@ import { Option } from "@tsplus/stdlib/data/Option/definition";
  * @tsplus global
  */
 import { Predicate } from "@tsplus/stdlib/data/Predicate";
+/**
+ * @tsplus global
+ */
+import { Stack } from "@tsplus/stdlib/data/Stack";
 /**
  * @tsplus global
  */
