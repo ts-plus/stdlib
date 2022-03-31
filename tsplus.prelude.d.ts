@@ -93,6 +93,10 @@ import { Exception } from "@tsplus/stdlib/exceptions/Exception";
 /**
  * @tsplus global
  */
+import { Eval } from "@tsplus/stdlib/io/Eval/definition";
+/**
+ * @tsplus global
+ */
 import { Associative } from "@tsplus/stdlib/prelude/Associative";
 /**
  * @tsplus global
