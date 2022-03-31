@@ -1,8 +1,7 @@
-import { ImmutableArray } from "@tsplus/stdlib/collections/ImmutableArray";
-
 describe("RedBlackTree", () => {
   it("forEach", () => {
     const ordered: [number, string][] = [];
+
     RedBlackTree.make<number, string>(Ord.number)
       .insert(1, "a")
       .insert(0, "b")
