@@ -1,5 +1,13 @@
 # @tsplus/stdlib
 
+## 0.0.25
+
+### Patch Changes
+
+- [#30](https://github.com/ts-plus/stdlib/pull/30) [`dd02e37`](https://github.com/ts-plus/stdlib/commit/dd02e37c235620778653729c945e03c874e425a4) Thanks [@IMax153](https://github.com/IMax153)! - Add Either module
+
+* [`b11a962`](https://github.com/ts-plus/stdlib/commit/b11a9621b587ce8369be332324b30177989fdcb4) Thanks [@mikearnaldi](https://github.com/mikearnaldi)! - Refine equal signatures
+
 ## 0.0.24
 
 ### Patch Changes
