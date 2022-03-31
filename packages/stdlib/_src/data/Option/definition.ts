@@ -271,15 +271,6 @@ export function fold_<A, B, C>(
  */
 export const fold = Pipeable(fold_);
 
-// /**
-//  * Constructs `Option<A>` from `Either<E, A>` discarding `E`.
-//  *
-//  * @tsplus static Option/Ops fromEither
-//  */
-// export function fromEither<E, A>(ma: Either<E, A>): Option<A> {
-//   return ma._tag === "Left" ? none : some(ma.right)
-// }
-
 /**
  * Constructs a new `Option` from a nullable type. If the value is `null` or
  * `undefined`, returns `None`, otherwise returns the value wrapped in a `Some`.
@@ -304,12 +295,6 @@ export function fromPredicate<A>(a: A, predicate: Predicate<A>): Option<A> {
   return predicate(a) ? Option.some(a) : Option.none;
 }
 
-// /**
-//  * Returns an `E` value if possible.
-//  */
-// export function getLeft<E, A>(ma: Either<E, A>): Option<E> {
-//   return ma._tag === "Right" ? none : some(ma.left)
-// }
 /**
  * Extracts the value out of the structure, if it exists. Otherwise returns the
  * given default value.
@@ -354,13 +339,6 @@ export function getRefinement<A, B extends A>(
 ): Refinement<A, B> {
   return (a: A): a is B => getOption(a).isSome();
 }
-
-// /**
-//  * Returns an `A` value if possible.
-//  */
-// export function getRight<E, A>(ma: Either<E, A>): Option<A> {
-//   return ma._tag === "Left" ? none : some(ma.right)
-// }
 
 /**
  * Returns `true` if the option is `None`, `false` otherwise.

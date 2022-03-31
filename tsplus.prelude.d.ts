@@ -26,6 +26,10 @@ import { Duration } from "@tsplus/stdlib/data/Duration";
 /**
  * @tsplus global
  */
+import { Either } from "@tsplus/stdlib/data/Either/definition";
+/**
+ * @tsplus global
+ */
 import { Service } from "@tsplus/stdlib/data/Environment";
 /**
  * @tsplus global
