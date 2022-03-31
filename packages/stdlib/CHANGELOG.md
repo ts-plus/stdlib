@@ -1,5 +1,17 @@
 # @tsplus/stdlib
 
+## 0.0.26
+
+### Patch Changes
+
+- [#31](https://github.com/ts-plus/stdlib/pull/31) [`ebabe8b`](https://github.com/ts-plus/stdlib/commit/ebabe8be929f4a9a26a36caa822894a37f23b269) Thanks [@IMax153](https://github.com/IMax153)! - Add Chunk module
+
+* [#33](https://github.com/ts-plus/stdlib/pull/33) [`dc2e921`](https://github.com/ts-plus/stdlib/commit/dc2e921de0a78a30799610bbd64a55a74532e60a) Thanks [@IMax153](https://github.com/IMax153)! - Add HashMap module
+
+- [#34](https://github.com/ts-plus/stdlib/pull/34) [`78261e1`](https://github.com/ts-plus/stdlib/commit/78261e18c0ef6dd30165bc18d2048826bcf6afc8) Thanks [@IMax153](https://github.com/IMax153)! - add RedBlackTree module
+
+* [#33](https://github.com/ts-plus/stdlib/pull/33) [`fbd4142`](https://github.com/ts-plus/stdlib/commit/fbd4142bdfefb8fb4da096c1a0c87548bf034523) Thanks [@IMax153](https://github.com/IMax153)! - Add HashSet module
+
 ## 0.0.25
 
 ### Patch Changes
