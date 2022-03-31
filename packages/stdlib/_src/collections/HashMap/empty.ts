@@ -1,5 +1,6 @@
 import { HashMapInternal } from "@tsplus/stdlib/collections/HashMap/_internal/hashMap";
 import { EmptyNode } from "@tsplus/stdlib/collections/HashMap/_internal/node";
+
 /**
  * Creates a new `HashMap`.
  *
