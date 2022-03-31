@@ -44,7 +44,7 @@ export class HashMapInternal<K, V> implements HashMap<K, V> {
   [Hash.sym](): number {
     let hash = Hash.string("HashMap");
     for (const item of this) {
-      hash |= Hash.combine(Hash.unknown(item[0]), Hash.unknown(item[1]));
+      hash ^= Hash.combine(Hash.unknown(item[0]), Hash.unknown(item[1]));
     }
     return Hash.optimize(hash);
   }
