@@ -43,6 +43,13 @@ export function make<A extends readonly any[]>(...as: A): ImmutableArray<A[numbe
 }
 
 /**
+ * @tsplus static ImmutableArrayOps empty
+ */
+export function empty<A>(): ImmutableArray<A> {
+  return new ImmutableArray([]);
+}
+
+/**
  * @tsplus static ImmutableArrayOps from
  * @tsplus fluent Collection asImmutableArray
  */

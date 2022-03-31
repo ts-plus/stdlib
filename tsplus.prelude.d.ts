@@ -2,6 +2,10 @@ import {} from "@tsplus/stdlib";
 /**
  * @tsplus global
  */
+import { Chunk } from "@tsplus/stdlib/collections/Chunk/definition";
+/**
+ * @tsplus global
+ */
 import { Collection } from "@tsplus/stdlib/collections/Collection/definition";
 /**
  * @tsplus global
@@ -19,6 +23,18 @@ import { ListBuffer } from "@tsplus/stdlib/collections/mutable/ListBuffer";
  * @tsplus global
  */
 import { IterableWeakMap } from "@tsplus/stdlib/collections/weak/IterableWeakMap";
+/**
+ * @tsplus global
+ */
+import { AtomicBoolean } from "@tsplus/stdlib/data/AtomicBoolean";
+/**
+ * @tsplus global
+ */
+import { AtomicNumber } from "@tsplus/stdlib/data/AtomicNumber";
+/**
+ * @tsplus global
+ */
+import { AtomicReference } from "@tsplus/stdlib/data/AtomicReference";
 /**
  * @tsplus global
  */
