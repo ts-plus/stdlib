@@ -42,9 +42,9 @@ export class HashMapInternal<K, V> implements HashMap<K, V> {
   };
 
   [Hash.sym](): number {
-    let hash = 1;
+    let hash = Hash.string("HashMap");
     for (const item of this) {
-      hash = (hash * Hash.combine(Hash.unknown(item[0]), Hash.unknown(item[1]))) % 354_000;
+      hash |= Hash.combine(Hash.unknown(item[0]), Hash.unknown(item[1]));
     }
     return Hash.optimize(hash);
   }
@@ -56,8 +56,13 @@ export class HashMapInternal<K, V> implements HashMap<K, V> {
         return false;
       }
       for (const item of this) {
-        if (!that.has(item[0])) {
+        const elem = that.getHash(item[0], Hash.unknown(item[0]));
+        if (elem.isNone()) {
           return false;
+        } else {
+          if (!Equals.equals(item[1], elem.value)) {
+            return false;
+          }
         }
       }
       return true;
@@ -213,3 +218,15 @@ export function has_<K, V>(self: HashMap<K, V>, key: K): boolean {
  * @tsplus static HashMap/Aspects has
  */
 export const has = Pipeable(has_);
+
+/**
+ * @tsplus operator HashMap ==
+ * @tsplus fluent HashMap equals
+ */
+export function equals_<K, V>(self: HashMap<K, V>, that: HashMap<K, V>): boolean;
+export function equals_<K, V, K1, V1>(self: HashMap<K, V>, that: HashMap<K1, V1>): boolean;
+export function equals_(self: HashMap<unknown, unknown>, that: HashMap<unknown, unknown>) {
+  return Equals.equals(self, that);
+}
+
+export const equals = Pipeable(equals_);

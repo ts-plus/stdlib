@@ -339,4 +339,11 @@ describe("HashMap", () => {
 
     assert.deepEqual([...result], [value("a"), value("b")]);
   });
+
+  it("equals", () => {
+    const a = HashMap([new Key(0), new Value("a")], [new Key(1), new Value("b")]);
+    const b = HashMap([new Key(0), new Value("a")], [new Key(1), new Value("b")]);
+
+    assert.isTrue(a == b);
+  });
 });
