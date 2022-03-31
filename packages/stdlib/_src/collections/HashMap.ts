@@ -1,3 +1,5 @@
+export { getHash, getHash_, has, has_ } from "@tsplus/stdlib/collections/HashMap/_internal/hashMap";
+
 // codegen:start {preset: barrel, include: ./HashMap/*.ts, prefix: "@tsplus/stdlib/collections"}
 export * from "@tsplus/stdlib/collections/HashMap/asCollection";
 export * from "@tsplus/stdlib/collections/HashMap/asTupleCollection";
@@ -16,8 +18,6 @@ export * from "@tsplus/stdlib/collections/HashMap/forEach";
 export * from "@tsplus/stdlib/collections/HashMap/forEachWithIndex";
 export * from "@tsplus/stdlib/collections/HashMap/fromEntries";
 export * from "@tsplus/stdlib/collections/HashMap/get";
-export * from "@tsplus/stdlib/collections/HashMap/getHash";
-export * from "@tsplus/stdlib/collections/HashMap/has";
 export * from "@tsplus/stdlib/collections/HashMap/hasHash";
 export * from "@tsplus/stdlib/collections/HashMap/isEmpty";
 export * from "@tsplus/stdlib/collections/HashMap/keys";

@@ -1,3 +1,5 @@
+import { fromBitmap, hashFragment, toBitmap } from "@tsplus/stdlib/collections/HashMap/_internal/bitwise";
+import { SIZE } from "@tsplus/stdlib/collections/HashMap/_internal/config";
 import type { Node } from "@tsplus/stdlib/collections/HashMap/_internal/node";
 import { isEmptyNode } from "@tsplus/stdlib/collections/HashMap/_internal/node";
 import { _K, _V, HashMapSym } from "@tsplus/stdlib/collections/HashMap/definition";
@@ -40,18 +42,25 @@ export class HashMapInternal<K, V> implements HashMap<K, V> {
   };
 
   [Hash.sym](): number {
-    return Hash.iterator(
-      new HashMapIterator(this, ([k, v]) => Hash.combine(Hash.unknown(k), Hash.unknown(v)))
-    );
+    let hash = 1;
+    for (const item of this) {
+      hash = (hash * Hash.combine(Hash.unknown(item[0]), Hash.unknown(item[1]))) % 354_000;
+    }
+    return Hash.optimize(hash);
   }
 
   [Equals.sym](that: unknown): boolean {
     if (HashMap.isHashMap(that)) {
       realHashMap(that);
-      return (
-        that._size === this._size &&
-        this._tupleIterator == that._tupleIterator
-      );
+      if (that._size !== this._size) {
+        return false;
+      }
+      for (const item of this) {
+        if (!that.has(item[0])) {
+          return false;
+        }
+      }
+      return true;
     }
     return false;
   }
@@ -132,3 +141,75 @@ export function visitLazyChildren<K, V, A>(
   }
   return applyCont(cont);
 }
+
+/**
+ * Lookup the value for the specified key in the `HashMap` using a custom hash.
+ *
+ * @tsplus fluent HashMap getHash
+ */
+export function getHash_<K, V>(self: HashMap<K, V>, key: K, hash: number): Option<V> {
+  realHashMap(self);
+  let node = self._root;
+  let shift = 0;
+  // eslint-disable-next-line no-constant-condition
+  while (true) {
+    switch (node._tag) {
+      case "LeafNode": {
+        return Equals.equals(key, node.key) ? node.value : Option.none;
+      }
+      case "CollisionNode": {
+        if (hash === node.hash) {
+          const children = node.children;
+          for (let i = 0, len = children.length; i < len; ++i) {
+            const child = children[i]!;
+            if ("key" in child && Equals.equals(key, child.key)) return child.value;
+          }
+        }
+        return Option.none;
+      }
+      case "IndexedNode": {
+        const frag = hashFragment(shift, hash);
+        const bit = toBitmap(frag);
+        if (node.mask & bit) {
+          node = node.children[fromBitmap(node.mask, bit)]!;
+          shift += SIZE;
+          break;
+        }
+        return Option.none;
+      }
+      case "ArrayNode": {
+        node = node.children[hashFragment(shift, hash)]!;
+        if (node) {
+          shift += SIZE;
+          break;
+        }
+        return Option.none;
+      }
+      default:
+        return Option.none;
+    }
+  }
+}
+
+/**
+ * Lookup the value for the specified key in the `HashMap` using a custom hash.
+ *
+ * @tsplus static HashMap/Aspects getHash
+ */
+export const getHash = Pipeable(getHash_);
+
+/**
+ * Checks if the specified key has an entry in the `HashMap`.
+ *
+ * @tsplus fluent HashMap has
+ */
+export function has_<K, V>(self: HashMap<K, V>, key: K): boolean {
+  return self.getHash(key, Hash.unknown(key)).isSome();
+}
+
+/**
+ * Checks if the specified key has an entry in the `HashMap`.
+ *
+ * @tsplus static HashMap/Aspects has
+ */
+export const has = Pipeable(has_);
