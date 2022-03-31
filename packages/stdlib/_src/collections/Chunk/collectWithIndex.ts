@@ -1,0 +1,37 @@
+import { ArrTypeId, concreteChunk } from "@tsplus/stdlib/collections/Chunk/definition";
+
+/**
+ * Returns a filtered, mapped subset of the elements of this chunk.
+ *
+ * @tsplus fluent Chunk collectWithIndex
+ */
+export function collectWithIndex_<A, B>(
+  self: Chunk<A>,
+  f: (index: number, a: A) => Option<B>
+): Chunk<B> {
+  concreteChunk(self);
+
+  switch (self._typeId) {
+    case ArrTypeId: {
+      const array = self._arrayLike();
+      let dest = Chunk.empty<B>();
+      for (let i = 0; i < array.length; i++) {
+        const rhs = f(i, array[i]!);
+        if (rhs.isSome()) {
+          dest = dest.append(rhs.value);
+        }
+      }
+      return dest;
+    }
+    default: {
+      return collectWithIndex_(self._materialize(), f);
+    }
+  }
+}
+
+/**
+ * Returns a filtered, mapped subset of the elements of this chunk.
+ *
+ * @tsplus static Chunk/Aspects collectWithIndex
+ */
+export const collectWithIndex = Pipeable(collectWithIndex_);
