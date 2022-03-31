@@ -1,5 +1,13 @@
 # @tsplus/stdlib
 
+## 0.0.27
+
+### Patch Changes
+
+- [#35](https://github.com/ts-plus/stdlib/pull/35) [`5491195`](https://github.com/ts-plus/stdlib/commit/549119568f993609c0d5da73596b67a3c5037e0a) Thanks [@mikearnaldi](https://github.com/mikearnaldi)! - Make sure hashmap's equal and hash are order independent
+
+* [#37](https://github.com/ts-plus/stdlib/pull/37) [`0f12877`](https://github.com/ts-plus/stdlib/commit/0f12877d0bf056849f3d06e909ce4e92451137d0) Thanks [@mikearnaldi](https://github.com/mikearnaldi)! - Fix HashMap equals
+
 ## 0.0.26
 
 ### Patch Changes
