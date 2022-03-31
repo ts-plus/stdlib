@@ -1,4 +1,7 @@
-import {} from "@tsplus/stdlib";
+/**
+ * Ensure types are in scope
+ */
+import type {} from "@tsplus/stdlib";
 /**
  * @tsplus global
  */
