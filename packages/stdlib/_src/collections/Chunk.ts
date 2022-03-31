@@ -38,6 +38,7 @@ export * from "@tsplus/stdlib/collections/Chunk/isEmpty";
 export * from "@tsplus/stdlib/collections/Chunk/isNonEmpty";
 export * from "@tsplus/stdlib/collections/Chunk/join";
 export * from "@tsplus/stdlib/collections/Chunk/last";
+export * from "@tsplus/stdlib/collections/Chunk/make";
 export * from "@tsplus/stdlib/collections/Chunk/makeBy";
 export * from "@tsplus/stdlib/collections/Chunk/map";
 export * from "@tsplus/stdlib/collections/Chunk/mapAccum";

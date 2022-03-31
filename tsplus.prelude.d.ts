@@ -10,6 +10,10 @@ import { Collection } from "@tsplus/stdlib/collections/Collection/definition";
 /**
  * @tsplus global
  */
+/**
+ * @tsplus global
+ */
+import { HashSet } from "@tsplus/stdlib/collections/HashSet/definition";
 import { ImmutableArray } from "@tsplus/stdlib/collections/ImmutableArray";
 /**
  * @tsplus global
