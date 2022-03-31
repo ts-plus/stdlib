@@ -33,6 +33,10 @@ import { ListBuffer } from "@tsplus/stdlib/collections/mutable/ListBuffer";
 /**
  * @tsplus global
  */
+import { RedBlackTree } from "@tsplus/stdlib/collections/RedBlackTree/definition";
+/**
+ * @tsplus global
+ */
 import { IterableWeakMap } from "@tsplus/stdlib/collections/weak/IterableWeakMap";
 /**
  * @tsplus global
