@@ -1,28 +1,28 @@
+class Key implements Equals {
+  constructor(readonly n: number) {}
+
+  [Hash.sym](): number {
+    return Hash.number(this.n);
+  }
+
+  [Equals.sym](u: unknown): boolean {
+    return u instanceof Key && this.n === u.n;
+  }
+}
+
+class Value implements Equals {
+  constructor(readonly s: string) {}
+
+  [Hash.sym](): number {
+    return Hash.string(this.s);
+  }
+
+  [Equals.sym](u: unknown): boolean {
+    return u instanceof Value && this.s === u.s;
+  }
+}
+
 describe("HashMap", () => {
-  class Key implements Equals {
-    constructor(readonly n: number) {}
-
-    [Hash.sym](): number {
-      return Hash.number(this.n);
-    }
-
-    [Equals.sym](u: unknown): boolean {
-      return u instanceof Key && this.n === u.n;
-    }
-  }
-
-  class Value implements Equals {
-    constructor(readonly s: string) {}
-
-    [Hash.sym](): number {
-      return Hash.string(this.s);
-    }
-
-    [Equals.sym](u: unknown): boolean {
-      return u instanceof Value && this.s === u.s;
-    }
-  }
-
   function key(n: number): Key {
     return new Key(n);
   }

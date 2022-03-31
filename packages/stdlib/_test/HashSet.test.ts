@@ -1,16 +1,16 @@
-describe("HashSet", () => {
-  class Value implements Equals {
-    constructor(readonly n: number) {}
+class Value implements Equals {
+  constructor(readonly n: number) {}
 
-    [Hash.sym](): number {
-      return Hash.number(this.n);
-    }
-
-    [Equals.sym](u: unknown): boolean {
-      return u instanceof Value && this.n === u.n;
-    }
+  [Hash.sym](): number {
+    return Hash.number(this.n);
   }
 
+  [Equals.sym](u: unknown): boolean {
+    return u instanceof Value && this.n === u.n;
+  }
+}
+
+describe("HashSet", () => {
   function value(n: number): Value {
     return new Value(n);
   }
