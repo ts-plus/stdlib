@@ -28,12 +28,40 @@ describe("Eval", () => {
     assert.strictEqual(result, 1);
   });
 
+  it("reduce", () => {
+    const program = Eval.reduce([1, 2, 3, 4, 5], 0, (acc, a) => Eval.succeed(acc + a));
+
+    const result = program.run();
+
+    assert.strictEqual(result, 15);
+  });
+
+  it("struct", () => {
+    const program = Eval.struct({
+      a: Eval("a"),
+      b: Eval("b"),
+      c: Eval("c")
+    });
+
+    const result = program.run();
+
+    assert.deepEqual(result, { a: "a", b: "b", c: "c" });
+  });
+
   it("tap", () => {
     const program = Eval(0).tap((n) => Eval(n + 1));
 
     const result = program.run();
 
     assert.strictEqual(result, 0);
+  });
+
+  it("tuple", () => {
+    const program = Eval.tuple(Eval(0), Eval("a"), Eval(true));
+
+    const result = program.run();
+
+    assert.isTrue(result == Tuple(0, "a", true));
   });
 
   it("unit", () => {

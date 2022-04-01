@@ -16,7 +16,7 @@ export type Eval<A> = Succeed<A> | FlatMap<any, A> | Suspend<A>;
 export const EvalSym = Symbol.for("@tsplus/stdlib/io/Eval");
 export type EvalSym = typeof EvalSym;
 
-export const _A = Symbol.for("@tsplus/stdlib/io/Eval/_A");
+export const _A = Symbol.for("@tsplus/stdlib/io/Eval/A");
 export type _A = typeof _A;
 
 /**
