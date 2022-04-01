@@ -1,5 +1,11 @@
 # @tsplus/stdlib
 
+## 0.0.29
+
+### Patch Changes
+
+- [#41](https://github.com/ts-plus/stdlib/pull/41) [`fcf7e6b`](https://github.com/ts-plus/stdlib/commit/fcf7e6b54f2b36085212207978c2427edd611bfb) Thanks [@IMax153](https://github.com/IMax153)! - add ParSeq module
+
 ## 0.0.28
 
 ### Patch Changes
