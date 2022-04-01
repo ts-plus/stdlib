@@ -5,5 +5,6 @@ export * as hashSet from "@tsplus/stdlib/collections/HashSet";
 export * as immutableArray from "@tsplus/stdlib/collections/ImmutableArray";
 export * as list from "@tsplus/stdlib/collections/List";
 export * as mutable from "@tsplus/stdlib/collections/mutable";
+export * as parSeq from "@tsplus/stdlib/collections/ParSeq";
 export * as redBlackTree from "@tsplus/stdlib/collections/RedBlackTree";
 export * as weak from "@tsplus/stdlib/collections/weak";
