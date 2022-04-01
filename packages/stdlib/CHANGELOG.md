@@ -1,5 +1,13 @@
 # @tsplus/stdlib
 
+## 0.0.28
+
+### Patch Changes
+
+- [`6431927`](https://github.com/ts-plus/stdlib/commit/6431927f66c7134e744921ece1fea4be2d538900) Thanks [@mikearnaldi](https://github.com/mikearnaldi)! - Improve HashMap hash
+
+* [#40](https://github.com/ts-plus/stdlib/pull/40) [`4f41ce5`](https://github.com/ts-plus/stdlib/commit/4f41ce5f7f72a1ee4360e5ebee1c3d7604ba05c4) Thanks [@IMax153](https://github.com/IMax153)! - add Eval module
+
 ## 0.0.27
 
 ### Patch Changes
