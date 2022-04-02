@@ -33,6 +33,10 @@ import { ListBuffer } from "@tsplus/stdlib/collections/mutable/ListBuffer";
 /**
  * @tsplus global
  */
+import { MutableHashMap } from "@tsplus/stdlib/collections/mutable/MutableHashMap/definition";
+/**
+ * @tsplus global
+ */
 import { ParSeq } from "@tsplus/stdlib/collections/ParSeq/definition";
 /**
  * @tsplus global
