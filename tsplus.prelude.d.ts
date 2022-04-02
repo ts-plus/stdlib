@@ -85,6 +85,10 @@ import { AtomicReference } from "@tsplus/stdlib/data/AtomicReference";
 /**
  * @tsplus global
  */
+import { Case } from "@tsplus/stdlib/data/Case";
+/**
+ * @tsplus global
+ */
 import { Duration } from "@tsplus/stdlib/data/Duration";
 /**
  * @tsplus global
@@ -154,6 +158,10 @@ import { Ord } from "@tsplus/stdlib/prelude/Ord/definition";
  * @tsplus global
  */
 import { Ordering } from "@tsplus/stdlib/prelude/Ordering/definition";
+/**
+ * @tsplus global
+ */
+import { Copy } from "@tsplus/stdlib/structure/Copy";
 /**
  * @tsplus global
  */

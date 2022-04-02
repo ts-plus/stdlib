@@ -32,6 +32,7 @@ export function sameValueZeroEqual(a: any, b: any) {
 
 /**
  * @tsplus static EqualsOps equals
+ * @tsplus fluent Equals equals
  * @tsplus operator Equals ==
  */
 export function equals<A>(a: A, b: A): boolean;

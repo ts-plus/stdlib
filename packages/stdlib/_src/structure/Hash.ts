@@ -34,8 +34,9 @@ export function optimize(n: number) {
 
 /**
  * @tsplus static HashOps unknown
+ * @tsplus fluent Hash hash
  */
-export function hashUnknown(arg: unknown): number {
+export function hashUnknown<A>(arg: A): number {
   return optimize(_hash(arg));
 }
 
@@ -88,7 +89,7 @@ export function hashIterator(it: Iterator<any>): number {
 }
 
 /**
- * @tsplus static HashOps painObject
+ * @tsplus static HashOps plainObject
  */
 export function hashPlainObject(o: object): number {
   return optimize(_hashPlainObject(o));
