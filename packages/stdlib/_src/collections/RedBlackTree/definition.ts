@@ -40,12 +40,12 @@ export const RedBlackTree: RedBlackTreeOps = {
  */
 export interface RedBlackTreeAspects {}
 
-export interface RedBlackTreeIterable<K, V> extends Collection<readonly [K, V]> {
+export interface RedBlackTreeIterable<K, V> extends Collection<Tuple<[K, V]>> {
   readonly ord: Ord<K>;
   [Symbol.iterator](): RedBlackTreeIterator<K, V>;
 }
 
-export class RedBlackTreeIterator<K, V> implements Iterator<readonly [K, V]> {
+export class RedBlackTreeIterator<K, V> implements Iterator<Tuple<[K, V]>> {
   private count = 0;
 
   constructor(
@@ -75,7 +75,7 @@ export class RedBlackTreeIterator<K, V> implements Iterator<readonly [K, V]> {
   /**
    * Iterator next
    */
-  next(): IteratorResult<readonly [K, V]> {
+  next(): IteratorResult<Tuple<[K, V]>> {
     const entry = this.entry;
     this.count++;
     if (this.direction === "Forward") {
@@ -112,13 +112,13 @@ export class RedBlackTreeIterator<K, V> implements Iterator<readonly [K, V]> {
   /**
    * Returns the key
    */
-  get entry(): Option<readonly [K, V]> {
+  get entry(): Option<Tuple<[K, V]>> {
     if (this.stack.length > 0) {
       return Option.some(
-        [
+        Tuple(
           this.stack[this.stack.length - 1]!.key,
           this.stack[this.stack.length - 1]!.value
-        ]
+        )
       );
     }
     return Option.none;

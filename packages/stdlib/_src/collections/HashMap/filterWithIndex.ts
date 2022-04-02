@@ -17,7 +17,7 @@ export function filterWithIndex_<K, A>(
 ): HashMap<K, A> {
   const m = HashMap.empty<K, A>();
   return m.mutate((m) => {
-    for (const [k, a] of self) {
+    for (const { tuple: [k, a] } of self) {
       if (f(k, a)) {
         m.set(k, a);
       }

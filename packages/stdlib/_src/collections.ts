@@ -6,4 +6,5 @@ export * as immutableArray from "@tsplus/stdlib/collections/ImmutableArray";
 export * as list from "@tsplus/stdlib/collections/List";
 export * as mutable from "@tsplus/stdlib/collections/mutable";
 export * as redBlackTree from "@tsplus/stdlib/collections/RedBlackTree";
+export * as sortedMap from "@tsplus/stdlib/collections/SortedMap";
 export * as weak from "@tsplus/stdlib/collections/weak";
