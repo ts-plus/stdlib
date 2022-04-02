@@ -25,6 +25,10 @@ import { ImmutableArray } from "@tsplus/stdlib/collections/ImmutableArray";
 /**
  * @tsplus global
  */
+import { ImmutableQueue } from "@tsplus/stdlib/collections/ImmutableQueue/definition";
+/**
+ * @tsplus global
+ */
 import { List } from "@tsplus/stdlib/collections/List/definition";
 /**
  * @tsplus global
