@@ -41,6 +41,10 @@ import { SortedMap } from "@tsplus/stdlib/collections/SortedMap/definition";
 /**
  * @tsplus global
  */
+import { SortedSet } from "@tsplus/stdlib/collections/SortedSet/definition";
+/**
+ * @tsplus global
+ */
 import { IterableWeakMap } from "@tsplus/stdlib/collections/weak/IterableWeakMap";
 /**
  * @tsplus global
