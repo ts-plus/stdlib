@@ -29,6 +29,10 @@ import { List } from "@tsplus/stdlib/collections/List/definition";
 /**
  * @tsplus global
  */
+import { DoublyLinkedList } from "@tsplus/stdlib/collections/mutable/DoublyLinkedList";
+/**
+ * @tsplus global
+ */
 import { ListBuffer } from "@tsplus/stdlib/collections/mutable/ListBuffer";
 /**
  * @tsplus global
@@ -38,6 +42,10 @@ import { MutableHashMap } from "@tsplus/stdlib/collections/mutable/MutableHashMa
  * @tsplus global
  */
 import { MutableHashSet } from "@tsplus/stdlib/collections/mutable/MutableHashSet/definition";
+/**
+ * @tsplus global
+ */
+import { MutableQueue } from "@tsplus/stdlib/collections/mutable/MutableQueue/definition";
 /**
  * @tsplus global
  */
