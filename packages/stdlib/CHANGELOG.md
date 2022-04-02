@@ -1,5 +1,11 @@
 # @tsplus/stdlib
 
+## 0.0.31
+
+### Patch Changes
+
+- [#47](https://github.com/ts-plus/stdlib/pull/47) [`25cff02`](https://github.com/ts-plus/stdlib/commit/25cff02e03be1a46f4ce97eed904a2babc53e5af) Thanks [@mikearnaldi](https://github.com/mikearnaldi)! - Prototype Case without Class
+
 ## 0.0.30
 
 ### Patch Changes
