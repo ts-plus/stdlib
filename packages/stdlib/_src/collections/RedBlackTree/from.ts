@@ -7,15 +7,15 @@ import type { RedBlackTreeIterable } from "@tsplus/stdlib/collections/RedBlackTr
  */
 export function from<K, V>(iterable: RedBlackTreeIterable<K, V>): RedBlackTree<K, V>;
 export function from<K, V>(
-  iterable: Collection<readonly [K, V]>,
+  iterable: Collection<Tuple<[K, V]>>,
   ord: Ord<K>
 ): RedBlackTree<K, V>;
 export function from<K, V>(
-  ...args: [RedBlackTreeIterable<K, V>] | [Iterable<readonly [K, V]>, Ord<K>]
+  ...args: [RedBlackTreeIterable<K, V>] | [Iterable<Tuple<[K, V]>>, Ord<K>]
 ): RedBlackTree<K, V> {
   let tree = args.length === 2 ? RedBlackTree.make<K, V>(args[1]) : RedBlackTree.make<K, V>(args[0].ord);
 
-  for (const [k, v] of args[0]) {
+  for (const { tuple: [k, v] } of args[0]) {
     tree = tree.insert(k, v);
   }
 

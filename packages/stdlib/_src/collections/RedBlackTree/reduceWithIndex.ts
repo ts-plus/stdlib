@@ -9,7 +9,7 @@ export function reduceWithIndex_<K, V, Z>(
   f: (z: Z, k: K, v: V) => Z
 ): Z {
   let x = z;
-  for (const [k, v] of self) {
+  for (const { tuple: [k, v] } of self) {
     x = f(x, k, v);
   }
   return x;

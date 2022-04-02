@@ -30,7 +30,13 @@ describe("RedBlackTree", () => {
       .insert(3, "e");
 
     assert.strictEqual(tree.size, 5);
-    assert.deepEqual(Array.from(tree), [[-2, "d"], [-1, "c"], [0, "b"], [1, "a"], [3, "e"]]);
+    assert.deepEqual(Array.from(tree), [
+      Tuple(-2, "d"),
+      Tuple(-1, "c"),
+      Tuple(0, "b"),
+      Tuple(1, "a"),
+      Tuple(3, "e")
+    ]);
   });
 
   it("iterable empty", () => {
@@ -49,7 +55,13 @@ describe("RedBlackTree", () => {
       .insert(3, "e");
 
     assert.strictEqual(tree.size, 5);
-    assert.deepEqual(Array.from(tree.backwards()), [[3, "e"], [1, "a"], [0, "b"], [-1, "c"], [-2, "d"]]);
+    assert.deepEqual(Array.from(tree.backwards()), [
+      Tuple(3, "e"),
+      Tuple(1, "a"),
+      Tuple(0, "b"),
+      Tuple(-1, "c"),
+      Tuple(-2, "d")
+    ]);
   });
 
   it("backwards empty", () => {
@@ -152,8 +164,8 @@ describe("RedBlackTree", () => {
       .insert(-2, "d")
       .insert(3, "e");
 
-    assert.deepEqual(Array.from(tree.ge(0)), [[0, "b"], [1, "a"], [3, "e"]]);
-    assert.deepEqual(Array.from(tree.ge(0, "Backward")), [[0, "b"], [-1, "c"], [-2, "d"]]);
+    assert.deepEqual(Array.from(tree.ge(0)), [Tuple(0, "b"), Tuple(1, "a"), Tuple(3, "e")]);
+    assert.deepEqual(Array.from(tree.ge(0, "Backward")), [Tuple(0, "b"), Tuple(-1, "c"), Tuple(-2, "d")]);
   });
 
   it("find", () => {

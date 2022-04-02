@@ -10,7 +10,7 @@ export function collectWithIndex_<K, A, B>(
 ): HashMap<K, B> {
   const m = HashMap.empty<K, B>();
   return m.mutate((m) => {
-    for (const [k, a] of self) {
+    for (const { tuple: [k, a] } of self) {
       const o = f(k, a);
       if (o.isSome()) {
         m.set(k, o.value);

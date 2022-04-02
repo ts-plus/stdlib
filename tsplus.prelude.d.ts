@@ -41,6 +41,10 @@ import { RedBlackTree } from "@tsplus/stdlib/collections/RedBlackTree/definition
 /**
  * @tsplus global
  */
+import { SortedMap } from "@tsplus/stdlib/collections/SortedMap/definition";
+/**
+ * @tsplus global
+ */
 import { IterableWeakMap } from "@tsplus/stdlib/collections/weak/IterableWeakMap";
 /**
  * @tsplus global

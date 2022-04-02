@@ -10,6 +10,9 @@ export function removeFirst_<K, V>(
   self: RedBlackTree<K, V>,
   key: K
 ): RedBlackTree<K, V> {
+  if (!self.has(key)) {
+    return self;
+  }
   const cmp = self.ord.compare;
   let node: Node<K, V> | undefined = self.root;
   const stack = [];

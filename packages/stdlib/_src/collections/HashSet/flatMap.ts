@@ -3,13 +3,13 @@
  *
  * @tsplus fluent HashSet flatMap
  */
-export function flatMap_<A, B>(self: HashSet<A>, f: (a: A) => Iterable<B>): HashSet<B> {
+export function flatMap_<A, B>(self: HashSet<A>, f: (a: A) => Collection<B>): HashSet<B> {
   const set = HashSet.empty<B>();
   return set.mutate((_) => {
-    self.forEach((e) => {
-      for (const a of f(e)) {
-        if (!_.has(a)) {
-          _.add(a);
+    self.forEach((a) => {
+      for (const b of f(a)) {
+        if (!_.has(b)) {
+          _.add(b);
         }
       }
     });
