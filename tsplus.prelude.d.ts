@@ -37,6 +37,10 @@ import { MutableHashMap } from "@tsplus/stdlib/collections/mutable/MutableHashMa
 /**
  * @tsplus global
  */
+import { MutableHashSet } from "@tsplus/stdlib/collections/mutable/MutableHashSet/definition";
+/**
+ * @tsplus global
+ */
 import { ParSeq } from "@tsplus/stdlib/collections/ParSeq/definition";
 /**
  * @tsplus global
