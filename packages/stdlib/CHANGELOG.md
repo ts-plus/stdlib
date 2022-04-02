@@ -1,5 +1,21 @@
 # @tsplus/stdlib
 
+## 0.0.30
+
+### Patch Changes
+
+- [#45](https://github.com/ts-plus/stdlib/pull/45) [`6d236b4`](https://github.com/ts-plus/stdlib/commit/6d236b459f9612bd1d7adfc0cf7654c027f420da) Thanks [@IMax153](https://github.com/IMax153)! - add MutableQueue module
+
+* [#45](https://github.com/ts-plus/stdlib/pull/45) [`e39b364`](https://github.com/ts-plus/stdlib/commit/e39b364b8d67cfbf97c54cc71d56dd2a1cd6fc2a) Thanks [@IMax153](https://github.com/IMax153)! - add MutableHashMap module
+
+- [#46](https://github.com/ts-plus/stdlib/pull/46) [`e30d43d`](https://github.com/ts-plus/stdlib/commit/e30d43df88a249fef7c5ebc7139b74fa67da1726) Thanks [@IMax153](https://github.com/IMax153)! - add ImmutableQueue module
+
+* [#43](https://github.com/ts-plus/stdlib/pull/43) [`713000a`](https://github.com/ts-plus/stdlib/commit/713000a64afed9b50c7f813ceff4d4292da12296) Thanks [@IMax153](https://github.com/IMax153)! - add SortedSet module
+
+- [#43](https://github.com/ts-plus/stdlib/pull/43) [`4e914e9`](https://github.com/ts-plus/stdlib/commit/4e914e93e92828e7c06cc4ddc01b477ec2667fb4) Thanks [@IMax153](https://github.com/IMax153)! - add SortedMap module
+
+* [#45](https://github.com/ts-plus/stdlib/pull/45) [`18e6822`](https://github.com/ts-plus/stdlib/commit/18e6822f75a5b3a29b05aaccbb133b101b725270) Thanks [@IMax153](https://github.com/IMax153)! - add MutableHashSet module
+
 ## 0.0.29
 
 ### Patch Changes
