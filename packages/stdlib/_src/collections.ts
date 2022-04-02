@@ -8,4 +8,5 @@ export * as mutable from "@tsplus/stdlib/collections/mutable";
 export * as parSeq from "@tsplus/stdlib/collections/ParSeq";
 export * as redBlackTree from "@tsplus/stdlib/collections/RedBlackTree";
 export * as sortedMap from "@tsplus/stdlib/collections/SortedMap";
+export * as sortedSet from "@tsplus/stdlib/collections/SortedSet";
 export * as weak from "@tsplus/stdlib/collections/weak";
