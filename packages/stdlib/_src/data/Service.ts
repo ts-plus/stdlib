@@ -13,7 +13,9 @@ export interface ServiceOf<T> {
 }
 
 export interface ServiceAccess<T> {
+  readonly identifier: PropertyKey;
   readonly get: <R extends Service.Has<T>>(environment: R) => T;
+  readonly getMaybe: <R>(environment: R) => Option<T>;
   readonly in: <R>(environment: R) => environment is R & Service.Has<T>;
 }
 
@@ -31,10 +33,13 @@ export interface ServiceOps {
 
 export const Service: ServiceOps = <T>(key: PropertyKey): Service<T> => {
   const of: ServiceOf<T> = (r: T) => ({ [key]: r } as any as Service.Has<T>);
+  const in_: <R>(environment: R) => environment is R & Service.Has<T> = (environment): environment is any =>
+    typeof environment === "object" && environment != null && key in environment;
   const access: ServiceAccess<T> = {
+    identifier: key,
     get: (r) => r[key],
-    in: (environment): environment is any =>
-      typeof environment === "object" && environment != null && key in environment
+    getMaybe: (r) => in_(r) ? Option.some(r[key]) : Option.none,
+    in: in_
   };
   return Object.assign(of, access);
 };

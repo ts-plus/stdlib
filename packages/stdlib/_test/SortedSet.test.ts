@@ -10,7 +10,7 @@ class Member implements Equals {
   }
 }
 
-describe("SortedSet", () => {
+describe.concurrent("SortedSet", () => {
   it("add", () => {
     const set = SortedSet.make<Member>(Ord.string.contramap((_) => _.id))
       + new Member("worker_000000")

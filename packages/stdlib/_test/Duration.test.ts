@@ -1,4 +1,4 @@
-describe("Duration", () => {
+describe.concurrent("Duration", () => {
   it("equals", () => {
     assert.isTrue(
       (1).hours == (60).minutes

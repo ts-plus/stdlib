@@ -1,4 +1,4 @@
-describe("ParSeq", () => {
+describe.concurrent("ParSeq", () => {
   it("first", () => {
     assert.isTrue(ParSeq.empty().first() == Option.none);
     assert.isTrue(ParSeq.single("ok").first() == Option.some("ok"));

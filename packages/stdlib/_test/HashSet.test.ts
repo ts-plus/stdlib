@@ -10,7 +10,7 @@ class Value implements Equals {
   }
 }
 
-describe("HashSet", () => {
+describe.concurrent("HashSet", () => {
   function value(n: number): Value {
     return new Value(n);
   }

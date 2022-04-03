@@ -1,4 +1,4 @@
-describe("List", () => {
+describe.concurrent("List", () => {
   it("equals", () => {
     assert.isTrue(
       List(0, 1, 2)

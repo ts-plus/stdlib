@@ -1,4 +1,4 @@
-describe("Case", () => {
+describe.concurrent("Case", () => {
   it("equals", () => {
     interface Person extends Case {
       readonly _tag: "Person";

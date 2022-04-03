@@ -1,4 +1,4 @@
-describe("IterableWeakMap", () => {
+describe.concurrent("IterableWeakMap", () => {
   it("has", () => {
     const a = {};
     const b = {};

@@ -1,4 +1,4 @@
-describe("ImmutableArray", () => {
+describe.concurrent("ImmutableArray", () => {
   it("equals", () => {
     assert.isTrue(
       [1, 2].immutable()

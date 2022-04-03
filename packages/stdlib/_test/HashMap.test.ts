@@ -22,7 +22,7 @@ class Value implements Equals {
   }
 }
 
-describe("HashMap", () => {
+describe.concurrent("HashMap", () => {
   function key(n: number): Key {
     return new Key(n);
   }

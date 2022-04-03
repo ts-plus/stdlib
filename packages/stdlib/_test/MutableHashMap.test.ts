@@ -30,7 +30,7 @@ function value(c: number, d: number): Value {
   return new Value(c, d);
 }
 
-describe("MutableHashMap", () => {
+describe.concurrent("MutableHashMap", () => {
   it("from", () => {
     const map = MutableHashMap(Tuple(key(0, 0), value(0, 0)), Tuple(key(1, 1), value(1, 1)));
 

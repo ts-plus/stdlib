@@ -14,7 +14,7 @@ function value(n: number): Value {
   return new Value(n);
 }
 
-describe("MutableHashSet", () => {
+describe.concurrent("MutableHashSet", () => {
   it("add", () => {
     const set = MutableHashSet.empty<Value>();
 

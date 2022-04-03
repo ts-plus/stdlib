@@ -1,7 +1,7 @@
 import { EmptyMutableQueue } from "@tsplus/stdlib/collections/mutable/MutableQueue";
 
-describe("MutableQueue", () => {
-  describe("bounded", () => {
+describe.concurrent("MutableQueue", () => {
+  describe.concurrent("bounded", () => {
     it("capacity", () => {
       const queue = MutableQueue.bounded<number>(2);
 
@@ -87,7 +87,7 @@ describe("MutableQueue", () => {
     });
   });
 
-  describe("unbounded", () => {
+  describe.concurrent("unbounded", () => {
     it("capacity", () => {
       const queue = MutableQueue.unbounded<number>();
 
