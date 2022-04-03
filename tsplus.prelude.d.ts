@@ -129,6 +129,10 @@ import { Exception } from "@tsplus/stdlib/exceptions/Exception";
 /**
  * @tsplus global
  */
+import { Environment } from "@tsplus/stdlib/io/Environment";
+/**
+ * @tsplus global
+ */
 import { Eval } from "@tsplus/stdlib/io/Eval/definition";
 /**
  * @tsplus global

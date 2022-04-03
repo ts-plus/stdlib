@@ -12,30 +12,12 @@ export interface ServiceOf<T> {
   (service: T): Service.Has<T>;
 }
 
-export interface ServiceAccess<T> {
-  readonly identifier: PropertyKey;
-  readonly get: <R extends Service.Has<T>>(environment: R) => T;
-  readonly getMaybe: <R>(environment: R) => Option<T>;
-  readonly in: <R>(environment: R) => environment is R & Service.Has<T>;
-}
-
-/**
- * @tspus type Service
- */
-export interface Service<T> extends ServiceOf<T>, ServiceAccess<T> {}
-
-/**
- * @tspus type Service/Ops
- */
-export interface ServiceOps {
-  <T>(key: PropertyKey): Service<T>;
-}
-
 export const Service: ServiceOps = <T>(key: PropertyKey): Service<T> => {
   const of: ServiceOf<T> = (r: T) => ({ [key]: r } as any as Service.Has<T>);
   const in_: <R>(environment: R) => environment is R & Service.Has<T> = (environment): environment is any =>
     typeof environment === "object" && environment != null && key in environment;
-  const access: ServiceAccess<T> = {
+  const access: Service.Access<T> = {
+    id: (x) => x,
     identifier: key,
     get: (r) => r[key],
     getMaybe: (r) => in_(r) ? Option.some(r[key]) : Option.none,
@@ -43,6 +25,18 @@ export const Service: ServiceOps = <T>(key: PropertyKey): Service<T> => {
   };
   return Object.assign(of, access);
 };
+
+/**
+ * @tspus type Service
+ */
+export interface Service<T> extends Service.Access<T>, ServiceOf<T> {}
+
+/**
+ * @tspus type Service/Ops
+ */
+export interface ServiceOps {
+  <T>(key: PropertyKey): Service<T>;
+}
 
 export interface Extractor<A> {
   Option: [A] extends [Option<infer X>] ? X : never;
@@ -52,12 +46,22 @@ type HasInternal<A> = Has<A>;
 
 export declare namespace Service {
   export type From<A> = OrElse<Extractor<A>[keyof Extractor<A>], A>;
+
   export type All<Services extends unknown[]> = UnionToIntersection<
     {
       [k in keyof Services]: Services[k] extends Has<any> ? Services[k] : Has<Services[k]>;
     }[number]
   >;
+
   export type Has<A> = HasInternal<A>;
+
+  export interface Access<T> {
+    readonly id: (_: T) => T;
+    readonly identifier: PropertyKey;
+    readonly get: <R extends Service.Has<T>>(environment: R) => T;
+    readonly getMaybe: <R>(environment: R) => Option<T>;
+    readonly in: <R>(environment: R) => environment is R & Service.Has<T>;
+  }
 }
 
 /**
