@@ -1,5 +1,13 @@
 # @tsplus/stdlib
 
+## 0.0.33
+
+### Patch Changes
+
+- [#51](https://github.com/ts-plus/stdlib/pull/51) [`c167f46`](https://github.com/ts-plus/stdlib/commit/c167f46cb0c528e7fbcae08c774c5e95a98ac8de) Thanks [@mikearnaldi](https://github.com/mikearnaldi)! - Add TypeLevel and Check modules
+
+* [#53](https://github.com/ts-plus/stdlib/pull/53) [`f81fe0d`](https://github.com/ts-plus/stdlib/commit/f81fe0d1ee7c423491886df71348e6d258818833) Thanks [@mikearnaldi](https://github.com/mikearnaldi)! - Add Environment module
+
 ## 0.0.32
 
 ### Patch Changes
