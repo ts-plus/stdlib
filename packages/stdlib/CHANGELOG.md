@@ -1,5 +1,11 @@
 # @tsplus/stdlib
 
+## 0.0.32
+
+### Patch Changes
+
+- [#49](https://github.com/ts-plus/stdlib/pull/49) [`25eaea1`](https://github.com/ts-plus/stdlib/commit/25eaea1f65cbae98f4e7ee47326a381010860741) Thanks [@mikearnaldi](https://github.com/mikearnaldi)! - Add identifier in Service
+
 ## 0.0.31
 
 ### Patch Changes
