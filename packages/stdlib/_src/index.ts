@@ -4,4 +4,5 @@ export * as exceptions from "@tsplus/stdlib/exceptions";
 export * as io from "@tsplus/stdlib/io";
 export * as prelude from "@tsplus/stdlib/prelude";
 export * as structure from "@tsplus/stdlib/structure";
+export * as typeLevel from "@tsplus/stdlib/type-level";
 export * as utilities from "@tsplus/stdlib/utilities";
