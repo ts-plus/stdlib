@@ -1,4 +1,4 @@
-describe("RedBlackTree", () => {
+describe.concurrent("RedBlackTree", () => {
   it("forEach", () => {
     const ordered: [number, string][] = [];
 

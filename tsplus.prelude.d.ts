@@ -97,10 +97,6 @@ import { Either } from "@tsplus/stdlib/data/Either/definition";
 /**
  * @tsplus global
  */
-import { Service } from "@tsplus/stdlib/data/Environment";
-/**
- * @tsplus global
- */
 import { identity, LazyArg, pipe, Refinement, unsafeCoerce } from "@tsplus/stdlib/data/Function";
 /**
  * @tsplus global
@@ -110,6 +106,10 @@ import { Option } from "@tsplus/stdlib/data/Option/definition";
  * @tsplus global
  */
 import { Predicate } from "@tsplus/stdlib/data/Predicate";
+/**
+ * @tsplus global
+ */
+import { Service } from "@tsplus/stdlib/data/Service";
 /**
  * @tsplus global
  */

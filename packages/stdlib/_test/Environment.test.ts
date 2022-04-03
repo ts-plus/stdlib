@@ -1,4 +1,4 @@
-describe("Environment", () => {
+describe.concurrent("Environment", () => {
   it("merges services", () => {
     const makeServiceA = {
       a: 0

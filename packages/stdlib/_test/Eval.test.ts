@@ -1,4 +1,4 @@
-describe("Eval", () => {
+describe.concurrent("Eval", () => {
   it("flatMap", () => {
     const program = Eval(0).flatMap((n) => Eval(n + 1));
 

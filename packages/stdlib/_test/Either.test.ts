@@ -1,4 +1,4 @@
-describe("Either", () => {
+describe.concurrent("Either", () => {
   it("equals", () => {
     assert.isTrue(
       Either.right(0) == Either.right(0)

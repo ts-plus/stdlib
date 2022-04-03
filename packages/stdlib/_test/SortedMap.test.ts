@@ -35,7 +35,7 @@ function makeSortedMap(...numbers: Array<Tuple<[number, number]>>): SortedMap<Ke
   return SortedMap(Ord.number.contramap((key) => key.id), entries);
 }
 
-describe("SortedMap", () => {
+describe.concurrent("SortedMap", () => {
   it("entries", () => {
     const map = makeSortedMap(Tuple(0, 10), Tuple(1, 20), Tuple(2, 30));
 

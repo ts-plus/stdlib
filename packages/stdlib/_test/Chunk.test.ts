@@ -1,4 +1,4 @@
-describe("Chunk", () => {
+describe.concurrent("Chunk", () => {
   it("find & concat", () => {
     const chunk = Chunk(4, 5, 6) + Chunk(1, 2, 3);
     const result = chunk.find((v) => v === 3);

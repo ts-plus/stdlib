@@ -1,4 +1,4 @@
-describe("ImmutableQueue", () => {
+describe.concurrent("ImmutableQueue", () => {
   it("append", () => {
     const queue = ImmutableQueue.empty<number>();
 
