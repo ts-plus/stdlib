@@ -74,8 +74,13 @@ export const taggedObject: Guard<{
 export function deriveLazy<A>(
   fn: (_: Guard<A>) => Guard<A>
 ): Guard<A> {
-  const guard: Guard<A> = Guard((u): u is A => fn(guard).is(u));
-
+  let cached: Guard<A> | undefined;
+  const guard: Guard<A> = Guard((u): u is A => {
+    if (!cached) {
+      cached = fn(guard);
+    }
+    return cached.is(u);
+  });
   return guard;
 }
 
