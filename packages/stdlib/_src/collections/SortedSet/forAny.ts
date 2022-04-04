@@ -2,9 +2,9 @@
  * Return `true` if one or more elements match the specified predicate,
  * otherwise returns `false`.
  *
- * @tsplus fluent SortedSet some
+ * @tsplus fluent SortedSet forAny
  */
-export function some_<A>(self: SortedSet<A>, f: Predicate<A>): boolean {
+export function forAny_<A>(self: SortedSet<A>, f: Predicate<A>): boolean {
   let found = false;
   for (const value of self) {
     found = f(value);
@@ -19,6 +19,6 @@ export function some_<A>(self: SortedSet<A>, f: Predicate<A>): boolean {
  * Return `true` if one or more elements match the specified predicate,
  * otherwise returns `false`.
  *
- * @tsplus static SortedSet/Aspects some
+ * @tsplus static SortedSet/Aspects forAny
  */
-export const some = Pipeable(some_);
+export const forAny = Pipeable(forAny_);

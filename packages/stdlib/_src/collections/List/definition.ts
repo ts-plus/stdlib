@@ -9,13 +9,16 @@
  * (http://www.apache.org/licenses/LICENSE-2.0).
  */
 
+export const ListTypeId = Symbol.for("@tsplus/collections/List");
+export type ListTypeId = typeof ListTypeId;
+
 /**
  * @tsplus type List/Cons
  */
 export class Cons<A> implements Collection<A>, Equals {
   readonly _tag = "Cons";
+  readonly [ListTypeId] = ListTypeId;
   constructor(readonly head: A, public tail: List<A>) {}
-
   [Symbol.iterator](): Iterator<A> {
     let done = false;
     // eslint-disable-next-line @typescript-eslint/no-this-alias
@@ -41,11 +44,9 @@ export class Cons<A> implements Collection<A>, Equals {
       }
     };
   }
-
   [Hash.sym](): number {
     return Hash.iterator(this[Symbol.iterator]());
   }
-
   [Equals.sym](that: unknown): boolean {
     return that instanceof Cons && equalsWith_(this, that, Equals.equals);
   }
@@ -56,6 +57,7 @@ export class Cons<A> implements Collection<A>, Equals {
  */
 export class Nil<A> implements Collection<A>, Equals {
   readonly _tag = "Nil";
+  readonly [ListTypeId] = ListTypeId;
   [Symbol.iterator](): Iterator<A> {
     return {
       next() {
@@ -63,11 +65,9 @@ export class Nil<A> implements Collection<A>, Equals {
       }
     };
   }
-
   [Hash.sym](): number {
     return Hash.iterator(this[Symbol.iterator]());
   }
-
   [Equals.sym](that: unknown): boolean {
     return that instanceof Nil;
   }
@@ -88,7 +88,7 @@ export declare namespace List {
 }
 
 /**
- * @tsplus type ListOps
+ * @tsplus type List/Ops
  */
 export interface ListOps {}
 export const List: ListOps = {};
@@ -103,14 +103,14 @@ export function unify<X extends List<any>>(
 }
 
 /**
- * @tsplus static ListOps nil
+ * @tsplus static List/Ops nil
  */
 export function nil<A = never>(): Nil<A> {
   return _Nil;
 }
 
 /**
- * @tsplus static ListOps cons
+ * @tsplus static List/Ops cons
  */
 export function cons<A>(head: A, tail: List<A>): Cons<A> {
   return new Cons(head, tail);
@@ -190,3 +190,14 @@ export const equals = Pipeable(equals_);
  * @tsplus fluent List __call
  */
 export const listPipe: typeof pipe = pipe;
+
+/**
+ * Type guard
+ *
+ * @tsplus static List/Ops isList
+ */
+export function isList<A>(u: Iterable<A>): u is List<A>;
+export function isList(u: unknown): u is List<unknown>;
+export function isList(u: unknown): u is List<unknown> {
+  return typeof u === "object" && u != null && ListTypeId in u;
+}

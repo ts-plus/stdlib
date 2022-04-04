@@ -165,6 +165,10 @@ import { Ordering } from "@tsplus/stdlib/prelude/Ordering/definition";
 /**
  * @tsplus global
  */
+import { Guard } from "@tsplus/stdlib/runtime/Guard";
+/**
+ * @tsplus global
+ */
 import { Copy } from "@tsplus/stdlib/structure/Copy";
 /**
  * @tsplus global

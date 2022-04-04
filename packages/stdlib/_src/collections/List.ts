@@ -8,6 +8,8 @@ export * from "@tsplus/stdlib/collections/List/exists";
 export * from "@tsplus/stdlib/collections/List/filter";
 export * from "@tsplus/stdlib/collections/List/find";
 export * from "@tsplus/stdlib/collections/List/flatMap";
+export * from "@tsplus/stdlib/collections/List/forAll";
+export * from "@tsplus/stdlib/collections/List/forAny";
 export * from "@tsplus/stdlib/collections/List/forEach";
 export * from "@tsplus/stdlib/collections/List/from";
 export * from "@tsplus/stdlib/collections/List/head";

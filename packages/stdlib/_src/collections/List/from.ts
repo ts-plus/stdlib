@@ -1,7 +1,7 @@
 /**
  * Constructs a new `List` from an `Iterable`
  *
- * @tsplus static ListOps from
+ * @tsplus static List/Ops from
  * @tsplus fluent Collection asList
  */
 export function from<A>(prefix: Collection<A>): List<A> {
@@ -24,8 +24,8 @@ export function from<A>(prefix: Collection<A>): List<A> {
 /**
  * Constructs a new `List` from an `Iterable`
  *
- * @tsplus static ListOps __call
- * @tsplus static ListOps make
+ * @tsplus static List/Ops __call
+ * @tsplus static List/Ops make
  */
 export function make<As extends readonly any[]>(...prefix: As): List<As[number]> {
   return from(prefix);
