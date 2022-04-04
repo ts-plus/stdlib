@@ -7,7 +7,7 @@
  * @tsplus fluent SortedSet isSubset
  */
 export function isSubset_<A>(self: SortedSet<A>, that: SortedSet<A>): boolean {
-  return self.every((a) => that.has(a));
+  return self.forAll((a) => that.has(a));
 }
 
 /**

@@ -56,7 +56,7 @@ describe.concurrent("SortedSet", () => {
     );
   });
 
-  it("every", () => {
+  it("forAll", () => {
     const isWorker = (member: Member) => member.id.indexOf("worker") !== -1;
     const isWorker1 = (member: Member) => member.id === "worker_000001";
     const set = SortedSet.make<Member>(Ord.string.contramap((_) => _.id))
@@ -64,14 +64,14 @@ describe.concurrent("SortedSet", () => {
       + new Member("worker_000001")
       + new Member("worker_000002");
 
-    const result1 = set.every(isWorker);
-    const result2 = set.every(isWorker1);
+    const result1 = set.forAll(isWorker);
+    const result2 = set.forAll(isWorker1);
 
     assert.isTrue(result1);
     assert.isFalse(result2);
   });
 
-  it("some", () => {
+  it("forAny", () => {
     const isWorker1 = (member: Member) => member.id === "worker_000001";
     const isWorker4 = (member: Member) => member.id === "worker_000004";
     const set = SortedSet.make<Member>(Ord.string.contramap((_) => _.id))
@@ -79,8 +79,8 @@ describe.concurrent("SortedSet", () => {
       + new Member("worker_000001")
       + new Member("worker_000002");
 
-    const result1 = set.some(isWorker1);
-    const result2 = set.some(isWorker4);
+    const result1 = set.forAny(isWorker1);
+    const result2 = set.forAny(isWorker4);
 
     assert.isTrue(result1);
     assert.isFalse(result2);
