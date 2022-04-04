@@ -1,5 +1,11 @@
 # @tsplus/stdlib
 
+## 0.0.34
+
+### Patch Changes
+
+- [#54](https://github.com/ts-plus/stdlib/pull/54) [`9120d58`](https://github.com/ts-plus/stdlib/commit/9120d58afcf54f1c68f3a57a625c815c4db135e1) Thanks [@mikearnaldi](https://github.com/mikearnaldi)! - Implement Guard module with Derivation Rules
+
 ## 0.0.33
 
 ### Patch Changes
