@@ -1,5 +1,13 @@
 # @tsplus/stdlib
 
+## 0.0.35
+
+### Patch Changes
+
+- [#59](https://github.com/ts-plus/stdlib/pull/59) [`d0822a3`](https://github.com/ts-plus/stdlib/commit/d0822a3e9d88b116b035f131babebf96d6f7a731) Thanks [@mikearnaldi](https://github.com/mikearnaldi)! - Improve type unification, change Eval encoding
+
+* [#56](https://github.com/ts-plus/stdlib/pull/56) [`257562f`](https://github.com/ts-plus/stdlib/commit/257562fbd89fb4b1d03ca8cf915b3493419caa83) Thanks [@mikearnaldi](https://github.com/mikearnaldi)! - Improve lazy guard
+
 ## 0.0.34
 
 ### Patch Changes
