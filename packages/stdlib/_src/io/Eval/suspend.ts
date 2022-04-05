@@ -1,3 +1,4 @@
+import type { EvalInternal } from "@tsplus/stdlib/io/Eval";
 import { Suspend } from "@tsplus/stdlib/io/Eval/definition";
 
 /**
@@ -6,5 +7,5 @@ import { Suspend } from "@tsplus/stdlib/io/Eval/definition";
  * @tsplus static Eval/Ops suspend
  */
 export function suspend<A>(f: LazyArg<Eval<A>>): Eval<A> {
-  return new Suspend(f);
+  return new Suspend(f as LazyArg<EvalInternal<A>>);
 }

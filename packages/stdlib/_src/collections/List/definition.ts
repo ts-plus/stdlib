@@ -95,6 +95,8 @@ export const List: ListOps = {};
 
 /**
  * @tsplus unify List
+ * @tsplus unify List/Nil
+ * @tsplus unify List/Cons
  */
 export function unify<X extends List<any>>(
   self: X
