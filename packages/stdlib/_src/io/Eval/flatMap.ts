@@ -1,3 +1,4 @@
+import type { EvalInternal } from "@tsplus/stdlib/io/Eval";
 import { FlatMap } from "@tsplus/stdlib/io/Eval/definition";
 
 /**
@@ -8,7 +9,7 @@ import { FlatMap } from "@tsplus/stdlib/io/Eval/definition";
  * @tsplus fluent Eval flatMap
  */
 export function flatMap_<A, B>(self: Eval<A>, f: (a: A) => Eval<B>): Eval<B> {
-  return new FlatMap(self, f);
+  return new FlatMap(self as EvalInternal<A>, f as (a: A) => EvalInternal<B>);
 }
 
 /**

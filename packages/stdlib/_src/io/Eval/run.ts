@@ -1,12 +1,14 @@
+import type { EvalInternal } from "@tsplus/stdlib/io/Eval";
+
 /**
  * Runs this computation.
  *
  * @tsplus fluent Eval run
  */
 export function run<A>(self: Eval<A>): A {
-  let stack: Stack<(e: any) => Eval<any>> | undefined = undefined;
+  let stack: Stack<(e: any) => EvalInternal<any>> | undefined = undefined;
   let a = undefined;
-  let curIO = self as Eval<any> | undefined;
+  let curIO = self as EvalInternal<A> | undefined;
 
   while (curIO != null) {
     switch (curIO._tag) {
@@ -40,6 +42,6 @@ export function run<A>(self: Eval<A>): A {
       }
     }
   }
-
+  // @ts-expect-error
   return a;
 }

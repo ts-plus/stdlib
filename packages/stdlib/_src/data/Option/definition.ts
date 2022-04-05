@@ -56,6 +56,8 @@ export interface OptionAspects {}
 
 /**
  * @tsplus unify Option
+ * @tsplus unify Option/Some
+ * @tsplus unify Option/None
  */
 export function unifyOption<X extends Option<any>>(
   self: X

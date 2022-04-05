@@ -11,7 +11,12 @@ import type { Lazy } from "@tsplus/stdlib/data/Function";
  *
  * @tsplus type Eval
  */
-export type Eval<A> = Succeed<A> | FlatMap<any, A> | Suspend<A>;
+export interface Eval<A> {
+  readonly _A: () => A;
+  readonly _TypeId: unique symbol;
+}
+
+export type EvalInternal<A> = Succeed<A> | FlatMap<any, A> | Suspend<A>;
 
 export const EvalSym = Symbol.for("@tsplus/stdlib/io/Eval");
 export type EvalSym = typeof EvalSym;
@@ -41,6 +46,7 @@ export function unifyEval<X extends Eval<any>>(self: X): Eval<[X] extends [Eval<
   return self;
 }
 
+export interface Succeed<A> extends Eval<A> {}
 export class Succeed<A> {
   readonly _tag = "Succeed";
 
@@ -50,20 +56,22 @@ export class Succeed<A> {
   constructor(readonly a: Lazy<A>) {}
 }
 
+export interface Suspend<A> extends Eval<A> {}
 export class Suspend<A> {
   readonly _tag = "Suspend";
 
   readonly [EvalSym]: EvalSym = EvalSym;
   readonly [_A]!: () => A;
 
-  constructor(readonly f: Lazy<Eval<A>>) {}
+  constructor(readonly f: Lazy<EvalInternal<A>>) {}
 }
 
+export interface FlatMap<A, B> extends Eval<B> {}
 export class FlatMap<A, B> {
   readonly _tag = "FlatMap";
 
   readonly [EvalSym]: EvalSym = EvalSym;
   readonly [_A]!: () => A;
 
-  constructor(readonly value: Eval<A>, readonly cont: (a: A) => Eval<B>) {}
+  constructor(readonly value: EvalInternal<A>, readonly cont: (a: A) => EvalInternal<B>) {}
 }

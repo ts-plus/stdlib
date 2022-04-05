@@ -58,6 +58,8 @@ export interface EitherAspects {}
 
 /**
  * @tsplus unify Either
+ * @tsplus unify Either/Left
+ * @tsplus unify Either/Right
  */
 export function unifyEither<X extends Either<any, any>>(
   self: X
