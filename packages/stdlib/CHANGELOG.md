@@ -1,5 +1,11 @@
 # @tsplus/stdlib
 
+## 0.0.38
+
+### Patch Changes
+
+- [#64](https://github.com/ts-plus/stdlib/pull/64) [`f9bfaab`](https://github.com/ts-plus/stdlib/commit/f9bfaab52d61aa9eb81aeba636a24f7720a854f7) Thanks [@mikearnaldi](https://github.com/mikearnaldi)! - Add Result module to data
+
 ## 0.0.37
 
 ### Patch Changes
