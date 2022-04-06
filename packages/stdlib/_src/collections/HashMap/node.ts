@@ -14,7 +14,7 @@ import {
   LeafNode
 } from "@tsplus/stdlib/collections/HashMap/_internal/node";
 
-export { Node } from "./_internal/node";
+export { Node } from "@tsplus/stdlib/collections/HashMap/_internal/node";
 
 // -----------------------------------------------------------------------------
 // Constructors
