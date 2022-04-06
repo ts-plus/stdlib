@@ -1,6 +1,6 @@
 const failure = Result.fail("failure");
 const success = Result.success("success");
-const warning = Result.successWithWarning("warning", "success");
+const warning = Result.successWithWarning("success", "warning");
 
 describe.concurrent("Result", () => {
   it("getSuccess", () => {
