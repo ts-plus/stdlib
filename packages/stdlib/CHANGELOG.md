@@ -1,5 +1,11 @@
 # @tsplus/stdlib
 
+## 0.0.36
+
+### Patch Changes
+
+- [#60](https://github.com/ts-plus/stdlib/pull/60) [`4d08646`](https://github.com/ts-plus/stdlib/commit/4d08646391d16028e4d7497981bf2d3a29d5a208) Thanks [@mikearnaldi](https://github.com/mikearnaldi)! - Add flatMap and size to ImmutableArray
+
 ## 0.0.35
 
 ### Patch Changes
