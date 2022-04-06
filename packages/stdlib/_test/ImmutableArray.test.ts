@@ -40,11 +40,20 @@ describe.concurrent("ImmutableArray", () => {
         == ImmutableArray(0, 1, 2, 3)
     );
   });
-  it("flatMap Iterable", () => {
+  it("flatMap", () => {
+    assert.isTrue(
+      ImmutableArray(0, 1)
+        .flatMap((n) => ImmutableArray(n + 1)) == ImmutableArray(1, 2)
+    );
+  });
+  it("flatMap from collection", () => {
     assert.isTrue(
       ImmutableArray(0, 1)
         .flatMap((n) => [n + 1])
         .asImmutableArray() == ImmutableArray(1, 2)
     );
+  });
+  it("size", () => {
+    assert.equal(ImmutableArray(0, 1, 2).size, 3);
   });
 });

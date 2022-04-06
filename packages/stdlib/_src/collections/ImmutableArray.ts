@@ -183,3 +183,19 @@ export function asCollection<A>(self: ImmutableArray<A>): Collection<A> {
  * @tsplus fluent ImmutableArray __call
  */
 export const immutableArrayPipe: typeof pipe = pipe;
+
+/**
+ * @tsplus getter ImmutableArray size
+ */
+export function size<A>(self: ImmutableArray<A>) {
+  return self.array.length;
+}
+
+/**
+ * @tsplus fluent ImmutableArray flatMap
+ */
+export function flatMap_<A, B>(self: ImmutableArray<A>, f: (a: A) => ImmutableArray<B>) {
+  return new ImmutableArray(self.array.flatMap(x => f(x).array));
+}
+
+export const flatMap = Pipeable(flatMap_);
