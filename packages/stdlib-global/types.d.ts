@@ -109,6 +109,10 @@ import { Predicate } from "@tsplus/stdlib/data/Predicate";
 /**
  * @tsplus global
  */
+import { Result } from "@tsplus/stdlib/data/Result";
+/**
+ * @tsplus global
+ */
 import { Service } from "@tsplus/stdlib/data/Service";
 /**
  * @tsplus global
