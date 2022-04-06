@@ -860,6 +860,17 @@ __metadata:
   languageName: node
   linkType: hard
 
+"@tsplus/stdlib-global@workspace:packages/stdlib-global":
+  version: 0.0.0-use.local
+  resolution: "@tsplus/stdlib-global@workspace:packages/stdlib-global"
+  peerDependencies:
+    "@tsplus/stdlib": ^0.0.36
+  peerDependenciesMeta:
+    "@tsplus/stdlib":
+      optional: true
+  languageName: unknown
+  linkType: soft
+
 "@tsplus/stdlib@workspace:packages/stdlib":
   version: 0.0.0-use.local
   resolution: "@tsplus/stdlib@workspace:packages/stdlib"

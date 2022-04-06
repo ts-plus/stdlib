@@ -4,5 +4,8 @@
         {
             "path": "packages/stdlib"
         }
+    ],
+    "files": [
+        "./packages/stdlib-global/types.d.ts"
     ]
 }

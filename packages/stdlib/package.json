@@ -2,7 +2,7 @@
   "name": "@tsplus/stdlib",
   "version": "0.0.36",
   "type": "module",
-  "repository": "https://github.com/ts-plus/installer.git",
+  "repository": "https://github.com/ts-plus/stdlib.git",
   "author": "Michael Arnaldi <arnaldimichael@gmail.com>",
   "license": "MIT",
   "publishConfig": {
