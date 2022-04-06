@@ -1,6 +1,5 @@
 /**
  * @tsplus macro pipe
- * @tsplus fluent global pipe
  */
 export function pipe<A>(
   a: A
