@@ -1,5 +1,11 @@
 # @tsplus/stdlib
 
+## 0.0.37
+
+### Patch Changes
+
+- [#65](https://github.com/ts-plus/stdlib/pull/65) [`80c289c`](https://github.com/ts-plus/stdlib/commit/80c289cbd5e8c841c838acadec298707cf49c7f3) Thanks [@mikearnaldi](https://github.com/mikearnaldi)! - Fix local import in HashMap and AtomicBoolean
+
 ## 0.0.36
 
 ### Patch Changes
