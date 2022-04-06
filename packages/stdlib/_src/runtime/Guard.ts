@@ -32,28 +32,28 @@ export const Guard: GuardOps = (is) => ({ is });
  *
  * @tsplus implicit
  */
-export const number = Guard((u): u is number => typeof u === "number");
+export const number: Guard<number> = Guard((u): u is number => typeof u === "number");
 
 /**
  * Guard for a string
  *
  * @tsplus implicit
  */
-export const string = Guard((u): u is string => typeof u === "string");
+export const string: Guard<string> = Guard((u): u is string => typeof u === "string");
 
 /**
  * Guard for a Date
  *
  * @tsplus implicit
  */
-export const date = Guard((u): u is Date => u instanceof Date);
+export const date: Guard<Date> = Guard((u): u is Date => u instanceof Date);
 
 /**
  * Guard for a {}
  *
  * @tsplus implicit
  */
-export const record = Guard((u): u is {} => typeof u === "object" && u !== null);
+export const record: Guard<{}> = Guard((u): u is {} => typeof u === "object" && u !== null);
 
 /**
  * Guard for an object shaped like { _tag: string }
@@ -94,7 +94,7 @@ export function deriveLiteral<A extends string | number>(
 }
 
 /**
- * @tsplus derive Guard<_> 10
+ * @tsplus derive Guard[Option]<_> 10
  */
 export function deriveOption<A extends Option<any>>(
   ...[element]: [A] extends [Option<infer _A>] ? [element: Guard<_A>]
@@ -112,7 +112,7 @@ export function deriveOption<A extends Option<any>>(
 }
 
 /**
- * @tsplus derive Guard<_> 10
+ * @tsplus derive Guard[Chunk]<_> 10
  */
 export function deriveChunk<A extends Chunk<any>>(
   ...[element]: [A] extends [Chunk<infer _A>] ? [element: Guard<_A>]
@@ -127,7 +127,7 @@ export function deriveChunk<A extends Chunk<any>>(
 }
 
 /**
- * @tsplus derive Guard<_> 10
+ * @tsplus derive Guard[List]<_> 10
  */
 export function deriveList<A extends List<any>>(
   ...[element]: [A] extends [List<infer _A>] ? [element: Guard<_A>]
@@ -143,7 +143,7 @@ export function deriveList<A extends List<any>>(
 }
 
 /**
- * @tsplus derive Guard<_> 10
+ * @tsplus derive Guard[SortedSet]<_> 10
  */
 export function deriveSortedSet<A extends SortedSet<any>>(
   ...[element]: [A] extends [SortedSet<infer _A>] ? [element: Guard<_A>]
@@ -158,7 +158,7 @@ export function deriveSortedSet<A extends SortedSet<any>>(
 }
 
 /**
- * @tsplus derive Guard<_> 10
+ * @tsplus derive Guard[ImmutableArray]<_> 10
  */
 export function deriveImmutableArray<A extends ImmutableArray<any>>(
   ...[element]: [A] extends [ImmutableArray<infer _A>] ? [element: Guard<_A>]
@@ -174,7 +174,7 @@ export function deriveImmutableArray<A extends ImmutableArray<any>>(
 }
 
 /**
- * @tsplus derive Guard<_> 10
+ * @tsplus derive Guard[Array]<_> 10
  */
 export function deriveArray<A extends Array<any>>(
   ...[element]: [A] extends [Array<infer _A>]
@@ -192,7 +192,7 @@ export function deriveArray<A extends Array<any>>(
 }
 
 /**
- * @tsplus derive Guard<_> 10
+ * @tsplus derive Guard[Either]<_> 10
  */
 export function deriveEither<A extends Either<any, any>>(
   ...[left, right]: [A] extends [Either<infer _E, infer _A>] ? [left: Guard<_E>, right: Guard<_A>]

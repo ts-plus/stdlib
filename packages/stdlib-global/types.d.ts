@@ -69,6 +69,10 @@ import { SortedSet } from "@tsplus/stdlib/collections/SortedSet/definition";
 /**
  * @tsplus global
  */
+import { Tree } from "@tsplus/stdlib/collections/Tree";
+/**
+ * @tsplus global
+ */
 import { IterableWeakMap } from "@tsplus/stdlib/collections/weak/IterableWeakMap";
 /**
  * @tsplus global
@@ -166,6 +170,10 @@ import { Ord } from "@tsplus/stdlib/prelude/Ord/definition";
  * @tsplus global
  */
 import { Ordering } from "@tsplus/stdlib/prelude/Ordering/definition";
+/**
+ * @tsplus global
+ */
+import { Decoder } from "@tsplus/stdlib/runtime/Decoder";
 /**
  * @tsplus global
  */
