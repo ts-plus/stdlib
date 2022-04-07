@@ -96,6 +96,50 @@ describe.concurrent("SortedMap", () => {
     assert.isTrue(result == ImmutableArray(key(0), key(1), key(2)));
   });
 
+  it("map", () => {
+    const map = makeSortedMap(Tuple(0, 10), Tuple(1, 20), Tuple(2, 30));
+
+    const result = ImmutableArray.from(map.map((value) => value.id));
+
+    assert.isTrue(
+      result == ImmutableArray(
+        Tuple(key(0), 10),
+        Tuple(key(1), 20),
+        Tuple(key(2), 30)
+      )
+    );
+  });
+
+  it("mapWithIndex", () => {
+    const map = makeSortedMap(Tuple(0, 10), Tuple(1, 20), Tuple(2, 30));
+
+    const result = ImmutableArray.from(map.mapWithIndex((key, value) => key.id + value.id));
+
+    assert.isTrue(
+      result == ImmutableArray(
+        Tuple(key(0), 10),
+        Tuple(key(1), 21),
+        Tuple(key(2), 32)
+      )
+    );
+  });
+
+  it("reduce", () => {
+    const map = makeSortedMap(Tuple(0, 10), Tuple(1, 20), Tuple(2, 30));
+
+    const result = map.reduce("", (acc, value) => acc + value.id);
+
+    assert.strictEqual(result, "102030");
+  });
+
+  it("reduceWithIndex", () => {
+    const map = makeSortedMap(Tuple(0, 10), Tuple(1, 20), Tuple(2, 30));
+
+    const result = map.reduceWithIndex("", (acc, key, value) => acc + key.id + value.id);
+
+    assert.strictEqual(result, "010120230");
+  });
+
   it("remove", () => {
     const map = makeSortedMap(Tuple(0, 10), Tuple(1, 20), Tuple(2, 30));
 
