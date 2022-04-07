@@ -1,5 +1,11 @@
 # @tsplus/stdlib
 
+## 0.0.39
+
+### Patch Changes
+
+- [#69](https://github.com/ts-plus/stdlib/pull/69) [`f578369`](https://github.com/ts-plus/stdlib/commit/f5783696d0f5c3c395f27584ab206f8c9edce775) Thanks [@IMax153](https://github.com/IMax153)! - add map, mapWithIndex, reduce, and reduceWithIndex to SortedMap
+
 ## 0.0.38
 
 ### Patch Changes
