@@ -1,5 +1,11 @@
 # @tsplus/stdlib
 
+## 0.0.40
+
+### Patch Changes
+
+- [#71](https://github.com/ts-plus/stdlib/pull/71) [`bb19425`](https://github.com/ts-plus/stdlib/commit/bb1942529e9087e009bc7477d8f9aa0cf8622117) Thanks [@IMax153](https://github.com/IMax153)! - fix hash calculation for HashSet
+
 ## 0.0.39
 
 ### Patch Changes
