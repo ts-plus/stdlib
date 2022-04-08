@@ -11,7 +11,7 @@ export function add_<A>(self: HashSet<A>, value: A): HashSet<A> {
   realHashSet(self);
   return (self._keyMap as HashMapInternal<A, unknown>)._editable
     ? (self._keyMap.set(value as A, true), self)
-    : new HashSetInternal(self._keyMap.set(value as A, undefined));
+    : new HashSetInternal(self._keyMap.set(value as A, true));
 }
 
 /**
