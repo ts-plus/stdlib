@@ -1,5 +1,11 @@
 # @tsplus/stdlib
 
+## 0.0.41
+
+### Patch Changes
+
+- [#73](https://github.com/ts-plus/stdlib/pull/73) [`689db61`](https://github.com/ts-plus/stdlib/commit/689db61183603bd26cf89bd08fb025d63248e827) Thanks [@IMax153](https://github.com/IMax153)! - ensure consistency when adding values to HashSet
+
 ## 0.0.40
 
 ### Patch Changes
