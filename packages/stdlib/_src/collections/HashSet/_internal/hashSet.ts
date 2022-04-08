@@ -10,7 +10,7 @@ export class HashSetInternal<A> implements HashSet<A> {
   }
 
   [Hash.sym](): number {
-    return Hash.iterator(this[Symbol.iterator]());
+    return Hash.combine(Hash.string("HashSet"), Hash.unknown(this._keyMap));
   }
 
   [Equals.sym](that: unknown): boolean {
@@ -18,7 +18,7 @@ export class HashSetInternal<A> implements HashSet<A> {
       realHashSet(that);
       return (
         this._keyMap.size === that._keyMap.size &&
-        Equals.equals(this._keyMap, that._keyMap)
+        this._keyMap == that._keyMap
       );
     }
     return false;
