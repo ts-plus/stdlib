@@ -10,6 +10,5 @@ export * as match from "@tsplus/stdlib/data/Match";
 export * as option from "@tsplus/stdlib/data/Option";
 export * as predicate from "@tsplus/stdlib/data/Predicate";
 export * as result from "@tsplus/stdlib/data/Result";
-export * as service from "@tsplus/stdlib/data/Service";
 export * as stack from "@tsplus/stdlib/data/Stack";
 export * as tuple from "@tsplus/stdlib/data/Tuple";

@@ -20,7 +20,7 @@ describe.concurrent("Encoder", () => {
     const encoder: Encoder<1> = Derive();
     assert.deepEqual(encoder.encode(1), 1);
   });
-  it.skip("struct", () => {
+  it("struct", () => {
     interface Person {
       firstName: string;
       lastName: string;

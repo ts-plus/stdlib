@@ -1,26 +1,33 @@
+interface A {
+  a: number;
+}
+const A = Service.Tag<A>();
+
+interface B {
+  b: number;
+}
+const B = Service.Tag<B>();
+
+interface C {
+  c: number;
+}
+const C = Service.Tag<C>();
+
 describe.concurrent("Environment", () => {
-  it("merges services", () => {
-    const makeServiceA = {
-      a: 0
-    };
-    interface ServiceA extends Service.From<typeof makeServiceA> {}
-    const ServiceA = Service<ServiceA>(Symbol());
-
-    const makeServiceB = Option({
-      b: 0
-    });
-    interface ServiceB extends Service.From<typeof makeServiceB> {}
-    const ServiceB = Service<ServiceB>(Symbol());
-
-    const merged: Service.All<[
-      ServiceA,
-      ServiceB
-    ]> = ServiceA(makeServiceA) & ServiceB(makeServiceB.value!);
-
-    assert.isTrue(ServiceA.in(merged));
-    assert.isFalse(ServiceA.in({}));
-    assert.isTrue(ServiceB.in(merged));
-    assert.strictEqual(ServiceA.get(merged).a, 0);
-    assert.strictEqual(ServiceB.get(merged).b, 0);
+  it("adds and retrieve services", () => {
+    const env = Service.Env().add(A, { a: 0 }).add(B, { b: 1 });
+    assert.deepEqual(env.get(A), { a: 0 });
+    assert.deepEqual(env.getOption(B).value, { b: 1 });
+    assert.isTrue(env.getOption(C).isNone());
+    assert.throw(() => env.unsafeGet(C));
+  });
+  it("prunes services in env and merges", () => {
+    const env = Service.Env().add(A, { a: 0 }).merge(Service.Env().add(B, { b: 1 }).add(C, { c: 2 }));
+    const pruned = env.prune(A, B);
+    assert.deepEqual(pruned.get(A), { a: 0 });
+    assert.deepEqual(pruned.getOption(B).value, { b: 1 });
+    assert.isTrue(pruned.getOption(C).isNone());
+    assert.throw(() => pruned.unsafeGet(C));
+    assert.deepEqual(env.get(C), { c: 2 });
   });
 });
