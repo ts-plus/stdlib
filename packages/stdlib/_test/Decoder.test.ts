@@ -22,10 +22,7 @@ describe.concurrent("Decoder", () => {
   it("date", () => {
     const string: Decoder<Date> = Derive();
     const date = new Date();
-    assert.deepEqual(
-      string.parseJSON(JSON.stringify(date)).right.value,
-      date
-    );
+    assert.deepEqual(string.parseJSON(JSON.stringify(date)).right.value, date);
     assert.deepEqual(
       string.parseJSON(JSON.stringify({})).left.value,
       `Expected a value of type "string" but received one of type "object"`
@@ -52,10 +49,7 @@ describe.concurrent("Decoder", () => {
   });
   it("literal-num", () => {
     const decoder: Decoder<1> = Derive();
-    assert.deepEqual(
-      decoder.parseJSON(JSON.stringify(1)).right.value,
-      1
-    );
+    assert.deepEqual(decoder.parseJSON(JSON.stringify(1)).right.value, 1);
     assert.deepEqual(
       decoder.parseJSON(JSON.stringify("no-hello")).left.value,
       `Expected literal "1" of type "number" instead received one of type "string"`
@@ -112,101 +106,67 @@ describe.concurrent("Decoder", () => {
     }
     type Union = A | B | C;
     const decoder: Decoder<Union> = Derive();
-    assert.deepEqual(
-      decoder.parse({
-        _tag: "A"
-      }).right.value,
-      { _tag: "A" }
+    assert.deepEqual(decoder.parse({ _tag: "A" }).right.value, { _tag: "A" });
+    assert.deepEqual(decoder.parse({ _tag: "B" }).right.value, { _tag: "B" });
+    assert.deepEqual(decoder.parse({ _tag: "C", field: "F" }).right.value, { _tag: "C", field: "F" });
+    assert.isTrue(
+      decoder.parse({ _tag: "D" }) ==
+        Either.left("Expected a tagged object of the form \"{ _tag: \"A\" | \"B\" | \"C\" }\"")
     );
-    assert.deepEqual(
-      decoder.parse({
-        _tag: "B"
-      }).right.value,
-      { _tag: "B" }
-    );
-    assert.deepEqual(
-      decoder.parse({
-        _tag: "C",
-        field: "F"
-      }).right.value,
-      { _tag: "C", field: "F" }
-    );
-    assert.equal(
-      decoder.parse({
-        _tag: "D"
-      }).left.value,
-      "Expected a tagged object of the form \"{ _tag: \"A\" | \"B\" | \"C\" }\""
-    );
-    assert.equal(
-      decoder.parse({
-        _tag: "C"
-      }).left.value,
-      "Encountered while processing tagged object \"C\"\n" +
-        "└─ Encountered while parsing an object structure\n" +
-        "   └─ Field \"field\"\n" +
-        "      └─ Missing"
+    assert.isTrue(
+      decoder.parse({ _tag: "C" }) ==
+        Either.left(
+          "Encountered while processing tagged object \"C\"\n" +
+            "└─ Encountered while parsing an object structure\n" +
+            "   └─ Field \"field\"\n" +
+            "      └─ Missing"
+        )
     );
   });
   it("union", () => {
     const decoder: Decoder<string | number> = Derive();
-    assert.equal(
-      decoder.parse("ok").right.value,
-      "ok"
-    );
-    assert.equal(
-      decoder.parse(1).right.value,
-      1
-    );
-    assert.equal(
-      decoder.parse({}).left.value,
-      "Encountered while processing union\n" +
-        "├─ Encountered while processing a union member\n" +
-        "│  └─ Expected a value of type \"string\" but received one of type \"object\"\n" +
-        "└─ Encountered while processing a union member\n" +
-        "   └─ Expected a value of type \"number\" but received one of type \"object\""
+    assert.equal(decoder.parse("ok").right.value, "ok");
+    assert.equal(decoder.parse(1).right.value, 1);
+    assert.isTrue(
+      decoder.parse({}) ==
+        Either.left(
+          "Encountered while processing union\n" +
+            "├─ Encountered while processing a union member\n" +
+            "│  └─ Expected a value of type \"string\" but received one of type \"object\"\n" +
+            "└─ Encountered while processing a union member\n" +
+            "   └─ Expected a value of type \"number\" but received one of type \"object\""
+        )
     );
   });
   it("array", () => {
     const decoder: Decoder<string[]> = Derive();
-    assert.deepEqual(
-      decoder.parse(["a", "b", "c"]).right.value,
-      ["a", "b", "c"]
+    assert.deepEqual(decoder.parse(["a", "b", "c"]).right.value, ["a", "b", "c"]);
+    assert.isTrue(
+      decoder.parse(["a", 0, "b", 1, "c"]) ==
+        Either.left(
+          "Encountered while processing an Array of elements\n" +
+            "├─ Encountered while processing element \"1\"\n" +
+            "│  └─ Expected a value of type \"string\" but received one of type \"number\"\n" +
+            "└─ Encountered while processing element \"3\"\n" +
+            "   └─ Expected a value of type \"string\" but received one of type \"number\""
+        )
     );
     assert.isTrue(
-      decoder.parse(["a", 0, "b", 1, "c"]) == Either.left(
-        "Encountered while processing an Array of elements\n" +
-          "├─ Encountered while processing element \"1\"\n" +
-          "│  └─ Expected a value of type \"string\" but received one of type \"number\"\n" +
-          "└─ Encountered while processing element \"3\"\n" +
-          "   └─ Expected a value of type \"string\" but received one of type \"number\""
-      )
-    );
-    assert.isTrue(
-      decoder.parse(0) == Either.left(
-        "Expected a value of type \"Array\" but received one of type \"number\""
-      )
+      decoder.parse(0) == Either.left("Expected a value of type \"Array\" but received one of type \"number\"")
     );
   });
   it("chunk", () => {
     const decoder: Decoder<Chunk<string>> = Derive();
+    assert.isTrue(decoder.parse(["a", "b", "c"]) == Either.right(Chunk("a", "b", "c")));
     assert.isTrue(
-      decoder.parse(["a", "b", "c"]) == Either.right(Chunk("a", "b", "c"))
-    );
-    assert.isTrue(
-      decoder.parse(0) == Either.left(
-        "Expected a value of type \"Array\" but received one of type \"number\""
-      )
+      decoder.parse(0) == Either.left("Expected a value of type \"Array\" but received one of type \"number\"")
     );
   });
   it("list", () => {
     const decoder: Decoder<List<string>> = Derive();
+    assert.isTrue(decoder.parse(["a", "b", "c"]) == Either.right(List("a", "b", "c")));
     assert.isTrue(
-      decoder.parse(["a", "b", "c"]) == Either.right(List("a", "b", "c"))
-    );
-    assert.isTrue(
-      decoder.parse(0) == Either.left(
-        "Expected a value of type \"Array\" but received one of type \"number\""
-      )
+      decoder.parse(0) == Either.left("Expected a value of type \"Array\" but received one of type \"number\"")
     );
   });
   it("immutable array", () => {
@@ -215,35 +175,21 @@ describe.concurrent("Decoder", () => {
       decoder.parse(["a", "b", "c"]) == Either.right(ImmutableArray("a", "b", "c"))
     );
     assert.isTrue(
-      decoder.parse(0) == Either.left(
-        "Expected a value of type \"Array\" but received one of type \"number\""
-      )
+      decoder.parse(0) == Either.left("Expected a value of type \"Array\" but received one of type \"number\"")
     );
   });
   it("either", () => {
     const decoder: Decoder<Either<number, string>> = Derive();
+    assert.isTrue(decoder.parse({ _tag: "Left", left: 0 }) == Either.right(Either.left(0)));
+    assert.isTrue(decoder.parse({ _tag: "Right", right: "ok" }) == Either.right(Either.right("ok")));
     assert.isTrue(
-      decoder.parse({
-        _tag: "Left",
-        left: 0
-      }) == Either.right(Either.left(0))
-    );
-    assert.isTrue(
-      decoder.parse({
-        _tag: "Right",
-        right: "ok"
-      }) == Either.right(Either.right("ok"))
-    );
-    assert.isTrue(
-      decoder.parse({
-        _tag: "Left",
-        left: "ok"
-      }) == Either.left(
-        "Encountered while processing tagged object \"Left\"\n" +
-          "└─ Encountered while parsing an object structure\n" +
-          "   └─ Field \"left\"\n" +
-          "      └─ Expected a value of type \"number\" but received one of type \"string\""
-      )
+      decoder.parse({ _tag: "Left", left: "ok" }) ==
+        Either.left(
+          "Encountered while processing tagged object \"Left\"\n" +
+            "└─ Encountered while parsing an object structure\n" +
+            "   └─ Field \"left\"\n" +
+            "      └─ Expected a value of type \"number\" but received one of type \"string\""
+        )
     );
   });
   it("option", () => {
