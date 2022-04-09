@@ -78,7 +78,7 @@ describe.concurrent("Encoder", () => {
   it("option", () => {
     const encoder: Encoder<Option<string>> = Derive();
     assert.deepEqual(encoder.encode(Option.none), Option.none);
-    assert.deepEqual(encoder.toJSON(Option.none), "{\"_tag\":\"None\"}");
+    assert.deepEqual(encoder.encodeJSON(Option.none), "{\"_tag\":\"None\"}");
     assert.deepEqual(encoder.encode(Option.some("ok")), Option.some("ok"));
   });
 });

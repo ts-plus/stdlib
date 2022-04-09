@@ -11,7 +11,7 @@ export declare namespace Decoder {
  * @tsplus type Decoder
  */
 export interface Decoder<A> {
-  readonly parseResult: (u: unknown) => Result<Decoder.Error, Decoder.Error, A>;
+  readonly decodeResult: (u: unknown) => Result<Decoder.Error, Decoder.Error, A>;
 }
 
 /**
@@ -23,9 +23,9 @@ export const Decoder: DecoderOps = {};
 /**
  * @tsplus static Decoder/Ops __call
  */
-export function make<A>(parseResult: (u: unknown) => Result<Decoder.Error, Decoder.Error, A>): Decoder<A> {
+export function make<A>(decodeResult: (u: unknown) => Result<Decoder.Error, Decoder.Error, A>): Decoder<A> {
   return {
-    parseResult
+    decodeResult
   };
 }
 
@@ -34,21 +34,21 @@ export function make<A>(parseResult: (u: unknown) => Result<Decoder.Error, Decod
 //
 
 /**
- * @tsplus fluent Decoder parseJSON
+ * @tsplus fluent Decoder decodeJSON
  */
-export function parseJSON<A>(decoder: Decoder<A>, json: string) {
+export function decodeJSON<A>(decoder: Decoder<A>, json: string) {
   try {
-    return decoder.parse(JSON.parse(json));
+    return decoder.decode(JSON.parse(json));
   } catch {
     return Either.left(`Invalid json string: ${json}`);
   }
 }
 
 /**
- * @tsplus fluent Decoder parse
+ * @tsplus fluent Decoder decode
  */
-export function parse<A>(decoder: Decoder<A>, value: unknown) {
-  const result = decoder.parseResult(value);
+export function decode<A>(decoder: Decoder<A>, value: unknown) {
+  const result = decoder.decodeResult(value);
   if (result.isFailure()) {
     return Either.left(result.failure.render().draw());
   }
@@ -188,7 +188,7 @@ export const record: Decoder<{}> = Decoder((u) =>
  * @tsplus implicit
  */
 export const date: Decoder<Date> = Decoder((u) => {
-  const strRes = string.parseResult(u);
+  const strRes = string.decodeResult(u);
   if (strRes.isFailure()) {
     return strRes;
   }
@@ -218,7 +218,7 @@ export function deriveLazy<A>(
     if (!cached) {
       cached = fn(decoder);
     }
-    return cached.parseResult(u);
+    return cached.decodeResult(u);
   });
   return decoder;
 }
@@ -232,7 +232,7 @@ export function deriveChunk<A extends Chunk<any>>(
     : never
     : never
 ): Decoder<A> {
-  return Decoder((u) => array.parseResult(u).map((a) => Chunk.from(a) as A));
+  return Decoder((u) => array.decodeResult(u).map((a) => Chunk.from(a) as A));
 }
 
 /**
@@ -244,7 +244,7 @@ export function deriveList<A extends List<any>>(
     : never
     : never
 ): Decoder<A> {
-  return Decoder((u) => array.parseResult(u).map((a) => List.from(a) as A));
+  return Decoder((u) => array.decodeResult(u).map((a) => List.from(a) as A));
 }
 
 /**
@@ -256,7 +256,7 @@ export function deriveImmutableArray<A extends ImmutableArray<any>>(
     : never
     : never
 ): Decoder<A> {
-  return Decoder((u) => array.parseResult(u).map((a) => new ImmutableArray(a) as A));
+  return Decoder((u) => array.decodeResult(u).map((a) => new ImmutableArray(a) as A));
 }
 
 /**
@@ -274,7 +274,7 @@ export function deriveArray<A extends Array<any>>(
       let hasFailed = false;
       const out: unknown[] = [];
       for (let i = 0; i < u.length; i++) {
-        const decoded = element.parseResult(u[i]);
+        const decoded = element.decodeResult(u[i]);
         if (decoded.isFailure()) {
           hasFailed = true;
           errorsBuilder.append([i, decoded.failure]);
@@ -314,7 +314,7 @@ export function deriveEither<A extends Either<any, any>>(
 ): Decoder<A> {
   const structural = deriveEitherInternal(left, right);
   return Decoder((u) =>
-    structural.parseResult(u).map((e) => e._tag === "Left" ? Either.left(e.left) as A : Either.right(e.right) as A)
+    structural.decodeResult(u).map((e) => e._tag === "Left" ? Either.left(e.left) as A : Either.right(e.right) as A)
   );
 }
 
@@ -335,7 +335,7 @@ export function deriveOption<A extends Option<any>>(
 ): Decoder<A> {
   const structural = deriveOptionInternal(value);
   return Decoder((u) =>
-    structural.parseResult(u).map((e) => e._tag === "Some" ? Option.some(e.value) as A : Option.none as A)
+    structural.decodeResult(u).map((e) => e._tag === "Some" ? Option.some(e.value) as A : Option.none as A)
   );
 }
 
@@ -367,7 +367,7 @@ export function deriveStruct<A extends Record<string, any>>(
     : never
 ): Decoder<A> {
   return Decoder((u) => {
-    const decodeRecordResult = record.parseResult(u);
+    const decodeRecordResult = record.decodeResult(u);
     if (decodeRecordResult.isFailure()) {
       return decodeRecordResult;
     }
@@ -380,7 +380,7 @@ export function deriveStruct<A extends Record<string, any>>(
         errors.push(new DecoderErrorStructFieldError(field, new DecoderErrorStructMissingField()));
         errored = true;
       } else {
-        const res = (requiredFields[field] as Decoder<any>).parseResult(input[field]);
+        const res = (requiredFields[field] as Decoder<any>).decodeResult(input[field]);
         res.fold(
           (a, w) => {
             decoded[field as keyof A] = a;
@@ -398,7 +398,7 @@ export function deriveStruct<A extends Record<string, any>>(
     if (optionalFields) {
       for (const field of Object.keys(optionalFields)) {
         if ((field in input) && typeof input[field] !== "undefined") {
-          const res = (optionalFields[field] as Decoder<any>).parseResult(input[field]);
+          const res = (optionalFields[field] as Decoder<any>).decodeResult(input[field]);
           res.fold(
             (a, w) => {
               decoded[field as keyof A] = a;
@@ -440,7 +440,7 @@ export function deriveTagged<A extends { _tag: string; }>(
   const structure = Derive<Guard<{ _tag: A["_tag"]; }>>();
   return Decoder((u) => {
     if (structure.is(u)) {
-      return elements[u["_tag"]].parseResult(u).fold(
+      return elements[u["_tag"]].decodeResult(u).fold(
         (a, w) => Result.success(a, w.map((e) => new DecoderErrorTaggedInner(u["_tag"], e))),
         (e) => Result.fail(new DecoderErrorTaggedInner(u["_tag"], e))
       );
@@ -460,7 +460,7 @@ export function deriveUnion<A extends unknown[]>(
   return Decoder((u) => {
     const errors: DecoderErrorUnionMember[] = [];
     for (const element of elements) {
-      const res = element.parseResult(u);
+      const res = element.decodeResult(u);
       if (res.isFailure()) {
         errors.push(new DecoderErrorUnionMember(res.failure));
       } else {

@@ -254,8 +254,8 @@ export function deriveUnion<A extends unknown[]>(
 }
 
 /**
- * @tsplus fluent Encoder toJSON
+ * @tsplus fluent Encoder encodeJSON
  */
-export function toJSON<A>(encoder: Encoder<A>, a: A) {
+export function encodeJSON<A>(encoder: Encoder<A>, a: A) {
   return JSON.stringify(encoder.encode(a));
 }
