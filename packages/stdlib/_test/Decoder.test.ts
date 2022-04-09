@@ -10,12 +10,12 @@ describe.concurrent("Decoder", () => {
     );
   });
   it("number", () => {
-    const string: Decoder<number> = Derive();
+    const number: Decoder<number> = Derive();
     assert.isTrue(
-      string.parseJSON(JSON.stringify(1)) == Either.right(1)
+      number.parseJSON(JSON.stringify(1)) == Either.right(1)
     );
     assert.equal(
-      string.parseJSON(JSON.stringify("hello")).left.value,
+      number.parseJSON(JSON.stringify("hello")).left.value,
       `Expected a value of type "number" but received one of type "string"`
     );
   });
