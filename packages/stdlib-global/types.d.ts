@@ -121,10 +121,6 @@ import { Result } from "@tsplus/stdlib/data/Result";
 /**
  * @tsplus global
  */
-import { Service } from "@tsplus/stdlib/data/Service";
-/**
- * @tsplus global
- */
 import { Stack } from "@tsplus/stdlib/data/Stack";
 /**
  * @tsplus global
@@ -186,6 +182,10 @@ import { Encoder } from "@tsplus/stdlib/runtime/Encoder";
  * @tsplus global
  */
 import { Guard } from "@tsplus/stdlib/runtime/Guard";
+/**
+ * @tsplus global
+ */
+import { Service } from "@tsplus/stdlib/service/Service";
 /**
  * @tsplus global
  */
