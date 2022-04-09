@@ -5,6 +5,8 @@ export * as case from "@tsplus/stdlib/data/Case";
 export * as duration from "@tsplus/stdlib/data/Duration";
 export * as either from "@tsplus/stdlib/data/Either";
 export * as function from "@tsplus/stdlib/data/Function";
+export * as lazyValue from "@tsplus/stdlib/data/LazyValue";
+export * as match from "@tsplus/stdlib/data/Match";
 export * as option from "@tsplus/stdlib/data/Option";
 export * as predicate from "@tsplus/stdlib/data/Predicate";
 export * as result from "@tsplus/stdlib/data/Result";

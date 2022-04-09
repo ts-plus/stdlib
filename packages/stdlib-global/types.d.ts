@@ -109,6 +109,10 @@ import { LazyValue } from "@tsplus/stdlib/data/LazyValue";
 /**
  * @tsplus global
  */
+import { Match } from "@tsplus/stdlib/data/Match";
+/**
+ * @tsplus global
+ */
 import { Option } from "@tsplus/stdlib/data/Option/definition";
 /**
  * @tsplus global

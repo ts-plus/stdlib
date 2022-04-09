@@ -1,3 +1,21 @@
+/**
+ * @tsplus type Match/Ops
+ */
+export interface MatchOps {
+  $: MatchAspects;
+}
+export const Match: MatchOps = {
+  $: {}
+};
+
+/**
+ * @tsplus type Match/Aspects
+ */
+export interface MatchAspects {}
+
+/**
+ * @tsplus static Match/Aspects pattern
+ */
 export const pattern: <N extends string>(
   n: N
 ) => {
@@ -40,8 +58,14 @@ export const pattern: <N extends string>(
       return (_[m[n]] ? _[m[n]](m, m) : d(m, m)) as any;
     }) as any;
 
+/**
+ * @tsplus static Match/Aspects tag
+ */
 export const matchTag = pattern("_tag");
 
+/**
+ * @tsplus static Match/Ops pattern
+ */
 export const pattern_: <N extends string>(
   n: N
 ) => {
@@ -85,8 +109,14 @@ export const pattern_: <N extends string>(
     return (_[m[n]] ? _[m[n]](m, m) : d(m, m)) as any;
   }) as any;
 
+/**
+ * @tsplus static Match/Ops tag
+ */
 export const matchTag_ = pattern_("_tag");
 
+/**
+ * @tsplus static Match/Aspects patternFor
+ */
 export const patternFor: <N extends string>(
   n: N
 ) => <X extends { [k in N]: string; }>() => {
@@ -128,14 +158,29 @@ export const patternFor: <N extends string>(
         return (_[m[n]] ? _[m[n]](m, m) : d(m, m)) as any;
       }) as any;
 
+/**
+ * @tsplus static Match/Ops tagFor
+ */
 export const matchTagFor = patternFor("_tag");
 
-export function isAdtElement<A extends { _tag: string; }, K extends A["_tag"]>(
-  tag: K
-): (adt: A) => adt is Extract<A, { _tag: K; }> {
-  return (adt: A): adt is Extract<A, { _tag: K; }> => adt["_tag"] === tag;
+/**
+ * @tsplus static Match/Ops isAdtElement
+ */
+export function isAdtElement_<A extends { _tag: string; }, K extends A["_tag"]>(
+  tag: K,
+  adt: A
+): adt is Extract<A, { _tag: K; }> {
+  return adt["_tag"] === tag;
 }
 
+/**
+ * @tsplus static Match/Aspects isAdtElement
+ */
+export const isAdtElement = Pipeable(isAdtElement_);
+
+/**
+ * @tsplus static Match/Ops isGenericAdtElement
+ */
 export function isGenericAdtElement<T extends string>(
   _t: T
 ): <A extends { [k in T]: string; }, K extends A[T]>(
@@ -145,6 +190,9 @@ export function isGenericAdtElement<T extends string>(
     (adt: A): adt is Extract<A, { [k in T]: K; }> => adt[_t] === tag;
 }
 
+/**
+ * @tsplus static Match/Ops onAdtElement
+ */
 export function onAdtElement<A extends { _tag: string; }, K extends A["_tag"], B>(
   tag: K,
   f: (_: Extract<A, { _tag: K; }>) => B
@@ -157,6 +205,9 @@ export function onAdtElement<A extends { _tag: string; }, K extends A["_tag"], B
   };
 }
 
+/**
+ * @tsplus static Match/Ops onGenericAdtElement
+ */
 export function onGenericAdtElement<T extends string>(_t: T) {
   return <A extends { [k in T]: string; }, K extends A[T], B>(
     tag: K,
