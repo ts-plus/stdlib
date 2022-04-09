@@ -105,6 +105,10 @@ import { identity, LazyArg, pipe, Refinement, unsafeCoerce } from "@tsplus/stdli
 /**
  * @tsplus global
  */
+import { LazyValue } from "@tsplus/stdlib/data/LazyValue";
+/**
+ * @tsplus global
+ */
 import { Option } from "@tsplus/stdlib/data/Option/definition";
 /**
  * @tsplus global
