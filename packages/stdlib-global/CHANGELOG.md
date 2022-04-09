@@ -1,5 +1,14 @@
 # @tsplus/stdlib-global
 
+## 0.0.8
+
+### Patch Changes
+
+- [#76](https://github.com/ts-plus/stdlib/pull/76) [`5cf9599`](https://github.com/ts-plus/stdlib/commit/5cf95992f76b59b48991e9b770d9bd6b68dc9927) Thanks [@mikearnaldi](https://github.com/mikearnaldi)! - Implement Encoder module with Derivation Rules
+
+- Updated dependencies [[`e97bbb0`](https://github.com/ts-plus/stdlib/commit/e97bbb0a9ae135047c4afeec296db16a7a2b5c7b), [`5cf9599`](https://github.com/ts-plus/stdlib/commit/5cf95992f76b59b48991e9b770d9bd6b68dc9927)]:
+  - @tsplus/stdlib@0.0.43
+
 ## 0.0.7
 
 ### Patch Changes

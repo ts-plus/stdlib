@@ -1,5 +1,13 @@
 # @tsplus/stdlib
 
+## 0.0.43
+
+### Patch Changes
+
+- [`e97bbb0`](https://github.com/ts-plus/stdlib/commit/e97bbb0a9ae135047c4afeec296db16a7a2b5c7b) Thanks [@mikearnaldi](https://github.com/mikearnaldi)! - Rename parse to decode for clarity
+
+* [#76](https://github.com/ts-plus/stdlib/pull/76) [`5cf9599`](https://github.com/ts-plus/stdlib/commit/5cf95992f76b59b48991e9b770d9bd6b68dc9927) Thanks [@mikearnaldi](https://github.com/mikearnaldi)! - Implement Encoder module with Derivation Rules
+
 ## 0.0.42
 
 ### Patch Changes
