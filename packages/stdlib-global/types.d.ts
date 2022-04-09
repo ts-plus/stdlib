@@ -177,6 +177,10 @@ import { Decoder } from "@tsplus/stdlib/runtime/Decoder";
 /**
  * @tsplus global
  */
+import { Encoder } from "@tsplus/stdlib/runtime/Encoder";
+/**
+ * @tsplus global
+ */
 import { Guard } from "@tsplus/stdlib/runtime/Guard";
 /**
  * @tsplus global
