@@ -1,5 +1,13 @@
 # @tsplus/stdlib
 
+## 0.0.42
+
+### Patch Changes
+
+- [`168a1e2`](https://github.com/ts-plus/stdlib/commit/168a1e2fddd2d051415fcec8d8b8503d32712544) Thanks [@mikearnaldi](https://github.com/mikearnaldi)! - Add Decoder module with Derivation Rules
+
+* [`168a1e2`](https://github.com/ts-plus/stdlib/commit/168a1e2fddd2d051415fcec8d8b8503d32712544) Thanks [@mikearnaldi](https://github.com/mikearnaldi)! - Add Tree module
+
 ## 0.0.41
 
 ### Patch Changes
