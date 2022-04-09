@@ -24,6 +24,7 @@ export class None implements Equals {
  */
 export class Some<A> implements Equals {
   readonly _tag = "Some";
+
   constructor(readonly value: A) {}
 
   [Equals.sym](that: unknown): boolean {
@@ -358,6 +359,18 @@ export function isNone<A>(fa: Option<A>): fa is None {
  */
 export function isSome<A>(fa: Option<A>): fa is Some<A> {
   return fa._tag === "Some";
+}
+
+/**
+ * @tsplus static Option/Ops isOption
+ */
+export function isOption(u: unknown): u is Option<unknown> {
+  return (
+    typeof u === "object" &&
+    u != null &&
+    "_tag" in u &&
+    (u["_tag"] === "Some" || u["_tag"] === "None")
+  );
 }
 
 /**

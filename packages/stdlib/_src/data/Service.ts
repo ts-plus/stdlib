@@ -71,3 +71,24 @@ export declare namespace Service {
 export function merge<A extends Service.Has<any>, B extends Service.Has<any>>(self: A, that: B): A & B {
   return { ...self, ...that };
 }
+
+/**
+ * @tsplus static Service/Ops isService
+ */
+export function isService(u: unknown): u is Service<unknown> {
+  return (
+    typeof u === "object" &&
+    u != null &&
+    "of" in u &&
+    typeof u["of"] === "function" &&
+    "in" in u &&
+    typeof u["in"] === "function" &&
+    "id" in u &&
+    typeof u["id"] === "function" &&
+    "get" in u &&
+    typeof u["get"] === "function" &&
+    "getMaybe" in u &&
+    typeof u["getMaybe"] === "function" &&
+    "identifier" in u
+  );
+}

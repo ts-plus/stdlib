@@ -96,6 +96,18 @@ export function getLeft<E, A>(self: Either<E, A>): Option<E> {
 }
 
 /**
+ * @tsplus static Either/Ops isEither
+ */
+export function isEither(u: unknown): u is Either<unknown, unknown> {
+  return (
+    typeof u === "object" &&
+    u != null &&
+    "_tag" in u &&
+    (u["_tag"] === "Left" || u["_tag"] === "Right")
+  );
+}
+
+/**
  * @tsplus getter Either right
  */
 export function getRight<E, A>(self: Either<E, A>): Option<A> {
