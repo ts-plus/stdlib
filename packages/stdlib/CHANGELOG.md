@@ -1,5 +1,15 @@
 # @tsplus/stdlib
 
+## 0.0.44
+
+### Patch Changes
+
+- [#78](https://github.com/ts-plus/stdlib/pull/78) [`69708a1`](https://github.com/ts-plus/stdlib/commit/69708a174413ca75b176b4178e0ebf603b8ad549) Thanks [@IMax153](https://github.com/IMax153)! - add LazyValue module
+
+* [#80](https://github.com/ts-plus/stdlib/pull/80) [`03511f8`](https://github.com/ts-plus/stdlib/commit/03511f8f5a56aa3536e0fdf4203ea60031b996ad) Thanks [@IMax153](https://github.com/IMax153)! - add global for Match module
+
+- [#78](https://github.com/ts-plus/stdlib/pull/78) [`2550673`](https://github.com/ts-plus/stdlib/commit/2550673daf3492564302e1d87babb642d783093c) Thanks [@IMax153](https://github.com/IMax153)! - add Match module
+
 ## 0.0.43
 
 ### Patch Changes
