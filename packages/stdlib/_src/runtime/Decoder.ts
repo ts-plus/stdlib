@@ -149,6 +149,16 @@ export class DecoderErrorUnion implements Decoder.Error {
     );
 }
 
+export class DecoderErrorArray implements Decoder.Error {
+  constructor(readonly errors: Chunk<[number, Decoder.Error]>) {}
+
+  render = () =>
+    Tree(
+      `Encountered while processing an Array of elements`,
+      this.errors.map(([n, err]) => Tree(`Encountered while processing element "${n}"`, Chunk(err.render())))
+    );
+}
+
 //
 // Implicits
 //
@@ -211,16 +221,6 @@ export function deriveLazy<A>(
     return cached.parseResult(u);
   });
   return decoder;
-}
-
-export class DecoderErrorArray implements Decoder.Error {
-  constructor(readonly errors: Chunk<[number, Decoder.Error]>) {}
-
-  render = () =>
-    Tree(
-      `Encountered while processing an Array of elements`,
-      this.errors.map(([n, err]) => Tree(`Encountered while processing element "${n}"`, Chunk(err.render())))
-    );
 }
 
 /**
