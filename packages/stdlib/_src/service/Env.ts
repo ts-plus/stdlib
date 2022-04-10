@@ -1,5 +1,5 @@
-import type { Has } from "./Has";
-import type { Tag } from "./Tag";
+import type { Has } from "@tsplus/stdlib/service/Has";
+import type { Tag } from "@tsplus/stdlib/service/Tag";
 
 /**
  * @tsplus type Env/Ops

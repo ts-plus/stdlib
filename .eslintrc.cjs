@@ -39,6 +39,9 @@ module.exports = {
         }
       }
     ],
+    "no-restricted-imports": ["error", {
+      "patterns": [".*"]
+    }],
     "codegen/codegen": "error",
     "no-fallthrough": "off",
     "no-irregular-whitespace": "off",
