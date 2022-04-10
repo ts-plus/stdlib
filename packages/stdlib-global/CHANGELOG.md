@@ -1,5 +1,14 @@
 # @tsplus/stdlib-global
 
+## 0.0.10
+
+### Patch Changes
+
+- [#81](https://github.com/ts-plus/stdlib/pull/81) [`f72ad3b`](https://github.com/ts-plus/stdlib/commit/f72ad3beb1b08feedf330edbfc3add9f5e8edeab) Thanks [@mikearnaldi](https://github.com/mikearnaldi)! - Revise Service.Has/Tag/Env
+
+- Updated dependencies [[`f72ad3b`](https://github.com/ts-plus/stdlib/commit/f72ad3beb1b08feedf330edbfc3add9f5e8edeab)]:
+  - @tsplus/stdlib@0.0.45
+
 ## 0.0.9
 
 ### Patch Changes
