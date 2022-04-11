@@ -1,5 +1,11 @@
 # @tsplus/stdlib
 
+## 0.0.46
+
+### Patch Changes
+
+- [#84](https://github.com/ts-plus/stdlib/pull/84) [`2fce89f`](https://github.com/ts-plus/stdlib/commit/2fce89fb32cefa430de87b9824d24b640d0c6e33) Thanks [@IMax153](https://github.com/IMax153)! - add Patch module for Service
+
 ## 0.0.45
 
 ### Patch Changes
