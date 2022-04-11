@@ -21,6 +21,7 @@ describe.concurrent("Environment", () => {
     assert.isTrue(env.getOption(C).isNone());
     assert.throw(() => env.unsafeGet(C));
   });
+
   it("prunes services in env and merges", () => {
     const env = Service.Env().add(A, { a: 0 }).merge(Service.Env().add(B, { b: 1 }).add(C, { c: 2 }));
     const pruned = env.prune(A, B);
@@ -29,5 +30,40 @@ describe.concurrent("Environment", () => {
     assert.isTrue(pruned.getOption(C).isNone());
     assert.throw(() => pruned.unsafeGet(C));
     assert.deepEqual(env.get(C), { c: 2 });
+  });
+
+  describe.concurrent("Patch", () => {
+    it("applies a patch to the environment", () => {
+      const a: A = { a: 0 };
+      const b: B = { b: 1 };
+      const c: C = { c: 2 };
+      const oldEnv = Service.Env().add(A, a).add(B, b).add(C, c);
+      const newEnv = Service.Env().add(A, a).add(B, { b: 3 });
+      const patch = Service.Patch.diff(oldEnv, newEnv);
+
+      const result = patch.patch(oldEnv);
+
+      assert.isTrue(result.getOption(A).isSome());
+      assert.isTrue(result.getOption(B).isSome());
+      assert.isTrue(result.getOption(C).isNone());
+      assert.strictEqual(result.get(B).b, 3);
+    });
+
+    it("creates a proper diff", () => {
+      const a: A = { a: 0 };
+      const b: B = { b: 1 };
+      const c: C = { c: 2 };
+      const oldEnv = Service.Env().add(A, a).add(B, b).add(C, c);
+      const newEnv = Service.Env().add(A, a).add(B, { b: 3 });
+
+      const result = Service.Patch.diff(oldEnv, newEnv);
+
+      assert.deepNestedPropertyVal(result, "first._tag", "AndThen");
+      assert.deepNestedPropertyVal(result, "first.first._tag", "Empty");
+      assert.deepNestedPropertyVal(result, "first.second._tag", "UpdateService");
+      assert.deepNestedPropertyVal(result, "first.second.tag", B);
+      assert.deepNestedPropertyVal(result, "second._tag", "RemoveService");
+      assert.deepNestedPropertyVal(result, "second.tag", C);
+    });
   });
 });
