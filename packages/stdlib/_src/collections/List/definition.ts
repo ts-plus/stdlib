@@ -93,6 +93,13 @@ export declare namespace List {
 export interface ListOps {}
 export const List: ListOps = {};
 
+export declare namespace List {
+  /**
+   * @tsplus type NonEmptyList
+   */
+  export type NonEmpty<A> = Cons<A>;
+}
+
 /**
  * @tsplus unify List
  * @tsplus unify List/Nil
