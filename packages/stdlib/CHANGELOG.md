@@ -1,5 +1,11 @@
 # @tsplus/stdlib
 
+## 0.0.47
+
+### Patch Changes
+
+- [#86](https://github.com/ts-plus/stdlib/pull/86) [`4a40f32`](https://github.com/ts-plus/stdlib/commit/4a40f328b30c3b47eacade97f8ff4dac3ac4cd33) Thanks [@IMax153](https://github.com/IMax153)! - add List.NonEmpty alias for List.Cons
+
 ## 0.0.46
 
 ### Patch Changes
