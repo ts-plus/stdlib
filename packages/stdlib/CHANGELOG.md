@@ -1,5 +1,11 @@
 # @tsplus/stdlib
 
+## 0.0.48
+
+### Patch Changes
+
+- [#88](https://github.com/ts-plus/stdlib/pull/88) [`417a239`](https://github.com/ts-plus/stdlib/commit/417a23933be7242fd269d64e772b5ee33ba1c190) Thanks [@mikearnaldi](https://github.com/mikearnaldi)! - Introduce Validation module with Derivation Rules
+
 ## 0.0.47
 
 ### Patch Changes
