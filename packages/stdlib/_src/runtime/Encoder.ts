@@ -65,6 +65,18 @@ export const taggedObject: Encoder<{
 //
 
 /**
+ * @tsplus derive Encoder<_> 10
+ */
+export function deriveValidation<A extends Validation.Brand<any, any>>(
+  ...[base]: Check<Validation.IsValidated<A>> extends Check.True ? [
+    base: Encoder<Validation.Unbranded<A>>
+  ]
+    : never
+): Encoder<A> {
+  return Encoder((a) => base.encode(a as Validation.Unbranded<A>));
+}
+
+/**
  * @tsplus derive Encoder lazy
  */
 export function deriveLazy<A>(
@@ -180,7 +192,7 @@ export function deriveSortedSet<A extends SortedSet<any>>(
 }
 
 /**
- * @tsplus derive Encoder<_> 10
+ * @tsplus derive Encoder<_> 20
  */
 export function deriveLiteral<A extends string | number>(
   ...[value]: Check<Check.IsLiteral<A> & Check.Not<Check.IsUnion<A>>> extends Check.True ? [value: A] : never

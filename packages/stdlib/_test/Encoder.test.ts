@@ -81,4 +81,17 @@ describe.concurrent("Encoder", () => {
     assert.deepEqual(encoder.encodeJSON(Option.none), "{\"_tag\":\"None\"}");
     assert.deepEqual(encoder.encode(Option.some("ok")), Option.some("ok"));
   });
+  it("validated", () => {
+    /** @tsplus implicit local */
+    const Int = Validation<number, "Int">((n) => Number.isInteger(n));
+    type Int = Validation.Type<typeof Int>;
+    const encoderInt: Encoder<Int> = Derive();
+    /** @tsplus implicit local */
+    const Id = Validation<string, "Id">((n) => n.startsWith("id:"));
+    type Id = Validation.Type<typeof Id>;
+    const encoderId: Encoder<Id> = Derive();
+
+    assert.equal(encoderInt.encode(1 as Int), 1);
+    assert.equal(encoderId.encode("id:hello" as Id), "id:hello");
+  });
 });

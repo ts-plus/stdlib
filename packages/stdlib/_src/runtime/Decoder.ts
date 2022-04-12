@@ -159,6 +159,14 @@ export class DecoderErrorArray implements Decoder.Error {
     );
 }
 
+export class DecoderErrorValidation implements Decoder.Error {
+  constructor(readonly errors: string[]) {}
+  render = () =>
+    Tree(
+      `Encountered while processing validations: ${this.errors.sort().join(", ")}`
+    );
+}
+
 //
 // Implicits
 //
@@ -221,6 +229,38 @@ export function deriveLazy<A>(
     return cached.decodeResult(u);
   });
   return decoder;
+}
+
+/**
+ * @tsplus derive Decoder<_> 10
+ */
+export function deriveValidation<A extends Validation.Brand<any, any>>(
+  ...[base, brands]: Check<Validation.IsValidated<A>> extends Check.True ? [
+    base: Decoder<Validation.Unbranded<A>>,
+    brands: {
+      [k in (keyof A[typeof Validation.sym]) & string]: Validation<A[typeof Validation.sym][k], k>;
+    }
+  ]
+    : never
+): Decoder<A> {
+  const brandKeys = Object.keys(brands);
+  return Decoder((u) =>
+    base.decodeResult(u).fold(
+      (baseValue, warning) => {
+        const errors: string[] = [];
+        for (const brand of brandKeys) {
+          if (!brands[brand]!.validate(baseValue as any)) {
+            errors.push(brand);
+          }
+        }
+        if (errors.length > 0) {
+          return Result.fail(new DecoderErrorValidation(errors));
+        }
+        return Result.success(baseValue, warning);
+      },
+      (e) => Result.fail(e)
+    )
+  );
 }
 
 /**
@@ -340,7 +380,7 @@ export function deriveOption<A extends Option<any>>(
 }
 
 /**
- * @tsplus derive Decoder<_> 10
+ * @tsplus derive Decoder<_> 20
  */
 export function deriveLiteral<A extends string | number>(
   ...[value]: Check<Check.IsLiteral<A> & Check.Not<Check.IsUnion<A>>> extends Check.True ? [value: A] : never

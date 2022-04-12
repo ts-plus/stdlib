@@ -87,6 +87,22 @@ export function deriveLazy<A>(
 /**
  * @tsplus derive Guard<_> 10
  */
+export function deriveValidation<A extends Validation.Brand<any, any>>(
+  ...[base, brands]: Check<Validation.IsValidated<A>> extends Check.True ? [
+    base: Guard<Validation.Unbranded<A>>,
+    brands: {
+      [k in (keyof A[typeof Validation.sym]) & string]: Validation<A[typeof Validation.sym][k], k>;
+    }
+  ]
+    : never
+): Guard<A> {
+  const validateBrands = Object.keys(brands).map((k) => brands[k]!);
+  return Guard((u): u is A => base.is(u) && validateBrands.every((brand) => brand.validate(u as any)));
+}
+
+/**
+ * @tsplus derive Guard<_> 20
+ */
 export function deriveLiteral<A extends string | number>(
   ...[value]: Check<Check.IsLiteral<A> & Check.Not<Check.IsUnion<A>>> extends Check.True ? [value: A] : never
 ): Guard<A> {
