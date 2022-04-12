@@ -211,4 +211,28 @@ describe.concurrent("Decoder", () => {
       }) == Either.left("Expected a tagged object of the form \"{ _tag: \"None\" | \"Some\" }\"")
     );
   });
+  it("validated", () => {
+    /** @tsplus implicit local */
+    const Int = Validation<number, "Int">((n) => Number.isInteger(n));
+    type Int = Validation.Type<typeof Int>;
+    const decoder: Decoder<Int> = Derive();
+
+    assert.isTrue(decoder.decode(1) == Either.right(1));
+    assert.isTrue(
+      decoder.decode("1") == Either.left("Expected a value of type \"number\" but received one of type \"string\"")
+    );
+
+    /** @tsplus implicit local */
+    const Positive = Validation<number, "Positive">((n) => n >= 0);
+    type Positive = Validation.Type<typeof Positive>;
+    const decoderPositive: Decoder<Positive> = Derive();
+
+    assert.isTrue(decoderPositive.decode(1) == Either.right(1));
+    assert.isTrue(decoderPositive.decode(-1) == Either.left("Encountered while processing validations: Positive"));
+
+    const positiveInt: Decoder<Positive & Int> = Derive();
+
+    assert.isTrue(positiveInt.decode(-1.5) == Either.left("Encountered while processing validations: Int, Positive"));
+    assert.isTrue(positiveInt.decode(-1) == Either.left("Encountered while processing validations: Positive"));
+  });
 });
