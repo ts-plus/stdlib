@@ -212,5 +212,11 @@ describe("Guard", () => {
 
     assert.isTrue(guardId.is("id:ok"));
     assert.isFalse(guardId.is("id2:ok"));
+
+    assert.throw(() => {
+      const x = "id2:ok";
+      guardId.asserts(x);
+      console.log(x);
+    });
   });
 });

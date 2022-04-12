@@ -302,3 +302,12 @@ export function deriveUnion<A extends unknown[]>(
     return false;
   });
 }
+
+/**
+ * @tsplus fluent Guard asserts
+ */
+export function asserts<A>(self: Guard<A>, u: unknown): asserts u is A {
+  if (!self.is(u)) {
+    throw new Error("Invalid assertion");
+  }
+}
