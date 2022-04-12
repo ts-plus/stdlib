@@ -1,5 +1,11 @@
 # @tsplus/stdlib
 
+## 0.0.49
+
+### Patch Changes
+
+- [#90](https://github.com/ts-plus/stdlib/pull/90) [`764ae0e`](https://github.com/ts-plus/stdlib/commit/764ae0ed5d1e3f99c7fb1cc9aa498920edd9ff75) Thanks [@mikearnaldi](https://github.com/mikearnaldi)! - Add asserts in Guard
+
 ## 0.0.48
 
 ### Patch Changes
