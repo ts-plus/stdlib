@@ -8,9 +8,20 @@ export declare namespace Validation {
     };
   }
 
+  export type sym = Ops["sym"];
+
+  /**
+   * @tsplus type Validation/Ops
+   */
+  export interface Ops {
+    readonly sym: unique symbol;
+
+    <A, K extends string>(predicate: (a: A) => boolean): Validation<A, K>;
+  }
+
   export type IsValidated<P extends Brand<any, any>> = {
-    [k in keyof P[ValidationOps["sym"]]]: P extends P[ValidationOps["sym"]][k] ? 0 : 1;
-  }[keyof P[ValidationOps["sym"]]] extends 0 ? unknown : never;
+    [k in keyof P[Validation.sym]]: P extends P[Validation.sym][k] ? 0 : 1;
+  }[keyof P[Validation.sym]] extends 0 ? unknown : never;
 
   export type Validated<A, K extends string> = A & Brand<A, K>;
 
@@ -18,10 +29,10 @@ export declare namespace Validation {
 
   export type Brands<P extends Brand<any, any>> = TypeLevel.UnionToIntersection<
     {
-      [k in keyof P[ValidationOps["sym"]]]: P extends P[ValidationOps["sym"]][k]
-        ? k extends string ? Brand<P[ValidationOps["sym"]][k], k> : never
+      [k in keyof P[Validation.sym]]: P extends P[Validation.sym][k]
+        ? k extends string ? Brand<P[Validation.sym][k], k> : never
         : never;
-    }[keyof P[ValidationOps["sym"]]]
+    }[keyof P[Validation.sym]]
   >;
 }
 
@@ -32,20 +43,11 @@ export interface Validation<A, K extends string> {
   readonly validate: (a: A) => a is A & Validation.Brand<A, K>;
 }
 
-/**
- * @tsplus type Validation/Ops
- */
-export interface ValidationOps {
-  readonly sym: unique symbol;
-
-  <A, K extends string>(predicate: (a: A) => boolean): Validation<A, K>;
-}
-
-export const Validation: ValidationOps = Object.assign(
+export const Validation: Validation.Ops = Object.assign(
   <A, K extends string>(predicate: (a: A) => boolean): Validation<A, K> => ({
     validate: (a: A): a is A & Validation.Brand<A, K> => predicate(a)
   }),
   {
-    sym: Symbol() as ValidationOps["sym"]
+    sym: Symbol() as Validation.sym
   }
 );
