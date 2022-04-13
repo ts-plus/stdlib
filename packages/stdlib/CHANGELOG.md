@@ -1,5 +1,13 @@
 # @tsplus/stdlib
 
+## 0.0.50
+
+### Patch Changes
+
+- [#94](https://github.com/ts-plus/stdlib/pull/94) [`18ade1c`](https://github.com/ts-plus/stdlib/commit/18ade1cae5a758a23b1e7bc477ec20a846a64940) Thanks [@IMax153](https://github.com/IMax153)! - add missing Chunk combinators
+
+* [#92](https://github.com/ts-plus/stdlib/pull/92) [`192ba46`](https://github.com/ts-plus/stdlib/commit/192ba4618258d43dc093ffa15a5296c754688138) Thanks [@mikearnaldi](https://github.com/mikearnaldi)! - Improve Validation structure
+
 ## 0.0.49
 
 ### Patch Changes
