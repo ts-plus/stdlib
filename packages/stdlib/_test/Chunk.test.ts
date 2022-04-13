@@ -98,6 +98,11 @@ describe.concurrent("Chunk", () => {
     assert.isTrue(result == ImmutableArray(6, 7, 8, 9, 10));
   });
 
+  it("elem", () => {
+    assert.isTrue(Chunk(1, 2, 3).elem(Equivalence.number, 2));
+    assert.isFalse(Chunk(1, 2, 3).elem(Equivalence.number, 0));
+  });
+
   it("map", () => {
     const chunk = Chunk.from(Buffer.from("hello-world"));
 
@@ -133,6 +138,12 @@ describe.concurrent("Chunk", () => {
     const chunkB = Chunk.single(0).append(1).append(2).append(3).append(4);
 
     assert.isTrue(chunkA == chunkB);
+  });
+
+  it("difference", () => {
+    assert.isTrue(Chunk(1, 2).difference(Equivalence.number, Chunk(3, 4)) == Chunk(1, 2));
+    assert.isTrue(Chunk(1, 2).difference(Equivalence.number, Chunk(2, 3)) == Chunk(1));
+    assert.isTrue(Chunk(1, 2).difference(Equivalence.number, Chunk(1, 2)) == Chunk.empty<number>());
   });
 
   it("dropWhile", () => {
@@ -181,6 +192,132 @@ describe.concurrent("Chunk", () => {
     assert.strictEqual(result, 4);
   });
 
+  it("intersection", () => {
+    assert.isTrue(Chunk(1, 2).intersection(Equivalence.number, Chunk(3, 4)) == Chunk.empty<number>());
+    assert.isTrue(Chunk(1, 2).intersection(Equivalence.number, Chunk(2, 3)) == Chunk(2));
+    assert.isTrue(Chunk(1, 2).intersection(Equivalence.number, Chunk(1, 2)) == Chunk(1, 2));
+  });
+
+  it("partition", () => {
+    assert.isTrue(Chunk.empty<number>().partition((n) => n > 2) == Tuple(Chunk.empty<number>(), Chunk.empty<number>()));
+    assert.isTrue(Chunk(1, 3).partition((n) => n > 2) == Tuple(Chunk(1), Chunk(3)));
+  });
+
+  it("partitionMap", () => {
+    assert.isTrue(
+      Chunk.empty<Either<string, number>>().partitionMap(identity) ==
+        Tuple(Chunk.empty<string>(), Chunk.empty<number>())
+    );
+    assert.isTrue(
+      Chunk(Either.right(1), Either.left("foo"), Either.right(2)).partitionMap(identity) ==
+        Tuple(Chunk("foo"), Chunk(1, 2))
+    );
+  });
+
+  it("partitionWithIndex", () => {
+    assert.isTrue(
+      Chunk.empty<number>().partitionWithIndex((i, n) => i + n > 2) ==
+        Tuple(Chunk.empty<number>(), Chunk.empty<number>())
+    );
+    assert.isTrue(Chunk(1, 2).partitionWithIndex((i, n) => i + n > 2) == Tuple(Chunk(1), Chunk(2)));
+  });
+
+  it("partitionMapWithIndex", () => {
+    assert.isTrue(
+      Chunk.empty<Either<string, number>>().partitionMapWithIndex((_, a) => a) ==
+        Tuple(Chunk.empty<string>(), Chunk.empty<number>())
+    );
+    assert.isTrue(
+      Chunk(Either.right(1), Either.left("foo"), Either.right(2))
+        .partitionMapWithIndex((i, a) => a.filterOrElse((n) => n > i, () => "woops")) ==
+        Tuple(Chunk("foo", "woops"), Chunk(1))
+    );
+  });
+
+  describe("sort", () => {
+    it("simple", () => {
+      assert.isTrue(Chunk(3, 2, 1).sort(Ord.number) == Chunk(1, 2, 3));
+      assert.isTrue(Chunk.empty<number>().sort(Ord.number) == Chunk.empty<number>());
+    });
+
+    it("complex", () => {
+      class Person implements Equals {
+        constructor(readonly name: string, readonly age: number) {}
+
+        [Hash.sym](): number {
+          return Hash.combine(Hash.string(this.name), Hash.number(this.age));
+        }
+
+        [Equals.sym](u: unknown): boolean {
+          return u instanceof Person && this.name === u.name && this.age === u.age;
+        }
+      }
+
+      const chunk = Chunk(
+        new Person("b", 0),
+        new Person("a", 1),
+        new Person("c", 2)
+      );
+      const byName = Ord.string.contramap((x: Person) => x.name);
+
+      const result = chunk.sort(byName);
+
+      assert.isTrue(
+        result ==
+          Chunk(
+            new Person("a", 1),
+            new Person("b", 0),
+            new Person("c", 2)
+          )
+      );
+    });
+  });
+
+  it("sortBy", () => {
+    class Person implements Equals {
+      constructor(readonly name: string, readonly age: number) {}
+
+      [Hash.sym](): number {
+        return Hash.combine(Hash.string(this.name), Hash.number(this.age));
+      }
+
+      [Equals.sym](u: unknown): boolean {
+        return u instanceof Person && this.name === u.name && this.age === u.age;
+      }
+    }
+
+    const people = Chunk(
+      new Person("a", 1),
+      new Person("b", 3),
+      new Person("c", 2),
+      new Person("b", 2)
+    );
+    const byName = Ord.string.contramap((x: Person) => x.name);
+    const byAge = Ord.number.contramap((x: Person) => x.age);
+
+    assert.isTrue(
+      people.sortBy(byName, byAge) ==
+        Chunk(
+          new Person("a", 1),
+          new Person("b", 2),
+          new Person("b", 3),
+          new Person("c", 2)
+        )
+    );
+    assert.isTrue(
+      people.sortBy(byAge, byName) ==
+        Chunk(
+          new Person("a", 1),
+          new Person("b", 2),
+          new Person("c", 2),
+          new Person("b", 3)
+        )
+    );
+    assert.isTrue(Chunk.empty<Person>().sortBy() == Chunk.empty<Person>());
+    assert.isTrue(Chunk.empty<Person>().sortBy(byName, byAge) == Chunk.empty<Person>());
+    assert.isTrue(people.sortBy() == people);
+  });
+
   it("split", () => {
     function flattenArray(
       chunk: Chunk<Chunk<number>>
@@ -210,6 +347,50 @@ describe.concurrent("Chunk", () => {
 
     assert.isTrue(left == Chunk(0, 1, 2));
     assert.isTrue(right == Chunk(3, 4, 5));
+  });
+
+  it("union", () => {
+    assert.isTrue(Chunk(1, 2).union(Equivalence.number, Chunk(3, 4)) == Chunk(1, 2, 3, 4));
+    assert.isTrue(Chunk(1, 2).union(Equivalence.number, Chunk(2, 3)) == Chunk(1, 2, 3));
+    assert.isTrue(Chunk(1, 2).union(Equivalence.number, Chunk(1, 2)) == Chunk(1, 2));
+    assert.isTrue(Chunk(1, 2).union(Equivalence.number, Chunk.empty<number>()) == Chunk(1, 2));
+    assert.isTrue(Chunk.empty<number>().union(Equivalence.number, Chunk(1, 2)) == Chunk(1, 2));
+    assert.isTrue(Chunk.empty<number>().union(Equivalence.number, Chunk.empty<number>()) == Chunk.empty<number>());
+  });
+
+  it("uniq", () => {
+    interface A {
+      readonly a: string;
+      readonly b: number;
+    }
+
+    const E = Equivalence.struct({
+      a: Equivalence.string,
+      b: Equivalence.number
+    });
+
+    const a: A = { a: "a", b: 1 };
+    const b: A = { a: "b", b: 1 };
+    const c: A = { a: "c", b: 2 };
+    const d: A = { a: "d", b: 2 };
+
+    assert.isTrue(Chunk(a, c).uniq(E) == Chunk(a, c));
+    assert.isTrue(Chunk(c, a).uniq(E) == Chunk(c, a));
+    assert.isTrue(Chunk(a, b, b, a).uniq(E) == Chunk(a, b));
+    assert.isTrue(Chunk(b, a, c, d).uniq(E) == Chunk(b, a, c, d));
+    assert.isTrue(Chunk(a, a, c, d, a).uniq(E) == Chunk(a, c, d));
+    assert.isTrue(Chunk(true, false, true, false).uniq(Equivalence.boolean) == Chunk(true, false));
+    assert.isTrue(Chunk.empty<boolean>().uniq(Equivalence.boolean) == Chunk.empty<boolean>());
+    assert.isTrue(Chunk(-0, -0).uniq(Equivalence.number) == Chunk(-0));
+    assert.isTrue(Chunk(0, -0).uniq(Equivalence.number) == Chunk(0));
+    assert.isTrue(Chunk(1).uniq(Equivalence.number) == Chunk(1));
+    assert.isTrue(Chunk(2, 1, 2).uniq(Equivalence.number) == Chunk(2, 1));
+    assert.isTrue(Chunk(1, 2, 1).uniq(Equivalence.number) == Chunk(1, 2));
+    assert.isTrue(Chunk(1, 2, 3, 4, 5).uniq(Equivalence.number) == Chunk(1, 2, 3, 4, 5));
+    assert.isTrue(Chunk(1, 1, 2, 2, 3, 3, 4, 4, 5, 5).uniq(Equivalence.number) == Chunk(1, 2, 3, 4, 5));
+    assert.isTrue(Chunk(1, 2, 3, 4, 5, 1, 2, 3, 4, 5).uniq(Equivalence.number) == Chunk(1, 2, 3, 4, 5));
+    assert.isTrue(Chunk("a", "b", "a").uniq(Equivalence.string) == Chunk("a", "b"));
+    assert.isTrue(Chunk("a", "b", "A").uniq(Equivalence.string) == Chunk("a", "b", "A"));
   });
 
   it("zip", () => {

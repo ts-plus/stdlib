@@ -8,19 +8,7 @@ export function partitionMap_<A, B, C>(
   self: Chunk<A>,
   f: (a: A) => Either<B, C>
 ): Tuple<[Chunk<B>, Chunk<C>]> {
-  let bs = Chunk.empty<B>();
-  let cs = Chunk.empty<C>();
-
-  self.forEach((a) => {
-    const x = f(a);
-    if (x._tag === "Left") {
-      bs = bs.append(x.left);
-    } else {
-      cs = cs.append(x.right);
-    }
-  });
-
-  return Tuple(bs, cs);
+  return self.partitionMapWithIndex((_, a) => f(a));
 }
 
 /**
