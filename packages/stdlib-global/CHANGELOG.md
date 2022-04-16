@@ -1,5 +1,14 @@
 # @tsplus/stdlib-global
 
+## 0.0.16
+
+### Patch Changes
+
+- [#96](https://github.com/ts-plus/stdlib/pull/96) [`656faa9`](https://github.com/ts-plus/stdlib/commit/656faa9320d0389f7483734b0e27c485d6e55e18) Thanks [@IMax153](https://github.com/IMax153)! - add ImmutableMap module
+
+- Updated dependencies [[`656faa9`](https://github.com/ts-plus/stdlib/commit/656faa9320d0389f7483734b0e27c485d6e55e18)]:
+  - @tsplus/stdlib@0.0.51
+
 ## 0.0.15
 
 ### Patch Changes
