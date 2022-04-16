@@ -3,10 +3,10 @@ import { EmptyMutableQueue, MutableQueueSym } from "@tsplus/stdlib/collections/m
 export class Unbounded<A> implements MutableQueue<A> {
   readonly [MutableQueueSym]: MutableQueueSym = MutableQueueSym;
 
-  #queue = new DoublyLinkedList<A>();
+  private queue = new DoublyLinkedList<A>();
 
   get size(): number {
-    return this.#queue.length;
+    return this.queue.length;
   }
 
   get isEmpty(): boolean {
@@ -22,7 +22,7 @@ export class Unbounded<A> implements MutableQueue<A> {
   }
 
   offer(a: A): boolean {
-    this.#queue.add(a);
+    this.queue.add(a);
     return true;
   }
 
@@ -37,7 +37,7 @@ export class Unbounded<A> implements MutableQueue<A> {
     if (this.isEmpty) {
       return a;
     }
-    return this.#queue.shift()!;
+    return this.queue.shift()!;
   }
 
   pollUpTo(n: number): Chunk<A> {
@@ -57,6 +57,6 @@ export class Unbounded<A> implements MutableQueue<A> {
   }
 
   [Symbol.iterator](): Iterator<A> {
-    return this.#queue[Symbol.iterator]();
+    return this.queue[Symbol.iterator]();
   }
 }

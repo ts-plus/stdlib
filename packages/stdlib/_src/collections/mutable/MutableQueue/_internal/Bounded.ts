@@ -3,16 +3,16 @@ import { EmptyMutableQueue, MutableQueueSym } from "@tsplus/stdlib/collections/m
 export class Bounded<A> implements MutableQueue<A> {
   readonly [MutableQueueSym]: MutableQueueSym = MutableQueueSym;
 
-  #queue = new DoublyLinkedList<A>();
+  private queue = new DoublyLinkedList<A>();
 
-  #max: number;
+  private max: number;
 
   constructor(max: number) {
-    this.#max = max;
+    this.max = max;
   }
 
   get size(): number {
-    return this.#queue.length;
+    return this.queue.length;
   }
 
   get isEmpty(): boolean {
@@ -24,14 +24,14 @@ export class Bounded<A> implements MutableQueue<A> {
   }
 
   get capacity(): number {
-    return this.#max;
+    return this.max;
   }
 
   offer(value: A): boolean {
     if (this.isFull) {
       return false;
     }
-    this.#queue.add(value);
+    this.queue.add(value);
     return true;
   }
 
@@ -57,7 +57,7 @@ export class Bounded<A> implements MutableQueue<A> {
     if (this.isEmpty) {
       return a;
     }
-    return this.#queue.shift()!;
+    return this.queue.shift()!;
   }
 
   pollUpTo(n: number): Chunk<A> {
@@ -79,6 +79,6 @@ export class Bounded<A> implements MutableQueue<A> {
   }
 
   [Symbol.iterator](): Iterator<A> {
-    return this.#queue[Symbol.iterator]();
+    return this.queue[Symbol.iterator]();
   }
 }

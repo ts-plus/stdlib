@@ -18,16 +18,16 @@ export class MutableHashMap<K, V> implements Collection<Tuple<[K, V]>> {
   readonly [_K]!: () => K;
   readonly [_V]!: () => V;
 
-  #backingMap = new Map<number, Node<K, V>>();
-  #length = new AtomicNumber(0);
+  private backingMap = new Map<number, Node<K, V>>();
+  private length = new AtomicNumber(0);
 
   get size(): number {
-    return this.#length.get;
+    return this.length.get;
   }
 
   get(k: K): Option<V> {
     const hash = Hash.unknown(k);
-    const arr = this.#backingMap.get(hash);
+    const arr = this.backingMap.get(hash);
 
     if (arr == null) {
       return Option.none;
@@ -47,7 +47,7 @@ export class MutableHashMap<K, V> implements Collection<Tuple<[K, V]>> {
 
   remove(k: K): MutableHashMap<K, V> {
     const hash = Hash.unknown(k);
-    const arr = this.#backingMap.get(hash);
+    const arr = this.backingMap.get(hash);
 
     if (arr == null) {
       return this;
@@ -55,11 +55,11 @@ export class MutableHashMap<K, V> implements Collection<Tuple<[K, V]>> {
 
     if (Equals.equals(k, arr.k)) {
       if (arr.next != null) {
-        this.#backingMap.set(hash, arr.next);
+        this.backingMap.set(hash, arr.next);
       } else {
-        this.#backingMap.delete(hash);
+        this.backingMap.delete(hash);
       }
-      this.#length.decrementAndGet();
+      this.length.decrementAndGet();
       return this;
     }
 
@@ -69,7 +69,7 @@ export class MutableHashMap<K, V> implements Collection<Tuple<[K, V]>> {
     while (next) {
       if (Equals.equals(k, next.k)) {
         curr.next = next.next;
-        this.#length.decrementAndGet();
+        this.length.decrementAndGet();
         return this;
       }
       curr = next;
@@ -81,11 +81,11 @@ export class MutableHashMap<K, V> implements Collection<Tuple<[K, V]>> {
 
   set(k: K, v: V): MutableHashMap<K, V> {
     const hash = Hash.unknown(k);
-    const arr = this.#backingMap.get(hash);
+    const arr = this.backingMap.get(hash);
 
     if (arr == null) {
-      this.#backingMap.set(hash, new Node(k, v));
-      this.#length.incrementAndGet();
+      this.backingMap.set(hash, new Node(k, v));
+      this.length.incrementAndGet();
       return this;
     }
 
@@ -101,14 +101,14 @@ export class MutableHashMap<K, V> implements Collection<Tuple<[K, V]>> {
       c = c.next;
     }
 
-    this.#length.incrementAndGet();
+    this.length.incrementAndGet();
     l.next = new Node(k, v);
     return this;
   }
 
   update(k: K, f: (v: V) => V): MutableHashMap<K, V> {
     const hash = Hash.unknown(k);
-    const arr = this.#backingMap.get(hash);
+    const arr = this.backingMap.get(hash);
 
     if (arr == null) {
       return this;
@@ -128,7 +128,7 @@ export class MutableHashMap<K, V> implements Collection<Tuple<[K, V]>> {
   }
 
   [Symbol.iterator](): Iterator<Tuple<[K, V]>> {
-    return ImmutableArray.from(this.#backingMap.values())
+    return ImmutableArray.from(this.backingMap.values())
       .map((node) => Tuple(node.k, node.v))[Symbol.iterator]();
   }
 }
