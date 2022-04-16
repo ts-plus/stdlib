@@ -3,14 +3,14 @@
  * @tsplus companion MutableHashSet/Ops
  */
 export class MutableHashSet<A> implements Collection<A> {
-  #hashMap: MutableHashMap<A, boolean>;
+  private backingMap: MutableHashMap<A, boolean>;
 
   constructor() {
-    this.#hashMap = MutableHashMap.empty();
+    this.backingMap = MutableHashMap.empty();
   }
 
   get size(): number {
-    return this.#hashMap.size;
+    return this.backingMap.size;
   }
 
   isEmpty(): boolean {
@@ -18,21 +18,21 @@ export class MutableHashSet<A> implements Collection<A> {
   }
 
   contains(value: A): boolean {
-    return this.#hashMap.has(value);
+    return this.backingMap.has(value);
   }
 
   add(value: A): boolean {
-    this.#hashMap.set(value, true);
-    return this.#hashMap.has(value);
+    this.backingMap.set(value, true);
+    return this.backingMap.has(value);
   }
 
   remove(value: A): boolean {
-    this.#hashMap.remove(value);
+    this.backingMap.remove(value);
 
-    return !this.#hashMap.has(value);
+    return !this.backingMap.has(value);
   }
 
   [Symbol.iterator](): Iterator<A> {
-    return this.#hashMap.map(({ tuple: [a] }) => a)[Symbol.iterator]();
+    return this.backingMap.map(({ tuple: [a] }) => a)[Symbol.iterator]();
   }
 }
