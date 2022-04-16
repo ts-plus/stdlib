@@ -580,45 +580,32 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@effect-ts/build-utils@npm:0.39.2":
-  version: 0.39.2
-  resolution: "@effect-ts/build-utils@npm:0.39.2"
+"@effect-ts/build-utils@npm:0.40.1":
+  version: 0.40.1
+  resolution: "@effect-ts/build-utils@npm:0.40.1"
   peerDependencies:
     "@effect-ts/core": ">= 0.28.9"
     cpx: ">= 1.5.0"
     picocolors: ^1.0.0
   bin:
     build-utils: build-utils
-  checksum: 0803c3a343b5546a2315881fb4f6b171307205af967b3dac68de631ccfcc1b9897f18bf0ab337f4814f4751b97b0b85552011f73efc2dfe85a63f6c2c31274aa
+  checksum: 4485a8c39f35cee8f57dac352900e598ebf551d71d644594afa7f9f28979d8b8697b4aec631e52e46ca0be8f2395f0846802ad4cb1cb1ac4c1289d103b3a74f1
   languageName: node
   linkType: hard
 
-"@effect-ts/build-utils@patch:@effect-ts/build-utils@npm:0.39.2#.yarn/patches/@effect-ts-build-utils-npm-0.39.2-f802d4baa8::locator=tsplus%40workspace%3A.":
-  version: 0.39.2
-  resolution: "@effect-ts/build-utils@patch:@effect-ts/build-utils@npm%3A0.39.2#.yarn/patches/@effect-ts-build-utils-npm-0.39.2-f802d4baa8::version=0.39.2&hash=75edf1&locator=tsplus%40workspace%3A."
-  peerDependencies:
-    "@effect-ts/core": ">= 0.28.9"
-    cpx: ">= 1.5.0"
-    picocolors: ^1.0.0
-  bin:
-    build-utils: build-utils
-  checksum: 8ff73b3b4c56ef6249a4ce4d43075fd059ab2786c074504306f6d61187a7a520a47475b9494da3687673e4f7f310136e541cade5cdbde8e954f0e78d48c47c38
-  languageName: node
-  linkType: hard
-
-"@effect-ts/core@npm:^0.59.4":
-  version: 0.59.4
-  resolution: "@effect-ts/core@npm:0.59.4"
+"@effect-ts/core@npm:^0.60.0":
+  version: 0.60.0
+  resolution: "@effect-ts/core@npm:0.60.0"
   dependencies:
-    "@effect-ts/system": ^0.56.4
-  checksum: 9d4b536cc34d252bb975ccaa0fc54b36480a6f01fe6ad5cc063c97a45ed59f712384f58662d337ade5fadb0e687b668ecf2815da08efc5ff7579a7fa60b4a1ce
+    "@effect-ts/system": ^0.57.0
+  checksum: fd43af7409e62e99261c8b59aeab7a3d94277af27e7790a630d8ab3cfe7db657aed744af7d67eeba3a233fa8b0f5fc7374892ddf72e33270dcedef92e965ded7
   languageName: node
   linkType: hard
 
-"@effect-ts/system@npm:^0.56.4":
-  version: 0.56.4
-  resolution: "@effect-ts/system@npm:0.56.4"
-  checksum: 141606b6d3a3896d2c5aae8b56bd1d7ec8d1d9399af7e197a28cb5ed24b861f2e0a7934a7739eab15855e5612281a98ced175bb34fc6d6c8a1983b60fbc25a4a
+"@effect-ts/system@npm:^0.57.0":
+  version: 0.57.0
+  resolution: "@effect-ts/system@npm:0.57.0"
+  checksum: 9f5dd596734091969f30e943c1303a501f5e91de3413b06d5513a342ce054b3749170fd6f4136ec5cc727c702337f122f549d7c903de2bc3f2f9f85615764ff6
   languageName: node
   linkType: hard
 
@@ -835,9 +822,9 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@tsplus/installer@npm:^0.0.82":
-  version: 0.0.82
-  resolution: "@tsplus/installer@npm:0.0.82"
+"@tsplus/installer@npm:^0.0.84":
+  version: 0.0.84
+  resolution: "@tsplus/installer@npm:0.0.84"
   dependencies:
     mkdirp: ^1.0.4
     rimraf: ^3.0.2
@@ -846,7 +833,7 @@ __metadata:
     zlib: ^1.0.5
   bin:
     tsplus-install: bin/tsplus-install
-  checksum: f419e9fcde7548ab198e10f3b564fc13516a57380f3ff5d1eb1c6f77e8c664692a7a8e350cca38e328a05e5080810dc010b0519a12e9c028e2caf7dfd6d2782f
+  checksum: 843f9a70230300862cc98c6cc78ec5239edae4ca45041a71a61fe7796a0aeafec142df7e3c9b49e847d64fb3f4bede97b34d7397dd6295d80db13ec27fd8aa85
   languageName: node
   linkType: hard
 
@@ -955,10 +942,10 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@types/node@npm:*, @types/node@npm:^17.0.23":
-  version: 17.0.23
-  resolution: "@types/node@npm:17.0.23"
-  checksum: a3517554737cbb042e76c30d0e5482192ac4d9bea0eeb086e2622d9cabf460a0eb52a696b99fcd18e7fcc93c96db6cc7ae507f6608f256ef0b5c1d8c87a5a470
+"@types/node@npm:*, @types/node@npm:^17.0.24":
+  version: 17.0.24
+  resolution: "@types/node@npm:17.0.24"
+  checksum: 9e7c4f863601b2430b4c2429a89935f22eba692956f5013c90a4c7fb0e1401ed8add8c4307453c5d6b8b985384500f8c3f644427ab88632640cc396159af479a
   languageName: node
   linkType: hard
 
@@ -7184,11 +7171,11 @@ __metadata:
     "@babel/plugin-transform-modules-commonjs": ^7.17.9
     "@changesets/changelog-github": ^0.4.4
     "@changesets/cli": ^2.22.0
-    "@effect-ts/build-utils": 0.39.4
-    "@effect-ts/core": ^0.59.4
+    "@effect-ts/build-utils": 0.40.1
+    "@effect-ts/core": ^0.60.0
     "@phaphoso/eslint-plugin-dprint": ^0.5.2
-    "@tsplus/installer": ^0.0.82
-    "@types/node": ^17.0.23
+    "@tsplus/installer": ^0.0.84
+    "@types/node": ^17.0.24
     "@types/rimraf": ^3.0.2
     "@typescript-eslint/eslint-plugin": ^5.19.0
     "@typescript-eslint/parser": ^5.19.0
@@ -7209,7 +7196,7 @@ __metadata:
     rimraf: ^3.0.2
     typescript: ^4.6.3
     ultra-runner: ^3.10.5
-    vite: ^2.9.1
+    vite: ^2.9.5
     vitest: 0.9.3
   languageName: unknown
   linkType: soft
@@ -7500,9 +7487,9 @@ __metadata:
   languageName: node
   linkType: hard
 
-"vite@npm:^2.9.1":
-  version: 2.9.1
-  resolution: "vite@npm:2.9.1"
+"vite@npm:^2.9.1, vite@npm:^2.9.5":
+  version: 2.9.5
+  resolution: "vite@npm:2.9.5"
   dependencies:
     esbuild: ^0.14.27
     fsevents: ~2.3.2
@@ -7525,7 +7512,7 @@ __metadata:
       optional: true
   bin:
     vite: bin/vite.js
-  checksum: 0f0ac9337fa5c17faa4a59831a2df17475563b23a6162e86b2b60b19835ca1277f3249ea7a6608880354b39caf05779e9bad1e3b1f5b27010deced224aae47ea
+  checksum: 354189cbce6904a3b58ca70b7ad9e1bb751ded9c13e483165562e634804cfb29bbf1507a4e6334cb9987e3f1f41e9f50764878a3c837523762e9da65229c9543
   languageName: node
   linkType: hard
 
