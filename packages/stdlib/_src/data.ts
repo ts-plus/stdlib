@@ -11,4 +11,5 @@ export * as option from "@tsplus/stdlib/data/Option";
 export * as predicate from "@tsplus/stdlib/data/Predicate";
 export * as result from "@tsplus/stdlib/data/Result";
 export * as stack from "@tsplus/stdlib/data/Stack";
+export * as string from "@tsplus/stdlib/data/String";
 export * as tuple from "@tsplus/stdlib/data/Tuple";
