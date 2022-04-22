@@ -1,5 +1,11 @@
 # @tsplus/stdlib
 
+## 0.0.52
+
+### Patch Changes
+
+- [#98](https://github.com/ts-plus/stdlib/pull/98) [`7257c4f`](https://github.com/ts-plus/stdlib/commit/7257c4f5b9dc4f38eeeab1bca87f4af256affba9) Thanks [@IMax153](https://github.com/IMax153)! - add String module
+
 ## 0.0.51
 
 ### Patch Changes
