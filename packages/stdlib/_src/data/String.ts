@@ -3,6 +3,10 @@ declare global {
    * @tsplus type string
    */
   export interface String {}
+  /**
+   * @tsplus type string/Ops
+   */
+  export interface StringConstructor {}
 }
 
 /**
@@ -63,11 +67,15 @@ export const takeRight = Pipeable(takeRight_);
 
 /**
  * Represents the character code of a carriage return character (`"\r"`).
+ *
+ * @tsplus static string/Ops CR
  */
 export const CR = 0x0d;
 
 /**
  * Represents the character code of a line-feed character (`"\n"`).
+ *
+ * @tsplus static string/Ops LF
  */
 export const LF = 0x0a;
 
