@@ -20,6 +20,19 @@ describe.concurrent("Eval", () => {
     assert.strictEqual(result, 3);
   });
 
+  it("do", () => {
+    const program = Do(($) => {
+      const a = $(Eval(0));
+      const b = $(Eval(1));
+      const c = $(Eval(2));
+      return a + b + c;
+    });
+
+    const result = program.run();
+
+    assert.strictEqual(result, 3);
+  });
+
   it("map", () => {
     const program = Eval(0).map((n) => n + 1);
 
