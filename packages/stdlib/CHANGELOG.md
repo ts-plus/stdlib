@@ -1,5 +1,11 @@
 # @tsplus/stdlib
 
+## 0.0.59
+
+### Patch Changes
+
+- [#112](https://github.com/ts-plus/stdlib/pull/112) [`6ef193a`](https://github.com/ts-plus/stdlib/commit/6ef193acf441612ab817a773cfa3fb8fc375fbe7) Thanks [@mikearnaldi](https://github.com/mikearnaldi)! - Fix ordering of diff
+
 ## 0.0.58
 
 ### Patch Changes
