@@ -6,6 +6,7 @@ import type { Tag } from "@tsplus/stdlib/service/Tag";
  */
 export interface EnvOps {
   readonly sym: unique symbol;
+  readonly empty: Env<unknown>;
 
   <S, H>(tag: Tag<S>, service: H): Env<Has<S>>;
   new(unsafeMap: Env<unknown>["unsafeMap"], index: number): Env<unknown>;
@@ -58,7 +59,7 @@ function pruneMethod<
     >
   >;
 }
-
+const sym = Symbol("@tsplus/stdlib/Env/Env") as EnvOps["sym"];
 export const Env: EnvOps = Object.assign(
   function(a: any, b: any) {
     if (new.target) {
@@ -74,25 +75,23 @@ export const Env: EnvOps = Object.assign(
         unsafeMap: a
       };
     }
-    return empty.add(a, b);
+    return Env.empty.add(a, b);
   } as any as EnvOps,
-  { sym: Symbol("@tsplus/stdlib/Env/Env") as EnvOps["sym"] }
+  {
+    sym,
+    empty: {
+      [sym]: identity,
+      add: methodAdd,
+      get: methodGet,
+      unsafeGet: methodGet,
+      getOption: methodGetOption,
+      merge: methodMerge,
+      prune: pruneMethod,
+      index: 0,
+      unsafeMap: new ImmutableMap(new Map())
+    }
+  }
 );
-
-/**
- * @tsplus static Env empty
- */
-export const empty: Env<unknown> = {
-  [Env.sym]: identity,
-  add: methodAdd,
-  get: methodGet,
-  unsafeGet: methodGet,
-  getOption: methodGetOption,
-  merge: methodMerge,
-  prune: pruneMethod,
-  index: 0,
-  unsafeMap: new ImmutableMap(new Map())
-};
 
 /**
  * @tsplus type Env
