@@ -1,3 +1,4 @@
+/* eslint-disable prefer-rest-params */
 import type { Has } from "@tsplus/stdlib/service/Has";
 import type { Tag } from "@tsplus/stdlib/service/Tag";
 
@@ -7,6 +8,7 @@ import type { Tag } from "@tsplus/stdlib/service/Tag";
 export interface EnvOps {
   readonly sym: unique symbol;
 
+  <S, H>(tag: Tag<S>, service: H): Env<Has<S>>;
   (unsafeMap?: Env<unknown>["unsafeMap"]): Env<unknown>;
 }
 
@@ -40,11 +42,11 @@ function pruneMethod<
     }[number]
   >
 > {
-  const newEnv = HashMap.empty<Tag<unknown>, unknown>().beginMutation();
+  const newEnv = new Map();
   for (const tag of tags) {
     newEnv.set(tag, this.unsafeGet(tag));
   }
-  return Env(newEnv.endMutation()) as Env<
+  return Env(new ImmutableMap(newEnv)) as Env<
     UnionToIntersection<
       {
         [k in keyof S]: [S[k]] extends [Tag<infer _S>] ? Has<_S> : never;
@@ -54,7 +56,12 @@ function pruneMethod<
 }
 
 export const Env: EnvOps = Object.assign(
-  function(unsafeMap: Env<unknown>["unsafeMap"] = HashMap.empty()): Env<unknown> {
+  function() {
+    const unsafeMap: Env<unknown>["unsafeMap"] = arguments.length === 0 ?
+      ImmutableMap.empty() :
+      arguments.length === 1 ?
+      arguments[0] :
+      new ImmutableMap(new Map([[arguments[0], arguments[1]]]));
     return {
       [Env.sym]: identity,
       unsafeMap,
@@ -74,7 +81,7 @@ export const Env: EnvOps = Object.assign(
  */
 export interface Env<R> {
   readonly [Env.sym]: (_: never) => R;
-  readonly unsafeMap: HashMap<Tag<unknown>, unknown>;
+  readonly unsafeMap: ImmutableMap<Tag<unknown>, unknown>;
 
   add<R, S, H extends S = S>(this: Env<R>, tag: Tag<S>, service: H): Env<R & Has<S>>;
   get<R extends Has<S>, S>(this: Env<R>, tag: Tag<S>): S;
