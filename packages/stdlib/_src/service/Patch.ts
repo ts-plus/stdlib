@@ -1,4 +1,6 @@
 import { Env } from "@tsplus/stdlib/service/Env";
+import { Has } from "@tsplus/stdlib/service/Has";
+import { Tag } from "@tsplus/stdlib/service/Tag";
 
 export const PatchSym = Symbol.for("@tsplus/stdlib/service/Patch");
 export type PatchSym = typeof PatchSym;
@@ -51,10 +53,10 @@ export class Empty<I, O> extends BasePatch<I, O> {
   }
 }
 
-export class AddService<Env, T> extends BasePatch<Env, Env & Service.Has<T>> {
+export class AddService<Env, T> extends BasePatch<Env, Env & Has<T>> {
   readonly _tag = "AddService";
 
-  constructor(readonly tag: Service.Tag<T>, readonly service: T) {
+  constructor(readonly tag: Tag<T>, readonly service: T) {
     super();
   }
 }
@@ -67,18 +69,18 @@ export class AndThen<Input, Output, Output2> extends BasePatch<Input, Output2> {
   }
 }
 
-export class RemoveService<Env, T> extends BasePatch<Env & Service.Has<T>, Env> {
+export class RemoveService<Env, T> extends BasePatch<Env & Has<T>, Env> {
   readonly _tag = "RemoveService";
 
-  constructor(readonly tag: Service.Tag<T>) {
+  constructor(readonly tag: Tag<T>) {
     super();
   }
 }
 
-export class UpdateService<Env, T> extends BasePatch<Env & Service.Has<T>, Env & Service.Has<T>> {
+export class UpdateService<Env, T> extends BasePatch<Env & Has<T>, Env & Has<T>> {
   readonly _tag = "UpdateService";
 
-  constructor(readonly tag: Service.Tag<T>, readonly update: (service: T) => T) {
+  constructor(readonly tag: Tag<T>, readonly update: (service: T) => T) {
     super();
   }
 }
@@ -103,8 +105,8 @@ export function concretePatch<Input, Output>(
  *
  * @tsplus fluent Patch patch
  */
-export function patch_<Input, Output>(self: Patch<Input, Output>, env: Service.Env<Input>): Service.Env<Output> {
-  return patchLoop(env, List(self as Patch<unknown, unknown>)) as Service.Env<Output>;
+export function patch_<Input, Output>(self: Patch<Input, Output>, env: Env<Input>): Env<Output> {
+  return Env(new ImmutableMap(patchLoop(new Map(env.unsafeMap.internalMap), List(self as Patch<unknown, unknown>)))) as Env<Output>;
 }
 
 /**
@@ -115,7 +117,7 @@ export const patch = Pipeable(patch_);
 /**
  * @tsplus tailrec
  */
-function patchLoop(env: Service.Env<unknown>, patches: List<Patch<unknown, unknown>>): Service.Env<unknown> {
+function patchLoop(env: Map<Tag<unknown>, unknown>, patches: List<Patch<unknown, unknown>>): Map<Tag<unknown>, unknown> {
   if (patches.isNil()) {
     return env;
   }
@@ -127,17 +129,17 @@ function patchLoop(env: Service.Env<unknown>, patches: List<Patch<unknown, unkno
       return patchLoop(env, tail);
     }
     case "AddService": {
-      return patchLoop(env.add(head.tag, head.service), tail);
+      return patchLoop(env.set(head.tag, head.service), tail);
     }
     case "AndThen": {
       return patchLoop(env, tail.prependAll(List(head.first, head.second)));
     }
     case "RemoveService": {
-      return patchLoop(Env(env.unsafeMap.remove(head.tag)), tail);
+      return patchLoop((env.delete(head.tag), env), tail);
     }
     case "UpdateService": {
-      const service = env.get<any, any>(head.tag);
-      return patchLoop(env.add(head.tag, head.update(service)), tail);
+      const service = env.get(head.tag);
+      return patchLoop(env.set(head.tag, head.update(service)), tail);
     }
   }
 }
@@ -175,24 +177,27 @@ export const combine = Pipeable(combine_);
 /**
  * @tsplus static Patch/Ops diff
  */
-export function diff<Input, Output>(oldValue: Service.Env<Input>, newValue: Service.Env<Output>): Patch<Input, Output> {
-  const sorted = newValue.unsafeMap.asList().sortWith(Ord.number.contramap(({ tuple: [tag] }) => tag.id));
-  const { tuple: [missingServices, patch] } = sorted.reduce(
-    Tuple(oldValue.unsafeMap, Patch.empty<Input, Output>()),
-    ({ tuple: [map, patch] }, { tuple: [tag, newService] }) =>
-      map.get(tag).fold(
-        Tuple(map.remove(tag), patch.combine(new AddService(tag, newService))),
-        (oldService) =>
-          oldService === newService ?
-            Tuple(map.remove(tag), patch) :
-            Tuple(
-              map.remove(tag),
-              (patch as Patch<Input, Output & Service.Has<unknown>>).combine(new UpdateService(tag, () => newService))
-            )
-      )
-  );
-  return missingServices.reduceWithIndex(
-    patch,
-    (patch, tag, _) => (patch as Patch<Input, Output & Service.Has<unknown>>).combine(new RemoveService(tag))
-  );
+export function diff<Input, Output>(oldValue: Env<Input>, newValue: Env<Output>): Patch<Input, Output> {
+  let missingServices = new Map(oldValue.unsafeMap.internalMap)
+  let patch = Patch.empty<any, any>()
+
+  for (const [tag, newService] of newValue.unsafeMap.internalMap) {
+    if (missingServices.has(tag)) {
+      const old = missingServices.get(tag)
+      missingServices.delete(tag)
+      if (old !== newService) {
+        patch = patch.combine(new UpdateService(tag, () => newService))
+      }
+    }
+    else {
+      missingServices.delete(tag)
+      patch = patch.combine(new AddService(tag, newService))
+    }
+  }
+
+  for (const [tag] of missingServices) {
+    patch = patch.combine(new RemoveService(tag))
+  }
+
+  return patch
 }
