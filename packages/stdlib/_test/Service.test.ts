@@ -15,7 +15,7 @@ const C = Service.Tag<C>();
 
 describe.concurrent("Environment", () => {
   it("adds and retrieve services", () => {
-    const env = Service.Env().add(A, { a: 0 }).add(B, { b: 1 });
+    const env = Service.Env(A, { a: 0 }).add(B, { b: 1 });
     assert.deepEqual(env.get(A), { a: 0 });
     assert.deepEqual(env.getOption(B).value, { b: 1 });
     assert.isTrue(env.getOption(C).isNone());
@@ -23,7 +23,7 @@ describe.concurrent("Environment", () => {
   });
 
   it("prunes services in env and merges", () => {
-    const env = Service.Env().add(A, { a: 0 }).merge(Service.Env().add(B, { b: 1 }).add(C, { c: 2 }));
+    const env = Service.Env(A, { a: 0 }).merge(Service.Env(B, { b: 1 }).add(C, { c: 2 }));
     const pruned = env.prune(A, B);
     assert.deepEqual(pruned.get(A), { a: 0 });
     assert.deepEqual(pruned.getOption(B).value, { b: 1 });
@@ -37,8 +37,8 @@ describe.concurrent("Environment", () => {
       const a: A = { a: 0 };
       const b: B = { b: 1 };
       const c: C = { c: 2 };
-      const oldEnv = Service.Env().add(A, a).add(B, b).add(C, c);
-      const newEnv = Service.Env().add(A, a).add(B, { b: 3 });
+      const oldEnv = Service.Env(A, a).add(B, b).add(C, c);
+      const newEnv = Service.Env(A, a).add(B, { b: 3 });
       const patch = Service.Patch.diff(oldEnv, newEnv);
 
       const result = patch.patch(oldEnv);
