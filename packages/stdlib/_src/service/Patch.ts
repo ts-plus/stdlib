@@ -43,7 +43,7 @@ export abstract class BasePatch<Input, Output> implements Patch<Input, Output> {
   readonly [_Output]!: () => Output;
 }
 
-export class Empty<Env> extends BasePatch<Env, Env> {
+export class Empty<I, O> extends BasePatch<I, O> {
   readonly _tag = "Empty";
 
   constructor() {
@@ -89,7 +89,7 @@ export class UpdateService<Env, T> extends BasePatch<Env & Service.Has<T>, Env &
 export function concretePatch<Input, Output>(
   _: Patch<Input, Output>
 ): asserts _ is
-  | Empty<any>
+  | Empty<any, any>
   | AddService<any, any>
   | AndThen<any, any, any>
   | RemoveService<any, any>
@@ -147,7 +147,7 @@ function patchLoop(env: Service.Env<unknown>, patches: List<Patch<unknown, unkno
  *
  * @tsplus static Patch/Ops empty
  */
-export function empty<A>(): Patch<A, A> {
+export function empty<I, O>(): Patch<I, O> {
   return new Empty();
 }
 
@@ -178,7 +178,7 @@ export const combine = Pipeable(combine_);
 export function diff<Input, Output>(oldValue: Service.Env<Input>, newValue: Service.Env<Output>): Patch<Input, Output> {
   const sorted = newValue.unsafeMap.asList().sortWith(Ord.number.contramap(({ tuple: [tag] }) => tag.id));
   const { tuple: [missingServices, patch] } = sorted.reduce(
-    Tuple(oldValue.unsafeMap, Patch.empty() as unknown as Patch<Input, Output>),
+    Tuple(oldValue.unsafeMap, Patch.empty<Input, Output>()),
     ({ tuple: [map, patch] }, { tuple: [tag, newService] }) =>
       map.get(tag).fold(
         Tuple(map.remove(tag), patch.combine(new AddService(tag, newService))),

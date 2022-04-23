@@ -13,9 +13,12 @@ export * from "@tsplus/stdlib/collections/ImmutableMap/has";
 export * from "@tsplus/stdlib/collections/ImmutableMap/isEmpty";
 export * from "@tsplus/stdlib/collections/ImmutableMap/map";
 export * from "@tsplus/stdlib/collections/ImmutableMap/mapWithIndex";
+export * from "@tsplus/stdlib/collections/ImmutableMap/reduceWithIndex";
 export * from "@tsplus/stdlib/collections/ImmutableMap/remove";
 export * from "@tsplus/stdlib/collections/ImmutableMap/removeMany";
 export * from "@tsplus/stdlib/collections/ImmutableMap/set";
 export * from "@tsplus/stdlib/collections/ImmutableMap/size";
+export * from "@tsplus/stdlib/collections/ImmutableMap/union";
+export * from "@tsplus/stdlib/collections/ImmutableMap/unsafeGet";
 export * from "@tsplus/stdlib/collections/ImmutableMap/update";
 // codegen:end

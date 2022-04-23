@@ -53,8 +53,8 @@ describe.concurrent("Environment", () => {
       const a: A = { a: 0 };
       const b: B = { b: 1 };
       const c: C = { c: 2 };
-      const oldEnv = Service.Env().add(A, a).add(B, b).add(C, c);
-      const newEnv = Service.Env().add(A, a).add(B, { b: 3 });
+      const oldEnv = Service.Env(A, a).add(B, b).add(C, c);
+      const newEnv = Service.Env(A, a).add(B, { b: 3 });
 
       const result = Service.Patch.diff(oldEnv, newEnv);
 
