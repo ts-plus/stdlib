@@ -1,4 +1,3 @@
-/* eslint-disable prefer-rest-params */
 import type { Has } from "@tsplus/stdlib/service/Has";
 import type { Tag } from "@tsplus/stdlib/service/Tag";
 
@@ -61,15 +60,21 @@ function pruneMethod<
 }
 
 export const Env: EnvOps = Object.assign(
-  function() {
+  function(a: any, b: any) {
     if (new.target) {
       return {
-        ...empty,
-        index: arguments[1],
-        unsafeMap: arguments[0]
+        [Env.sym]: identity,
+        add: methodAdd,
+        get: methodGet,
+        unsafeGet: methodGet,
+        getOption: methodGetOption,
+        merge: methodMerge,
+        prune: pruneMethod,
+        index: b,
+        unsafeMap: a
       };
     }
-    return empty.add(arguments[0], arguments[1]);
+    return empty.add(a, b);
   } as any as EnvOps,
   { sym: Symbol("@tsplus/stdlib/Env/Env") as EnvOps["sym"] }
 );
