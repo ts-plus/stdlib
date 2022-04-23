@@ -186,12 +186,12 @@ export const combine = Pipeable(combine_);
  * @tsplus static Patch/Ops diff
  */
 export function diff<Input, Output>(oldValue: Env<Input>, newValue: Env<Output>): Patch<Input, Output> {
-  const ordered = Array.from(oldValue.unsafeMap.internalMap.entries()).sort((a, b) => b[1][1] - a[1][1]);
-  const missingServices = new Map(ordered);
+  const ordered = Array.from(newValue.unsafeMap.internalMap.entries()).sort((a, b) => b[1][1] - a[1][1]);
+  const missingServices = new Map(oldValue.unsafeMap.internalMap);
 
   let patch = Patch.empty<any, any>();
 
-  for (const [tag, [newService]] of newValue.unsafeMap.internalMap) {
+  for (const [tag, [newService]] of ordered) {
     if (missingServices.has(tag)) {
       const [old] = missingServices.get(tag)!;
       missingServices.delete(tag);
@@ -204,7 +204,7 @@ export function diff<Input, Output>(oldValue: Env<Input>, newValue: Env<Output>)
     }
   }
 
-  for (const [tag] of missingServices) {
+  for (const [tag] of Array.from(missingServices).sort((a, b) => b[1][1] - a[1][1])) {
     patch = patch.combine(new RemoveService(tag));
   }
 
