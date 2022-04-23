@@ -1,5 +1,11 @@
 # @tsplus/stdlib
 
+## 0.0.58
+
+### Patch Changes
+
+- [#110](https://github.com/ts-plus/stdlib/pull/110) [`6b50e1f`](https://github.com/ts-plus/stdlib/commit/6b50e1f4c3e596248429a17d8063de9b27f430d0) Thanks [@mikearnaldi](https://github.com/mikearnaldi)! - Use this constructor instead of new target for compatibility
+
 ## 0.0.57
 
 ### Patch Changes
