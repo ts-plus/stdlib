@@ -1,6 +1,6 @@
 import { Env } from "@tsplus/stdlib/service/Env";
-import { Has } from "@tsplus/stdlib/service/Has";
-import { Tag } from "@tsplus/stdlib/service/Tag";
+import type { Has } from "@tsplus/stdlib/service/Has";
+import type { Tag } from "@tsplus/stdlib/service/Tag";
 
 export const PatchSym = Symbol.for("@tsplus/stdlib/service/Patch");
 export type PatchSym = typeof PatchSym;
@@ -106,7 +106,11 @@ export function concretePatch<Input, Output>(
  * @tsplus fluent Patch patch
  */
 export function patch_<Input, Output>(self: Patch<Input, Output>, env: Env<Input>): Env<Output> {
-  return Env(new ImmutableMap(patchLoop(new Map(env.unsafeMap.internalMap), List(self as Patch<unknown, unknown>)))) as Env<Output>;
+  const loopResult = patchLoop(new Map(env.unsafeMap.internalMap), env.index, List(self as Patch<unknown, unknown>));
+  return new Env(
+    new ImmutableMap(loopResult[0]),
+    loopResult[1]
+  ) as Env<Output>;
 }
 
 /**
@@ -117,29 +121,33 @@ export const patch = Pipeable(patch_);
 /**
  * @tsplus tailrec
  */
-function patchLoop(env: Map<Tag<unknown>, unknown>, patches: List<Patch<unknown, unknown>>): Map<Tag<unknown>, unknown> {
+function patchLoop(
+  env: Map<Tag<unknown>, [unknown, number]>,
+  index: number,
+  patches: List<Patch<unknown, unknown>>
+): [Map<Tag<unknown>, [unknown, number]>, number] {
   if (patches.isNil()) {
-    return env;
+    return [env, index];
   }
   const head = patches.head;
   concretePatch(head);
   const tail = patches.tail;
   switch (head._tag) {
     case "Empty": {
-      return patchLoop(env, tail);
+      return patchLoop(env, index, tail);
     }
     case "AddService": {
-      return patchLoop(env.set(head.tag, head.service), tail);
+      return patchLoop(env.set(head.tag, [head.service, index]), index + 1, tail);
     }
     case "AndThen": {
-      return patchLoop(env, tail.prependAll(List(head.first, head.second)));
+      return patchLoop(env, index, tail.prependAll(List(head.first, head.second)));
     }
     case "RemoveService": {
-      return patchLoop((env.delete(head.tag), env), tail);
+      return patchLoop((env.delete(head.tag), env), index, tail);
     }
     case "UpdateService": {
-      const service = env.get(head.tag);
-      return patchLoop(env.set(head.tag, head.update(service)), tail);
+      const [service, i] = env.get(head.tag)!;
+      return patchLoop(env.set(head.tag, [head.update(service), i]), index, tail);
     }
   }
 }
@@ -178,26 +186,27 @@ export const combine = Pipeable(combine_);
  * @tsplus static Patch/Ops diff
  */
 export function diff<Input, Output>(oldValue: Env<Input>, newValue: Env<Output>): Patch<Input, Output> {
-  let missingServices = new Map(oldValue.unsafeMap.internalMap)
-  let patch = Patch.empty<any, any>()
+  const ordered = Array.from(oldValue.unsafeMap.internalMap.entries()).sort((a, b) => b[1][1] - a[1][1]);
+  const missingServices = new Map(ordered);
 
-  for (const [tag, newService] of newValue.unsafeMap.internalMap) {
+  let patch = Patch.empty<any, any>();
+
+  for (const [tag, [newService]] of newValue.unsafeMap.internalMap) {
     if (missingServices.has(tag)) {
-      const old = missingServices.get(tag)
-      missingServices.delete(tag)
+      const [old] = missingServices.get(tag)!;
+      missingServices.delete(tag);
       if (old !== newService) {
-        patch = patch.combine(new UpdateService(tag, () => newService))
+        patch = patch.combine(new UpdateService(tag, () => newService));
       }
-    }
-    else {
-      missingServices.delete(tag)
-      patch = patch.combine(new AddService(tag, newService))
+    } else {
+      missingServices.delete(tag);
+      patch = patch.combine(new AddService(tag, newService));
     }
   }
 
   for (const [tag] of missingServices) {
-    patch = patch.combine(new RemoveService(tag))
+    patch = patch.combine(new RemoveService(tag));
   }
 
-  return patch
+  return patch;
 }
