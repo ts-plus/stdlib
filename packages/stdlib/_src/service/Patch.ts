@@ -119,7 +119,7 @@ export function patch_<Input, Output>(self: Patch<Input, Output>, env: Env<Input
 export const patch = Pipeable(patch_);
 
 /**
- * @tsplus tailrec
+ * @tsplus tailRec
  */
 function patchLoop(
   env: Map<Tag<unknown>, [unknown, number]>,
