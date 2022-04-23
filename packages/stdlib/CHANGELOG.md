@@ -1,5 +1,11 @@
 # @tsplus/stdlib
 
+## 0.0.53
+
+### Patch Changes
+
+- [#100](https://github.com/ts-plus/stdlib/pull/100) [`263d792`](https://github.com/ts-plus/stdlib/commit/263d7928c1b2468c4eccc39e552fabdcbc3cf5da) Thanks [@mikearnaldi](https://github.com/mikearnaldi)! - Improve Env API and switch to using ImmutableMap for faster access
+
 ## 0.0.52
 
 ### Patch Changes
