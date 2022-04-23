@@ -61,8 +61,8 @@ function pruneMethod<
 }
 const sym = Symbol("@tsplus/stdlib/Env/Env") as EnvOps["sym"];
 export const Env: EnvOps = Object.assign(
-  function(a: any, b: any) {
-    if (new.target) {
+  function self(this: any, a: any, b: any) {
+    if (this.constructor === self) {
       return {
         [Env.sym]: identity,
         add: methodAdd,
