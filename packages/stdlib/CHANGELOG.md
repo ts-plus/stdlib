@@ -1,5 +1,11 @@
 # @tsplus/stdlib
 
+## 0.0.57
+
+### Patch Changes
+
+- [#108](https://github.com/ts-plus/stdlib/pull/108) [`7ddc02e`](https://github.com/ts-plus/stdlib/commit/7ddc02e1b5abe6b252e18332eed14c01abbf635d) Thanks [@mikearnaldi](https://github.com/mikearnaldi)! - Fix tail recursion in patch
+
 ## 0.0.56
 
 ### Patch Changes
