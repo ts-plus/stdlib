@@ -1,5 +1,11 @@
 # @tsplus/stdlib
 
+## 0.0.54
+
+### Patch Changes
+
+- [`b2092ca`](https://github.com/ts-plus/stdlib/commit/b2092ca6823fdb0aa3cab4c8bb7fccd28f57c0f2) Thanks [@mikearnaldi](https://github.com/mikearnaldi)! - Improve Patch performance, drop ordering guarantees
+
 ## 0.0.53
 
 ### Patch Changes
