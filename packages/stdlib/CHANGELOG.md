@@ -1,5 +1,13 @@
 # @tsplus/stdlib
 
+## 0.0.55
+
+### Patch Changes
+
+- [`a2f7f66`](https://github.com/ts-plus/stdlib/commit/a2f7f66aab8efbdf34f6eff1a08cdb588d34e6b6) Thanks [@mikearnaldi](https://github.com/mikearnaldi)! - Preserve ordering via separated index (align to zio) (https://github.com/ts-plus/stdlib/commit/8e5132029342d4b11c3c4a20e28a5f77d5d3f120)
+
+* [`cbfe9b1`](https://github.com/ts-plus/stdlib/commit/cbfe9b1e607d0dcfdde09894da3a9ef314b6c032) Thanks [@mikearnaldi](https://github.com/mikearnaldi)! - Avoid usage of arguments
+
 ## 0.0.54
 
 ### Patch Changes
