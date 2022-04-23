@@ -1,5 +1,11 @@
 # @tsplus/stdlib
 
+## 0.0.56
+
+### Patch Changes
+
+- [`0569e5b`](https://github.com/ts-plus/stdlib/commit/0569e5b696ba04df72749ecd3184a7f5713cac0c) Thanks [@mikearnaldi](https://github.com/mikearnaldi)! - Put empty inside Env constructor
+
 ## 0.0.55
 
 ### Patch Changes
