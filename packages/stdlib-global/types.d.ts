@@ -145,6 +145,26 @@ import { Exception } from "@tsplus/stdlib/exceptions/Exception";
 /**
  * @tsplus global
  */
+import { Associative, AssociativeF } from "@tsplus/stdlib/hkt/Associative/definition";
+/**
+ * @tsplus global
+ */
+import { Closure, ClosureF } from "@tsplus/stdlib/hkt/Closure/definition";
+/**
+ * @tsplus global
+ */
+import { Covariant } from "@tsplus/stdlib/hkt/Covariant";
+/**
+ * @tsplus global
+ */
+import { ComposeF, HKT, Infer, Kind, Typeclass } from "@tsplus/stdlib/hkt/HKT";
+/**
+ * @tsplus global
+ */
+import { Identity, IdentityF } from "@tsplus/stdlib/hkt/Identity/definition";
+/**
+ * @tsplus global
+ */
 import { Environment } from "@tsplus/stdlib/io/Environment";
 /**
  * @tsplus global
