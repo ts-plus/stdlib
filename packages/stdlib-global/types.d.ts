@@ -153,7 +153,7 @@ import { Eval } from "@tsplus/stdlib/io/Eval/definition";
 /**
  * @tsplus global
  */
-import { Associative } from "@tsplus/stdlib/prelude/Associative";
+import { Any } from "@tsplus/stdlib/prelude/Any";
 /**
  * @tsplus global
  */
@@ -161,11 +161,23 @@ import { Associative, AssociativeF } from "@tsplus/stdlib/prelude/Associative/de
 /**
  * @tsplus global
  */
-import { AssociativeIdentity } from "@tsplus/stdlib/prelude/AssociativeIdentity";
+import { AssociativeBoth } from "@tsplus/stdlib/prelude/AssociativeBoth";
 /**
  * @tsplus global
  */
-import { Closure } from "@tsplus/stdlib/prelude/Closure";
+import { AssociativeEither } from "@tsplus/stdlib/prelude/AssociativeEither";
+/**
+ * @tsplus global
+ */
+import { AssociativeFlatten } from "@tsplus/stdlib/prelude/AssociativeFlatten";
+/**
+ * @tsplus global
+ */
+import { AssociativeIdentity } from "@tsplus/stdlib/prelude/AssociativeIdentity/definition";
+/**
+ * @tsplus global
+ */
+import { ChainRec } from "@tsplus/stdlib/prelude/ChainRec";
 /**
  * @tsplus global
  */
@@ -189,7 +201,27 @@ import { Identity, IdentityF } from "@tsplus/stdlib/prelude/Identity/definition"
 /**
  * @tsplus global
  */
+import { IdentityBoth } from "@tsplus/stdlib/prelude/IdentityBoth";
+/**
+ * @tsplus global
+ */
+import { IdentityEither } from "@tsplus/stdlib/prelude/IdentityEither";
+/**
+ * @tsplus global
+ */
+import { IdentityFlatten } from "@tsplus/stdlib/prelude/IdentityFlatten";
+/**
+ * @tsplus global
+ */
 import { instance } from "@tsplus/stdlib/prelude/Instance";
+/**
+ * @tsplus global
+ */
+import { Monad } from "@tsplus/stdlib/prelude/Monad";
+/**
+ * @tsplus global
+ */
+import { None } from "@tsplus/stdlib/prelude/None";
 /**
  * @tsplus global
  */
