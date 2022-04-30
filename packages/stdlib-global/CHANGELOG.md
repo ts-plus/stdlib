@@ -1,5 +1,14 @@
 # @tsplus/stdlib-global
 
+## 0.0.25
+
+### Patch Changes
+
+- [#116](https://github.com/ts-plus/stdlib/pull/116) [`2395238`](https://github.com/ts-plus/stdlib/commit/2395238cb445370a74f9761c7d910989ed2dccf4) Thanks [@IMax153](https://github.com/IMax153)! - add initial HKT implementation
+
+- Updated dependencies [[`2395238`](https://github.com/ts-plus/stdlib/commit/2395238cb445370a74f9761c7d910989ed2dccf4), [`c51f222`](https://github.com/ts-plus/stdlib/commit/c51f2229aa1ea03d933fca9b13f6dd30c18c6d77), [`14a6f1e`](https://github.com/ts-plus/stdlib/commit/14a6f1e0d29957286a826ba9bd7a8629c987d2c2)]:
+  - @tsplus/stdlib@0.0.60
+
 ## 0.0.24
 
 ### Patch Changes
