@@ -145,26 +145,6 @@ import { Exception } from "@tsplus/stdlib/exceptions/Exception";
 /**
  * @tsplus global
  */
-import { Associative, AssociativeF } from "@tsplus/stdlib/hkt/Associative/definition";
-/**
- * @tsplus global
- */
-import { Closure, ClosureF } from "@tsplus/stdlib/hkt/Closure/definition";
-/**
- * @tsplus global
- */
-import { Covariant } from "@tsplus/stdlib/hkt/Covariant";
-/**
- * @tsplus global
- */
-import { ComposeF, HKT, Infer, Kind, Typeclass } from "@tsplus/stdlib/hkt/HKT";
-/**
- * @tsplus global
- */
-import { Identity, IdentityF } from "@tsplus/stdlib/hkt/Identity/definition";
-/**
- * @tsplus global
- */
 import { Environment } from "@tsplus/stdlib/io/Environment";
 /**
  * @tsplus global
@@ -177,6 +157,10 @@ import { Associative } from "@tsplus/stdlib/prelude/Associative";
 /**
  * @tsplus global
  */
+import { Associative, AssociativeF } from "@tsplus/stdlib/prelude/Associative/definition";
+/**
+ * @tsplus global
+ */
 import { AssociativeIdentity } from "@tsplus/stdlib/prelude/AssociativeIdentity";
 /**
  * @tsplus global
@@ -185,7 +169,23 @@ import { Closure } from "@tsplus/stdlib/prelude/Closure";
 /**
  * @tsplus global
  */
+import { Closure, ClosureF } from "@tsplus/stdlib/prelude/Closure/definition";
+/**
+ * @tsplus global
+ */
+import { Covariant } from "@tsplus/stdlib/prelude/Covariant";
+/**
+ * @tsplus global
+ */
 import { Equivalence } from "@tsplus/stdlib/prelude/Equivalence/definition";
+/**
+ * @tsplus global
+ */
+import { ComposeF, HKT, Infer, Kind, Typeclass } from "@tsplus/stdlib/prelude/HKT";
+/**
+ * @tsplus global
+ */
+import { Identity, IdentityF } from "@tsplus/stdlib/prelude/Identity/definition";
 /**
  * @tsplus global
  */
