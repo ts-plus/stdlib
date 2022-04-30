@@ -1,18 +1,4 @@
 /**
- * Constructs an `Equal[A]` from a function. The instance will be optimized
- * to first compare the values for reference equality and then compare the
- * values for value equality.
- *
- * @tsplus static EquivalenceOps __call
- */
-export function make<A>(f: (x: A, y: A) => boolean): Equivalence<A> {
-  return {
-    Law: { Equivalence: "Equivalence" },
-    equals: f
-  };
-}
-
-/**
  * Equality for `Any` values. Note that since values of type `Any` contain
  * no information, all values of type `Any` can be treated as equal to each
  * other.
@@ -78,7 +64,7 @@ export function contramap<A, B>(
  * embodied in the implementation of `equals` for values of type `A`.
  */
 export function strict<A>() {
-  return make<A>((x, y) => x === y);
+  return Equivalence<A>((x, y) => x === y);
 }
 
 /**

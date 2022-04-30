@@ -17,5 +17,13 @@ export interface Equivalence<A> {
 /**
  * @tsplus type EquivalenceOps
  */
-export interface EquivalenceOps {}
-export const Equivalence: EquivalenceOps = {};
+export interface EquivalenceOps {
+  /**
+   * Constructs an `Equal<A>` from a function. The instance will be optimized
+   * to first compare the values for reference equality and then compare the
+   * values for value equality.
+   */
+  <A>(equals: (x: A, y: A) => boolean): Equivalence<A>;
+}
+export const Equivalence: EquivalenceOps = <A>(equals: (x: A, y: A) => boolean): Equivalence<A> =>
+  HKT.instance({ equals });

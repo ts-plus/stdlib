@@ -10,11 +10,11 @@ export function sortBy_<A>(
 ): Chunk<A> {
   return self.sort(
     ords.reduce((acc, curr) =>
-      Ord.make((x, y) => {
+      Ord((x, y) => {
         const a = acc.compare(x, y);
         const b = curr.compare(x, y);
         return a !== 0 ? a : b;
-      }), Ord.make(() => 0))
+      }), Ord(() => 0))
   );
 }
 
