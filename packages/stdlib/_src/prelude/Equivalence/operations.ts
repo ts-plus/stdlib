@@ -5,8 +5,9 @@
  *
  * @tsplus static EquivalenceOps __call
  */
-export function makeEquivalence<A>(f: (x: A, y: A) => boolean): Equivalence<A> {
+export function make<A>(f: (x: A, y: A) => boolean): Equivalence<A> {
   return {
+    Law: { Equivalence: "Equivalence" },
     equals: f
   };
 }
@@ -77,7 +78,7 @@ export function contramap<A, B>(
  * embodied in the implementation of `equals` for values of type `A`.
  */
 export function strict<A>() {
-  return makeEquivalence<A>((x, y) => x === y);
+  return make<A>((x, y) => x === y);
 }
 
 /**
@@ -122,19 +123,17 @@ export const date: Equivalence<Date> = contramap((date: Date) => date.valueOf())
  * @tsplus static EquivalenceOps array
  */
 export function array<A>(EqA: Equivalence<A>): Equivalence<readonly A[]> {
-  return {
-    equals: (x, y) => {
-      if (x.length === y.length) {
-        for (let i = 0; i < x.length; i++) {
-          if (!EqA.equals(x[i]!, y[i]!)) {
-            return false;
-          }
+  return Equivalence((x, y) => {
+    if (x.length === y.length) {
+      for (let i = 0; i < x.length; i++) {
+        if (!EqA.equals(x[i]!, y[i]!)) {
+          return false;
         }
-        return true;
       }
-      return false;
+      return true;
     }
-  };
+    return false;
+  });
 }
 
 /**

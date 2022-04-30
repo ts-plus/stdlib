@@ -5,6 +5,9 @@
  * @tsplus type Equivalence
  */
 export interface Equivalence<A> {
+  readonly Law: {
+    readonly Equivalence: "Equivalence";
+  };
   /**
    * Returns whether two values of type `A` are equal.
    */
