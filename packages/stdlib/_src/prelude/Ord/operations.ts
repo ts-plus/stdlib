@@ -1,16 +1,4 @@
 /**
- * Creates Ord[A] from a compare function
- *
- * @tsplus static OrdOps make
- * @tsplus static OrdOps __call
- */
-export function makeOrd<A>(compare: (x: A, y: A) => Ordering): Ord<A> {
-  return {
-    compare
-  };
-}
-
-/**
  * Contramap Ord input
  *
  * @tsplus fluent Ord contramap
