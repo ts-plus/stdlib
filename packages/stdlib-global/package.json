@@ -1,6 +1,6 @@
 {
     "name": "@tsplus/stdlib-global",
-    "version": "0.0.24",
+    "version": "0.0.25",
     "repository": "https://github.com/ts-plus/stdlib.git",
     "author": "Michael Arnaldi <arnaldimichael@gmail.com>",
     "license": "MIT",
@@ -9,7 +9,7 @@
     },
     "types": "./types.d.ts",
     "peerDependencies": {
-        "@tsplus/stdlib": "^0.0.59"
+        "@tsplus/stdlib": "^0.0.60"
     },
     "peerDependenciesMeta": {
         "@tsplus/stdlib": {

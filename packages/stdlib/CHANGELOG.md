@@ -1,5 +1,15 @@
 # @tsplus/stdlib
 
+## 0.0.60
+
+### Patch Changes
+
+- [#116](https://github.com/ts-plus/stdlib/pull/116) [`2395238`](https://github.com/ts-plus/stdlib/commit/2395238cb445370a74f9761c7d910989ed2dccf4) Thanks [@IMax153](https://github.com/IMax153)! - add initial HKT implementation
+
+* [#114](https://github.com/ts-plus/stdlib/pull/114) [`c51f222`](https://github.com/ts-plus/stdlib/commit/c51f2229aa1ea03d933fca9b13f6dd30c18c6d77) Thanks [@mikearnaldi](https://github.com/mikearnaldi)! - Improve Env Perf
+
+- [`14a6f1e`](https://github.com/ts-plus/stdlib/commit/14a6f1e0d29957286a826ba9bd7a8629c987d2c2) Thanks [@mikearnaldi](https://github.com/mikearnaldi)! - Remove not needed Equals from Tag
+
 ## 0.0.59
 
 ### Patch Changes
