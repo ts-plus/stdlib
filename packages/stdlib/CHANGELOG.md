@@ -1,5 +1,11 @@
 # @tsplus/stdlib
 
+## 0.0.61
+
+### Patch Changes
+
+- [#117](https://github.com/ts-plus/stdlib/pull/117) [`960e8ef`](https://github.com/ts-plus/stdlib/commit/960e8efc429ac3cc8c09a441a4b79c238ce83a1a) Thanks [@mikearnaldi](https://github.com/mikearnaldi)! - Fix Identity type
+
 ## 0.0.60
 
 ### Patch Changes
