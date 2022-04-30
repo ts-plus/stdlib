@@ -1,5 +1,11 @@
 # @tsplus/stdlib
 
+## 0.0.62
+
+### Patch Changes
+
+- [#119](https://github.com/ts-plus/stdlib/pull/119) [`e6109a1`](https://github.com/ts-plus/stdlib/commit/e6109a1834d931f85178931979484c374ed0d379) Thanks [@IMax153](https://github.com/IMax153)! - add \_\_call constructors for several prelude types
+
 ## 0.0.61
 
 ### Patch Changes
