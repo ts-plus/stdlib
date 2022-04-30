@@ -1,4 +1,4 @@
 export interface Closure<A> {
-  readonly _Closure: "Closure";
+  readonly Law: { readonly Closure: "Closure"; };
   readonly combine: (x: A, y: A) => A;
 }

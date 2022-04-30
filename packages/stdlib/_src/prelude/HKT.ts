@@ -1,7 +1,7 @@
 export declare const URI: unique symbol;
 
 export interface Typeclass<F extends HKT> {
-  readonly [URI]?: F;
+  readonly [URI]: F;
 }
 
 /**
@@ -32,7 +32,6 @@ export type Kind<F extends HKT, R, E, A> = F extends { readonly type: unknown; }
     readonly _A: () => A;
   };
 
-// @todo: re-check this with fixed types
 export type Infer<F extends HKT, P extends "R" | "E" | "A", K> = [K] extends [
   Kind<F, infer R, infer E, infer A>
 ] ? P extends "R" ? R
@@ -43,14 +42,6 @@ export type Infer<F extends HKT, P extends "R" | "E" | "A", K> = [K] extends [
 
 export interface ComposeF<F extends HKT, G extends HKT> extends HKT {
   readonly type: Kind<F, this["R"], this["E"], Kind<G, this["R"], this["E"], this["A"]>>;
-}
-
-/**
- * @tsplus static HKT/Ops instance
- * @tsplus macro identity
- */
-export function instance<T>(_: T): T {
-  return _ as any;
 }
 
 /**
@@ -65,4 +56,12 @@ export function intersect<As extends any[]>(
   }
   // @ts-expect-error
   return y;
+}
+
+/**
+ * @tsplus static HKT/Ops instance
+ * @tsplus macro identity
+ */
+export function instance<A>(a: Omit<A, "Law" | typeof URI>): A {
+  return a as any;
 }

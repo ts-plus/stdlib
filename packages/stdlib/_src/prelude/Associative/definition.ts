@@ -4,5 +4,5 @@
  * concatenation for strings.
  */
 export interface Associative<A> extends Closure<A> {
-  readonly _Associative: "Associative";
+  readonly Law: Closure<A>["Law"] & { readonly Associative: "Associative"; };
 }
