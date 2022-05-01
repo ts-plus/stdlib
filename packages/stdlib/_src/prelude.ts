@@ -1,9 +1,17 @@
+export * as any from "@tsplus/stdlib/prelude/Any";
 export * as associative from "@tsplus/stdlib/prelude/Associative";
+export * as associativeBoth from "@tsplus/stdlib/prelude/AssociativeBoth";
+export * as associativeEither from "@tsplus/stdlib/prelude/AssociativeEither";
 export * as associativeIdentity from "@tsplus/stdlib/prelude/AssociativeIdentity";
+export * as chainRec from "@tsplus/stdlib/prelude/ChainRec";
 export * as closure from "@tsplus/stdlib/prelude/Closure";
 export * as covariant from "@tsplus/stdlib/prelude/Covariant";
 export * as equivalence from "@tsplus/stdlib/prelude/Equivalence";
 export * as hkt from "@tsplus/stdlib/prelude/HKT";
 export * as identity from "@tsplus/stdlib/prelude/Identity";
+export * as identityBoth from "@tsplus/stdlib/prelude/IdentityBoth";
+export * as identityEither from "@tsplus/stdlib/prelude/IdentityEither";
+export * as identityFlatten from "@tsplus/stdlib/prelude/IdentityFlatten";
 export * as ord from "@tsplus/stdlib/prelude/Ord";
 export * as ordering from "@tsplus/stdlib/prelude/Ordering";
+export * as show from "@tsplus/stdlib/prelude/Show";
