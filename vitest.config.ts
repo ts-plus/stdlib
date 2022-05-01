@@ -17,6 +17,6 @@ export default defineConfig({
     alias: aliases("stdlib")
   },
   test: {
-    include: ["packages/*/build/test/**/*.{test,spec}.{js,mjs,cjs,ts,mts,cts,jsx,tsx}"]
+    include: ["packages/*/build/test/Show.{test,spec}.{js,mjs,cjs,ts,mts,cts,jsx,tsx}"]
   }
 });

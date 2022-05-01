@@ -233,6 +233,10 @@ import { Ordering } from "@tsplus/stdlib/prelude/Ordering/definition";
 /**
  * @tsplus global
  */
+import { Show } from "@tsplus/stdlib/prelude/Show/definition";
+/**
+ * @tsplus global
+ */
 import { Decoder } from "@tsplus/stdlib/runtime/Decoder";
 /**
  * @tsplus global
