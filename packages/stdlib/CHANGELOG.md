@@ -1,5 +1,11 @@
 # @tsplus/stdlib
 
+## 0.0.63
+
+### Patch Changes
+
+- [#121](https://github.com/ts-plus/stdlib/pull/121) [`47cf29a`](https://github.com/ts-plus/stdlib/commit/47cf29a9d5df278943c30ee7d18de46226a7f0b5) Thanks [@IMax153](https://github.com/IMax153)! - add more HKT variants
+
 ## 0.0.62
 
 ### Patch Changes
