@@ -177,6 +177,10 @@ import { AssociativeIdentity } from "@tsplus/stdlib/prelude/AssociativeIdentity/
 /**
  * @tsplus global
  */
+import { Bounded } from "@tsplus/stdlib/prelude/Bounded";
+/**
+ * @tsplus global
+ */
 import { ChainRec } from "@tsplus/stdlib/prelude/ChainRec";
 /**
  * @tsplus global
