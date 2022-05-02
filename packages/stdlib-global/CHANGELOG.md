@@ -1,5 +1,16 @@
 # @tsplus/stdlib-global
 
+## 0.0.29
+
+### Patch Changes
+
+- [#123](https://github.com/ts-plus/stdlib/pull/123) [`e6ab177`](https://github.com/ts-plus/stdlib/commit/e6ab1779b57183fd9c81a6157bd7f0a5056bc716) Thanks [@IMax153](https://github.com/IMax153)! - add Show module
+
+* [#123](https://github.com/ts-plus/stdlib/pull/123) [`0e46ecb`](https://github.com/ts-plus/stdlib/commit/0e46ecbea90096c5cb23e445f810190cfec2816f) Thanks [@IMax153](https://github.com/IMax153)! - add operations to Associative types
+
+* Updated dependencies [[`e6ab177`](https://github.com/ts-plus/stdlib/commit/e6ab1779b57183fd9c81a6157bd7f0a5056bc716), [`0e46ecb`](https://github.com/ts-plus/stdlib/commit/0e46ecbea90096c5cb23e445f810190cfec2816f)]:
+  - @tsplus/stdlib@0.0.64
+
 ## 0.0.28
 
 ### Patch Changes
