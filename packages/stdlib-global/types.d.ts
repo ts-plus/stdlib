@@ -21,7 +21,7 @@ import { HashSet } from "@tsplus/stdlib/collections/HashSet/definition";
 /**
  * @tsplus global
  */
-import { ImmutableArray } from "@tsplus/stdlib/collections/ImmutableArray";
+import { ImmutableArray } from "@tsplus/stdlib/collections/ImmutableArray/definition";
 /**
  * @tsplus global
  */
@@ -54,6 +54,10 @@ import { MutableHashSet } from "@tsplus/stdlib/collections/mutable/MutableHashSe
  * @tsplus global
  */
 import { MutableQueue } from "@tsplus/stdlib/collections/mutable/MutableQueue/definition";
+/**
+ * @tsplus global
+ */
+import { NonEmptyImmutableArray } from "@tsplus/stdlib/collections/NonEmptyImmutableArray/definition";
 /**
  * @tsplus global
  */
