@@ -161,11 +161,23 @@ import { Any } from "@tsplus/stdlib/prelude/Any";
 /**
  * @tsplus global
  */
+import { Applicative } from "@tsplus/stdlib/prelude/Applicative";
+/**
+ * @tsplus global
+ */
+import { Apply } from "@tsplus/stdlib/prelude/Apply";
+/**
+ * @tsplus global
+ */
 import { Associative, AssociativeF } from "@tsplus/stdlib/prelude/Associative/definition";
 /**
  * @tsplus global
  */
 import { AssociativeBoth } from "@tsplus/stdlib/prelude/AssociativeBoth";
+/**
+ * @tsplus global
+ */
+import { AssociativeCompose } from "@tsplus/stdlib/prelude/AssociativeCompose";
 /**
  * @tsplus global
  */
@@ -185,6 +197,10 @@ import { Bounded } from "@tsplus/stdlib/prelude/Bounded";
 /**
  * @tsplus global
  */
+import { Category } from "@tsplus/stdlib/prelude/Category";
+/**
+ * @tsplus global
+ */
 import { ChainRec } from "@tsplus/stdlib/prelude/ChainRec";
 /**
  * @tsplus global
@@ -193,7 +209,31 @@ import { Closure, ClosureF } from "@tsplus/stdlib/prelude/Closure/definition";
 /**
  * @tsplus global
  */
+import { CommutativeBoth } from "@tsplus/stdlib/prelude/CommutativeBoth";
+/**
+ * @tsplus global
+ */
+import { CommutativeEither } from "@tsplus/stdlib/prelude/CommutativeEither";
+/**
+ * @tsplus global
+ */
+import { Compact } from "@tsplus/stdlib/prelude/Compact";
+/**
+ * @tsplus global
+ */
+import { Compactable } from "@tsplus/stdlib/prelude/Compactable";
+/**
+ * @tsplus global
+ */
 import { Covariant } from "@tsplus/stdlib/prelude/Covariant";
+/**
+ * @tsplus global
+ */
+import { Derive } from "@tsplus/stdlib/prelude/Derive";
+/**
+ * @tsplus global
+ */
+import { DSL } from "@tsplus/stdlib/prelude/DSL/definition";
 /**
  * @tsplus global
  */
@@ -201,7 +241,75 @@ import { Equivalence } from "@tsplus/stdlib/prelude/Equivalence/definition";
 /**
  * @tsplus global
  */
-import { ComposeF, HKT, Infer, Kind, Typeclass } from "@tsplus/stdlib/prelude/HKT";
+import { Extend } from "@tsplus/stdlib/prelude/Extend";
+/**
+ * @tsplus global
+ */
+import { Filter } from "@tsplus/stdlib/prelude/Filter";
+/**
+ * @tsplus global
+ */
+import { Filterable } from "@tsplus/stdlib/prelude/Filterable";
+/**
+ * @tsplus global
+ */
+import { FilterableWithIndex } from "@tsplus/stdlib/prelude/FilterableWithIndex";
+/**
+ * @tsplus global
+ */
+import { FilterMap } from "@tsplus/stdlib/prelude/FilterMap";
+/**
+ * @tsplus global
+ */
+import { FilterMapWithIndex } from "@tsplus/stdlib/prelude/FilterMapWithIndex";
+/**
+ * @tsplus global
+ */
+import { FilterWithIndex } from "@tsplus/stdlib/prelude/FilterWithIndex";
+/**
+ * @tsplus global
+ */
+import { Foldable } from "@tsplus/stdlib/prelude/Foldable";
+/**
+ * @tsplus global
+ */
+import { FoldableWithIndex } from "@tsplus/stdlib/prelude/FoldableWithIndex";
+/**
+ * @tsplus global
+ */
+import { FoldMap } from "@tsplus/stdlib/prelude/FoldMap";
+/**
+ * @tsplus global
+ */
+import { FoldMapWithIndex } from "@tsplus/stdlib/prelude/FoldMapWithIndex";
+/**
+ * @tsplus global
+ */
+import { ForEach } from "@tsplus/stdlib/prelude/ForEach";
+/**
+ * @tsplus global
+ */
+import { ForEachWithIndex } from "@tsplus/stdlib/prelude/ForEachWithIndex";
+/**
+ * @tsplus global
+ */
+import { Access } from "@tsplus/stdlib/prelude/FX/Access";
+/**
+ * @tsplus global
+ */
+import { Fail } from "@tsplus/stdlib/prelude/FX/Fail";
+/**
+ * @tsplus global
+ */
+import { Provide } from "@tsplus/stdlib/prelude/FX/Provide";
+/**
+ * @tsplus global
+ */
+import { Run } from "@tsplus/stdlib/prelude/FX/Run";
+/**
+ * @tsplus global
+ */
+import { HKT } from "@tsplus/stdlib/prelude/HKT";
 /**
  * @tsplus global
  */
@@ -225,6 +333,10 @@ import { instance } from "@tsplus/stdlib/prelude/Instance";
 /**
  * @tsplus global
  */
+import { Invariant } from "@tsplus/stdlib/prelude/Invariant";
+/**
+ * @tsplus global
+ */
 import { Monad } from "@tsplus/stdlib/prelude/Monad";
 /**
  * @tsplus global
@@ -241,7 +353,63 @@ import { Ordering } from "@tsplus/stdlib/prelude/Ordering/definition";
 /**
  * @tsplus global
  */
+import { Partition } from "@tsplus/stdlib/prelude/Partition";
+/**
+ * @tsplus global
+ */
+import { PartitionMap } from "@tsplus/stdlib/prelude/PartitionMap";
+/**
+ * @tsplus global
+ */
+import { PartitionMapWithIndex } from "@tsplus/stdlib/prelude/PartitionMapWithIndex";
+/**
+ * @tsplus global
+ */
+import { PartitionWithIndex } from "@tsplus/stdlib/prelude/PartitionWithIndex";
+/**
+ * @tsplus global
+ */
+import { Reduce } from "@tsplus/stdlib/prelude/Reduce";
+/**
+ * @tsplus global
+ */
+import { ReduceRight } from "@tsplus/stdlib/prelude/ReduceRight";
+/**
+ * @tsplus global
+ */
+import { ReduceRightWithIndex } from "@tsplus/stdlib/prelude/ReduceRightWithIndex";
+/**
+ * @tsplus global
+ */
+import { ReduceWithIndex } from "@tsplus/stdlib/prelude/ReduceWithIndex";
+/**
+ * @tsplus global
+ */
+import { Select, Selective, SelectiveMonad } from "@tsplus/stdlib/prelude/Selective";
+/**
+ * @tsplus global
+ */
+import { Separate } from "@tsplus/stdlib/prelude/Separate";
+/**
+ * @tsplus global
+ */
 import { Show } from "@tsplus/stdlib/prelude/Show/definition";
+/**
+ * @tsplus global
+ */
+import { Wilt, Wiltable } from "@tsplus/stdlib/prelude/Wiltable";
+/**
+ * @tsplus global
+ */
+import { WiltableWithIndex, WiltWithIndex } from "@tsplus/stdlib/prelude/WiltableWithIndex";
+/**
+ * @tsplus global
+ */
+import { Wither, Witherable } from "@tsplus/stdlib/prelude/Witherable";
+/**
+ * @tsplus global
+ */
+import { WitherableWithIndex, WitherWithIndex } from "@tsplus/stdlib/prelude/WitherableWithIndex";
 /**
  * @tsplus global
  */
