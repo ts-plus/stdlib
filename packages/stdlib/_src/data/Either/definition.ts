@@ -3,6 +3,38 @@
  */
 const _leftHash = Hash.string("Either/Left");
 const _rightHash = Hash.string("Either/Right");
+/**
+ * @tsplus type Either
+ */
+export type Either<E, A> = Left<E> | Right<A>;
+
+export interface EitherF extends HKT {
+  readonly type: Either<this["E"], this["A"]>;
+}
+
+export interface EitherFixedLeftF<E> extends HKT {
+  readonly type: HKT.Kind<EitherF, this["R"], E, this["A"]>;
+}
+
+/**
+ * @tsplus type Either/Ops
+ */
+export interface EitherOps {
+  $: EitherAspects;
+}
+export const Either: EitherOps = {
+  $: {}
+};
+
+/**
+ * @tsplus type Either/Aspects
+ */
+export interface EitherAspects {}
+
+export declare namespace Either {
+  export type HKT = EitherF;
+  export type FixedLeftHKT<E> = EitherFixedLeftF<E>;
+}
 
 /**
  * @tsplus type Either/Left
@@ -35,26 +67,6 @@ export class Right<A> implements Equals {
     return Hash.combine(_rightHash, Hash.unknown(this.right));
   }
 }
-
-/**
- * @tsplus type Either
- */
-export type Either<E, A> = Left<E> | Right<A>;
-
-/**
- * @tsplus type Either/Ops
- */
-export interface EitherOps {
-  $: EitherAspects;
-}
-export const Either: EitherOps = {
-  $: {}
-};
-
-/**
- * @tsplus type Either/Aspects
- */
-export interface EitherAspects {}
 
 /**
  * @tsplus unify Either
