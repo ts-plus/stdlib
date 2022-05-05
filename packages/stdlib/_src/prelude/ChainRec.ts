@@ -1,13 +1,13 @@
 /**
  * @tsplus type ChainRec
  */
-export interface ChainRec<F extends HKT> extends Typeclass<F> {
+export interface ChainRec<F extends HKT> extends HKT.Typeclass<F> {
   readonly Law: {
     readonly ChainRec: "ChainRec";
   };
   readonly chainRec: <A, B, R, E>(
-    f: (a: A) => Kind<F, R, E, Either<A, B>>
-  ) => (a: A) => Kind<F, R, E, B>;
+    f: (a: A) => HKT.Kind<F, R, E, Either<A, B>>
+  ) => (a: A) => HKT.Kind<F, R, E, B>;
 }
 
 /**
