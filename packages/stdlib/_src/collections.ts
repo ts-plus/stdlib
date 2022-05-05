@@ -7,6 +7,7 @@ export * as immutableMap from "@tsplus/stdlib/collections/ImmutableMap";
 export * as immutableQueue from "@tsplus/stdlib/collections/ImmutableQueue";
 export * as list from "@tsplus/stdlib/collections/List";
 export * as mutable from "@tsplus/stdlib/collections/mutable";
+export * as nonEmptyImmutableArray from "@tsplus/stdlib/collections/NonEmptyImmutableArray";
 export * as parSeq from "@tsplus/stdlib/collections/ParSeq";
 export * as redBlackTree from "@tsplus/stdlib/collections/RedBlackTree";
 export * as sortedMap from "@tsplus/stdlib/collections/SortedMap";

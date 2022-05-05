@@ -25,13 +25,13 @@ describe.concurrent("ImmutableArray", () => {
   it("append", () => {
     assert.isTrue(
       ImmutableArray(0, 1) + 2
-        == ImmutableArray(0, 1, 2)
+        == NonEmptyImmutableArray(0, 1, 2)
     );
   });
   it("prepend", () => {
     assert.isTrue(
       0 + ImmutableArray(1)
-        == ImmutableArray(0, 1)
+        == NonEmptyImmutableArray(0, 1)
     );
   });
   it("concat", () => {
