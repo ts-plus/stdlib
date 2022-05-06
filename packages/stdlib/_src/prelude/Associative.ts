@@ -3,6 +3,7 @@ export * from "@tsplus/stdlib/prelude/Associative/all";
 export * from "@tsplus/stdlib/prelude/Associative/any";
 export * from "@tsplus/stdlib/prelude/Associative/definition";
 export * from "@tsplus/stdlib/prelude/Associative/first";
+export * from "@tsplus/stdlib/prelude/Associative/fold";
 export * from "@tsplus/stdlib/prelude/Associative/function";
 export * from "@tsplus/stdlib/prelude/Associative/intercalate";
 export * from "@tsplus/stdlib/prelude/Associative/inverted";

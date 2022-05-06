@@ -4,8 +4,8 @@
 export function conditionalF_<F extends HKT>() {
   return <X extends HKT.Kind<F, any, any, any>, Y extends HKT.Kind<F, any, any, any>>(
     predicate: boolean,
-    onTrue: () => X,
-    onFalse: () => Y
+    onTrue: LazyArg<X>,
+    onFalse: LazyArg<Y>
   ): HKT.Kind<
     F,
     HKT.Infer<F, "R", X | Y>,
@@ -19,8 +19,8 @@ export function conditionalF_<F extends HKT>() {
  */
 export function conditionalF<F extends HKT>() {
   return <X extends HKT.Kind<F, any, any, any>, Y extends HKT.Kind<F, any, any, any>>(
-    onTrue: () => X,
-    onFalse: () => Y
+    onTrue: LazyArg<X>,
+    onFalse: LazyArg<Y>
   ): ((
     predicate: boolean
   ) => HKT.Kind<

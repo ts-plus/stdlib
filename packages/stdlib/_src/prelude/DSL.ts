@@ -3,6 +3,7 @@ export * from "@tsplus/stdlib/prelude/DSL/apF";
 export * from "@tsplus/stdlib/prelude/DSL/conditionalF";
 export * from "@tsplus/stdlib/prelude/DSL/definition";
 export * from "@tsplus/stdlib/prelude/DSL/flatMapF";
+export * from "@tsplus/stdlib/prelude/DSL/genF";
 export * from "@tsplus/stdlib/prelude/DSL/getApplicativeF";
 export * from "@tsplus/stdlib/prelude/DSL/getApplyF";
 export * from "@tsplus/stdlib/prelude/DSL/getDoF";

@@ -3,6 +3,7 @@ export * from "@tsplus/stdlib/prelude/AssociativeIdentity/all";
 export * from "@tsplus/stdlib/prelude/AssociativeIdentity/any";
 export * from "@tsplus/stdlib/prelude/AssociativeIdentity/definition";
 export * from "@tsplus/stdlib/prelude/AssociativeIdentity/endomorphism";
+export * from "@tsplus/stdlib/prelude/AssociativeIdentity/fold";
 export * from "@tsplus/stdlib/prelude/AssociativeIdentity/fromAssociative";
 export * from "@tsplus/stdlib/prelude/AssociativeIdentity/function";
 export * from "@tsplus/stdlib/prelude/AssociativeIdentity/inverted";
