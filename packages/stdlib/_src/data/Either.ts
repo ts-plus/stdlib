@@ -22,6 +22,7 @@ export * from "@tsplus/stdlib/data/Either/getCompact";
 export * from "@tsplus/stdlib/data/Either/getCompactable";
 export * from "@tsplus/stdlib/data/Either/getOrElse";
 export * from "@tsplus/stdlib/data/Either/getSeparate";
+export * from "@tsplus/stdlib/data/Either/getValidationApplicative";
 export * from "@tsplus/stdlib/data/Either/getValidationAssociative";
 export * from "@tsplus/stdlib/data/Either/getWiltable";
 export * from "@tsplus/stdlib/data/Either/getWitherable";

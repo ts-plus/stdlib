@@ -137,7 +137,7 @@ import { Tuple } from "@tsplus/stdlib/data/Tuple/definition";
 /**
  * @tsplus global
  */
-import { IndexOutOfBounds, NoSuchElement } from "@tsplus/stdlib/exceptions";
+import { IndexOutOfBounds, NoSuchElement, PrematureGeneratorExit } from "@tsplus/stdlib/exceptions";
 /**
  * @tsplus global
  */
