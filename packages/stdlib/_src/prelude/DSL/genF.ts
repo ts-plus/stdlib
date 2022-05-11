@@ -26,12 +26,12 @@ const adapterLazy = (_: () => any) => {
  * To be used with multi-shot monads, required adapter to be lazy and is O(n^2)
  * perf wise because the generator needs to be replayed.
  *
- * @tsplus static DSL genWithHistory
+ * @tsplus static DSL genWithHistoryF
  */
 export function genWithHistoryF<
   F extends HKT,
   ADAPTER = {
-    <R, E, A>(_: () => HKT.Kind<F, R, E, A>): GenLazyHKT<HKT.Kind<F, R, E, A>, A>;
+    <R, E, A>(_: LazyArg<HKT.Kind<F, R, E, A>>): GenLazyHKT<HKT.Kind<F, R, E, A>, A>;
   }
 >(F: Monad<F>, config?: { adapter?: ADAPTER; }) {
   return <Eff extends GenLazyHKT<HKT.Kind<F, any, any, any>, any>, AEff>(

@@ -1,11 +1,8 @@
 /**
  * @tsplus fluent ImmutableArray map
  */
-export function map_<A, B>(
-  i: ImmutableArray<A>,
-  f: (a: A, k: number) => B
-): ImmutableArray<B> {
-  return new ImmutableArray(i.array.map(f));
+export function map_<A, B>(self: ImmutableArray<A>, f: (a: A, k: number) => B): ImmutableArray<B> {
+  return new ImmutableArray(self.array.map((a, i) => f(a, i)));
 }
 
 /**

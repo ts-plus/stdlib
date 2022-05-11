@@ -9,11 +9,11 @@ export interface PartitionWithIndex<K, F extends HKT> {
 }
 
 export declare namespace PartitionWithIndex {
-  export interface Fn<K, F extends HKT> extends HKT.Typeclass<F> {
+  export interface Fn<K, F extends HKT> {
     <N extends string, A, B extends A>(refinement: RefinementWithIndex<K, A, B>): <R, E>(
       fa: HKT.Kind<F, R, E, A>
     ) => Tuple<[HKT.Kind<F, R, E, A>, HKT.Kind<F, R, E, B>]>;
-    <A>(predicate: PredicateWithIndex<K, A>): <X, I, R, E>(
+    <A>(predicate: PredicateWithIndex<K, A>): <R, E>(
       fa: HKT.Kind<F, R, E, A>
     ) => Tuple<[HKT.Kind<F, R, E, A>, HKT.Kind<F, R, E, A>]>;
   }

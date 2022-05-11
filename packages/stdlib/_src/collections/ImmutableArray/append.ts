@@ -5,7 +5,7 @@
  * @tsplus operator ImmutableArray <
  */
 export function append_<A, B>(self: ImmutableArray<A>, a: B): NonEmptyImmutableArray<A | B> {
-  return new NonEmptyImmutableArray([...self.array, a] as any);
+  return new ImmutableArray([...self.array, a] as any) as NonEmptyImmutableArray<A>;
 }
 
 /**

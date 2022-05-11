@@ -1,5 +1,5 @@
 /**
- * @tsplus static ImmutableArrayOps from
+ * @tsplus static ImmutableArray/Ops from
  * @tsplus fluent Collection asImmutableArray
  */
 export function from<A>(iterable: Collection<A>): ImmutableArray<A> {

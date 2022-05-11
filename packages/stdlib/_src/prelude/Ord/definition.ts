@@ -10,7 +10,7 @@ export interface Ord<A> {
 }
 
 /**
- * @tsplus type OrdOps
+ * @tsplus type Ord/Ops
  */
 export interface OrdOps {
   <A>(compare: (x: A, y: A) => Ordering): Ord<A>;

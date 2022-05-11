@@ -174,6 +174,22 @@ export function deriveSortedSet<A extends SortedSet<any>>(
 }
 
 /**
+ * @tsplus derive Guard[NonEmptyImmutableArray]<_> 10
+ */
+export function deriveNonEmptyImmutableArray<A extends ImmutableArray<any>>(
+  ...[element]: [A] extends [NonEmptyImmutableArray<infer _A>] ? [element: Guard<_A>]
+    : never
+): Guard<A> {
+  return Guard((u): u is A => {
+    if (u instanceof ImmutableArray && u.isNonEmpty()) {
+      return u.array.every(element.is);
+    }
+
+    return false;
+  });
+}
+
+/**
  * @tsplus derive Guard[ImmutableArray]<_> 10
  */
 export function deriveImmutableArray<A extends ImmutableArray<any>>(

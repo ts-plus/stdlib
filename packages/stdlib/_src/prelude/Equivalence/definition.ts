@@ -1,5 +1,5 @@
 /**
- * `Equivalence[A]` provides evidence that two values of type `A` can be
+ * `Equivalence<A>` provides evidence that two values of type `A` can be
  * compared for equality.
  *
  * @tsplus type Equivalence
@@ -15,7 +15,7 @@ export interface Equivalence<A> {
 }
 
 /**
- * @tsplus type EquivalenceOps
+ * @tsplus type Equivalence/Ops
  */
 export interface EquivalenceOps {
   /**
@@ -24,6 +24,14 @@ export interface EquivalenceOps {
    * values for value equality.
    */
   <A>(equals: (x: A, y: A) => boolean): Equivalence<A>;
+  readonly $: EquivalenceAspects;
 }
-export const Equivalence: EquivalenceOps = <A>(equals: (x: A, y: A) => boolean): Equivalence<A> =>
-  HKT.instance({ equals });
+export const Equivalence: EquivalenceOps = Object.assign(
+  <A>(equals: (x: A, y: A) => boolean): Equivalence<A> => HKT.instance({ equals }),
+  { $: {} }
+);
+
+/**
+ * @tsplus type Equivalence/Aspects
+ */
+export interface EquivalenceAspects {}
