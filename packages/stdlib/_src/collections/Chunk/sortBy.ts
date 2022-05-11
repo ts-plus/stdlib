@@ -8,14 +8,8 @@ export function sortBy_<A>(
   self: Chunk<A>,
   ...ords: Array<Ord<A>>
 ): Chunk<A> {
-  return self.sort(
-    ords.reduce((acc, curr) =>
-      Ord((x, y) => {
-        const a = acc.compare(x, y);
-        const b = curr.compare(x, y);
-        return a !== 0 ? a : b;
-      }), Ord(() => 0))
-  );
+  const O = Ord.consecutive(...ords);
+  return self.sort(O);
 }
 
 /**

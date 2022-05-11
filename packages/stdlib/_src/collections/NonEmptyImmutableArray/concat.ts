@@ -8,7 +8,7 @@ export function concat_<A, B>(
 ): NonEmptyImmutableArray<A | B>;
 export function concat_<A, B>(self: NonEmptyImmutableArray<A>, that: ImmutableArray<B>): NonEmptyImmutableArray<A | B>;
 export function concat_<A, B>(self: NonEmptyImmutableArray<A>, that: ImmutableArray<B>): NonEmptyImmutableArray<A | B> {
-  return new NonEmptyImmutableArray([...self.array, ...that.array] as any);
+  return new ImmutableArray([...self.array, ...that.array] as any) as NonEmptyImmutableArray<A | B>;
 }
 
 /**

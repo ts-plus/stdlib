@@ -7,7 +7,7 @@ declare global {
 
 /**
  * @tsplus type ImmutableArray
- * @tsplus companion ImmutableArrayOps
+ * @tsplus companion ImmutableArray/Ops
  */
 export class ImmutableArray<A> implements Equals, Collection<A> {
   constructor(readonly array: ReadonlyArray<A>) {}
@@ -27,6 +27,14 @@ export class ImmutableArray<A> implements Equals, Collection<A> {
   [Hash.sym](this: this): number {
     return Hash.array(this.array);
   }
+}
+
+export interface ImmutableArrayF extends HKT {
+  readonly type: ImmutableArray<this["A"]>;
+}
+
+export declare namespace ImmutableArray {
+  export type HKT = ImmutableArrayF;
 }
 
 /**

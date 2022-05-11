@@ -6,5 +6,5 @@
  */
 export function from<A>(collection: Collection<A>): Option<NonEmptyImmutableArray<A>> {
   const array = Array.from(collection);
-  return array.length === 0 ? Option.none : Option.some(new NonEmptyImmutableArray(array as any));
+  return array.length === 0 ? Option.none : Option.some(new ImmutableArray(array as any) as NonEmptyImmutableArray<A>);
 }

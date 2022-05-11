@@ -28,6 +28,14 @@ describe("Guard", () => {
     assert.isFalse(guard.is([0]));
     assert.isFalse(guard.is(undefined));
   });
+  it("non-empty immutable array", () => {
+    const guard: Guard<NonEmptyImmutableArray<number>> = Derive();
+    assert.isTrue(guard.is(ImmutableArray(0, 1, 2)));
+    assert.isFalse(guard.is(ImmutableArray.empty()));
+    assert.isFalse(guard.is(ImmutableArray(0, 1, 2, "3")));
+    assert.isFalse(guard.is([0]));
+    assert.isFalse(guard.is(undefined));
+  });
   it("immutable array", () => {
     const guard: Guard<ImmutableArray<number>> = Derive();
     assert.isTrue(guard.is(ImmutableArray(0, 1, 2)));
