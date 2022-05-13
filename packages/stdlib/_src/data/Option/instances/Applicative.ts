@@ -1,7 +1,9 @@
+import type * as P from "@tsplus/stdlib/prelude/Applicative";
+
 /**
  * @tsplus static Option/Ops Applicative
  */
-export const OptionApplicative = HKT.instance<Applicative<Option.HKT>>({
+export const Applicative = HKT.instance<P.Applicative<Option.HKT>>({
   ...Option.Covariant,
   ...Option.IdentityBoth
 });

@@ -1,7 +1,9 @@
+import type * as P from "@tsplus/stdlib/prelude/ForEach";
+
 /**
  * @tsplus static Option/Ops ForEach
  */
-export const OptionForEach = HKT.instance<ForEach<Option.HKT>>({
+export const ForEach = HKT.instance<P.ForEach<Option.HKT>>({
   ...Option.Covariant,
   forEachF: Option.forEachF
 });

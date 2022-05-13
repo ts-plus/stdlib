@@ -1,6 +1,8 @@
+import type * as P from "@tsplus/stdlib/prelude/AssociativeFlatten";
+
 /**
  * @tsplus static Option/Ops AssociativeFlatten
  */
-export const OptionAssociativeFlatten = HKT.instance<AssociativeFlatten<Option.HKT>>({
+export const AssociativeFlatten = HKT.instance<P.AssociativeFlatten<Option.HKT>>({
   flatten: (option) => option.flatten()
 });

@@ -1,6 +1,8 @@
+import type * as P from "@tsplus/stdlib/prelude/AssociativeBoth";
+
 /**
  * @tsplus static Either/Ops AssociativeBoth
  */
-export const EitherAssociativeBoth = HKT.instance<AssociativeBoth<Either.HKT>>({
+export const AssociativeBoth = HKT.instance<P.AssociativeBoth<Either.HKT>>({
   both: Either.$.zip
 });

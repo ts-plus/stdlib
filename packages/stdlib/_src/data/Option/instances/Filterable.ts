@@ -1,7 +1,9 @@
+import type * as P from "@tsplus/stdlib/prelude/Filterable";
+
 /**
  * @tsplus static Option/Ops Filterable
  */
-export const OptionFilterable = HKT.instance<Filterable<Option.HKT>>({
+export const Filterable = HKT.instance<P.Filterable<Option.HKT>>({
   filter: Option.$.filter,
   filterMap: Option.$.filterMap,
   partition: Option.$.partition,

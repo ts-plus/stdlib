@@ -1,6 +1,8 @@
+import type * as P from "@tsplus/stdlib/prelude/Covariant";
+
 /**
  * @tsplus static Option/Ops Covariant
  */
-export const OptionCovariant = HKT.instance<Covariant<Option.HKT>>({
+export const Covariant = HKT.instance<P.Covariant<Option.HKT>>({
   map: Option.$.map
 });
