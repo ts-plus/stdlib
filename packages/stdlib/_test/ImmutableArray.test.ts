@@ -38,14 +38,12 @@ describe.concurrent("ImmutableArray", () => {
   });
 
   it("compactWithIndexF", () => {
-    it("compactF", () => {
-      const compactWithIndexF = ImmutableArray.compactWithIndexF(Either.Applicative)((i, n: number) =>
-        Either.right((i + n) % 2 === 0 ? Option.some(n + 1) : Option.none)
-      );
+    const compactWithIndexF = ImmutableArray.compactWithIndexF(Either.Applicative)((i, n: number) =>
+      Either.right((i + n) % 2 === 0 ? Option.some(n + 1) : Option.none)
+    );
 
-      assert.isTrue(compactWithIndexF(ImmutableArray.empty()) == Either.right(ImmutableArray.empty()));
-      assert.isTrue(compactWithIndexF(ImmutableArray(1, 3)) == Either.right(ImmutableArray(4)));
-    });
+    assert.isTrue(compactWithIndexF(ImmutableArray.empty()) == Either.right(ImmutableArray.empty()));
+    assert.isTrue(compactWithIndexF(ImmutableArray(1, 3)) == Either.right(ImmutableArray(4)));
   });
 
   it("concat", () => {

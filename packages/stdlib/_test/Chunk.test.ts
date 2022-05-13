@@ -1,17 +1,4 @@
 describe.concurrent("Chunk", () => {
-  it("find & concat", () => {
-    const chunk = Chunk(4, 5, 6) + Chunk(1, 2, 3);
-    const result = chunk.find((v) => v === 3);
-
-    assert.isTrue(result == Option.some(3));
-  });
-
-  it("spread", () => {
-    const f = (...args: number[]) => args;
-
-    assert.deepEqual(f(...Chunk(0, 1, 2)), [0, 1, 2]);
-  });
-
   it("append", () => {
     const chunkA = Chunk.single(1).append(2).append(3).append(4).append(5);
     const chunkB = Chunk(1, 2, 3, 4, 5);
@@ -19,38 +6,12 @@ describe.concurrent("Chunk", () => {
     assert.isTrue(chunkA == chunkB);
   });
 
-  it("prepend", () => {
-    const chunkA = Chunk.single(1).prepend(2).prepend(3).prepend(4).prepend(5);
-    const chunkB = Chunk(5, 4, 3, 2, 1);
+  it("arrayLikeIterator", () => {
+    const chunk = Chunk.single(0) + Chunk.single(1) + Chunk.single(2) + Chunk.single(3);
 
-    assert.isTrue(chunkA == chunkB);
-  });
+    const result = Array.from(chunk.buckets);
 
-  it("fromArray", () => {
-    const chunkA = Chunk.from([1, 2, 3, 4, 5]).append(6).append(7);
-    const chunkB = Chunk(1, 2, 3, 4, 5, 6, 7);
-
-    assert.isTrue(chunkA == chunkB);
-  });
-
-  it("concat", () => {
-    const chunkA = Chunk(1, 2, 3, 4, 5) + Chunk(6, 7, 8, 9, 10);
-    const chunkB = Chunk(1, 2, 3, 4, 5, 6, 7, 8, 9, 10);
-
-    assert.isTrue(chunkA == chunkB);
-  });
-
-  it("iterable", () => {
-    const chunk = Chunk(0, 1, 2).asArrayLike();
-
-    assert.deepEqual(chunk, Buffer.of(0, 1, 2));
-  });
-
-  it("get", () => {
-    const chunk = Chunk(1, 2, 3, 4, 5);
-
-    assert.isTrue(chunk.get(3) == Option.some(4));
-    assert.isTrue(chunk.get(5) == Option.none);
+    assert.deepEqual(result, [Buffer.of(0), Buffer.of(1), Buffer.of(2), Buffer.of(3)]);
   });
 
   it("buffer", () => {
@@ -63,31 +24,43 @@ describe.concurrent("Chunk", () => {
     assert.deepEqual(result, Buffer.from(" world "));
   });
 
-  it("stack", () => {
-    let a = Chunk.empty<number>();
-    for (let i = 0; i < 100_000; i++) {
-      a = a + Chunk(i, i);
-    }
+  it("compactF", () => {
+    const compactF = Chunk.compactF(Either.Applicative)((n: number) =>
+      Either.right(n > 2 ? Option.some(n + 1) : Option.none)
+    );
 
-    const result = a.asArrayLike();
-
-    assert.strictEqual(result.length, 200_000);
+    assert.isTrue(compactF(Chunk.empty()) == Either.right(Chunk.empty()));
+    assert.isTrue(compactF(Chunk(1, 3)) == Either.right(Chunk(4)));
   });
 
-  it("take", () => {
-    const chunk = Chunk(1, 2, 3, 4, 5) + Chunk(6, 7, 8, 9, 10);
+  it("compactWithIndexF", () => {
+    const compactWithIndexF = Chunk.compactWithIndexF(Either.Applicative)((i, n: number) =>
+      Either.right((i + n) % 2 === 0 ? Option.some(n + 1) : Option.none)
+    );
 
-    const result = chunk.take(5).asImmutableArray();
-
-    assert.isTrue(result == ImmutableArray(1, 2, 3, 4, 5));
+    assert.isTrue(compactWithIndexF(Chunk.empty()) == Either.right(Chunk.empty()));
+    assert.isTrue(compactWithIndexF(Chunk(1, 3)) == Either.right(Chunk(4)));
   });
 
-  it("takeRight", () => {
-    const chunk = Chunk(1, 2, 3, 4, 5) + Chunk(6, 7, 8, 9, 10);
+  it("concat", () => {
+    const chunkA = Chunk(1, 2, 3, 4, 5) + Chunk(6, 7, 8, 9, 10);
+    const chunkB = Chunk(1, 2, 3, 4, 5, 6, 7, 8, 9, 10);
 
-    const result = chunk.takeRight(5).asImmutableArray();
+    assert.isTrue(chunkA == chunkB);
+  });
 
-    assert.isTrue(result == ImmutableArray(6, 7, 8, 9, 10));
+  it("dedupe", () => {
+    const chunk = Chunk(0, 0, 1, 2, 3, 4, 4, 5, 6, 7, 7, 7, 8, 9, 9, 9, 9);
+
+    const result = chunk.dedupe().asImmutableArray();
+
+    assert.deepEqual(result, ImmutableArray(0, 1, 2, 3, 4, 5, 6, 7, 8, 9));
+  });
+
+  it("difference", () => {
+    assert.isTrue(Chunk(1, 2).difference(Equivalence.number, Chunk(3, 4)) == Chunk(1, 2));
+    assert.isTrue(Chunk(1, 2).difference(Equivalence.number, Chunk(2, 3)) == Chunk(1));
+    assert.isTrue(Chunk(1, 2).difference(Equivalence.number, Chunk(1, 2)) == Chunk.empty<number>());
   });
 
   it("drop", () => {
@@ -98,35 +71,25 @@ describe.concurrent("Chunk", () => {
     assert.isTrue(result == ImmutableArray(6, 7, 8, 9, 10));
   });
 
+  it("dropRight", () => {
+    const chunk = Chunk(1, 2, 3, 4, 5, 6, 7);
+
+    const result = chunk.dropRight(3).asImmutableArray();
+
+    assert.isTrue(result == ImmutableArray(1, 2, 3, 4));
+  });
+
+  it("dropWhile", () => {
+    const chunk = Chunk(0, 1, 2, 3, 4);
+
+    const result = chunk.dropWhile((n) => n < 2).asImmutableArray();
+
+    assert.isTrue(result == ImmutableArray(2, 3, 4));
+  });
+
   it("elem", () => {
     assert.isTrue(Chunk(1, 2, 3).elem(Equivalence.number, 2));
     assert.isFalse(Chunk(1, 2, 3).elem(Equivalence.number, 0));
-  });
-
-  it("map", () => {
-    const chunk = Chunk.from(Buffer.from("hello-world"));
-
-    const result = chunk.map((n) => (n === 45 ? 32 : n)).asArrayLike();
-
-    assert.deepEqual(result, Buffer.from("hello world"));
-  });
-
-  it("flatMap", () => {
-    const chunk = Chunk.from(Buffer.from("hello-world"));
-
-    const result = chunk
-      .flatMap((n) => (n === 45 ? Chunk.from(Buffer.from("-|-")) : Chunk.single(n)))
-      .asArrayLike();
-
-    assert.deepEqual(result, Buffer.from("hello-|-world"));
-  });
-
-  it("arrayLikeIterator", () => {
-    const chunk = Chunk.single(0) + Chunk.single(1) + Chunk.single(2) + Chunk.single(3);
-
-    const result = Array.from(chunk.buckets);
-
-    assert.deepEqual(result, [Buffer.of(0), Buffer.of(1), Buffer.of(2), Buffer.of(3)]);
   });
 
   it("equals", () => {
@@ -140,18 +103,102 @@ describe.concurrent("Chunk", () => {
     assert.isTrue(chunkA == chunkB);
   });
 
-  it("difference", () => {
-    assert.isTrue(Chunk(1, 2).difference(Equivalence.number, Chunk(3, 4)) == Chunk(1, 2));
-    assert.isTrue(Chunk(1, 2).difference(Equivalence.number, Chunk(2, 3)) == Chunk(1));
-    assert.isTrue(Chunk(1, 2).difference(Equivalence.number, Chunk(1, 2)) == Chunk.empty<number>());
+  it("equality", () => {
+    const chunk = Chunk(0, 1, 2);
+
+    const result = chunk.equals(Chunk.from([0, 1, 2]));
+
+    assert.isTrue(result);
   });
 
-  it("dropWhile", () => {
+  it("exists", () => {
     const chunk = Chunk(0, 1, 2, 3, 4);
 
-    const result = chunk.dropWhile((n) => n < 2).asImmutableArray();
+    assert.isTrue(chunk.exists((n) => n === 3));
+    assert.isFalse(chunk.exists((n) => n === 6));
+  });
 
-    assert.isTrue(result == ImmutableArray(2, 3, 4));
+  it("extend", () => {
+    const sum: (self: Chunk<number>) => number = AssociativeIdentity.fold(AssociativeIdentity.sum);
+
+    assert.isTrue(Chunk(1, 2, 3, 4).extend(sum) == Chunk(10, 9, 7, 4));
+    assert.isTrue(
+      Chunk(1, 2, 3, 4).extend(identity) == Chunk(Chunk(1, 2, 3, 4), Chunk(2, 3, 4), Chunk(3, 4), Chunk(4))
+    );
+  });
+
+  it("fill", () => {
+    const chunk = Chunk.fill(10, (n) => n + 1);
+
+    const result = chunk.asImmutableArray();
+
+    assert.isTrue(result == ImmutableArray(1, 2, 3, 4, 5, 6, 7, 8, 9, 10));
+  });
+
+  it("find", () => {
+    const chunk = Chunk(0, 1, 2, 3, 4);
+
+    assert.isTrue(chunk.find((n) => n > 2) == Option.some(3));
+    assert.isTrue(chunk.find((n) => n === 6) == Option.none);
+  });
+
+  it("find & concat", () => {
+    const chunk = Chunk(4, 5, 6) + Chunk(1, 2, 3);
+    const result = chunk.find((v) => v === 3);
+
+    assert.isTrue(result == Option.some(3));
+  });
+
+  it("findIndex", () => {
+    const chunk = Chunk(1, 2, 3, 4, 5, 6, 7);
+
+    const result = chunk.findIndex((n) => n === 5);
+
+    assert.isTrue(result == Option.some(4));
+  });
+
+  it("findLast - found", () => {
+    const chunk = Chunk(1, 2, 3, 4, 5, 6, 7, 5, 9, 10).mapWithIndex((i, n) => ({
+      id: i,
+      n
+    }));
+
+    const result = chunk.findLast(({ n }) => n === 5);
+
+    assert.deepEqual(result, Option.some({ id: 7, n: 5 }));
+  });
+
+  it("findLast - not found", () => {
+    const chunk = Chunk(1, 2, 3, 4, 5, 6, 7, 5, 9, 10).mapWithIndex((i, n) => ({
+      id: i,
+      n
+    }));
+
+    const result = chunk.findLast(({ n }) => n === 25);
+
+    assert.isTrue(result == Option.none);
+  });
+
+  it("findLastIndex - found", () => {
+    const chunk = Chunk(1, 2, 3, 4, 5, 6, 7, 5, 9, 10).mapWithIndex((i, n) => ({
+      id: i,
+      n
+    }));
+
+    const result = chunk.findLastIndex(({ n }) => n === 5);
+
+    assert.isTrue(result == Option.some(7));
+  });
+
+  it("findLastIndex - not found", () => {
+    const chunk = Chunk(1, 2, 3, 4, 5, 6, 7, 5, 9, 10).mapWithIndex((i, n) => ({
+      id: i,
+      n
+    }));
+
+    const result = chunk.findLastIndex(({ n }) => n === 25);
+
+    assert.isTrue(result == Option.none);
   });
 
   it("filter", () => {
@@ -162,18 +209,54 @@ describe.concurrent("Chunk", () => {
     assert.isTrue(result == ImmutableArray(2, 3, 4));
   });
 
-  it("exists", () => {
-    const chunk = Chunk(0, 1, 2, 3, 4);
+  it("flatMap", () => {
+    const chunk = Chunk.from(Buffer.from("hello-world"));
 
-    assert.isTrue(chunk.exists((n) => n === 3));
-    assert.isFalse(chunk.exists((n) => n === 6));
+    const result = chunk
+      .flatMap((n) => (n === 45 ? Chunk.from(Buffer.from("-|-")) : Chunk.single(n)))
+      .asArrayLike();
+
+    assert.deepEqual(result, Buffer.from("hello-|-world"));
   });
 
-  it("find", () => {
-    const chunk = Chunk(0, 1, 2, 3, 4);
+  it("forEachF", () => {
+    const forEachF = Chunk.forEachF(Option.Applicative)(
+      (n: number): Option<number> => (n % 2 === 0 ? Option.none : Option.some(n))
+    );
 
-    assert.isTrue(chunk.find((n) => n > 2) == Option.some(3));
-    assert.isTrue(chunk.find((n) => n === 6) == Option.none);
+    assert.isTrue(forEachF(Chunk(1, 2)) == Option.none);
+    assert.isTrue(forEachF(Chunk(1, 3)) == Option.some(Chunk(1, 3)));
+  });
+
+  it("forEachWithIndexF", () => {
+    assert.isTrue(
+      Chunk("a", "bb")(
+        Chunk.forEachWithIndexF(Option.Applicative)(
+          (i, s) => (s.length >= 1 ? Option.some(s + i) : Option.none)
+        )
+      ) == Option.some(Chunk("a0", "bb1"))
+    );
+    assert.isTrue(
+      Chunk("a", "bb")(
+        Chunk.forEachWithIndexF(Option.Applicative)(
+          (i, s) => (s.length > 1 ? Option.some(s + i) : Option.none)
+        )
+      ) == Option.none
+    );
+  });
+
+  it("fromArray", () => {
+    const chunkA = Chunk.from([1, 2, 3, 4, 5]).append(6).append(7);
+    const chunkB = Chunk(1, 2, 3, 4, 5, 6, 7);
+
+    assert.isTrue(chunkA == chunkB);
+  });
+
+  it("get", () => {
+    const chunk = Chunk(1, 2, 3, 4, 5);
+
+    assert.isTrue(chunk.get(3) == Option.some(4));
+    assert.isTrue(chunk.get(5) == Option.none);
   });
 
   it("indexWhere", () => {
@@ -198,6 +281,39 @@ describe.concurrent("Chunk", () => {
     assert.isTrue(Chunk(1, 2).intersection(Equivalence.number, Chunk(1, 2)) == Chunk(1, 2));
   });
 
+  it("iterable", () => {
+    const chunk = Chunk(0, 1, 2).asArrayLike();
+
+    assert.deepEqual(chunk, Buffer.of(0, 1, 2));
+  });
+
+  it("map", () => {
+    const chunk = Chunk.from(Buffer.from("hello-world"));
+
+    const result = chunk.map((n) => (n === 45 ? 32 : n)).asArrayLike();
+
+    assert.deepEqual(result, Buffer.from("hello world"));
+  });
+
+  it("mapWithIndex", () => {
+    const chunk = Chunk(1, 2, 3, 4, 5, 6, 7);
+
+    const result = chunk.mapWithIndex((i, n) => Tuple(i, n)).asImmutableArray();
+
+    assert.isTrue(
+      result ==
+        ImmutableArray(
+          Tuple(0, 1),
+          Tuple(1, 2),
+          Tuple(2, 3),
+          Tuple(3, 4),
+          Tuple(4, 5),
+          Tuple(5, 6),
+          Tuple(6, 7)
+        )
+    );
+  });
+
   it("partition", () => {
     assert.isTrue(Chunk.empty<number>().partition((n) => n > 2) == Tuple(Chunk.empty<number>(), Chunk.empty<number>()));
     assert.isTrue(Chunk(1, 3).partition((n) => n > 2) == Tuple(Chunk(1), Chunk(3)));
@@ -214,14 +330,6 @@ describe.concurrent("Chunk", () => {
     );
   });
 
-  it("partitionWithIndex", () => {
-    assert.isTrue(
-      Chunk.empty<number>().partitionWithIndex((i, n) => i + n > 2) ==
-        Tuple(Chunk.empty<number>(), Chunk.empty<number>())
-    );
-    assert.isTrue(Chunk(1, 2).partitionWithIndex((i, n) => i + n > 2) == Tuple(Chunk(1), Chunk(2)));
-  });
-
   it("partitionMapWithIndex", () => {
     assert.isTrue(
       Chunk.empty<Either<string, number>>().partitionMapWithIndex((_, a) => a) ==
@@ -234,7 +342,96 @@ describe.concurrent("Chunk", () => {
     );
   });
 
-  describe("sort", () => {
+  it("partitionWithIndex", () => {
+    assert.isTrue(
+      Chunk.empty<number>().partitionWithIndex((i, n) => i + n > 2) ==
+        Tuple(Chunk.empty<number>(), Chunk.empty<number>())
+    );
+    assert.isTrue(Chunk(1, 2).partitionWithIndex((i, n) => i + n > 2) == Tuple(Chunk(1), Chunk(2)));
+  });
+
+  it("prepend", () => {
+    const chunkA = Chunk.single(1).prepend(2).prepend(3).prepend(4).prepend(5);
+    const chunkB = Chunk(5, 4, 3, 2, 1);
+
+    assert.isTrue(chunkA == chunkB);
+  });
+
+  it("reduceWithIndex", () => {
+    const chunk = Chunk(1, 2, 3, 4, 5, 6, 7);
+
+    const result = chunk.reduceWithIndex(
+      ImmutableArray.empty<Tuple<[number, number]>>(),
+      (i, acc, n) => acc + Tuple(i, n)
+    );
+
+    assert.isTrue(
+      result == ImmutableArray(
+        Tuple(0, 1),
+        Tuple(1, 2),
+        Tuple(2, 3),
+        Tuple(3, 4),
+        Tuple(4, 5),
+        Tuple(5, 6),
+        Tuple(6, 7)
+      )
+    );
+  });
+
+  it("reduceRightWithIndex", () => {
+    const chunk = Chunk(1, 2, 3, 4, 5, 6, 7);
+
+    const result = chunk.reduceRightWithIndex(
+      ImmutableArray.empty<Tuple<[number, number]>>(),
+      (i, n, acc) => acc + Tuple(i, n)
+    );
+
+    assert.isTrue(
+      result ==
+        ImmutableArray(
+          Tuple(6, 7),
+          Tuple(5, 6),
+          Tuple(4, 5),
+          Tuple(3, 4),
+          Tuple(2, 3),
+          Tuple(1, 2),
+          Tuple(0, 1)
+        )
+    );
+  });
+
+  it("separate", () => {
+    const chunk = Chunk(1, 2, 3, 4, 5, 6).map((n) => n % 2 === 0 ? Either.right(n) : Either.left(n.toString()));
+
+    const result = chunk.separate();
+
+    assert.isTrue(result == Tuple(Chunk("1", "3", "5"), Chunk(2, 4, 6)));
+  });
+
+  it("separateF", () => {
+    const separateF = Chunk.separateF(Option.Applicative)((n: number) =>
+      Option.some(n > 2 ? Either.right(n + 1) : Either.left(n - 1))
+    );
+
+    assert.isTrue(
+      separateF(Chunk.empty<number>()) == Option.some(Tuple(Chunk.empty(), Chunk.empty()))
+    );
+    assert.isTrue(separateF(Chunk(1, 3)) == Option.some(Tuple(Chunk(0), Chunk(4))));
+  });
+
+  it("separateWithIndexF", () => {
+    const separateWithIndexF = Chunk.separateWithIndexF(Option.Applicative)((i, n: number) =>
+      Option.some(n > 2 ? Either.right(n + i) : Either.left(n - i))
+    );
+
+    assert.isTrue(
+      separateWithIndexF(Chunk.empty<number>()) ==
+        Option.some(Tuple(Chunk.empty(), Chunk.empty()))
+    );
+    assert.isTrue(separateWithIndexF(Chunk(1, 3)) == Option.some(Tuple(Chunk(1), Chunk(4))));
+  });
+
+  describe.concurrent("sort", () => {
     it("simple", () => {
       assert.isTrue(Chunk(3, 2, 1).sort(Ord.number) == Chunk(1, 2, 3));
       assert.isTrue(Chunk.empty<number>().sort(Ord.number) == Chunk.empty<number>());
@@ -349,6 +546,39 @@ describe.concurrent("Chunk", () => {
     assert.isTrue(right == Chunk(3, 4, 5));
   });
 
+  it("spread", () => {
+    const f = (...args: number[]) => args;
+
+    assert.deepEqual(f(...Chunk(0, 1, 2)), [0, 1, 2]);
+  });
+
+  it("stack", () => {
+    let a = Chunk.empty<number>();
+    for (let i = 0; i < 100_000; i++) {
+      a = a + Chunk(i, i);
+    }
+
+    const result = a.asArrayLike();
+
+    assert.strictEqual(result.length, 200_000);
+  });
+
+  it("take", () => {
+    const chunk = Chunk(1, 2, 3, 4, 5) + Chunk(6, 7, 8, 9, 10);
+
+    const result = chunk.take(5).asImmutableArray();
+
+    assert.isTrue(result == ImmutableArray(1, 2, 3, 4, 5));
+  });
+
+  it("takeRight", () => {
+    const chunk = Chunk(1, 2, 3, 4, 5) + Chunk(6, 7, 8, 9, 10);
+
+    const result = chunk.takeRight(5).asImmutableArray();
+
+    assert.isTrue(result == ImmutableArray(6, 7, 8, 9, 10));
+  });
+
   it("union", () => {
     assert.isTrue(Chunk(1, 2).union(Equivalence.number, Chunk(3, 4)) == Chunk(1, 2, 3, 4));
     assert.isTrue(Chunk(1, 2).union(Equivalence.number, Chunk(2, 3)) == Chunk(1, 2, 3));
@@ -437,165 +667,5 @@ describe.concurrent("Chunk", () => {
     const result = chunk.zipWithIndex().asImmutableArray();
 
     assert.isTrue(result == ImmutableArray(Tuple(1, 0), Tuple(2, 1), Tuple(3, 2), Tuple(4, 3)));
-  });
-
-  it("fill", () => {
-    const chunk = Chunk.fill(10, (n) => n + 1);
-
-    const result = chunk.asImmutableArray();
-
-    assert.isTrue(result == ImmutableArray(1, 2, 3, 4, 5, 6, 7, 8, 9, 10));
-  });
-
-  it("equality", () => {
-    const chunk = Chunk(0, 1, 2);
-
-    const result = chunk.equals(Chunk.from([0, 1, 2]));
-
-    assert.isTrue(result);
-  });
-
-  it("dedupe", () => {
-    const chunk = Chunk(0, 0, 1, 2, 3, 4, 4, 5, 6, 7, 7, 7, 8, 9, 9, 9, 9);
-
-    const result = chunk.dedupe().asImmutableArray();
-
-    assert.deepEqual(result, ImmutableArray(0, 1, 2, 3, 4, 5, 6, 7, 8, 9));
-  });
-
-  it("dropRight", () => {
-    const chunk = Chunk(1, 2, 3, 4, 5, 6, 7);
-
-    const result = chunk.dropRight(3).asImmutableArray();
-
-    assert.isTrue(result == ImmutableArray(1, 2, 3, 4));
-  });
-
-  it("mapWithIndex", () => {
-    const chunk = Chunk(1, 2, 3, 4, 5, 6, 7);
-
-    const result = chunk.mapWithIndex((i, n) => Tuple(i, n)).asImmutableArray();
-
-    assert.isTrue(
-      result ==
-        ImmutableArray(
-          Tuple(0, 1),
-          Tuple(1, 2),
-          Tuple(2, 3),
-          Tuple(3, 4),
-          Tuple(4, 5),
-          Tuple(5, 6),
-          Tuple(6, 7)
-        )
-    );
-  });
-
-  it("reduceWithIndex", () => {
-    const chunk = Chunk(1, 2, 3, 4, 5, 6, 7);
-
-    const result = chunk.reduceWithIndex(
-      ImmutableArray.empty<Tuple<[number, number]>>(),
-      (i, acc, n) => acc + Tuple(i, n)
-    );
-
-    assert.isTrue(
-      result == ImmutableArray(
-        Tuple(0, 1),
-        Tuple(1, 2),
-        Tuple(2, 3),
-        Tuple(3, 4),
-        Tuple(4, 5),
-        Tuple(5, 6),
-        Tuple(6, 7)
-      )
-    );
-  });
-
-  it("reduceRightWithIndex", () => {
-    const chunk = Chunk(1, 2, 3, 4, 5, 6, 7);
-
-    const result = chunk.reduceRightWithIndex(
-      ImmutableArray.empty<Tuple<[number, number]>>(),
-      (i, n, acc) => acc + Tuple(i, n)
-    );
-
-    assert.isTrue(
-      result ==
-        ImmutableArray(
-          Tuple(6, 7),
-          Tuple(5, 6),
-          Tuple(4, 5),
-          Tuple(3, 4),
-          Tuple(2, 3),
-          Tuple(1, 2),
-          Tuple(0, 1)
-        )
-    );
-  });
-
-  it("findIndex", () => {
-    const chunk = Chunk(1, 2, 3, 4, 5, 6, 7);
-
-    const result = chunk.findIndex((n) => n === 5);
-
-    assert.isTrue(result == Option.some(4));
-  });
-
-  it("findLast - found", () => {
-    const chunk = Chunk(1, 2, 3, 4, 5, 6, 7, 5, 9, 10).mapWithIndex((i, n) => ({
-      id: i,
-      n
-    }));
-
-    const result = chunk.findLast(({ n }) => n === 5);
-
-    assert.deepEqual(result, Option.some({ id: 7, n: 5 }));
-  });
-
-  it("findLast - not found", () => {
-    const chunk = Chunk(1, 2, 3, 4, 5, 6, 7, 5, 9, 10).mapWithIndex((i, n) => ({
-      id: i,
-      n
-    }));
-
-    const result = chunk.findLast(({ n }) => n === 25);
-
-    assert.isTrue(result == Option.none);
-  });
-
-  it("findLastIndex - found", () => {
-    const chunk = Chunk(1, 2, 3, 4, 5, 6, 7, 5, 9, 10).mapWithIndex((i, n) => ({
-      id: i,
-      n
-    }));
-
-    const result = chunk.findLastIndex(({ n }) => n === 5);
-
-    assert.isTrue(result == Option.some(7));
-  });
-
-  it("findLastIndex - not found", () => {
-    const chunk = Chunk(1, 2, 3, 4, 5, 6, 7, 5, 9, 10).mapWithIndex((i, n) => ({
-      id: i,
-      n
-    }));
-
-    const result = chunk.findLastIndex(({ n }) => n === 25);
-
-    assert.isTrue(result == Option.none);
-  });
-  it("partitionMap", () => {
-    const chunk = Chunk(1, 2, 3, 4, 5, 6);
-
-    const result = chunk.partitionMap((n) => n % 2 === 0 ? Either.right(n) : Either.left(n));
-
-    assert.isTrue(result == Tuple(Chunk(1, 3, 5), Chunk(2, 4, 6)));
-  });
-  it("separate", () => {
-    const chunk = Chunk(1, 2, 3, 4, 5, 6).map((n) => n % 2 === 0 ? Either.right(n) : Either.left(n.toString()));
-
-    const result = chunk.separate();
-
-    assert.isTrue(result == Tuple(Chunk("1", "3", "5"), Chunk(2, 4, 6)));
   });
 });
