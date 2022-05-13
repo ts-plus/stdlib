@@ -1,7 +1,9 @@
+import type * as P from "@tsplus/stdlib/prelude/Compactable";
+
 /**
  * @tsplus static Option/Ops Compactable
  */
-export const OptionCompactable = HKT.instance<Compactable<Option.HKT>>({
+export const Compactable = HKT.instance<P.Compactable<Option.HKT>>({
   compact: (option) => option.flatten(),
   separate: (option) => option.separate()
 });

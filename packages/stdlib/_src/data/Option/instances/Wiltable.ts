@@ -1,6 +1,8 @@
+import type * as P from "@tsplus/stdlib/prelude/Wiltable";
+
 /**
  * @tsplus static Option/Ops Wiltable
  */
-export const OptionWiltable = HKT.instance<Wiltable<Option.HKT>>({
+export const Wiltable = HKT.instance<P.Wiltable<Option.HKT>>({
   separateF: Option.separateF
 });

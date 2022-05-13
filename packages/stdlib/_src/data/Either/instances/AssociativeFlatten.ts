@@ -1,6 +1,8 @@
+import type * as P from "@tsplus/stdlib/prelude/AssociativeFlatten";
+
 /**
  * @tsplus static Either/Ops AssociativeFlatten
  */
-export const EitherAssociativeFlatten = HKT.instance<AssociativeFlatten<Either.HKT>>({
+export const AssociativeFlatten = HKT.instance<P.AssociativeFlatten<Either.HKT>>({
   flatten: (ffa) => ffa.flatten()
 });
