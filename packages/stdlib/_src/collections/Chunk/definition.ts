@@ -33,6 +33,14 @@ export interface Chunk<A> extends Collection<A> {
   [Symbol.iterator](): Iterator<A>;
 }
 
+export interface ChunkF extends HKT {
+  readonly type: Chunk<this["A"]>;
+}
+
+export declare namespace Chunk {
+  export type HKT = ChunkF;
+}
+
 /**
  * @tsplus type Chunk/Ops
  */

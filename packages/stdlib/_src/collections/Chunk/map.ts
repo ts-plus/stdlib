@@ -22,6 +22,6 @@ export function map_<A, B>(self: Chunk<A>, f: (a: A) => B): Chunk<B> {
 /**
  * Returns a chunk with the elements mapped by the specified function.
  *
- * @tsplus static Chunk/Aspects map_
+ * @tsplus static Chunk/Aspects map
  */
 export const map = Pipeable(map_);
