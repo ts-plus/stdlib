@@ -1,5 +1,23 @@
 # @tsplus/stdlib
 
+## 0.0.65
+
+### Patch Changes
+
+- [#126](https://github.com/ts-plus/stdlib/pull/126) [`d1c8b1e`](https://github.com/ts-plus/stdlib/commit/d1c8b1ebd3a5d843fe64b5bcecd7e8f8fff5f2d2) Thanks [@IMax153](https://github.com/IMax153)! - add additional HKTs
+
+* [#129](https://github.com/ts-plus/stdlib/pull/129) [`2678d5c`](https://github.com/ts-plus/stdlib/commit/2678d5c937c868add307d0fc61ed8dff618bad8b) Thanks [@IMax153](https://github.com/IMax153)! - add HKTs for Chunk
+
+- [#126](https://github.com/ts-plus/stdlib/pull/126) [`5938a3f`](https://github.com/ts-plus/stdlib/commit/5938a3fc01bc3895aaeaa8035e683933c442c033) Thanks [@IMax153](https://github.com/IMax153)! - add HKTs for Option
+
+* [#125](https://github.com/ts-plus/stdlib/pull/125) [`8f2afc0`](https://github.com/ts-plus/stdlib/commit/8f2afc0c75fd8bf4cec4515537a0a60dd094b8ba) Thanks [@IMax153](https://github.com/IMax153)! - add NonEmptyImmutableArray module
+
+- [#129](https://github.com/ts-plus/stdlib/pull/129) [`612f34b`](https://github.com/ts-plus/stdlib/commit/612f34b1ae53d959a26e225379c186f29ae8cd41) Thanks [@IMax153](https://github.com/IMax153)! - fix naming of data HKTs
+
+* [#128](https://github.com/ts-plus/stdlib/pull/128) [`b30a4bb`](https://github.com/ts-plus/stdlib/commit/b30a4bb959c7aed219231206afbc2935ce316e89) Thanks [@IMax153](https://github.com/IMax153)! - add HKTs for ImmutableArray
+
+- [#126](https://github.com/ts-plus/stdlib/pull/126) [`1a39361`](https://github.com/ts-plus/stdlib/commit/1a393610ef91cf025ccd82025b7bced80560d106) Thanks [@IMax153](https://github.com/IMax153)! - add HKT operations to Either
+
 ## 0.0.64
 
 ### Patch Changes
