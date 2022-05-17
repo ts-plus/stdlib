@@ -28,6 +28,13 @@ export const Guard: GuardOps = (is) => ({ is });
 //
 
 /**
+ * Guard for a boolean
+ *
+ * @tsplus implicit
+ */
+export const boolean: Guard<boolean> = Guard((u): u is boolean => typeof u === "boolean");
+
+/**
  * Guard for a number
  *
  * @tsplus implicit

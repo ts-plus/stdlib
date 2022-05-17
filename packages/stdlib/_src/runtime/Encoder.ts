@@ -24,6 +24,13 @@ export const Encoder: EncoderOps = (encode) => ({ encode });
 //
 
 /**
+ * Encoder for a boolean
+ *
+ * @tsplus implicit
+ */
+export const boolean: Encoder<boolean> = Encoder((u) => u);
+
+/**
  * Encoder for a number
  *
  * @tsplus implicit

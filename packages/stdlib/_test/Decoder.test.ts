@@ -1,4 +1,17 @@
 describe.concurrent("Decoder", () => {
+  it("boolean", () => {
+    const boolean: Decoder<boolean> = Derive();
+    assert.isTrue(
+      boolean.decodeJSON(JSON.stringify(true)) == Either.right(true)
+    );
+    assert.isTrue(
+      boolean.decodeJSON(JSON.stringify(false)) == Either.right(false)
+    );
+    assert.equal(
+      boolean.decodeJSON(JSON.stringify(1)).left.value,
+      `Expected a value of type "boolean" but received one of type "number"`
+    );
+  });
   it("string", () => {
     const string: Decoder<string> = Derive();
     assert.isTrue(

@@ -1,4 +1,9 @@
 describe.concurrent("Encoder", () => {
+  it("boolean", () => {
+    const boolean: Encoder<boolean> = Derive();
+    assert.deepEqual(boolean.encode(true), true);
+    assert.deepEqual(boolean.encode(false), false);
+  });
   it("string", () => {
     const string: Encoder<string> = Derive();
     assert.deepEqual(string.encode("ok"), "ok");
