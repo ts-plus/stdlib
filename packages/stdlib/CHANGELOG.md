@@ -1,5 +1,13 @@
 # @tsplus/stdlib
 
+## 0.0.66
+
+### Patch Changes
+
+- [#130](https://github.com/ts-plus/stdlib/pull/130) [`446617d`](https://github.com/ts-plus/stdlib/commit/446617d7f24967ed7ea851b8765e30a166fa160d) Thanks [@IMax153](https://github.com/IMax153)! - add methods to contruct compound HKTs
+
+* [#131](https://github.com/ts-plus/stdlib/pull/131) [`e2bdd02`](https://github.com/ts-plus/stdlib/commit/e2bdd025ab71e5897d1069f3319dcd5077e35ed7) Thanks [@IMax153](https://github.com/IMax153)! - add runtime derivations for boolean
+
 ## 0.0.65
 
 ### Patch Changes
