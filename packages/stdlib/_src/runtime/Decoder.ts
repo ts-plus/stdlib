@@ -174,6 +174,13 @@ export class DecoderErrorValidation implements Decoder.Error {
 /**
  * @tsplus implicit
  */
+export const boolean: Decoder<boolean> = Decoder((u) =>
+  Derive<Guard<boolean>>().is(u) ? Result.success(u) : Result.fail(new DecoderErrorPrimitive(u, "boolean"))
+);
+
+/**
+ * @tsplus implicit
+ */
 export const string: Decoder<string> = Decoder((u) =>
   Derive<Guard<string>>().is(u) ? Result.success(u) : Result.fail(new DecoderErrorPrimitive(u, "string"))
 );
