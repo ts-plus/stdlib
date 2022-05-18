@@ -24,6 +24,20 @@ export const Encoder: EncoderOps = (encode) => ({ encode });
 //
 
 /**
+ * Encoder for `true`
+ *
+ * @tsplus implicit
+ */
+export const _true: Encoder<true> = Encoder((u) => u);
+
+/**
+ * Encoder for `false`
+ *
+ * @tsplus implicit
+ */
+export const _false: Encoder<false> = Encoder((u) => u);
+
+/**
  * Encoder for a boolean
  *
  * @tsplus implicit
@@ -201,7 +215,7 @@ export function deriveSortedSet<A extends SortedSet<any>>(
 /**
  * @tsplus derive Encoder<_> 20
  */
-export function deriveLiteral<A extends boolean | string | number>(
+export function deriveLiteral<A extends string | number>(
   ...[value]: Check<Check.IsLiteral<A> & Check.Not<Check.IsUnion<A>>> extends Check.True ? [value: A] : never
 ): Encoder<A> {
   return Encoder(() => value);
