@@ -49,8 +49,8 @@ export declare namespace Check {
   /**
    * @tsplus type Check.IsLiteral
    */
-  type IsLiteral<A extends string | number> = Not<
-    Extends<string, A> | Extends<number, A>
+  type IsLiteral<A extends boolean | string | number> = Not<
+    Extends<boolean, A> | Extends<string, A> | Extends<number, A>
   >;
 
   /**
