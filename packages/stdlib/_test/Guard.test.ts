@@ -68,6 +68,20 @@ describe("Guard", () => {
     assert.isFalse(guard.is(Either.left(0)));
     assert.isFalse(guard.is("nope"));
   });
+  it("record", () => {
+    const guard: Guard<Record<string, { foo: string; }>> = Derive();
+    const guard2: Guard<Record<"a", { foo: string; }>> = Derive();
+    const guard3: Guard<Record<"a" | "b", { foo: string; }>> = Derive();
+    assert.isTrue(guard.is({ a: { foo: "a" } }));
+    assert.isTrue(guard.is({ b: { foo: "a" } }));
+    assert.isFalse(guard.is({ a: { foo: 0 } }));
+    assert.isTrue(guard2.is({ a: { foo: "a" } }));
+    assert.isFalse(guard2.is({ a: { foo: 0 } }));
+    assert.isFalse(guard2.is({ b: { foo: "a" } }));
+    assert.isTrue(guard3.is({ a: { foo: "a" }, b: { foo: "b" } }));
+    assert.isFalse(guard3.is({ a: { foo: "a" }, c: { foo: "b" } }));
+    assert.isFalse(guard3.is({ a: { foo: "a" }, b: { foo: 0 } }));
+  });
   it("struct", () => {
     interface Person {
       name: string;
