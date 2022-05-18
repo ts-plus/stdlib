@@ -1,5 +1,12 @@
 # @tsplus/stdlib-global
 
+## 0.0.34
+
+### Patch Changes
+
+- Updated dependencies [[`55e9dde`](https://github.com/ts-plus/stdlib/commit/55e9dde956c5a25db33bcfc315ffc90c57b010d4), [`ed8d71a`](https://github.com/ts-plus/stdlib/commit/ed8d71ac0b8510563e29eb5e7c0777f4f0a52b9a), [`bd4bb55`](https://github.com/ts-plus/stdlib/commit/bd4bb550f3d7e8d6a92266b262e81bdf89db54e9)]:
+  - @tsplus/stdlib@0.0.69
+
 ## 0.0.33
 
 ### Patch Changes
