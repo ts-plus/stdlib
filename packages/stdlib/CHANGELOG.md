@@ -1,5 +1,13 @@
 # @tsplus/stdlib
 
+## 0.0.67
+
+### Patch Changes
+
+- [#133](https://github.com/ts-plus/stdlib/pull/133) [`2695e6a`](https://github.com/ts-plus/stdlib/commit/2695e6aa7f064ec8d394053efebc9f23a20e6efc) Thanks [@IMax153](https://github.com/IMax153)! - add auto-derivation of boolean literals
+
+* [#135](https://github.com/ts-plus/stdlib/pull/135) [`c13e15c`](https://github.com/ts-plus/stdlib/commit/c13e15cec2b88aaf21400323d3d00b0aacf9cac7) Thanks [@IMax153](https://github.com/IMax153)! - fix derivation of true and false
+
 ## 0.0.66
 
 ### Patch Changes
