@@ -25,6 +25,17 @@ describe.concurrent("Encoder", () => {
     const encoder: Encoder<1> = Derive();
     assert.deepEqual(encoder.encode(1), 1);
   });
+  it("record", () => {
+    const encoder: Encoder<Record<string, { foo: string; }>> = Derive();
+    const encoder2: Encoder<Record<"a", { foo: string; }>> = Derive();
+    const encoder3: Encoder<Record<"a" | "b", { foo: string; }>> = Derive();
+    assert.deepStrictEqual(encoder.encode({ a: { foo: "a" } }), { a: { foo: "a" } });
+    assert.deepStrictEqual(encoder2.encode({ a: { foo: "a" } }), { a: { foo: "a" } });
+    assert.deepStrictEqual(
+      encoder3.encode({ a: { foo: "a" }, b: { foo: "b" } }),
+      { a: { foo: "a" }, b: { foo: "b" } }
+    );
+  });
   it("struct", () => {
     interface Person {
       firstName: string;

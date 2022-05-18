@@ -213,6 +213,25 @@ export function deriveSortedSet<A extends SortedSet<any>>(
 }
 
 /**
+ * @tsplus derive Encoder<_> 15
+ */
+export function deriveRecord<A extends Record<string, any>>(
+  ...[keyEncoder, valueEncoder]: [A] extends [Record<infer X, infer Y>] ? Check<
+    Check.IsEqual<A, Record<X, Y>> & Check.Not<Check.IsUnion<A>>
+  > extends Check.True ? [key: Encoder<X>, value: Encoder<Y>]
+  : never
+    : never
+): Encoder<A> {
+  return Encoder((u) => {
+    const encoded = {};
+    for (const k of Object.keys(u)) {
+      encoded[keyEncoder.encode(k) as any] = valueEncoder.encode(u[k]);
+    }
+    return encoded;
+  });
+}
+
+/**
  * @tsplus derive Encoder<_> 20
  */
 export function deriveLiteral<A extends string | number>(
