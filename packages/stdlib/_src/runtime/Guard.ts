@@ -263,6 +263,32 @@ export function deriveEither<A extends Either<any, any>>(
 }
 
 /**
+ * @tsplus derive Guard<_> 15
+ */
+export function deriveRecord<A extends Record<string, any>>(
+  ...[keyGuard, valueGuard]: [A] extends [Record<infer X, infer Y>] ? Check<
+    Check.IsEqual<A, Record<X, Y>> & Check.Not<Check.IsUnion<A>>
+  > extends Check.True ? [key: Guard<X>, value: Guard<Y>]
+  : never
+    : never
+): Guard<A> {
+  return Guard((u): u is A => {
+    if (record.is(u)) {
+      for (const k of Object.keys(u)) {
+        if (!keyGuard.is(k)) {
+          return false;
+        }
+        if (!valueGuard.is(u[k])) {
+          return false;
+        }
+      }
+      return true;
+    }
+    return false;
+  });
+}
+
+/**
  * @tsplus derive Guard<_> 20
  */
 export function deriveStruct<A extends Record<string, any>>(

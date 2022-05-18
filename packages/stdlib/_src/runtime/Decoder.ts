@@ -593,7 +593,9 @@ export function deriveTagged<A extends { _tag: string; }>(
 ): Decoder<A> {
   /** @tsplus implicit local */
   const tags = Guard((u): u is A["_tag"] => typeof u === "string" && u in elements);
-  const structure = Derive<Guard<{ _tag: A["_tag"]; }>>();
+  const structure = Guard<{ _tag: A["_tag"]; }>((u): u is { _tag: A["_tag"]; } =>
+    typeof u === "object" && u != null && "_tag" in u && tags.is(u["_tag"])
+  );
   return Decoder((u) => {
     if (structure.is(u)) {
       return elements[u["_tag"]].decodeResult(u).fold(
