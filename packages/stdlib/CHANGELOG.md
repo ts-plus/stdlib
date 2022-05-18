@@ -1,5 +1,11 @@
 # @tsplus/stdlib
 
+## 0.0.68
+
+### Patch Changes
+
+- [#136](https://github.com/ts-plus/stdlib/pull/136) [`9fb73c1`](https://github.com/ts-plus/stdlib/commit/9fb73c18f44fc8f12447ccf549389501abeeb6e5) Thanks [@IMax153](https://github.com/IMax153)! - upgrade dependencies
+
 ## 0.0.67
 
 ### Patch Changes
