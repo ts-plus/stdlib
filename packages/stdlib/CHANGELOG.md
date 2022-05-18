@@ -1,5 +1,15 @@
 # @tsplus/stdlib
 
+## 0.0.69
+
+### Patch Changes
+
+- [#139](https://github.com/ts-plus/stdlib/pull/139) [`55e9dde`](https://github.com/ts-plus/stdlib/commit/55e9dde956c5a25db33bcfc315ffc90c57b010d4) Thanks [@mikearnaldi](https://github.com/mikearnaldi)! - Guard derivation for Record<X, Y>
+
+* [#139](https://github.com/ts-plus/stdlib/pull/139) [`ed8d71a`](https://github.com/ts-plus/stdlib/commit/ed8d71ac0b8510563e29eb5e7c0777f4f0a52b9a) Thanks [@mikearnaldi](https://github.com/mikearnaldi)! - Encoder derivation for Record<X, Y>
+
+- [#139](https://github.com/ts-plus/stdlib/pull/139) [`bd4bb55`](https://github.com/ts-plus/stdlib/commit/bd4bb550f3d7e8d6a92266b262e81bdf89db54e9) Thanks [@mikearnaldi](https://github.com/mikearnaldi)! - Decoder derivation for Record<X, Y>
+
 ## 0.0.68
 
 ### Patch Changes
