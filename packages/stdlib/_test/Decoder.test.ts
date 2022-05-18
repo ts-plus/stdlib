@@ -1,4 +1,24 @@
 describe.concurrent("Decoder", () => {
+  it("true", () => {
+    const _true: Decoder<true> = Derive();
+    assert.isTrue(
+      _true.decodeJSON(JSON.stringify(true)) == Either.right(true)
+    );
+    assert.equal(
+      _true.decodeJSON(JSON.stringify(1)).left.value,
+      `Expected a value of type "true" but received one of type "number"`
+    );
+  });
+  it("false", () => {
+    const _false: Decoder<false> = Derive();
+    assert.isTrue(
+      _false.decodeJSON(JSON.stringify(false)) == Either.right(false)
+    );
+    assert.equal(
+      _false.decodeJSON(JSON.stringify(1)).left.value,
+      `Expected a value of type "false" but received one of type "number"`
+    );
+  });
   it("boolean", () => {
     const boolean: Decoder<boolean> = Derive();
     assert.isTrue(

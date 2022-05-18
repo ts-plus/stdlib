@@ -28,6 +28,20 @@ export const Guard: GuardOps = (is) => ({ is });
 //
 
 /**
+ * Guard for `true`
+ *
+ * @tsplus implicit
+ */
+export const _true: Guard<true> = Guard((u): u is true => u === true);
+
+/**
+ * Guard for `false`
+ *
+ * @tsplus implicit
+ */
+export const _false: Guard<false> = Guard((u): u is false => u === false);
+
+/**
  * Guard for a boolean
  *
  * @tsplus implicit
@@ -110,7 +124,7 @@ export function deriveValidation<A extends Validation.Brand<any, any>>(
 /**
  * @tsplus derive Guard<_> 20
  */
-export function deriveLiteral<A extends boolean | string | number>(
+export function deriveLiteral<A extends string | number>(
   ...[value]: Check<Check.IsLiteral<A> & Check.Not<Check.IsUnion<A>>> extends Check.True ? [value: A] : never
 ): Guard<A> {
   return Guard((u): u is A => u === value);

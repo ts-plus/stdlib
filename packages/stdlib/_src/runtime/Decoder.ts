@@ -89,13 +89,13 @@ export class DecoderErrorIsoDateMalformed implements Decoder.Error {
 
 export class DecoderErrorLiteral implements Decoder.Error {
   constructor(
-    readonly expected: boolean | string | number,
+    readonly expected: string | number,
     readonly value: unknown
   ) {}
   render = () => {
     return Tree(
       `Expected literal "${this.expected}"${
-        typeof this.expected === "number" || typeof this.expected === "boolean" ?
+        typeof this.expected === "number" ?
           ` of type "${typeof this.expected}"` :
           ""
       } instead received ${
@@ -170,6 +170,20 @@ export class DecoderErrorValidation implements Decoder.Error {
 //
 // Implicits
 //
+
+/**
+ * @tsplus implicit
+ */
+export const _true: Decoder<true> = Decoder((u) =>
+  Derive<Guard<true>>().is(u) ? Result.success(u) : Result.fail(new DecoderErrorPrimitive(u, "true"))
+);
+
+/**
+ * @tsplus implicit
+ */
+export const _false: Decoder<false> = Decoder((u) =>
+  Derive<Guard<false>>().is(u) ? Result.success(u) : Result.fail(new DecoderErrorPrimitive(u, "false"))
+);
 
 /**
  * @tsplus implicit
@@ -389,7 +403,7 @@ export function deriveOption<A extends Option<any>>(
 /**
  * @tsplus derive Decoder<_> 20
  */
-export function deriveLiteral<A extends false | true | string | number>(
+export function deriveLiteral<A extends string | number>(
   ...[value]: Check<Check.IsLiteral<A> & Check.Not<Check.IsUnion<A>>> extends Check.True ? [value: A] : never
 ): Decoder<A> {
   return Decoder((u) => u === value ? Result.success(u as A) : Result.fail(new DecoderErrorLiteral(value, u)));
