@@ -268,4 +268,27 @@ describe.concurrent("Decoder", () => {
     assert.isTrue(positiveInt.decode(-1.5) == Either.left("Encountered while processing validations: Int, Positive"));
     assert.isTrue(positiveInt.decode(-1) == Either.left("Encountered while processing validations: Positive"));
   });
+  it("record", () => {
+    const decoder: Decoder<Record<string, { foo: string; }>> = Derive();
+    const decoder2: Decoder<Record<"a", { foo: string; }>> = Derive();
+    const decoder3: Decoder<Record<"a" | "b", { foo: string; }>> = Derive();
+    assert.deepEqual(decoder.decode({ a: { foo: "ok" } }), Either.right({ a: { foo: "ok" } }));
+    assert.deepEqual(decoder2.decode({ a: { foo: "ok" } }), Either.right({ a: { foo: "ok" } }));
+    assert.deepEqual(
+      decoder2.decode({}),
+      Either.left("Encountered while parsing a record structure, missing keys: \"a\"")
+    );
+    assert.deepEqual(
+      decoder3.decode({}),
+      Either.left("Encountered while parsing a record structure, missing keys: \"a\", \"b\"")
+    );
+    assert.deepEqual(
+      decoder2.decode({ b: { foo: "ok" } }),
+      Either.left(
+        "Encountered while parsing a record structure\n" +
+          "└─ Encountered while parsing a record key \"b\"\n" +
+          "   └─ Expected literal \"a\" instead received \"b\""
+      )
+    );
+  });
 });
