@@ -858,7 +858,7 @@ __metadata:
   version: 0.0.0-use.local
   resolution: "@tsplus/stdlib-global@workspace:packages/stdlib-global"
   peerDependencies:
-    "@tsplus/stdlib": ^0.0.66
+    "@tsplus/stdlib": ^0.0.67
   peerDependenciesMeta:
     "@tsplus/stdlib":
       optional: true
