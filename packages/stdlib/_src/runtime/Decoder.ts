@@ -89,13 +89,13 @@ export class DecoderErrorIsoDateMalformed implements Decoder.Error {
 
 export class DecoderErrorLiteral implements Decoder.Error {
   constructor(
-    readonly expected: string | number,
+    readonly expected: boolean | string | number,
     readonly value: unknown
   ) {}
   render = () => {
     return Tree(
       `Expected literal "${this.expected}"${
-        typeof this.expected === "number" ?
+        typeof this.expected === "number" || typeof this.expected === "boolean" ?
           ` of type "${typeof this.expected}"` :
           ""
       } instead received ${
@@ -389,7 +389,7 @@ export function deriveOption<A extends Option<any>>(
 /**
  * @tsplus derive Decoder<_> 20
  */
-export function deriveLiteral<A extends string | number>(
+export function deriveLiteral<A extends false | true | string | number>(
   ...[value]: Check<Check.IsLiteral<A> & Check.Not<Check.IsUnion<A>>> extends Check.True ? [value: A] : never
 ): Decoder<A> {
   return Decoder((u) => u === value ? Result.success(u as A) : Result.fail(new DecoderErrorLiteral(value, u)));
