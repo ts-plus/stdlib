@@ -282,12 +282,11 @@ describe.concurrent("Decoder", () => {
       decoder3.decode({}),
       Either.left("Encountered while parsing a record structure, missing keys: \"a\", \"b\"")
     );
+    console.log(decoder2.decode({ b: { foo: "ok" } }));
     assert.deepEqual(
       decoder2.decode({ b: { foo: "ok" } }),
       Either.left(
-        "Encountered while parsing a record structure\n" +
-          "└─ Encountered while parsing a record key \"b\"\n" +
-          "   └─ Expected literal \"a\" instead received \"b\""
+        "Encountered while parsing a record structure, missing keys: \"a\""
       )
     );
   });

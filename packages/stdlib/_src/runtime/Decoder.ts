@@ -400,14 +400,6 @@ export function deriveOption<A extends Option<any>>(
   );
 }
 
-export class DecoderErrorRecordKey implements Decoder.Error {
-  constructor(
-    readonly key: string,
-    readonly error: Decoder.Error
-  ) {}
-  render = () => Tree(`Encountered while parsing a record key "${this.key}"`, Chunk(this.error.render()));
-}
-
 export class DecoderErrorRecordValue implements Decoder.Error {
   constructor(
     readonly key: string,
@@ -437,9 +429,9 @@ export class DecoderErrorRecordMissingKeys implements Decoder.Error {
  * @tsplus derive Decoder<_> 15
  */
 export function deriveRecord<A extends Record<string, any>>(
-  ...[keyDecoder, valueDecoder, requiredKeys]: [A] extends [Record<infer X, infer Y>] ? Check<
-    Check.IsEqual<A, Record<X, Y>> & Check.Not<Check.IsUnion<A>>
-  > extends Check.True ? [key: Decoder<X>, value: Decoder<Y>, requiredKeys: { [k in X]: 0; }]
+  ...[keyGuard, valueDecoder, requiredKeysRecord]: [A] extends [Record<infer X, infer Y>] ? Check<
+    Check.Not<Check.IsUnion<A>> & Check.IsEqual<A, Record<X, Y>>
+  > extends Check.True ? [keyGuard: Guard<X>, valueDecoder: Decoder<Y>, requiredKeysRecord: { [k in X]: 0; }]
   : never
     : never
 ): Decoder<A> {
@@ -451,35 +443,25 @@ export function deriveRecord<A extends Record<string, any>>(
     const asRecord = asRecordResult.success;
     const fieldErrors = Chunk.builder<Decoder.Error>();
     let isFailure = false;
-    const missing = new Set(Object.keys(requiredKeys));
+    const missing = new Set(Object.keys(requiredKeysRecord));
     const res = {};
     for (const k of Object.keys(asRecord)) {
-      const keyResult = keyDecoder.decodeResult(k);
-      if (keyResult.isFailure()) {
-        isFailure = true;
+      if (keyGuard.is(k)) {
+        const valueResult = valueDecoder.decodeResult(asRecord[k]);
+        if (valueResult.isFailure()) {
+          isFailure = true;
+        }
+        const valueError = valueResult.getWarningOrFailure();
+        if (valueError.isSome()) {
+          fieldErrors.append(new DecoderErrorRecordValue(k, valueError.value.merge()));
+        }
+        const valueSuccess = valueResult.getSuccess();
+        if (valueSuccess.isNone()) {
+          continue;
+        }
+        missing.delete(k);
+        res[k] = valueSuccess.value;
       }
-      const keyError = keyResult.getWarningOrFailure();
-      if (keyError.isSome()) {
-        fieldErrors.append(new DecoderErrorRecordKey(k, keyError.value.merge()));
-      }
-      const keySuccess = keyResult.getSuccess();
-      if (keySuccess.isNone()) {
-        continue;
-      }
-      const valueResult = valueDecoder.decodeResult(asRecord[k]);
-      if (valueResult.isFailure()) {
-        isFailure = true;
-      }
-      const valueError = valueResult.getWarningOrFailure();
-      if (valueError.isSome()) {
-        fieldErrors.append(new DecoderErrorRecordValue(k, valueError.value.merge()));
-      }
-      const valueSuccess = valueResult.getSuccess();
-      if (valueSuccess.isNone()) {
-        continue;
-      }
-      missing.delete(k);
-      res[k] = valueSuccess.value;
     }
     const errors = fieldErrors.build();
     if (isFailure) {
