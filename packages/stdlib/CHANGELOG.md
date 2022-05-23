@@ -1,5 +1,17 @@
 # @tsplus/stdlib
 
+## 0.0.70
+
+### Patch Changes
+
+- [#142](https://github.com/ts-plus/stdlib/pull/142) [`953595c`](https://github.com/ts-plus/stdlib/commit/953595c4e1e378046d6549a4b7764ccb97f56c63) Thanks [@mikearnaldi](https://github.com/mikearnaldi)! - Fix guard for record
+
+* [#141](https://github.com/ts-plus/stdlib/pull/141) [`d7d860d`](https://github.com/ts-plus/stdlib/commit/d7d860d121c0660a7fffdfb88cbf19ff208bd03e) Thanks [@0x706b](https://github.com/0x706b)! - fix(Guard): check property is defined in deriveStruct
+
+- [#142](https://github.com/ts-plus/stdlib/pull/142) [`7178a4d`](https://github.com/ts-plus/stdlib/commit/7178a4dee28ef0cd79930d4760f19cec2e844806) Thanks [@mikearnaldi](https://github.com/mikearnaldi)! - Update ts-plus build
+
+* [#142](https://github.com/ts-plus/stdlib/pull/142) [`7e86daf`](https://github.com/ts-plus/stdlib/commit/7e86dafc48020125c9915a029ab12e9a73c77411) Thanks [@mikearnaldi](https://github.com/mikearnaldi)! - Fix decoder for record
+
 ## 0.0.69
 
 ### Patch Changes
