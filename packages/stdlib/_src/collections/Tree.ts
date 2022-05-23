@@ -1,47 +1,23 @@
-export type Forest<A> = Chunk<Tree<A>>;
-
-/**
- * @tsplus type Tree
- */
-export interface Tree<A> {
-  readonly value: A;
-  readonly forest: Forest<A>;
-}
-
-/**
- * @tsplus type Tree/Ops
- */
-export interface TreeOps {}
-export const Tree: TreeOps = {};
-
-const empty = Chunk.empty<never>();
-
-/**
- * @tsplus static Tree/Ops __call
- */
-export function tree<A>(value: A, forest: Forest<A> = empty): Tree<A> {
-  return {
-    value,
-    forest
-  };
-}
-
-/**
- * @tsplus fluent Tree draw
- */
-export function drawTree(tree: Tree<string>): string {
-  return tree.value + drawForest("\n", tree.forest);
-}
-
-function drawForest(indentation: string, forest: Chunk<Tree<string>>): string {
-  let r = "";
-  const len = forest.length;
-  let tree: Tree<string>;
-  for (let i = 0; i < len; i++) {
-    tree = forest.unsafeGet(i);
-    const isLast = i === len - 1;
-    r += indentation + (isLast ? "└" : "├") + "─ " + tree.value;
-    r += drawForest(indentation + (len > 1 && !isLast ? "│  " : "   "), tree.forest);
-  }
-  return r;
-}
+// codegen:start {preset: barrel, include: ./Tree/*.ts, prefix: "@tsplus/stdlib/collections"}
+export * from "@tsplus/stdlib/collections/Tree/corresponds";
+export * from "@tsplus/stdlib/collections/Tree/definition";
+export * from "@tsplus/stdlib/collections/Tree/drawTree";
+export * from "@tsplus/stdlib/collections/Tree/duplicate";
+export * from "@tsplus/stdlib/collections/Tree/elem";
+export * from "@tsplus/stdlib/collections/Tree/equals";
+export * from "@tsplus/stdlib/collections/Tree/extend";
+export * from "@tsplus/stdlib/collections/Tree/flatMap";
+export * from "@tsplus/stdlib/collections/Tree/flatten";
+export * from "@tsplus/stdlib/collections/Tree/fold";
+export * from "@tsplus/stdlib/collections/Tree/foldMap";
+export * from "@tsplus/stdlib/collections/Tree/forEach";
+export * from "@tsplus/stdlib/collections/Tree/forEachF";
+export * from "@tsplus/stdlib/collections/Tree/getEquivalence";
+export * from "@tsplus/stdlib/collections/Tree/getShow";
+export * from "@tsplus/stdlib/collections/Tree/instances";
+export * from "@tsplus/stdlib/collections/Tree/map";
+export * from "@tsplus/stdlib/collections/Tree/reduce";
+export * from "@tsplus/stdlib/collections/Tree/unfold";
+export * from "@tsplus/stdlib/collections/Tree/zip";
+export * from "@tsplus/stdlib/collections/Tree/zipWith";
+// codegen:end

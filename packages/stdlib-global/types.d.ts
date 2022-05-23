@@ -77,7 +77,7 @@ import { SortedSet } from "@tsplus/stdlib/collections/SortedSet/definition";
 /**
  * @tsplus global
  */
-import { Tree } from "@tsplus/stdlib/collections/Tree";
+import { Tree } from "@tsplus/stdlib/collections/Tree/definition";
 /**
  * @tsplus global
  */
