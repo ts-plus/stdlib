@@ -315,7 +315,7 @@ export function deriveStruct<A extends Record<string, any>>(
       }
       if (optionalFields) {
         for (const field of Object.keys(optionalFields)) {
-          if (field in u && typeof field !== "undefined" && !(optionalFields[field] as Guard<any>).is(u[field])) {
+          if (field in u && typeof u[field] !== "undefined" && !(optionalFields[field] as Guard<any>).is(u[field])) {
             return false;
           }
         }
