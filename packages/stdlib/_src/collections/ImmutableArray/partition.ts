@@ -4,7 +4,7 @@
  * @tsplus fluent ImmutableArray partition
  */
 export function partition_<A>(self: ImmutableArray<A>, f: Predicate<A>): Tuple<[ImmutableArray<A>, ImmutableArray<A>]> {
-  return self.partitionWithIndex((_, a) => f(a));
+  return self.partitionWithIndex((_, a) => f(a))
 }
 
 /**
@@ -12,4 +12,4 @@ export function partition_<A>(self: ImmutableArray<A>, f: Predicate<A>): Tuple<[
  *
  * @tsplus static ImmutableArray/Aspects partition
  */
-export const partition = Pipeable(partition_);
+export const partition = Pipeable(partition_)

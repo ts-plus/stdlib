@@ -15,7 +15,7 @@ export function zipAll_<A, B>(
     (a, b) => Tuple(Option.some(a), Option.some(b)),
     (a) => Tuple(Option.some(a), Option.none),
     (b) => Tuple(Option.none, Option.some(b))
-  );
+  )
 }
 
 /**
@@ -26,4 +26,4 @@ export function zipAll_<A, B>(
  *
  * @tsplus static Chunk/Aspects zipAll
  */
-export const zipAll = Pipeable(zipAll_);
+export const zipAll = Pipeable(zipAll_)

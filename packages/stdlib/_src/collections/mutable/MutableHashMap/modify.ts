@@ -14,13 +14,13 @@ export function modify_<K, V>(
   key: K,
   f: (value: Option<V>) => Option<V>
 ) {
-  const result = f(self.get(key));
+  const result = f(self.get(key))
   if (result.isSome()) {
-    self.set(key, result.value);
+    self.set(key, result.value)
   } else {
-    self.remove(key);
+    self.remove(key)
   }
-  return self;
+  return self
 }
 
 /**
@@ -32,4 +32,4 @@ export function modify_<K, V>(
  *
  * `modify` will always either update or insert a value into the map.
  */
-export const modify = Pipeable(modify_);
+export const modify = Pipeable(modify_)

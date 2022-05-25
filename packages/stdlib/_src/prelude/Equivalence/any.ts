@@ -5,4 +5,4 @@
  *
  * @tsplus static Equivalence/Ops any
  */
-export const any: Equivalence<unknown> = Equivalence(() => true);
+export const any: Equivalence<unknown> = Equivalence(() => true)

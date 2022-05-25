@@ -1,16 +1,16 @@
 /**
  * @tsplus type Identity
  */
-export type Identity<A> = A;
+export type Identity<A> = A
 
 /**
  * @tsplus type Identity/Ops
  */
 export interface IdentityOps {}
-export const Identity: IdentityOps = {};
+export const Identity: IdentityOps = {}
 
 export interface IdentityF extends HKT {
-  readonly type: Identity<this["A"]>;
+  readonly type: Identity<this["A"]>
 }
 
 /**
@@ -18,4 +18,4 @@ export interface IdentityF extends HKT {
  */
 export const CovariantIdentity = HKT.instance<Covariant<IdentityF>>({
   map: (f) => (a) => f(a)
-});
+})

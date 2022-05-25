@@ -11,5 +11,5 @@
  * @tsplus static Option/Ops getFirstAssociative
  */
 export function getFirstAssociative<A>(): Associative<Option<A>> {
-  return Associative((x, y) => (x.isNone() ? y : x));
+  return Associative((x, y) => (x.isNone() ? y : x))
 }

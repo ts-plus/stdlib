@@ -12,9 +12,9 @@ export function flatMap_<K, V, A>(
   return self.reduceWithIndex(HashMap.empty<K, A>(), (z, _, v) =>
     z.mutate((m) => {
       f(v).forEachWithIndex((_k, _a) => {
-        m.set(_k, _a);
-      });
-    }));
+        m.set(_k, _a)
+      })
+    }))
 }
 
 /**
@@ -25,5 +25,5 @@ export function flatMap_<K, V, A>(
  * @ets_data_first chain_
  */
 export function chain<K, V, A>(f: (v: V) => HashMap<K, A>) {
-  return (self: HashMap<K, V>): HashMap<K, A> => self.flatMap(f);
+  return (self: HashMap<K, V>): HashMap<K, A> => self.flatMap(f)
 }

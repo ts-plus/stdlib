@@ -1,4 +1,4 @@
-import { concreteChunkId } from "@tsplus/stdlib/collections/Chunk/definition";
+import { concreteChunkId } from "@tsplus/stdlib/collections/Chunk/definition"
 
 /**
  * Returns every elements after the first.
@@ -6,5 +6,5 @@ import { concreteChunkId } from "@tsplus/stdlib/collections/Chunk/definition";
  * @tsplus getter Chunk tail
  */
 export function tail<A>(self: Chunk<A>): Option<Chunk<A>> {
-  return concreteChunkId(self).length > 0 ? Option.some(self.drop(1)) : Option.none;
+  return concreteChunkId(self).length > 0 ? Option.some(self.drop(1)) : Option.none
 }

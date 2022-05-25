@@ -7,7 +7,7 @@ export function forEachWithIndex_<K, V>(
   self: HashMap<K, V>,
   f: (k: K, v: V) => void
 ): void {
-  self.reduceWithIndex(undefined as void, (_, key, value) => f(key, value));
+  self.reduceWithIndex(undefined as void, (_, key, value) => f(key, value))
 }
 
 /**
@@ -15,4 +15,4 @@ export function forEachWithIndex_<K, V>(
  *
  * @tsplus static HashMap/Aspects forEachWithIndex
  */
-export const forEachWithIndex = Pipeable(forEachWithIndex_);
+export const forEachWithIndex = Pipeable(forEachWithIndex_)

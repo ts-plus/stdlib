@@ -4,5 +4,5 @@
  * @tsplus fluent Chunk separate
  */
 export function separate<B, C>(self: Chunk<Either<B, C>>): Tuple<[Chunk<B>, Chunk<C>]> {
-  return self.partitionMap(identity);
+  return self.partitionMap(identity)
 }

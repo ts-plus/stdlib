@@ -8,7 +8,7 @@ export function mapBoth_<E, A, E1, B>(
   f: (e: E) => E1,
   g: (a: A) => B
 ): Either<E1, B> {
-  return self.isLeft() ? Either.left(f(self.left)) : Either.right(g(self.right));
+  return self.isLeft() ? Either.left(f(self.left)) : Either.right(g(self.right))
 }
 
 /**
@@ -16,4 +16,4 @@ export function mapBoth_<E, A, E1, B>(
  *
  * @tsplus static Either/Aspects mapBoth
  */
-export const mapBoth = Pipeable(mapBoth_);
+export const mapBoth = Pipeable(mapBoth_)

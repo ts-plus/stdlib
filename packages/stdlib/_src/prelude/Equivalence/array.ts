@@ -8,11 +8,11 @@ export function array<A>(E: Equivalence<A>): Equivalence<ReadonlyArray<A>> {
     if (x.length === y.length) {
       for (let i = 0; i < x.length; i++) {
         if (!E.equals(x[i]!, y[i]!)) {
-          return false;
+          return false
         }
       }
-      return true;
+      return true
     }
-    return false;
-  });
+    return false
+  })
 }

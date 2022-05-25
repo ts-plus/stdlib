@@ -1,5 +1,5 @@
-import type { EvalInternal } from "@tsplus/stdlib/io/Eval";
-import { FlatMap } from "@tsplus/stdlib/io/Eval/definition";
+import type { EvalInternal } from "@tsplus/stdlib/io/Eval"
+import { FlatMap } from "@tsplus/stdlib/io/Eval/definition"
 
 /**
  * Extends this computation with another computation that depends on the
@@ -9,7 +9,7 @@ import { FlatMap } from "@tsplus/stdlib/io/Eval/definition";
  * @tsplus fluent Eval flatMap
  */
 export function flatMap_<A, B>(self: Eval<A>, f: (a: A) => Eval<B>): Eval<B> {
-  return new FlatMap(self as EvalInternal<A>, f as (a: A) => EvalInternal<B>);
+  return new FlatMap(self as EvalInternal<A>, f as (a: A) => EvalInternal<B>)
 }
 
 /**
@@ -19,4 +19,4 @@ export function flatMap_<A, B>(self: Eval<A>, f: (a: A) => Eval<B>): Eval<B> {
  *
  * @tsplus static Eval/Aspects flatMap
  */
-export const flatMap = Pipeable(flatMap_);
+export const flatMap = Pipeable(flatMap_)

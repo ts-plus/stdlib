@@ -6,7 +6,7 @@
  * @tsplus fluent HashSet toggle
  */
 export function toggle_<A>(self: HashSet<A>, value: A): HashSet<A> {
-  return self.has(value) ? self - value : self + value;
+  return self.has(value) ? self - value : self + value
 }
 
 /**
@@ -16,4 +16,4 @@ export function toggle_<A>(self: HashSet<A>, value: A): HashSet<A> {
  *
  * @tsplus static HashSet/Aspects toggle
  */
-export const toggle = Pipeable(toggle_);
+export const toggle = Pipeable(toggle_)

@@ -7,5 +7,5 @@ export function merge<E, A>(self: Either<E, A>): E | A {
   return self.fold(
     identity,
     identity
-  );
+  )
 }

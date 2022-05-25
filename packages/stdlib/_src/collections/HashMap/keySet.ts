@@ -1,4 +1,4 @@
-import { HashSetInternal } from "@tsplus/stdlib/collections/HashSet/_internal/hashSet";
+import { HashSetInternal } from "@tsplus/stdlib/collections/HashSet/_internal/hashSet"
 
 /**
  * Returns a `HashSet` of keys within the `HashMap`.
@@ -6,5 +6,5 @@ import { HashSetInternal } from "@tsplus/stdlib/collections/HashSet/_internal/ha
  * @tsplus fluent HashMap keySet
  */
 export function keySet<K, V>(self: HashMap<K, V>): HashSet<K> {
-  return new HashSetInternal(self);
+  return new HashSetInternal(self)
 }

@@ -1,5 +1,5 @@
-import { realHashMap } from "@tsplus/stdlib/collections/HashMap/_internal/hashMap";
-import { Node } from "@tsplus/stdlib/collections/HashMap/_internal/node";
+import { realHashMap } from "@tsplus/stdlib/collections/HashMap/_internal/hashMap"
+import { Node } from "@tsplus/stdlib/collections/HashMap/_internal/node"
 
 /**
  * Reduces the specified state over the entries of the `HashMap`.
@@ -11,29 +11,29 @@ export function reduceWithIndex_<K, V, Z>(
   z: Z,
   f: (z: Z, k: K, v: V) => Z
 ): Z {
-  realHashMap(self);
-  const root = self._root;
+  realHashMap(self)
+  const root = self._root
   if (root._tag === "LeafNode") {
-    return root.value.isSome() ? f(z, root.key, root.value.value) : z;
+    return root.value.isSome() ? f(z, root.key, root.value.value) : z
   }
   if (root._tag === "EmptyNode") {
-    return z;
+    return z
   }
-  const toVisit = [root.children];
-  let children;
+  const toVisit = [root.children]
+  let children
   while ((children = toVisit.pop())) {
     for (let i = 0, len = children.length; i < len;) {
-      const child = children[i++];
+      const child = children[i++]
       if (child && !Node.isEmptyNode(child)) {
         if (child._tag === "LeafNode") {
           if (child.value.isSome()) {
-            z = f(z, child.key, child.value.value);
+            z = f(z, child.key, child.value.value)
           }
-        } else toVisit.push(child.children);
+        } else toVisit.push(child.children)
       }
     }
   }
-  return z;
+  return z
 }
 
 /**
@@ -41,4 +41,4 @@ export function reduceWithIndex_<K, V, Z>(
  *
  * @tsplus static HashMap/Aspects reduceWithIndex
  */
-export const reduceWithIndex = Pipeable(reduceWithIndex_);
+export const reduceWithIndex = Pipeable(reduceWithIndex_)

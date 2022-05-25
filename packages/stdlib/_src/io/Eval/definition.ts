@@ -1,4 +1,4 @@
-import type { Lazy } from "@tsplus/stdlib/data/Function";
+import type { Lazy } from "@tsplus/stdlib/data/Function"
 
 /**
  * `Eval<A>` is a purely functional description of a computation.
@@ -12,27 +12,27 @@ import type { Lazy } from "@tsplus/stdlib/data/Function";
  * @tsplus type Eval
  */
 export interface Eval<A> {
-  readonly _A: () => A;
-  readonly _TypeId: unique symbol;
+  readonly _A: () => A
+  readonly _TypeId: unique symbol
 }
 
-export type EvalInternal<A> = Succeed<A> | FlatMap<any, A> | Suspend<A>;
+export type EvalInternal<A> = Succeed<A> | FlatMap<any, A> | Suspend<A>
 
-export const EvalSym = Symbol.for("@tsplus/stdlib/io/Eval");
-export type EvalSym = typeof EvalSym;
+export const EvalSym = Symbol.for("@tsplus/stdlib/io/Eval")
+export type EvalSym = typeof EvalSym
 
-export const _A = Symbol.for("@tsplus/stdlib/io/Eval/A");
-export type _A = typeof _A;
+export const _A = Symbol.for("@tsplus/stdlib/io/Eval/A")
+export type _A = typeof _A
 
 /**
  * @tsplus type Eval/Ops
  */
 export interface EvalOps {
-  $: EvalAspects;
+  $: EvalAspects
 }
 export const Eval: EvalOps = {
   $: {}
-};
+}
 
 /**
  * @tsplus type Eval/Aspects
@@ -43,35 +43,35 @@ export interface EvalAspects {}
  * @tsplus unify Eval
  */
 export function unifyEval<X extends Eval<any>>(self: X): Eval<[X] extends [Eval<infer AX>] ? AX : never> {
-  return self;
+  return self
 }
 
 export interface Succeed<A> extends Eval<A> {}
 export class Succeed<A> {
-  readonly _tag = "Succeed";
+  readonly _tag = "Succeed"
 
-  readonly [EvalSym]: EvalSym = EvalSym;
-  readonly [_A]!: () => A;
+  readonly [EvalSym]: EvalSym = EvalSym
+  readonly [_A]!: () => A
 
   constructor(readonly a: Lazy<A>) {}
 }
 
 export interface Suspend<A> extends Eval<A> {}
 export class Suspend<A> {
-  readonly _tag = "Suspend";
+  readonly _tag = "Suspend"
 
-  readonly [EvalSym]: EvalSym = EvalSym;
-  readonly [_A]!: () => A;
+  readonly [EvalSym]: EvalSym = EvalSym
+  readonly [_A]!: () => A
 
   constructor(readonly f: Lazy<EvalInternal<A>>) {}
 }
 
 export interface FlatMap<A, B> extends Eval<B> {}
 export class FlatMap<A, B> {
-  readonly _tag = "FlatMap";
+  readonly _tag = "FlatMap"
 
-  readonly [EvalSym]: EvalSym = EvalSym;
-  readonly [_A]!: () => A;
+  readonly [EvalSym]: EvalSym = EvalSym
+  readonly [_A]!: () => A
 
   constructor(readonly value: EvalInternal<A>, readonly cont: (a: A) => EvalInternal<B>) {}
 }

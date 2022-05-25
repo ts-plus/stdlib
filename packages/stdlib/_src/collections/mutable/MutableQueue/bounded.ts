@@ -1,4 +1,4 @@
-import { Bounded } from "@tsplus/stdlib/collections/mutable/MutableQueue/_internal/Bounded";
+import { Bounded } from "@tsplus/stdlib/collections/mutable/MutableQueue/_internal/Bounded"
 
 /**
  * Creates a new bounded `MutableQueue`.
@@ -6,5 +6,5 @@ import { Bounded } from "@tsplus/stdlib/collections/mutable/MutableQueue/_intern
  * @tsplus static MutableQueue/Ops bounded
  */
 export function bounded<A>(n: number): MutableQueue<A> {
-  return new Bounded(n);
+  return new Bounded(n)
 }

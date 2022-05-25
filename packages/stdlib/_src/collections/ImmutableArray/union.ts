@@ -5,8 +5,8 @@
  * @tsplus fluent ImmutableArray union
  */
 export function union_<A>(self: ImmutableArray<A>, E: Equivalence<A>) {
-  const elem = self.elem(E);
-  return (that: ImmutableArray<A>): ImmutableArray<A> => self + that.filter((a) => !elem(a));
+  const elem = self.elem(E)
+  return (that: ImmutableArray<A>): ImmutableArray<A> => self + that.filter((a) => !elem(a))
 }
 
 /**
@@ -15,4 +15,4 @@ export function union_<A>(self: ImmutableArray<A>, E: Equivalence<A>) {
  *
  * @tsplus static ImmutableArray/Aspects union
  */
-export const union = Pipeable(union_);
+export const union = Pipeable(union_)

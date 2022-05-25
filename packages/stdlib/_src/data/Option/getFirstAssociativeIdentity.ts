@@ -11,5 +11,5 @@
  * @tsplus static Option/Ops getFirstAssociativeIdentity
  */
 export function getFirstAssociativeIdentity<A>(): AssociativeIdentity<Option<A>> {
-  return AssociativeIdentity.fromAssociative(Option.none, Option.getFirstAssociative<A>());
+  return AssociativeIdentity.fromAssociative(Option.none, Option.getFirstAssociative<A>())
 }

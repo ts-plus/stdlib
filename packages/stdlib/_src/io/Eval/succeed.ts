@@ -1,4 +1,4 @@
-import { Succeed } from "@tsplus/stdlib/io/Eval/definition";
+import { Succeed } from "@tsplus/stdlib/io/Eval/definition"
 
 /**
  * Lift a sync (non failable) computation.
@@ -7,5 +7,5 @@ import { Succeed } from "@tsplus/stdlib/io/Eval/definition";
  * @tsplus static Eval/Ops succeed
  */
 export function succeed<A>(a: LazyArg<A>): Eval<A> {
-  return new Succeed(a);
+  return new Succeed(a)
 }

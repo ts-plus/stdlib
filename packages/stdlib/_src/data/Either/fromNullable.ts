@@ -5,5 +5,5 @@
  * @tsplus static Either/Ops fromNullable
  */
 export function fromNullable<A, E>(a: A, e: LazyArg<E>): Either<E, NonNullable<A>> {
-  return a == null ? Either.left(e()) : Either.right(a as NonNullable<A>);
+  return a == null ? Either.left(e()) : Either.right(a as NonNullable<A>)
 }

@@ -1,4 +1,4 @@
-import { concreteChunkId } from "@tsplus/stdlib/collections/Chunk/definition";
+import { concreteChunkId } from "@tsplus/stdlib/collections/Chunk/definition"
 
 /**
  * Returns the first index for which the given predicate is satisfied after or
@@ -11,29 +11,29 @@ export function indexWhereFrom_<A>(
   from: number,
   f: Predicate<A>
 ): number {
-  const iterator = concreteChunkId(self)._arrayLikeIterator();
-  let next;
-  let i = 0;
+  const iterator = concreteChunkId(self)._arrayLikeIterator()
+  let next
+  let i = 0
 
   while ((next = iterator.next()) && !next.done) {
-    const array = next.value;
-    const len = array.length;
+    const array = next.value
+    const len = array.length
     if (i + len - 1 >= from) {
-      let j = 0;
+      let j = 0
       while (j < len) {
-        const a = array[j]!;
+        const a = array[j]!
         if (i >= from && f(a)) {
-          return i;
+          return i
         }
-        j++;
-        i++;
+        j++
+        i++
       }
     } else {
-      i += len;
+      i += len
     }
   }
 
-  return -1;
+  return -1
 }
 
 /**
@@ -42,4 +42,4 @@ export function indexWhereFrom_<A>(
  *
  * @tsplus static Chunk/Aspects indexWhereFrom
  */
-export const indexWhereFrom = Pipeable(indexWhereFrom_);
+export const indexWhereFrom = Pipeable(indexWhereFrom_)

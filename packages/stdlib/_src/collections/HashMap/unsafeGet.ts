@@ -5,11 +5,11 @@
  * @tsplus fluent HashMap unsafeGet
  */
 export function unsafeGet_<K, V>(self: HashMap<K, V>, key: K): V {
-  const element = self.getHash(key, Hash.unknown(key));
+  const element = self.getHash(key, Hash.unknown(key))
   if (element.isNone()) {
-    throw new NoSuchElement();
+    throw new NoSuchElement()
   }
-  return element.value;
+  return element.value
 }
 
 /**
@@ -18,4 +18,4 @@ export function unsafeGet_<K, V>(self: HashMap<K, V>, key: K): V {
  *
  * @ets_data_first unsafeGet_
  */
-export const unsafeGet = Pipeable(unsafeGet_);
+export const unsafeGet = Pipeable(unsafeGet_)

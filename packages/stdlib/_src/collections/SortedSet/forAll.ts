@@ -5,7 +5,7 @@
  * @tsplus fluent SortedSet forAll
  */
 export function forAll_<A>(self: SortedSet<A>, f: Predicate<A>): boolean {
-  return !self.forAny((a) => !f(a));
+  return !self.forAny((a) => !f(a))
 }
 
 /**
@@ -14,4 +14,4 @@ export function forAll_<A>(self: SortedSet<A>, f: Predicate<A>): boolean {
  *
  * @tsplus static SortedSet/Aspects forAll
  */
-export const forAll = Pipeable(forAll_);
+export const forAll = Pipeable(forAll_)

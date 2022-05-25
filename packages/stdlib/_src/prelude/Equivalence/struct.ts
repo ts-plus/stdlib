@@ -5,15 +5,15 @@
  */
 export function struct<O extends Record<string, any>>(
   eqs: {
-    [K in keyof O]: Equivalence<O[K]>;
+    [K in keyof O]: Equivalence<O[K]>
   }
 ): Equivalence<O> {
   return Equivalence((x, y) => {
     for (const k in eqs) {
       if (!eqs[k].equals(x[k], y[k])) {
-        return false;
+        return false
       }
     }
-    return true;
-  });
+    return true
+  })
 }

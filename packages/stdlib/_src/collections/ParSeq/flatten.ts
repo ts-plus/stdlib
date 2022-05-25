@@ -5,5 +5,5 @@
  * @tsplus fluent ParSeq flatten
  */
 export function flatten<A>(self: ParSeq<ParSeq<A>>): ParSeq<A> {
-  return self.flatMap(identity);
+  return self.flatMap(identity)
 }

@@ -8,7 +8,7 @@ export function reduce_<K, V, Z>(
   z: Z,
   f: (z: Z, v: V) => Z
 ): Z {
-  return self.reduceWithIndex(z, (z1, _, v) => f(z1, v));
+  return self.reduceWithIndex(z, (z1, _, v) => f(z1, v))
 }
 
 /**
@@ -16,4 +16,4 @@ export function reduce_<K, V, Z>(
  *
  * @tsplus static RedBlackTree/Aspects reduce
  */
-export const reduce = Pipeable(reduce_);
+export const reduce = Pipeable(reduce_)

@@ -1,10 +1,10 @@
 describe.concurrent("LazyValue", () => {
   it("is lazy", () => {
-    const lazyValue = LazyValue.make(() => ({ value: "test" }));
+    const lazyValue = LazyValue.make(() => ({ value: "test" }))
 
-    const first = lazyValue.value;
-    const second = lazyValue.value;
+    const first = lazyValue.value
+    const second = lazyValue.value
 
-    assert.strictEqual(first, second);
-  });
-});
+    assert.strictEqual(first, second)
+  })
+})

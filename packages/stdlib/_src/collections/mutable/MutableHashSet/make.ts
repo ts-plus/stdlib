@@ -4,9 +4,9 @@
  * @tsplus static MutableHashSet/Ops __call
  */
 export function make<A>(...elements: Array<A>): MutableHashSet<A> {
-  const set = MutableHashSet.empty<A>();
+  const set = MutableHashSet.empty<A>()
   for (const value of elements) {
-    set.add(value);
+    set.add(value)
   }
-  return set;
+  return set
 }

@@ -1,15 +1,15 @@
-import type { Node } from "@tsplus/stdlib/collections/RedBlackTree/node";
+import type { Node } from "@tsplus/stdlib/collections/RedBlackTree/node"
 
-export const RedBlackTreeSym = Symbol.for("@tsplus/stdlib/collections/RedBlackTree");
-export type RedBlackTreeSym = typeof RedBlackTreeSym;
+export const RedBlackTreeSym = Symbol.for("@tsplus/stdlib/collections/RedBlackTree")
+export type RedBlackTreeSym = typeof RedBlackTreeSym
 
-export const _K = Symbol.for("@tsplus/stdlib/collections/RedBlackTree/K");
-export type _K = typeof _K;
+export const _K = Symbol.for("@tsplus/stdlib/collections/RedBlackTree/K")
+export type _K = typeof _K
 
-export const _V = Symbol.for("@tsplus/stdlib/collections/RedBlackTree/V");
-export type _V = typeof _V;
+export const _V = Symbol.for("@tsplus/stdlib/collections/RedBlackTree/V")
+export type _V = typeof _V
 
-export type Direction = "Forward" | "Backward";
+export type Direction = "Forward" | "Backward"
 
 /**
  * A Red-Black Tree.
@@ -17,23 +17,23 @@ export type Direction = "Forward" | "Backward";
  * @tsplus type RedBlackTree
  */
 export interface RedBlackTree<K, V> extends RedBlackTreeIterable<K, V>, Equals {
-  readonly [RedBlackTreeSym]: RedBlackTreeSym;
-  readonly [_K]: () => K;
-  readonly [_V]: () => V;
-  readonly ord: Ord<K>;
-  readonly root: Node<K, V> | undefined;
-  [Symbol.iterator](): RedBlackTreeIterator<K, V>;
+  readonly [RedBlackTreeSym]: RedBlackTreeSym
+  readonly [_K]: () => K
+  readonly [_V]: () => V
+  readonly ord: Ord<K>
+  readonly root: Node<K, V> | undefined
+  [Symbol.iterator](): RedBlackTreeIterator<K, V>
 }
 
 /**
  * @tsplus type RedBlackTree/Ops
  */
 export interface RedBlackTreeOps {
-  $: RedBlackTreeAspects;
+  $: RedBlackTreeAspects
 }
 export const RedBlackTree: RedBlackTreeOps = {
   $: {}
-};
+}
 
 /**
  * @tsplus type RedBlackTree/Aspects
@@ -41,12 +41,12 @@ export const RedBlackTree: RedBlackTreeOps = {
 export interface RedBlackTreeAspects {}
 
 export interface RedBlackTreeIterable<K, V> extends Collection<Tuple<[K, V]>> {
-  readonly ord: Ord<K>;
-  [Symbol.iterator](): RedBlackTreeIterator<K, V>;
+  readonly ord: Ord<K>
+  [Symbol.iterator](): RedBlackTreeIterator<K, V>
 }
 
 export class RedBlackTreeIterator<K, V> implements Iterator<Tuple<[K, V]>> {
-  private count = 0;
+  private count = 0
 
   constructor(
     readonly self: RedBlackTree<K, V>,
@@ -58,7 +58,7 @@ export class RedBlackTreeIterator<K, V> implements Iterator<Tuple<[K, V]>> {
    * Clones the iterator
    */
   clone(): RedBlackTreeIterator<K, V> {
-    return new RedBlackTreeIterator(this.self, this.stack.slice(), this.direction);
+    return new RedBlackTreeIterator(this.self, this.stack.slice(), this.direction)
   }
 
   /**
@@ -69,24 +69,24 @@ export class RedBlackTreeIterator<K, V> implements Iterator<Tuple<[K, V]>> {
       this.self,
       this.stack.slice(),
       this.direction === "Forward" ? "Backward" : "Forward"
-    );
+    )
   }
 
   /**
    * Iterator next
    */
   next(): IteratorResult<Tuple<[K, V]>> {
-    const entry = this.entry;
-    this.count++;
+    const entry = this.entry
+    this.count++
     if (this.direction === "Forward") {
-      this.moveNext();
+      this.moveNext()
     } else {
-      this.movePrev();
+      this.movePrev()
     }
     return entry.fold(
       () => ({ done: true, value: this.count }),
       (kv) => ({ done: false, value: kv })
-    );
+    )
   }
 
   /**
@@ -94,9 +94,9 @@ export class RedBlackTreeIterator<K, V> implements Iterator<Tuple<[K, V]>> {
    */
   get key(): Option<K> {
     if (this.stack.length > 0) {
-      return Option.some(this.stack[this.stack.length - 1]!.key);
+      return Option.some(this.stack[this.stack.length - 1]!.key)
     }
-    return Option.none;
+    return Option.none
   }
 
   /**
@@ -104,9 +104,9 @@ export class RedBlackTreeIterator<K, V> implements Iterator<Tuple<[K, V]>> {
    */
   get value(): Option<V> {
     if (this.stack.length > 0) {
-      return Option.some(this.stack[this.stack.length - 1]!.value);
+      return Option.some(this.stack[this.stack.length - 1]!.value)
     }
-    return Option.none;
+    return Option.none
   }
 
   /**
@@ -119,57 +119,57 @@ export class RedBlackTreeIterator<K, V> implements Iterator<Tuple<[K, V]>> {
           this.stack[this.stack.length - 1]!.key,
           this.stack[this.stack.length - 1]!.value
         )
-      );
+      )
     }
-    return Option.none;
+    return Option.none
   }
 
   /**
    * Returns the position of this iterator in the sorted list
    */
   get index(): number {
-    let idx = 0;
-    const stack = this.stack;
+    let idx = 0
+    const stack = this.stack
     if (stack.length === 0) {
-      const r = this.self.root;
+      const r = this.self.root
       if (r) {
-        return r.count;
+        return r.count
       }
-      return 0;
+      return 0
     } else if (stack[stack.length - 1]!.left) {
-      idx = stack[stack.length - 1]!.left!.count;
+      idx = stack[stack.length - 1]!.left!.count
     }
     for (let s = stack.length - 2; s >= 0; --s) {
       if (stack[s + 1] === stack[s]!.right) {
-        ++idx;
+        ;++idx
         if (stack[s]!.left) {
-          idx += stack[s]!.left!.count;
+          idx += stack[s]!.left!.count
         }
       }
     }
-    return idx;
+    return idx
   }
 
   /**
    * Advances iterator to next element in list
    */
   moveNext() {
-    const stack = this.stack;
+    const stack = this.stack
     if (stack.length === 0) {
-      return;
+      return
     }
-    let n: Node<K, V> | undefined = stack[stack.length - 1]!;
+    let n: Node<K, V> | undefined = stack[stack.length - 1]!
     if (n.right) {
-      n = n.right;
+      n = n.right
       while (n) {
-        stack.push(n);
-        n = n.left;
+        stack.push(n)
+        n = n.left
       }
     } else {
-      stack.pop();
+      stack.pop()
       while (stack.length > 0 && stack[stack.length - 1]!.right === n) {
-        n = stack[stack.length - 1];
-        stack.pop();
+        n = stack[stack.length - 1]
+        stack.pop()
       }
     }
   }
@@ -178,41 +178,41 @@ export class RedBlackTreeIterator<K, V> implements Iterator<Tuple<[K, V]>> {
    * Checks if there is a next element
    */
   get hasNext() {
-    const stack = this.stack;
+    const stack = this.stack
     if (stack.length === 0) {
-      return false;
+      return false
     }
     if (stack[stack.length - 1]!.right) {
-      return true;
+      return true
     }
     for (let s = stack.length - 1; s > 0; --s) {
       if (stack[s - 1]!.left === stack[s]) {
-        return true;
+        return true
       }
     }
-    return false;
+    return false
   }
 
   /**
    * Advances iterator to previous element in list
    */
   movePrev() {
-    const stack = this.stack;
+    const stack = this.stack
     if (stack.length === 0) {
-      return;
+      return
     }
-    let n = stack[stack.length - 1];
+    let n = stack[stack.length - 1]
     if (n && n.left) {
-      n = n.left;
+      n = n.left
       while (n) {
-        stack.push(n);
-        n = n.right;
+        stack.push(n)
+        n = n.right
       }
     } else {
-      stack.pop();
+      stack.pop()
       while (stack.length > 0 && stack[stack.length - 1]!.left === n) {
-        n = stack[stack.length - 1];
-        stack.pop();
+        n = stack[stack.length - 1]
+        stack.pop()
       }
     }
   }
@@ -221,18 +221,18 @@ export class RedBlackTreeIterator<K, V> implements Iterator<Tuple<[K, V]>> {
    * Checks if there is a previous element
    */
   get hasPrev() {
-    const stack = this.stack;
+    const stack = this.stack
     if (stack.length === 0) {
-      return false;
+      return false
     }
     if (stack[stack.length - 1]!.left) {
-      return true;
+      return true
     }
     for (let s = stack.length - 1; s > 0; --s) {
       if (stack[s - 1]!.right === stack[s]) {
-        return true;
+        return true
       }
     }
-    return false;
+    return false
   }
 }

@@ -8,7 +8,7 @@ export function zipLeft_<E, A, E2, B>(
   self: Either<E, A>,
   that: Either<E2, B>
 ): Either<E | E2, A> {
-  return self.map((a) => () => a).ap(that);
+  return self.map((a) => () => a).ap(that)
 }
 
 /**
@@ -16,4 +16,4 @@ export function zipLeft_<E, A, E2, B>(
  *
  * @tsplus static Either/Aspects zipLeft
  */
-export const zipLeft = Pipeable(zipLeft_);
+export const zipLeft = Pipeable(zipLeft_)

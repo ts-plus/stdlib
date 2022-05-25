@@ -7,15 +7,15 @@
  */
 export function elem_<A>(self: ImmutableArray<A>, E: Equivalence<A>) {
   return (a: A): boolean => {
-    const predicate = (element: A) => E.equals(element, a);
-    const len = self.array.length;
+    const predicate = (element: A) => E.equals(element, a)
+    const len = self.array.length
     for (let i = 0; i < len; i = i + 1) {
       if (predicate(self.array[i]!)) {
-        return true;
+        return true
       }
     }
-    return false;
-  };
+    return false
+  }
 }
 
 /**
@@ -25,4 +25,4 @@ export function elem_<A>(self: ImmutableArray<A>, E: Equivalence<A>) {
  *
  * @tsplus static ImmutableArray/Aspects elem
  */
-export const elem = Pipeable(elem_);
+export const elem = Pipeable(elem_)

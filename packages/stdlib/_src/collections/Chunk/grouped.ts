@@ -4,22 +4,22 @@
  * @tsplus fluent Chunk grouped
  */
 export function grouped_<A>(self: Chunk<A>, n: number): Chunk<Chunk<A>> {
-  let gr = Chunk.empty<Chunk<A>>();
-  let current = Chunk.empty<A>();
+  let gr = Chunk.empty<Chunk<A>>()
+  let current = Chunk.empty<A>()
 
   self.forEach((a) => {
-    current = current.append(a);
+    current = current.append(a)
     if (current.size >= n) {
-      gr = gr.append(current);
-      current = Chunk.empty();
+      gr = gr.append(current)
+      current = Chunk.empty()
     }
-  });
+  })
 
   if (current.size > 0) {
-    gr = gr.append(current);
+    gr = gr.append(current)
   }
 
-  return gr;
+  return gr
 }
 
 /**
@@ -27,4 +27,4 @@ export function grouped_<A>(self: Chunk<A>, n: number): Chunk<Chunk<A>> {
  *
  * @tsplus static Chunk/Aspects grouped
  */
-export const grouped = Pipeable(grouped_);
+export const grouped = Pipeable(grouped_)

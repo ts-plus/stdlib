@@ -10,9 +10,9 @@ export function from<Entries extends Tuple<[any, any]>[]>(
   Entries[number] extends Tuple<[infer K, any]> ? K : never,
   Entries[number] extends Tuple<[any, infer V]> ? V : never
 > {
-  const map = new Map();
+  const map = new Map()
   for (const { tuple: [key, value] } of entries) {
-    map.set(key, value);
+    map.set(key, value)
   }
-  return new ImmutableMap(map);
+  return new ImmutableMap(map)
 }

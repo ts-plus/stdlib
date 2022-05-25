@@ -4,5 +4,5 @@
  * @tsplus static Associative/Ops last
  */
 export function last<A>(): Associative<A> {
-  return Associative((_, y) => y);
+  return Associative((_, y) => y)
 }

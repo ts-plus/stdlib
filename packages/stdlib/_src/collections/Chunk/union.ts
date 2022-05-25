@@ -9,7 +9,7 @@ export function union_<A>(
   E: Equivalence<A>,
   that: Chunk<A>
 ): Chunk<A> {
-  return self + that.filter((a) => !self.elem(E, a));
+  return self + that.filter((a) => !self.elem(E, a))
 }
 
 /**
@@ -18,4 +18,4 @@ export function union_<A>(
  *
  * @tsplus static Chunk/Aspects union
  */
-export const union = Pipeable(union_);
+export const union = Pipeable(union_)

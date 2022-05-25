@@ -6,4 +6,4 @@
 export const product: AssociativeIdentity<number> = AssociativeIdentity.fromAssociative(
   1,
   Associative.product
-);
+)

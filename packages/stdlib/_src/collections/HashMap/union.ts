@@ -5,13 +5,13 @@
  * @tsplus fluent HashMap union
  */
 export function union_<K0, V0, K1, V1>(self: HashMap<K0, V0>, that: HashMap<K1, V1>) {
-  const result: HashMap<K0 | K1, V0 | V1> = self.beginMutation();
+  const result: HashMap<K0 | K1, V0 | V1> = self.beginMutation()
 
   that.forEachWithIndex((k, v) => {
-    result.set(k, v);
-  });
+    result.set(k, v)
+  })
 
-  return result.endMutation();
+  return result.endMutation()
 }
 
 /**
@@ -19,4 +19,4 @@ export function union_<K0, V0, K1, V1>(self: HashMap<K0, V0>, that: HashMap<K1, 
  *
  * @tsplus static HashMap/Aspects union
  */
-export const union = Pipeable(union_);
+export const union = Pipeable(union_)

@@ -7,7 +7,7 @@
  * @tsplus fluent ParSeq zipRight
  */
 export function zipRight_<A, B>(self: ParSeq<A>, that: ParSeq<B>): ParSeq<B> {
-  return self.zipWith(that, (_, b) => b);
+  return self.zipWith(that, (_, b) => b)
 }
 
 /**
@@ -17,4 +17,4 @@ export function zipRight_<A, B>(self: ParSeq<A>, that: ParSeq<B>): ParSeq<B> {
  *
  * @tsplus static ParSeq/Aspects zipRight
  */
-export const zipRight = Pipeable(zipRight_);
+export const zipRight = Pipeable(zipRight_)

@@ -1,4 +1,4 @@
-import { concreteSortedSet } from "@tsplus/stdlib/collections/SortedSet/_internal/SortedSetInternal";
+import { concreteSortedSet } from "@tsplus/stdlib/collections/SortedSet/_internal/SortedSetInternal"
 
 /**
  * Partition the values of a set using the specified predicate.
@@ -8,29 +8,29 @@ import { concreteSortedSet } from "@tsplus/stdlib/collections/SortedSet/_interna
 export function partition_<A, B extends A>(
   self: SortedSet<A>,
   f: Refinement<A, B>
-): Tuple<[SortedSet<A>, SortedSet<B>]>;
+): Tuple<[SortedSet<A>, SortedSet<B>]>
 export function partition_<A>(
   self: SortedSet<A>,
   f: Predicate<A>
-): Tuple<[SortedSet<A>, SortedSet<A>]>;
+): Tuple<[SortedSet<A>, SortedSet<A>]>
 export function partition_<A>(
   self: SortedSet<A>,
   f: Predicate<A>
 ): Tuple<[SortedSet<A>, SortedSet<A>]> {
-  concreteSortedSet(self);
+  concreteSortedSet(self)
 
-  let right = SortedSet.make(self.keyTree.ord);
-  let left = SortedSet.make(self.keyTree.ord);
+  let right = SortedSet.make(self.keyTree.ord)
+  let left = SortedSet.make(self.keyTree.ord)
 
   for (const value of self) {
     if (f(value)) {
-      right = right.add(value);
+      right = right.add(value)
     } else {
-      left = left.add(value);
+      left = left.add(value)
     }
   }
 
-  return Tuple(left, right);
+  return Tuple(left, right)
 }
 
 /**
@@ -40,12 +40,12 @@ export function partition_<A>(
  */
 export function partition<A, B extends A>(
   f: Refinement<A, B>
-): (self: SortedSet<A>) => Tuple<[SortedSet<A>, SortedSet<B>]>;
+): (self: SortedSet<A>) => Tuple<[SortedSet<A>, SortedSet<B>]>
 export function partition<A>(
   f: Predicate<A>
-): (self: SortedSet<A>) => Tuple<[SortedSet<A>, SortedSet<A>]>;
+): (self: SortedSet<A>) => Tuple<[SortedSet<A>, SortedSet<A>]>
 export function partition<A>(
   f: Predicate<A>
 ): (self: SortedSet<A>) => Tuple<[SortedSet<A>, SortedSet<A>]> {
-  return (self) => self.partition(f);
+  return (self) => self.partition(f)
 }

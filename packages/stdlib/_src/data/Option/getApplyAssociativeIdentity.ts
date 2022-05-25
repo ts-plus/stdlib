@@ -11,5 +11,5 @@
  * @tsplus static Option/Ops getApplyAssociativeIdentity
  */
 export function getApplyAssociativeIdentity<A>(M: AssociativeIdentity<A>): AssociativeIdentity<Option<A>> {
-  return AssociativeIdentity.fromAssociative(Option.some(M.identity), Option.getApplyAssociative(M));
+  return AssociativeIdentity.fromAssociative(Option.some(M.identity), Option.getApplyAssociative(M))
 }

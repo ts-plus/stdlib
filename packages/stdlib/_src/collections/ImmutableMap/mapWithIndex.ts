@@ -7,11 +7,11 @@ export function mapWithIndex_<K, V, B>(
   self: ImmutableMap<K, V>,
   f: (key: K, value: V) => B
 ): ImmutableMap<K, B> {
-  const map = new Map<K, B>();
+  const map = new Map<K, B>()
   for (const [key, value] of self.internalMap) {
-    map.set(key, f(key, value));
+    map.set(key, f(key, value))
   }
-  return new ImmutableMap(map);
+  return new ImmutableMap(map)
 }
 
 /**
@@ -19,4 +19,4 @@ export function mapWithIndex_<K, V, B>(
  *
  * @tsplus static ImmutableMap/Aspects mapWithIndex
  */
-export const mapWithIndex = Pipeable(mapWithIndex_);
+export const mapWithIndex = Pipeable(mapWithIndex_)

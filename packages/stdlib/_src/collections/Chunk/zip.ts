@@ -4,7 +4,7 @@
  * @tsplus fluent Chunk zip
  */
 export function zip_<A, B>(self: Chunk<A>, that: Chunk<B>): Chunk<Tuple<[A, B]>> {
-  return self.zipWith(that, (a, b) => Tuple(a, b));
+  return self.zipWith(that, (a, b) => Tuple(a, b))
 }
 
 /**
@@ -12,4 +12,4 @@ export function zip_<A, B>(self: Chunk<A>, that: Chunk<B>): Chunk<Tuple<[A, B]>>
  *
  * @tsplus static Chunk/Aspects zip
  */
-export const zip = Pipeable(zip_);
+export const zip = Pipeable(zip_)

@@ -4,5 +4,5 @@
  * @tsplus static List/Ops empty
  */
 export function empty<A>(): List<A> {
-  return List.nil();
+  return List.nil()
 }

@@ -6,4 +6,4 @@
 export const string: AssociativeIdentity<string> = AssociativeIdentity.fromAssociative(
   "",
   Associative.string
-);
+)

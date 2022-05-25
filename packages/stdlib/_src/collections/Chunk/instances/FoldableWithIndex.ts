@@ -1,4 +1,4 @@
-import type * as P from "@tsplus/stdlib/prelude/FoldableWithIndex";
+import type * as P from "@tsplus/stdlib/prelude/FoldableWithIndex"
 
 /**
  * @tsplus static Chunk/Ops FoldableWithIndex
@@ -7,4 +7,4 @@ export const FoldableWithIndex = HKT.instance<P.FoldableWithIndex<number, Chunk.
   ...Chunk.FoldMapWithIndex,
   ...Chunk.ReduceWithIndex,
   ...Chunk.ReduceRightWithIndex
-});
+})

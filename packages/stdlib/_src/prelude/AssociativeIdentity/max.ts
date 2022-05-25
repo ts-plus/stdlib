@@ -4,5 +4,5 @@
  * @tsplus static AssociativeIdentity/Ops max
  */
 export function max<A>(B: Bounded<A>): AssociativeIdentity<A> {
-  return AssociativeIdentity(B.bottom, Associative.max(B).combine);
+  return AssociativeIdentity(B.bottom, Associative.max(B).combine)
 }

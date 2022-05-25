@@ -1,5 +1,5 @@
-import { realHashMap } from "@tsplus/stdlib/collections/HashMap/_internal/hashMap";
-import type { UpdateFn } from "@tsplus/stdlib/collections/HashMap/_internal/node";
+import { realHashMap } from "@tsplus/stdlib/collections/HashMap/_internal/hashMap"
+import type { UpdateFn } from "@tsplus/stdlib/collections/HashMap/_internal/node"
 
 /**
  * Alter the value of the specified key in the `HashMap` using the specified
@@ -19,8 +19,8 @@ export function modifyHash_<K, V>(
   hash: number,
   f: UpdateFn<V>
 ): HashMap<K, V> {
-  realHashMap(self);
-  const size = { value: self._size };
+  realHashMap(self)
+  const size = { value: self._size }
   const newRoot = self._root.modify(
     self._editable ? self._edit : NaN,
     0,
@@ -28,8 +28,8 @@ export function modifyHash_<K, V>(
     hash,
     key,
     size
-  );
-  return (self as HashMap<K, V>).setTree(newRoot, size.value);
+  )
+  return (self as HashMap<K, V>).setTree(newRoot, size.value)
 }
 
 /**
@@ -44,4 +44,4 @@ export function modifyHash_<K, V>(
  *
  * @tsplus static HashMap/Aspects modifyHash
  */
-export const modifyHash = Pipeable(modifyHash_);
+export const modifyHash = Pipeable(modifyHash_)

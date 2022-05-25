@@ -6,7 +6,7 @@
  */
 export function elem_<A>(self: Tree<A>, E: Equivalence<A>, value: A): boolean {
   return E.equals(self.value, value) ||
-    self.forest.exists((tree) => tree.elem(E, value));
+    self.forest.exists((tree) => tree.elem(E, value))
 }
 
 /**
@@ -16,4 +16,4 @@ export function elem_<A>(self: Tree<A>, E: Equivalence<A>, value: A): boolean {
  *
  * @tsplus static Tree/Aspects elem
  */
-export const elem = Pipeable(elem_);
+export const elem = Pipeable(elem_)

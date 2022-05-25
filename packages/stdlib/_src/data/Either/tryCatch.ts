@@ -8,8 +8,8 @@ export function tryCatch<E, A>(
   onError: (e: unknown) => E
 ): Either<E, A> {
   try {
-    return Either.right(f());
+    return Either.right(f())
   } catch (e) {
-    return Either.left(onError(e));
+    return Either.left(onError(e))
   }
 }

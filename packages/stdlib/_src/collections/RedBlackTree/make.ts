@@ -1,4 +1,4 @@
-import { RedBlackTreeInternal } from "@tsplus/stdlib/collections/RedBlackTree/_internal/RedBlackTreeInternal";
+import { RedBlackTreeInternal } from "@tsplus/stdlib/collections/RedBlackTree/_internal/RedBlackTreeInternal"
 
 /**
  * Creates a new Red-Black Tree.
@@ -6,5 +6,5 @@ import { RedBlackTreeInternal } from "@tsplus/stdlib/collections/RedBlackTree/_i
  * @tsplus static RedBlackTree/Ops make
  */
 export function make<K, V>(ord: Ord<K>): RedBlackTree<K, V> {
-  return new RedBlackTreeInternal<K, V>(ord, undefined);
+  return new RedBlackTreeInternal<K, V>(ord, undefined)
 }

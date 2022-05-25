@@ -5,7 +5,7 @@
  * @tsplus fluent Eval zip
  */
 export function zip_<A, B>(self: Eval<A>, that: LazyArg<Eval<B>>): Eval<Tuple<[A, B]>> {
-  return self.zipWith(that, (a, b) => Tuple(a, b));
+  return self.zipWith(that, (a, b) => Tuple(a, b))
 }
 
 /**
@@ -14,4 +14,4 @@ export function zip_<A, B>(self: Eval<A>, that: LazyArg<Eval<B>>): Eval<Tuple<[A
  *
  * @tsplus static Eval/Aspects zip
  */
-export const zip = Pipeable(zip_);
+export const zip = Pipeable(zip_)

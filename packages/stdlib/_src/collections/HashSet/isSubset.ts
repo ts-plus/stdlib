@@ -7,7 +7,7 @@
  * @tsplus fluent HashSet isSubset
  */
 export function isSubset_<A>(self: HashSet<A>, that: HashSet<A>): boolean {
-  return self.every((a) => that.has(a));
+  return self.every((a) => that.has(a))
 }
 
 /**
@@ -18,4 +18,4 @@ export function isSubset_<A>(self: HashSet<A>, that: HashSet<A>): boolean {
  *
  * @tsplus static HashSet/Aspects isSubset
  */
-export const isSubset = Pipeable(isSubset_);
+export const isSubset = Pipeable(isSubset_)

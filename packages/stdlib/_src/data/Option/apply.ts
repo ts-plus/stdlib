@@ -5,5 +5,5 @@
  * @tsplus static Option/Ops __call
  */
 export function apply<A>(a: A): Option<NonNullable<A>> {
-  return Option.fromNullable(a);
+  return Option.fromNullable(a)
 }

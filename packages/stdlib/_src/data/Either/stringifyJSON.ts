@@ -7,5 +7,5 @@ export function stringifyJSON<E>(
   u: unknown,
   onError: (reason: unknown) => E
 ): Either<E, string> {
-  return Either.tryCatch(() => JSON.stringify(u), onError);
+  return Either.tryCatch(() => JSON.stringify(u), onError)
 }

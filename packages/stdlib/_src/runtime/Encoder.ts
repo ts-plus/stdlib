@@ -4,20 +4,20 @@
  * @tsplus type Encoder
  */
 export interface Encoder<A> {
-  readonly encode: (a: A) => unknown;
+  readonly encode: (a: A) => unknown
 }
 
 /**
  * @tsplus type EncoderOps
  */
 export interface EncoderOps {
-  <A>(f: (a: A) => unknown): Encoder<A>;
+  <A>(f: (a: A) => unknown): Encoder<A>
 }
 
 /**
  * Creates a new Encoder
  */
-export const Encoder: EncoderOps = (encode) => ({ encode });
+export const Encoder: EncoderOps = (encode) => ({ encode })
 
 //
 // Implicits
@@ -28,49 +28,49 @@ export const Encoder: EncoderOps = (encode) => ({ encode });
  *
  * @tsplus implicit
  */
-export const _true: Encoder<true> = Encoder((u) => u);
+export const _true: Encoder<true> = Encoder((u) => u)
 
 /**
  * Encoder for `false`
  *
  * @tsplus implicit
  */
-export const _false: Encoder<false> = Encoder((u) => u);
+export const _false: Encoder<false> = Encoder((u) => u)
 
 /**
  * Encoder for a boolean
  *
  * @tsplus implicit
  */
-export const boolean: Encoder<boolean> = Encoder((u) => u);
+export const boolean: Encoder<boolean> = Encoder((u) => u)
 
 /**
  * Encoder for a number
  *
  * @tsplus implicit
  */
-export const number: Encoder<number> = Encoder((u) => u);
+export const number: Encoder<number> = Encoder((u) => u)
 
 /**
  * Encoder for a string
  *
  * @tsplus implicit
  */
-export const string: Encoder<string> = Encoder((u) => u);
+export const string: Encoder<string> = Encoder((u) => u)
 
 /**
  * Encoder for a Date
  *
  * @tsplus implicit
  */
-export const date: Encoder<Date> = Encoder((u) => u.toISOString());
+export const date: Encoder<Date> = Encoder((u) => u.toISOString())
 
 /**
  * Encoder for a {}
  *
  * @tsplus implicit
  */
-export const record: Encoder<{}> = Encoder((u) => u);
+export const record: Encoder<{}> = Encoder((u) => u)
 
 /**
  * Encoder for an object shaped like { _tag: string }
@@ -78,8 +78,8 @@ export const record: Encoder<{}> = Encoder((u) => u);
  * @tsplus implicit
  */
 export const taggedObject: Encoder<{
-  _tag: string;
-}> = Derive();
+  _tag: string
+}> = Derive()
 
 //
 // Derivation Rules
@@ -94,7 +94,7 @@ export function deriveValidation<A extends Validation.Brand<any, any>>(
   ]
     : never
 ): Encoder<A> {
-  return Encoder((a) => base.encode(a as Validation.Unbranded<A>));
+  return Encoder((a) => base.encode(a as Validation.Unbranded<A>))
 }
 
 /**
@@ -103,23 +103,23 @@ export function deriveValidation<A extends Validation.Brand<any, any>>(
 export function deriveLazy<A>(
   fn: (_: Encoder<A>) => Encoder<A>
 ): Encoder<A> {
-  let cached: Encoder<A> | undefined;
+  let cached: Encoder<A> | undefined
   const encoder: Encoder<A> = Encoder((a) => {
     if (!cached) {
-      cached = fn(encoder);
+      cached = fn(encoder)
     }
-    return cached.encode(a);
-  });
-  return encoder;
+    return cached.encode(a)
+  })
+  return encoder
 }
 
-type EitherStructural<E, A> = { _tag: "Left"; left: E; } | { _tag: "Right"; right: A; };
+type EitherStructural<E, A> = { _tag: "Left"; left: E } | { _tag: "Right"; right: A }
 
 function deriveEitherInternal<E, A>(
   /** @tsplus implicit local */ left: Encoder<E>,
   /** @tsplus implicit local */ right: Encoder<A>
 ): Encoder<EitherStructural<E, A>> {
-  return Derive();
+  return Derive()
 }
 
 /**
@@ -129,16 +129,16 @@ export function deriveEither<A extends Either<any, any>>(
   ...[left, right]: [A] extends [Either<infer _E, infer _A>] ? [left: Encoder<_E>, right: Encoder<_A>]
     : never
 ): Encoder<A> {
-  const structural = deriveEitherInternal(left, right);
-  return Encoder((u) => structural.encode(u));
+  const structural = deriveEitherInternal(left, right)
+  return Encoder((u) => structural.encode(u))
 }
 
-type OptionStructural<A> = { _tag: "None"; } | { _tag: "Some"; value: A; };
+type OptionStructural<A> = { _tag: "None" } | { _tag: "Some"; value: A }
 
 function deriveOptionInternal<A>(
   /** @tsplus implicit local */ value: Encoder<A>
 ): Encoder<OptionStructural<A>> {
-  return Derive();
+  return Derive()
 }
 
 /**
@@ -148,8 +148,8 @@ export function deriveOption<A extends Option<any>>(
   ...[value]: [A] extends [Option<infer _A>] ? [value: Encoder<_A>]
     : never
 ): Encoder<A> {
-  const structural = deriveOptionInternal(value);
-  return Encoder((u) => structural.encode(u));
+  const structural = deriveOptionInternal(value)
+  return Encoder((u) => structural.encode(u))
 }
 
 /**
@@ -161,7 +161,7 @@ export function deriveArray<A extends Array<any>>(
     : never
     : never
 ): Encoder<A> {
-  return Encoder((u) => u.map((a) => element.encode(a)));
+  return Encoder((u) => u.map((a) => element.encode(a)))
 }
 
 /**
@@ -173,7 +173,7 @@ export function deriveChunk<A extends Chunk<any>>(
     : never
     : never
 ): Encoder<A> {
-  return Encoder((u) => Array.from(u).map((a) => element.encode(a)));
+  return Encoder((u) => Array.from(u).map((a) => element.encode(a)))
 }
 
 /**
@@ -185,7 +185,7 @@ export function deriveList<A extends List<any>>(
     : never
     : never
 ): Encoder<A> {
-  return Encoder((u) => Array.from(u).map((a) => element.encode(a)));
+  return Encoder((u) => Array.from(u).map((a) => element.encode(a)))
 }
 
 /**
@@ -197,7 +197,7 @@ export function deriveImmutableArray<A extends ImmutableArray<any>>(
     : never
     : never
 ): Encoder<A> {
-  return Encoder((u) => u.array.map((a) => element.encode(a)));
+  return Encoder((u) => u.array.map((a) => element.encode(a)))
 }
 
 /**
@@ -209,7 +209,7 @@ export function deriveSortedSet<A extends SortedSet<any>>(
     : never
     : never
 ): Encoder<A> {
-  return Encoder((u) => Array.from(u).map((a) => element.encode(a)));
+  return Encoder((u) => Array.from(u).map((a) => element.encode(a)))
 }
 
 /**
@@ -223,12 +223,12 @@ export function deriveRecord<A extends Record<string, any>>(
     : never
 ): Encoder<A> {
   return Encoder((u) => {
-    const encoded = {};
+    const encoded = {}
     for (const k of Object.keys(u)) {
-      encoded[keyEncoder.encode(k) as any] = valueEncoder.encode(u[k]);
+      encoded[keyEncoder.encode(k) as any] = valueEncoder.encode(u[k])
     }
-    return encoded;
-  });
+    return encoded
+  })
 }
 
 /**
@@ -237,7 +237,7 @@ export function deriveRecord<A extends Record<string, any>>(
 export function deriveLiteral<A extends string | number>(
   ...[value]: Check<Check.IsLiteral<A> & Check.Not<Check.IsUnion<A>>> extends Check.True ? [value: A] : never
 ): Encoder<A> {
-  return Encoder(() => value);
+  return Encoder(() => value)
 }
 
 /**
@@ -247,45 +247,45 @@ export function deriveStruct<A extends Record<string, any>>(
   ...[requiredFields, optionalFields]: Check<Check.IsStruct<A>> extends Check.True ? [
     ...[
       requiredFields: {
-        [k in TypeLevel.RequiredKeys<A>]: Encoder<A[k]>;
+        [k in TypeLevel.RequiredKeys<A>]: Encoder<A[k]>
       }
     ],
     ...([TypeLevel.OptionalKeys<A>] extends [never] ? [] : [
       optionalFields: {
-        [k in TypeLevel.OptionalKeys<A>]: Encoder<NonNullable<A[k]>>;
+        [k in TypeLevel.OptionalKeys<A>]: Encoder<NonNullable<A[k]>>
       }
     ])
   ]
     : never
 ): Encoder<A> {
   return Encoder((u) => {
-    const encoded = {};
+    const encoded = {}
     for (const field of Object.keys(requiredFields)) {
-      encoded[field] = (requiredFields[field] as Encoder<unknown>).encode(u[field]);
+      encoded[field] = (requiredFields[field] as Encoder<unknown>).encode(u[field])
     }
     if (optionalFields) {
       for (const field of Object.keys(optionalFields)) {
         if (field in u && typeof u[field] !== "undefined") {
-          encoded[field] = (optionalFields[field] as Encoder<unknown>).encode(u[field]);
+          encoded[field] = (optionalFields[field] as Encoder<unknown>).encode(u[field])
         }
       }
     }
-    return encoded;
-  });
+    return encoded
+  })
 }
 
 /**
  * @tsplus derive Encoder<_> 20
  */
-export function deriveTagged<A extends { _tag: string; }>(
+export function deriveTagged<A extends { _tag: string }>(
   ...[elements]: Check<Check.IsTagged<"_tag", A>> extends Check.True ? [
     elements: {
-      [k in A["_tag"]]: Encoder<Extract<A, { _tag: k; }>>;
+      [k in A["_tag"]]: Encoder<Extract<A, { _tag: k }>>
     }
   ]
     : never
 ): Encoder<A> {
-  return Encoder((u) => elements[u._tag].encode(u));
+  return Encoder((u) => elements[u._tag].encode(u))
 }
 
 /**
@@ -293,21 +293,21 @@ export function deriveTagged<A extends { _tag: string; }>(
  */
 export function deriveUnion<A extends unknown[]>(
   ...elements: {
-    [k in keyof A]: [Guard<A[k]>, Encoder<A[k]>];
+    [k in keyof A]: [Guard<A[k]>, Encoder<A[k]>]
   }
 ): Encoder<A[number]> {
   return Encoder((u) => {
     for (const element of elements) {
       if (element[0].is(u)) {
-        return element[1].encode(u);
+        return element[1].encode(u)
       }
     }
-  });
+  })
 }
 
 /**
  * @tsplus fluent Encoder encodeJSON
  */
 export function encodeJSON<A>(encoder: Encoder<A>, a: A) {
-  return JSON.stringify(encoder.encode(a));
+  return JSON.stringify(encoder.encode(a))
 }

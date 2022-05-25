@@ -1,4 +1,4 @@
-import { HashSetInternal, realHashSet } from "@tsplus/stdlib/collections/HashSet/_internal/hashSet";
+import { HashSetInternal, realHashSet } from "@tsplus/stdlib/collections/HashSet/_internal/hashSet"
 
 /**
  * Marks the `HashSet` as mutable.
@@ -6,6 +6,6 @@ import { HashSetInternal, realHashSet } from "@tsplus/stdlib/collections/HashSet
  * @tsplus fluent HashSet beginMutation
  */
 export function beginMutation<A>(self: HashSet<A>): HashSet<A> {
-  realHashSet(self);
-  return new HashSetInternal(self._keyMap.beginMutation());
+  realHashSet(self)
+  return new HashSetInternal(self._keyMap.beginMutation())
 }

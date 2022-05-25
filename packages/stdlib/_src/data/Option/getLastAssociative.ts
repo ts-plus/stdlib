@@ -11,5 +11,5 @@
  * @tsplus static Option/Ops getLastAssociative
  */
 export function getLastAssociative<A>(): Associative<Option<A>> {
-  return Associative((x, y) => (x.isNone() ? y : x));
+  return Associative((x, y) => (x.isNone() ? y : x))
 }

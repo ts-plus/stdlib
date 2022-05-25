@@ -5,17 +5,17 @@
  * @tsplus static Chunk/Ops unfold
  */
 export function unfold<A, S>(s: S, f: (s: S) => Option<Tuple<[A, S]>>): Chunk<A> {
-  let builder = Chunk.empty<A>();
-  let cont = true;
-  let s1 = s;
+  let builder = Chunk.empty<A>()
+  let cont = true
+  let s1 = s
   while (cont) {
-    const x = f(s1);
+    const x = f(s1)
     if (x.isSome()) {
-      s1 = x[1];
-      builder = builder.append(x[0]);
+      s1 = x[1]
+      builder = builder.append(x[0])
     } else {
-      cont = false;
+      cont = false
     }
   }
-  return builder;
+  return builder
 }

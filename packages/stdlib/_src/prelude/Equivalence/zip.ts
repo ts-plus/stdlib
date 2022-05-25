@@ -11,7 +11,7 @@ export function zip_<A, B>(
 ): Equivalence<Tuple<[A, B]>> {
   return Equivalence(
     ({ tuple: [x0, x1] }, { tuple: [y0, y1] }) => self.equals(x0, y0) && that.equals(x1, y1)
-  );
+  )
 }
 
 /**
@@ -21,4 +21,4 @@ export function zip_<A, B>(
  *
  * @tsplus static Equivalence/Aspects zip
  */
-export const zip = Pipeable(zip_);
+export const zip = Pipeable(zip_)

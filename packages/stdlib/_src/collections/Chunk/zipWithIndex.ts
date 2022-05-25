@@ -5,5 +5,5 @@
  * @tsplus fluent Chunk zipWithIndex
  */
 export function zipWithIndex<A>(self: Chunk<A>): Chunk<Tuple<[A, number]>> {
-  return self.zipWithIndexOffset(0);
+  return self.zipWithIndexOffset(0)
 }

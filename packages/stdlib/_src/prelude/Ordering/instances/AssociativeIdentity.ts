@@ -1,4 +1,4 @@
-import * as A from "@tsplus/stdlib/prelude/AssociativeIdentity/definition";
+import * as A from "@tsplus/stdlib/prelude/AssociativeIdentity/definition"
 
 /**
  * `AssociativeIdentity` instance for `Ordering`.
@@ -8,4 +8,4 @@ import * as A from "@tsplus/stdlib/prelude/AssociativeIdentity/definition";
 export const AssociativeIdentity = A.AssociativeIdentity.fromAssociative<Ordering>(
   0,
   Ordering.Associative
-);
+)

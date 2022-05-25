@@ -8,8 +8,8 @@ export function sortBy_<A>(
   self: Chunk<A>,
   ...ords: Array<Ord<A>>
 ): Chunk<A> {
-  const O = Ord.consecutive(...ords);
-  return self.sort(O);
+  const O = Ord.consecutive(...ords)
+  return self.sort(O)
 }
 
 /**
@@ -18,4 +18,4 @@ export function sortBy_<A>(
  *
  * @tsplus static Chunk/Aspects sortBy
  */
-export const sortBy = Pipeable(sortBy_);
+export const sortBy = Pipeable(sortBy_)

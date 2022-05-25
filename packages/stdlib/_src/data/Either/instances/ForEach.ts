@@ -1,4 +1,4 @@
-import type * as P from "@tsplus/stdlib/prelude/ForEach";
+import type * as P from "@tsplus/stdlib/prelude/ForEach"
 
 /**
  * @tsplus static Either/Ops ForEach
@@ -6,4 +6,4 @@ import type * as P from "@tsplus/stdlib/prelude/ForEach";
 export const ForEach = HKT.instance<P.ForEach<Either.HKT>>({
   ...Either.Covariant,
   forEachF: Either.forEachF
-});
+})

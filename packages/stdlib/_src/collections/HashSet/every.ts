@@ -5,7 +5,7 @@
  * @tsplus fluent HashSet every
  */
 export function every_<A>(self: HashSet<A>, f: Predicate<A>): boolean {
-  return !self.some((a) => !f(a));
+  return !self.some((a) => !f(a))
 }
 
 /**
@@ -14,4 +14,4 @@ export function every_<A>(self: HashSet<A>, f: Predicate<A>): boolean {
  *
  * @tsplus static HashSet/Aspects every
  */
-export const every = Pipeable(every_);
+export const every = Pipeable(every_)

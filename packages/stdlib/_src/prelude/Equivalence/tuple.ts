@@ -8,9 +8,9 @@ export function tuple<T extends ReadonlyArray<Equivalence<any>>>(
 ): Equivalence<
   ForcedTuple<
     {
-      [K in keyof T]: T[K] extends Equivalence<infer A> ? A : never;
+      [K in keyof T]: T[K] extends Equivalence<infer A> ? A : never
     }
   >
 > {
-  return Equivalence((x, y) => eqs.every((E, i) => E.equals(x.get(i), y.get(i))));
+  return Equivalence((x, y) => eqs.every((E, i) => E.equals(x.get(i), y.get(i))))
 }

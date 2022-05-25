@@ -5,5 +5,5 @@
  * @tsplus static Equivalence/Ops strict
  */
 export function strict<A>() {
-  return Equivalence<A>((x, y) => x === y);
+  return Equivalence<A>((x, y) => x === y)
 }

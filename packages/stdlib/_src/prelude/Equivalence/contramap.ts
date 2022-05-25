@@ -6,7 +6,7 @@
  * @tsplus fluent Equivalence contramap
  */
 export function contramap_<A, B>(self: Equivalence<A>, f: (b: B) => A): Equivalence<B> {
-  return Equivalence((x, y) => self.equals(f(x), f(y)));
+  return Equivalence((x, y) => self.equals(f(x), f(y)))
 }
 
 /**
@@ -16,4 +16,4 @@ export function contramap_<A, B>(self: Equivalence<A>, f: (b: B) => A): Equivale
  *
  * @tsplus static Equivalence/Aspects contramap
  */
-export const contramap = Pipeable(contramap_);
+export const contramap = Pipeable(contramap_)

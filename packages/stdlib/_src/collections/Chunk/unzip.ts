@@ -5,13 +5,13 @@
  * @tsplus fluent Chunk unzip
  */
 export function unzip<A, B>(as: Chunk<Tuple<[A, B]>>): Tuple<[Chunk<A>, Chunk<B>]> {
-  let fa: Chunk<A> = Chunk.empty();
-  let fb: Chunk<B> = Chunk.empty();
+  let fa: Chunk<A> = Chunk.empty()
+  let fb: Chunk<B> = Chunk.empty()
 
   as.forEach(({ tuple: [a, b] }) => {
-    fa = fa.append(a);
-    fb = fb.append(b);
-  });
+    fa = fa.append(a)
+    fb = fb.append(b)
+  })
 
-  return Tuple(fa, fb);
+  return Tuple(fa, fb)
 }

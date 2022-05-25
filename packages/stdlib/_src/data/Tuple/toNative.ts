@@ -4,5 +4,5 @@
  * @tsplus fluent tsplus/Tuple toNative
  */
 export function toNative<Ks extends readonly unknown[]>(self: Tuple<Ks>): Ks {
-  return self.tuple;
+  return self.tuple
 }

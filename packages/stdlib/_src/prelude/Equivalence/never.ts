@@ -5,4 +5,4 @@
  *
  * @tsplus static Equivalence/Ops never
  */
-export const never: Equivalence<never> = Equivalence(() => false);
+export const never: Equivalence<never> = Equivalence(() => false)

@@ -1,4 +1,4 @@
-import { concreteChunkId } from "@tsplus/stdlib/collections/Chunk/definition";
+import { concreteChunkId } from "@tsplus/stdlib/collections/Chunk/definition"
 
 /**
  * Folds over the elements in this chunk from the left.
@@ -12,25 +12,25 @@ export function reduceWhile_<A, S>(
   pred: (s: S) => boolean,
   f: (s: S, a: A) => S
 ): S {
-  const iterator = concreteChunkId(self)._arrayLikeIterator();
-  let next;
-  let s1 = s;
-  let cont = true;
+  const iterator = concreteChunkId(self)._arrayLikeIterator()
+  let next
+  let s1 = s
+  let cont = true
 
   while (cont && (next = iterator.next()) && !next.done) {
-    const array = next.value;
-    const len = array.length;
-    let i = 0;
+    const array = next.value
+    const len = array.length
+    let i = 0
     while (cont && i < len) {
-      const a = array[i]!;
-      s1 = f(s1, a);
-      cont = pred(s1);
-      i++;
+      const a = array[i]!
+      s1 = f(s1, a)
+      cont = pred(s1)
+      i++
     }
-    next = iterator.next();
+    next = iterator.next()
   }
 
-  return s1;
+  return s1
 }
 
 /**
@@ -39,4 +39,4 @@ export function reduceWhile_<A, S>(
  *
  * @tsplus static Chunk/Aspects reduceWhile
  */
-export const reduceWhile = Pipeable(reduceWhile_);
+export const reduceWhile = Pipeable(reduceWhile_)

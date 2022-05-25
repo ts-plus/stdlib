@@ -7,7 +7,7 @@ export function mapWithIndex_<K, V, A>(
   self: HashMap<K, V>,
   f: (k: K, v: V) => A
 ): HashMap<K, A> {
-  return self.reduceWithIndex(HashMap.empty<K, A>(), (z, k, v) => z.set(k, f(k, v)));
+  return self.reduceWithIndex(HashMap.empty<K, A>(), (z, k, v) => z.set(k, f(k, v)))
 }
 
 /**
@@ -15,4 +15,4 @@ export function mapWithIndex_<K, V, A>(
  *
  * @tsplus static HashMap/Aspects mapWithIndex
  */
-export const mapWithIndex = Pipeable(mapWithIndex_);
+export const mapWithIndex = Pipeable(mapWithIndex_)

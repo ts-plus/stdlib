@@ -1,5 +1,5 @@
-import type { HashMapInternal } from "@tsplus/stdlib/collections/HashMap/_internal/hashMap";
-import { HashSetInternal, realHashSet } from "@tsplus/stdlib/collections/HashSet/_internal/hashSet";
+import type { HashMapInternal } from "@tsplus/stdlib/collections/HashMap/_internal/hashMap"
+import { HashSetInternal, realHashSet } from "@tsplus/stdlib/collections/HashSet/_internal/hashSet"
 
 /**
  * Adds a value to the `HashSet`.
@@ -8,10 +8,10 @@ import { HashSetInternal, realHashSet } from "@tsplus/stdlib/collections/HashSet
  * @tsplus fluent HashSet add
  */
 export function add_<A>(self: HashSet<A>, value: A): HashSet<A> {
-  realHashSet(self);
+  realHashSet(self)
   return (self._keyMap as HashMapInternal<A, unknown>)._editable
     ? (self._keyMap.set(value as A, true), self)
-    : new HashSetInternal(self._keyMap.set(value as A, true));
+    : new HashSetInternal(self._keyMap.set(value as A, true))
 }
 
 /**
@@ -19,4 +19,4 @@ export function add_<A>(self: HashSet<A>, value: A): HashSet<A> {
  *
  * @tsplus static HashSet/Aspects add
  */
-export const add = Pipeable(add_);
+export const add = Pipeable(add_)

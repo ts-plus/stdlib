@@ -1,4 +1,4 @@
-import { HashMapIterator, realHashMap } from "@tsplus/stdlib/collections/HashMap/_internal/hashMap";
+import { HashMapIterator, realHashMap } from "@tsplus/stdlib/collections/HashMap/_internal/hashMap"
 
 /**
  * Returns an `IterableIterator` of the values within the `HashMap`.
@@ -6,6 +6,6 @@ import { HashMapIterator, realHashMap } from "@tsplus/stdlib/collections/HashMap
  * @tsplus fluent HashMap values
  */
 export function values<K, V>(self: HashMap<K, V>): IterableIterator<V> {
-  realHashMap(self);
-  return new HashMapIterator(self, ({ tuple: [, value] }) => value);
+  realHashMap(self)
+  return new HashMapIterator(self, ({ tuple: [, value] }) => value)
 }

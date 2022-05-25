@@ -10,9 +10,9 @@ export function forEachGe_<K, V>(
 ) {
   if (self.root) {
     RedBlackTree.visitGe(self.root, min, self.ord, (key, value) => {
-      visit(key, value);
-      return Option.none;
-    });
+      visit(key, value)
+      return Option.none
+    })
   }
 }
 
@@ -21,4 +21,4 @@ export function forEachGe_<K, V>(
  *
  * @tsplus static RedBlackTree/Aspects forEachGe
  */
-export const forEachGe = Pipeable(forEachGe_);
+export const forEachGe = Pipeable(forEachGe_)

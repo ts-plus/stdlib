@@ -5,7 +5,7 @@
  * @tsplus fluent HashMap remove
  */
 export function remove_<K, V>(self: HashMap<K, V>, key: K) {
-  return self.modify(key, () => Option.none);
+  return self.modify(key, () => Option.none)
 }
 
 /**
@@ -14,4 +14,4 @@ export function remove_<K, V>(self: HashMap<K, V>, key: K) {
  *
  * @tsplus static HashMap/Aspects remove
  */
-export const remove = Pipeable(remove_);
+export const remove = Pipeable(remove_)

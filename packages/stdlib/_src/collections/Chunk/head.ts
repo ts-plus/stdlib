@@ -4,5 +4,5 @@
  * @tsplus getter Chunk head
  */
 export function head<A>(self: Chunk<A>): Option<A> {
-  return self.get(0);
+  return self.get(0)
 }

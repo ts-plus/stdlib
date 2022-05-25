@@ -7,5 +7,5 @@ export function append<Ks extends unknown[], K>(
   self: Tuple<Ks>,
   k: K
 ): Tuple<[...Ks, K]> {
-  return new Tuple([...self.tuple, k]);
+  return new Tuple([...self.tuple, k])
 }

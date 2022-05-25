@@ -1,4 +1,4 @@
-import { concreteChunkId } from "@tsplus/stdlib/collections/Chunk/definition";
+import { concreteChunkId } from "@tsplus/stdlib/collections/Chunk/definition"
 
 /**
  * Returns the first element of this chunk. Note that this method is partial
@@ -10,5 +10,5 @@ import { concreteChunkId } from "@tsplus/stdlib/collections/Chunk/definition";
  * @tsplus fluent Chunk unsafeHead
  */
 export function unsafeHead<A>(self: Chunk<A>): A {
-  return concreteChunkId(self)._get(0);
+  return concreteChunkId(self)._get(0)
 }

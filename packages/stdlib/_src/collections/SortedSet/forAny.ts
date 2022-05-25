@@ -5,14 +5,14 @@
  * @tsplus fluent SortedSet forAny
  */
 export function forAny_<A>(self: SortedSet<A>, f: Predicate<A>): boolean {
-  let found = false;
+  let found = false
   for (const value of self) {
-    found = f(value);
+    found = f(value)
     if (found) {
-      break;
+      break
     }
   }
-  return found;
+  return found
 }
 
 /**
@@ -21,4 +21,4 @@ export function forAny_<A>(self: SortedSet<A>, f: Predicate<A>): boolean {
  *
  * @tsplus static SortedSet/Aspects forAny
  */
-export const forAny = Pipeable(forAny_);
+export const forAny = Pipeable(forAny_)

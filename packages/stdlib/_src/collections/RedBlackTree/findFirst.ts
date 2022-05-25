@@ -4,20 +4,20 @@
  * @tsplus fluent RedBlackTree findFirst
  */
 export function findFirst_<K, V>(self: RedBlackTree<K, V>, key: K): Option<V> {
-  const cmp = self.ord.compare;
-  let n = self.root;
+  const cmp = self.ord.compare
+  let n = self.root
   while (n) {
-    const d = cmp(key, n.key);
+    const d = cmp(key, n.key)
     if (Equals.equals(key, n.key)) {
-      return Option.some(n.value);
+      return Option.some(n.value)
     }
     if (d <= 0) {
-      n = n.left;
+      n = n.left
     } else {
-      n = n.right;
+      n = n.right
     }
   }
-  return Option.none;
+  return Option.none
 }
 
 /**
@@ -25,4 +25,4 @@ export function findFirst_<K, V>(self: RedBlackTree<K, V>, key: K): Option<V> {
  *
  * @tsplus static RedBlackTree/Aspects findFirst
  */
-export const findFirst = Pipeable(findFirst_);
+export const findFirst = Pipeable(findFirst_)

@@ -4,11 +4,11 @@
  * @tsplus fluent ImmutableMap compact
  */
 export function compact<K, V>(self: ImmutableMap<K, Option<V>>): ImmutableMap<K, V> {
-  const map = new Map<K, V>();
+  const map = new Map<K, V>()
   for (const [key, value] of self.internalMap) {
     if (value.isSome()) {
-      map.set(key, value.value);
+      map.set(key, value.value)
     }
   }
-  return new ImmutableMap(map);
+  return new ImmutableMap(map)
 }

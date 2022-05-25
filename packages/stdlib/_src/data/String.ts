@@ -22,7 +22,7 @@ declare global {
  * @tsplus fluent string takeLeft
  */
 export function takeLeft_(self: string, n: number): string {
-  return self.slice(0, Math.max(n, 0));
+  return self.slice(0, Math.max(n, 0))
 }
 
 /**
@@ -35,7 +35,7 @@ export function takeLeft_(self: string, n: number): string {
  *
  * If `n` is a float, it will be rounded down to the nearest integer.
  */
-export const takeLeft = Pipeable(takeLeft_);
+export const takeLeft = Pipeable(takeLeft_)
 
 /**
  * Keep the specified number of characters from the end of a string.
@@ -50,7 +50,7 @@ export const takeLeft = Pipeable(takeLeft_);
  * @tsplus fluent string takeRight
  */
 export function takeRight_(s: string, n: number): string {
-  return s.slice(Math.max(0, s.length - Math.floor(n)), Infinity);
+  return s.slice(Math.max(0, s.length - Math.floor(n)), Infinity)
 }
 
 /**
@@ -63,21 +63,21 @@ export function takeRight_(s: string, n: number): string {
  *
  * If `n` is a float, it will be rounded down to the nearest integer.
  */
-export const takeRight = Pipeable(takeRight_);
+export const takeRight = Pipeable(takeRight_)
 
 /**
  * Represents the character code of a carriage return character (`"\r"`).
  *
  * @tsplus static string/Ops CR
  */
-export const CR = 0x0d;
+export const CR = 0x0d
 
 /**
  * Represents the character code of a line-feed character (`"\n"`).
  *
  * @tsplus static string/Ops LF
  */
-export const LF = 0x0a;
+export const LF = 0x0a
 
 /**
  * Returns an `IterableIterator` which yields each line contained within the
@@ -86,7 +86,7 @@ export const LF = 0x0a;
  * @tsplus fluent string linesIterator
  */
 export function linesIterator(self: string): LinesIterator {
-  return linesSeparated(self, true);
+  return linesSeparated(self, true)
 }
 
 /**
@@ -96,7 +96,7 @@ export function linesIterator(self: string): LinesIterator {
  * @tsplus fluent string linesIterator
  */
 export function linesWithSeparators(s: string): LinesIterator {
-  return linesSeparated(s, false);
+  return linesSeparated(s, false)
 }
 
 /**
@@ -107,23 +107,23 @@ export function linesWithSeparators(s: string): LinesIterator {
  * @tsplus fluent string stripMarginWith
  */
 export function stripMarginWith_(self: string, marginChar: string): string {
-  let out = "";
+  let out = ""
 
   for (const line of linesWithSeparators(self)) {
-    let index = 0;
+    let index = 0
 
     while (index < line.length && line.charAt(index) <= " ") {
-      index = index + 1;
+      index = index + 1
     }
 
     const stripped = index < line.length && line.charAt(index) === marginChar
       ? line.substring(index + 1)
-      : line;
+      : line
 
-    out = out + stripped;
+    out = out + stripped
   }
 
-  return out;
+  return out
 }
 
 /**
@@ -131,7 +131,7 @@ export function stripMarginWith_(self: string, marginChar: string): string {
  * or control characters followed by the character specified by `marginChar`
  * from the line.
  */
-export const stripMarginWith = Pipeable(stripMarginWith_);
+export const stripMarginWith = Pipeable(stripMarginWith_)
 
 /**
  * For every line in this string, strip a leading prefix consisting of blanks
@@ -140,54 +140,54 @@ export const stripMarginWith = Pipeable(stripMarginWith_);
  * @tsplus fluent string stripMargin
  */
 export function stripMargin(self: string): string {
-  return self.stripMarginWith("|");
+  return self.stripMarginWith("|")
 }
 
 export class LinesIterator implements IterableIterator<string> {
-  private index: number;
-  private length: number;
+  private index: number
+  private length: number
 
   constructor(readonly s: string, readonly stripped: boolean = false) {
-    this.index = 0;
-    this.length = s.length;
+    this.index = 0
+    this.length = s.length
   }
 
   next(): IteratorResult<string> {
     if (this.done) {
-      return { done: true, value: undefined };
+      return { done: true, value: undefined }
     }
 
-    const start = this.index;
+    const start = this.index
 
     while (!this.done && !isLineBreak(this.s[this.index]!)) {
-      this.index = this.index + 1;
+      this.index = this.index + 1
     }
 
-    let end = this.index;
+    let end = this.index
 
     if (!this.done) {
-      const char = this.s[this.index]!;
+      const char = this.s[this.index]!
 
-      this.index = this.index + 1;
+      this.index = this.index + 1
 
       if (!this.done && isLineBreak2(char, this.s[this.index]!)) {
-        this.index = this.index + 1;
+        this.index = this.index + 1
       }
 
       if (!this.stripped) {
-        end = this.index;
+        end = this.index
       }
     }
 
-    return { done: false, value: this.s.substring(start, end) };
+    return { done: false, value: this.s.substring(start, end) }
   }
 
   [Symbol.iterator](): IterableIterator<string> {
-    return new LinesIterator(this.s, this.stripped);
+    return new LinesIterator(this.s, this.stripped)
   }
 
   private get done(): boolean {
-    return this.index >= this.length;
+    return this.index >= this.length
   }
 }
 
@@ -196,8 +196,8 @@ export class LinesIterator implements IterableIterator<string> {
  * or `"\n"`).
  */
 function isLineBreak(char: string): boolean {
-  const code = char.charCodeAt(0);
-  return code === CR || code === LF;
+  const code = char.charCodeAt(0)
+  return code === CR || code === LF
 }
 
 /**
@@ -205,9 +205,9 @@ function isLineBreak(char: string): boolean {
  * (i.e. `"\r\n"`).
  */
 function isLineBreak2(char0: string, char1: string): boolean {
-  return char0.charCodeAt(0) === CR && char1.charCodeAt(0) === LF;
+  return char0.charCodeAt(0) === CR && char1.charCodeAt(0) === LF
 }
 
 function linesSeparated(self: string, stripped: boolean): LinesIterator {
-  return new LinesIterator(self, stripped);
+  return new LinesIterator(self, stripped)
 }

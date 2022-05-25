@@ -1,5 +1,5 @@
-import { HashMapInternal } from "@tsplus/stdlib/collections/HashMap/_internal/hashMap";
-import { EmptyNode } from "@tsplus/stdlib/collections/HashMap/_internal/node";
+import { HashMapInternal } from "@tsplus/stdlib/collections/HashMap/_internal/hashMap"
+import { EmptyNode } from "@tsplus/stdlib/collections/HashMap/_internal/node"
 
 /**
  * Creates a new `HashMap`.
@@ -7,5 +7,5 @@ import { EmptyNode } from "@tsplus/stdlib/collections/HashMap/_internal/node";
  * @tsplus static HashMap/Ops empty
  */
 export function empty<K, V>(): HashMap<K, V> {
-  return new HashMapInternal<K, V>(false, 0, new EmptyNode(), 0);
+  return new HashMapInternal<K, V>(false, 0, new EmptyNode(), 0)
 }

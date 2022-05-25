@@ -5,7 +5,7 @@
  * @tsplus fluent HashMap set
  */
 export function set_<K, V>(self: HashMap<K, V>, key: K, value: V): HashMap<K, V> {
-  return self.modify(key, () => Option.some(value));
+  return self.modify(key, () => Option.some(value))
 }
 
 /**
@@ -14,4 +14,4 @@ export function set_<K, V>(self: HashMap<K, V>, key: K, value: V): HashMap<K, V>
  *
  * @tsplus static HashMap/Aspects set
  */
-export const set = Pipeable(set_);
+export const set = Pipeable(set_)

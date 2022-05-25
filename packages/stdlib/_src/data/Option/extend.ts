@@ -4,10 +4,10 @@
  * @tsplus fluent Option extend
  */
 export function extend_<A, B>(self: Option<A>, f: (fa: Option<A>) => B): Option<B> {
-  return self.isNone() ? Option.none : Option.some(f(self));
+  return self.isNone() ? Option.none : Option.some(f(self))
 }
 
 /**
  * @tsplus static Option/Aspects extend
  */
-export const extend = Pipeable(extend_);
+export const extend = Pipeable(extend_)

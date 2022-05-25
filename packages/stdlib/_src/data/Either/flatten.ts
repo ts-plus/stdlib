@@ -4,5 +4,5 @@
  * @tsplus fluent Either flatten
  */
 export function flatten<E, E2, A>(self: Either<E, Either<E2, A>>): Either<E | E2, A> {
-  return self.flatMap(identity);
+  return self.flatMap(identity)
 }

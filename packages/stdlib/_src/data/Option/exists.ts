@@ -4,10 +4,10 @@
  * @tsplus fluent Option exists
  */
 export function exists_<A>(ma: Option<A>, predicate: Predicate<A>): boolean {
-  return ma.isNone() ? false : predicate(ma.value);
+  return ma.isNone() ? false : predicate(ma.value)
 }
 
 /**
  * @tsplus static Option/Aspects exists
  */
-export const exists = Pipeable(exists_);
+export const exists = Pipeable(exists_)

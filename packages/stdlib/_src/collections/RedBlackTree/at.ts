@@ -1,6 +1,6 @@
-import type { Direction, RedBlackTreeIterable } from "@tsplus/stdlib/collections/RedBlackTree/definition";
-import { RedBlackTreeIterator } from "@tsplus/stdlib/collections/RedBlackTree/definition";
-import type { Node } from "@tsplus/stdlib/collections/RedBlackTree/node";
+import type { Direction, RedBlackTreeIterable } from "@tsplus/stdlib/collections/RedBlackTree/definition"
+import { RedBlackTreeIterator } from "@tsplus/stdlib/collections/RedBlackTree/definition"
+import type { Node } from "@tsplus/stdlib/collections/RedBlackTree/node"
 
 /**
  * Returns an iterator that points to the element at the spcified index of the
@@ -17,35 +17,35 @@ export function at_<K, V>(
     ord: self.ord,
     [Symbol.iterator]: () => {
       if (index < 0) {
-        return new RedBlackTreeIterator(self, [], direction);
+        return new RedBlackTreeIterator(self, [], direction)
       }
-      let n = self.root;
-      const stack: Node<K, V>[] = [];
+      let n = self.root
+      const stack: Node<K, V>[] = []
       while (n) {
-        stack.push(n);
+        stack.push(n)
         if (n.left) {
           if (index < n.left.count) {
-            n = n.left;
-            continue;
+            n = n.left
+            continue
           }
-          index -= n.left.count;
+          index -= n.left.count
         }
         if (!index) {
-          return new RedBlackTreeIterator(self, stack, direction);
+          return new RedBlackTreeIterator(self, stack, direction)
         }
-        index -= 1;
+        index -= 1
         if (n.right) {
           if (index >= n.right.count) {
-            break;
+            break
           }
-          n = n.right;
+          n = n.right
         } else {
-          break;
+          break
         }
       }
-      return new RedBlackTreeIterator(self, [], direction);
+      return new RedBlackTreeIterator(self, [], direction)
     }
-  };
+  }
 }
 
 /**
@@ -54,4 +54,4 @@ export function at_<K, V>(
  *
  * @tsplus static RedBlackTree/Aspects at
  */
-export const at = Pipeable(at_);
+export const at = Pipeable(at_)

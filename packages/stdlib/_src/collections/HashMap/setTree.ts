@@ -1,5 +1,5 @@
-import { HashMapInternal, realHashMap } from "@tsplus/stdlib/collections/HashMap/_internal/hashMap";
-import type { Node } from "@tsplus/stdlib/collections/HashMap/_internal/node";
+import { HashMapInternal, realHashMap } from "@tsplus/stdlib/collections/HashMap/_internal/hashMap"
+import type { Node } from "@tsplus/stdlib/collections/HashMap/_internal/node"
 
 /**
  * Sets the root of the `HashMap`.
@@ -11,15 +11,15 @@ export function setTree_<K, V>(
   newRoot: Node<K, V>,
   newSize: number
 ): HashMap<K, V> {
-  realHashMap(self);
+  realHashMap(self)
   if (self._editable) {
-    self._root = newRoot;
-    self._size = newSize;
-    return self;
+    self._root = newRoot
+    self._size = newSize
+    return self
   }
   return newRoot === self._root
     ? self
-    : new HashMapInternal(self._editable, self._edit, newRoot, newSize);
+    : new HashMapInternal(self._editable, self._edit, newRoot, newSize)
 }
 
 /**
@@ -27,4 +27,4 @@ export function setTree_<K, V>(
  *
  * @tsplus static HashMap/Aspects setTree
  */
-export const setTree = Pipeable(setTree_);
+export const setTree = Pipeable(setTree_)

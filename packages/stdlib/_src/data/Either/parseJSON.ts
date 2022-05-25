@@ -7,5 +7,5 @@ export function parseJSON<E>(
   s: string,
   onError: (reason: unknown) => E
 ): Either<E, unknown> {
-  return Either.tryCatch(() => JSON.parse(s), onError);
+  return Either.tryCatch(() => JSON.parse(s), onError)
 }

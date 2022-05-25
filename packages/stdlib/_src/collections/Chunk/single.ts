@@ -1,4 +1,4 @@
-import { Singleton } from "@tsplus/stdlib/collections/Chunk/definition";
+import { Singleton } from "@tsplus/stdlib/collections/Chunk/definition"
 
 /**
  * Builds a chunk of a single value.
@@ -6,5 +6,5 @@ import { Singleton } from "@tsplus/stdlib/collections/Chunk/definition";
  * @tsplus static Chunk/Ops single
  */
 export function single<A>(a: A): Chunk<A> {
-  return new Singleton(a);
+  return new Singleton(a)
 }

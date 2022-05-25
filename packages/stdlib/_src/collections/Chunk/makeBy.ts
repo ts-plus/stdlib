@@ -4,11 +4,11 @@
  * @tsplus static Chunk/Ops makeBy
  */
 export function makeBy<A>(n: number, f: (i: number) => A): Chunk<A> {
-  const b = Chunk.builder<A>();
+  const b = Chunk.builder<A>()
 
   for (let i = 0; i < n; i++) {
-    b.append(f(i));
+    b.append(f(i))
   }
 
-  return b.build();
+  return b.build()
 }

@@ -4,5 +4,5 @@
  * @tsplus fluent Associative inverted
  */
 export function inverted<A>(self: Associative<A>): Associative<A> {
-  return Associative((x, y) => self.combine(y, x));
+  return Associative((x, y) => self.combine(y, x))
 }

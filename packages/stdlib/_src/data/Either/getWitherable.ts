@@ -4,8 +4,8 @@
  * @tsplus static Either/Ops getWitherable
  */
 export function getWitherable<E>(M: AssociativeIdentity<E>) {
-  const compactF = Either.getCompactF(M);
+  const compactF = Either.getCompactF(M)
   return HKT.instance<Witherable<Either.FixedLeftHKT<E>>>({
     compactF
-  });
+  })
 }

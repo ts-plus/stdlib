@@ -1,5 +1,5 @@
-import type { HashMapInternal } from "@tsplus/stdlib/collections/HashMap/_internal/hashMap";
-import { HashSetInternal, realHashSet } from "@tsplus/stdlib/collections/HashSet/_internal/hashSet";
+import type { HashMapInternal } from "@tsplus/stdlib/collections/HashMap/_internal/hashMap"
+import { HashSetInternal, realHashSet } from "@tsplus/stdlib/collections/HashSet/_internal/hashSet"
 
 /**
  * Removes a value from the `HashSet`.
@@ -8,10 +8,10 @@ import { HashSetInternal, realHashSet } from "@tsplus/stdlib/collections/HashSet
  * @tsplus fluent HashSet remove
  */
 export function remove_<A>(self: HashSet<A>, value: A): HashSet<A> {
-  realHashSet(self);
+  realHashSet(self)
   return (self._keyMap as HashMapInternal<A, unknown>)._editable
     ? (self._keyMap.remove(value), self)
-    : new HashSetInternal(self._keyMap.remove(value));
+    : new HashSetInternal(self._keyMap.remove(value))
 }
 
 /**
@@ -19,4 +19,4 @@ export function remove_<A>(self: HashSet<A>, value: A): HashSet<A> {
  *
  * @tsplus static HashSet/Aspects remove
  */
-export const remove = Pipeable(remove_);
+export const remove = Pipeable(remove_)

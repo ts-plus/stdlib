@@ -4,9 +4,9 @@
  * @tsplus fluent Tree forEach
  */
 export function forEach_<A, U>(self: Tree<A>, f: (a: A) => U): void {
-  f(self.value);
-  self.forest.map((a: Tree<A>) => a.forEach(f));
-  return;
+  f(self.value)
+  self.forest.map((a: Tree<A>) => a.forEach(f))
+  return
 }
 
 /**
@@ -14,4 +14,4 @@ export function forEach_<A, U>(self: Tree<A>, f: (a: A) => U): void {
  *
  * @tsplus static Tree/Aspects forEach
  */
-export const forEach = Pipeable(forEach_);
+export const forEach = Pipeable(forEach_)

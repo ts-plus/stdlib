@@ -1,4 +1,4 @@
-import type { Node } from "@tsplus/stdlib/collections/RedBlackTree/node";
+import type { Node } from "@tsplus/stdlib/collections/RedBlackTree/node"
 
 /**
  * Returns the element at the specified index within the tree or `None` if the
@@ -11,33 +11,33 @@ export function getAt_<K, V>(
   index: number
 ): Option<Tuple<[K, V]>> {
   if (index < 0) {
-    return Option.none;
+    return Option.none
   }
-  let n = self.root;
-  let node: Node<K, V> | undefined = undefined;
+  let n = self.root
+  let node: Node<K, V> | undefined = undefined
   while (n) {
-    node = n;
+    node = n
     if (n.left) {
       if (index < n.left.count) {
-        n = n.left;
-        continue;
+        n = n.left
+        continue
       }
-      index -= n.left.count;
+      index -= n.left.count
     }
     if (!index) {
-      return Option.some(Tuple(node.key, node.value));
+      return Option.some(Tuple(node.key, node.value))
     }
-    index -= 1;
+    index -= 1
     if (n.right) {
       if (index >= n.right.count) {
-        break;
+        break
       }
-      n = n.right;
+      n = n.right
     } else {
-      break;
+      break
     }
   }
-  return Option.none;
+  return Option.none
 }
 
 /**
@@ -46,4 +46,4 @@ export function getAt_<K, V>(
  *
  * @tsplus static RedBlackTree/Aspects getAt
  */
-export const getAt = Pipeable(getAt_);
+export const getAt = Pipeable(getAt_)

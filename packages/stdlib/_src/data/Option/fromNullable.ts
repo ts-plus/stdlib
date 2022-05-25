@@ -5,5 +5,5 @@
  * @tsplus static Option/Ops fromNullable
  */
 export function fromNullable<A>(a: A): Option<NonNullable<A>> {
-  return a == null ? Option.none : Option.some(a as NonNullable<A>);
+  return a == null ? Option.none : Option.some(a as NonNullable<A>)
 }

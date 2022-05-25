@@ -8,7 +8,7 @@ export function filterMap_<K, V, B>(
   self: ImmutableMap<K, V>,
   pf: (value: V) => Option<B>
 ): ImmutableMap<K, B> {
-  return self.filterMapWithIndex((_, value) => pf(value));
+  return self.filterMapWithIndex((_, value) => pf(value))
 }
 
 /**
@@ -17,4 +17,4 @@ export function filterMap_<K, V, B>(
  *
  * @tsplus static ImmutableMap/Aspects filterMap
  */
-export const filterMap = Pipeable(filterMap_);
+export const filterMap = Pipeable(filterMap_)

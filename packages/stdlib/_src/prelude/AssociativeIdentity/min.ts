@@ -4,5 +4,5 @@
  * @tsplus static AssociativeIdentity/Ops min
  */
 export function min<A>(B: Bounded<A>): AssociativeIdentity<A> {
-  return AssociativeIdentity(B.top, Associative.min(B).combine);
+  return AssociativeIdentity(B.top, Associative.min(B).combine)
 }

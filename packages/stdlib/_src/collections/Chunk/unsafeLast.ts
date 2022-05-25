@@ -1,4 +1,4 @@
-import { concreteChunkId } from "@tsplus/stdlib/collections/Chunk/definition";
+import { concreteChunkId } from "@tsplus/stdlib/collections/Chunk/definition"
 
 /**
  * Returns the last element of this chunk. Note that this method is partial
@@ -10,5 +10,5 @@ import { concreteChunkId } from "@tsplus/stdlib/collections/Chunk/definition";
  * @tsplus fluent Chunk unsafeLast
  */
 export function unsafeLast<A>(self: Chunk<A>): A {
-  return concreteChunkId(self)._get(concreteChunkId(self).length - 1);
+  return concreteChunkId(self)._get(concreteChunkId(self).length - 1)
 }

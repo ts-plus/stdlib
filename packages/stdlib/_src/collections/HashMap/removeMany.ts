@@ -6,9 +6,9 @@
 export function removeMany_<K, V>(self: HashMap<K, V>, ks: Iterable<K>): HashMap<K, V> {
   return self.mutate((m) => {
     for (const k of ks) {
-      m.remove(k);
+      m.remove(k)
     }
-  });
+  })
 }
 
 /**
@@ -16,4 +16,4 @@ export function removeMany_<K, V>(self: HashMap<K, V>, ks: Iterable<K>): HashMap
  *
  * @tsplus static HashMap/Aspects removeMany
  */
-export const removeMany = Pipeable(removeMany_);
+export const removeMany = Pipeable(removeMany_)

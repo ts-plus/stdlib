@@ -3,4 +3,4 @@
  *
  * @tsplus static Equivalence/Ops number
  */
-export const number = Equivalence.strict<number>();
+export const number = Equivalence.strict<number>()

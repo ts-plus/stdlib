@@ -1,4 +1,4 @@
-import { not } from "@tsplus/stdlib/data/Predicate";
+import { not } from "@tsplus/stdlib/data/Predicate"
 
 /**
  * Creates an `ImmutableArray<A>` of values not included in that
@@ -8,8 +8,8 @@ import { not } from "@tsplus/stdlib/data/Predicate";
  * @tsplus fluent ImmutableArray difference
  */
 export function difference_<A>(self: ImmutableArray<A>, E: Equivalence<A>) {
-  const elem = ImmutableArray.$.elem(E);
-  return (that: ImmutableArray<A>): ImmutableArray<A> => self.filter(not(elem(that)));
+  const elem = ImmutableArray.$.elem(E)
+  return (that: ImmutableArray<A>): ImmutableArray<A> => self.filter(not(elem(that)))
 }
 
 /**
@@ -19,4 +19,4 @@ export function difference_<A>(self: ImmutableArray<A>, E: Equivalence<A>) {
  *
  * @tsplus static ImmutableArray/Aspects difference
  */
-export const difference = Pipeable(difference_);
+export const difference = Pipeable(difference_)

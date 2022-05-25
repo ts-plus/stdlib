@@ -1,4 +1,4 @@
-import { concreteChunkId } from "@tsplus/stdlib/collections/Chunk/definition";
+import { concreteChunkId } from "@tsplus/stdlib/collections/Chunk/definition"
 
 /**
  * Determines if the chunk is empty.
@@ -6,5 +6,5 @@ import { concreteChunkId } from "@tsplus/stdlib/collections/Chunk/definition";
  * @tsplus fluent Chunk isEmpty
  */
 export function isEmpty<A>(self: Chunk<A>): boolean {
-  return concreteChunkId(self).length === 0;
+  return concreteChunkId(self).length === 0
 }

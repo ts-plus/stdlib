@@ -6,8 +6,8 @@
  */
 export function tryCatch<A>(f: LazyArg<A>): Option<A> {
   try {
-    return Option.some(f());
+    return Option.some(f())
   } catch (e) {
-    return Option.none;
+    return Option.none
   }
 }

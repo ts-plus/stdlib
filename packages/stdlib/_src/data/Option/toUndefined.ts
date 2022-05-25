@@ -5,5 +5,5 @@
  * @tsplus getter Option value
  */
 export function toUndefined<A>(self: Option<A>): A | undefined {
-  return self.isNone() ? undefined : self.value;
+  return self.isNone() ? undefined : self.value
 }

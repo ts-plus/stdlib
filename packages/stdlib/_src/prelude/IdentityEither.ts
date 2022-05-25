@@ -4,4 +4,4 @@
  *
  * @tsplus type IdentityEither
  */
-export type IdentityEither<F extends HKT> = AssociativeEither<F> & None<F>;
+export type IdentityEither<F extends HKT> = AssociativeEither<F> & None<F>

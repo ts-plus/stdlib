@@ -7,17 +7,17 @@ export function partitionWithIndex_<A>(
   self: ImmutableArray<A>,
   f: PredicateWithIndex<number, A>
 ): Tuple<[ImmutableArray<A>, ImmutableArray<A>]> {
-  const left: Array<A> = [];
-  const right: Array<A> = [];
+  const left: Array<A> = []
+  const right: Array<A> = []
   for (let i = 0; i < self.array.length; i = i + 1) {
-    const a = self.array[i]!;
+    const a = self.array[i]!
     if (f(i, a)) {
-      right.push(a);
+      right.push(a)
     } else {
-      left.push(a);
+      left.push(a)
     }
   }
-  return Tuple(new ImmutableArray(left), new ImmutableArray(right));
+  return Tuple(new ImmutableArray(left), new ImmutableArray(right))
 }
 
 /**
@@ -25,4 +25,4 @@ export function partitionWithIndex_<A>(
  *
  * @tsplus static ImmutableArray/Aspects partitionWithIndex
  */
-export const partitionWithIndex = Pipeable(partitionWithIndex_);
+export const partitionWithIndex = Pipeable(partitionWithIndex_)

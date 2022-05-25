@@ -5,5 +5,5 @@
  * @tsplus fluent Option toNullable
  */
 export function toNullable<A>(self: Option<A>): A | null {
-  return self.isNone() ? null : self.value;
+  return self.isNone() ? null : self.value
 }

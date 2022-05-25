@@ -4,7 +4,7 @@
  * @tsplus fluent Chunk takeRight
  */
 export function takeRight_<A>(self: Chunk<A>, n: number): Chunk<A> {
-  return self.drop(self.size - n);
+  return self.drop(self.size - n)
 }
 
 /**
@@ -12,4 +12,4 @@ export function takeRight_<A>(self: Chunk<A>, n: number): Chunk<A> {
  *
  * @tsplus static Chunk/Aspects takeRight
  */
-export const takeRight = Pipeable(takeRight_);
+export const takeRight = Pipeable(takeRight_)

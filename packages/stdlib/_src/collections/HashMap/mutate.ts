@@ -7,9 +7,9 @@ export function mutate_<K, V>(
   self: HashMap<K, V>,
   f: (self: HashMap<K, V>) => void
 ): HashMap<K, V> {
-  const transient = self.beginMutation();
-  f(transient);
-  return transient.endMutation();
+  const transient = self.beginMutation()
+  f(transient)
+  return transient.endMutation()
 }
 
 /**
@@ -17,4 +17,4 @@ export function mutate_<K, V>(
  *
  * @tsplus static HashMap/Aspects mutate
  */
-export const mutate = Pipeable(mutate_);
+export const mutate = Pipeable(mutate_)

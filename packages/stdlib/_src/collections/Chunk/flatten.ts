@@ -4,5 +4,5 @@
  * @tsplus fluent Chunk flatten
  */
 export function flatten<A>(self: Chunk<Chunk<A>>): Chunk<A> {
-  return self.flatMap(identity);
+  return self.flatMap(identity)
 }

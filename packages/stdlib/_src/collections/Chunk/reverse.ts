@@ -1,4 +1,4 @@
-import { concreteChunkId } from "@tsplus/stdlib/collections/Chunk/definition";
+import { concreteChunkId } from "@tsplus/stdlib/collections/Chunk/definition"
 
 /**
  * Reverse buckets iterator.
@@ -6,5 +6,5 @@ import { concreteChunkId } from "@tsplus/stdlib/collections/Chunk/definition";
  * @tsplus fluent Chunk reverse
  */
 export function reverse<A>(self: Chunk<A>): Iterable<A> {
-  return concreteChunkId(self)._reverse();
+  return concreteChunkId(self)._reverse()
 }

@@ -4,7 +4,7 @@
  * @tsplus fluent Chunk join
  */
 export function join_(self: Chunk<string>, sep: string): string {
-  return self.reduce("", (s, a) => (s.length > 0 ? `${s}${sep}${a}` : a));
+  return self.reduce("", (s, a) => (s.length > 0 ? `${s}${sep}${a}` : a))
 }
 
 /**
@@ -12,4 +12,4 @@ export function join_(self: Chunk<string>, sep: string): string {
  *
  * @tsplus static Chunk/Aspects join
  */
-export const join = Pipeable(join_);
+export const join = Pipeable(join_)

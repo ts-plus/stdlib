@@ -11,5 +11,5 @@
  * @tsplus static Option/Ops getApplyAssociative
  */
 export function getApplyAssociative<A>(S: Associative<A>): Associative<Option<A>> {
-  return Associative((x, y) => x.isSome() && y.isSome() ? Option.some(S.combine(x.value, y.value)) : Option.none);
+  return Associative((x, y) => x.isSome() && y.isSome() ? Option.some(S.combine(x.value, y.value)) : Option.none)
 }

@@ -4,9 +4,9 @@
  * @tsplus fluent ImmutableMap remove
  */
 export function remove_<K, V>(self: ImmutableMap<K, V>, key: K): ImmutableMap<K, V> {
-  const map = self.copy().internalMap as Map<K, V>;
-  map.delete(key);
-  return new ImmutableMap(map);
+  const map = self.copy().internalMap as Map<K, V>
+  map.delete(key)
+  return new ImmutableMap(map)
 }
 
 /**
@@ -14,4 +14,4 @@ export function remove_<K, V>(self: ImmutableMap<K, V>, key: K): ImmutableMap<K,
  *
  * @tsplus static ImmutableMap/Aspects remove
  */
-export const remove = Pipeable(remove_);
+export const remove = Pipeable(remove_)

@@ -4,7 +4,7 @@
  * @tsplus fluent HashMap map
  */
 export function map_<K, V, A>(self: HashMap<K, V>, f: (v: V) => A): HashMap<K, A> {
-  return self.reduceWithIndex(HashMap.empty<K, A>(), (z, k, v) => z.set(k, f(v)));
+  return self.reduceWithIndex(HashMap.empty<K, A>(), (z, k, v) => z.set(k, f(v)))
 }
 
 /**
@@ -12,4 +12,4 @@ export function map_<K, V, A>(self: HashMap<K, V>, f: (v: V) => A): HashMap<K, A
  *
  * @tsplus static HashMap/Aspects map
  */
-export const map = Pipeable(map_);
+export const map = Pipeable(map_)

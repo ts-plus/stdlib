@@ -10,28 +10,28 @@
 export function partition_<A, B extends A>(
   self: HashSet<A>,
   f: Refinement<A, B>
-): Tuple<[HashSet<A>, HashSet<B>]>;
+): Tuple<[HashSet<A>, HashSet<B>]>
 export function partition_<A>(
   self: HashSet<A>,
   f: Predicate<A>
-): Tuple<[HashSet<A>, HashSet<A>]>;
+): Tuple<[HashSet<A>, HashSet<A>]>
 export function partition_<A>(
   self: HashSet<A>,
   f: Predicate<A>
 ): Tuple<[HashSet<A>, HashSet<A>]> {
-  const vs = self.values();
-  let e: IteratorResult<A, any>;
-  const right = HashSet<A>().beginMutation();
-  const left = HashSet<A>().beginMutation();
+  const vs = self.values()
+  let e: IteratorResult<A, any>
+  const right = HashSet<A>().beginMutation()
+  const left = HashSet<A>().beginMutation()
   while (!(e = vs.next()).done) {
-    const value = e.value;
+    const value = e.value
     if (f(value)) {
-      right.add(value);
+      right.add(value)
     } else {
-      left.add(value);
+      left.add(value)
     }
   }
-  return Tuple(left.endMutation(), right.endMutation());
+  return Tuple(left.endMutation(), right.endMutation())
 }
 
 /**
@@ -45,10 +45,10 @@ export function partition_<A>(
  */
 export function partition<A, B extends A>(
   f: Refinement<A, B>
-): (self: HashSet<A>) => Tuple<[HashSet<A>, HashSet<B>]>;
+): (self: HashSet<A>) => Tuple<[HashSet<A>, HashSet<B>]>
 export function partition<A>(
   f: Predicate<A>
-): (self: HashSet<A>) => Tuple<[HashSet<A>, HashSet<A>]>;
+): (self: HashSet<A>) => Tuple<[HashSet<A>, HashSet<A>]>
 export function partition<A>(f: Predicate<A>) {
-  return (self: HashSet<A>): Tuple<[HashSet<A>, HashSet<A>]> => self.partition(f);
+  return (self: HashSet<A>): Tuple<[HashSet<A>, HashSet<A>]> => self.partition(f)
 }
