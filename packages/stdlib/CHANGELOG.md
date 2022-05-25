@@ -1,5 +1,13 @@
 # @tsplus/stdlib
 
+## 0.0.71
+
+### Patch Changes
+
+- [`c24b3bc`](https://github.com/ts-plus/stdlib/commit/c24b3bc0519e0513960e11ce12a20fbfc3af0573) Thanks [@mikearnaldi](https://github.com/mikearnaldi)! - Implement Tree missing operators and instances (https://github.com/ts-plus/stdlib/pull/144)
+
+* [#145](https://github.com/ts-plus/stdlib/pull/145) [`96080e8`](https://github.com/ts-plus/stdlib/commit/96080e8ed29a640a50e4f1dc386738b70f7b7b11) Thanks [@mikearnaldi](https://github.com/mikearnaldi)! - TS+ updated to fix build output
+
 ## 0.0.70
 
 ### Patch Changes
