@@ -4,7 +4,7 @@
  * @tsplus fluent ImmutableArray sort
  */
 export function sort_<A>(self: ImmutableArray<A>, O: Ord<A>): ImmutableArray<A> {
-  return new ImmutableArray([...self].sort((x, y) => O.compare(x, y)));
+  return new ImmutableArray([...self].sort((x, y) => O.compare(x, y)))
 }
 
 /**
@@ -12,4 +12,4 @@ export function sort_<A>(self: ImmutableArray<A>, O: Ord<A>): ImmutableArray<A> 
  *
  * @tsplus static ImmutableArray/Aspects sort
  */
-export const sort = Pipeable(sort_);
+export const sort = Pipeable(sort_)

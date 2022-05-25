@@ -13,7 +13,7 @@ export class ImmutableArray<A> implements Equals, Collection<A> {
   constructor(readonly array: ReadonlyArray<A>) {}
 
   [Symbol.iterator](): Iterator<A> {
-    return this.array[Symbol.iterator]();
+    return this.array[Symbol.iterator]()
   }
 
   [Equals.sym](this: this, other: unknown): boolean {
@@ -21,20 +21,20 @@ export class ImmutableArray<A> implements Equals, Collection<A> {
       other instanceof ImmutableArray &&
       this.array.length === other.array.length &&
       this.array.every((v, i) => Equals.equals(v, other.array[i]))
-    );
+    )
   }
 
   [Hash.sym](this: this): number {
-    return Hash.array(this.array);
+    return Hash.array(this.array)
   }
 }
 
 export interface ImmutableArrayF extends HKT {
-  readonly type: ImmutableArray<this["A"]>;
+  readonly type: ImmutableArray<this["A"]>
 }
 
 export declare namespace ImmutableArray {
-  export type HKT = ImmutableArrayF;
+  export type HKT = ImmutableArrayF
 }
 
 /**
@@ -44,10 +44,10 @@ export interface ImmutableArrayAspects {}
 /**
  * @tsplus static ImmutableArray/Ops $
  */
-export const ImmutableArrayAspects: ImmutableArrayAspects = {};
+export const ImmutableArrayAspects: ImmutableArrayAspects = {}
 
 /**
  * @tsplus macro pipe
  * @tsplus fluent ImmutableArray __call
  */
-export const immutableArrayPipe: typeof pipe = pipe;
+export const immutableArrayPipe: typeof pipe = pipe

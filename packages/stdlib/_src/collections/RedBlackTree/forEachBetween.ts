@@ -12,9 +12,9 @@ export function forEachBetween_<K, V>(
 ) {
   if (self.root) {
     RedBlackTree.visitBetween(self.root, min, max, self.ord, (key, value) => {
-      visit(key, value);
-      return Option.none;
-    });
+      visit(key, value)
+      return Option.none
+    })
   }
 }
 
@@ -24,4 +24,4 @@ export function forEachBetween_<K, V>(
  *
  * @tsplus static RedBlackTree/Aspects forEachBetween
  */
-export const forEachBetween = Pipeable(forEachBetween_);
+export const forEachBetween = Pipeable(forEachBetween_)

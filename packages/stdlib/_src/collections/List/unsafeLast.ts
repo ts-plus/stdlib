@@ -3,13 +3,13 @@
  */
 export function unsafeLast<A>(self: List<A>): A | undefined {
   if (self.isNil()) {
-    return undefined;
+    return undefined
   }
-  let these = self;
-  let scout = self.tail;
+  let these = self
+  let scout = self.tail
   while (!scout.isNil()) {
-    these = scout;
-    scout = scout.tail;
+    these = scout
+    scout = scout.tail
   }
-  return these.head;
+  return these.head
 }

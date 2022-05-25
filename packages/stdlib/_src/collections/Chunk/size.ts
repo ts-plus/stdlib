@@ -1,4 +1,4 @@
-import { concreteChunkId } from "@tsplus/stdlib/collections/Chunk/definition";
+import { concreteChunkId } from "@tsplus/stdlib/collections/Chunk/definition"
 
 /**
  * Returns the number of elements in the chunk.
@@ -6,5 +6,5 @@ import { concreteChunkId } from "@tsplus/stdlib/collections/Chunk/definition";
  * @tsplus getter Chunk size
  */
 export function size<A>(self: Chunk<A>) {
-  return concreteChunkId(self).length;
+  return concreteChunkId(self).length
 }

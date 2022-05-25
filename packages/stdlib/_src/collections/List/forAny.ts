@@ -6,10 +6,10 @@
 export function forAny_<A>(self: List<A>, f: Predicate<A>): boolean {
   for (const a of self) {
     if (f(a)) {
-      return true;
+      return true
     }
   }
-  return false;
+  return false
 }
 
 /**
@@ -17,4 +17,4 @@ export function forAny_<A>(self: List<A>, f: Predicate<A>): boolean {
  *
  * @tsplus static List/Ops forAny
  */
-export const forAny = Pipeable(forAny_);
+export const forAny = Pipeable(forAny_)

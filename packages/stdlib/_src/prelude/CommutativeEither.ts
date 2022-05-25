@@ -6,6 +6,6 @@
  */
 export type CommutativeEither<F extends HKT> = {
   readonly Law: {
-    readonly CommutativeEither: "CommutativeEither";
-  };
-} & AssociativeEither<F>;
+    readonly CommutativeEither: "CommutativeEither"
+  }
+} & AssociativeEither<F>

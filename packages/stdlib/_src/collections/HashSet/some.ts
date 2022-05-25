@@ -4,14 +4,14 @@
  * @tsplus fluent HashSet some
  */
 export function some_<A>(self: HashSet<A>, f: Predicate<A>): boolean {
-  let found = false;
+  let found = false
   for (const v of self) {
-    found = f(v);
+    found = f(v)
     if (found) {
-      break;
+      break
     }
   }
-  return found;
+  return found
 }
 
 /**
@@ -19,4 +19,4 @@ export function some_<A>(self: HashSet<A>, f: Predicate<A>): boolean {
  *
  * @tsplus static HashSet/Aspects some
  */
-export const some = Pipeable(some_);
+export const some = Pipeable(some_)

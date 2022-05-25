@@ -3,7 +3,7 @@
  */
 export function unsafeHead<A>(self: List<A>): A | undefined {
   if (self.isNil()) {
-    return undefined;
+    return undefined
   }
-  return self.head;
+  return self.head
 }

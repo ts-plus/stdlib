@@ -10,20 +10,20 @@ export function first<A>(self: ParSeq<A>): Option<A> {
   while (1) {
     switch (self._tag) {
       case "Single": {
-        return Option.some(self.a);
+        return Option.some(self.a)
       }
       case "Empty": {
-        return Option.none;
+        return Option.none
       }
       case "Both": {
-        self = self.left;
-        break;
+        self = self.left
+        break
       }
       case "Then": {
-        self = self.left;
-        break;
+        self = self.left
+        break
       }
     }
   }
-  throw new Error("Bug");
+  throw new Error("Bug")
 }

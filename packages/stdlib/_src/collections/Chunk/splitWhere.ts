@@ -1,4 +1,4 @@
-import { concreteChunkId } from "@tsplus/stdlib/collections/Chunk/definition";
+import { concreteChunkId } from "@tsplus/stdlib/collections/Chunk/definition"
 /**
  * Splits this chunk on the first element that matches this predicate.
  *
@@ -8,27 +8,27 @@ export function splitWhere_<A>(
   self: Chunk<A>,
   f: Predicate<A>
 ): Tuple<[Chunk<A>, Chunk<A>]> {
-  const iterator = concreteChunkId(self)._arrayLikeIterator();
-  let next;
-  let cont = true;
-  let i = 0;
+  const iterator = concreteChunkId(self)._arrayLikeIterator()
+  let next
+  let cont = true
+  let i = 0
 
   while (cont && (next = iterator.next()) && !next.done) {
-    const array = next.value;
-    const len = array.length;
-    let j = 0;
+    const array = next.value
+    const len = array.length
+    let j = 0
     while (cont && j < len) {
-      const a = array[j]!;
+      const a = array[j]!
       if (f(a)) {
-        cont = false;
+        cont = false
       } else {
-        i++;
-        j++;
+        i++
+        j++
       }
     }
   }
 
-  return self.splitAt(i);
+  return self.splitAt(i)
 }
 
 /**
@@ -36,4 +36,4 @@ export function splitWhere_<A>(
  *
  * @tsplus static Chunk/Aspects splitWhere
  */
-export const splitWhere = Pipeable(splitWhere_);
+export const splitWhere = Pipeable(splitWhere_)

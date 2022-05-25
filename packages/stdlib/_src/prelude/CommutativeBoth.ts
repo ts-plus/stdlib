@@ -6,6 +6,6 @@
  */
 export type CommutativeBoth<F extends HKT> = {
   readonly Law: {
-    readonly CommutativeBoth: "CommutativeBoth";
-  };
-} & AssociativeBoth<F>;
+    readonly CommutativeBoth: "CommutativeBoth"
+  }
+} & AssociativeBoth<F>

@@ -6,4 +6,4 @@
 export const sum: AssociativeIdentity<number> = AssociativeIdentity.fromAssociative(
   0,
   Associative.sum
-);
+)

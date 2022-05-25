@@ -11,7 +11,7 @@ export function conditionalF_<F extends HKT>() {
     HKT.Infer<F, "R", X | Y>,
     HKT.Infer<F, "E", X | Y>,
     HKT.Infer<F, "A", X | Y>
-  > => (predicate ? onTrue() : onFalse());
+  > => (predicate ? onTrue() : onFalse())
 }
 
 /**
@@ -28,5 +28,5 @@ export function conditionalF<F extends HKT>() {
     HKT.Infer<F, "R", X | Y>,
     HKT.Infer<F, "E", X | Y>,
     HKT.Infer<F, "A", X | Y>
-  >) => (b) => b ? onTrue() : onFalse();
+  >) => (b) => b ? onTrue() : onFalse()
 }

@@ -12,11 +12,11 @@ export function fromEntries<Entries extends Tuple<[any, any]>[]>(
   const map = MutableHashMap.empty<
     Entries[number] extends Tuple<[infer K, any]> ? K : never,
     Entries[number] extends Tuple<[any, infer V]> ? V : never
-  >();
+  >()
 
   for (const entry of entries) {
-    map.set(entry.get(0), entry.get(1));
+    map.set(entry.get(0), entry.get(1))
   }
 
-  return map;
+  return map
 }

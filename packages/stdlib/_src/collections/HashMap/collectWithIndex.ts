@@ -8,15 +8,15 @@ export function collectWithIndex_<K, A, B>(
   self: HashMap<K, A>,
   f: (k: K, a: A) => Option<B>
 ): HashMap<K, B> {
-  const m = HashMap.empty<K, B>();
+  const m = HashMap.empty<K, B>()
   return m.mutate((m) => {
     for (const { tuple: [k, a] } of self) {
-      const o = f(k, a);
+      const o = f(k, a)
       if (o.isSome()) {
-        m.set(k, o.value);
+        m.set(k, o.value)
       }
     }
-  });
+  })
 }
 
 /**
@@ -25,4 +25,4 @@ export function collectWithIndex_<K, A, B>(
  *
  * @tsplus static HashMap/Aspects collectWithIndex
  */
-export const collectWithIndex = Pipeable(collectWithIndex_);
+export const collectWithIndex = Pipeable(collectWithIndex_)

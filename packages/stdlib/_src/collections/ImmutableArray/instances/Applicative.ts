@@ -1,4 +1,4 @@
 /**
  * @tsplus static ImmutableArray/Ops Applicative
  */
-export const Applicative = DSL.getApplicativeF(ImmutableArray.Monad);
+export const Applicative = DSL.getApplicativeF(ImmutableArray.Monad)

@@ -10,9 +10,9 @@
 export function difference_<A>(self: HashSet<A>, that: Iterable<A>): HashSet<A> {
   return self.mutate((s) => {
     for (const k of that) {
-      s.remove(k);
+      s.remove(k)
     }
-  });
+  })
 }
 
 /**
@@ -24,4 +24,4 @@ export function difference_<A>(self: HashSet<A>, that: Iterable<A>): HashSet<A> 
  *
  * @tsplus static HashSet/Aspects difference
  */
-export const difference = Pipeable(difference_);
+export const difference = Pipeable(difference_)

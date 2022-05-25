@@ -4,5 +4,5 @@
  * @tsplus fluent ImmutableArray isEmpty
  */
 export function isEmpty<A>(self: ImmutableArray<A>): boolean {
-  return self.array.length === 0;
+  return self.array.length === 0
 }

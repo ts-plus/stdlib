@@ -5,7 +5,7 @@
  * @tsplus fluent ImmutableArray collect
  */
 export function collect_<A, B>(self: ImmutableArray<A>, f: (a: A) => Option<B>): ImmutableArray<B> {
-  return self.collectWithIndex((_, a) => f(a));
+  return self.collectWithIndex((_, a) => f(a))
 }
 
 /**
@@ -14,4 +14,4 @@ export function collect_<A, B>(self: ImmutableArray<A>, f: (a: A) => Option<B>):
  *
  * @tsplus static ImmutableArray/Aspects collect
  */
-export const collect = Pipeable(collect_);
+export const collect = Pipeable(collect_)

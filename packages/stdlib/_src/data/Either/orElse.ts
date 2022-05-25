@@ -9,7 +9,7 @@ export function orElse_<E, A, E2, B>(
   self: Either<E, A>,
   onLeft: LazyArg<Either<E2, B>>
 ): Either<E2, A | B> {
-  return self.catchAll(onLeft);
+  return self.catchAll(onLeft)
 }
 
 /**
@@ -18,4 +18,4 @@ export function orElse_<E, A, E2, B>(
  *
  * @tsplus static Either/Aspects orElse
  */
-export const orElse = Pipeable(orElse_);
+export const orElse = Pipeable(orElse_)

@@ -10,9 +10,9 @@ export function forEachLt_<K, V>(
 ) {
   if (self.root) {
     RedBlackTree.visitLt(self.root, max, self.ord, (key, value) => {
-      visit(key, value);
-      return Option.none;
-    });
+      visit(key, value)
+      return Option.none
+    })
   }
 }
 
@@ -21,4 +21,4 @@ export function forEachLt_<K, V>(
  *
  * @tsplus static RedBlackTree/Aspects forEachLt
  */
-export const forEachLt = Pipeable(forEachLt_);
+export const forEachLt = Pipeable(forEachLt_)

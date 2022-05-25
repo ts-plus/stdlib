@@ -1,6 +1,6 @@
-import { Cons, Nil } from "@tsplus/stdlib/collections/List/definition";
-import { Left, Right } from "@tsplus/stdlib/data/Either/definition";
-import { None, Some } from "@tsplus/stdlib/data/Option/definition";
+import { Cons, Nil } from "@tsplus/stdlib/collections/List/definition"
+import { Left, Right } from "@tsplus/stdlib/data/Either/definition"
+import { None, Some } from "@tsplus/stdlib/data/Option/definition"
 
 /**
  * A Guard<A> is a type representing the ability to identify when a value is of type A at runtime
@@ -8,20 +8,20 @@ import { None, Some } from "@tsplus/stdlib/data/Option/definition";
  * @tsplus type Guard
  */
 export interface Guard<A> {
-  readonly is: (u: unknown) => u is A;
+  readonly is: (u: unknown) => u is A
 }
 
 /**
  * @tsplus type GuardOps
  */
 export interface GuardOps {
-  <A>(f: (u: unknown) => u is A): Guard<A>;
+  <A>(f: (u: unknown) => u is A): Guard<A>
 }
 
 /**
  * Creates a new Guard
  */
-export const Guard: GuardOps = (is) => ({ is });
+export const Guard: GuardOps = (is) => ({ is })
 
 //
 // Implicits
@@ -32,49 +32,49 @@ export const Guard: GuardOps = (is) => ({ is });
  *
  * @tsplus implicit
  */
-export const _true: Guard<true> = Guard((u): u is true => u === true);
+export const _true: Guard<true> = Guard((u): u is true => u === true)
 
 /**
  * Guard for `false`
  *
  * @tsplus implicit
  */
-export const _false: Guard<false> = Guard((u): u is false => u === false);
+export const _false: Guard<false> = Guard((u): u is false => u === false)
 
 /**
  * Guard for a boolean
  *
  * @tsplus implicit
  */
-export const boolean: Guard<boolean> = Guard((u): u is boolean => typeof u === "boolean");
+export const boolean: Guard<boolean> = Guard((u): u is boolean => typeof u === "boolean")
 
 /**
  * Guard for a number
  *
  * @tsplus implicit
  */
-export const number: Guard<number> = Guard((u): u is number => typeof u === "number");
+export const number: Guard<number> = Guard((u): u is number => typeof u === "number")
 
 /**
  * Guard for a string
  *
  * @tsplus implicit
  */
-export const string: Guard<string> = Guard((u): u is string => typeof u === "string");
+export const string: Guard<string> = Guard((u): u is string => typeof u === "string")
 
 /**
  * Guard for a Date
  *
  * @tsplus implicit
  */
-export const date: Guard<Date> = Guard((u): u is Date => u instanceof Date);
+export const date: Guard<Date> = Guard((u): u is Date => u instanceof Date)
 
 /**
  * Guard for a {}
  *
  * @tsplus implicit
  */
-export const record: Guard<{}> = Guard((u): u is {} => typeof u === "object" && u !== null);
+export const record: Guard<{}> = Guard((u): u is {} => typeof u === "object" && u !== null)
 
 /**
  * Guard for an object shaped like { _tag: string }
@@ -82,8 +82,8 @@ export const record: Guard<{}> = Guard((u): u is {} => typeof u === "object" && 
  * @tsplus implicit
  */
 export const taggedObject: Guard<{
-  _tag: string;
-}> = Derive();
+  _tag: string
+}> = Derive()
 
 //
 // Derivation Rules
@@ -95,14 +95,14 @@ export const taggedObject: Guard<{
 export function deriveLazy<A>(
   fn: (_: Guard<A>) => Guard<A>
 ): Guard<A> {
-  let cached: Guard<A> | undefined;
+  let cached: Guard<A> | undefined
   const guard: Guard<A> = Guard((u): u is A => {
     if (!cached) {
-      cached = fn(guard);
+      cached = fn(guard)
     }
-    return cached.is(u);
-  });
-  return guard;
+    return cached.is(u)
+  })
+  return guard
 }
 
 /**
@@ -112,13 +112,13 @@ export function deriveValidation<A extends Validation.Brand<any, any>>(
   ...[base, brands]: Check<Validation.IsValidated<A>> extends Check.True ? [
     base: Guard<Validation.Unbranded<A>>,
     brands: {
-      [k in (keyof A[typeof Validation.sym]) & string]: Validation<A[typeof Validation.sym][k], k>;
+      [k in (keyof A[typeof Validation.sym]) & string]: Validation<A[typeof Validation.sym][k], k>
     }
   ]
     : never
 ): Guard<A> {
-  const validateBrands = Object.keys(brands).map((k) => brands[k]!);
-  return Guard((u): u is A => base.is(u) && validateBrands.every((brand) => brand.validate(u as any)));
+  const validateBrands = Object.keys(brands).map((k) => brands[k]!)
+  return Guard((u): u is A => base.is(u) && validateBrands.every((brand) => brand.validate(u as any)))
 }
 
 /**
@@ -127,7 +127,7 @@ export function deriveValidation<A extends Validation.Brand<any, any>>(
 export function deriveLiteral<A extends string | number>(
   ...[value]: Check<Check.IsLiteral<A> & Check.Not<Check.IsUnion<A>>> extends Check.True ? [value: A] : never
 ): Guard<A> {
-  return Guard((u): u is A => u === value);
+  return Guard((u): u is A => u === value)
 }
 
 /**
@@ -139,13 +139,13 @@ export function deriveOption<A extends Option<any>>(
 ): Guard<A> {
   return Guard((u): u is A => {
     if (u instanceof None) {
-      return true;
+      return true
     }
     if (u instanceof Some) {
-      return element.is(u.value);
+      return element.is(u.value)
     }
-    return false;
-  });
+    return false
+  })
 }
 
 /**
@@ -157,10 +157,10 @@ export function deriveChunk<A extends Chunk<any>>(
 ): Guard<A> {
   return Guard((u): u is A => {
     if (Chunk.isChunk(u)) {
-      return u.forAll(element.is);
+      return u.forAll(element.is)
     }
-    return false;
-  });
+    return false
+  })
 }
 
 /**
@@ -172,11 +172,11 @@ export function deriveList<A extends List<any>>(
 ): Guard<A> {
   return Guard((u): u is A => {
     if (u instanceof Cons || u instanceof Nil) {
-      return (u as List<unknown>).forAll(element.is);
+      return (u as List<unknown>).forAll(element.is)
     }
 
-    return false;
-  });
+    return false
+  })
 }
 
 /**
@@ -188,10 +188,10 @@ export function deriveSortedSet<A extends SortedSet<any>>(
 ): Guard<A> {
   return Guard((u): u is A => {
     if (SortedSet.isSortedSet(u)) {
-      return u.forAll(element.is);
+      return u.forAll(element.is)
     }
-    return false;
-  });
+    return false
+  })
 }
 
 /**
@@ -203,11 +203,11 @@ export function deriveNonEmptyImmutableArray<A extends ImmutableArray<any>>(
 ): Guard<A> {
   return Guard((u): u is A => {
     if (u instanceof ImmutableArray && u.isNonEmpty()) {
-      return u.array.every(element.is);
+      return u.array.every(element.is)
     }
 
-    return false;
-  });
+    return false
+  })
 }
 
 /**
@@ -219,11 +219,11 @@ export function deriveImmutableArray<A extends ImmutableArray<any>>(
 ): Guard<A> {
   return Guard((u): u is A => {
     if (u instanceof ImmutableArray) {
-      return u.array.every(element.is);
+      return u.array.every(element.is)
     }
 
-    return false;
-  });
+    return false
+  })
 }
 
 /**
@@ -237,11 +237,11 @@ export function deriveArray<A extends Array<any>>(
 ): Guard<A> {
   return Guard((u): u is A => {
     if (Array.isArray(u)) {
-      return u.every(element.is);
+      return u.every(element.is)
     }
 
-    return false;
-  });
+    return false
+  })
 }
 
 /**
@@ -253,13 +253,13 @@ export function deriveEither<A extends Either<any, any>>(
 ): Guard<A> {
   return Guard((u): u is A => {
     if (u instanceof Left) {
-      return left.is(u.left);
+      return left.is(u.left)
     }
     if (u instanceof Right) {
-      return right.is(u.right);
+      return right.is(u.right)
     }
-    return false;
-  });
+    return false
+  })
 }
 
 /**
@@ -268,25 +268,25 @@ export function deriveEither<A extends Either<any, any>>(
 export function deriveRecord<A extends Record<string, any>>(
   ...[keyGuard, valueGuard, requiredKeysRecord]: [A] extends [Record<infer X, infer Y>] ? Check<
     Check.IsEqual<A, Record<X, Y>> & Check.Not<Check.IsUnion<A>>
-  > extends Check.True ? [key: Guard<X>, value: Guard<Y>, requiredKeysRecord: { [k in X]: 0; }]
+  > extends Check.True ? [key: Guard<X>, value: Guard<Y>, requiredKeysRecord: { [k in X]: 0 }]
   : never
     : never
 ): Guard<A> {
   return Guard((u): u is A => {
-    const missing = new Set(Object.keys(requiredKeysRecord));
+    const missing = new Set(Object.keys(requiredKeysRecord))
     if (record.is(u)) {
       for (const k of Object.keys(u)) {
         if (keyGuard.is(k)) {
           if (!valueGuard.is(u[k])) {
-            return false;
+            return false
           }
-          missing.delete(k);
+          missing.delete(k)
         }
       }
-      return missing.size === 0;
+      return missing.size === 0
     }
-    return false;
-  });
+    return false
+  })
 }
 
 /**
@@ -296,12 +296,12 @@ export function deriveStruct<A extends Record<string, any>>(
   ...[requiredFields, optionalFields]: Check<Check.IsStruct<A>> extends Check.True ? [
     ...[
       requiredFields: {
-        [k in TypeLevel.RequiredKeys<A>]: Guard<A[k]>;
+        [k in TypeLevel.RequiredKeys<A>]: Guard<A[k]>
       }
     ],
     ...([TypeLevel.OptionalKeys<A>] extends [never] ? [] : [
       optionalFields: {
-        [k in TypeLevel.OptionalKeys<A>]: Guard<NonNullable<A[k]>>;
+        [k in TypeLevel.OptionalKeys<A>]: Guard<NonNullable<A[k]>>
       }
     ])
   ]
@@ -311,42 +311,42 @@ export function deriveStruct<A extends Record<string, any>>(
     if (record.is(u)) {
       for (const field of Object.keys(requiredFields)) {
         if (!(field in u) || !(requiredFields[field] as Guard<any>).is(u[field])) {
-          return false;
+          return false
         }
       }
       if (optionalFields) {
         for (const field of Object.keys(optionalFields)) {
           if (field in u && typeof u[field] !== "undefined" && !(optionalFields[field] as Guard<any>).is(u[field])) {
-            return false;
+            return false
           }
         }
       }
-      return true;
+      return true
     }
-    return false;
-  });
+    return false
+  })
 }
 
 /**
  * @tsplus derive Guard<_> 20
  */
-export function deriveTagged<A extends { _tag: string; }>(
+export function deriveTagged<A extends { _tag: string }>(
   ...[elements]: Check<Check.IsTagged<"_tag", A>> extends Check.True ? [
     elements: {
-      [k in A["_tag"]]: Guard<Extract<A, { _tag: k; }>>;
+      [k in A["_tag"]]: Guard<Extract<A, { _tag: k }>>
     }
   ]
     : never
 ): Guard<A> {
   return Guard((u): u is A => {
     if (taggedObject.is(u)) {
-      const guard = elements[u["_tag"] as A["_tag"]];
+      const guard = elements[u["_tag"] as A["_tag"]]
       if (guard) {
-        return guard.is(u);
+        return guard.is(u)
       }
     }
-    return false;
-  });
+    return false
+  })
 }
 
 /**
@@ -354,17 +354,17 @@ export function deriveTagged<A extends { _tag: string; }>(
  */
 export function deriveUnion<A extends unknown[]>(
   ...elements: {
-    [k in keyof A]: Guard<A[k]>;
+    [k in keyof A]: Guard<A[k]>
   }
 ): Guard<A[number]> {
   return Guard((u): u is A[number] => {
     for (const element of elements) {
       if (element.is(u)) {
-        return true;
+        return true
       }
     }
-    return false;
-  });
+    return false
+  })
 }
 
 /**
@@ -372,6 +372,6 @@ export function deriveUnion<A extends unknown[]>(
  */
 export function asserts<A>(self: Guard<A>, u: unknown): asserts u is A {
   if (!self.is(u)) {
-    throw new Error("Invalid assertion");
+    throw new Error("Invalid assertion")
   }
 }

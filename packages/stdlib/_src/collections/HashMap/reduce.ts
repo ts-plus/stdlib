@@ -4,7 +4,7 @@
  * @tsplus fluent HashMap reduce
  */
 export function reduce_<K, V, Z>(self: HashMap<K, V>, z: Z, f: (z: Z, v: V) => Z): Z {
-  return self.reduceWithIndex(z, (z, _, v) => f(z, v));
+  return self.reduceWithIndex(z, (z, _, v) => f(z, v))
 }
 
 /**
@@ -12,4 +12,4 @@ export function reduce_<K, V, Z>(self: HashMap<K, V>, z: Z, f: (z: Z, v: V) => Z
  *
  * @tsplus static HashMap/Aspects reduce
  */
-export const reduce = Pipeable(reduce_);
+export const reduce = Pipeable(reduce_)

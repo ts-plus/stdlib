@@ -8,7 +8,7 @@ export function catchAll_<E, A, E1, B>(
   self: Either<E, A>,
   onLeft: (e: E) => Either<E1, B>
 ): Either<E1, A | B> {
-  return self.isLeft() ? onLeft(self.left) : self;
+  return self.isLeft() ? onLeft(self.left) : self
 }
 
 /**
@@ -17,4 +17,4 @@ export function catchAll_<E, A, E1, B>(
  *
  * @tsplus static Either/Aspects catchAll
  */
-export const catchAll = Pipeable(catchAll_);
+export const catchAll = Pipeable(catchAll_)

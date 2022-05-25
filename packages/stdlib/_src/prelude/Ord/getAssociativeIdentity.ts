@@ -6,5 +6,5 @@
  * @tsplus static Ord/Ops getAssociativeIdentity
  */
 export function getAssociativeIdentity<A = never>(): AssociativeIdentity<Ord<A>> {
-  return AssociativeIdentity.fromAssociative(Ord(() => 0), Ord.getAssociative<A>());
+  return AssociativeIdentity.fromAssociative(Ord(() => 0), Ord.getAssociative<A>())
 }

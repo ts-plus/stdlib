@@ -6,13 +6,13 @@
  * @tsplus fluent Chunk elem
  */
 export function elem_<A>(self: Chunk<A>, E: Equivalence<A>, value: A): boolean {
-  const predicate = (element: A) => E.equals(element, value);
+  const predicate = (element: A) => E.equals(element, value)
   for (let i = 0; i < self.length; i++) {
     if (predicate(self.unsafeGet(i)!)) {
-      return true;
+      return true
     }
   }
-  return false;
+  return false
 }
 
 /**
@@ -22,4 +22,4 @@ export function elem_<A>(self: Chunk<A>, E: Equivalence<A>, value: A): boolean {
  *
  * @tsplus static Chunk/Aspects elem
  */
-export const elem = Pipeable(elem_);
+export const elem = Pipeable(elem_)

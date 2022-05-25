@@ -7,9 +7,9 @@
  * @tsplus static Chunk/Ops __call
  */
 export function make<Elem extends readonly any[]>(...iter: Elem): Chunk<Elem[number]> {
-  let builder = Chunk.empty<Elem[number]>();
+  let builder = Chunk.empty<Elem[number]>()
   for (const x of iter) {
-    builder = builder.append(x);
+    builder = builder.append(x)
   }
-  return builder;
+  return builder
 }

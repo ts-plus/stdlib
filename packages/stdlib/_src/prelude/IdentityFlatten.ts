@@ -8,4 +8,4 @@
  *
  * @tsplus type IdentityFlatten
  */
-export type IdentityFlatten<F extends HKT> = AssociativeFlatten<F> & Any<F>;
+export type IdentityFlatten<F extends HKT> = AssociativeFlatten<F> & Any<F>

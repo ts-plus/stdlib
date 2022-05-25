@@ -1,4 +1,4 @@
-import type { ImmutableArray } from "@tsplus/stdlib/collections/ImmutableArray";
+import type { ImmutableArray } from "@tsplus/stdlib/collections/ImmutableArray"
 
 /**
  * Sort the elements of an `ImmutableArray<A>` in increasing order, where
@@ -8,8 +8,8 @@ import type { ImmutableArray } from "@tsplus/stdlib/collections/ImmutableArray";
  * @tsplus fluent ImmutableArray sortBy
  */
 export function sortBy_<A>(self: ImmutableArray<A>, ...ords: Array<Ord<A>>): ImmutableArray<A> {
-  const O = Ord.consecutive(...ords);
-  return self.sort(O);
+  const O = Ord.consecutive(...ords)
+  return self.sort(O)
 }
 
 /**
@@ -19,5 +19,5 @@ export function sortBy_<A>(self: ImmutableArray<A>, ...ords: Array<Ord<A>>): Imm
  * @tsplus static ImmutableArray/Aspects sortBy
  */
 export function sortBy<A>(...ords: Array<Ord<A>>) {
-  return (self: ImmutableArray<A>): ImmutableArray<A> => self.sortBy(...ords);
+  return (self: ImmutableArray<A>): ImmutableArray<A> => self.sortBy(...ords)
 }

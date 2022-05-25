@@ -10,7 +10,7 @@ export function fold_<E, A, B, C>(
   onLeft: (e: E) => B,
   onRight: (a: A) => C
 ): B | C {
-  return self.isLeft() ? onLeft(self.left) : onRight(self.right);
+  return self.isLeft() ? onLeft(self.left) : onRight(self.right)
 }
 
 /**
@@ -20,4 +20,4 @@ export function fold_<E, A, B, C>(
  *
  * @tsplus static Either/Aspects fold
  */
-export const fold = Pipeable(fold_);
+export const fold = Pipeable(fold_)

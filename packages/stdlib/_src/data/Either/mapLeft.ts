@@ -4,7 +4,7 @@
  * @tsplus fluent Either mapLeft
  */
 export function mapLeft_<E, A, E1>(self: Either<E, A>, f: (e: E) => E1): Either<E1, A> {
-  return self.isLeft() ? Either.left(f(self.left)) : self;
+  return self.isLeft() ? Either.left(f(self.left)) : self
 }
 
 /**
@@ -12,4 +12,4 @@ export function mapLeft_<E, A, E1>(self: Either<E, A>, f: (e: E) => E1): Either<
  *
  * @tsplus static Either/Aspects mapLeft
  */
-export const mapLeft = Pipeable(mapLeft_);
+export const mapLeft = Pipeable(mapLeft_)

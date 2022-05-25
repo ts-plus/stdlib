@@ -1,4 +1,4 @@
-import { concreteChunkId } from "@tsplus/stdlib/collections/Chunk/definition";
+import { concreteChunkId } from "@tsplus/stdlib/collections/Chunk/definition"
 
 /**
  * Unsafely retrieve a value from a `Chunk`.
@@ -6,7 +6,7 @@ import { concreteChunkId } from "@tsplus/stdlib/collections/Chunk/definition";
  * @tsplus fluent Chunk unsafeGet
  */
 export function unsafeGet_<A>(self: Chunk<A>, n: number): A {
-  return concreteChunkId(self)._get(n);
+  return concreteChunkId(self)._get(n)
 }
 
 /**
@@ -14,4 +14,4 @@ export function unsafeGet_<A>(self: Chunk<A>, n: number): A {
  *
  * @tsplus static Chunk/Aspects unsafeGet
  */
-export const unsafeGet = Pipeable(unsafeGet_);
+export const unsafeGet = Pipeable(unsafeGet_)

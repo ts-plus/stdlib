@@ -8,14 +8,14 @@ export function filterMapWithIndex_<K, V, B>(
   self: ImmutableMap<K, V>,
   pf: (key: K, value: V) => Option<B>
 ): ImmutableMap<K, B> {
-  const map = new Map<K, B>();
+  const map = new Map<K, B>()
   for (const [key, value] of self.internalMap) {
-    const result = pf(key, value);
+    const result = pf(key, value)
     if (result.isSome()) {
-      map.set(key, result.value);
+      map.set(key, result.value)
     }
   }
-  return new ImmutableMap(map);
+  return new ImmutableMap(map)
 }
 
 /**
@@ -24,4 +24,4 @@ export function filterMapWithIndex_<K, V, B>(
  *
  * @tsplus static ImmutableMap/Aspects filterMapWithIndex
  */
-export const filterMapWithIndex = Pipeable(filterMapWithIndex_);
+export const filterMapWithIndex = Pipeable(filterMapWithIndex_)

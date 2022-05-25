@@ -6,8 +6,8 @@
  * @tsplus fluent ImmutableArray intersection
  */
 export function intersection_<A>(self: ImmutableArray<A>, E: Equivalence<A>) {
-  const elem = ImmutableArray.$.elem(E);
-  return (that: ImmutableArray<A>): ImmutableArray<A> => self.filter(elem(that));
+  const elem = ImmutableArray.$.elem(E)
+  return (that: ImmutableArray<A>): ImmutableArray<A> => self.filter(elem(that))
 }
 
 /**
@@ -17,4 +17,4 @@ export function intersection_<A>(self: ImmutableArray<A>, E: Equivalence<A>) {
  *
  * @tsplus static ImmutableArray/Aspect intersection
  */
-export const intersection = Pipeable(intersection_);
+export const intersection = Pipeable(intersection_)

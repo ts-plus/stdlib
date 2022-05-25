@@ -10,7 +10,7 @@ export function intersection_<A>(
   E: Equivalence<A>,
   that: Chunk<A>
 ): Chunk<A> {
-  return self.filter((a) => that.elem(E, a));
+  return self.filter((a) => that.elem(E, a))
 }
 
 /**
@@ -20,4 +20,4 @@ export function intersection_<A>(
  *
  * @tsplus static Chunk/Aspects intersection
  */
-export const intersection = Pipeable(intersection_);
+export const intersection = Pipeable(intersection_)

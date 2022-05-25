@@ -4,5 +4,5 @@
  * @tsplus getter NonEmptyImmutableArray head
  */
 export function head<A>(self: NonEmptyImmutableArray<A>): A {
-  return self.array[0]!;
+  return self.array[0]!
 }

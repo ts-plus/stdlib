@@ -1,4 +1,4 @@
-import type * as P from "@tsplus/stdlib/prelude/IdentityFlatten";
+import type * as P from "@tsplus/stdlib/prelude/IdentityFlatten"
 
 /**
  * @tsplus static Option/Ops IdentityFlatten
@@ -6,4 +6,4 @@ import type * as P from "@tsplus/stdlib/prelude/IdentityFlatten";
 export const OptionIdentityFlatten = HKT.instance<P.IdentityFlatten<Option.HKT>>({
   ...Option.Any,
   ...Option.AssociativeFlatten
-});
+})

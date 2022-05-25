@@ -1,4 +1,4 @@
 /**
  * @tsplus type Compactable
  */
-export type Compactable<F extends HKT> = Compact<F> & Separate<F>;
+export type Compactable<F extends HKT> = Compact<F> & Separate<F>

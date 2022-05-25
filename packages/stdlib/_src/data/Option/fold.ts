@@ -10,10 +10,10 @@ export function fold_<A, B, C>(
   onNone: LazyArg<B>,
   onSome: (a: A) => C
 ): B | C {
-  return ma.isNone() ? onNone() : onSome(ma.value);
+  return ma.isNone() ? onNone() : onSome(ma.value)
 }
 
 /**
  * @tsplus static Option/Aspects fold
  */
-export const fold = Pipeable(fold_);
+export const fold = Pipeable(fold_)

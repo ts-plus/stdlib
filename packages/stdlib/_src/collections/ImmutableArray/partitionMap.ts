@@ -7,7 +7,7 @@ export function partitionMap_<A, B, C>(
   self: ImmutableArray<A>,
   f: (a: A) => Either<B, C>
 ): Tuple<[ImmutableArray<B>, ImmutableArray<C>]> {
-  return self.partitionMapWithIndex((_, a) => f(a));
+  return self.partitionMapWithIndex((_, a) => f(a))
 }
 
 /**
@@ -15,4 +15,4 @@ export function partitionMap_<A, B, C>(
  *
  * @tsplus static ImmutableArray/Aspects partitionMap
  */
-export const partitionMap = Pipeable(partitionMap_);
+export const partitionMap = Pipeable(partitionMap_)

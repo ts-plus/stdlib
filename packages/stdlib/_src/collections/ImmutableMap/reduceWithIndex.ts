@@ -8,11 +8,11 @@ export function reduceWithIndex_<K, V, Z>(
   z: Z,
   f: (z: Z, k: K, v: V) => Z
 ): Z {
-  let s = z;
+  let s = z
   self.internalMap.forEach((v, k) => {
-    s = f(s, k, v);
-  });
-  return s;
+    s = f(s, k, v)
+  })
+  return s
 }
 
 /**
@@ -20,4 +20,4 @@ export function reduceWithIndex_<K, V, Z>(
  *
  * @tsplus static ImmutableMap/Aspects reduceWithIndex
  */
-export const reduceWithIndex = Pipeable(reduceWithIndex_);
+export const reduceWithIndex = Pipeable(reduceWithIndex_)

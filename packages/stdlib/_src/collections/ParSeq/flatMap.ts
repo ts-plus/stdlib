@@ -5,7 +5,7 @@
  * @tsplus fluent ParSeq flatMap
  */
 export function flatMap_<A, B>(self: ParSeq<A>, f: (a: A) => ParSeq<B>): ParSeq<B> {
-  return self.fold(ParSeq.empty(), f, ParSeq.combineSeq, ParSeq.combinePar);
+  return self.fold(ParSeq.empty(), f, ParSeq.combineSeq, ParSeq.combinePar)
 }
 
 /**
@@ -14,4 +14,4 @@ export function flatMap_<A, B>(self: ParSeq<A>, f: (a: A) => ParSeq<B>): ParSeq<
  *
  * @tsplus static ParSeq/Aspects flatMap
  */
-export const flatMap = Pipeable(flatMap_);
+export const flatMap = Pipeable(flatMap_)

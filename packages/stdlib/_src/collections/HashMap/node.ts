@@ -1,8 +1,8 @@
 import {
   visitLazy as visitLazyInternal,
   visitLazyChildren as visitLazyChildrenInternal
-} from "@tsplus/stdlib/collections/HashMap/_internal/hashMap";
-import type { Node } from "@tsplus/stdlib/collections/HashMap/_internal/node";
+} from "@tsplus/stdlib/collections/HashMap/_internal/hashMap"
+import type { Node } from "@tsplus/stdlib/collections/HashMap/_internal/node"
 import {
   ArrayNode,
   canEditNode as canEditNodeInternal,
@@ -12,9 +12,9 @@ import {
   isEmptyNode as isEmptyNodeInternal,
   isLeafNode as isLeafNodeInternal,
   LeafNode
-} from "@tsplus/stdlib/collections/HashMap/_internal/node";
+} from "@tsplus/stdlib/collections/HashMap/_internal/node"
 
-export { Node } from "@tsplus/stdlib/collections/HashMap/_internal/node";
+export { Node } from "@tsplus/stdlib/collections/HashMap/_internal/node"
 
 // -----------------------------------------------------------------------------
 // Constructors
@@ -24,7 +24,7 @@ export { Node } from "@tsplus/stdlib/collections/HashMap/_internal/node";
  * @tsplus static HashMap/Node/Ops empty
  */
 export function emptyNode<K, V>(): Node<K, V> {
-  return new EmptyNode();
+  return new EmptyNode()
 }
 
 /**
@@ -36,7 +36,7 @@ export function leafNode<K, V>(
   key: K,
   value: Option<V>
 ): Node<K, V> {
-  return new LeafNode(edit, hash, key, value);
+  return new LeafNode(edit, hash, key, value)
 }
 
 /**
@@ -47,7 +47,7 @@ export function collisionNode<K, V>(
   hash: number,
   children: Array<Node<K, V>>
 ): Node<K, V> {
-  return new CollisionNode(edit, hash, children);
+  return new CollisionNode(edit, hash, children)
 }
 
 /**
@@ -58,7 +58,7 @@ export function indexedNode<K, V>(
   mask: number,
   children: Array<Node<K, V>>
 ): Node<K, V> {
-  return new IndexedNode(edit, mask, children);
+  return new IndexedNode(edit, mask, children)
 }
 
 /**
@@ -69,7 +69,7 @@ export function arrayNode<K, V>(
   size: number,
   children: Array<Node<K, V>>
 ): Node<K, V> {
-  return new ArrayNode(edit, size, children);
+  return new ArrayNode(edit, size, children)
 }
 
 // -----------------------------------------------------------------------------
@@ -79,12 +79,12 @@ export function arrayNode<K, V>(
 /**
  * @tsplus static HashMap/Node/Ops isEmptyNode
  */
-export const isEmptyNode = isEmptyNodeInternal;
+export const isEmptyNode = isEmptyNodeInternal
 
 /**
  * @tsplus static HashMap/Node/Ops isLeafNode
  */
-export const isLeafNode = isLeafNodeInternal;
+export const isLeafNode = isLeafNodeInternal
 
 // -----------------------------------------------------------------------------
 // Operations
@@ -93,14 +93,14 @@ export const isLeafNode = isLeafNodeInternal;
 /**
  * @tsplus fluent HashMap/Node canEdit
  */
-export const canEditNode = canEditNodeInternal;
+export const canEditNode = canEditNodeInternal
 
 /**
  * @tsplus fluent HashMap/Node visitLazy
  */
-export const visitLazy = visitLazyInternal;
+export const visitLazy = visitLazyInternal
 
 /**
  * @tsplus fluent HashMap/Node visitLazyChildren
  */
-export const visitLazyChildren = visitLazyChildrenInternal;
+export const visitLazyChildren = visitLazyChildrenInternal

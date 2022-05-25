@@ -5,7 +5,7 @@
  * @tsplus fluent ImmutableArray zip
  */
 export function zip_<A, B>(self: ImmutableArray<A>, that: ImmutableArray<B>): ImmutableArray<Tuple<[A, B]>> {
-  return self.zipWith(that, (a, b) => Tuple(a, b));
+  return self.zipWith(that, (a, b) => Tuple(a, b))
 }
 
 /**
@@ -14,4 +14,4 @@ export function zip_<A, B>(self: ImmutableArray<A>, that: ImmutableArray<B>): Im
  *
  * @tsplus static ImmutableArray/Aspects zip
  */
-export const zip = Pipeable(zip_);
+export const zip = Pipeable(zip_)

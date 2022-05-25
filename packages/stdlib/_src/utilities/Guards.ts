@@ -1,19 +1,19 @@
 export function isDefined<T>(value: T | undefined): value is T {
-  return value !== void 0;
+  return value !== void 0
 }
 
 export function isIterable(value: object): value is Collection<unknown> {
-  return Symbol.iterator in <any> value;
+  return Symbol.iterator in <any> value
 }
 
 export function isPlainObject(value: any) {
-  return value.constructor === Object || value.constructor == null;
+  return value.constructor === Object || value.constructor == null
 }
 
 export function isPromiseLike(value: any) {
-  return !!value && typeof value.then === "function";
+  return !!value && typeof value.then === "function"
 }
 
 export function isReactElement(value: any) {
-  return !!(value && value.$$typeof);
+  return !!(value && value.$$typeof)
 }

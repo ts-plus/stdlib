@@ -1,4 +1,4 @@
-import { concreteSortedSet } from "@tsplus/stdlib/collections/SortedSet/_internal/SortedSetInternal";
+import { concreteSortedSet } from "@tsplus/stdlib/collections/SortedSet/_internal/SortedSetInternal"
 
 /**
  * The set of elements which are in both the first and second set.
@@ -8,17 +8,17 @@ import { concreteSortedSet } from "@tsplus/stdlib/collections/SortedSet/_interna
  * @tsplus fluent SortedSet intersection
  */
 export function intersection_<A>(self: SortedSet<A>, that: Iterable<A>): SortedSet<A> {
-  concreteSortedSet(self);
+  concreteSortedSet(self)
 
-  let out = SortedSet.make<A>(self.keyTree.ord);
+  let out = SortedSet.make<A>(self.keyTree.ord)
 
   for (const key of that) {
     if (self.has(key)) {
-      out = out.add(key);
+      out = out.add(key)
     }
   }
 
-  return out;
+  return out
 }
 
 /**
@@ -28,4 +28,4 @@ export function intersection_<A>(self: SortedSet<A>, that: Iterable<A>): SortedS
  *
  * @tsplus static SortedSet/Aspects intersection
  */
-export const intersection = Pipeable(intersection_);
+export const intersection = Pipeable(intersection_)

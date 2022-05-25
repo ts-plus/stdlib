@@ -1,4 +1,4 @@
-import { realHashSet } from "@tsplus/stdlib/collections/HashSet/_internal/hashSet";
+import { realHashSet } from "@tsplus/stdlib/collections/HashSet/_internal/hashSet"
 
 /**
  * Applies the specified function to the values of the `HashSet`.
@@ -6,10 +6,10 @@ import { realHashSet } from "@tsplus/stdlib/collections/HashSet/_internal/hashSe
  * @tsplus fluent HashSet forEach
  */
 export function forEach_<A>(self: HashSet<A>, f: (v: A) => void) {
-  realHashSet(self);
+  realHashSet(self)
   self._keyMap.forEachWithIndex((k) => {
-    f(k);
-  });
+    f(k)
+  })
 }
 
 /**
@@ -17,4 +17,4 @@ export function forEach_<A>(self: HashSet<A>, f: (v: A) => void) {
  *
  * @tsplus static HashSet/Aspects forEach
  */
-export const forEach = Pipeable(forEach_);
+export const forEach = Pipeable(forEach_)

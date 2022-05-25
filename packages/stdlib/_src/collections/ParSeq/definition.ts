@@ -1,8 +1,8 @@
-export const ParSeqSym = Symbol.for("@tsplus/stdlib/collections/ParSeq");
-export type ParSeqSym = typeof ParSeqSym;
+export const ParSeqSym = Symbol.for("@tsplus/stdlib/collections/ParSeq")
+export type ParSeqSym = typeof ParSeqSym
 
-export const _A = Symbol.for("@tsplus/stdlib/collections/ParSeq/A");
-export type _A = typeof _A;
+export const _A = Symbol.for("@tsplus/stdlib/collections/ParSeq/A")
+export type _A = typeof _A
 
 /**
  * `ParSeq` is a data type that represents some notion of "events" that can
@@ -15,44 +15,44 @@ export type _A = typeof _A;
  *
  * @tsplus type ParSeq
  */
-export type ParSeq<A> = Empty | Single<A> | Then<A> | Both<A>;
+export type ParSeq<A> = Empty | Single<A> | Then<A> | Both<A>
 
 /**
  * @tsplus type ParSeq/Ops
  */
 export interface ParSeqOps {
-  $: ParSeqAspects;
+  $: ParSeqAspects
 }
 export const ParSeq: ParSeqOps = {
   $: {}
-};
+}
 
 /**
  * @tsplus type ParSeq/Aspects
  */
 export interface ParSeqAspects {}
 
-const _emptyHash = Hash.optimize(Hash.random());
+const _emptyHash = Hash.optimize(Hash.random())
 
 /**
  * @tsplus type ParSeq/Empty
  */
 export class Empty implements Equals {
-  readonly _tag = "Empty";
+  readonly _tag = "Empty"
 
-  readonly [ParSeqSym]: ParSeqSym = ParSeqSym;
+  readonly [ParSeqSym]: ParSeqSym = ParSeqSym
   readonly [_A]!: () => never;
 
   [Equals.sym](that: unknown): boolean {
-    return isParSeq(that) && this.equalsSafe(that).run();
+    return isParSeq(that) && this.equalsSafe(that).run()
   }
 
   [Hash.sym](): number {
-    return _emptyHash;
+    return _emptyHash
   }
 
   equalsSafe(that: ParSeq<unknown>): Eval<boolean> {
-    return Eval.succeed(that._tag === "Empty");
+    return Eval.succeed(that._tag === "Empty")
   }
 }
 
@@ -60,23 +60,23 @@ export class Empty implements Equals {
  * @tsplus type ParSeq/Single
  */
 export class Single<A> implements Equals {
-  readonly _tag = "Single";
+  readonly _tag = "Single"
 
-  readonly [ParSeqSym]: ParSeqSym = ParSeqSym;
-  readonly [_A]!: () => A;
+  readonly [ParSeqSym]: ParSeqSym = ParSeqSym
+  readonly [_A]!: () => A
 
   constructor(readonly a: A) {}
 
   [Equals.sym](that: unknown): boolean {
-    return isParSeq(that) && this.equalsSafe(that).run();
+    return isParSeq(that) && this.equalsSafe(that).run()
   }
 
   [Hash.sym](): number {
-    return Hash.combine(Hash.string(this._tag), Hash.unknown(this.a));
+    return Hash.combine(Hash.string(this._tag), Hash.unknown(this.a))
   }
 
   equalsSafe(that: ParSeq<unknown>): Eval<boolean> {
-    return Eval.succeed(that._tag === "Single" && Equals.equals(this.a, that.a));
+    return Eval.succeed(that._tag === "Single" && Equals.equals(this.a, that.a))
   }
 }
 
@@ -84,32 +84,32 @@ export class Single<A> implements Equals {
  * @tsplus type ParSeq/Then
  */
 export class Then<A> implements Equals {
-  readonly _tag = "Then";
+  readonly _tag = "Then"
 
-  readonly [ParSeqSym]: ParSeqSym = ParSeqSym;
-  readonly [_A]!: () => A;
+  readonly [ParSeqSym]: ParSeqSym = ParSeqSym
+  readonly [_A]!: () => A
 
   constructor(readonly left: ParSeq<A>, readonly right: ParSeq<A>) {}
 
   [Equals.sym](that: unknown): boolean {
-    return isParSeq(that) && this.equalsSafe(that).run();
+    return isParSeq(that) && this.equalsSafe(that).run()
   }
 
   [Hash.sym](): number {
-    return hashCode(this);
+    return hashCode(this)
   }
 
   equalsSafe(that: ParSeq<unknown>): Eval<boolean> {
     // eslint-disable-next-line @typescript-eslint/no-this-alias
-    const self = this;
+    const self = this
     return Eval.gen(function*($) {
       return (
         (yield* $(self.eq(that))) ||
         (yield* $(symmetric(associateThen)(self, that))) ||
         (yield* $(symmetric(distributiveThen)(self, that))) ||
         (yield* $(symmetric(zero)(self, that)))
-      );
-    });
+      )
+    })
   }
 
   private eq(that: ParSeq<unknown>): Eval<boolean> {
@@ -117,9 +117,9 @@ export class Then<A> implements Equals {
       return this.left.equalsSafe(that.left).zipWith(
         this.right.equalsSafe(that.right),
         (a, b) => a && b
-      );
+      )
     }
-    return Eval.succeed(false);
+    return Eval.succeed(false)
   }
 }
 
@@ -127,24 +127,24 @@ export class Then<A> implements Equals {
  * @tsplus type ParSeq/Both
  */
 export class Both<A> implements Equals {
-  readonly _tag = "Both";
+  readonly _tag = "Both"
 
-  readonly [ParSeqSym]: ParSeqSym = ParSeqSym;
-  readonly [_A]!: () => A;
+  readonly [ParSeqSym]: ParSeqSym = ParSeqSym
+  readonly [_A]!: () => A
 
   constructor(readonly left: ParSeq<A>, readonly right: ParSeq<A>) {}
 
   [Equals.sym](that: unknown): boolean {
-    return isParSeq(that) && this.equalsSafe(that).run();
+    return isParSeq(that) && this.equalsSafe(that).run()
   }
 
   [Hash.sym](): number {
-    return hashCode(this);
+    return hashCode(this)
   }
 
   equalsSafe(that: ParSeq<unknown>): Eval<boolean> {
     // eslint-disable-next-line @typescript-eslint/no-this-alias
-    const self = this;
+    const self = this
     return Eval.gen(function*(_) {
       return (
         (yield* _(self.eq(that))) ||
@@ -152,8 +152,8 @@ export class Both<A> implements Equals {
         (yield* _(symmetric(distributiveBoth)(self, that))) ||
         (yield* _(commutativeBoth(self, that))) ||
         (yield* _(symmetric(zero)(self, that)))
-      );
-    });
+      )
+    })
   }
 
   private eq(that: ParSeq<unknown>): Eval<boolean> {
@@ -161,9 +161,9 @@ export class Both<A> implements Equals {
       return this.left.equalsSafe(that.left).zipWith(
         this.right.equalsSafe(that.right),
         (a, b) => a && b
-      );
+      )
     }
-    return Eval.succeed(false);
+    return Eval.succeed(false)
   }
 }
 
@@ -174,21 +174,21 @@ function associateThen<A>(self: ParSeq<A>, that: ParSeq<A>): Eval<boolean> {
     that._tag === "Then" &&
     that.right._tag === "Then"
   ) {
-    const al = self.left.left;
-    const bl = self.left.right;
-    const cl = self.right;
-    const ar = that.left;
-    const br = that.right.left;
-    const cr = that.right.right;
+    const al = self.left.left
+    const bl = self.left.right
+    const cl = self.right
+    const ar = that.left
+    const br = that.right.left
+    const cr = that.right.right
     return al.equalsSafe(ar).zipWith(
       bl.equalsSafe(br).zipWith(
         cl.equalsSafe(cr),
         (a, b) => a && b
       ),
       (a, b) => a && b
-    );
+    )
   }
-  return Eval.succeed(false);
+  return Eval.succeed(false)
 }
 
 function distributiveThen<A>(self: ParSeq<A>, that: ParSeq<A>): Eval<boolean> {
@@ -200,13 +200,13 @@ function distributiveThen<A>(self: ParSeq<A>, that: ParSeq<A>): Eval<boolean> {
       that.left._tag === "Then" &&
       that.right._tag === "Then"
     ) {
-      const al = self.left;
-      const bl = self.right.left;
-      const cl = self.right.right;
-      const ar1 = that.left.left;
-      const br = that.left.right;
-      const ar2 = that.right.left;
-      const cr = that.right.right;
+      const al = self.left
+      const bl = self.right.left
+      const cl = self.right.right
+      const ar1 = that.left.left
+      const br = that.left.right
+      const ar2 = that.right.left
+      const cr = that.right.right
 
       if (
         (yield* _(ar1.equalsSafe(ar2))) &&
@@ -214,7 +214,7 @@ function distributiveThen<A>(self: ParSeq<A>, that: ParSeq<A>): Eval<boolean> {
         (yield* _(bl.equalsSafe(br))) &&
         (yield* _(cl.equalsSafe(cr)))
       ) {
-        return true;
+        return true
       }
     }
     if (
@@ -224,13 +224,13 @@ function distributiveThen<A>(self: ParSeq<A>, that: ParSeq<A>): Eval<boolean> {
       that.left._tag === "Then" &&
       that.right._tag === "Then"
     ) {
-      const al = self.left.left;
-      const bl = self.left.right;
-      const cl = self.right;
-      const ar = that.left.left;
-      const cr1 = that.left.right;
-      const br = that.right.left;
-      const cr2 = that.right.right;
+      const al = self.left.left
+      const bl = self.left.right
+      const cl = self.right
+      const ar = that.left.left
+      const cr1 = that.left.right
+      const br = that.right.left
+      const cr2 = that.right.right
 
       if (
         (yield* _(cr1.equalsSafe(cr2))) &&
@@ -238,11 +238,11 @@ function distributiveThen<A>(self: ParSeq<A>, that: ParSeq<A>): Eval<boolean> {
         (yield* _(bl.equalsSafe(br))) &&
         (yield* _(cl.equalsSafe(cr1)))
       ) {
-        return true;
+        return true
       }
     }
-    return false;
-  });
+    return false
+  })
 }
 
 function associativeBoth<A>(self: ParSeq<A>, that: ParSeq<A>): Eval<boolean> {
@@ -253,20 +253,20 @@ function associativeBoth<A>(self: ParSeq<A>, that: ParSeq<A>): Eval<boolean> {
       that._tag === "Both" &&
       that.right._tag === "Both"
     ) {
-      const al = self.left.left;
-      const bl = self.left.right;
-      const cl = self.right;
-      const ar = that.left;
-      const br = that.right.left;
-      const cr = that.right.right;
+      const al = self.left.left
+      const bl = self.left.right
+      const cl = self.right
+      const ar = that.left
+      const br = that.right.left
+      const cr = that.right.right
       return (
         (yield* _(al.equalsSafe(ar))) &&
         (yield* _(bl.equalsSafe(br))) &&
         (yield* _(cl.equalsSafe(cr)))
-      );
+      )
     }
-    return false;
-  });
+    return false
+  })
 }
 
 function distributiveBoth<A>(self: ParSeq<A>, that: ParSeq<A>): Eval<boolean> {
@@ -278,13 +278,13 @@ function distributiveBoth<A>(self: ParSeq<A>, that: ParSeq<A>): Eval<boolean> {
       that._tag === "Then" &&
       that.right._tag === "Both"
     ) {
-      const al1 = self.left.left;
-      const bl = self.left.right;
-      const al2 = self.right.left;
-      const cl = self.right.right;
-      const ar = that.left;
-      const br = that.right.left;
-      const cr = that.right.right;
+      const al1 = self.left.left
+      const bl = self.left.right
+      const al2 = self.right.left
+      const cl = self.right.right
+      const ar = that.left
+      const br = that.right.left
+      const cr = that.right.right
 
       if (
         (yield* _(al1.equalsSafe(al2))) &&
@@ -292,7 +292,7 @@ function distributiveBoth<A>(self: ParSeq<A>, that: ParSeq<A>): Eval<boolean> {
         (yield* _(bl.equalsSafe(br))) &&
         (yield* _(cl.equalsSafe(cr)))
       ) {
-        return true;
+        return true
       }
     }
     if (
@@ -302,13 +302,13 @@ function distributiveBoth<A>(self: ParSeq<A>, that: ParSeq<A>): Eval<boolean> {
       that._tag === "Then" &&
       that.left._tag === "Both"
     ) {
-      const al = self.left.left;
-      const cl1 = self.left.right;
-      const bl = self.right.left;
-      const cl2 = self.right.right;
-      const ar = that.left.left;
-      const br = that.left.right;
-      const cr = that.right;
+      const al = self.left.left
+      const cl1 = self.left.right
+      const bl = self.right.left
+      const cl2 = self.right.right
+      const ar = that.left.left
+      const br = that.left.right
+      const cr = that.right
 
       if (
         (yield* _(cl1.equalsSafe(cl2))) &&
@@ -316,11 +316,11 @@ function distributiveBoth<A>(self: ParSeq<A>, that: ParSeq<A>): Eval<boolean> {
         (yield* _(bl.equalsSafe(br))) &&
         (yield* _(cl1.equalsSafe(cr)))
       ) {
-        return true;
+        return true
       }
     }
-    return false;
-  });
+    return false
+  })
 }
 
 function commutativeBoth(self: Both<unknown>, that: ParSeq<unknown>): Eval<boolean> {
@@ -328,44 +328,44 @@ function commutativeBoth(self: Both<unknown>, that: ParSeq<unknown>): Eval<boole
     return self.left.equalsSafe(that.right).zipWith(
       self.right.equalsSafe(that.left),
       (a, b) => a && b
-    );
+    )
   }
-  return Eval.succeed(false);
+  return Eval.succeed(false)
 }
 
 function zero<A>(self: ParSeq<A>, that: ParSeq<A>) {
   if (self._tag === "Then" && self.right._tag === "Empty") {
-    return self.left.equalsSafe(that);
+    return self.left.equalsSafe(that)
   }
   if (self._tag === "Then" && self.left._tag === "Empty") {
-    return self.right.equalsSafe(that);
+    return self.right.equalsSafe(that)
   }
   if (self._tag === "Both" && self.right._tag === "Empty") {
-    return self.left.equalsSafe(that);
+    return self.left.equalsSafe(that)
   }
   if (self._tag === "Both" && self.left._tag === "Empty") {
-    return self.right.equalsSafe(that);
+    return self.right.equalsSafe(that)
   }
-  return Eval.succeed(false);
+  return Eval.succeed(false)
 }
 
 function symmetric<A>(f: (a: ParSeq<A>, b: ParSeq<A>) => Eval<boolean>) {
   return (a: ParSeq<A>, b: ParSeq<A>) =>
     Eval.gen(function*(_) {
-      return (yield* _(f(a, b))) || (yield* _(f(b, a)));
-    });
+      return (yield* _(f(a, b))) || (yield* _(f(b, a)))
+    })
 }
 
 function hashCode(self: ParSeq<unknown>): number {
-  const flat = flatten(self);
-  const size = flat.length();
-  let head;
+  const flat = flatten(self)
+  const size = flat.length()
+  let head
   if (size === 0) {
-    return _emptyHash;
+    return _emptyHash
   } else if (size === 1 && (head = flat.unsafeHead()!) && head.size === 1) {
-    return List.make(head).unsafeHead()![Hash.sym]();
+    return List.make(head).unsafeHead()![Hash.sym]()
   } else {
-    return Hash.iterator(flat[Symbol.iterator]());
+    return Hash.iterator(flat[Symbol.iterator]())
   }
 }
 
@@ -375,7 +375,7 @@ function hashCode(self: ParSeq<unknown>): number {
  * @tsplus static ParSeq/Ops empty
  */
 export function empty<A>(): ParSeq<A> {
-  return new Empty();
+  return new Empty()
 }
 
 /**
@@ -384,7 +384,7 @@ export function empty<A>(): ParSeq<A> {
  * @tsplus static ParSeq/Ops single
  */
 export function single<A>(a: A): ParSeq<A> {
-  return new Single(a);
+  return new Single(a)
 }
 
 /**
@@ -395,7 +395,7 @@ export function single<A>(a: A): ParSeq<A> {
  * @tsplus static ParSeq/Ops combinePar
  */
 export function combinePar_<A, A1>(left: ParSeq<A>, right: ParSeq<A1>): ParSeq<A | A1> {
-  return left.isEmpty() ? right : right.isEmpty() ? left : new Both<A | A1>(left, right);
+  return left.isEmpty() ? right : right.isEmpty() ? left : new Both<A | A1>(left, right)
 }
 
 /**
@@ -405,7 +405,7 @@ export function combinePar_<A, A1>(left: ParSeq<A>, right: ParSeq<A1>): ParSeq<A
  *
  * @tsplus static ParSeq/Aspects combinePar
  */
-export const combinePar = Pipeable(combinePar_);
+export const combinePar = Pipeable(combinePar_)
 
 /**
  * Combines this collection of events with that collection of events to
@@ -415,7 +415,7 @@ export const combinePar = Pipeable(combinePar_);
  * @tsplus static ParSeq/Ops combineSeq
  */
 export function combineSeq_<A, A1>(left: ParSeq<A>, right: ParSeq<A1>): ParSeq<A | A1> {
-  return left.isEmpty() ? right : right.isEmpty() ? left : new Then<A | A1>(left, right);
+  return left.isEmpty() ? right : right.isEmpty() ? left : new Then<A | A1>(left, right)
 }
 
 /**
@@ -425,13 +425,13 @@ export function combineSeq_<A, A1>(left: ParSeq<A>, right: ParSeq<A1>): ParSeq<A
  *
  * @tsplus static ParSeq/Aspects combineSeq
  */
-export const combineSeq = Pipeable(combineSeq_);
+export const combineSeq = Pipeable(combineSeq_)
 
 /**
  * @tsplus static ParSeq/Ops isParSeq
  */
 export function isParSeq(u: unknown): u is ParSeq<unknown> {
-  return typeof u === "object" && u != null && ParSeqSym in u;
+  return typeof u === "object" && u != null && ParSeqSym in u
 }
 
 /**
@@ -440,36 +440,36 @@ export function isParSeq(u: unknown): u is ParSeq<unknown> {
  * @tsplus fluent ParSeq isEmpty
  */
 export function isEmpty<A>(self: ParSeq<A>): boolean {
-  return isEmptyLoop(List.make(self));
+  return isEmptyLoop(List.make(self))
 }
 
 function isEmptyLoop<A>(self: List<ParSeq<A>>): boolean {
   while (!self.isNil()) {
-    const head = self.head;
-    const tail = self.tail();
+    const head = self.head
+    const tail = self.tail()
     switch (head._tag) {
       case "Empty": {
-        self = tail;
-        break;
+        self = tail
+        break
       }
       case "Single": {
-        return false;
+        return false
       }
       case "Both": {
-        self = tail.prepend(head.right).prepend(head.left);
-        break;
+        self = tail.prepend(head.right).prepend(head.left)
+        break
       }
       case "Then": {
-        self = tail.prepend(head.right).prepend(head.left);
-        break;
+        self = tail.prepend(head.right).prepend(head.left)
+        break
       }
     }
   }
-  return true;
+  return true
 }
 
 function flatten<A>(self: ParSeq<A>) {
-  return flattenLoop(List(self), List.empty());
+  return flattenLoop(List(self), List.empty())
 }
 
 function flattenLoop<A>(
@@ -483,23 +483,23 @@ function flattenLoop<A>(
     } = causes.reduce(
       Tuple(HashSet.empty<ParSeq<A>>(), List.empty<ParSeq<A>>()),
       ({ tuple: [parallel, sequential] }, cause) => {
-        const [set, seq] = step(cause).tuple;
-        return Tuple(parallel.union(set), sequential + seq);
+        const [set, seq] = step(cause).tuple
+        return Tuple(parallel.union(set), sequential + seq)
       }
-    );
-    const updated = parallel.size > 0 ? flattened.prepend(parallel) : flattened;
+    )
+    const updated = parallel.size > 0 ? flattened.prepend(parallel) : flattened
     if (sequential.isNil()) {
-      return updated.reverse();
+      return updated.reverse()
     } else {
-      causes = sequential;
-      flattened = updated;
+      causes = sequential
+      flattened = updated
     }
   }
-  throw new Error("Bug");
+  throw new Error("Bug")
 }
 
 function step<A>(self: ParSeq<A>): Tuple<[HashSet<ParSeq<A>>, List<ParSeq<A>>]> {
-  return stepLoop(self, List.empty(), HashSet.empty(), List.empty());
+  return stepLoop(self, List.empty(), HashSet.empty(), List.empty())
 }
 
 function stepLoop<A>(
@@ -513,52 +513,52 @@ function stepLoop<A>(
     switch (cause._tag) {
       case "Empty": {
         if (stack.isNil()) {
-          return Tuple(parallel, sequential);
+          return Tuple(parallel, sequential)
         } else {
-          cause = stack.head!;
-          stack = stack.tail();
+          cause = stack.head!
+          stack = stack.tail()
         }
-        break;
+        break
       }
       case "Both": {
-        stack = stack.prepend(cause.right);
-        cause = cause.left;
-        break;
+        stack = stack.prepend(cause.right)
+        cause = cause.left
+        break
       }
       case "Then": {
-        const left = cause.left;
-        const right = cause.right;
+        const left = cause.left
+        const right = cause.right
         switch (left._tag) {
           case "Empty": {
-            cause = cause.right;
-            break;
+            cause = cause.right
+            break
           }
           case "Then": {
-            cause = combineSeq_(left.left, combineSeq_(left.right, right));
-            break;
+            cause = combineSeq_(left.left, combineSeq_(left.right, right))
+            break
           }
           case "Both": {
-            cause = combinePar_(combineSeq_(left.left, right), combineSeq_(left.right, right));
-            break;
+            cause = combinePar_(combineSeq_(left.left, right), combineSeq_(left.right, right))
+            break
           }
           default: {
-            cause = left;
-            sequential = sequential.prepend(right);
+            cause = left
+            sequential = sequential.prepend(right)
           }
         }
-        break;
+        break
       }
       default: {
         if (stack.isNil()) {
-          return Tuple(parallel.add(cause), sequential);
+          return Tuple(parallel.add(cause), sequential)
         } else {
-          parallel = parallel.add(cause);
-          cause = stack.head;
-          stack = stack.tail();
-          break;
+          parallel = parallel.add(cause)
+          cause = stack.head
+          stack = stack.tail()
+          break
         }
       }
     }
   }
-  throw new Error("Bug");
+  throw new Error("Bug")
 }

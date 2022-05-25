@@ -1,4 +1,4 @@
-import { realHashSet } from "@tsplus/stdlib/collections/HashSet/_internal/hashSet";
+import { realHashSet } from "@tsplus/stdlib/collections/HashSet/_internal/hashSet"
 
 /**
  * Checks if the specified value exists in the `HashSet`.
@@ -6,8 +6,8 @@ import { realHashSet } from "@tsplus/stdlib/collections/HashSet/_internal/hashSe
  * @tsplus fluent HashSet has
  */
 export function has_<A>(self: HashSet<A>, value: A): boolean {
-  realHashSet(self);
-  return self._keyMap.has(value);
+  realHashSet(self)
+  return self._keyMap.has(value)
 }
 
 /**
@@ -15,4 +15,4 @@ export function has_<A>(self: HashSet<A>, value: A): boolean {
  *
  * @tsplus static HashSet/Aspects has
  */
-export const has = Pipeable(has_);
+export const has = Pipeable(has_)

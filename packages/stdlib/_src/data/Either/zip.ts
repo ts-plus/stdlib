@@ -8,7 +8,7 @@ export function zip_<E, A, E2, B>(
   self: Either<E, A>,
   that: Either<E2, B>
 ): Either<E | E2, Tuple<[A, B]>> {
-  return self.flatMap((a) => that.map((b) => Tuple(a, b)));
+  return self.flatMap((a) => that.map((b) => Tuple(a, b)))
 }
 
 /**
@@ -16,4 +16,4 @@ export function zip_<E, A, E2, B>(
  *
  * @tsplus static Either/Aspects zip
  */
-export const zip = Pipeable(zip_);
+export const zip = Pipeable(zip_)

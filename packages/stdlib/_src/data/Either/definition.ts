@@ -1,30 +1,30 @@
 /**
  * adapted from https://github.com/gcanti/fp-ts
  */
-const _leftHash = Hash.string("Either/Left");
-const _rightHash = Hash.string("Either/Right");
+const _leftHash = Hash.string("Either/Left")
+const _rightHash = Hash.string("Either/Right")
 /**
  * @tsplus type Either
  */
-export type Either<E, A> = Left<E> | Right<A>;
+export type Either<E, A> = Left<E> | Right<A>
 
 export interface EitherF extends HKT {
-  readonly type: Either<this["E"], this["A"]>;
+  readonly type: Either<this["E"], this["A"]>
 }
 
 export interface EitherFixedLeftF<E> extends HKT {
-  readonly type: HKT.Kind<EitherF, this["R"], E, this["A"]>;
+  readonly type: HKT.Kind<EitherF, this["R"], E, this["A"]>
 }
 
 /**
  * @tsplus type Either/Ops
  */
 export interface EitherOps {
-  $: EitherAspects;
+  $: EitherAspects
 }
 export const Either: EitherOps = {
   $: {}
-};
+}
 
 /**
  * @tsplus type Either/Aspects
@@ -32,23 +32,23 @@ export const Either: EitherOps = {
 export interface EitherAspects {}
 
 export declare namespace Either {
-  export type HKT = EitherF;
-  export type FixedLeftHKT<E> = EitherFixedLeftF<E>;
+  export type HKT = EitherF
+  export type FixedLeftHKT<E> = EitherFixedLeftF<E>
 }
 
 /**
  * @tsplus type Either/Left
  */
 export class Left<E> implements Equals {
-  readonly _tag = "Left";
+  readonly _tag = "Left"
 
   constructor(readonly left: E) {}
 
   [Equals.sym](that: unknown): boolean {
-    return that instanceof Left && Equals.equals(this.left, that.left);
+    return that instanceof Left && Equals.equals(this.left, that.left)
   }
   [Hash.sym](): number {
-    return Hash.combine(_leftHash, Hash.unknown(this.left));
+    return Hash.combine(_leftHash, Hash.unknown(this.left))
   }
 }
 
@@ -56,15 +56,15 @@ export class Left<E> implements Equals {
  * @tsplus type Either/Right
  */
 export class Right<A> implements Equals {
-  readonly _tag = "Right";
+  readonly _tag = "Right"
 
   constructor(readonly right: A) {}
 
   [Equals.sym](that: unknown): boolean {
-    return that instanceof Right && Equals.equals(this.right, that.right);
+    return that instanceof Right && Equals.equals(this.right, that.right)
   }
   [Hash.sym](): number {
-    return Hash.combine(_rightHash, Hash.unknown(this.right));
+    return Hash.combine(_rightHash, Hash.unknown(this.right))
   }
 }
 
@@ -79,7 +79,7 @@ export function unifyEither<X extends Either<any, any>>(
   [X] extends [Either<infer EX, any>] ? EX : never,
   [X] extends [Either<any, infer AX>] ? AX : never
 > {
-  return self;
+  return self
 }
 
 /**
@@ -88,7 +88,7 @@ export function unifyEither<X extends Either<any, any>>(
  * @tsplus fluent Either isLeft
  */
 export function isLeft<E, A>(ma: Either<E, A>): ma is Left<E> {
-  return ma._tag === "Left";
+  return ma._tag === "Left"
 }
 
 /**
@@ -97,14 +97,14 @@ export function isLeft<E, A>(ma: Either<E, A>): ma is Left<E> {
  * @tsplus fluent Either isRight
  */
 export function isRight<E, A>(ma: Either<E, A>): ma is Right<A> {
-  return ma._tag === "Right";
+  return ma._tag === "Right"
 }
 
 /**
  * @tsplus getter Either left
  */
 export function getLeft<E, A>(self: Either<E, A>): Option<E> {
-  return self._tag === "Left" ? Option.some(self.left) : Option.none;
+  return self._tag === "Left" ? Option.some(self.left) : Option.none
 }
 
 /**
@@ -116,14 +116,14 @@ export function isEither(u: unknown): u is Either<unknown, unknown> {
     u != null &&
     "_tag" in u &&
     (u["_tag"] === "Left" || u["_tag"] === "Right")
-  );
+  )
 }
 
 /**
  * @tsplus getter Either right
  */
 export function getRight<E, A>(self: Either<E, A>): Option<A> {
-  return self._tag === "Right" ? Option.some(self.right) : Option.none;
+  return self._tag === "Right" ? Option.some(self.right) : Option.none
 }
 
 /**
@@ -133,7 +133,7 @@ export function getRight<E, A>(self: Either<E, A>): Option<A> {
  * @tsplus static Either/Ops __call
  */
 export function apply<A>(a: A): Either<never, A> {
-  return new Right(a);
+  return new Right(a)
 }
 /**
  * Constructs a new `Either` holding a `Right` value. This usually represents a
@@ -142,7 +142,7 @@ export function apply<A>(a: A): Either<never, A> {
  * @tsplus static Either/Ops right
  */
 export function right<A>(a: A): Either<never, A> {
-  return new Right(a);
+  return new Right(a)
 }
 
 /**
@@ -152,7 +152,7 @@ export function right<A>(a: A): Either<never, A> {
  * @tsplus static Either/Ops rightW
  */
 export function rightW<A, E = never>(a: A): Either<E, A> {
-  return new Right(a);
+  return new Right(a)
 }
 
 /**
@@ -162,7 +162,7 @@ export function rightW<A, E = never>(a: A): Either<E, A> {
  * @tsplus static Either/Ops left
  */
 export function left<E>(e: E): Either<E, never> {
-  return new Left(e);
+  return new Left(e)
 }
 
 /**
@@ -172,7 +172,7 @@ export function left<E>(e: E): Either<E, never> {
  * @tsplus static Either/Ops leftW
  */
 export function leftW<E, A = never>(e: E): Either<E, A> {
-  return new Left(e);
+  return new Left(e)
 }
 
 /**
@@ -182,7 +182,7 @@ export function leftW<E, A = never>(e: E): Either<E, A> {
  * @tsplus macro identity
  */
 export function widenE_<E, A, E1>(self: Either<E, A>): Either<E | E1, A> {
-  return self;
+  return self
 }
 
 /**
@@ -196,7 +196,7 @@ export function widenE<E1>() {
      * @tsplus macro identity
      */
     <E, A>(self: Either<E, A>): Either<E | E1, A> => self
-  );
+  )
 }
 
 /**
@@ -206,7 +206,7 @@ export function widenE<E1>() {
  * @tsplus macro identity
  */
 export function widenA_<E, A, A1>(self: Either<E, A>): Either<E, A | A1> {
-  return self;
+  return self
 }
 
 /**
@@ -220,11 +220,11 @@ export function widenA<A1>() {
      * @tsplus macro identity
      */
     <E, A>(self: Either<E, A>): Either<E, A | A1> => self
-  );
+  )
 }
 
 /**
  * @tsplus macro pipe
  * @tsplus fluent Either __call
  */
-export const eitherPipe: typeof pipe = pipe;
+export const eitherPipe: typeof pipe = pipe

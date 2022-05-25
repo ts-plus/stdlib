@@ -7,5 +7,5 @@
 export function compact<E extends Either<any, any>>(
   _: E
 ): [E] extends [Either<infer L, infer R>] ? Either<L, R> : E {
-  return _ as any;
+  return _ as any
 }

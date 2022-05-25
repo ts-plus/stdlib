@@ -10,5 +10,5 @@
 export function getEquivalnce<A>(E: Equivalence<A>): Equivalence<ImmutableArray<A>> {
   return Equivalence((xs, ys) =>
     xs === ys || (xs.array.length === ys.array.length && xs.array.every((x, i) => E.equals(x, ys.array[i]!)))
-  );
+  )
 }

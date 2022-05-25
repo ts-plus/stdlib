@@ -1,30 +1,30 @@
 export class AtomicReference<A> {
-  private current: A;
+  private current: A
 
   constructor(readonly initial: A) {
-    this.current = initial;
+    this.current = initial
   }
 
   get get() {
-    return this.current;
+    return this.current
   }
 
   getAndSet(value: A) {
-    const old = this.current;
+    const old = this.current
 
-    this.set(value);
-    return old;
+    this.set(value)
+    return old
   }
 
   set(value: A) {
-    this.current = value;
+    this.current = value
   }
 
   compareAndSet(old: A, value: A) {
     if (this.get === old) {
-      this.set(value);
-      return true;
+      this.set(value)
+      return true
     }
-    return false;
+    return false
   }
 }

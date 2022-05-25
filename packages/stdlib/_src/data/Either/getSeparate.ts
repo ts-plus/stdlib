@@ -5,8 +5,8 @@
  * @tsplus static Either/Ops getSeparate
  */
 export function getSeparate<E>(M: AssociativeIdentity<E>) {
-  const separate = Either.$.separate(M);
+  const separate = Either.$.separate(M)
   return HKT.instance<Separate<Either.FixedLeftHKT<E>>>({
     separate
-  });
+  })
 }

@@ -3,4 +3,4 @@
  *
  * @tsplus static Equivalence/Ops string
  */
-export const string = Equivalence.strict<string>();
+export const string = Equivalence.strict<string>()

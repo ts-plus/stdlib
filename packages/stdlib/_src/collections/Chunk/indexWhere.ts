@@ -4,7 +4,7 @@
  * @tsplus fluent Chunk indexWhere
  */
 export function indexWhere_<A>(self: Chunk<A>, f: Predicate<A>): number {
-  return self.indexWhereFrom(0, f);
+  return self.indexWhereFrom(0, f)
 }
 
 /**
@@ -12,4 +12,4 @@ export function indexWhere_<A>(self: Chunk<A>, f: Predicate<A>): number {
  *
  * @tsplus static Chunk/Aspects indexWhere
  */
-export const indexWhere = Pipeable(indexWhere_);
+export const indexWhere = Pipeable(indexWhere_)

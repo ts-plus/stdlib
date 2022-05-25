@@ -6,11 +6,11 @@
  * @tsplus fluent SortedSet difference
  */
 export function difference_<A, B extends A>(self: SortedSet<A>, that: Collection<B>): SortedSet<A> {
-  let out = self;
+  let out = self
   for (const value of that) {
-    out = out.remove(value);
+    out = out.remove(value)
   }
-  return out;
+  return out
 }
 
 /**
@@ -18,4 +18,4 @@ export function difference_<A, B extends A>(self: SortedSet<A>, that: Collection
  *
  * @tsplus static SortedSet/Aspects difference
  */
-export const difference = Pipeable(difference_);
+export const difference = Pipeable(difference_)

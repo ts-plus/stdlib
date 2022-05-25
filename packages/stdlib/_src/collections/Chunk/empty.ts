@@ -1,4 +1,4 @@
-import { _Empty } from "@tsplus/stdlib/collections/Chunk/definition";
+import { _Empty } from "@tsplus/stdlib/collections/Chunk/definition"
 
 /**
  * Builds an empty chunk.
@@ -6,5 +6,5 @@ import { _Empty } from "@tsplus/stdlib/collections/Chunk/definition";
  * @tsplus static Chunk/Ops empty
  */
 export function empty<A>(): Chunk<A> {
-  return _Empty;
+  return _Empty
 }

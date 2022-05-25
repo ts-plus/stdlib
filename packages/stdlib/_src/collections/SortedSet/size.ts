@@ -1,4 +1,4 @@
-import { concreteSortedSet } from "@tsplus/stdlib/collections/SortedSet/_internal/SortedSetInternal";
+import { concreteSortedSet } from "@tsplus/stdlib/collections/SortedSet/_internal/SortedSetInternal"
 
 /**
  * Calculate the number of keys in the set.
@@ -6,6 +6,6 @@ import { concreteSortedSet } from "@tsplus/stdlib/collections/SortedSet/_interna
  * @tsplus getter SortedSet size
  */
 export function size<A>(self: SortedSet<A>): number {
-  concreteSortedSet(self);
-  return self.keyTree.size;
+  concreteSortedSet(self)
+  return self.keyTree.size
 }

@@ -16,15 +16,15 @@ export function update_<K, V>(
   key: K,
   f: (value: Option<V>) => Option<V>
 ): ImmutableMap<K, V> {
-  const previousValue = Option.fromNullable(self.internalMap.get(key));
-  const nextValue = f(previousValue);
+  const previousValue = Option.fromNullable(self.internalMap.get(key))
+  const nextValue = f(previousValue)
   if (previousValue.isSome()) {
-    return self.remove(key);
+    return self.remove(key)
   }
   if (nextValue.isSome()) {
-    return self.set(key, nextValue.value);
+    return self.set(key, nextValue.value)
   }
-  return self;
+  return self
 }
 
 /**
@@ -38,4 +38,4 @@ export function update_<K, V>(
  *
  * @tsplus static ImmutableMap/Aspects update
  */
-export const update = Pipeable(update_);
+export const update = Pipeable(update_)

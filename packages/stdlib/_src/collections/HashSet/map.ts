@@ -4,15 +4,15 @@
  * @tsplus fluent HashSet map
  */
 export function map_<A, B>(self: HashSet<A>, f: (a: A) => B): HashSet<B> {
-  const set = HashSet<B>();
+  const set = HashSet<B>()
   return set.mutate((_) => {
     self.forEach((e) => {
-      const v = f(e);
+      const v = f(e)
       if (!_.has(v)) {
-        _.add(v);
+        _.add(v)
       }
-    });
-  });
+    })
+  })
 }
 
 /**
@@ -20,4 +20,4 @@ export function map_<A, B>(self: HashSet<A>, f: (a: A) => B): HashSet<B> {
  *
  * @tsplus static HashSet/Aspects map
  */
-export const map = Pipeable(map_);
+export const map = Pipeable(map_)

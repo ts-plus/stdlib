@@ -1,4 +1,4 @@
-import { concreteChunkId } from "@tsplus/stdlib/collections/Chunk/definition";
+import { concreteChunkId } from "@tsplus/stdlib/collections/Chunk/definition"
 
 /**
  * Determines whether a predicate is satisfied for all elements of this chunk.
@@ -6,23 +6,23 @@ import { concreteChunkId } from "@tsplus/stdlib/collections/Chunk/definition";
  * @tsplus fluent Chunk forAll
  */
 export function forAll_<A>(self: Chunk<A>, f: Predicate<A>): boolean {
-  const iterator = concreteChunkId(self)._arrayLikeIterator();
-  let next;
+  const iterator = concreteChunkId(self)._arrayLikeIterator()
+  let next
 
   while ((next = iterator.next()) && !next.done) {
-    const array = next.value;
-    const len = array.length;
-    let i = 0;
+    const array = next.value
+    const len = array.length
+    let i = 0
     while (i < len) {
-      const a = array[i]!;
+      const a = array[i]!
       if (!f(a)) {
-        return false;
+        return false
       }
-      i++;
+      i++
     }
   }
 
-  return true;
+  return true
 }
 
 /**
@@ -30,4 +30,4 @@ export function forAll_<A>(self: Chunk<A>, f: Predicate<A>): boolean {
  *
  * @tsplus static Chunk/Aspects forAll
  */
-export const forAll = Pipeable(forAll_);
+export const forAll = Pipeable(forAll_)

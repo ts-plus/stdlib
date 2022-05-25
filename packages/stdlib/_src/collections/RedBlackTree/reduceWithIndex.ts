@@ -8,11 +8,11 @@ export function reduceWithIndex_<K, V, Z>(
   z: Z,
   f: (z: Z, k: K, v: V) => Z
 ): Z {
-  let x = z;
+  let x = z
   for (const { tuple: [k, v] } of self) {
-    x = f(x, k, v);
+    x = f(x, k, v)
   }
-  return x;
+  return x
 }
 
 /**
@@ -20,4 +20,4 @@ export function reduceWithIndex_<K, V, Z>(
  *
  * @tsplus static RedBlackTree/Aspects reduceWithIndex
  */
-export const reduceWithIndex = Pipeable(reduceWithIndex_);
+export const reduceWithIndex = Pipeable(reduceWithIndex_)

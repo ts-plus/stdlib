@@ -5,14 +5,14 @@
  * @tsplus type Ord
  */
 export interface Ord<A> {
-  readonly Law: { readonly Ord: "Ord"; };
-  readonly compare: (x: A, y: A) => Ordering;
+  readonly Law: { readonly Ord: "Ord" }
+  readonly compare: (x: A, y: A) => Ordering
 }
 
 /**
  * @tsplus type Ord/Ops
  */
 export interface OrdOps {
-  <A>(compare: (x: A, y: A) => Ordering): Ord<A>;
+  <A>(compare: (x: A, y: A) => Ordering): Ord<A>
 }
-export const Ord: OrdOps = <A>(compare: (x: A, y: A) => Ordering): Ord<A> => HKT.instance({ compare });
+export const Ord: OrdOps = <A>(compare: (x: A, y: A) => Ordering): Ord<A> => HKT.instance({ compare })

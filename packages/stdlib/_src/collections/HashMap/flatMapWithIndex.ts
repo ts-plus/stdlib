@@ -12,9 +12,9 @@ export function flatMapWithIndex_<K, V, A>(
   return self.reduceWithIndex(HashMap.empty<K, A>(), (z, k, v) =>
     z.mutate((m) => {
       f(k, v).forEachWithIndex((_k, _a) => {
-        m.set(_k, _a);
-      });
-    }));
+        m.set(_k, _a)
+      })
+    }))
 }
 
 /**
@@ -24,4 +24,4 @@ export function flatMapWithIndex_<K, V, A>(
  *
  * @tsplus static HashMap/Aspects flatMapWithIndex
  */
-export const flatMapWithIndex = Pipeable(flatMapWithIndex_);
+export const flatMapWithIndex = Pipeable(flatMapWithIndex_)

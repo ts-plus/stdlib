@@ -5,7 +5,7 @@
  * @tsplus fluent SortedSet toggle
  */
 export function toggle_<A>(self: SortedSet<A>, value: A): SortedSet<A> {
-  return self.has(value) ? self.remove(value) : self.add(value);
+  return self.has(value) ? self.remove(value) : self.add(value)
 }
 
 /**
@@ -14,4 +14,4 @@ export function toggle_<A>(self: SortedSet<A>, value: A): SortedSet<A> {
  *
  * @tsplus static SortedSet/Aspects toggle
  */
-export const toggle = Pipeable(toggle_);
+export const toggle = Pipeable(toggle_)

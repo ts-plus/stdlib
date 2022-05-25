@@ -18,7 +18,7 @@ export function fold_<A, B>(
     bothCase,
     List(self),
     List.empty()
-  ).unsafeHead()!;
+  ).unsafeHead()!
 }
 
 /**
@@ -27,7 +27,7 @@ export function fold_<A, B>(
  *
  * @tsplus static ParSeq/Aspects fold
  */
-export const fold = Pipeable(fold_);
+export const fold = Pipeable(fold_)
 
 function foldLoop<A, B>(
   emptyCase: B,
@@ -42,52 +42,52 @@ function foldLoop<A, B>(
     if (inp.isNil()) {
       return out.reduce(List.empty<B>(), (acc, val) => {
         if (val._tag === "Right") {
-          return acc.prepend(val.right);
+          return acc.prepend(val.right)
         } else {
           if (val.left) {
-            let parSeqs: List<B> = acc;
-            const left = parSeqs.unsafeHead();
-            parSeqs = parSeqs.unsafeTail()!;
-            const right = parSeqs.unsafeHead();
-            parSeqs = parSeqs.unsafeTail()!;
-            return parSeqs.prepend(bothCase(left!, right!));
+            let parSeqs: List<B> = acc
+            const left = parSeqs.unsafeHead()
+            parSeqs = parSeqs.unsafeTail()!
+            const right = parSeqs.unsafeHead()
+            parSeqs = parSeqs.unsafeTail()!
+            return parSeqs.prepend(bothCase(left!, right!))
           } else {
-            let parSeqs: List<B> = acc;
-            const left = parSeqs.unsafeHead();
-            parSeqs = parSeqs.unsafeTail()!;
-            const right = parSeqs.unsafeHead();
-            parSeqs = parSeqs.unsafeTail()!;
-            return parSeqs.prepend(thenCase(left!, right!));
+            let parSeqs: List<B> = acc
+            const left = parSeqs.unsafeHead()
+            parSeqs = parSeqs.unsafeTail()!
+            const right = parSeqs.unsafeHead()
+            parSeqs = parSeqs.unsafeTail()!
+            return parSeqs.prepend(thenCase(left!, right!))
           }
         }
-      });
+      })
     } else {
-      const head = inp.head;
-      const parSeqs = inp.tail();
+      const head = inp.head
+      const parSeqs = inp.tail()
 
       switch (head._tag) {
         case "Empty": {
-          inp = parSeqs;
-          out = out.prepend(Either.right(emptyCase));
-          break;
+          inp = parSeqs
+          out = out.prepend(Either.right(emptyCase))
+          break
         }
         case "Single": {
-          inp = parSeqs;
-          out = out.prepend(Either.right(singleCase(head.a)));
-          break;
+          inp = parSeqs
+          out = out.prepend(Either.right(singleCase(head.a)))
+          break
         }
         case "Then": {
-          inp = parSeqs.prepend(head.right).prepend(head.left);
-          out = out.prepend(Either.left(false));
-          break;
+          inp = parSeqs.prepend(head.right).prepend(head.left)
+          out = out.prepend(Either.left(false))
+          break
         }
         case "Both": {
-          inp = parSeqs.prepend(head.right).prepend(head.left);
-          out = out.prepend(Either.left(true));
-          break;
+          inp = parSeqs.prepend(head.right).prepend(head.left)
+          out = out.prepend(Either.left(true))
+          break
         }
       }
     }
   }
-  throw new Error("Bug");
+  throw new Error("Bug")
 }

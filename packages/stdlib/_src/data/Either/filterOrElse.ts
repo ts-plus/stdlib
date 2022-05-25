@@ -8,18 +8,18 @@ export function filterOrElse_<E, E2, A, B extends A>(
   self: Either<E2, A>,
   f: Refinement<A, B>,
   onFalse: (a: A) => E
-): Either<E | E2, B>;
+): Either<E | E2, B>
 export function filterOrElse_<E, E2, A>(
   self: Either<E2, A>,
   f: Predicate<A>,
   onFalse: (a: A) => E
-): Either<E | E2, A>;
+): Either<E | E2, A>
 export function filterOrElse_<E, A>(
   self: Either<E, A>,
   f: Predicate<A>,
   onFalse: (a: A) => E
 ): Either<E, A> {
-  return self.flatMap((a) => (f(a) ? Either.right(a) : Either.left(onFalse(a))));
+  return self.flatMap((a) => (f(a) ? Either.right(a) : Either.left(onFalse(a))))
 }
 
 /**
@@ -31,11 +31,11 @@ export function filterOrElse_<E, A>(
 export function filterOrElse<E, A, B extends A>(
   f: Refinement<A, B>,
   onFalse: (a: A) => E
-): <E2>(self: Either<E2, A>) => Either<E | E2, B>;
+): <E2>(self: Either<E2, A>) => Either<E | E2, B>
 export function filterOrElse<E, A>(
   f: Predicate<A>,
   onFalse: (a: A) => E
-): <E2>(self: Either<E2, A>) => Either<E | E2, A>;
+): <E2>(self: Either<E2, A>) => Either<E | E2, A>
 export function filterOrElse<E, A>(f: Predicate<A>, onFalse: (a: A) => E) {
-  return (self: Either<E, A>): Either<E, A> => self.filterOrElse(f, onFalse);
+  return (self: Either<E, A>): Either<E, A> => self.filterOrElse(f, onFalse)
 }

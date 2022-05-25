@@ -6,4 +6,4 @@
 export const all: AssociativeIdentity<boolean> = AssociativeIdentity.fromAssociative(
   true,
   Associative.all
-);
+)

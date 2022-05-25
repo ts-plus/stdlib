@@ -6,6 +6,6 @@
 export const void_: AssociativeIdentity<void> = AssociativeIdentity.fromAssociative(
   undefined,
   Associative.void
-);
+)
 
-export { void_ as void };
+export { void_ as void }

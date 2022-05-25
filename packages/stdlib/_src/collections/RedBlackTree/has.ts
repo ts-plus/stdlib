@@ -4,7 +4,7 @@
  * @tsplus fluent RedBlackTree has
  */
 export function has_<K, V>(self: RedBlackTree<K, V>, key: K): boolean {
-  return self.findFirst(key).isSome();
+  return self.findFirst(key).isSome()
 }
 
 /**
@@ -12,4 +12,4 @@ export function has_<K, V>(self: RedBlackTree<K, V>, key: K): boolean {
  *
  * @tsplus static RedBlackTree/Aspects has
  */
-export const has = Pipeable(has_);
+export const has = Pipeable(has_)

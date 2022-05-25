@@ -8,4 +8,4 @@ export const getValidationApplicative = DSL.getValidationF<Either.HKT>(
     ...Either.Fail,
     ...Either.Applicative
   })
-);
+)

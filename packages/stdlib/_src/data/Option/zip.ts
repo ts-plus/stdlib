@@ -5,10 +5,10 @@
  * @tsplus fluent Option zip
  */
 export function zip_<A, B>(fa: Option<A>, fb: Option<B>): Option<Tuple<[A, B]>> {
-  return fa.flatMap((a) => fb.map((b) => Tuple(a, b)));
+  return fa.flatMap((a) => fb.map((b) => Tuple(a, b)))
 }
 
 /**
  * @tsplus static Option/Aspects zip
  */
-export const zip = Pipeable(zip_);
+export const zip = Pipeable(zip_)

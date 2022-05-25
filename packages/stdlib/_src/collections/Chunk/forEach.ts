@@ -1,4 +1,4 @@
-import { ArrTypeId, concreteChunk } from "@tsplus/stdlib/collections/Chunk/definition";
+import { ArrTypeId, concreteChunk } from "@tsplus/stdlib/collections/Chunk/definition"
 
 /**
  * Iterate over the chunk applying `f`.
@@ -6,35 +6,35 @@ import { ArrTypeId, concreteChunk } from "@tsplus/stdlib/collections/Chunk/defin
  * @tsplus fluent Chunk forEach
  */
 export function forEach_<A, U>(self: Chunk<A>, f: (a: A) => U): void {
-  concreteChunk(self);
+  concreteChunk(self)
 
   switch (self._typeId) {
     case ArrTypeId: {
-      const arr = self._arrayLike();
-      const len = arr.length;
-      let i = 0;
+      const arr = self._arrayLike()
+      const len = arr.length
+      let i = 0
       while (i < len) {
-        f(arr[i]!);
-        i++;
+        f(arr[i]!)
+        i++
       }
-      return;
+      return
     }
     default: {
-      const iterator = self._arrayLikeIterator();
-      let next;
+      const iterator = self._arrayLikeIterator()
+      let next
 
       while ((next = iterator.next()) && !next.done) {
-        const array = next.value;
-        const len = array.length;
-        let i = 0;
+        const array = next.value
+        const len = array.length
+        let i = 0
         while (i < len) {
-          const a = array[i]!;
-          f(a);
-          i++;
+          const a = array[i]!
+          f(a)
+          i++
         }
       }
 
-      return;
+      return
     }
   }
 }
@@ -44,4 +44,4 @@ export function forEach_<A, U>(self: Chunk<A>, f: (a: A) => U): void {
  *
  * @tsplus static Chunk/Aspects forEach
  */
-export const forEach = Pipeable(forEach_);
+export const forEach = Pipeable(forEach_)

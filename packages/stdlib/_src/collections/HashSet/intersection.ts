@@ -8,14 +8,14 @@
  * @tsplus fluent HashSet intersection
  */
 export function intersection_<A>(self: HashSet<A>, that: Iterable<A>): HashSet<A> {
-  const set = HashSet<A>();
+  const set = HashSet<A>()
   return set.mutate((_) => {
     for (const k of that) {
       if (self.has(k)) {
-        _.add(k);
+        _.add(k)
       }
     }
-  });
+  })
 }
 
 /**
@@ -27,4 +27,4 @@ export function intersection_<A>(self: HashSet<A>, that: Iterable<A>): HashSet<A
  *
  * @tsplus static HashSet/Aspects intersection
  */
-export const intersection = Pipeable(intersection_);
+export const intersection = Pipeable(intersection_)

@@ -6,13 +6,13 @@ export const forEachWithIndexF = ForEachWithIndex.implementForEachWithIndexF<num
     (G) =>
       (f) =>
         (fa) => {
-          const succeed = DSL.succeedF(G);
-          let base = succeed<Chunk<typeof _.B>, typeof _.R, typeof _.E>(Chunk.empty());
+          const succeed = DSL.succeedF(G)
+          let base = succeed<Chunk<typeof _.B>, typeof _.R, typeof _.E>(Chunk.empty())
           for (let i = 0; i < fa.length; i = i + 1) {
             base = G.map(
               ({ tuple: [bs, b] }: Tuple<[Chunk<typeof _.B>, typeof _.B]>) => bs.append(b)
-            )(G.both(f(i, fa.unsafeGet(i)!))(base));
+            )(G.both(f(i, fa.unsafeGet(i)!))(base))
           }
-          return base;
+          return base
         }
-);
+)

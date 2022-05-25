@@ -4,7 +4,7 @@
  * @tsplus fluent Chunk partition
  */
 export function partition_<A>(self: Chunk<A>, f: Predicate<A>): Tuple<[Chunk<A>, Chunk<A>]> {
-  return self.partitionWithIndex((_, a: A) => f(a));
+  return self.partitionWithIndex((_, a: A) => f(a))
 }
 
 /**
@@ -12,4 +12,4 @@ export function partition_<A>(self: Chunk<A>, f: Predicate<A>): Tuple<[Chunk<A>,
  *
  * @tsplus static Chunk/Aspects partition
  */
-export const partition = Pipeable(partition_);
+export const partition = Pipeable(partition_)

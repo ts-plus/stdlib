@@ -1,4 +1,4 @@
-import { concreteChunkId } from "@tsplus/stdlib/collections/Chunk/definition";
+import { concreteChunkId } from "@tsplus/stdlib/collections/Chunk/definition"
 
 /**
  * Returns every elements after the first. Note that this method is partial
@@ -11,7 +11,7 @@ import { concreteChunkId } from "@tsplus/stdlib/collections/Chunk/definition";
  */
 export function unsafeTail<A>(self: Chunk<A>): Chunk<A> {
   if (concreteChunkId(self).length === 0) {
-    throw new IndexOutOfBounds(1, 1, self.length - 1);
+    throw new IndexOutOfBounds(1, 1, self.length - 1)
   }
-  return self.drop(1);
+  return self.drop(1)
 }

@@ -1,5 +1,5 @@
-import type { Direction, RedBlackTreeIterable } from "@tsplus/stdlib/collections/RedBlackTree/definition";
-import { RedBlackTreeIterator } from "@tsplus/stdlib/collections/RedBlackTree/definition";
+import type { Direction, RedBlackTreeIterable } from "@tsplus/stdlib/collections/RedBlackTree/definition"
+import { RedBlackTreeIterator } from "@tsplus/stdlib/collections/RedBlackTree/definition"
 
 /**
  * Returns an iterator that traverse entries with keys less than the specified
@@ -15,26 +15,26 @@ export function lt_<K, V>(
   return {
     ord: self.ord,
     [Symbol.iterator]: () => {
-      const cmp = self.ord.compare;
-      let n = self.root;
-      const stack = [];
-      let last_ptr = 0;
+      const cmp = self.ord.compare
+      let n = self.root
+      const stack = []
+      let last_ptr = 0
       while (n) {
-        const d = cmp(key, n.key);
-        stack.push(n);
+        const d = cmp(key, n.key)
+        stack.push(n)
         if (d > 0) {
-          last_ptr = stack.length;
+          last_ptr = stack.length
         }
         if (d <= 0) {
-          n = n.left;
+          n = n.left
         } else {
-          n = n.right;
+          n = n.right
         }
       }
-      stack.length = last_ptr;
-      return new RedBlackTreeIterator(self, stack, direction);
+      stack.length = last_ptr
+      return new RedBlackTreeIterator(self, stack, direction)
     }
-  };
+  }
 }
 
 /**
@@ -43,4 +43,4 @@ export function lt_<K, V>(
  *
  * @tsplus static RedBlackTree/Aspects lt
  */
-export const lt = Pipeable(lt_);
+export const lt = Pipeable(lt_)

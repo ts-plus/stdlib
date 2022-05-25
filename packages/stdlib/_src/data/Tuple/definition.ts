@@ -1,5 +1,5 @@
-export const TupleSym: unique symbol = Symbol.for("tsplus/Tuple");
-export type TupleSym = typeof TupleSym;
+export const TupleSym: unique symbol = Symbol.for("tsplus/Tuple")
+export type TupleSym = typeof TupleSym
 
 /**
  * A `Tuple` represents an immutable, finite ordered sequence of elements.
@@ -8,16 +8,16 @@ export type TupleSym = typeof TupleSym;
  * @tsplus companion tsplus/TupleOps
  */
 export class Tuple<T extends readonly unknown[]> implements Collection<T[number]>, Equals {
-  readonly [TupleSym]: TupleSym = TupleSym;
+  readonly [TupleSym]: TupleSym = TupleSym
 
   constructor(readonly tuple: T) {}
 
   [Symbol.iterator](): IterableIterator<T[number]> {
-    return this.tuple[Symbol.iterator]();
+    return this.tuple[Symbol.iterator]()
   }
 
   [Hash.sym](): number {
-    return Hash.array(this.tuple);
+    return Hash.array(this.tuple)
   }
 
   [Equals.sym](that: unknown): boolean {
@@ -25,13 +25,13 @@ export class Tuple<T extends readonly unknown[]> implements Collection<T[number]
       return (
         this.tuple.length === that.tuple.length &&
         this.tuple.every((v, i) => Equals.equals(v, that.tuple[i]))
-      );
+      )
     }
-    return false;
+    return false
   }
 
   get<K extends keyof T>(i: K): T[K] {
-    return this.tuple[i];
+    return this.tuple[i]
   }
 }
 
@@ -41,7 +41,7 @@ export class Tuple<T extends readonly unknown[]> implements Collection<T[number]
 export function unifyTuple<X extends Tuple<any>>(
   self: X
 ): Tuple<[X] extends [Tuple<infer A>] ? A : never> {
-  return self;
+  return self
 }
 
 /**
@@ -50,11 +50,11 @@ export function unifyTuple<X extends Tuple<any>>(
  * @tsplus static tsplus/TupleOps isTuple
  */
 export function isTuple(self: unknown): self is Tuple<unknown[]> {
-  return typeof self === "object" && self != null && TupleSym in self;
+  return typeof self === "object" && self != null && TupleSym in self
 }
 
 /**
  * @tsplus macro pipe
  * @tsplus fluent Tuple __call
  */
-export const tuplePipe: typeof pipe = pipe;
+export const tuplePipe: typeof pipe = pipe

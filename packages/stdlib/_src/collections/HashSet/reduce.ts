@@ -1,4 +1,4 @@
-import { realHashSet } from "@tsplus/stdlib/collections/HashSet/_internal/hashSet";
+import { realHashSet } from "@tsplus/stdlib/collections/HashSet/_internal/hashSet"
 
 /**
  * Reduces the specified state over the values of the `HashSet`.
@@ -6,8 +6,8 @@ import { realHashSet } from "@tsplus/stdlib/collections/HashSet/_internal/hashSe
  * @tsplus fluent HashSet reduce
  */
 export function reduce_<V, Z>(self: HashSet<V>, z: Z, f: (z: Z, v: V) => Z): Z {
-  realHashSet(self);
-  return self._keyMap.reduceWithIndex(z, (z, v) => f(z, v));
+  realHashSet(self)
+  return self._keyMap.reduceWithIndex(z, (z, v) => f(z, v))
 }
 
 /**
@@ -15,4 +15,4 @@ export function reduce_<V, Z>(self: HashSet<V>, z: Z, f: (z: Z, v: V) => Z): Z {
  *
  * @tsplus static HashSet/Aspects reduce
  */
-export const reduce = Pipeable(reduce_);
+export const reduce = Pipeable(reduce_)

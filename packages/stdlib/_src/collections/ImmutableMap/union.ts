@@ -5,13 +5,13 @@
  * @tsplus fluent ImmutableMap union
  */
 export function union_<K0, V0, K1, V1>(self: ImmutableMap<K0, V0>, that: ImmutableMap<K1, V1>) {
-  const result = new Map<K0 | K1, V0 | V1>(self.internalMap);
+  const result = new Map<K0 | K1, V0 | V1>(self.internalMap)
 
   that.internalMap.forEach((v, k) => {
-    result.set(k, v);
-  });
+    result.set(k, v)
+  })
 
-  return new ImmutableMap(result);
+  return new ImmutableMap(result)
 }
 
 /**
@@ -19,4 +19,4 @@ export function union_<K0, V0, K1, V1>(self: ImmutableMap<K0, V0>, that: Immutab
  *
  * @tsplus static ImmutableMap/Aspects union
  */
-export const union = Pipeable(union_);
+export const union = Pipeable(union_)

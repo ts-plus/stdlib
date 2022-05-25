@@ -9,7 +9,7 @@ export function zipWith_<A, B, C>(
   that: LazyArg<Eval<B>>,
   f: (a: A, b: B) => C
 ) {
-  return self.flatMap((a) => that().map((b) => f(a, b)));
+  return self.flatMap((a) => that().map((b) => f(a, b)))
 }
 
 /**
@@ -18,4 +18,4 @@ export function zipWith_<A, B, C>(
  *
  * @tsplus static Eval/Aspects zipWith
  */
-export const zipWith = Pipeable(zipWith_);
+export const zipWith = Pipeable(zipWith_)

@@ -1,4 +1,4 @@
-import { realHashMap } from "@tsplus/stdlib/collections/HashMap/_internal/hashMap";
+import { realHashMap } from "@tsplus/stdlib/collections/HashMap/_internal/hashMap"
 
 /**
  * Marks the `HashMap` as immutable.
@@ -6,7 +6,7 @@ import { realHashMap } from "@tsplus/stdlib/collections/HashMap/_internal/hashMa
  * @tsplus fluent HashMap endMutation
  */
 export function endMutation<K, V>(self: HashMap<K, V>): HashMap<K, V> {
-  realHashMap(self);
-  self._editable = false;
-  return self;
+  realHashMap(self)
+  self._editable = false
+  return self
 }

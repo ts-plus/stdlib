@@ -9,9 +9,9 @@ export function corresponds_<A, B>(
   return (
     f(self.value, that.value) &&
     self.forest.corresponds(that.forest, (a, b) => corresponds_(a, b, f))
-  );
+  )
 }
 /**
  * @tsplus static Tree/Aspects corresponds
  */
-export const corresponds = Pipeable(corresponds_);
+export const corresponds = Pipeable(corresponds_)

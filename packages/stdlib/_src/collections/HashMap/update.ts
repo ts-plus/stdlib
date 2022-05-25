@@ -8,7 +8,7 @@ export function update_<K, V>(
   key: K,
   f: (v: V) => V
 ): HashMap<K, V> {
-  return self.modify(key, (option) => option.map(f));
+  return self.modify(key, (option) => option.map(f))
 }
 
 /**
@@ -16,4 +16,4 @@ export function update_<K, V>(
  *
  * @tsplus static HashMap/Aspects update
  */
-export const update = Pipeable(update_);
+export const update = Pipeable(update_)

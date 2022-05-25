@@ -1,4 +1,4 @@
-import type { UpdateFn } from "@tsplus/stdlib/collections/HashMap/_internal/node";
+import type { UpdateFn } from "@tsplus/stdlib/collections/HashMap/_internal/node"
 
 /**
  * Alter the value of the specified key in the `HashMap` using the specified
@@ -17,7 +17,7 @@ export function modify_<K, V>(
   key: K,
   f: UpdateFn<V>
 ): HashMap<K, V> {
-  return self.modifyHash(key, Hash.unknown(key), f);
+  return self.modifyHash(key, Hash.unknown(key), f)
 }
 
 /**
@@ -32,4 +32,4 @@ export function modify_<K, V>(
  *
  * @tsplus static HashMap/Aspects modify
  */
-export const modify = Pipeable(modify_);
+export const modify = Pipeable(modify_)

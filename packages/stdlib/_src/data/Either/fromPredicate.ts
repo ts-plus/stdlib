@@ -8,16 +8,16 @@ export function fromPredicate<E, A, B extends A>(
   a: A,
   f: Refinement<A, B>,
   onFalse: (a: A) => E
-): Either<E, B>;
+): Either<E, B>
 export function fromPredicate<E, A>(
   a: A,
   f: Predicate<A>,
   onFalse: (a: A) => E
-): Either<E, A>;
+): Either<E, A>
 export function fromPredicate<E, A>(
   a: A,
   f: Predicate<A>,
   onFalse: (a: A) => E
 ): Either<E, A> {
-  return f(a) ? Either.right(a) : Either.left(onFalse(a));
+  return f(a) ? Either.right(a) : Either.left(onFalse(a))
 }

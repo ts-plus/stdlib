@@ -9,9 +9,9 @@ export function forEach_<K, V>(
 ): void {
   if (self.root) {
     RedBlackTree.visitFull(self.root, (key, value) => {
-      visit(key, value);
-      return Option.none;
-    });
+      visit(key, value)
+      return Option.none
+    })
   }
 }
 
@@ -20,4 +20,4 @@ export function forEach_<K, V>(
  *
  * @tsplus static RedBlackTree/Aspects forEach
  */
-export const forEach = Pipeable(forEach_);
+export const forEach = Pipeable(forEach_)

@@ -3,5 +3,5 @@
  * @tsplus fluent ImmutableMap isEmpty
  */
 export function isEmpty<K, V>(self: ImmutableMap<K, V>): boolean {
-  return self.internalMap.size === 0;
+  return self.internalMap.size === 0
 }

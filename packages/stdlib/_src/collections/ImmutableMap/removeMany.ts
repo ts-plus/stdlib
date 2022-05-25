@@ -5,11 +5,11 @@
  * @tsplus fluent ImmutableMap removeMany
  */
 export function removeMany_<K, V>(self: ImmutableMap<K, V>, keys: Collection<K>): ImmutableMap<K, V> {
-  const map = self.copy().internalMap as Map<K, V>;
+  const map = self.copy().internalMap as Map<K, V>
   for (const key of keys) {
-    map.delete(key);
+    map.delete(key)
   }
-  return new ImmutableMap(map);
+  return new ImmutableMap(map)
 }
 
 /**
@@ -18,4 +18,4 @@ export function removeMany_<K, V>(self: ImmutableMap<K, V>, keys: Collection<K>)
  *
  * @tsplus static ImmutableMap/Aspects removeMany
  */
-export const removeMany = Pipeable(removeMany_);
+export const removeMany = Pipeable(removeMany_)

@@ -4,5 +4,5 @@
  * @tsplus static Associative/Ops max
  */
 export function max<A>(O: Ord<A>): Associative<A> {
-  return Associative(O.max);
+  return Associative(O.max)
 }

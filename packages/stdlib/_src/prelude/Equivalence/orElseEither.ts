@@ -15,7 +15,7 @@ export function orElseEither_<A, B>(
       : ex._tag === "Right" && ey._tag === "Right"
       ? that().equals(ex.right, ey.right)
       : false
-  );
+  )
 }
 
 /**
@@ -25,4 +25,4 @@ export function orElseEither_<A, B>(
  *
  * @tsplus static Equivalence/Aspects orElseEither
  */
-export const orElseEither = Pipeable(orElseEither_);
+export const orElseEither = Pipeable(orElseEither_)

@@ -5,5 +5,5 @@
  * @tsplus static Ord/Ops getAssociative
  */
 export function getAssociative<A = never>(): Associative<Ord<A>> {
-  return Associative((x, y) => Ord((a, b) => Ordering.Associative.combine(x.compare(a, b), y.compare(a, b))));
+  return Associative((x, y) => Ord((a, b) => Ordering.Associative.combine(x.compare(a, b), y.compare(a, b))))
 }

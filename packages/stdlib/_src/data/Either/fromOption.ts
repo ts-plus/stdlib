@@ -4,5 +4,5 @@
  * @tsplus static Either/Ops fromOption
  */
 export function fromOption<A, E>(option: Option<A>, onNone: LazyArg<E>): Either<E, A> {
-  return option.isNone() ? Either.left(onNone()) : Either.right(option.value);
+  return option.isNone() ? Either.left(onNone()) : Either.right(option.value)
 }

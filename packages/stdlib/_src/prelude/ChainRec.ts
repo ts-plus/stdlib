@@ -3,26 +3,26 @@
  */
 export interface ChainRec<F extends HKT> extends HKT.Typeclass<F> {
   readonly Law: {
-    readonly ChainRec: "ChainRec";
-  };
+    readonly ChainRec: "ChainRec"
+  }
   readonly chainRec: <A, B, R, E>(
     f: (a: A) => HKT.Kind<F, R, E, Either<A, B>>
-  ) => (a: A) => HKT.Kind<F, R, E, B>;
+  ) => (a: A) => HKT.Kind<F, R, E, B>
 }
 
 /**
  * @tsplus type ChainRec/Ops
  */
 export interface ChainRecOps {}
-export const ChainRec: ChainRecOps = {};
+export const ChainRec: ChainRecOps = {}
 
 /**
  * @tsplus static ChainRec/Ops tailRec
  */
 export function tailRec<A, B>(a: A, f: (a: A) => Either<A, B>): B {
-  let v = f(a);
+  let v = f(a)
   while (v._tag === "Left") {
-    v = f(v.left);
+    v = f(v.left)
   }
-  return v.right;
+  return v.right
 }

@@ -3,7 +3,7 @@
  * @tsplus type Validation
  */
 export interface Validation<F extends HKT, E> extends HKT {
-  readonly type: HKT.Kind<F, this["R"], E, this["A"]>;
+  readonly type: HKT.Kind<F, this["R"], E, this["A"]>
 }
 
 /**
@@ -16,7 +16,7 @@ export function getValidationF<F extends HKT>(M: Monad<F> & Run<F> & Fail<F> & A
       map: M.map,
       both: <B, R2 = unknown>(fb: HKT.Kind<F, R2, Z, B>) =>
         <A, R = unknown>(fa: HKT.Kind<F, R, Z, A>) => {
-          const both = M.both(M.either(fb))(M.either(fa));
+          const both = M.both(M.either(fb))(M.either(fa))
           return M.flatten(
             M.map(({ tuple: [eitherA, eitherB] }: Tuple<[Either<Z, A>, Either<Z, B>]>) =>
               eitherA.fold(
@@ -32,7 +32,7 @@ export function getValidationF<F extends HKT>(M: Monad<F> & Run<F> & Fail<F> & A
                   )
               )
             )(both)
-          );
+          )
         }
-    });
+    })
 }

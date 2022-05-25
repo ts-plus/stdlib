@@ -1,4 +1,4 @@
-import { concreteChunkId } from "@tsplus/stdlib/collections/Chunk/definition";
+import { concreteChunkId } from "@tsplus/stdlib/collections/Chunk/definition"
 
 /**
  * Returns the index of the first element that satisfies the predicate.
@@ -6,25 +6,25 @@ import { concreteChunkId } from "@tsplus/stdlib/collections/Chunk/definition";
  * @tsplus fluent Chunk findIndex
  */
 export function findIndex_<A>(self: Chunk<A>, f: Predicate<A>): Option<number> {
-  const iterator = concreteChunkId(self)._arrayLikeIterator();
-  let next;
-  let index = 0;
+  const iterator = concreteChunkId(self)._arrayLikeIterator()
+  let next
+  let index = 0
 
   while ((next = iterator.next()) && !next.done) {
-    const array = next.value;
-    const len = array.length;
-    let i = 0;
+    const array = next.value
+    const len = array.length
+    let i = 0
     while (i < len) {
-      const a = array[i]!;
+      const a = array[i]!
       if (f(a)) {
-        return Option.some(index);
+        return Option.some(index)
       }
-      i++;
-      index++;
+      i++
+      index++
     }
   }
 
-  return Option.none;
+  return Option.none
 }
 
 /**
@@ -32,4 +32,4 @@ export function findIndex_<A>(self: Chunk<A>, f: Predicate<A>): Option<number> {
  *
  * @tsplus static Chunk/Aspects findIndex
  */
-export const findIndex = Pipeable(findIndex_);
+export const findIndex = Pipeable(findIndex_)

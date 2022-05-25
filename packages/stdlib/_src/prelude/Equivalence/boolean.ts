@@ -3,4 +3,4 @@
  *
  * @tsplus static Equivalence/Ops boolean
  */
-export const boolean = Equivalence.strict<boolean>();
+export const boolean = Equivalence.strict<boolean>()

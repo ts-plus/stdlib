@@ -4,7 +4,7 @@
  * @tsplus fluent Either reduceRight
  */
 export function reduceRight_<E, A, B>(self: Either<E, A>, b: B, f: (a: A, b: B) => B): B {
-  return self.isLeft() ? b : f(self.right, b);
+  return self.isLeft() ? b : f(self.right, b)
 }
 
 /**
@@ -12,4 +12,4 @@ export function reduceRight_<E, A, B>(self: Either<E, A>, b: B, f: (a: A, b: B) 
  *
  * @tsplus static Either/Aspects reduceRight
  */
-export const reduceRight = Pipeable(reduceRight_);
+export const reduceRight = Pipeable(reduceRight_)

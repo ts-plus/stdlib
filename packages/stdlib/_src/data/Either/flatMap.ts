@@ -9,7 +9,7 @@ export function flatMap_<E, A, B, E2>(
   fa: Either<E, A>,
   f: (a: A) => Either<E2, B>
 ): Either<E | E2, B> {
-  return fa.isLeft() ? fa : f(fa.right);
+  return fa.isLeft() ? fa : f(fa.right)
 }
 
 /**
@@ -19,4 +19,4 @@ export function flatMap_<E, A, B, E2>(
  *
  * @tsplus static Either/Aspects flatMap
  */
-export const flatMap = Pipeable(flatMap_);
+export const flatMap = Pipeable(flatMap_)

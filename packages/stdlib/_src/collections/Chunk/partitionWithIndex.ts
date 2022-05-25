@@ -8,17 +8,17 @@ export function partitionWithIndex_<A>(
   self: Chunk<A>,
   f: PredicateWithIndex<number, A>
 ): Tuple<[Chunk<A>, Chunk<A>]> {
-  const left: Array<A> = [];
-  const right: Array<A> = [];
+  const left: Array<A> = []
+  const right: Array<A> = []
   for (let i = 0; i < self.length; i++) {
-    const a = self.unsafeGet(i)!;
+    const a = self.unsafeGet(i)!
     if (f(i, a)) {
-      right.push(a);
+      right.push(a)
     } else {
-      left.push(a);
+      left.push(a)
     }
   }
-  return Tuple(Chunk.from(left), Chunk.from(right));
+  return Tuple(Chunk.from(left), Chunk.from(right))
 }
 
 /**
@@ -26,4 +26,4 @@ export function partitionWithIndex_<A>(
  *
  * @tsplus static Chunk/Aspects partitionWithIndex
  */
-export const partitionWithIndex = Pipeable(partitionWithIndex_);
+export const partitionWithIndex = Pipeable(partitionWithIndex_)

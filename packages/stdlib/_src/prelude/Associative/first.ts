@@ -4,5 +4,5 @@
  * @tsplus static Associative/Ops first
  */
 export function first<A>(): Associative<A> {
-  return Associative((x, _) => x);
+  return Associative((x, _) => x)
 }

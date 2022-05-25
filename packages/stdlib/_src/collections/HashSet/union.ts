@@ -8,16 +8,16 @@
  * @tsplus fluent HashSet union
  */
 export function union_<A>(self: HashSet<A>, that: Iterable<A>): HashSet<A> {
-  const set = HashSet.empty<A>();
+  const set = HashSet.empty<A>()
 
   return set.mutate((_) => {
     self.forEach((a) => {
-      _.add(a);
-    });
+      _.add(a)
+    })
     for (const a of that) {
-      _.add(a);
+      _.add(a)
     }
-  });
+  })
 }
 
 /**
@@ -29,4 +29,4 @@ export function union_<A>(self: HashSet<A>, that: Iterable<A>): HashSet<A> {
  *
  * @tsplus static HashSet/Aspects union
  */
-export const union = Pipeable(union_);
+export const union = Pipeable(union_)

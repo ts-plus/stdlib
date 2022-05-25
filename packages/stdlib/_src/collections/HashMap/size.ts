@@ -1,4 +1,4 @@
-import { realHashMap } from "@tsplus/stdlib/collections/HashMap/_internal/hashMap";
+import { realHashMap } from "@tsplus/stdlib/collections/HashMap/_internal/hashMap"
 
 /**
  * Returns the number of entries within the `HashMap`.
@@ -6,6 +6,6 @@ import { realHashMap } from "@tsplus/stdlib/collections/HashMap/_internal/hashMa
  * @tsplus getter HashMap size
  */
 export function size<K, V>(self: HashMap<K, V>): number {
-  realHashMap(self);
-  return self._size;
+  realHashMap(self)
+  return self._size
 }

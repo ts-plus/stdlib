@@ -1,4 +1,4 @@
-import { concreteSortedSet } from "@tsplus/stdlib/collections/SortedSet/_internal/SortedSetInternal";
+import { concreteSortedSet } from "@tsplus/stdlib/collections/SortedSet/_internal/SortedSetInternal"
 
 /**
  * Computes the set union of the set and the specified collection
@@ -8,15 +8,15 @@ import { concreteSortedSet } from "@tsplus/stdlib/collections/SortedSet/_interna
  * @tsplus fluent SortedSet union
  */
 export function union_<A>(self: SortedSet<A>, that: Collection<A>): SortedSet<A> {
-  concreteSortedSet(self);
-  let out = SortedSet.make(self.keyTree.ord);
+  concreteSortedSet(self)
+  let out = SortedSet.make(self.keyTree.ord)
   for (const value of self) {
-    out = out.add(value);
+    out = out.add(value)
   }
   for (const value of that) {
-    out = out.add(value);
+    out = out.add(value)
   }
-  return out;
+  return out
 }
 
 /**
@@ -26,4 +26,4 @@ export function union_<A>(self: SortedSet<A>, that: Collection<A>): SortedSet<A>
  *
  * @tsplus static SortedSet/Aspects union
  */
-export const union = Pipeable(union_);
+export const union = Pipeable(union_)

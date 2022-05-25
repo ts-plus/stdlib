@@ -4,9 +4,9 @@
  * @tsplus fluent HashSet mutate
  */
 export function mutate_<A>(self: HashSet<A>, f: (set: HashSet<A>) => void): HashSet<A> {
-  const transient = self.beginMutation();
-  f(transient);
-  return transient.endMutation();
+  const transient = self.beginMutation()
+  f(transient)
+  return transient.endMutation()
 }
 
 /**
@@ -14,4 +14,4 @@ export function mutate_<A>(self: HashSet<A>, f: (set: HashSet<A>) => void): Hash
  *
  * @tsplus static HashSet/Aspects mutate
  */
-export const mutate = Pipeable(mutate_);
+export const mutate = Pipeable(mutate_)

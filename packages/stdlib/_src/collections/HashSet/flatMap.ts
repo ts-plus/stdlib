@@ -4,16 +4,16 @@
  * @tsplus fluent HashSet flatMap
  */
 export function flatMap_<A, B>(self: HashSet<A>, f: (a: A) => Collection<B>): HashSet<B> {
-  const set = HashSet.empty<B>();
+  const set = HashSet.empty<B>()
   return set.mutate((_) => {
     self.forEach((a) => {
       for (const b of f(a)) {
         if (!_.has(b)) {
-          _.add(b);
+          _.add(b)
         }
       }
-    });
-  });
+    })
+  })
 }
 
 /**
@@ -21,4 +21,4 @@ export function flatMap_<A, B>(self: HashSet<A>, f: (a: A) => Collection<B>): Ha
  *
  * @tsplus static HashSet/Aspects flatMap
  */
-export const flatMap = Pipeable(flatMap_);
+export const flatMap = Pipeable(flatMap_)

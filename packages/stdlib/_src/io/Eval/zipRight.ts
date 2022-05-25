@@ -6,7 +6,7 @@
  * @tsplus fluent Eval zipRight
  */
 export function zipRight_<A, B>(self: Eval<A>, that: LazyArg<Eval<B>>): Eval<B> {
-  return self.zipWith(that, (_, b) => b);
+  return self.zipWith(that, (_, b) => b)
 }
 
 /**
@@ -15,4 +15,4 @@ export function zipRight_<A, B>(self: Eval<A>, that: LazyArg<Eval<B>>): Eval<B> 
  *
  * @tsplus static Eval/Aspects zipRight
  */
-export const zipRight = Pipeable(zipRight_);
+export const zipRight = Pipeable(zipRight_)

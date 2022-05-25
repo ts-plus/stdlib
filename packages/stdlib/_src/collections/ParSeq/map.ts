@@ -5,7 +5,7 @@
  * @tsplus fluent ParSeq map
  */
 export function map_<A, B>(self: ParSeq<A>, f: (a: A) => B): ParSeq<B> {
-  return self.flatMap((a) => ParSeq.single(f(a)));
+  return self.flatMap((a) => ParSeq.single(f(a)))
 }
 
 /**
@@ -14,4 +14,4 @@ export function map_<A, B>(self: ParSeq<A>, f: (a: A) => B): ParSeq<B> {
  *
  * @tsplus static ParSeq/Aspects map
  */
-export const map = Pipeable(map_);
+export const map = Pipeable(map_)

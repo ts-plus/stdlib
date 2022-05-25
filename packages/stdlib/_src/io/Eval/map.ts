@@ -6,7 +6,7 @@
  * @tsplus fluent Eval map
  */
 export function map_<A, B>(self: Eval<A>, f: (a: A) => B) {
-  return self.flatMap((a) => Eval.succeed(f(a)));
+  return self.flatMap((a) => Eval.succeed(f(a)))
 }
 
 /**
@@ -16,4 +16,4 @@ export function map_<A, B>(self: Eval<A>, f: (a: A) => B) {
  *
  * @tsplus static Eval/Aspects map
  */
-export const map = Pipeable(map_);
+export const map = Pipeable(map_)

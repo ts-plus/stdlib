@@ -4,5 +4,5 @@
  * @tsplus fluent NonEmptyImmutableArray head
  */
 export function tail<A>(self: NonEmptyImmutableArray<A>): ImmutableArray<A> {
-  return new ImmutableArray(self.array.slice(1));
+  return new ImmutableArray(self.array.slice(1))
 }

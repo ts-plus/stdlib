@@ -1,4 +1,4 @@
-import { concreteChunkId } from "@tsplus/stdlib/collections/Chunk/definition";
+import { concreteChunkId } from "@tsplus/stdlib/collections/Chunk/definition"
 
 /**
  * Zips with chunk with the specified chunk to produce a new chunk with
@@ -16,55 +16,55 @@ export function zipAllWith_<A, B, C, D, E>(
   left: (a: A) => D,
   right: (b: B) => E
 ): Chunk<C | D | E> {
-  const length = Math.max(concreteChunkId(self).length, concreteChunkId(that).length);
+  const length = Math.max(concreteChunkId(self).length, concreteChunkId(that).length)
 
   if (length === 0) {
-    return Chunk.empty();
+    return Chunk.empty()
   }
 
-  const leftIterator = concreteChunkId(self)._arrayLikeIterator();
-  const rightIterator = concreteChunkId(that)._arrayLikeIterator();
-  let i = 0;
-  let j = 0;
-  let k = 0;
-  let leftLength = 0;
-  let rightLength = 0;
-  let leftArray: ArrayLike<A> | undefined = undefined;
-  let rightArray: ArrayLike<B> | undefined = undefined;
-  let leftNext;
-  let rightNext;
-  let builder = Chunk.empty<C | D | E>();
+  const leftIterator = concreteChunkId(self)._arrayLikeIterator()
+  const rightIterator = concreteChunkId(that)._arrayLikeIterator()
+  let i = 0
+  let j = 0
+  let k = 0
+  let leftLength = 0
+  let rightLength = 0
+  let leftArray: ArrayLike<A> | undefined = undefined
+  let rightArray: ArrayLike<B> | undefined = undefined
+  let leftNext
+  let rightNext
+  let builder = Chunk.empty<C | D | E>()
 
   while (i < length) {
     if (j < leftLength && k < rightLength) {
-      builder = builder.append(f(leftArray![j]!, rightArray![k]!));
-      i++;
-      j++;
-      k++;
+      builder = builder.append(f(leftArray![j]!, rightArray![k]!))
+      i++
+      j++
+      k++
     } else if (j === leftLength && (leftNext = leftIterator.next()) && !leftNext.done) {
-      leftArray = leftNext.value;
-      leftLength = leftArray.length;
-      j = 0;
+      leftArray = leftNext.value
+      leftLength = leftArray.length
+      j = 0
     } else if (
       k === rightLength &&
       (rightNext = rightIterator.next()) &&
       !rightNext.done
     ) {
-      rightArray = rightNext.value;
-      rightLength = rightArray.length;
-      k = 0;
+      rightArray = rightNext.value
+      rightLength = rightArray.length
+      k = 0
     } else if (j < leftLength) {
-      builder = builder.append(left(leftArray![j]!));
-      i++;
-      j++;
+      builder = builder.append(left(leftArray![j]!))
+      i++
+      j++
     } else if (k < rightLength) {
-      builder = builder.append(right(rightArray![k]!));
-      i++;
-      k++;
+      builder = builder.append(right(rightArray![k]!))
+      i++
+      k++
     }
   }
 
-  return builder;
+  return builder
 }
 
 /**
@@ -76,4 +76,4 @@ export function zipAllWith_<A, B, C, D, E>(
  *
  * @tsplus static Chunk/Aspects zipAllWith
  */
-export const zipAllWith = Pipeable(zipAllWith_);
+export const zipAllWith = Pipeable(zipAllWith_)

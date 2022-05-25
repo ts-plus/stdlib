@@ -5,8 +5,8 @@
  * @tsplus static Either/Ops getCompact
  */
 export function getCompact<E>(M: AssociativeIdentity<E>) {
-  const compact = Either.$.compactOption(M);
+  const compact = Either.$.compactOption(M)
   return HKT.instance<Compact<Either.FixedLeftHKT<E>>>({
     compact
-  });
+  })
 }

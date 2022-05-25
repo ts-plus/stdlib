@@ -3,5 +3,5 @@
  * @tsplus static ImmutableArray/Ops make
  */
 export function make<A extends readonly any[]>(...as: A): ImmutableArray<A[number]> {
-  return new ImmutableArray(as);
+  return new ImmutableArray(as)
 }

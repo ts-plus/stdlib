@@ -5,11 +5,11 @@
  */
 export function fill<A>(n: number, f: (n: number) => A): Chunk<A> {
   if (n <= 0) {
-    return Chunk.empty<A>();
+    return Chunk.empty<A>()
   }
-  let builder = Chunk.empty<A>();
+  let builder = Chunk.empty<A>()
   for (let i = 0; i < n; i++) {
-    builder = builder.append(f(i));
+    builder = builder.append(f(i))
   }
-  return builder;
+  return builder
 }

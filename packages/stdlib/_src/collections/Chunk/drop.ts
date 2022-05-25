@@ -5,7 +5,7 @@ import {
   SingletonTypeId,
   Slice,
   SliceTypeId
-} from "@tsplus/stdlib/collections/Chunk/definition";
+} from "@tsplus/stdlib/collections/Chunk/definition"
 
 /**
  * Drops the first `n` elements.
@@ -13,28 +13,28 @@ import {
  * @tsplus fluent Chunk drop
  */
 export function drop_<A>(self: Chunk<A>, n: number): Chunk<A> {
-  concreteChunk(self);
+  concreteChunk(self)
   if (n <= 0) {
-    return self;
+    return self
   } else if (n >= self.length) {
-    return _Empty;
+    return _Empty
   } else {
-    const len = self.length;
+    const len = self.length
     switch (self._typeId) {
       case EmptyTypeId: {
-        return _Empty;
+        return _Empty
       }
       case SliceTypeId: {
-        return new Slice(self.chunk, self.offset + n, self.length - n);
+        return new Slice(self.chunk, self.offset + n, self.length - n)
       }
       case SingletonTypeId: {
         if (n > 0) {
-          return _Empty;
+          return _Empty
         }
-        return self;
+        return self
       }
       default: {
-        return new Slice(self, n, len - n);
+        return new Slice(self, n, len - n)
       }
     }
   }
@@ -45,4 +45,4 @@ export function drop_<A>(self: Chunk<A>, n: number): Chunk<A> {
  *
  * @tsplus static Chunk/Aspects drop
  */
-export const drop = Pipeable(drop_);
+export const drop = Pipeable(drop_)

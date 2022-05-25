@@ -6,7 +6,7 @@
  * @tsplus index HashMap
  */
 export function get_<K, V>(self: HashMap<K, V>, key: K): Option<V> {
-  return self.getHash(key, Hash.unknown(key));
+  return self.getHash(key, Hash.unknown(key))
 }
 
 /**
@@ -15,4 +15,4 @@ export function get_<K, V>(self: HashMap<K, V>, key: K): Option<V> {
  *
  * @tsplus static HashMap/Aspects get
  */
-export const get = Pipeable(get_);
+export const get = Pipeable(get_)

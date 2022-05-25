@@ -1,4 +1,4 @@
-import * as P from "@tsplus/stdlib/prelude/ChainRec";
+import * as P from "@tsplus/stdlib/prelude/ChainRec"
 
 /**
  * @tsplus static Either/Ops ChainRec
@@ -12,4 +12,4 @@ export const ChainRec = HKT.instance<P.ChainRec<Either.HKT>>({
           : either.right.isLeft()
           ? Either.left(f(either.right.left))
           : Either.right(Either.right(either.right.right)))
-});
+})

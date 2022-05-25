@@ -8,12 +8,12 @@ export function separate_<E, A, B>(
   self: Either<E, Either<A, B>>,
   M: AssociativeIdentity<E>
 ): Tuple<[Either<E, A>, Either<E, B>]> {
-  const empty = Either.left(M.identity);
+  const empty = Either.left(M.identity)
   return self.isLeft()
     ? Tuple<[Either<E, A>, Either<E, B>]>(self, self)
     : self.right.isLeft()
     ? Tuple<[Either<E, A>, Either<E, B>]>(Either.right(self.right.left), empty)
-    : Tuple<[Either<E, A>, Either<E, B>]>(empty, Either.right(self.right.right));
+    : Tuple<[Either<E, A>, Either<E, B>]>(empty, Either.right(self.right.right))
 }
 
 /**
@@ -22,4 +22,4 @@ export function separate_<E, A, B>(
  *
  * @tsplus static Either/Aspects separate
  */
-export const separate = Pipeable(separate_);
+export const separate = Pipeable(separate_)

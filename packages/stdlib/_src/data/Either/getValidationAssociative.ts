@@ -16,5 +16,5 @@ export function getValidationAssociative<E, A>(
       : fy.isLeft()
       ? fy
       : Either.right(SA.combine(fx.right, fy.right))
-  );
+  )
 }

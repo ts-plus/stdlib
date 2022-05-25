@@ -5,7 +5,7 @@
  * @tsplus fluent Chunk equals
  */
 export function equals_<A, B>(self: Chunk<A>, that: Chunk<B>): boolean {
-  return self.corresponds(that, Equals.equals);
+  return self.corresponds(that, Equals.equals)
 }
 
 /**
@@ -13,4 +13,4 @@ export function equals_<A, B>(self: Chunk<A>, that: Chunk<B>): boolean {
  *
  * @tsplus static Chunk/Aspects equals
  */
-export const equals = Pipeable(equals_);
+export const equals = Pipeable(equals_)

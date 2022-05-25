@@ -1,4 +1,4 @@
-import { concreteChunkId } from "@tsplus/stdlib/collections/Chunk/definition";
+import { concreteChunkId } from "@tsplus/stdlib/collections/Chunk/definition"
 
 /**
  * Takes the first `n` elements.
@@ -6,7 +6,7 @@ import { concreteChunkId } from "@tsplus/stdlib/collections/Chunk/definition";
  * @tsplus fluent Chunk take
  */
 export function take_<A>(self: Chunk<A>, n: number): Chunk<A> {
-  return concreteChunkId(self)._take(n);
+  return concreteChunkId(self)._take(n)
 }
 
 /**
@@ -14,4 +14,4 @@ export function take_<A>(self: Chunk<A>, n: number): Chunk<A> {
  *
  * @tsplus static Chunk/Aspects take
  */
-export const take = Pipeable(take_);
+export const take = Pipeable(take_)

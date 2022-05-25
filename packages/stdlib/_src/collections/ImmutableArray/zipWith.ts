@@ -10,12 +10,12 @@ export function zipWith_<A, B, C>(
   that: ImmutableArray<B>,
   f: (a: A, b: B) => C
 ): ImmutableArray<C> {
-  const fc: Array<C> = [];
-  const length = Math.min(self.array.length, that.array.length);
+  const fc: Array<C> = []
+  const length = Math.min(self.array.length, that.array.length)
   for (let i = 0; i < length; i++) {
-    fc[i] = f(self.array[i]!, that.array[i]!);
+    fc[i] = f(self.array[i]!, that.array[i]!)
   }
-  return ImmutableArray.from(fc);
+  return ImmutableArray.from(fc)
 }
 
 /**
@@ -25,4 +25,4 @@ export function zipWith_<A, B, C>(
  *
  * @tsplus static ImmutableArray/Aspects zipWith
  */
-export const zipWith = Pipeable(zipWith_);
+export const zipWith = Pipeable(zipWith_)

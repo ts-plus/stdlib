@@ -1,4 +1,4 @@
-import { concreteChunkId } from "@tsplus/stdlib/collections/Chunk/definition";
+import { concreteChunkId } from "@tsplus/stdlib/collections/Chunk/definition"
 
 /**
  * Safely retrieve a value from a `Chunk`.
@@ -9,7 +9,7 @@ import { concreteChunkId } from "@tsplus/stdlib/collections/Chunk/definition";
 export function get_<A>(self: Chunk<A>, n: number): Option<A> {
   return !Number.isInteger(n) || n < 0 || n >= concreteChunkId(self).length
     ? Option.none
-    : Option.some(concreteChunkId(self)._get(n));
+    : Option.some(concreteChunkId(self)._get(n))
 }
 
 /**
@@ -17,4 +17,4 @@ export function get_<A>(self: Chunk<A>, n: number): Option<A> {
  *
  * @tsplus static Chunk/Aspects get
  */
-export const get = Pipeable(get_);
+export const get = Pipeable(get_)

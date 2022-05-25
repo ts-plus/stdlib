@@ -1,62 +1,62 @@
-import { EmptyMutableQueue, MutableQueueSym } from "@tsplus/stdlib/collections/mutable/MutableQueue/definition";
+import { EmptyMutableQueue, MutableQueueSym } from "@tsplus/stdlib/collections/mutable/MutableQueue/definition"
 
 export class Unbounded<A> implements MutableQueue<A> {
-  readonly [MutableQueueSym]: MutableQueueSym = MutableQueueSym;
+  readonly [MutableQueueSym]: MutableQueueSym = MutableQueueSym
 
-  private queue = new DoublyLinkedList<A>();
+  private queue = new DoublyLinkedList<A>()
 
   get size(): number {
-    return this.queue.length;
+    return this.queue.length
   }
 
   get isEmpty(): boolean {
-    return this.size === 0;
+    return this.size === 0
   }
 
   get isFull(): boolean {
-    return false;
+    return false
   }
 
   get capacity(): number {
-    return Number.MAX_SAFE_INTEGER;
+    return Number.MAX_SAFE_INTEGER
   }
 
   offer(a: A): boolean {
-    this.queue.add(a);
-    return true;
+    this.queue.add(a)
+    return true
   }
 
   offerAll(as: Collection<A>): Chunk<A> {
     for (const a of as) {
-      this.offer(a);
+      this.offer(a)
     }
-    return Chunk.empty();
+    return Chunk.empty()
   }
 
   poll<D>(a: D): A | D {
     if (this.isEmpty) {
-      return a;
+      return a
     }
-    return this.queue.shift()!;
+    return this.queue.shift()!
   }
 
   pollUpTo(n: number): Chunk<A> {
-    let result = Chunk.empty<A>();
-    let count = 0;
+    let result = Chunk.empty<A>()
+    let count = 0
 
     while (count < n) {
-      const elem = this.poll(EmptyMutableQueue);
+      const elem = this.poll(EmptyMutableQueue)
       if (elem === EmptyMutableQueue) {
-        break;
+        break
       }
-      result = result.append(elem);
-      count += 1;
+      result = result.append(elem)
+      count += 1
     }
 
-    return result;
+    return result
   }
 
   [Symbol.iterator](): Iterator<A> {
-    return this.queue[Symbol.iterator]();
+    return this.queue[Symbol.iterator]()
   }
 }

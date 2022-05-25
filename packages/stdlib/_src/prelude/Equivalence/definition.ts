@@ -6,12 +6,12 @@
  */
 export interface Equivalence<A> {
   readonly Law: {
-    readonly Equivalence: "Equivalence";
-  };
+    readonly Equivalence: "Equivalence"
+  }
   /**
    * Returns whether two values of type `A` are equal.
    */
-  readonly equals: (x: A, y: A) => boolean;
+  readonly equals: (x: A, y: A) => boolean
 }
 
 /**
@@ -23,13 +23,13 @@ export interface EquivalenceOps {
    * to first compare the values for reference equality and then compare the
    * values for value equality.
    */
-  <A>(equals: (x: A, y: A) => boolean): Equivalence<A>;
-  readonly $: EquivalenceAspects;
+  <A>(equals: (x: A, y: A) => boolean): Equivalence<A>
+  readonly $: EquivalenceAspects
 }
 export const Equivalence: EquivalenceOps = Object.assign(
   <A>(equals: (x: A, y: A) => boolean): Equivalence<A> => HKT.instance({ equals }),
   { $: {} }
-);
+)
 
 /**
  * @tsplus type Equivalence/Aspects
