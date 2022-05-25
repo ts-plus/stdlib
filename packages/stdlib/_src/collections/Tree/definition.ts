@@ -56,5 +56,5 @@ export function make<A>(value: A, forest: Forest<A> = empty): Tree<A> {
  * @tsplus static Tree/Ops isTree
  */
 export function isTree(t: unknown): t is Tree<unknown> {
-  return typeof t == "object" && t instanceof Tree && TreeTypeId in t;
+  return typeof t === "object" && t instanceof Tree && TreeTypeId in t;
 }
