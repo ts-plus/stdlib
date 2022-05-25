@@ -370,13 +370,6 @@ export function concat_<A, B>(self: Collection<A>, that: Collection<B>): Collect
 export const concat = Pipeable(concat_);
 
 /**
- * Concats iterators together that are strictly of the same type
- *
- * @tsplus operator Collection +
- */
-export const concatOperator: <A>(self: Collection<A>, that: Collection<A>) => Collection<A> = concat_;
-
-/**
  * Prepends a value to an iterator
  *
  * @tsplus fluent Collection prepend
@@ -407,13 +400,6 @@ export function prependOperator<A, B>(a: A, self: Collection<B>): Collection<A |
 }
 
 /**
- * Prepends a value to an iterator of the same type
- *
- * @tsplus operator Collection + 1.0
- */
-export const prependOperatorStrict: <A>(a: A, self: Collection<A>) => Collection<A> = prependOperator;
-
-/**
  * Appends a value to an iterator
  *
  * @tsplus fluent Collection append
@@ -434,13 +420,6 @@ export function append_<A, B>(self: Collection<A>, that: B): Collection<A | B> {
  * Appends a value to an iterator
  */
 export const append = Pipeable(append_);
-
-/**
- * Appends a value to an iterator of the same type
- *
- * @tsplus operator Collection + 1.0
- */
-export const appendOperatorStrict: <A>(self: Collection<A>, a: A) => Collection<A> = append_;
 
 /**
  * Flattens nested iterators
