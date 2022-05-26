@@ -338,4 +338,16 @@ describe.concurrent("HashMap", () => {
 
     assert.isTrue(a == b)
   })
+
+  it("getAssociative", () => {
+    const a = HashMap(Tuple(key(0), value("a")), Tuple(key(1), value("b")))
+    const b = HashMap(Tuple(key(0), value("a")), Tuple(key(1), value("b")))
+    const expected = HashMap(Tuple(key(0), value("aa")), Tuple(key(1), value("bb")))
+    const A = HashMap.getAssociative<Key, Value>(
+      Associative((x: Value, y: Value) => value(Associative.string.combine(x.s, y.s)))
+    )
+    assert.isTrue(
+      A.combine(a, b).equals(expected)
+    )
+  })
 })
