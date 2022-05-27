@@ -135,58 +135,33 @@ describe.concurrent("Option", () => {
     )
   })
 
-  it("getApplyAssociative", () => {
-    const S = Option.getApplyAssociative(Associative.sum)
+  describe("getAssociativeIdentity", () => {
+    it("Apply", () => {
+      const M = Option.getAssociativeIdentity(AssociativeIdentity.sum)
 
-    assert.isTrue(S.combine(Option.none, Option.none) == Option.none)
-    assert.isTrue(S.combine(Option.some(1), Option.none) == Option.none)
-    assert.isTrue(S.combine(Option.none, Option.some(1)) == Option.none)
-    assert.isTrue(S.combine(Option.some(1), Option.some(2)) == Option.some(3))
-  })
+      assert.isTrue(M.combine(M.identity, Option.none) == Option.none)
+      assert.isTrue(M.combine(Option.none, M.identity) == Option.none)
+      assert.isTrue(M.combine(M.identity, Option.some(1)) == Option.some(1))
+      assert.isTrue(M.combine(Option.some(1), M.identity) == Option.some(1))
+    })
 
-  it("getApplyAssociativeIdentity", () => {
-    const M = Option.getApplyAssociativeIdentity(AssociativeIdentity.sum)
+    it("First", () => {
+      const M = Option.getAssociativeIdentity<number>("First")
 
-    assert.isTrue(M.combine(M.identity, Option.none) == Option.none)
-    assert.isTrue(M.combine(Option.none, M.identity) == Option.none)
-    assert.isTrue(M.combine(M.identity, Option.some(1)) == Option.some(1))
-    assert.isTrue(M.combine(Option.some(1), M.identity) == Option.some(1))
-  })
+      assert.isTrue(M.combine(Option.none, Option.none) == Option.none)
+      assert.isTrue(M.combine(Option.some(1), Option.none) == Option.some(1))
+      assert.isTrue(M.combine(Option.none, Option.some(2)) == Option.some(2))
+      assert.isTrue(M.combine(Option.some(1), Option.some(2)) == Option.some(1))
+    })
 
-  it("getFirstAssociative", () => {
-    const S = Option.getFirstAssociative<number>()
+    it("Last", () => {
+      const M = Option.getAssociativeIdentity<number>("Last")
 
-    assert.isTrue(S.combine(Option.none, Option.none) == Option.none)
-    assert.isTrue(S.combine(Option.some(1), Option.none) == Option.some(1))
-    assert.isTrue(S.combine(Option.none, Option.some(2)) == Option.some(2))
-    assert.isTrue(S.combine(Option.some(1), Option.some(2)) == Option.some(1))
-  })
-
-  it("getFirstAssociativeIdentity", () => {
-    const M = Option.getFirstAssociativeIdentity<number>()
-
-    assert.isTrue(M.combine(Option.none, Option.none) == Option.none)
-    assert.isTrue(M.combine(Option.some(1), Option.none) == Option.some(1))
-    assert.isTrue(M.combine(Option.none, Option.some(2)) == Option.some(2))
-    assert.isTrue(M.combine(Option.some(1), Option.some(2)) == Option.some(1))
-  })
-
-  it("getLastAssociative", () => {
-    const S = Option.getLastAssociative<number>()
-
-    assert.isTrue(S.combine(Option.none, Option.none) == Option.none)
-    assert.isTrue(S.combine(Option.some(1), Option.none) == Option.some(1))
-    assert.isTrue(S.combine(Option.none, Option.some(2)) == Option.some(2))
-    assert.isTrue(S.combine(Option.some(1), Option.some(2)) == Option.some(1))
-  })
-
-  it("getLastAssociativeIdentity", () => {
-    const M = Option.getLastAssociativeIdentity<number>()
-
-    assert.isTrue(M.combine(Option.none, Option.none) == Option.none)
-    assert.isTrue(M.combine(Option.some(1), Option.none) == Option.some(1))
-    assert.isTrue(M.combine(Option.none, Option.some(2)) == Option.some(2))
-    assert.isTrue(M.combine(Option.some(1), Option.some(2)) == Option.some(1))
+      assert.isTrue(M.combine(Option.none, Option.none) == Option.none)
+      assert.isTrue(M.combine(Option.some(1), Option.none) == Option.some(1))
+      assert.isTrue(M.combine(Option.none, Option.some(2)) == Option.some(2))
+      assert.isTrue(M.combine(Option.some(1), Option.some(2)) == Option.some(2))
+    })
   })
 
   it("getOrElse", () => {
