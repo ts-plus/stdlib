@@ -1,4 +1,4 @@
-const DoF = DSL.getDoF(Option.Monad)
+const DoF = Prelude.getDoF(Option.Monad)
 
 /**
  * @tsplus static Option/Ops Do

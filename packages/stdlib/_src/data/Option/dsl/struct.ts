@@ -1,7 +1,7 @@
 /**
  * @tsplus static Option/Ops struct
  */
-export const struct = DSL.structF<Option.HKT>({
+export const struct = Prelude.structF<Option.HKT>({
   ...Option.Monad,
   ...Option.Applicative
 })

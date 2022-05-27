@@ -5,5 +5,5 @@ import type * as P from "@tsplus/stdlib/prelude/ForEach"
  */
 export const ForEach = HKT.instance<P.ForEach<Either.HKT>>({
   ...Either.Covariant,
-  forEachF: Either.forEachF
+  forEach: Either.forEachF
 })

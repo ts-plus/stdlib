@@ -1,4 +1,4 @@
 /**
  * @tsplus static Either/Ops struct
  */
-export const struct = DSL.structF(Either.Applicative)
+export const struct = Prelude.structF(Either.Applicative)

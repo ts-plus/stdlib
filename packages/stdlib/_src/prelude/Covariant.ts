@@ -1,13 +1,12 @@
 /**
  * @tsplus type Covariant
  */
-export interface Covariant<F extends HKT> extends HKT.Typeclass<F> {
-  readonly Law: {
-    readonly Covariant: "Covariant"
-  }
-  readonly map: <A, B>(
+export interface Covariant<F extends HKT> extends HKT.TypeClass<F> {
+  readonly Law: { readonly Covariant: "Covariant" }
+  readonly map: <R, E, A, B>(
+    fa: HKT.Kind<F, R, E, A>,
     f: (a: A) => B
-  ) => <R, E>(fa: HKT.Kind<F, R, E, A>) => HKT.Kind<F, R, E, B>
+  ) => HKT.Kind<F, R, E, B>
 }
 
 /**
@@ -18,10 +17,9 @@ export const Covariant: CovariantOps = {}
 
 export interface CovariantComposition<F extends HKT, G extends HKT> {
   readonly Law: { readonly Covariant: "Covariant" }
-  readonly map: <A, B>(
+  readonly map: <FR, FE, GR, GE, A, B>(
+    fa: HKT.Kind<F, FR, FE, HKT.Kind<G, GR, GE, A>>,
     f: (a: A) => B
-  ) => <FR, FE, GR, GE>(
-    fa: HKT.Kind<F, FR, FE, HKT.Kind<G, GR, GE, A>>
   ) => HKT.Kind<F, FR, FE, HKT.Kind<G, GR, GE, B>>
 }
 
@@ -33,8 +31,6 @@ export function getCovariantComposition<F extends HKT, G extends HKT>(
   G: Covariant<G>
 ): CovariantComposition<F, G> {
   return HKT.instance({
-    map: <A, B>(f: (a: A) => B): <FR, FE, GR, GE>(
-      fa: HKT.Kind<F, FR, FE, HKT.Kind<G, GR, GE, A>>
-    ) => HKT.Kind<F, FR, FE, HKT.Kind<G, GR, GE, B>> => F.map(G.map(f))
+    map: (fa, f) => F.map(fa, (ga) => G.map(ga, f))
   })
 }

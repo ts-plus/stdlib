@@ -1,4 +1,4 @@
-const Matchers = DSL.matchers<Either.HKT>()
+const Matchers = Prelude.matchers<Either.HKT>()
 
 /**
  * @tsplus static Either/Ops match

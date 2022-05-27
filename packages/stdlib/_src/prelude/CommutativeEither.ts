@@ -4,8 +4,6 @@
  *
  * @tsplus type CommutativeEither
  */
-export type CommutativeEither<F extends HKT> = {
-  readonly Law: {
-    readonly CommutativeEither: "CommutativeEither"
-  }
-} & AssociativeEither<F>
+export interface CommutativeEither<F extends HKT> extends AssociativeEither<F> {
+  readonly Law: AssociativeEither<F>["Law"] & { readonly CommutativeEither: "CommutativeEither" }
+}

@@ -1,7 +1,7 @@
 /**
  * @tsplus type Separate
  */
-export interface Separate<F extends HKT> extends HKT.Typeclass<F> {
+export interface Separate<F extends HKT> extends HKT.TypeClass<F> {
   readonly Law: {
     readonly Separate: "Separate"
   }

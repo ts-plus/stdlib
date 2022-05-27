@@ -1,5 +1,5 @@
 /**
- * Boolean `Associative`  under conjunction.
+ * Boolean `Associative` under conjunction.
  *
  * @tsplus static Associative/Ops all
  */

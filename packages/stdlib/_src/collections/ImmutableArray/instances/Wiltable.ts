@@ -1,8 +1,8 @@
-import type * as P from "@tsplus/stdlib/prelude/Wiltable"
+import type * as P from "@tsplus/stdlib/prelude/Separable"
 
 /**
  * @tsplus static ImmutableArray/Ops Wiltable
  */
-export const Wiltable = HKT.instance<P.Wiltable<ImmutableArray.HKT>>({
-  separateF: ImmutableArray.separateF
+export const Wiltable = HKT.instance<P.Separable<ImmutableArray.HKT>>({
+  separate: ImmutableArray.separateF
 })

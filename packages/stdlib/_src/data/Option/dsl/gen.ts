@@ -1,4 +1,4 @@
 /**
  * @tsplus static Option/Ops gen
  */
-export const gen = DSL.genF<Option.HKT>(Option.Monad)
+export const gen = Prelude.genF<Option.HKT>(Option.Monad)

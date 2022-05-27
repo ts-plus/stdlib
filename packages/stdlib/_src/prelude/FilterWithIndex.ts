@@ -1,14 +1,13 @@
 /**
  * @tsplus type FilterWithIndex
  */
-export interface FilterWithIndex<K, F extends HKT> extends HKT.Typeclass<F> {
-  readonly Law: {
-    readonly FilterWithIndex: "FilterWithIndex"
-  }
+export interface FilterWithIndex<K, F extends HKT> extends HKT.TypeClass<F> {
+  readonly Law: { readonly FilterWithIndex: "FilterWithIndex" }
   readonly filterWithIndex: {
-    <N extends string, K, A, B extends A>(
+    <R, E, N extends string, K, A, B extends A>(
+      fa: HKT.Kind<F, R, E, A>,
       refinement: RefinementWithIndex<K, A, B>
-    ): <R, E>(fa: HKT.Kind<F, R, E, A>) => HKT.Kind<F, R, E, B>
-    <K, A>(predicate: PredicateWithIndex<K, A>): <R, E>(fa: HKT.Kind<F, R, E, A>) => HKT.Kind<F, R, E, A>
+    ): HKT.Kind<F, R, E, B>
+    <R, E, K, A>(fa: HKT.Kind<F, R, E, A>, predicate: PredicateWithIndex<K, A>): HKT.Kind<F, R, E, A>
   }
 }

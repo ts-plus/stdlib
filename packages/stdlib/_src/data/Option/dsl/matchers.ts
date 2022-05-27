@@ -1,4 +1,4 @@
-const Matchers = DSL.matchers<Option.HKT>()
+const Matchers = Prelude.matchers<Option.HKT>()
 
 /**
  * @tsplus static Option/Ops match

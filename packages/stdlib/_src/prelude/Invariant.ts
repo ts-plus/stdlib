@@ -1,10 +1,8 @@
 /**
  * @tsplus type Invariant
  */
-export interface Invariant<F extends HKT> extends HKT.Typeclass<F> {
-  readonly Law: {
-    readonly Invariant: "Invariant"
-  }
+export interface Invariant<F extends HKT> extends HKT.TypeClass<F> {
+  readonly Law: { readonly Invariant: "Invariant" }
   readonly invmap: <A, B>(fg: {
     f: (a: A) => B
     g: (b: B) => A

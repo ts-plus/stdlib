@@ -8,12 +8,21 @@ export function contramap<A, B>(fa: Ord<A>, f: (b: B) => A): Ord<B> {
 }
 
 /**
+ * Contramap Ord input
+ *
+ * @tsplus static Ord/Ops from
+ */
+export function from<A, B>(f: (b: B) => A, /** @tsplus auto */ fa: Ord<A>): Ord<B> {
+  return Ord((x, y) => fa.compare(f(x), f(y)))
+}
+
+/**
  * Test whether one value is _strictly greater than_ another
  *
  * @tsplus getter Ord gt
  */
-export function gt<A>(O: Ord<A>): (x: A, y: A) => boolean {
-  return (x, y) => O.compare(x, y) === 1
+export function gt<A>(x: A, y: A, /** @tsplus auto */ O: Ord<A>): boolean {
+  return O.compare(x, y) === 1
 }
 
 /**
@@ -21,8 +30,8 @@ export function gt<A>(O: Ord<A>): (x: A, y: A) => boolean {
  *
  * @tsplus getter Ord leq
  */
-export function leq<A>(O: Ord<A>): (x: A, y: A) => boolean {
-  return (x, y) => O.compare(x, y) !== 1
+export function leq<A>(x: A, y: A, /** @tsplus auto */ O: Ord<A>): boolean {
+  return O.compare(x, y) !== 1
 }
 
 /**
@@ -30,8 +39,8 @@ export function leq<A>(O: Ord<A>): (x: A, y: A) => boolean {
  *
  * @tsplus getter Ord lt
  */
-export function lt<A>(O: Ord<A>): (x: A, y: A) => boolean {
-  return (x, y) => O.compare(x, y) === -1
+export function lt<A>(x: A, y: A, /** @tsplus auto */ O: Ord<A>): boolean {
+  return O.compare(x, y) === -1
 }
 
 /**
@@ -39,8 +48,8 @@ export function lt<A>(O: Ord<A>): (x: A, y: A) => boolean {
  *
  * @tsplus getter Ord max
  */
-export function max<A>(O: Ord<A>): (x: A, y: A) => A {
-  return (x, y) => (O.compare(x, y) === -1 ? y : x)
+export function max<A>(x: A, y: A, /** @tsplus auto */ O: Ord<A>): A {
+  return O.compare(x, y) === -1 ? y : x
 }
 
 /**
@@ -48,8 +57,8 @@ export function max<A>(O: Ord<A>): (x: A, y: A) => A {
  *
  * @tsplus getter Ord min
  */
-export function min<A>(O: Ord<A>): (x: A, y: A) => A {
-  return (x, y) => (O.compare(x, y) === 1 ? y : x)
+export function min<A>(x: A, y: A, /** @tsplus auto */ O: Ord<A>): A {
+  return O.compare(x, y) === 1 ? y : x
 }
 
 /**
@@ -57,10 +66,8 @@ export function min<A>(O: Ord<A>): (x: A, y: A) => A {
  *
  * @tsplus getter Ord between
  */
-export function between<A>(O: Ord<A>): (low: A, hi: A) => (x: A) => boolean {
-  const lessThanO = lt(O)
-  const greaterThanO = gt(O)
-  return (low, hi) => (x) => lessThanO(x, low) || greaterThanO(x, hi) ? false : true
+export function between<A>(x: A, low: A, hi: A, /** @tsplus auto */ O: Ord<A>): boolean {
+  return (lt(x, low) || gt(x, hi)) ? false : true
 }
 
 /**
@@ -68,10 +75,8 @@ export function between<A>(O: Ord<A>): (low: A, hi: A) => (x: A) => boolean {
  *
  * @tsplus getter Ord clamp
  */
-export function clamp<A>(O: Ord<A>): (low: A, hi: A) => (x: A) => A {
-  const minO = min(O)
-  const maxO = max(O)
-  return (low, hi) => (x) => maxO(minO(x, hi), low)
+export function clamp<A>(x: A, low: A, hi: A, /** @tsplus auto */ O: Ord<A>): A {
+  return max(min(x, hi), low)
 }
 
 /**
