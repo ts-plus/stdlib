@@ -1,5 +1,15 @@
 # @tsplus/stdlib
 
+## 0.0.72
+
+### Patch Changes
+
+- [#153](https://github.com/ts-plus/stdlib/pull/153) [`ec5b67a`](https://github.com/ts-plus/stdlib/commit/ec5b67af17fa7997681ed1923333eece82b1ebc0) Thanks [@IMax153](https://github.com/IMax153)! - fix `this is undefined` bug in Env
+
+* [#150](https://github.com/ts-plus/stdlib/pull/150) [`e84407b`](https://github.com/ts-plus/stdlib/commit/e84407b169e7c5cb5bd66e419d4c8b603f66e02f) Thanks [@mikearnaldi](https://github.com/mikearnaldi)! - Fix Option getLastAssociative and revise getAssociative
+
+- [#148](https://github.com/ts-plus/stdlib/pull/148) [`b63bfb3`](https://github.com/ts-plus/stdlib/commit/b63bfb3f318c84e8aaf21a941ca75b4b49981ea0) Thanks [@IMax153](https://github.com/IMax153)! - death to semicolons
+
 ## 0.0.71
 
 ### Patch Changes
