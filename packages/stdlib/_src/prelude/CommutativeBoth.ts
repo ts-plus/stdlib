@@ -4,8 +4,6 @@
  *
  * @tsplus type CommutativeBoth
  */
-export type CommutativeBoth<F extends HKT> = {
-  readonly Law: {
-    readonly CommutativeBoth: "CommutativeBoth"
-  }
-} & AssociativeBoth<F>
+export interface CommutativeBoth<F extends HKT> extends AssociativeBoth<F> {
+  readonly Law: AssociativeBoth<F>["Law"] & { readonly CommutativeBoth: "CommutativeBoth" }
+}

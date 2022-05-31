@@ -1,4 +1,4 @@
-const DoF = DSL.getDoF(ImmutableArray.Monad)
+const DoF = Prelude.getDoF(ImmutableArray.Monad)
 
 /**
  * @tsplus static ImmutableArray/Ops Do

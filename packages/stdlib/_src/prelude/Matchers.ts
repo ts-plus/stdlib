@@ -126,7 +126,12 @@ export interface MatchMorphFn<
 }
 
 /**
- * @tsplus static DSL matchers
+ * @tsplus type Matchers
+ */
+export interface Matchers {}
+
+/**
+ * @tsplus static Matchers get
  */
 export function matchers<F extends HKT>() {
   function match<N extends string>(tag: N): MatchFn<F, N> {

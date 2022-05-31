@@ -1,4 +1,4 @@
 /**
  * @tsplus static Chunk/Ops Applicative
  */
-export const Applicative = DSL.getApplicativeF(Chunk.Monad)
+export const Applicative = Prelude.getApplicativeF(Chunk.Monad)

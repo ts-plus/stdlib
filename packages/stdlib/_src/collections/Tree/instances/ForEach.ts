@@ -5,5 +5,5 @@ import type * as P from "@tsplus/stdlib/prelude/ForEach"
  */
 export const ForEach = HKT.instance<P.ForEach<Tree.HKT>>({
   ...Tree.Covariant,
-  forEachF: Tree.forEachF
+  forEach: Tree.forEachF
 })

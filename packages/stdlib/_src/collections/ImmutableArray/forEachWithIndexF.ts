@@ -6,7 +6,7 @@ export const forEachWithIndexF = ForEachWithIndex.implementForEachWithIndexF<num
     (G) =>
       (f) =>
         (fa) => {
-          const succeed = DSL.succeedF(G)
+          const succeed = Prelude.succeedF(G)
           let base = succeed<ImmutableArray<typeof _.B>, typeof _.R, typeof _.E>(ImmutableArray.empty())
           for (let i = 0; i < fa.array.length; i = i + 1) {
             base = G.map(

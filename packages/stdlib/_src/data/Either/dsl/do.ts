@@ -1,4 +1,4 @@
-const DoF = DSL.getDoF<Either.HKT>(Either.Monad)
+const DoF = Prelude.getDoF<Either.HKT>(Either.Monad)
 
 /**
  * @tsplus static Either/Ops Do

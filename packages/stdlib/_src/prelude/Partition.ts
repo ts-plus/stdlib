@@ -1,16 +1,16 @@
 /**
  * @tsplus type Partition
  */
-export interface Partition<F extends HKT> extends HKT.Typeclass<F> {
-  readonly Law: {
-    readonly Partition: "Partition"
-  }
+export interface Partition<F extends HKT> extends HKT.TypeClass<F> {
+  readonly Law: { readonly Partition: "Partition" }
   readonly partition: {
-    <A, B extends A>(refinement: Refinement<A, B>): <R, E>(
-      fa: HKT.Kind<F, R, E, A>
-    ) => Tuple<[HKT.Kind<F, R, E, A>, HKT.Kind<F, R, E, B>]>
-    <A>(predicate: Predicate<A>): <R, E>(
-      fa: HKT.Kind<F, R, E, A>
-    ) => Tuple<[HKT.Kind<F, R, E, A>, HKT.Kind<F, R, E, A>]>
+    <R, E, A, B extends A>(
+      fa: HKT.Kind<F, R, E, A>,
+      refinement: Refinement<A, B>
+    ): Tuple<[HKT.Kind<F, R, E, A>, HKT.Kind<F, R, E, B>]>
+    <R, E, A>(
+      fa: HKT.Kind<F, R, E, A>,
+      predicate: Predicate<A>
+    ): Tuple<[HKT.Kind<F, R, E, A>, HKT.Kind<F, R, E, A>]>
   }
 }

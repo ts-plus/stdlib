@@ -18,7 +18,7 @@ export const number: Ord<number> = Ord(compare)
  * @tsplus static Ord/Ops date
  * @tsplus implicit
  */
-export const date: Ord<Date> = number.contramap((date: Date) => date.valueOf())
+export const date: Ord<Date> = Ord.from((date: Date) => date.valueOf())
 
 /**
  * @tsplus static Ord/Ops string

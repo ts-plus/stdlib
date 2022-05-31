@@ -3,13 +3,12 @@ import type { CovariantComposition } from "@tsplus/stdlib/prelude/Covariant"
 /**
  * @tsplus type Contravariant
  */
-export interface Contravariant<F extends HKT> extends HKT.Typeclass<F> {
-  readonly Law: {
-    readonly Contravariant: "Contravariant"
-  }
-  readonly contramap: <A, B>(
+export interface Contravariant<F extends HKT> extends HKT.TypeClass<F> {
+  readonly Law: { readonly Contravariant: "Contravariant" }
+  readonly contramap: <R, E, A, B>(
+    fa: HKT.Kind<F, R, E, A>,
     f: (b: B) => A
-  ) => <R, E>(fa: HKT.Kind<F, R, E, A>) => HKT.Kind<F, R, E, B>
+  ) => HKT.Kind<F, R, E, B>
 }
 
 /**
@@ -26,8 +25,9 @@ export function getContravariantComposition<F extends HKT, G extends HKT>(
   G: Contravariant<G>
 ): CovariantComposition<F, G> {
   return HKT.instance({
-    map: <A, B>(f: (a: A) => B): <FR, FE, GR, GE>(
-      fa: HKT.Kind<F, FR, FE, HKT.Kind<G, GR, GE, A>>
-    ) => HKT.Kind<F, FR, FE, HKT.Kind<G, GR, GE, B>> => F.contramap(G.contramap(f))
+    map: <FR, FE, GR, GE, A, B>(
+      fa: HKT.Kind<F, FR, FE, HKT.Kind<G, GR, GE, A>>,
+      f: (a: A) => B
+    ): HKT.Kind<F, FR, FE, HKT.Kind<G, GR, GE, B>> => F.contramap(fa, (g: HKT.Kind<G, GR, GE, B>) => G.contramap(g, f))
   })
 }

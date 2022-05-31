@@ -1,11 +1,10 @@
 /**
  * @tsplus type FilterMapWithIndex
  */
-export interface FilterMapWithIndex<K, F extends HKT> extends HKT.Typeclass<F> {
-  readonly Law: {
-    readonly FilterMapWithIndex: "FilterMapWithIndex"
-  }
-  readonly filterMapWithIndex: <A, B>(
+export interface FilterMapWithIndex<K, F extends HKT> extends HKT.TypeClass<F> {
+  readonly Law: { readonly FilterMapWithIndex: "FilterMapWithIndex" }
+  readonly filterMapWithIndex: <R, E, A, B>(
+    fa: HKT.Kind<F, R, E, A>,
     f: (k: K, a: A) => Option<B>
-  ) => <R, E>(fa: HKT.Kind<F, R, E, A>) => HKT.Kind<F, R, E, B>
+  ) => HKT.Kind<F, R, E, B>
 }

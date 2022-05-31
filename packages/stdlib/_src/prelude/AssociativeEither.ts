@@ -4,11 +4,10 @@
  *
  * @tsplus type AssociativeEither
  */
-export interface AssociativeEither<F extends HKT> extends HKT.Typeclass<F> {
-  readonly Law: {
-    readonly AssociativeEither: "AssociativeEither"
-  }
-  readonly orElseEither: <R2, E2, B>(
+export interface AssociativeEither<F extends HKT> extends HKT.TypeClass<F> {
+  readonly Law: { readonly AssociativeEither: "AssociativeEither" }
+  readonly orElseEither: <R, E, A, R2, E2, B>(
+    fa: HKT.Kind<F, R, E, A>,
     fb: LazyArg<HKT.Kind<F, R2, E2, B>>
-  ) => <R, E, A>(fa: HKT.Kind<F, R, E, A>) => HKT.Kind<F, R2 & R, E2 | E, Either<A, B>>
+  ) => HKT.Kind<F, R2 & R, E2 | E, Either<A, B>>
 }

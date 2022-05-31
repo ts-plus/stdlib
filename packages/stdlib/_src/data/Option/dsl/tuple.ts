@@ -1,7 +1,7 @@
 /**
  * @tsplus static Option/Ops tuple
  */
-export const tuple = DSL.tupleF<Option.HKT>({
+export const tuple = Prelude.tupleF<Option.HKT>({
   ...Option.Monad,
   ...Option.Applicative
 })

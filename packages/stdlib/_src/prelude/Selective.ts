@@ -1,11 +1,10 @@
 /**
  * @tsplus type Select
  */
-export interface Select<F extends HKT> extends HKT.Typeclass<F> {
-  readonly select: <R2, E2, A, B>(
+export interface Select<F extends HKT> extends HKT.TypeClass<F> {
+  readonly select: <R, E, B2, R2, E2, A, B>(
+    fa: HKT.Kind<F, R, E, Either<A, B2>>,
     fab: HKT.Kind<F, R2, E2, (a: A) => B>
-  ) => <R, E, B2>(
-    fa: HKT.Kind<F, R, E, Either<A, B2>>
   ) => HKT.Kind<F, R2 & R, E2 | E, B | B2>
 }
 
@@ -28,84 +27,78 @@ export const Select: SelectOps = {}
 /**
  * @tsplus static Select/Ops monad
  */
-export function monadF<F extends HKT>(F: Monad<F>): SelectiveMonad<F> {
-  const succeedF = DSL.succeedF(F)
-  const flatMapF_ = DSL.flatMapF_(F)
+export function monad<F extends HKT>(F: Monad<F>): SelectiveMonad<F> {
   return HKT.instance<SelectiveMonad<F>>({
     ...F,
-    select: <R2, E2, A, B>(fab: HKT.Kind<F, R2, E2, (a: A) => B>) =>
-      <R, E, B2>(
-        fa: HKT.Kind<F, R, E, Either<A, B2>>
-      ): HKT.Kind<F, R2 & R, E2 | E, B | B2> =>
-        flatMapF_(fa, (either) =>
+    select: <R, E, B2, R2, E2, A, B>(fa: HKT.Kind<F, R, E, Either<A, B2>>, fab: HKT.Kind<F, R2, E2, (a: A) => B>) =>
+      F.flatMap(
+        fa,
+        (either) =>
           either.fold(
-            (a) => F.map((g: (a: A) => B) => g(a))(fab),
-            (b) => succeedF<B | B2, R & R2, E | E2>(b)
-          ))
+            (a) => F.map(fab, (g) => g(a)) as HKT.Kind<F, R2 & R, E2 | E, B | B2>,
+            (b) => F.succeed(b) as HKT.Kind<F, R2 & R, E2 | E, B | B2>
+          )
+      )
   })
 }
 
 /**
  * @tsplus static Select/Ops applicative
  */
-export function applicativeF<F extends HKT>(F: Applicative<F>): Selective<F> {
+export function applicative<F extends HKT>(F: Applicative<F>): Selective<F> {
   return HKT.instance<Selective<F>>({
     ...F,
-    select: <R2, E2, A, B>(fab: HKT.Kind<F, R2, E2, (a: A) => B>) =>
-      <R, E, B2>(fa: HKT.Kind<F, R, E, Either<A, B2>>): HKT.Kind<F, R2 & R, E2 | E, B | B2> => {
-        const both = F.both(fab)(fa)
-        return F.map(
-          ({ tuple: [ea, f] }: Tuple<[Either<A, B2>, (a: A) => B]>) => ea.fold(f, identity)
-        )(both)
-      }
+    select: <R, E, B2, R2, E2, A, B>(
+      fa: HKT.Kind<F, R, E, Either<A, B2>>,
+      fab: HKT.Kind<F, R2, E2, (a: A) => B>
+    ): HKT.Kind<F, R2 & R, E2 | E, B | B2> => {
+      const both = F.both(fa, fab)
+      return F.map(both, ({ tuple: [ea, f] }: Tuple<[Either<A, B2>, (a: A) => B]>) => ea.fold(f, identity))
+    }
   })
 }
 
 /**
- * @tsplus static Select/Ops branchF
+ * @tsplus fluent Selective branch
  */
-export function branchF<F extends HKT>(F: Selective<F>) {
-  return <R2, E2, A, D1, R3, E3, B, D2>(
-    left: HKT.Kind<F, R2, E2, (a: A) => D1>,
-    right: HKT.Kind<F, R3, E3, (a: B) => D2>
-  ) =>
-    <R, E>(
-      fe: HKT.Kind<F, R, E, Either<A, B>>
-    ): HKT.Kind<F, R & R2 & R3, E | E2 | E3, D1 | D2> => {
-      const mapped = F.map((either: Either<A, B>) => either.map(Either.left))(fe)
-      const selected = F.select<R2, E2, A, Either<B, D1>>(
-        F.map((fac: (a: A) => D1) => (a: A) => Either.right(fac(a)))(left)
-      )(mapped)
-      return F.select(right)(selected)
-    }
+export function branch<F extends HKT, R, E, R2, E2, A, D1, R3, E3, B, D2>(
+  F: Selective<F>,
+  fe: HKT.Kind<F, R, E, Either<A, B>>,
+  left: HKT.Kind<F, R2, E2, (a: A) => D1>,
+  right: HKT.Kind<F, R3, E3, (a: B) => D2>
+): HKT.Kind<F, R & R2 & R3, E | E2 | E3, D1 | D2> {
+  const mapped = F.map(fe, (either: Either<A, B>) => either.map(Either.left))
+  const selected = F.select(
+    mapped,
+    F.map(left, (fac: (a: A) => D1) => (a: A) => Either.right(fac(a)))
+  )
+  return F.select(selected, right)
 }
 
 /**
- * @tsplus static Select/Ops ifF
+ * @tsplus fluent Selective if
  */
-export function ifF<F extends HKT>(F: Selective<F>) {
-  return <R2, E2, A, R3, E3, B>(
-    then_: HKT.Kind<F, R2, E2, A>,
-    else_: HKT.Kind<F, R3, E3, B>
-  ) =>
-    <S, R, E>(
-      if_: HKT.Kind<F, R, E, boolean>
-    ): HKT.Kind<F, R & R2 & R3, E | E2 | E3, A | B> => {
-      const mapped = F.map(
-        (b: boolean) => (b ? Either.left(undefined) : Either.right(undefined))
-      )(if_)
-      return branchF(F)(
-        F.map((a: A) => () => a)(then_),
-        F.map((b: B) => () => b)(else_)
-      )(mapped)
-    }
+export function cond<F extends HKT, R2, E2, A, R3, E3, B, R, E>(
+  F: Selective<F>,
+  if_: HKT.Kind<F, R, E, boolean>,
+  then_: HKT.Kind<F, R2, E2, A>,
+  else_: HKT.Kind<F, R3, E3, B>
+): HKT.Kind<F, R & R2 & R3, E | E2 | E3, A | B> {
+  const mapped = F.map(if_, (b: boolean) => (b ? Either.left(undefined) : Either.right(undefined)))
+  return F.branch(
+    mapped,
+    F.map(then_, (a: A) => () => a),
+    F.map(else_, (b: B) => () => b)
+  )
 }
 
 /**
- * @tsplus static Select/Ops whenF
+ * @tsplus fluent Selective when
  */
-export function whenF<F extends HKT>(F: Selective<F>) {
-  const succeedF = DSL.succeedF(F)
-  return <R2, E2>(act: HKT.Kind<F, R2, E2, void>) =>
-    <R, E>(if_: HKT.Kind<F, R, E, boolean>): HKT.Kind<F, R & R2, E | E2, void> => ifF(F)(act, succeedF(undefined))(if_)
+export function when<F extends HKT, R, E, R2, E2>(
+  F: Selective<F>,
+  if_: HKT.Kind<F, R, E, boolean>,
+  act: HKT.Kind<F, R2, E2, void>
+): HKT.Kind<F, R & R2, E | E2, void> {
+  return F.if(if_, act, F.succeed(undefined))
 }

@@ -1,4 +1,4 @@
-const Matchers = DSL.matchers<ImmutableArray.HKT>()
+const Matchers = Prelude.matchers<ImmutableArray.HKT>()
 
 /**
  * @tsplus static ImmutableArray/Ops match

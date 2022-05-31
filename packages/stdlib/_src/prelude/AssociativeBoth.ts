@@ -4,13 +4,10 @@
  *
  * @tsplus type AssociativeBoth
  */
-export interface AssociativeBoth<F extends HKT> extends HKT.Typeclass<F> {
-  readonly Law: {
-    readonly AssociativeBoth: "AssociativeBoth"
-  }
-  both: <R2, E2, B>(
+export interface AssociativeBoth<F extends HKT> extends HKT.TypeClass<F> {
+  readonly Law: { readonly AssociativeBoth: "AssociativeBoth" }
+  both: <R, E, A, R2, E2, B>(
+    fa: HKT.Kind<F, R, E, A>,
     fb: HKT.Kind<F, R2, E2, B>
-  ) => <R, E, A>(
-    fa: HKT.Kind<F, R, E, A>
   ) => HKT.Kind<F, R2 & R, E2 | E, Tuple<[A, B]>>
 }

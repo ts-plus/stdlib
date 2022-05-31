@@ -1,4 +1,4 @@
-import { GenLazyHKT } from "@tsplus/stdlib/prelude/DSL/genF"
+import { GenLazyHKT } from "@tsplus/stdlib/prelude/Prelude/gen"
 
 const adapter: {
   <A>(_: LazyArg<Option<A>>): GenLazyHKT<ImmutableArray<A>, A>
@@ -15,6 +15,6 @@ const adapter: {
 /**
  * @tsplus static ImmutableArray/Ops gen
  */
-export const gen = DSL.genWithHistoryF(ImmutableArray.Monad, {
+export const gen = Prelude.genWithHistoryF(ImmutableArray.Monad, {
   adapter
 })

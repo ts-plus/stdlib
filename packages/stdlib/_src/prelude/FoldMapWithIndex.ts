@@ -1,10 +1,8 @@
 /**
  * @tsplus type FoldMapWithIndex
  */
-export interface FoldMapWithIndex<K, F extends HKT> extends HKT.Typeclass<F> {
-  readonly Law: {
-    FoldMapWithIndex: "FoldMapWithIndex"
-  }
+export interface FoldMapWithIndex<K, F extends HKT> extends HKT.TypeClass<F> {
+  readonly Law: { FoldMapWithIndex: "FoldMapWithIndex" }
   readonly foldMapWithIndex: FoldMapWithIndex.Fn<K, F>
 }
 
