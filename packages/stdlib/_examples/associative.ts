@@ -79,7 +79,7 @@ export const makeVoteMap = (map: VoteData) => new VoteMap(map)
  * @tsplus static Example/VoteMap/Ops isVoteMap
  */
 export function isVoteMap(t: unknown): t is VoteMap {
-  return typeof t == "object" && t instanceof VoteMap
+  return typeof t === "object" && t instanceof VoteMap
 }
 
 /**
