@@ -1,5 +1,11 @@
 # @tsplus/stdlib
 
+## 0.0.74
+
+### Patch Changes
+
+- [#156](https://github.com/ts-plus/stdlib/pull/156) [`074b3b3`](https://github.com/ts-plus/stdlib/commit/074b3b3f83f40edc35f5e7ad226f16706653bc5d) Thanks [@mikearnaldi](https://github.com/mikearnaldi)! - Fix empty env type
+
 ## 0.0.73
 
 ### Patch Changes
