@@ -21,3 +21,7 @@ export const Tag: TagOps = Object.assign(
 export interface Tag<Service> {
   readonly [Tag.sym]: (_: never) => Service
 }
+
+export declare namespace Tag {
+  type TagType<T extends Tag<any>> = T extends Tag<infer A> ? A : never
+}

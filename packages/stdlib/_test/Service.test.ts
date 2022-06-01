@@ -16,6 +16,7 @@ const C = Service.Tag<C>()
 describe.concurrent("Environment", () => {
   it("adds and retrieve services", () => {
     const env = Service.Env(A, { a: 0 }).add(B, { b: 1 })
+
     assert.deepEqual(env.get(A), { a: 0 })
     assert.deepEqual(env.getOption(B).value, { b: 1 })
     assert.isTrue(env.getOption(C).isNone())
