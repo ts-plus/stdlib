@@ -5,10 +5,10 @@ import type { Tag } from "@tsplus/stdlib/service/Tag"
  */
 export interface EnvOps {
   readonly sym: unique symbol
-  readonly empty: Env<unknown>
+  readonly empty: Env<never>
 
   <S, H>(tag: Tag<S>, service: H): Env<S>
-  new(unsafeMap: Env<unknown>["unsafeMap"]): Env<unknown>
+  new(unsafeMap: Env<unknown>["unsafeMap"]): Env<never>
 }
 
 function methodAdd<R, S, H>(this: Env<R>, tag: Tag<S>, service: H): Env<R | S> {
@@ -48,7 +48,6 @@ function pruneMethod<R, S extends Tags<R>[]>(
       newEnv.set(tag, s)
     }
   }
-  // @ts-expect-error
   return new Env(newEnv)
 }
 
