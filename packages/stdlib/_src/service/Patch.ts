@@ -1,5 +1,4 @@
 import { Env } from "@tsplus/stdlib/service/Env"
-import type { Has } from "@tsplus/stdlib/service/Has"
 import type { Tag } from "@tsplus/stdlib/service/Tag"
 
 export const PatchSym = Symbol.for("@tsplus/stdlib/service/Patch")
@@ -53,7 +52,7 @@ export class Empty<I, O> extends BasePatch<I, O> {
   }
 }
 
-export class AddService<Env, T> extends BasePatch<Env, Env & Has<T>> {
+export class AddService<Env, T> extends BasePatch<Env, Env | T> {
   readonly _tag = "AddService"
 
   constructor(readonly tag: Tag<T>, readonly service: T) {
@@ -69,7 +68,7 @@ export class AndThen<Input, Output, Output2> extends BasePatch<Input, Output2> {
   }
 }
 
-export class RemoveService<Env, T> extends BasePatch<Env & Has<T>, Env> {
+export class RemoveService<Env, T> extends BasePatch<Env | T, Env> {
   readonly _tag = "RemoveService"
 
   constructor(readonly tag: Tag<T>) {
@@ -77,7 +76,7 @@ export class RemoveService<Env, T> extends BasePatch<Env & Has<T>, Env> {
   }
 }
 
-export class UpdateService<Env, T> extends BasePatch<Env & Has<T>, Env & Has<T>> {
+export class UpdateService<Env, T> extends BasePatch<Env | T, Env | T> {
   readonly _tag = "UpdateService"
 
   constructor(readonly tag: Tag<T>, readonly update: (service: T) => T) {
