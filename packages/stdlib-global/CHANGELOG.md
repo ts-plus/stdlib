@@ -1,5 +1,14 @@
 # @tsplus/stdlib-global
 
+## 0.0.38
+
+### Patch Changes
+
+- [#154](https://github.com/ts-plus/stdlib/pull/154) [`eb24ae3`](https://github.com/ts-plus/stdlib/commit/eb24ae33553a9ce2f67ca187b4ca91c2141b67f7) Thanks [@mikearnaldi](https://github.com/mikearnaldi)! - Covariant Index Type for Env (aka: killing Has)
+
+- Updated dependencies [[`eb24ae3`](https://github.com/ts-plus/stdlib/commit/eb24ae33553a9ce2f67ca187b4ca91c2141b67f7)]:
+  - @tsplus/stdlib@0.0.73
+
 ## 0.0.37
 
 ### Patch Changes
