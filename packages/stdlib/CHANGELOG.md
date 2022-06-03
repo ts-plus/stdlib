@@ -1,5 +1,11 @@
 # @tsplus/stdlib
 
+## 0.0.75
+
+### Patch Changes
+
+- [#158](https://github.com/ts-plus/stdlib/pull/158) [`03ffc91`](https://github.com/ts-plus/stdlib/commit/03ffc91a994d379261b8678f51dd22e6a0ed22a0) Thanks [@mikearnaldi](https://github.com/mikearnaldi)! - Extend Iterable in Array / Set / Map
+
 ## 0.0.74
 
 ### Patch Changes
