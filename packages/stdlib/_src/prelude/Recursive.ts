@@ -1,4 +1,5 @@
 import { Annotated } from "@tsplus/stdlib/prelude/Recursive/Annotated"
+import { Unfolder } from "@tsplus/stdlib/prelude/Recursive/Unfolder"
 
 export * from "@tsplus/stdlib/prelude/Recursive/Annotated"
 
@@ -92,3 +93,12 @@ export const foldAnnotated = Pipeable(foldAnnotated_)
 export declare function foldDown<F extends HKT>(
   F: ForEach<F>
 ): <Z>(z: Z) => (f: Zlgebra<F, Z>) => (term: Recursive<F>) => Z
+
+/**
+ * @tsplus static Recursive/Ops unfold
+ */
+export function unfold<F extends HKT, Z>(F: Covariant<F>, unfolder: Unfolder.Fn<F, Z>): (a: Z) => Recursive<F> {
+  return function self(a): Recursive<F> {
+    return Recursive(F.map(self)(unfolder(a)))
+  }
+}

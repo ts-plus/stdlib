@@ -1,127 +1,91 @@
-import type * as P from "@tsplus/stdlib/prelude/Covariant"
 import { Recursive } from "@tsplus/stdlib/prelude/Recursive"
 import type { Annotated } from "@tsplus/stdlib/prelude/Recursive/Annotated"
 
 describe.concurrent("Recursive", () => {
-  const succ = (n: NatR): NatR => Recursive(new Succ(n))
-  const zero: NatR = Recursive(Zero.value)
+  type Nat<A> = Option<A>
+  type NatF = Option.HKT
+  type NatR = Recursive<NatF>
+  const Covariant = Option.Covariant
+  const succ = (a: NatR): NatR => Recursive(Option(a))
+  const zero: NatR = Recursive(Option.none as any)
   const one = succ(zero)
   const two = succ(one)
   const three = succ(two)
   const four = succ(three)
   const five = succ(four)
+  const sumAlgebra = (r: Nat<number>): number => r.fold(
+    () => 0,
+    (r0) => 1 + r0
+  )
+  const natsum = Recursive.fold(Option.Covariant, sumAlgebra)
 
-  describe("fold", () => {
-    it("Recursive.fold", () => {
-      const natsum = Recursive.fold(Covariant, sumAlgebra)
+  describe.concurrent("fold", () => {
+    it("sum", () => {
       assert.equal(natsum(zero), 0)
-      assert.equal(natsum(one), 1)
-      assert.equal(natsum(two), 2)
-      assert.equal(natsum(three), 3)
-    })
-    it("fold", () => {
+      assert.equal(natsum(five), 5)
       assert.equal(five.fold(Covariant, sumAlgebra), 5)
     })
 
     it("fib", () => {
-      const fib = Recursive.fold(Covariant, tupleFib)
+      type T = Tuple<[number, number]>
+      type NatT = Nat<T>
+      const fibAlgebra = (r: NatT): T => r.fold(
+        () => Tuple(0, 1),
+        ({tuple: [n1, n2]}) => Tuple(n1 + n2, n1)
+      )
+      const fib = Recursive.fold(Covariant, fibAlgebra)
       assert.equal(fib(zero).get(0), 0)
       assert.equal(fib(one).get(0), 1)
-      assert.equal(fib(two).get(0), 1)
-      assert.equal(fib(three).get(0), 2)
-      assert.equal(fib(four).get(0), 3)
       assert.equal(fib(five).get(0), 5)
+      assert.equal(five.fold(Covariant, fibAlgebra).get(0), 5)
     })
-
-    function sumAlgebra(c: Nat<number>): number {
-      return Match.tag(c, {
-        Zero: () => 0,
-        Succ: (_) => 1 + _.value
-      })
-    }
-
-    function tupleFib(r: Nat<Tuple<[number, number]>>): Tuple<[number, number]> {
-      return Match.tag(r, {
-        Zero: () => Tuple(0, 1),
-        Succ: (m) =>
-          Tuple(
-            m.value.get(0) + m.value.get(1),
-            m.value.get(0)
-          )
-      })
-    }
   })
 
-  describe("foldAnnotated", () => {
-    it("Recursive.foldAnnotated", () => {
-      const folder = Recursive.foldAnnotated(Covariant, annotatedSum)
-      assert.equal(folder(zero), 0)
-      assert.equal(folder(one), 1)
-      assert.equal(folder(two), 2)
-      assert.equal(folder(three), 3)
-      assert.equal(folder(four), 4)
-      assert.equal(folder(five), 5)
-    })
-
-    it("foldAnnotated", () => {
-      assert.equal(five.foldAnnotated(Covariant, annotatedSum), 5)
+  describe.concurrent("foldAnnotated", () => {
+    type NatAnnotated<A> = Nat<Annotated<NatF, A>>
+    type Cache<A> = Annotated<NatF, A>
+    it("sum", () => {
+      const sumAlgebra = (r: NatAnnotated<number>): number => r.fold(
+        () => 0,
+        (r0) => 1 + r0.annotations
+      )
+      const natsum = Recursive.foldAnnotated(Covariant, sumAlgebra)
+      assert.equal(natsum(zero), 0)
+      assert.equal(natsum(one), 1)
+      assert.equal(natsum(five), 5)
+      assert.equal(five.foldAnnotated(Covariant, sumAlgebra), 5)
     })
 
     it("fib", () => {
-      const fib = Recursive.foldAnnotated(Covariant, annotatedFib)
+      const fibAlgebra = (r: NatAnnotated<number>): number => r.fold(
+        () => 0,
+        (r0) => r0.annotations + lookup(1, r0)
+      )
+
+      const fib = Recursive.foldAnnotated(Covariant, fibAlgebra)
       assert.equal(fib(one), 1)
-      assert.equal(fib(two), 1)
-      assert.equal(fib(three), 2)
-      assert.equal(fib(four), 3)
       assert.equal(fib(five), 5)
-    })
+      assert.equal(five.foldAnnotated(Covariant, fibAlgebra), 5)
 
-    function annotatedFib(r: Nat<Annotated<NatF, number>>): number {
-      return Match.tag(r, {
-        Zero: () => 0,
-        Succ: (r) => r.value.annotations + lookup(1, r.value)
-      })
-
-      function lookup(n: number, cache: Annotated<NatF, number>): number {
-        if (n == 0) return cache.annotations
-        return Match.tag(cache.caseValue, {
-          Zero: () => 1,
-          Succ: (h) => lookup(n - 1, h.value)
-        })
+      function lookup(n: number, cache: Cache<number>): number {
+        return (n == 0) ? cache.annotations :
+          cache.caseValue.fold(
+            () => 1,
+            (h) => lookup(n - 1, h)
+          )
       }
-    }
-
-    function annotatedSum(r: Nat<Annotated<NatF, number>>): number {
-      return Match.tag(r, {
-        Zero: (_) => 0,
-        Succ: (m) => 1 + m.value.annotations
-      })
-    }
+    })
   })
-})
 
-type Nat<A> = Succ<A> | Zero<A>
-type NatR = Recursive<NatF>
+  describe.concurrent("unfold", () => {
+    const Zero = Option.none
+    const Succ = Option
+    it("natural numbers", () => {
+      const coalgebra = (a: number): Nat<number> => a == 0 ? Zero : Succ(a - 1)
+      const expand = Recursive.unfold(Covariant, coalgebra)
 
-interface NatF extends HKT {
-  readonly type: Nat<this["A"]>
-}
-
-class Succ<A> {
-  readonly _tag = "Succ"
-  constructor(public value: A) {}
-  map<B>(f: (a: A) => B): Nat<B> {
-    return new Succ(f(this.value))
-  }
-}
-export class Zero<A> {
-  static value = new Zero<any>()
-  public value!: never
-  readonly _tag = "Zero"
-  map<B>(_: (a: A) => B): Nat<B> {
-    return this as any
-  }
-}
-export const Covariant = HKT.instance<P.Covariant<NatF>>({
-  map: (f) => (self) => self.map(f)
+      assert.equal(natsum(expand(0)), 0)
+      assert.equal(natsum(expand(5)), 5)
+    })
+  })
 })
