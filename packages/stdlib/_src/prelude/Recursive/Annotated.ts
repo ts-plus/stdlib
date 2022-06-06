@@ -15,7 +15,7 @@ export declare namespace Annotated {
   /**
    * A function operating on a single level of a recursive structure,
    * with its recursive terms replaced by a value *and* an annotation, which
-   * represents the value computed for each child.  aka `Course-of-Value Algebra`
+   * represents the value computed for each child.  aka `Course-of-Value (CV)Algebra`
    */
   export type Fn<F extends HKT, Z> = (
     r: HKT.Kind<F, unknown, unknown, Annotated<F, Z>>
