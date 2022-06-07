@@ -53,13 +53,13 @@
             ],
         }
     },
-    "files": [
-        "./tsplus.prelude.d.ts"
-    ],
     "include": [],
     "exclude": [
         "node_modules",
         "build",
         "lib"
+    ],
+    "files": [
+        "./packages/stdlib/_src/global.d.ts"
     ]
 }

@@ -149,10 +149,6 @@ import { Exception } from "@tsplus/stdlib/exceptions/Exception"
 /**
  * @tsplus global
  */
-import { Environment } from "@tsplus/stdlib/io/Environment"
-/**
- * @tsplus global
- */
 import { Eval } from "@tsplus/stdlib/io/Eval/definition"
 /**
  * @tsplus global
@@ -169,7 +165,7 @@ import { Apply } from "@tsplus/stdlib/prelude/Apply"
 /**
  * @tsplus global
  */
-import { Associative, AssociativeF } from "@tsplus/stdlib/prelude/Associative/definition"
+import { Associative } from "@tsplus/stdlib/prelude/Associative/definition"
 /**
  * @tsplus global
  */
@@ -205,7 +201,7 @@ import { ChainRec } from "@tsplus/stdlib/prelude/ChainRec"
 /**
  * @tsplus global
  */
-import { Closure, ClosureF } from "@tsplus/stdlib/prelude/Closure/definition"
+import { Closure } from "@tsplus/stdlib/prelude/Closure/definition"
 /**
  * @tsplus global
  */
@@ -326,10 +322,6 @@ import { IdentityEither } from "@tsplus/stdlib/prelude/IdentityEither"
  * @tsplus global
  */
 import { IdentityFlatten } from "@tsplus/stdlib/prelude/IdentityFlatten"
-/**
- * @tsplus global
- */
-import { instance } from "@tsplus/stdlib/prelude/Instance"
 /**
  * @tsplus global
  */
