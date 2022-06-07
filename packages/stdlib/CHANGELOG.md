@@ -1,5 +1,11 @@
 # @tsplus/stdlib
 
+## 0.1.0
+
+### Minor Changes
+
+- [#160](https://github.com/ts-plus/stdlib/pull/160) [`df90c0d`](https://github.com/ts-plus/stdlib/commit/df90c0d4e5206d0e561ed1893bb7c229a1e50d1b) Thanks [@wesselvdv](https://github.com/wesselvdv)! - Add partition/partitionMap for List
+
 ## 0.0.75
 
 ### Patch Changes
