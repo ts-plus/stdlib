@@ -9,4 +9,7 @@ export function forEach_<A, U>(self: List<A>, f: (a: A) => U): void {
   }
 }
 
+/**
+ * @tsplus static List/Ops forEach
+ */
 export const forEach = Pipeable(forEach_)
