@@ -1,5 +1,13 @@
 # @tsplus/stdlib
 
+## 0.1.1
+
+### Patch Changes
+
+- [#163](https://github.com/ts-plus/stdlib/pull/163) [`a4e37ad`](https://github.com/ts-plus/stdlib/commit/a4e37ad816996d0171e4115f0e9cf53ea159cc34) Thanks [@wesselvdv](https://github.com/wesselvdv)! - Add missing static extension for List.forEach
+
+* [#164](https://github.com/ts-plus/stdlib/pull/164) [`3b83595`](https://github.com/ts-plus/stdlib/commit/3b8359545faa6fc73211ed6c0a7a0037450345a1) Thanks [@mikearnaldi](https://github.com/mikearnaldi)! - Killing `@tsplus/stdlib-global`, global definitions exposed via `@tsplus/stdlib/global`.
+
 ## 0.1.0
 
 ### Minor Changes
