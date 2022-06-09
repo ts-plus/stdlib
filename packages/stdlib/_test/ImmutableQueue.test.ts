@@ -7,6 +7,14 @@ describe.concurrent("ImmutableQueue", () => {
     assert.isTrue(result.asImmutableArray() == ImmutableArray(1, 2, 3))
   })
 
+  it("appendAll", () => {
+    const queue = ImmutableQueue.empty<number>()
+
+    const result = queue.appendAll(Collection(1, 2, 3))
+
+    assert.isTrue(result.asImmutableArray() == ImmutableArray(1, 2, 3))
+  })
+
   it("dequeue", () => {
     const queue = ImmutableQueue(1, 2)
 
