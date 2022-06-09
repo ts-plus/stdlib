@@ -24,6 +24,16 @@ describe.concurrent("List", () => {
         == List(0, 1, 2)
     )
   })
+  it("splitAt", () => {
+    const list = List(0, 1, 2, 3, 4, 5)
+
+    const {
+      tuple: [left, right]
+    } = list.splitAt(3)
+
+    assert.isTrue(left == List(0, 1, 2))
+    assert.isTrue(right == List(3, 4, 5))
+  })
   it("drop", () => {
     const list = List(1, 2, 3, 4, 5) + List(6, 7, 8, 9, 10)
 
