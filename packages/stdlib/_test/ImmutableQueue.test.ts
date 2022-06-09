@@ -27,6 +27,12 @@ describe.concurrent("ImmutableQueue", () => {
     assert.isTrue(result3 == Option.none)
   })
 
+  it("head", () => {
+    const queue = ImmutableQueue(1, 2, 3, 4, 5)
+
+    assert.isTrue(queue.head() == Option.some(1))
+  })
+
   it("find", () => {
     const queue = ImmutableQueue(1, 2, 3)
 
