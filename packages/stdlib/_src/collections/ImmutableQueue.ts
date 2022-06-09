@@ -1,5 +1,6 @@
 // codegen:start {preset: barrel, include: ./ImmutableQueue/*.ts, prefix: "@tsplus/stdlib/collections"}
 export * from "@tsplus/stdlib/collections/ImmutableQueue/append"
+export * from "@tsplus/stdlib/collections/ImmutableQueue/appendAll"
 export * from "@tsplus/stdlib/collections/ImmutableQueue/definition"
 export * from "@tsplus/stdlib/collections/ImmutableQueue/dequeue"
 export * from "@tsplus/stdlib/collections/ImmutableQueue/empty"
