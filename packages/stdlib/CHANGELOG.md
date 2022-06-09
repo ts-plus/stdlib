@@ -1,5 +1,19 @@
 # @tsplus/stdlib
 
+## 0.1.2
+
+### Patch Changes
+
+- [#167](https://github.com/ts-plus/stdlib/pull/167) [`6dcb0cd`](https://github.com/ts-plus/stdlib/commit/6dcb0cdbcbbbc34c540f271939abd5cbb7ef0c58) Thanks [@wesselvdv](https://github.com/wesselvdv)! - Add head for ImmutableQueue
+
+* [#167](https://github.com/ts-plus/stdlib/pull/167) [`968b8e9`](https://github.com/ts-plus/stdlib/commit/968b8e9425f47dd00b9e5bdf48090878bb5ef730) Thanks [@wesselvdv](https://github.com/wesselvdv)! - Add appendAll for ImmutableQueue
+
+- [`de797c5`](https://github.com/ts-plus/stdlib/commit/de797c52124a654039e45bca46ffa905f0d520ea) Thanks [@wesselvdv](https://github.com/wesselvdv)! - Change List.length from fluent to getter
+
+* [#167](https://github.com/ts-plus/stdlib/pull/167) [`2293003`](https://github.com/ts-plus/stdlib/commit/2293003e2cde301972470b5960560820419cd5f7) Thanks [@wesselvdv](https://github.com/wesselvdv)! - Add drop for List
+
+- [`9a0599b`](https://github.com/ts-plus/stdlib/commit/9a0599b06f08b90514d6f028d91d5fd6ca918af4) Thanks [@wesselvdv](https://github.com/wesselvdv)! - Add splitAt for List
+
 ## 0.1.1
 
 ### Patch Changes
