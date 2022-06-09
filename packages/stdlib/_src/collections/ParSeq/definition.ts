@@ -358,7 +358,7 @@ function symmetric<A>(f: (a: ParSeq<A>, b: ParSeq<A>) => Eval<boolean>) {
 
 function hashCode(self: ParSeq<unknown>): number {
   const flat = flatten(self)
-  const size = flat.length()
+  const size = flat.length
   let head
   if (size === 0) {
     return _emptyHash

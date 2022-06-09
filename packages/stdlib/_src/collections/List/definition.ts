@@ -142,7 +142,7 @@ export function isCons<A>(self: List<A>): self is Cons<A> {
 /**
  * Returns the number of elements contained in a `List`
  *
- * @tsplus fluent List length
+ * @tsplus getter List length
  */
 export function length<A>(self: List<A>): number {
   let these = self

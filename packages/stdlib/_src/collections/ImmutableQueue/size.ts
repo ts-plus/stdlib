@@ -5,5 +5,5 @@ import { concreteImmutableQueue } from "@tsplus/stdlib/collections/ImmutableQueu
  */
 export function size<A>(self: ImmutableQueue<A>): number {
   concreteImmutableQueue(self)
-  return self.backingList.length()
+  return self.backingList.length
 }
