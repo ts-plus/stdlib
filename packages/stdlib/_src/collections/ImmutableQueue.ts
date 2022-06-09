@@ -12,4 +12,5 @@ export * from "@tsplus/stdlib/collections/ImmutableQueue/make"
 export * from "@tsplus/stdlib/collections/ImmutableQueue/prepend"
 export * from "@tsplus/stdlib/collections/ImmutableQueue/single"
 export * from "@tsplus/stdlib/collections/ImmutableQueue/size"
+export * from "@tsplus/stdlib/collections/ImmutableQueue/splitAt"
 // codegen:end

@@ -46,6 +46,17 @@ describe.concurrent("ImmutableQueue", () => {
     assert.isTrue(queue.filter((n) => n % 2 === 0) == ImmutableQueue(0, 2, 4))
   })
 
+  it("splitAt", () => {
+    const queue = ImmutableQueue(0, 1, 2, 3, 4, 5)
+
+    const {
+      tuple: [left, right]
+    } = queue.splitAt(3)
+
+    assert.isTrue(left == List(0, 1, 2))
+    assert.isTrue(right == List(3, 4, 5))
+  })
+
   it("prepend", () => {
     const queue = ImmutableQueue.empty<number>()
 
