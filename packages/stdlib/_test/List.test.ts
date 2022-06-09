@@ -24,6 +24,13 @@ describe.concurrent("List", () => {
         == List(0, 1, 2)
     )
   })
+  it("drop", () => {
+    const list = List(1, 2, 3, 4, 5) + List(6, 7, 8, 9, 10)
+
+    const result = list.drop(5).asImmutableArray()
+
+    assert.isTrue(result == ImmutableArray(6, 7, 8, 9, 10))
+  })
   it("map", () => {
     assert.isTrue(
       List(1, 2, 3).map((n) => n + 1)
