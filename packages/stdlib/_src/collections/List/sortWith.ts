@@ -2,7 +2,7 @@
  * @tsplus fluent List sortWith
  */
 export function sortWith_<A>(self: List<A>, ord: Ord<A>): List<A> {
-  const len = self.length()
+  const len = self.length
   const b = new ListBuffer<A>()
   if (len === 1) {
     b.append(self.unsafeHead()!)

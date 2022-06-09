@@ -8,7 +8,7 @@ export function drop_<A, B>(self: List<A>, n: number): List<A> {
     return self
   }
 
-  if (n >= self.length()) {
+  if (n >= self.length) {
     return List.nil<A>()
   }
 

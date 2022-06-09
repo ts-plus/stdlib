@@ -8,7 +8,7 @@ import {
  */
 export function dequeue<A>(self: ImmutableQueue<A>): Option<Tuple<[NonNullable<A>, ImmutableQueue<A>]>> {
   concreteImmutableQueue(self)
-  const size = self.backingList.length()
+  const size = self.backingList.length
   if (size === 0) {
     return Option.none
   }
