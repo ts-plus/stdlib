@@ -67,6 +67,15 @@ describe.concurrent("ImmutableQueue", () => {
     assert.isTrue(left == ImmutableQueue(0, 1, 2, 3, 4, 5))
     assert.isTrue(right == ImmutableQueue())
   })
+
+  it("drop", () => {
+    const queue = ImmutableQueue(1, 2, 3, 4, 5, 6)
+
+    const result = queue.drop(5)
+
+    assert.isTrue(result == ImmutableQueue(6))
+  })
+
   it("prepend", () => {
     const queue = ImmutableQueue.empty<number>()
 
