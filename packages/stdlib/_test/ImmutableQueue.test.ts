@@ -53,10 +53,20 @@ describe.concurrent("ImmutableQueue", () => {
       tuple: [left, right]
     } = queue.splitAt(3)
 
-    assert.isTrue(left == List(0, 1, 2))
-    assert.isTrue(right == List(3, 4, 5))
+    assert.isTrue(left == ImmutableQueue(0, 1, 2))
+    assert.isTrue(right == ImmutableQueue(3, 4, 5))
   })
 
+  it("splitAt - empty leftover", () => {
+    const queue = ImmutableQueue(0, 1, 2, 3, 4, 5)
+
+    const {
+      tuple: [left, right]
+    } = queue.splitAt(6)
+
+    assert.isTrue(left == ImmutableQueue(0, 1, 2, 3, 4, 5))
+    assert.isTrue(right == ImmutableQueue())
+  })
   it("prepend", () => {
     const queue = ImmutableQueue.empty<number>()
 
