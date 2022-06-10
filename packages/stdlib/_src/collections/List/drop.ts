@@ -3,7 +3,7 @@
  *
  * @tsplus fluent List drop
  */
-export function drop_<A, B>(self: List<A>, n: number): List<A> {
+export function drop_<A>(self: List<A>, n: number): List<A> {
   if (n <= 0) {
     return self
   }
