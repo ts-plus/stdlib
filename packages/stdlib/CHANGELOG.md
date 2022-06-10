@@ -1,5 +1,13 @@
 # @tsplus/stdlib
 
+## 0.1.3
+
+### Patch Changes
+
+- [#168](https://github.com/ts-plus/stdlib/pull/168) [`1fb72a3`](https://github.com/ts-plus/stdlib/commit/1fb72a37606cc973180369480129ca6b4177127b) Thanks [@wesselvdv](https://github.com/wesselvdv)! - Add drop for ImmutableQueue
+
+* [#168](https://github.com/ts-plus/stdlib/pull/168) [`b94bc0e`](https://github.com/ts-plus/stdlib/commit/b94bc0ed1e63ab94065e60ff341f1189e2e09a0c) Thanks [@wesselvdv](https://github.com/wesselvdv)! - Fix wrong return type for ImmutableQueue.splitAt
+
 ## 0.1.2
 
 ### Patch Changes
