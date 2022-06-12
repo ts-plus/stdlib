@@ -1,7 +1,7 @@
 const defaultSeparate = Tuple(Option.none, Option.none)
 
 /**
- * @tsplus fluent Option separate
+ * @tsplus getter Option separate
  */
 export function separate<A, B>(
   self: Option<Either<A, B>>

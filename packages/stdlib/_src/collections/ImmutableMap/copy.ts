@@ -1,7 +1,7 @@
 /**
  * Copies each element of an `ImmutableMap` into a new `ImmutableMap`.
  *
- * @tsplus fluent ImmutableMap copy
+ * @tsplus getter ImmutableMap copy
  */
 export function copy<K, V>(self: ImmutableMap<K, V>): ImmutableMap<K, V> {
   const map = new Map<K, V>()

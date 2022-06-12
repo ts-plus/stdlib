@@ -2,7 +2,7 @@ describe.concurrent("ImmutableMap", () => {
   it("compact", () => {
     const map = ImmutableMap(Tuple(1, Option.some("a")), Tuple(2, Option.none))
 
-    const result = map.compact()
+    const result = map.compact
 
     assert.isTrue(result == ImmutableMap(Tuple(1, "a")))
   })
@@ -10,7 +10,7 @@ describe.concurrent("ImmutableMap", () => {
   it("copy", () => {
     const map = ImmutableMap(Tuple(1, "a"))
 
-    const result = map.copy()
+    const result = map.copy
 
     assert.notStrictEqual(map, result)
   })

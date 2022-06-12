@@ -2,7 +2,7 @@
  * Constructs a new `List` from an `Iterable`
  *
  * @tsplus static List/Ops from
- * @tsplus fluent Collection asList
+ * @tsplus getter Collection asList
  */
 export function from<A>(prefix: Collection<A>): List<A> {
   const iter = prefix[Symbol.iterator]()

@@ -18,9 +18,9 @@ describe.concurrent("ImmutableQueue", () => {
   it("dequeue", () => {
     const queue = ImmutableQueue(1, 2)
 
-    const result1 = queue.dequeue()
-    const result2 = result1.value!.get(1).dequeue()
-    const result3 = result2.value!.get(1).dequeue()
+    const result1 = queue.dequeue
+    const result2 = result1.value!.get(1).dequeue
+    const result3 = result2.value!.get(1).dequeue
 
     assert.isTrue(result1 == Option.some(Tuple(1, ImmutableQueue(2))))
     assert.isTrue(result2 == Option.some(Tuple(2, ImmutableQueue.empty<number>())))
@@ -30,7 +30,7 @@ describe.concurrent("ImmutableQueue", () => {
   it("head", () => {
     const queue = ImmutableQueue(1, 2, 3, 4, 5)
 
-    assert.isTrue(queue.head() == Option.some(1))
+    assert.isTrue(queue.head == Option.some(1))
   })
 
   it("find", () => {

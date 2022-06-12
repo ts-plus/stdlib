@@ -35,11 +35,11 @@ describe.concurrent("HashSet", () => {
 
     assert.nestedPropertyVal(hashSet, "_keyMap._editable", false)
 
-    hashSet = hashSet.beginMutation()
+    hashSet = hashSet.beginMutation
 
     assert.nestedPropertyVal(hashSet, "_keyMap._editable", true)
 
-    hashSet = hashSet.endMutation()
+    hashSet = hashSet.endMutation
 
     assert.nestedPropertyVal(hashSet, "_keyMap._editable", false)
   })
@@ -196,7 +196,7 @@ describe.concurrent("HashSet", () => {
   it("values", () => {
     const hashSet = makeTestHashSet(0, 1, 2)
 
-    const result = hashSet.values()
+    const result = hashSet.values
 
     assert.isTrue(result == HashSet(value(0), value(1), value(2)))
   })
@@ -204,7 +204,7 @@ describe.concurrent("HashSet", () => {
   it("asCollection", () => {
     const hashSet = makeTestHashSet(1, 2, 3)
 
-    const result = hashSet.asCollection()
+    const result = hashSet.asCollection
 
     assert.deepEqual([...result], [value(1), value(2), value(3)])
   })

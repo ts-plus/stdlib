@@ -114,7 +114,7 @@ export class ListBuffer<A> implements Collection<A> {
     if (p === undefined) {
       return this.first
     } else {
-      return p.unsafeTail()!
+      return p.unsafeTail!
     }
   }
 
@@ -126,7 +126,7 @@ export class ListBuffer<A> implements Collection<A> {
     } else {
       let p = this.first
       for (let j = i - 1; j > 0; j--) {
-        p = p.unsafeTail()!
+        p = p.unsafeTail!
       }
       return p
     }
@@ -134,7 +134,7 @@ export class ListBuffer<A> implements Collection<A> {
 }
 
 /**
- * @tsplus fluent ListBuffer asCollection
+ * @tsplus getter ListBuffer asCollection
  */
 export function asCollection<A>(self: ListBuffer<A>): Collection<A> {
   return self

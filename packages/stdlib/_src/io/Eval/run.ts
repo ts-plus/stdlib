@@ -3,7 +3,7 @@ import type { EvalInternal } from "@tsplus/stdlib/io/Eval"
 /**
  * Runs this computation.
  *
- * @tsplus fluent Eval run
+ * @tsplus getter Eval run
  */
 export function run<A>(self: Eval<A>): A {
   let stack: Stack<(e: any) => EvalInternal<any>> | undefined = undefined

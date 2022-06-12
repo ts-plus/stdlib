@@ -5,7 +5,7 @@ export function sortWith_<A>(self: List<A>, ord: Ord<A>): List<A> {
   const len = self.length
   const b = new ListBuffer<A>()
   if (len === 1) {
-    b.append(self.unsafeHead()!)
+    b.append(self.unsafeHead!)
   } else if (len > 1) {
     const arr = new Array<[number, A]>(len)
     copyToArrayWithIndex(self, arr)

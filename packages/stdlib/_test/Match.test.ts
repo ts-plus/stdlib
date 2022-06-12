@@ -27,7 +27,7 @@ describe.concurrent("Match", () => {
       C: (_) => Eval.succeed(_)
     })
 
-    const result = matchEval.run()
+    const result = matchEval.run
 
     assert.deepStrictEqual(result, { _tag: "A", a: 0 })
   })
@@ -39,7 +39,7 @@ describe.concurrent("Match", () => {
       C: (_) => Eval.succeed(_)
     })
 
-    const result = matchEvalFor(adt()).run()
+    const result = matchEvalFor(adt()).run
 
     assert.deepStrictEqual(result, { _tag: "A", a: 0 })
   })

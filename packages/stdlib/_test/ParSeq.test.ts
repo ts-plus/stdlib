@@ -1,7 +1,7 @@
 describe.concurrent("ParSeq", () => {
   it("first", () => {
-    assert.isTrue(ParSeq.empty().first() == Option.none)
-    assert.isTrue(ParSeq.single("ok").first() == Option.some("ok"))
+    assert.isTrue(ParSeq.empty().first == Option.none)
+    assert.isTrue(ParSeq.single("ok").first == Option.some("ok"))
   })
 
   it("flatMap", () => {
@@ -10,7 +10,7 @@ describe.concurrent("ParSeq", () => {
   })
 
   it("flatten", () => {
-    assert.isTrue(ParSeq.single(ParSeq.single("ok")).flatten() == ParSeq.single("ok"))
+    assert.isTrue(ParSeq.single(ParSeq.single("ok")).flatten == ParSeq.single("ok"))
   })
 
   it("fold", () => {

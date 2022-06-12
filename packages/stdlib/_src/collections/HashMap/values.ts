@@ -3,7 +3,7 @@ import { HashMapIterator, realHashMap } from "@tsplus/stdlib/collections/HashMap
 /**
  * Returns an `IterableIterator` of the values within the `HashMap`.
  *
- * @tsplus fluent HashMap values
+ * @tsplus getter HashMap values
  */
 export function values<K, V>(self: HashMap<K, V>): IterableIterator<V> {
   realHashMap(self)

@@ -7,7 +7,7 @@ import { concreteChunkId } from "@tsplus/stdlib/collections/Chunk/definition"
  * or iterating over the elements of the chunk in lower level, performance
  * sensitive code unless you really only need the first element of the chunk.
  *
- * @tsplus fluent Chunk unsafeHead
+ * @tsplus getter Chunk unsafeHead
  */
 export function unsafeHead<A>(self: Chunk<A>): A {
   return concreteChunkId(self)._get(0)

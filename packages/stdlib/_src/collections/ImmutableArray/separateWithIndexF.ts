@@ -12,5 +12,5 @@ export const separateWithIndexF = WiltableWithIndex.implementSeparateWithIndexF<
     (G: Applicative<G>) =>
       <B2>(f: (k: number, a: A) => HKT.Kind<G, R, E, Either<B, B2>>) =>
         (fa: ImmutableArray<A>): HKT.Kind<G, R, E, Tuple<[ImmutableArray<B>, ImmutableArray<B2>]>> =>
-          G.map((self: ImmutableArray<Either<B, B2>>) => self.separate())(ImmutableArray.forEachWithIndexF(G)(f)(fa))
+          G.map((self: ImmutableArray<Either<B, B2>>) => self.separate)(ImmutableArray.forEachWithIndexF(G)(f)(fa))
 )

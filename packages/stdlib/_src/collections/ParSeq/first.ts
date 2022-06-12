@@ -3,7 +3,7 @@
  * occur in parallel and before any other events then any of these events
  * may be returned.
  *
- * @tsplus fluent ParSeq first
+ * @tsplus getter ParSeq first
  */
 export function first<A>(self: ParSeq<A>): Option<A> {
   // eslint-disable-next-line no-constant-condition

@@ -48,12 +48,12 @@ function partialFill<A>(
   p: Predicate<A>,
   isFlipped: boolean
 ): List<A> {
-  const newHead = List.cons<A>(origStart.unsafeHead()!, List.nil())
-  let toProcess = origStart.unsafeTail()! as List.Cons<A>
+  const newHead = List.cons<A>(origStart.unsafeHead!, List.nil())
+  let toProcess = origStart.unsafeTail! as List.Cons<A>
   let currentLast = newHead
 
   while (!(toProcess === firstMiss)) {
-    const newElem = List.cons(toProcess.unsafeHead()!, List.nil())
+    const newElem = List.cons(toProcess.unsafeHead!, List.nil())
     currentLast.tail = newElem
     currentLast = unsafeCoerce(newElem)
     toProcess = unsafeCoerce(toProcess.tail)
@@ -62,12 +62,12 @@ function partialFill<A>(
   let next = firstMiss.tail
   let nextToCopy: List.Cons<A> = unsafeCoerce(next)
   while (!next.isNil()) {
-    const head = next.unsafeHead()!
+    const head = next.unsafeHead!
     if (p(head) !== isFlipped) {
       next = next.tail
     } else {
       while (!(nextToCopy === next)) {
-        const newElem = List.cons(nextToCopy.unsafeHead()!, List.nil())
+        const newElem = List.cons(nextToCopy.unsafeHead!, List.nil())
         currentLast.tail = newElem
         currentLast = newElem
         nextToCopy = unsafeCoerce(nextToCopy.tail)

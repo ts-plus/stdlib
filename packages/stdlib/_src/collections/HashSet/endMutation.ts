@@ -4,7 +4,7 @@ import { realHashSet } from "@tsplus/stdlib/collections/HashSet/_internal/hashSe
 /**
  * Marks the `HashSet` as immutable.
  *
- * @tsplus fluent HashSet endMutation
+ * @tsplus getter HashSet endMutation
  */
 export function endMutation<A>(self: HashSet<A>): HashSet<A> {
   realHashSet(self)

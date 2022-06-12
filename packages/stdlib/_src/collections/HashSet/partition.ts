@@ -19,10 +19,10 @@ export function partition_<A>(
   self: HashSet<A>,
   f: Predicate<A>
 ): Tuple<[HashSet<A>, HashSet<A>]> {
-  const vs = self.values()
+  const vs = self.values
   let e: IteratorResult<A, any>
-  const right = HashSet<A>().beginMutation()
-  const left = HashSet<A>().beginMutation()
+  const right = HashSet<A>().beginMutation
+  const left = HashSet<A>().beginMutation
   while (!(e = vs.next()).done) {
     const value = e.value
     if (f(value)) {
@@ -31,7 +31,7 @@ export function partition_<A>(
       left.add(value)
     }
   }
-  return Tuple(left.endMutation(), right.endMutation())
+  return Tuple(left.endMutation, right.endMutation)
 }
 
 /**

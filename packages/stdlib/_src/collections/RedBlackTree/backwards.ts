@@ -5,7 +5,7 @@ import type { Node } from "@tsplus/stdlib/collections/RedBlackTree/node"
 /**
  * Traverse the tree backwards.
  *
- * @tsplus fluent RedBlackTree backwards
+ * @tsplus getter RedBlackTree backwards
  */
 export function backwards<K, V>(self: RedBlackTree<K, V>): RedBlackTreeIterable<K, V> {
   return {

@@ -44,7 +44,7 @@ export class Empty implements Equals {
   readonly [_A]!: () => never;
 
   [Equals.sym](that: unknown): boolean {
-    return isParSeq(that) && this.equalsSafe(that).run()
+    return isParSeq(that) && this.equalsSafe(that).run
   }
 
   [Hash.sym](): number {
@@ -68,7 +68,7 @@ export class Single<A> implements Equals {
   constructor(readonly a: A) {}
 
   [Equals.sym](that: unknown): boolean {
-    return isParSeq(that) && this.equalsSafe(that).run()
+    return isParSeq(that) && this.equalsSafe(that).run
   }
 
   [Hash.sym](): number {
@@ -92,7 +92,7 @@ export class Then<A> implements Equals {
   constructor(readonly left: ParSeq<A>, readonly right: ParSeq<A>) {}
 
   [Equals.sym](that: unknown): boolean {
-    return isParSeq(that) && this.equalsSafe(that).run()
+    return isParSeq(that) && this.equalsSafe(that).run
   }
 
   [Hash.sym](): number {
@@ -135,7 +135,7 @@ export class Both<A> implements Equals {
   constructor(readonly left: ParSeq<A>, readonly right: ParSeq<A>) {}
 
   [Equals.sym](that: unknown): boolean {
-    return isParSeq(that) && this.equalsSafe(that).run()
+    return isParSeq(that) && this.equalsSafe(that).run
   }
 
   [Hash.sym](): number {
@@ -362,8 +362,8 @@ function hashCode(self: ParSeq<unknown>): number {
   let head
   if (size === 0) {
     return _emptyHash
-  } else if (size === 1 && (head = flat.unsafeHead()!) && head.size === 1) {
-    return List.make(head).unsafeHead()![Hash.sym]()
+  } else if (size === 1 && (head = flat.unsafeHead!) && head.size === 1) {
+    return List.make(head).unsafeHead![Hash.sym]()
   } else {
     return Hash.iterator(flat[Symbol.iterator]())
   }
@@ -446,7 +446,7 @@ export function isEmpty<A>(self: ParSeq<A>): boolean {
 function isEmptyLoop<A>(self: List<ParSeq<A>>): boolean {
   while (!self.isNil()) {
     const head = self.head
-    const tail = self.tail()
+    const tail = self.tail
     switch (head._tag) {
       case "Empty": {
         self = tail
@@ -489,7 +489,7 @@ function flattenLoop<A>(
     )
     const updated = parallel.size > 0 ? flattened.prepend(parallel) : flattened
     if (sequential.isNil()) {
-      return updated.reverse()
+      return updated.reverse
     } else {
       causes = sequential
       flattened = updated
@@ -516,7 +516,7 @@ function stepLoop<A>(
           return Tuple(parallel, sequential)
         } else {
           cause = stack.head!
-          stack = stack.tail()
+          stack = stack.tail
         }
         break
       }
@@ -554,7 +554,7 @@ function stepLoop<A>(
         } else {
           parallel = parallel.add(cause)
           cause = stack.head
-          stack = stack.tail()
+          stack = stack.tail
           break
         }
       }

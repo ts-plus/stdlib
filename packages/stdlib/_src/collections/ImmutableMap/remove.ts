@@ -4,7 +4,7 @@
  * @tsplus fluent ImmutableMap remove
  */
 export function remove_<K, V>(self: ImmutableMap<K, V>, key: K): ImmutableMap<K, V> {
-  const map = self.copy().internalMap as Map<K, V>
+  const map = self.copy.internalMap as Map<K, V>
   map.delete(key)
   return new ImmutableMap(map)
 }

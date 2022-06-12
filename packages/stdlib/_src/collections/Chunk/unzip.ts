@@ -2,7 +2,7 @@
  * The function is reverse of `zip`. Takes an array of pairs and return two
  * corresponding arrays.
  *
- * @tsplus fluent Chunk unzip
+ * @tsplus getter Chunk unzip
  */
 export function unzip<A, B>(as: Chunk<Tuple<[A, B]>>): Tuple<[Chunk<A>, Chunk<B>]> {
   let fa: Chunk<A> = Chunk.empty()

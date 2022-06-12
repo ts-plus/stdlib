@@ -19,7 +19,7 @@ describe.concurrent("Chunk", () => {
       Chunk.from(Buffer.from(" ")) +
       Chunk.from(Buffer.from("world"))
 
-    const result = chunk.drop(6).append(32).prepend(32).asArrayLike()
+    const result = chunk.drop(6).append(32).prepend(32).asArrayLike
 
     assert.deepEqual(result, Buffer.from(" world "))
   })
@@ -52,7 +52,7 @@ describe.concurrent("Chunk", () => {
   it("dedupe", () => {
     const chunk = Chunk(0, 0, 1, 2, 3, 4, 4, 5, 6, 7, 7, 7, 8, 9, 9, 9, 9)
 
-    const result = chunk.dedupe().asImmutableArray()
+    const result = chunk.dedupe.asImmutableArray()
 
     assert.deepEqual(result, ImmutableArray(0, 1, 2, 3, 4, 5, 6, 7, 8, 9))
   })
@@ -214,7 +214,7 @@ describe.concurrent("Chunk", () => {
 
     const result = chunk
       .flatMap((n) => (n === 45 ? Chunk.from(Buffer.from("-|-")) : Chunk.single(n)))
-      .asArrayLike()
+      .asArrayLike
 
     assert.deepEqual(result, Buffer.from("hello-|-world"))
   })
@@ -282,7 +282,7 @@ describe.concurrent("Chunk", () => {
   })
 
   it("iterable", () => {
-    const chunk = Chunk(0, 1, 2).asArrayLike()
+    const chunk = Chunk(0, 1, 2).asArrayLike
 
     assert.deepEqual(chunk, Buffer.of(0, 1, 2))
   })
@@ -290,7 +290,7 @@ describe.concurrent("Chunk", () => {
   it("map", () => {
     const chunk = Chunk.from(Buffer.from("hello-world"))
 
-    const result = chunk.map((n) => (n === 45 ? 32 : n)).asArrayLike()
+    const result = chunk.map((n) => (n === 45 ? 32 : n)).asArrayLike
 
     assert.deepEqual(result, Buffer.from("hello world"))
   })
@@ -403,7 +403,7 @@ describe.concurrent("Chunk", () => {
   it("separate", () => {
     const chunk = Chunk(1, 2, 3, 4, 5, 6).map((n) => n % 2 === 0 ? Either.right(n) : Either.left(n.toString()))
 
-    const result = chunk.separate()
+    const result = chunk.separate
 
     assert.isTrue(result == Tuple(Chunk("1", "3", "5"), Chunk(2, 4, 6)))
   })
@@ -558,7 +558,7 @@ describe.concurrent("Chunk", () => {
       a = a + Chunk(i, i)
     }
 
-    const result = a.asArrayLike()
+    const result = a.asArrayLike
 
     assert.strictEqual(result.length, 200_000)
   })
@@ -664,7 +664,7 @@ describe.concurrent("Chunk", () => {
   it("zipWithIndex", () => {
     const chunk = Chunk(1, 2, 3, 4)
 
-    const result = chunk.zipWithIndex().asImmutableArray()
+    const result = chunk.zipWithIndex.asImmutableArray()
 
     assert.isTrue(result == ImmutableArray(Tuple(1, 0), Tuple(2, 1), Tuple(3, 2), Tuple(4, 3)))
   })

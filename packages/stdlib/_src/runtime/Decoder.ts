@@ -453,7 +453,7 @@ export function deriveRecord<A extends Record<string, any>>(
         }
         const valueError = valueResult.getWarningOrFailure()
         if (valueError.isSome()) {
-          fieldErrors.append(new DecoderErrorRecordValue(k, valueError.value.merge()))
+          fieldErrors.append(new DecoderErrorRecordValue(k, valueError.value.merge))
         }
         const valueSuccess = valueResult.getSuccess()
         if (valueSuccess.isNone()) {

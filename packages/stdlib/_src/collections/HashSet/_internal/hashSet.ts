@@ -6,7 +6,7 @@ export class HashSetInternal<A> implements HashSet<A> {
   constructor(readonly _keyMap: HashMap<A, unknown>) {}
 
   [Symbol.iterator](): Iterator<A> {
-    return this._keyMap.keys()
+    return this._keyMap.keys
   }
 
   [Hash.sym](): number {

@@ -7,7 +7,7 @@ import { concreteChunkId } from "@tsplus/stdlib/collections/Chunk/definition"
  * or iterating over the elements of the chunk in lower level, performance
  * sensitive code unless you really only need the last element of the chunk.
  *
- * @tsplus fluent Chunk unsafeLast
+ * @tsplus getter Chunk unsafeLast
  */
 export function unsafeLast<A>(self: Chunk<A>): A {
   return concreteChunkId(self)._get(concreteChunkId(self).length - 1)

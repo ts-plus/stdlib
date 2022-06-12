@@ -1,7 +1,7 @@
 /**
  * Deduplicates adjacent elements that are identical.
  *
- * @tsplus fluent Chunk dedupe
+ * @tsplus getter Chunk dedupe
  */
 export function dedupe<A>(self: Chunk<A>): Chunk<A> {
   const builder = Chunk.builder<A>()
