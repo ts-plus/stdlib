@@ -2,7 +2,7 @@ describe.concurrent("Eval", () => {
   it("flatMap", () => {
     const program = Eval(0).flatMap((n) => Eval(n + 1))
 
-    const result = program.run()
+    const result = program.run
 
     assert.strictEqual(result, 1)
   })
@@ -15,7 +15,7 @@ describe.concurrent("Eval", () => {
       return a + b + c
     })
 
-    const result = program.run()
+    const result = program.run
 
     assert.strictEqual(result, 3)
   })
@@ -28,7 +28,7 @@ describe.concurrent("Eval", () => {
       return a + b + c
     })
 
-    const result = program.run()
+    const result = program.run
 
     assert.strictEqual(result, 3)
   })
@@ -36,7 +36,7 @@ describe.concurrent("Eval", () => {
   it("map", () => {
     const program = Eval(0).map((n) => n + 1)
 
-    const result = program.run()
+    const result = program.run
 
     assert.strictEqual(result, 1)
   })
@@ -44,7 +44,7 @@ describe.concurrent("Eval", () => {
   it("reduce", () => {
     const program = Eval.reduce([1, 2, 3, 4, 5], 0, (acc, a) => Eval.succeed(acc + a))
 
-    const result = program.run()
+    const result = program.run
 
     assert.strictEqual(result, 15)
   })
@@ -56,7 +56,7 @@ describe.concurrent("Eval", () => {
       c: Eval("c")
     })
 
-    const result = program.run()
+    const result = program.run
 
     assert.deepEqual(result, { a: "a", b: "b", c: "c" })
   })
@@ -64,7 +64,7 @@ describe.concurrent("Eval", () => {
   it("tap", () => {
     const program = Eval(0).tap((n) => Eval(n + 1))
 
-    const result = program.run()
+    const result = program.run
 
     assert.strictEqual(result, 0)
   })
@@ -72,13 +72,13 @@ describe.concurrent("Eval", () => {
   it("tuple", () => {
     const program = Eval.tuple(Eval(0), Eval("a"), Eval(true))
 
-    const result = program.run()
+    const result = program.run
 
     assert.isTrue(result == Tuple(0, "a", true))
   })
 
   it("unit", () => {
-    const result = Eval.unit.run()
+    const result = Eval.unit.run
 
     assert.isUndefined(result)
   })
@@ -86,7 +86,7 @@ describe.concurrent("Eval", () => {
   it("zip", () => {
     const program = Eval(0).zip(Eval(1))
 
-    const result = program.run()
+    const result = program.run
 
     assert.isTrue(result == Tuple(0, 1))
   })
@@ -94,7 +94,7 @@ describe.concurrent("Eval", () => {
   it("zipLeft", () => {
     const program = Eval(0).zipLeft(Eval(1))
 
-    const result = program.run()
+    const result = program.run
 
     assert.strictEqual(result, 0)
   })
@@ -102,7 +102,7 @@ describe.concurrent("Eval", () => {
   it("zipRight", () => {
     const program = Eval(0).zipRight(Eval(1))
 
-    const result = program.run()
+    const result = program.run
 
     assert.strictEqual(result, 1)
   })
@@ -110,7 +110,7 @@ describe.concurrent("Eval", () => {
   it("zipWith", () => {
     const program = Eval(0).zipWith(Eval(1), (a, b) => a + b)
 
-    const result = program.run()
+    const result = program.run
 
     assert.strictEqual(result, 1)
   })
@@ -123,7 +123,7 @@ describe.concurrent("Eval", () => {
       return Eval.suspend(fib(n - 1)).zipWith(Eval.suspend(fib(n - 2)), (a, b) => a + b)
     }
 
-    const result = fib(20).run()
+    const result = fib(20).run
 
     assert.strictEqual(result, 6765)
   })

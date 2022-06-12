@@ -69,10 +69,10 @@ describe.concurrent("Either", () => {
 
   it("duplicate", () => {
     assert.isTrue(
-      Either.right(0).duplicate() == Either.right(Either.right(0))
+      Either.right(0).duplicate == Either.right(Either.right(0))
     )
     assert.isTrue(
-      Either.left(0).duplicate() == Either.left(0)
+      Either.left(0).duplicate == Either.left(0)
     )
   })
 
@@ -128,13 +128,13 @@ describe.concurrent("Either", () => {
 
   it("flatten", () => {
     assert.isTrue(
-      Either.right(Either.right(0)).flatten() == Either.right(0)
+      Either.right(Either.right(0)).flatten == Either.right(0)
     )
     assert.isTrue(
-      Either.right(Either.left(0)).flatten() == Either.left(0)
+      Either.right(Either.left(0)).flatten == Either.left(0)
     )
     assert.isTrue(
-      Either.left(Either.left(0)).flatten() == Either.left(Either.left(0))
+      Either.left(Either.left(0)).flatten == Either.left(Either.left(0))
     )
   })
 
@@ -260,8 +260,8 @@ describe.concurrent("Either", () => {
   })
 
   it("merge", () => {
-    assert.strictEqual(Either.right(0).merge(), 0)
-    assert.strictEqual(Either.left("hello").merge(), "hello")
+    assert.strictEqual(Either.right(0).merge, 0)
+    assert.strictEqual(Either.left("hello").merge, "hello")
   })
 
   it("orElse", () => {
@@ -312,8 +312,8 @@ describe.concurrent("Either", () => {
   })
 
   it("swap", () => {
-    assert.isTrue(Either.right(0).swap() == Either.left(0))
-    assert.isTrue(Either.left(0).swap() == Either.right(0))
+    assert.isTrue(Either.right(0).swap == Either.left(0))
+    assert.isTrue(Either.left(0).swap == Either.right(0))
   })
 
   it("tap", () => {

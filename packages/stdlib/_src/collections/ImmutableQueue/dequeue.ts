@@ -4,7 +4,7 @@ import {
 } from "@tsplus/stdlib/collections/ImmutableQueue/_internal/ImmutableQueueInternal"
 
 /**
- * @tsplus fluent ImmutableQueue dequeue
+ * @tsplus getter ImmutableQueue dequeue
  */
 export function dequeue<A>(self: ImmutableQueue<A>): Option<Tuple<[NonNullable<A>, ImmutableQueue<A>]>> {
   concreteImmutableQueue(self)
@@ -14,10 +14,10 @@ export function dequeue<A>(self: ImmutableQueue<A>): Option<Tuple<[NonNullable<A
   }
   return Option.some(
     Tuple(
-      self.backingList.unsafeHead()!,
+      self.backingList.unsafeHead!,
       size === 1
         ? new ImmutableQueueInternal(List.nil())
-        : new ImmutableQueueInternal(self.backingList.unsafeTail()!)
+        : new ImmutableQueueInternal(self.backingList.unsafeTail!)
     )
   )
 }

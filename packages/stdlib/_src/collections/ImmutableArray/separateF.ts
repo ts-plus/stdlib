@@ -12,5 +12,5 @@ export const separateF = Wiltable.implementSeparateF<ImmutableArray.HKT>()(
     (G: Applicative<G>) =>
       (f: (a: A) => HKT.Kind<G, FR, FE, Either<B, B2>>) =>
         (fa: ImmutableArray<A>): HKT.Kind<G, FR, FE, Tuple<[ImmutableArray<B>, ImmutableArray<B2>]>> =>
-          G.map((self: ImmutableArray<Either<B, B2>>) => self.separate())(ImmutableArray.forEachF(G)(f)(fa))
+          G.map((self: ImmutableArray<Either<B, B2>>) => self.separate)(ImmutableArray.forEachF(G)(f)(fa))
 )

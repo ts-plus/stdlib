@@ -1,5 +1,5 @@
 /**
- * @tsplus fluent Tree duplicate
+ * @tsplus getter Tree duplicate
  */
 export function duplicate_<A>(self: Tree<A>): Tree<Tree<A>> {
   return self.extend(identity)

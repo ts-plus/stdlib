@@ -11,7 +11,7 @@ export function filter_<A>(self: HashSet<A>, f: Predicate<A>): HashSet<A>
 export function filter_<A>(self: HashSet<A>, f: Predicate<A>): HashSet<A> {
   const set = HashSet.empty<A>()
   return set.mutate((r) => {
-    const vs = self.values()
+    const vs = self.values
     let e: IteratorResult<A, any>
     while (!(e = vs.next()).done) {
       const value = e.value

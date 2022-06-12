@@ -28,7 +28,7 @@ describe.concurrent("Associative", () => {
   })
 
   it("inverted", () => {
-    const S = Associative.string.inverted()
+    const S = Associative.string.inverted
     assert.strictEqual(S.combine("a", "b"), "ba")
   })
 

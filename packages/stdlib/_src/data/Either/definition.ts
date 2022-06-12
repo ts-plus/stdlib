@@ -178,7 +178,7 @@ export function leftW<E, A = never>(e: E): Either<E, A> {
 /**
  * Widen left side `Either[E, A] => Either[E | E1, A]`.
  *
- * @tsplus fluent Either widenE
+ * @tsplus getter Either widenE
  * @tsplus macro identity
  */
 export function widenE_<E, A, E1>(self: Either<E, A>): Either<E | E1, A> {
@@ -202,7 +202,7 @@ export function widenE<E1>() {
 /**
  * Widen left side `Either[E, A] => Either[E | E1, A]`.
  *
- * @tsplus fluent Either widenA
+ * @tsplus getter Either widenA
  * @tsplus macro identity
  */
 export function widenA_<E, A, A1>(self: Either<E, A>): Either<E, A | A1> {

@@ -18,7 +18,7 @@ export function fold_<A, B>(
     bothCase,
     List(self),
     List.empty()
-  ).unsafeHead()!
+  ).unsafeHead!
 }
 
 /**
@@ -46,24 +46,24 @@ function foldLoop<A, B>(
         } else {
           if (val.left) {
             let parSeqs: List<B> = acc
-            const left = parSeqs.unsafeHead()
-            parSeqs = parSeqs.unsafeTail()!
-            const right = parSeqs.unsafeHead()
-            parSeqs = parSeqs.unsafeTail()!
+            const left = parSeqs.unsafeHead
+            parSeqs = parSeqs.unsafeTail!
+            const right = parSeqs.unsafeHead
+            parSeqs = parSeqs.unsafeTail!
             return parSeqs.prepend(bothCase(left!, right!))
           } else {
             let parSeqs: List<B> = acc
-            const left = parSeqs.unsafeHead()
-            parSeqs = parSeqs.unsafeTail()!
-            const right = parSeqs.unsafeHead()
-            parSeqs = parSeqs.unsafeTail()!
+            const left = parSeqs.unsafeHead
+            parSeqs = parSeqs.unsafeTail!
+            const right = parSeqs.unsafeHead
+            parSeqs = parSeqs.unsafeTail!
             return parSeqs.prepend(thenCase(left!, right!))
           }
         }
       })
     } else {
       const head = inp.head
-      const parSeqs = inp.tail()
+      const parSeqs = inp.tail
 
       switch (head._tag) {
         case "Empty": {

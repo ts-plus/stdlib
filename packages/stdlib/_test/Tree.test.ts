@@ -56,7 +56,7 @@ describe.concurrent("Tree", () => {
 
   it("flatten", () => {
     assert.isTrue(
-      Tree(Tree(2), Chunk(Tree(Tree(1)), Tree(Tree(2)))).flatten() ==
+      Tree(Tree(2), Chunk(Tree(Tree(1)), Tree(Tree(2)))).flatten ==
         Tree(2, Chunk(Tree(1), Tree(2)))
     )
   })
@@ -113,7 +113,7 @@ describe.concurrent("Tree", () => {
   it("duplicate", () => {
     const t = Tree("a")
     const expected = Tree(Tree("a", Chunk()), Chunk())
-    assert.isTrue(t.duplicate() == expected)
+    assert.isTrue(t.duplicate == expected)
   })
 
   it("reduce", () => {

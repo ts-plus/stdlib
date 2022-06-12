@@ -68,8 +68,8 @@ describe.concurrent("SortedMap", () => {
     const map1 = makeSortedMap(Tuple(0, 10), Tuple(1, 20), Tuple(2, 30))
     const map2 = SortedMap.empty<number, number>(Ord.number)
 
-    assert.isTrue(map1.headOption() == Option.some(Tuple(key(0), value(10))))
-    assert.isTrue(map2.headOption() == Option.none)
+    assert.isTrue(map1.headOption == Option.some(Tuple(key(0), value(10))))
+    assert.isTrue(map2.headOption == Option.none)
   })
 
   it("isEmpty", () => {
@@ -91,7 +91,7 @@ describe.concurrent("SortedMap", () => {
   it("keys", () => {
     const map = makeSortedMap(Tuple(0, 10), Tuple(1, 20), Tuple(2, 30))
 
-    const result = ImmutableArray.from(map.keys())
+    const result = ImmutableArray.from(map.keys)
 
     assert.isTrue(result == ImmutableArray(key(0), key(1), key(2)))
   })
@@ -169,7 +169,7 @@ describe.concurrent("SortedMap", () => {
   it("values", () => {
     const map = makeSortedMap(Tuple(0, 10), Tuple(1, 20), Tuple(2, 30))
 
-    const result = ImmutableArray.from(map.values())
+    const result = ImmutableArray.from(map.values)
 
     assert.isTrue(result == ImmutableArray(value(10), value(20), value(30)))
   })

@@ -55,7 +55,7 @@ describe.concurrent("RedBlackTree", () => {
       .insert(3, "e")
 
     assert.strictEqual(tree.size, 5)
-    assert.deepEqual(Array.from(tree.backwards()), [
+    assert.deepEqual(Array.from(tree.backwards), [
       Tuple(3, "e"),
       Tuple(1, "a"),
       Tuple(0, "b"),
@@ -68,7 +68,7 @@ describe.concurrent("RedBlackTree", () => {
     const tree = RedBlackTree.make<number, string>(Ord.number)
 
     assert.strictEqual(tree.size, 0)
-    assert.isTrue(tree.backwards().asImmutableArray() == ImmutableArray.empty())
+    assert.isTrue(tree.backwards.asImmutableArray() == ImmutableArray.empty())
   })
 
   it("values", () => {

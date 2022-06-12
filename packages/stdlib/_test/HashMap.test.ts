@@ -72,11 +72,11 @@ describe.concurrent("HashMap", () => {
 
     assert.propertyVal(hashMap, "_editable", false)
 
-    hashMap = hashMap.beginMutation()
+    hashMap = hashMap.beginMutation
 
     assert.propertyVal(hashMap, "_editable", true)
 
-    hashMap = hashMap.endMutation()
+    hashMap = hashMap.endMutation
 
     assert.propertyVal(hashMap, "_editable", false)
   })
@@ -141,7 +141,7 @@ describe.concurrent("HashMap", () => {
   it("compact", () => {
     const hashMap = HashMap(Tuple(0, Option.some("a")), Tuple(1, Option.none))
 
-    const result = hashMap.compact()
+    const result = hashMap.compact
 
     assert.strictEqual(result.unsafeGet(0), "a")
     assert.throws(() => result.unsafeGet(1))
@@ -195,7 +195,7 @@ describe.concurrent("HashMap", () => {
   it("keys", () => {
     const hashMap = HashMap(Tuple(0, "a"), Tuple(1, "b"))
 
-    const result = hashMap.keys()
+    const result = hashMap.keys
 
     assert.deepEqual([...result], [0, 1])
   })
@@ -207,7 +207,7 @@ describe.concurrent("HashMap", () => {
       Tuple(key(1), value("c"))
     )
 
-    const result = hashMap.keySet()
+    const result = hashMap.keySet
 
     assert.deepEqual([...result], [key(0), key(1)])
   })
@@ -327,7 +327,7 @@ describe.concurrent("HashMap", () => {
   it("values", () => {
     const hashMap = HashMap(Tuple(key(0), value("a")), Tuple(key(1), value("b")))
 
-    const result = hashMap.values()
+    const result = hashMap.values
 
     assert.deepEqual([...result], [value("a"), value("b")])
   })

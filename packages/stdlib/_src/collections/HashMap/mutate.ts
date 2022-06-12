@@ -7,9 +7,9 @@ export function mutate_<K, V>(
   self: HashMap<K, V>,
   f: (self: HashMap<K, V>) => void
 ): HashMap<K, V> {
-  const transient = self.beginMutation()
+  const transient = self.beginMutation
   f(transient)
-  return transient.endMutation()
+  return transient.endMutation
 }
 
 /**

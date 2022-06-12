@@ -23,9 +23,9 @@ describe.concurrent("ImmutableArray", () => {
   })
 
   it("compact", () => {
-    assert.isTrue(ImmutableArray.empty<Option<number>>().compact() == ImmutableArray.empty())
-    assert.isTrue(ImmutableArray(Option.some(1), Option.some(2), Option.some(3)).compact() == ImmutableArray(1, 2, 3))
-    assert.isTrue(ImmutableArray(Option.some(1), Option.none, Option.some(3)).compact() == ImmutableArray(1, 3))
+    assert.isTrue(ImmutableArray.empty<Option<number>>().compact == ImmutableArray.empty())
+    assert.isTrue(ImmutableArray(Option.some(1), Option.some(2), Option.some(3)).compact == ImmutableArray(1, 2, 3))
+    assert.isTrue(ImmutableArray(Option.some(1), Option.none, Option.some(3)).compact == ImmutableArray(1, 3))
   })
 
   it("compactF", () => {
@@ -127,7 +127,7 @@ describe.concurrent("ImmutableArray", () => {
 
   it("flatten", () => {
     assert.isTrue(
-      ImmutableArray(ImmutableArray(1), ImmutableArray(2), ImmutableArray(3)).flatten() ==
+      ImmutableArray(ImmutableArray(1), ImmutableArray(2), ImmutableArray(3)).flatten ==
         ImmutableArray(1, 2, 3)
     )
   })
@@ -302,11 +302,11 @@ describe.concurrent("ImmutableArray", () => {
 
   it("separate", () => {
     assert.isTrue(
-      ImmutableArray.empty<Either<string, number>>().separate() ==
+      ImmutableArray.empty<Either<string, number>>().separate ==
         Tuple(ImmutableArray.empty(), ImmutableArray.empty())
     )
     assert.isTrue(
-      ImmutableArray(Either.left(123), Either.right("123")).separate() ==
+      ImmutableArray(Either.left(123), Either.right("123")).separate ==
         Tuple(ImmutableArray(123), ImmutableArray("123"))
     )
   })

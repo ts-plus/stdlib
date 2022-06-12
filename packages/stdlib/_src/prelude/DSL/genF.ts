@@ -55,7 +55,7 @@ export function genWithHistoryF<
         const iterator = f((config?.adapter ? config.adapter : adapterLazy) as any)
         let state = iterator.next()
 
-        for (const a of replayStack.reverse()) {
+        for (const a of replayStack.reverse) {
           if (state.done) {
             throw new PrematureGeneratorExit()
           }

@@ -1,7 +1,7 @@
 import { concreteSortedSet } from "@tsplus/stdlib/collections/SortedSet/_internal/SortedSetInternal"
 
 /**
- * @tsplus fluent SortedSet getOrd
+ * @tsplus getter SortedSet getOrd
  */
 export function getOrd<A>(self: SortedSet<A>): Ord<A> {
   concreteSortedSet(self)

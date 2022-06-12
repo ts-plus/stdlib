@@ -7,7 +7,7 @@ import { concreteChunkId } from "@tsplus/stdlib/collections/Chunk/definition"
  * or iterating over the elements of the chunk in lower level, performance
  * sensitive code unless you really only need the first element of the chunk.
  *
- * @tsplus fluent Chunk unsafeTail
+ * @tsplus getter Chunk unsafeTail
  */
 export function unsafeTail<A>(self: Chunk<A>): Chunk<A> {
   if (concreteChunkId(self).length === 0) {

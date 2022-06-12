@@ -1,5 +1,5 @@
 /**
- * @tsplus fluent ImmutableArray separate
+ * @tsplus getter ImmutableArray separate
  */
 export function separate<A, B>(self: ImmutableArray<Either<A, B>>): Tuple<[ImmutableArray<A>, ImmutableArray<B>]> {
   const left: Array<A> = []

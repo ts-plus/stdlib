@@ -7,8 +7,8 @@ export function depthFirstChainRec_<A, B>(init: A, f: (a: A) => Chunk<Either<A, 
   let todo = f(init)
   let result = Chunk.empty<B>()
   while (todo.size > 0) {
-    const either = todo.unsafeHead()
-    todo = todo.unsafeTail()
+    const either = todo.unsafeHead
+    todo = todo.unsafeTail
     if (either._tag === "Left") {
       todo = f(either.left).concat(todo)
     } else {
@@ -37,8 +37,8 @@ export function breadthFirstChainRec_<A, B>(init: A, f: (a: A) => Chunk<Either<A
   let todo = f(init)
   let result = Chunk.empty<B>()
   while (todo.size > 0) {
-    const either = todo.unsafeHead()
-    todo = todo.unsafeTail()
+    const either = todo.unsafeHead
+    todo = todo.unsafeTail
     if (either._tag === "Left") {
       todo = todo.concat(f(either.left))
     } else {

@@ -3,7 +3,7 @@ import { HashMapInternal, realHashMap } from "@tsplus/stdlib/collections/HashMap
 /**
  * Marks the `HashMap` as mutable.
  *
- * @tsplus fluent HashMap beginMutation
+ * @tsplus getter HashMap beginMutation
  */
 export function beginMutation<K, V>(self: HashMap<K, V>): HashMap<K, V> {
   realHashMap(self)

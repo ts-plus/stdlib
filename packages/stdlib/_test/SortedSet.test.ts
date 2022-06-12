@@ -110,7 +110,7 @@ describe.concurrent("SortedSet", () => {
       new Member("worker_000003")
     )
 
-    const result = set1.flatMap(set1.getOrd(), (a) => set2 + a)
+    const result = set1.flatMap(set1.getOrd, (a) => set2 + a)
 
     assert.isTrue(
       result.asImmutableArray() == ImmutableArray(

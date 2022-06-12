@@ -33,7 +33,7 @@ describe.concurrent("Option", () => {
   })
 
   it("duplicate", () => {
-    assert.isTrue(Option.some(1).duplicate() == Option.some(Option.some(1)))
+    assert.isTrue(Option.some(1).duplicate == Option.some(Option.some(1)))
   })
 
   it("equals", () => {
@@ -83,7 +83,7 @@ describe.concurrent("Option", () => {
   })
 
   it("flatten", () => {
-    assert.isTrue(Option.some(Option.some(1)).flatten() == Option.some(1))
+    assert.isTrue(Option.some(Option.some(1)).flatten == Option.some(1))
   })
 
   it("fold", () => {
@@ -226,9 +226,9 @@ describe.concurrent("Option", () => {
   })
 
   it("separate", () => {
-    assert.isTrue(Option.none.separate() == Tuple(Option.none, Option.none))
-    assert.isTrue(Option.some(Either.left("123")).separate() == Tuple(Option.some("123"), Option.none))
-    assert.isTrue(Option.some(Either.right("123")).separate() == Tuple(Option.none, Option.some("123")))
+    assert.isTrue(Option.none.separate == Tuple(Option.none, Option.none))
+    assert.isTrue(Option.some(Either.left("123")).separate == Tuple(Option.some("123"), Option.none))
+    assert.isTrue(Option.some(Either.right("123")).separate == Tuple(Option.none, Option.some("123")))
   })
 
   it("sequence", () => {
@@ -251,8 +251,8 @@ describe.concurrent("Option", () => {
   })
 
   it("toNullable", () => {
-    assert.strictEqual(Option.some(1).toNullable(), 1)
-    assert.isNull(Option.none.toNullable())
+    assert.strictEqual(Option.some(1).toNullable, 1)
+    assert.isNull(Option.none.toNullable)
   })
 
   it("tryCatch", () => {

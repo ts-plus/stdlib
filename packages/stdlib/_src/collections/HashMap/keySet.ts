@@ -3,7 +3,7 @@ import { HashSetInternal } from "@tsplus/stdlib/collections/HashSet/_internal/ha
 /**
  * Returns a `HashSet` of keys within the `HashMap`.
  *
- * @tsplus fluent HashMap keySet
+ * @tsplus getter HashMap keySet
  */
 export function keySet<K, V>(self: HashMap<K, V>): HashSet<K> {
   return new HashSetInternal(self)

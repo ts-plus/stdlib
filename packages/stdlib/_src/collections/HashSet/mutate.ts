@@ -4,9 +4,9 @@
  * @tsplus fluent HashSet mutate
  */
 export function mutate_<A>(self: HashSet<A>, f: (set: HashSet<A>) => void): HashSet<A> {
-  const transient = self.beginMutation()
+  const transient = self.beginMutation
   f(transient)
-  return transient.endMutation()
+  return transient.endMutation
 }
 
 /**

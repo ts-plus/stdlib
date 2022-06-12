@@ -1,7 +1,7 @@
 /**
  * Reverses a `List`, returning a new `List`
  *
- * @tsplus fluent List reverse
+ * @tsplus getter List reverse
  */
 export function reverse<A>(self: List<A>): List<A> {
   let result = List.empty<A>()

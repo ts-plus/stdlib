@@ -1,5 +1,5 @@
 /**
- * @tsplus fluent List unsafeTail
+ * @tsplus getter List unsafeTail
  */
 export function unsafeTail<A>(self: List<A>): List<A> | undefined {
   if (self.isNil()) {
