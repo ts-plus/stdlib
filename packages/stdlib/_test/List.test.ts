@@ -14,6 +14,9 @@ describe.concurrent("List", () => {
   it("prepend", () => {
     assert.isTrue(2 + List(3, 4, 5) == List(2, 3, 4, 5))
   })
+  it("toSet", () => {
+    assert.isTrue(List(3, 4, 5).toSet == new Set(List(3, 4, 5)))
+  })
   it("builder", () => {
     const builder = List.builder<number>()
     builder.append(0)
