@@ -4,5 +4,5 @@
 export function deriveSortedSet<A>(
   ...[ord]: [Ord<A>]
 ): SortedSet<A> {
-  return SortedSet.make(ord)
+  return SortedSet.empty(ord)
 }

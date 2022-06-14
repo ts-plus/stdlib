@@ -5,6 +5,7 @@
  * allowing for binary to be correctly stored in typed arrays
  *
  * @tsplus static Chunk/Ops __call
+ * @tsplus static Chunk/Ops make
  */
 export function make<Elem extends readonly any[]>(...iter: Elem): Chunk<Elem[number]> {
   let builder = Chunk.empty<Elem[number]>()

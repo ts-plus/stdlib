@@ -1,10 +1,3 @@
-declare global {
-  /**
-   * @tsplus type Array
-   */
-  export interface Array<T> {}
-}
-
 /**
  * @tsplus type ImmutableArray
  * @tsplus companion ImmutableArray/Ops

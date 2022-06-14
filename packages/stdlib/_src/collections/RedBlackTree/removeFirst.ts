@@ -32,7 +32,7 @@ export function removeFirst_<K, V>(
     return self
   }
 
-  const cstack = new Array(stack.length)
+  const cstack = Array.alloc<Node<K, V>>(stack.length)
 
   let n = stack[stack.length - 1]!
 
@@ -55,7 +55,7 @@ export function removeFirst_<K, V>(
   }
 
   // Get node
-  n = cstack[cstack.length - 1]
+  n = cstack[cstack.length - 1]!
 
   // If not leaf, then swap with previous node
   if (n.left && n.right) {
@@ -68,31 +68,31 @@ export function removeFirst_<K, V>(
     }
     // Copy path to leaf
     const v = cstack[split - 1]
-    cstack.push(new Node(n.color, v.key, v.value, n.left, n.right, n.count))
-    cstack[split - 1].key = n.key
-    cstack[split - 1].value = n.value
+    cstack.push(new Node(n.color, v!.key, v!.value, n.left, n.right, n.count))
+    cstack[split - 1]!.key = n.key
+    cstack[split - 1]!.value = n.value
 
     // Fix up stack
     for (let i = cstack.length - 2; i >= split; --i) {
-      n = cstack[i]
+      n = cstack[i]!
       cstack[i] = new Node(n.color, n.key, n.value, n.left, cstack[i + 1], n.count)
     }
-    cstack[split - 1].left = cstack[split]
+    cstack[split - 1]!.left = cstack[split]
   }
 
   // Remove leaf node
-  n = cstack[cstack.length - 1]
+  n = cstack[cstack.length - 1]!
   if (n.color === "Red") {
     // Easy case: removing red leaf
-    const p = cstack[cstack.length - 2]
+    const p = cstack[cstack.length - 2]!
     if (p.left === n) {
-      p.left = null
+      p.left = undefined
     } else if (p.right === n) {
-      p.right = null
+      p.right = undefined
     }
     cstack.pop()
     for (let i = 0; i < cstack.length; ++i) {
-      cstack[i]._count--
+      cstack[i]!.count--
     }
     return new RedBlackTreeInternal(self.ord, cstack[0])
   } else {
@@ -106,7 +106,7 @@ export function removeFirst_<K, V>(
       // Child must be red, so repaint it black to balance color
       n.color = "Black"
       for (let i = 0; i < cstack.length - 1; ++i) {
-        cstack[i]._count--
+        cstack[i]!.count--
       }
       return new RedBlackTreeInternal(self.ord, cstack[0])
     } else if (cstack.length === 1) {
@@ -115,15 +115,15 @@ export function removeFirst_<K, V>(
     } else {
       // Hard case: Repaint n, and then do some nasty stuff
       for (let i = 0; i < cstack.length; ++i) {
-        cstack[i]._count--
+        cstack[i]!.count--
       }
       const parent = cstack[cstack.length - 2]
       fixDoubleBlack(cstack)
       // Fix up links
-      if (parent.left === n) {
-        parent.left = null
+      if (parent!.left === n) {
+        parent!.left = undefined
       } else {
-        parent.right = null
+        parent!.right = undefined
       }
     }
   }

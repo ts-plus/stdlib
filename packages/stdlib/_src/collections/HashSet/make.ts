@@ -2,9 +2,10 @@
  * Construct a new `HashSet` from a variable number of values.
  *
  * @tsplus static HashSet/Ops __call
+ * @tsplus static HashSet/Ops make
  */
-export function make<A>(...elements: Array<A>): HashSet<A> {
-  const set = HashSet.empty<A>().beginMutation
+export function make<As extends readonly any[]>(...elements: As): HashSet<As[number]> {
+  const set = HashSet.empty<As[number]>().beginMutation
   for (const v of elements) {
     set.add(v)
   }

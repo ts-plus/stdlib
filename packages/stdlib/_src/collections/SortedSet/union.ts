@@ -9,7 +9,7 @@ import { concreteSortedSet } from "@tsplus/stdlib/collections/SortedSet/_interna
  */
 export function union_<A>(self: SortedSet<A>, that: Collection<A>): SortedSet<A> {
   concreteSortedSet(self)
-  let out = SortedSet.make(self.keyTree.ord)
+  let out = SortedSet.empty(self.keyTree.ord)
   for (const value of self) {
     out = out.add(value)
   }

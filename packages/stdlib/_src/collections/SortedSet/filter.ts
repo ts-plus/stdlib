@@ -9,7 +9,7 @@ export function filter_<A, B extends A>(self: SortedSet<A>, f: Refinement<A, B>)
 export function filter_<A>(self: SortedSet<A>, f: Predicate<A>): SortedSet<A>
 export function filter_<A>(self: SortedSet<A>, f: Predicate<A>): SortedSet<A> {
   concreteSortedSet(self)
-  let out = SortedSet.make(self.keyTree.ord)
+  let out = SortedSet.empty(self.keyTree.ord)
   for (const value of self) {
     if (f(value)) {
       out = out.add(value)

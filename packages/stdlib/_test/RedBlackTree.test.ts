@@ -2,7 +2,7 @@ describe.concurrent("RedBlackTree", () => {
   it("forEach", () => {
     const ordered: [number, string][] = []
 
-    RedBlackTree.make<number, string>(Ord.number)
+    RedBlackTree.empty<number, string>(Ord.number)
       .insert(1, "a")
       .insert(0, "b")
       .insert(-1, "c")
@@ -22,7 +22,7 @@ describe.concurrent("RedBlackTree", () => {
   })
 
   it("iterable", () => {
-    const tree = RedBlackTree.make<number, string>(Ord.number)
+    const tree = RedBlackTree.empty<number, string>(Ord.number)
       .insert(1, "a")
       .insert(0, "b")
       .insert(-1, "c")
@@ -40,14 +40,14 @@ describe.concurrent("RedBlackTree", () => {
   })
 
   it("iterable empty", () => {
-    const tree = RedBlackTree.make<number, string>(Ord.number)
+    const tree = RedBlackTree.empty<number, string>(Ord.number)
 
     assert.strictEqual(tree.size, 0)
     assert.isTrue(tree.asImmutableArray() == ImmutableArray.empty())
   })
 
   it("backwards", () => {
-    const tree = RedBlackTree.make<number, string>(Ord.number)
+    const tree = RedBlackTree.empty<number, string>(Ord.number)
       .insert(1, "a")
       .insert(0, "b")
       .insert(-1, "c")
@@ -65,14 +65,14 @@ describe.concurrent("RedBlackTree", () => {
   })
 
   it("backwards empty", () => {
-    const tree = RedBlackTree.make<number, string>(Ord.number)
+    const tree = RedBlackTree.empty<number, string>(Ord.number)
 
     assert.strictEqual(tree.size, 0)
     assert.isTrue(tree.backwards.asImmutableArray() == ImmutableArray.empty())
   })
 
   it("values", () => {
-    const tree = RedBlackTree.make<number, string>(Ord.number)
+    const tree = RedBlackTree.empty<number, string>(Ord.number)
       .insert(1, "a")
       .insert(0, "b")
       .insert(-1, "c")
@@ -84,7 +84,7 @@ describe.concurrent("RedBlackTree", () => {
   })
 
   it("keys", () => {
-    const tree = RedBlackTree.make<number, string>(Ord.number)
+    const tree = RedBlackTree.empty<number, string>(Ord.number)
       .insert(1, "a")
       .insert(0, "b")
       .insert(-1, "c")
@@ -96,7 +96,7 @@ describe.concurrent("RedBlackTree", () => {
   })
 
   it("begin/end", () => {
-    const tree = RedBlackTree.make<number, string>(Ord.number)
+    const tree = RedBlackTree.empty<number, string>(Ord.number)
       .insert(1, "a")
       .insert(0, "b")
       .insert(-1, "c")
@@ -111,7 +111,7 @@ describe.concurrent("RedBlackTree", () => {
   it("forEachGe", () => {
     const ordered: [number, string][] = []
 
-    RedBlackTree.make<number, string>(Ord.number)
+    RedBlackTree.empty<number, string>(Ord.number)
       .insert(1, "a")
       .insert(0, "b")
       .insert(-1, "c")
@@ -127,7 +127,7 @@ describe.concurrent("RedBlackTree", () => {
   it("forEachLt", () => {
     const ordered: [number, string][] = []
 
-    RedBlackTree.make<number, string>(Ord.number)
+    RedBlackTree.empty<number, string>(Ord.number)
       .insert(1, "a")
       .insert(0, "b")
       .insert(-1, "c")
@@ -143,7 +143,7 @@ describe.concurrent("RedBlackTree", () => {
   it("forEachBetween", () => {
     const ordered: [number, string][] = []
 
-    RedBlackTree.make<number, string>(Ord.number)
+    RedBlackTree.empty<number, string>(Ord.number)
       .insert(1, "a")
       .insert(0, "b")
       .insert(-1, "c")
@@ -157,7 +157,7 @@ describe.concurrent("RedBlackTree", () => {
   })
 
   it("ge", () => {
-    const tree = RedBlackTree.make<number, string>(Ord.number)
+    const tree = RedBlackTree.empty<number, string>(Ord.number)
       .insert(1, "a")
       .insert(0, "b")
       .insert(-1, "c")
@@ -169,7 +169,7 @@ describe.concurrent("RedBlackTree", () => {
   })
 
   it("find", () => {
-    const tree = RedBlackTree.make<number, string>(Ord.number)
+    const tree = RedBlackTree.empty<number, string>(Ord.number)
       .insert(1, "a")
       .insert(2, "c")
       .insert(1, "b")
@@ -192,7 +192,7 @@ describe.concurrent("RedBlackTree", () => {
       }
     }
 
-    const tree = RedBlackTree.make<Key, string>(Ord.number.contramap((_) => _.n))
+    const tree = RedBlackTree.empty<Key, string>(Ord.number.contramap((_) => _.n))
       .insert(new Key(1, "0"), "a")
       .insert(new Key(2, "0"), "c")
       .insert(new Key(1, "1"), "b")

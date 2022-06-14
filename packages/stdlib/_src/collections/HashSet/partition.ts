@@ -21,8 +21,8 @@ export function partition_<A>(
 ): Tuple<[HashSet<A>, HashSet<A>]> {
   const vs = self.values
   let e: IteratorResult<A, any>
-  const right = HashSet<A>().beginMutation
-  const left = HashSet<A>().beginMutation
+  const right = HashSet.empty<A>().beginMutation
+  const left = HashSet.empty<A>().beginMutation
   while (!(e = vs.next()).done) {
     const value = e.value
     if (f(value)) {

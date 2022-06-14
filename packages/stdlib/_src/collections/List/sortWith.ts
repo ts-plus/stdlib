@@ -7,7 +7,7 @@ export function sortWith_<A>(self: List<A>, ord: Ord<A>): List<A> {
   if (len === 1) {
     b.append(self.unsafeHead!)
   } else if (len > 1) {
-    const arr = new Array<[number, A]>(len)
+    const arr = Array.alloc<[number, A]>(len)
     copyToArrayWithIndex(self, arr)
     arr.sort(([i, x], [j, y]) => {
       const c = ord.compare(x, y)

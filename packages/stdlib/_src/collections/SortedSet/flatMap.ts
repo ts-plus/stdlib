@@ -6,7 +6,7 @@ export function flatMap_<A, B>(
   ord: Ord<B>,
   f: (a: A) => Collection<B>
 ): SortedSet<B> {
-  let out = SortedSet.make<B>(ord)
+  let out = SortedSet.empty<B>(ord)
   self.forEach((a) => {
     for (const b of f(a)) {
       if (!out.has(b)) {
