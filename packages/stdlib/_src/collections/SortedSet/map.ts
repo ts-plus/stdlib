@@ -6,7 +6,7 @@ export function map_<A, B>(
   ord: Ord<B>,
   f: (a: A) => B
 ): SortedSet<B> {
-  let out = SortedSet.make(ord)
+  let out = SortedSet.empty(ord)
   self.forEach((a) => {
     const b = f(a)
     if (!out.has(b)) {

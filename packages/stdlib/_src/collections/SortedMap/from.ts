@@ -1,13 +1,16 @@
 import { SortedMapInternal } from "@tsplus/stdlib/collections/SortedMap/_internal/SortedMapInternal"
 
 /**
- * @tsplus static SortedMap/Ops __call
+ * @tsplus static SortedMap/Ops from
  */
-export function from_<K, V>(
-  ord: Ord<K>,
-  iterable: Iterable<Tuple<[K, V]>>
-): SortedMap<K, V> {
-  return new SortedMapInternal(RedBlackTree(iterable, ord))
+export function from_<K>(
+  ord: Ord<K>
+): <V>(
+  iterable: Collection<Tuple<[K, V]>>
+) => SortedMap<K, V> {
+  return <V>(
+    iterable: Collection<Tuple<[K, V]>>
+  ) => new SortedMapInternal(RedBlackTree.from<K, V>(ord)(iterable))
 }
 
 /**

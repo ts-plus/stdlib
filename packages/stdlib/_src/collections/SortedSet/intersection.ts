@@ -10,7 +10,7 @@ import { concreteSortedSet } from "@tsplus/stdlib/collections/SortedSet/_interna
 export function intersection_<A>(self: SortedSet<A>, that: Iterable<A>): SortedSet<A> {
   concreteSortedSet(self)
 
-  let out = SortedSet.make<A>(self.keyTree.ord)
+  let out = SortedSet.empty<A>(self.keyTree.ord)
 
   for (const key of that) {
     if (self.has(key)) {

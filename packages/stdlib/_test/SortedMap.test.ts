@@ -32,7 +32,7 @@ function value(n: number): Value {
 
 function makeSortedMap(...numbers: Array<Tuple<[number, number]>>): SortedMap<Key, Value> {
   const entries = numbers.map(({ tuple: [k, v] }) => Tuple(key(k), value(v)))
-  return SortedMap(Ord.number.contramap((key) => key.id), entries)
+  return SortedMap.from(Ord.number.contramap((key: Key) => key.id))(entries)
 }
 
 describe.concurrent("SortedMap", () => {

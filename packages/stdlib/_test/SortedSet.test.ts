@@ -12,7 +12,7 @@ class Member implements Equals {
 
 describe.concurrent("SortedSet", () => {
   it("add", () => {
-    const set = SortedSet.make<Member>(Ord.string.contramap((_) => _.id))
+    const set = SortedSet.empty<Member>(Ord.string.contramap((_) => _.id))
       + new Member("worker_000000")
       + new Member("worker_000001")
       + new Member("worker_000001")
@@ -29,7 +29,7 @@ describe.concurrent("SortedSet", () => {
   })
 
   it("difference", () => {
-    const set1 = SortedSet.make<Member>(Ord.string.contramap((_) => _.id))
+    const set1 = SortedSet.empty<Member>(Ord.string.contramap((_) => _.id))
       + new Member("worker_000000")
       + new Member("worker_000001")
       + new Member("worker_000002")
@@ -59,7 +59,7 @@ describe.concurrent("SortedSet", () => {
   it("forAll", () => {
     const isWorker = (member: Member) => member.id.indexOf("worker") !== -1
     const isWorker1 = (member: Member) => member.id === "worker_000001"
-    const set = SortedSet.make<Member>(Ord.string.contramap((_) => _.id))
+    const set = SortedSet.empty<Member>(Ord.string.contramap((_) => _.id))
       + new Member("worker_000000")
       + new Member("worker_000001")
       + new Member("worker_000002")
@@ -74,7 +74,7 @@ describe.concurrent("SortedSet", () => {
   it("forAny", () => {
     const isWorker1 = (member: Member) => member.id === "worker_000001"
     const isWorker4 = (member: Member) => member.id === "worker_000004"
-    const set = SortedSet.make<Member>(Ord.string.contramap((_) => _.id))
+    const set = SortedSet.empty<Member>(Ord.string.contramap((_) => _.id))
       + new Member("worker_000000")
       + new Member("worker_000001")
       + new Member("worker_000002")
@@ -88,7 +88,7 @@ describe.concurrent("SortedSet", () => {
 
   it("filter", () => {
     const isWorker1 = (member: Member) => member.id === "worker_000001"
-    const set = SortedSet.make<Member>(Ord.string.contramap((_) => _.id))
+    const set = SortedSet.empty<Member>(Ord.string.contramap((_) => _.id))
       + new Member("worker_000000")
       + new Member("worker_000001")
       + new Member("worker_000002")
@@ -99,7 +99,7 @@ describe.concurrent("SortedSet", () => {
   })
 
   it("flatMap", () => {
-    const set1 = SortedSet.make<Member>(Ord.string.contramap((_) => _.id))
+    const set1 = SortedSet.empty<Member>(Ord.string.contramap((_) => _.id))
       + new Member("worker_000000")
       + new Member("worker_000001")
       + new Member("worker_000002")
@@ -123,7 +123,7 @@ describe.concurrent("SortedSet", () => {
   })
 
   it("forEach", () => {
-    const set1 = SortedSet.make<Member>(Ord.string.contramap((_) => _.id))
+    const set1 = SortedSet.empty<Member>(Ord.string.contramap((_) => _.id))
       + new Member("worker_000000")
       + new Member("worker_000001")
       + new Member("worker_000002")
@@ -140,7 +140,7 @@ describe.concurrent("SortedSet", () => {
   })
 
   it("has", () => {
-    const set = SortedSet.make<Member>(Ord.string.contramap((_) => _.id))
+    const set = SortedSet.empty<Member>(Ord.string.contramap((_) => _.id))
       + new Member("worker_000000")
       + new Member("worker_000001")
       + new Member("worker_000002")
@@ -150,7 +150,7 @@ describe.concurrent("SortedSet", () => {
   })
 
   it("intersection", () => {
-    const set1 = SortedSet.make<Member>(Ord.string.contramap((_) => _.id))
+    const set1 = SortedSet.empty<Member>(Ord.string.contramap((_) => _.id))
       + new Member("worker_000000")
       + new Member("worker_000001")
       + new Member("worker_000002")
@@ -178,16 +178,16 @@ describe.concurrent("SortedSet", () => {
   })
 
   it("isSubset", () => {
-    const set1 = SortedSet.make<Member>(Ord.string.contramap((_) => _.id))
+    const set1 = SortedSet.empty<Member>(Ord.string.contramap((_) => _.id))
       + new Member("worker_000000")
       + new Member("worker_000001")
       + new Member("worker_000002")
 
-    const set2 = SortedSet.make<Member>(Ord.string.contramap((_) => _.id))
+    const set2 = SortedSet.empty<Member>(Ord.string.contramap((_) => _.id))
       + new Member("worker_000001")
       + new Member("worker_000002")
 
-    const set3 = SortedSet.make<Member>(Ord.string.contramap((_) => _.id))
+    const set3 = SortedSet.empty<Member>(Ord.string.contramap((_) => _.id))
       + new Member("worker_000005")
 
     assert.isTrue(set2.isSubset(set1))
@@ -195,7 +195,7 @@ describe.concurrent("SortedSet", () => {
   })
 
   it("map", () => {
-    const set = SortedSet.make<Member>(Ord.string.contramap((_) => _.id))
+    const set = SortedSet.empty<Member>(Ord.string.contramap((_) => _.id))
       + new Member("worker_000000")
       + new Member("worker_000001")
       + new Member("worker_000002")
@@ -206,7 +206,7 @@ describe.concurrent("SortedSet", () => {
   })
 
   it("partition", () => {
-    const set = SortedSet.make<Member>(Ord.string.contramap((_) => _.id))
+    const set = SortedSet.empty<Member>(Ord.string.contramap((_) => _.id))
       + new Member("worker_000000")
       + new Member("worker_000001")
       + new Member("worker_000002")
@@ -229,7 +229,7 @@ describe.concurrent("SortedSet", () => {
   })
 
   it("remove", () => {
-    const set = SortedSet.make<Member>(Ord.string.contramap((_) => _.id))
+    const set = SortedSet.empty<Member>(Ord.string.contramap((_) => _.id))
       + new Member("worker_000000")
       + new Member("worker_000001")
       + new Member("worker_000002")
@@ -245,7 +245,7 @@ describe.concurrent("SortedSet", () => {
   })
 
   it("size", () => {
-    const set = SortedSet.make<Member>(Ord.string.contramap((_) => _.id))
+    const set = SortedSet.empty<Member>(Ord.string.contramap((_) => _.id))
       + new Member("worker_000000")
       + new Member("worker_000001")
       + new Member("worker_000002")
@@ -255,7 +255,7 @@ describe.concurrent("SortedSet", () => {
 
   it("toggle", () => {
     const member = new Member("worker_000000")
-    let set = SortedSet.make<Member>(Ord.string.contramap((_) => _.id))
+    let set = SortedSet.empty<Member>(Ord.string.contramap((_) => _.id))
       + new Member("worker_000000")
       + new Member("worker_000001")
       + new Member("worker_000002")
@@ -272,7 +272,7 @@ describe.concurrent("SortedSet", () => {
   })
 
   it("union", () => {
-    const set1 = SortedSet.make<Member>(Ord.string.contramap((_) => _.id))
+    const set1 = SortedSet.empty<Member>(Ord.string.contramap((_) => _.id))
       + new Member("worker_000000")
       + new Member("worker_000001")
       + new Member("worker_000002")

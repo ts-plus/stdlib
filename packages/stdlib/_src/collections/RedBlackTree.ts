@@ -2,6 +2,7 @@
 export * from "@tsplus/stdlib/collections/RedBlackTree/at"
 export * from "@tsplus/stdlib/collections/RedBlackTree/backwards"
 export * from "@tsplus/stdlib/collections/RedBlackTree/definition"
+export * from "@tsplus/stdlib/collections/RedBlackTree/empty"
 export * from "@tsplus/stdlib/collections/RedBlackTree/find"
 export * from "@tsplus/stdlib/collections/RedBlackTree/findFirst"
 export * from "@tsplus/stdlib/collections/RedBlackTree/first"

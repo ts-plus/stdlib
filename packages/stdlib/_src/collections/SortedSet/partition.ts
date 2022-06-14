@@ -19,8 +19,8 @@ export function partition_<A>(
 ): Tuple<[SortedSet<A>, SortedSet<A>]> {
   concreteSortedSet(self)
 
-  let right = SortedSet.make(self.keyTree.ord)
-  let left = SortedSet.make(self.keyTree.ord)
+  let right = SortedSet.empty(self.keyTree.ord)
+  let left = SortedSet.empty(self.keyTree.ord)
 
   for (const value of self) {
     if (f(value)) {
