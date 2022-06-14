@@ -1,5 +1,17 @@
 # @tsplus/stdlib
 
+## 0.1.4
+
+### Patch Changes
+
+- [#171](https://github.com/ts-plus/stdlib/pull/171) [`1948878`](https://github.com/ts-plus/stdlib/commit/1948878da55bcb8ab3335ca328bbd0fe8f3d8905) Thanks [@wesselvdv](https://github.com/wesselvdv)! - Add list toSet
+
+* [#170](https://github.com/ts-plus/stdlib/pull/170) [`244d66c`](https://github.com/ts-plus/stdlib/commit/244d66cc3fbc78788480bee6ddafbd9bb0f75f61) Thanks [@wesselvdv](https://github.com/wesselvdv)! - Replace fluent with getter extension where applicable
+
+- [#171](https://github.com/ts-plus/stdlib/pull/171) [`881f6f5`](https://github.com/ts-plus/stdlib/commit/881f6f5daa685eafe8b4f8aa3dab1ec97810228d) Thanks [@wesselvdv](https://github.com/wesselvdv)! - Add several extension for Array, Map & Set
+
+* [#171](https://github.com/ts-plus/stdlib/pull/171) [`881f6f5`](https://github.com/ts-plus/stdlib/commit/881f6f5daa685eafe8b4f8aa3dab1ec97810228d) Thanks [@wesselvdv](https://github.com/wesselvdv)! - Reworked make, from & \_\_call for all collection types to be more uniform
+
 ## 0.1.3
 
 ### Patch Changes
