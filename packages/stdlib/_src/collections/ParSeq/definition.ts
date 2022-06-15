@@ -395,7 +395,7 @@ export function single<A>(a: A): ParSeq<A> {
  * @tsplus static ParSeq/Ops combinePar
  */
 export function combinePar_<A, A1>(left: ParSeq<A>, right: ParSeq<A1>): ParSeq<A | A1> {
-  return left.isEmpty() ? right : right.isEmpty() ? left : new Both<A | A1>(left, right)
+  return left.isEmpty ? right : right.isEmpty ? left : new Both<A | A1>(left, right)
 }
 
 /**
@@ -415,7 +415,7 @@ export const combinePar = Pipeable(combinePar_)
  * @tsplus static ParSeq/Ops combineSeq
  */
 export function combineSeq_<A, A1>(left: ParSeq<A>, right: ParSeq<A1>): ParSeq<A | A1> {
-  return left.isEmpty() ? right : right.isEmpty() ? left : new Then<A | A1>(left, right)
+  return left.isEmpty ? right : right.isEmpty ? left : new Then<A | A1>(left, right)
 }
 
 /**
@@ -437,7 +437,7 @@ export function isParSeq(u: unknown): u is ParSeq<unknown> {
 /**
  * Checks if the ParSeq is empty.
  *
- * @tsplus fluent ParSeq isEmpty
+ * @tsplus getter ParSeq isEmpty
  */
 export function isEmpty<A>(self: ParSeq<A>): boolean {
   return isEmptyLoop(List.make(self))

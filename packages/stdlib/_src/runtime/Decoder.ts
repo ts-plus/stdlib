@@ -50,7 +50,7 @@ export function decodeJSON<A>(decoder: Decoder<A>, json: string) {
 export function decode<A>(decoder: Decoder<A>, value: unknown) {
   const result = decoder.decodeResult(value)
   if (result.isFailure()) {
-    return Either.left(result.failure.render().draw())
+    return Either.left(result.failure.render().draw)
   }
   return Either.right(result.success)
 }
@@ -351,7 +351,7 @@ export function deriveArray<A extends Array<any>>(
       if (hasFailed) {
         return Result.fail(new DecoderErrorArray(errors))
       }
-      return Result.success(out as A, errors.isEmpty() ? Option.none : Option.some(new DecoderErrorArray(errors)))
+      return Result.success(out as A, errors.isEmpty ? Option.none : Option.some(new DecoderErrorArray(errors)))
     }
     return Result.fail(new DecoderErrorPrimitive(u, "Array"))
   })

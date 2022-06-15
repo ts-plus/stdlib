@@ -236,8 +236,8 @@ describe.concurrent("ImmutableArray", () => {
   })
 
   it("isEmpty", () => {
-    assert.isTrue(ImmutableArray.empty().isEmpty())
-    assert.isFalse(ImmutableArray(1).isEmpty())
+    assert.isTrue(ImmutableArray.empty().isEmpty)
+    assert.isFalse(ImmutableArray(1).isEmpty)
   })
 
   it("isNonEmpty", () => {

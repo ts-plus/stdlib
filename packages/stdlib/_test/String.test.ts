@@ -74,7 +74,7 @@ describe.concurrent("String", () => {
     |World!
     |`
 
-      const result = string.stripMargin()
+      const result = string.stripMargin
 
       assert.strictEqual(result, "\nHello,\nWorld!\n")
     })

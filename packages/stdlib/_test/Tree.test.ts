@@ -2,7 +2,7 @@ import { expect, vi } from "vitest"
 
 describe.concurrent("Tree", () => {
   it("drawTree", () => {
-    const tree = Tree("15", Chunk(Tree("1"))).draw()
+    const tree = Tree("15", Chunk(Tree("1"))).draw
     assert.isTrue(tree.indexOf("15") >= 0)
     assert.isTrue(tree.indexOf("1") >= 0)
   })
@@ -11,7 +11,7 @@ describe.concurrent("Tree", () => {
     const tree = Tree(12, Chunk(Tree(1)))
     const tree0 = tree.map((a) => a.toFixed(0))
     const expected = Tree("12", Chunk(Tree("1")))
-    assert.equal(tree0.draw(), expected.draw())
+    assert.equal(tree0.draw, expected.draw)
   })
 
   it("getEquivalnce", () => {
