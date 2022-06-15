@@ -1,5 +1,11 @@
 # @tsplus/stdlib
 
+## 0.1.5
+
+### Patch Changes
+
+- [#173](https://github.com/ts-plus/stdlib/pull/173) [`6f3c277`](https://github.com/ts-plus/stdlib/commit/6f3c27796fd45610dabb1a510cc804518ed343a1) Thanks [@wesselvdv](https://github.com/wesselvdv)! - Replace more fluent extensions with getter
+
 ## 0.1.4
 
 ### Patch Changes
