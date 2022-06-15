@@ -4,7 +4,7 @@ describe.concurrent("ImmutableQueue", () => {
 
     const result = queue.append(1).append(2).append(3)
 
-    assert.isTrue(result.asImmutableArray() == ImmutableArray(1, 2, 3))
+    assert.isTrue(result.toImmutableArray() == ImmutableArray(1, 2, 3))
   })
 
   it("appendAll", () => {
@@ -12,7 +12,7 @@ describe.concurrent("ImmutableQueue", () => {
 
     const result = queue.appendAll(Collection(1, 2, 3))
 
-    assert.isTrue(result.asImmutableArray() == ImmutableArray(1, 2, 3))
+    assert.isTrue(result.toImmutableArray() == ImmutableArray(1, 2, 3))
   })
 
   it("dequeue", () => {
@@ -81,7 +81,7 @@ describe.concurrent("ImmutableQueue", () => {
 
     const result = queue.append(1).prepend(2).append(3)
 
-    assert.isTrue(result.asImmutableArray() == ImmutableArray(2, 1, 3))
+    assert.isTrue(result.toImmutableArray() == ImmutableArray(2, 1, 3))
   })
 
   it("size", () => {

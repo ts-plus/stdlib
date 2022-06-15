@@ -101,7 +101,7 @@ describe.concurrent("MutableHashMap", () => {
       .set(key(0, 0), value(4, 4))
 
     assert.isTrue(
-      map.asImmutableArray() == ImmutableArray(
+      map.toImmutableArray() == ImmutableArray(
         Tuple(key(0, 0), value(4, 4)),
         Tuple(key(1, 1), value(3, 3))
       )

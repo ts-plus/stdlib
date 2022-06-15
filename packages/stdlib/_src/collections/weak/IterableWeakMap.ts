@@ -156,9 +156,9 @@ const ConcreteImpl: {
 } = typeof FinalizationRegistry !== "undefined" ? WeakImpl : Map
 
 /**
- * @tsplus getter IterableWeakMap asCollection
+ * @tsplus getter IterableWeakMap toCollection
  */
-export function asCollection<K extends object, V>(self: IterableWeakMap<K, V>): Collection<[K, V]> {
+export function toCollection<K extends object, V>(self: IterableWeakMap<K, V>): Collection<[K, V]> {
   return self
 }
 

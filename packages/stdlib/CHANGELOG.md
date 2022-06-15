@@ -448,7 +448,7 @@
 
 ### Patch Changes
 
-- [`0961dce`](https://github.com/ts-plus/stdlib/commit/0961dce919701881b63e494c9d6ac341f44addd8) Thanks [@mikearnaldi](https://github.com/mikearnaldi)! - Add asCollection to collections
+- [`0961dce`](https://github.com/ts-plus/stdlib/commit/0961dce919701881b63e494c9d6ac341f44addd8) Thanks [@mikearnaldi](https://github.com/mikearnaldi)! - Add toCollection to collections
 
 ## 0.0.22
 
@@ -508,7 +508,7 @@
 
 ### Patch Changes
 
-- [`bfffa7c`](https://github.com/ts-plus/stdlib/commit/bfffa7c6a0e575fa9a40c9c1bd16dffe18c49580) Thanks [@mikearnaldi](https://github.com/mikearnaldi)! - Add asImmutableArray to Iterable
+- [`bfffa7c`](https://github.com/ts-plus/stdlib/commit/bfffa7c6a0e575fa9a40c9c1bd16dffe18c49580) Thanks [@mikearnaldi](https://github.com/mikearnaldi)! - Add toImmutableArray to Iterable
 
 * [`067e2f9`](https://github.com/ts-plus/stdlib/commit/067e2f90048b9777911a2ef8d1143aaded27f4bb) Thanks [@mikearnaldi](https://github.com/mikearnaldi)! - Implement Function.pipe, update ts-plus, add global `via` extension
 
@@ -558,7 +558,7 @@
 
 - [`b1769bf`](https://github.com/ts-plus/stdlib/commit/b1769bf89b48ba423f44fc91f0c4a2b7f3b281aa) Thanks [@mikearnaldi](https://github.com/mikearnaldi)! - Add == operator to Equals
 
-* [`771365a`](https://github.com/ts-plus/stdlib/commit/771365ac57013de91ff8f439bd67c072e5850794) Thanks [@mikearnaldi](https://github.com/mikearnaldi)! - Add fluent asList to Iterable
+* [`771365a`](https://github.com/ts-plus/stdlib/commit/771365ac57013de91ff8f439bd67c072e5850794) Thanks [@mikearnaldi](https://github.com/mikearnaldi)! - Add fluent toList to Iterable
 
 ## 0.0.8
 

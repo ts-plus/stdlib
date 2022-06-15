@@ -121,7 +121,7 @@ describe.concurrent("ImmutableArray", () => {
     assert.isTrue(
       ImmutableArray(0, 1)
         .flatMap((n) => [n + 1])
-        .asImmutableArray() == ImmutableArray(1, 2)
+        .toImmutableArray() == ImmutableArray(1, 2)
     )
   })
 

@@ -134,9 +134,9 @@ export class ListBuffer<A> implements Collection<A> {
 }
 
 /**
- * @tsplus getter ListBuffer asCollection
+ * @tsplus getter ListBuffer toCollection
  */
-export function asCollection<A>(self: ListBuffer<A>): Collection<A> {
+export function toCollection<A>(self: ListBuffer<A>): Collection<A> {
   return self
 }
 

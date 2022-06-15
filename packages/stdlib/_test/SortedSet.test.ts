@@ -20,7 +20,7 @@ describe.concurrent("SortedSet", () => {
       + new Member("worker_000001")
 
     assert.isTrue(
-      set.asImmutableArray() == ImmutableArray(
+      set.toImmutableArray() == ImmutableArray(
         new Member("worker_000000"),
         new Member("worker_000001"),
         new Member("worker_000002")
@@ -47,12 +47,12 @@ describe.concurrent("SortedSet", () => {
     )
 
     assert.isTrue(
-      set1.difference(set2).asImmutableArray() == ImmutableArray(
+      set1.difference(set2).toImmutableArray() == ImmutableArray(
         new Member("worker_000000")
       )
     )
     assert.isTrue(
-      set1.difference(set3).asImmutableArray() == ImmutableArray.empty()
+      set1.difference(set3).toImmutableArray() == ImmutableArray.empty()
     )
   })
 
@@ -95,7 +95,7 @@ describe.concurrent("SortedSet", () => {
 
     const result = set.filter(isWorker1)
 
-    assert.isTrue(result.asImmutableArray() == ImmutableArray(new Member("worker_000001")))
+    assert.isTrue(result.toImmutableArray() == ImmutableArray(new Member("worker_000001")))
   })
 
   it("flatMap", () => {
@@ -113,7 +113,7 @@ describe.concurrent("SortedSet", () => {
     const result = set1.flatMap(set1.getOrd, (a) => set2 + a)
 
     assert.isTrue(
-      result.asImmutableArray() == ImmutableArray(
+      result.toImmutableArray() == ImmutableArray(
         new Member("worker_000000"),
         new Member("worker_000001"),
         new Member("worker_000002"),
@@ -169,7 +169,7 @@ describe.concurrent("SortedSet", () => {
     const result2 = set1.intersection(set3)
 
     assert.isTrue(
-      result1.asImmutableArray() == ImmutableArray(
+      result1.toImmutableArray() == ImmutableArray(
         new Member("worker_000001"),
         new Member("worker_000002")
       )
@@ -202,7 +202,7 @@ describe.concurrent("SortedSet", () => {
 
     const result = set.map(Ord.string, (member) => member.id.replace(/_\d+/g, ""))
 
-    assert.isTrue(result.asImmutableArray() == ImmutableArray("worker"))
+    assert.isTrue(result.toImmutableArray() == ImmutableArray("worker"))
   })
 
   it("partition", () => {
@@ -215,13 +215,13 @@ describe.concurrent("SortedSet", () => {
     const result = set.partition((member) => member.id.endsWith("1") || member.id.endsWith("3"))
 
     assert.isTrue(
-      result.get(0).asImmutableArray() == ImmutableArray(
+      result.get(0).toImmutableArray() == ImmutableArray(
         new Member("worker_000000"),
         new Member("worker_000002")
       )
     )
     assert.isTrue(
-      result.get(1).asImmutableArray() == ImmutableArray(
+      result.get(1).toImmutableArray() == ImmutableArray(
         new Member("worker_000001"),
         new Member("worker_000003")
       )
@@ -237,7 +237,7 @@ describe.concurrent("SortedSet", () => {
     const result = set.remove(new Member("worker_000000"))
 
     assert.isTrue(
-      result.asImmutableArray() == ImmutableArray(
+      result.toImmutableArray() == ImmutableArray(
         new Member("worker_000001"),
         new Member("worker_000002")
       )
@@ -289,7 +289,7 @@ describe.concurrent("SortedSet", () => {
     const result2 = set1.union(set3)
 
     assert.isTrue(
-      result1.asImmutableArray() == ImmutableArray(
+      result1.toImmutableArray() == ImmutableArray(
         new Member("worker_000000"),
         new Member("worker_000001"),
         new Member("worker_000002"),
