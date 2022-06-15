@@ -1,5 +1,11 @@
 # @tsplus/stdlib
 
+## 0.1.6
+
+### Patch Changes
+
+- [#175](https://github.com/ts-plus/stdlib/pull/175) [`9742055`](https://github.com/ts-plus/stdlib/commit/974205590b6e5287c03ac2550681d0b4fa803c30) Thanks [@wesselvdv](https://github.com/wesselvdv)! - Rename extensions 'as<OtherType>' to 'to<OtherType>' for uniformity
+
 ## 0.1.5
 
 ### Patch Changes
