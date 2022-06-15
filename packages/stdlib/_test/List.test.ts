@@ -14,8 +14,8 @@ describe.concurrent("List", () => {
   it("prepend", () => {
     assert.isTrue(2 + List(3, 4, 5) == List(2, 3, 4, 5))
   })
-  it("toSet", () => {
-    assert.isTrue(List(3, 4, 5).toSet == new Set(List(3, 4, 5)))
+  it("toHashSet", () => {
+    assert.isTrue(List(3, 4, 5).toHashSet == HashSet(3, 4, 5))
   })
   it("builder", () => {
     const builder = List.builder<number>()
@@ -40,7 +40,7 @@ describe.concurrent("List", () => {
   it("drop", () => {
     const list = List(1, 2, 3, 4, 5) + List(6, 7, 8, 9, 10)
 
-    const result = list.drop(5).asImmutableArray()
+    const result = list.drop(5).toImmutableArray()
 
     assert.isTrue(result == ImmutableArray(6, 7, 8, 9, 10))
   })
@@ -58,12 +58,12 @@ describe.concurrent("List", () => {
   })
   it("flatMap Iterable", () => {
     assert.isTrue(
-      List(0, 1).flatMap((n) => [n + 1]).asList()
+      List(0, 1).flatMap((n) => [n + 1]).toList()
         == List(1, 2)
     )
   })
-  it("asCollection", () => {
-    assert.isTrue(List(0, 1).asCollection == List(0, 1))
+  it("toCollection", () => {
+    assert.isTrue(List(0, 1).toCollection == List(0, 1))
   })
   it("partition", () => {
     assert.isTrue(List.empty<number>().partition((n) => n > 2) == Tuple(List.empty<number>(), List.empty<number>()))

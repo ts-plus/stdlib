@@ -1,6 +1,6 @@
 /**
- * @tsplus getter ImmutableArray asCollection
+ * @tsplus getter ImmutableArray toCollection
  */
-export function asCollection<A>(self: ImmutableArray<A>): Collection<A> {
+export function toCollection<A>(self: ImmutableArray<A>): Collection<A> {
   return self
 }

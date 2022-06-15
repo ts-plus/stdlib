@@ -2,7 +2,8 @@
  * Construct a new `HashSet` from a `Collection` of values
  *
  * @tsplus static HashSet/Ops from
- * @tsplus getter Collection asHashSet
+ * @tsplus getter Collection toHashSet
+ * @tsplus getter List toHashSet
  */
 export function from<A>(elements: Collection<A>): HashSet<A> {
   const set = HashSet.empty<A>().beginMutation

@@ -19,7 +19,7 @@ describe.concurrent("Chunk", () => {
       Chunk.from(Buffer.from(" ")) +
       Chunk.from(Buffer.from("world"))
 
-    const result = chunk.drop(6).append(32).prepend(32).asArrayLike
+    const result = chunk.drop(6).append(32).prepend(32).toArrayLike
 
     assert.deepEqual(result, Buffer.from(" world "))
   })
@@ -52,7 +52,7 @@ describe.concurrent("Chunk", () => {
   it("dedupe", () => {
     const chunk = Chunk(0, 0, 1, 2, 3, 4, 4, 5, 6, 7, 7, 7, 8, 9, 9, 9, 9)
 
-    const result = chunk.dedupe.asImmutableArray()
+    const result = chunk.dedupe.toImmutableArray()
 
     assert.deepEqual(result, ImmutableArray(0, 1, 2, 3, 4, 5, 6, 7, 8, 9))
   })
@@ -66,7 +66,7 @@ describe.concurrent("Chunk", () => {
   it("drop", () => {
     const chunk = Chunk(1, 2, 3, 4, 5) + Chunk(6, 7, 8, 9, 10)
 
-    const result = chunk.drop(5).asImmutableArray()
+    const result = chunk.drop(5).toImmutableArray()
 
     assert.isTrue(result == ImmutableArray(6, 7, 8, 9, 10))
   })
@@ -74,7 +74,7 @@ describe.concurrent("Chunk", () => {
   it("dropRight", () => {
     const chunk = Chunk(1, 2, 3, 4, 5, 6, 7)
 
-    const result = chunk.dropRight(3).asImmutableArray()
+    const result = chunk.dropRight(3).toImmutableArray()
 
     assert.isTrue(result == ImmutableArray(1, 2, 3, 4))
   })
@@ -82,7 +82,7 @@ describe.concurrent("Chunk", () => {
   it("dropWhile", () => {
     const chunk = Chunk(0, 1, 2, 3, 4)
 
-    const result = chunk.dropWhile((n) => n < 2).asImmutableArray()
+    const result = chunk.dropWhile((n) => n < 2).toImmutableArray()
 
     assert.isTrue(result == ImmutableArray(2, 3, 4))
   })
@@ -130,7 +130,7 @@ describe.concurrent("Chunk", () => {
   it("fill", () => {
     const chunk = Chunk.fill(10, (n) => n + 1)
 
-    const result = chunk.asImmutableArray()
+    const result = chunk.toImmutableArray()
 
     assert.isTrue(result == ImmutableArray(1, 2, 3, 4, 5, 6, 7, 8, 9, 10))
   })
@@ -204,7 +204,7 @@ describe.concurrent("Chunk", () => {
   it("filter", () => {
     const chunk = Chunk(0, 1, 2, 3, 4)
 
-    const result = chunk.filter((n) => n >= 2).asImmutableArray()
+    const result = chunk.filter((n) => n >= 2).toImmutableArray()
 
     assert.isTrue(result == ImmutableArray(2, 3, 4))
   })
@@ -214,7 +214,7 @@ describe.concurrent("Chunk", () => {
 
     const result = chunk
       .flatMap((n) => (n === 45 ? Chunk.from(Buffer.from("-|-")) : Chunk.single(n)))
-      .asArrayLike
+      .toArrayLike
 
     assert.deepEqual(result, Buffer.from("hello-|-world"))
   })
@@ -282,7 +282,7 @@ describe.concurrent("Chunk", () => {
   })
 
   it("iterable", () => {
-    const chunk = Chunk(0, 1, 2).asArrayLike
+    const chunk = Chunk(0, 1, 2).toArrayLike
 
     assert.deepEqual(chunk, Buffer.of(0, 1, 2))
   })
@@ -290,7 +290,7 @@ describe.concurrent("Chunk", () => {
   it("map", () => {
     const chunk = Chunk.from(Buffer.from("hello-world"))
 
-    const result = chunk.map((n) => (n === 45 ? 32 : n)).asArrayLike
+    const result = chunk.map((n) => (n === 45 ? 32 : n)).toArrayLike
 
     assert.deepEqual(result, Buffer.from("hello world"))
   })
@@ -298,7 +298,7 @@ describe.concurrent("Chunk", () => {
   it("mapWithIndex", () => {
     const chunk = Chunk(1, 2, 3, 4, 5, 6, 7)
 
-    const result = chunk.mapWithIndex((i, n) => Tuple(i, n)).asImmutableArray()
+    const result = chunk.mapWithIndex((i, n) => Tuple(i, n)).toImmutableArray()
 
     assert.isTrue(
       result ==
@@ -519,7 +519,7 @@ describe.concurrent("Chunk", () => {
     function flattenArray(
       chunk: Chunk<Chunk<number>>
     ): ImmutableArray<ImmutableArray<number>> {
-      return chunk.map((_) => _.asImmutableArray()).asImmutableArray()
+      return chunk.map((_) => _.toImmutableArray()).toImmutableArray()
     }
 
     const chunk = Chunk(0, 1, 2, 3, 4, 5)
@@ -558,7 +558,7 @@ describe.concurrent("Chunk", () => {
       a = a + Chunk(i, i)
     }
 
-    const result = a.asArrayLike
+    const result = a.toArrayLike
 
     assert.strictEqual(result.length, 200_000)
   })
@@ -566,7 +566,7 @@ describe.concurrent("Chunk", () => {
   it("take", () => {
     const chunk = Chunk(1, 2, 3, 4, 5) + Chunk(6, 7, 8, 9, 10)
 
-    const result = chunk.take(5).asImmutableArray()
+    const result = chunk.take(5).toImmutableArray()
 
     assert.isTrue(result == ImmutableArray(1, 2, 3, 4, 5))
   })
@@ -574,7 +574,7 @@ describe.concurrent("Chunk", () => {
   it("takeRight", () => {
     const chunk = Chunk(1, 2, 3, 4, 5) + Chunk(6, 7, 8, 9, 10)
 
-    const result = chunk.takeRight(5).asImmutableArray()
+    const result = chunk.takeRight(5).toImmutableArray()
 
     assert.isTrue(result == ImmutableArray(6, 7, 8, 9, 10))
   })
@@ -627,8 +627,8 @@ describe.concurrent("Chunk", () => {
     const leftChunk = Chunk(0, 1, 2, 3)
     const rightChunk = Chunk(0, 1, 2, 3, 4)
 
-    const resultA = leftChunk.zip(rightChunk).asImmutableArray()
-    const resultB = rightChunk.zip(leftChunk).asImmutableArray()
+    const resultA = leftChunk.zip(rightChunk).toImmutableArray()
+    const resultB = rightChunk.zip(leftChunk).toImmutableArray()
 
     assert.isTrue(resultA == ImmutableArray(Tuple(0, 0), Tuple(1, 1), Tuple(2, 2), Tuple(3, 3)))
     assert.isTrue(resultB == ImmutableArray(Tuple(0, 0), Tuple(1, 1), Tuple(2, 2), Tuple(3, 3)))
@@ -638,8 +638,8 @@ describe.concurrent("Chunk", () => {
     const leftChunk = Chunk(0, 1, 2, 3)
     const rightChunk = Chunk(0, 1, 2, 3, 4)
 
-    const resultA = leftChunk.zipAll(rightChunk).asImmutableArray()
-    const resultB = rightChunk.zipAll(leftChunk).asImmutableArray()
+    const resultA = leftChunk.zipAll(rightChunk).toImmutableArray()
+    const resultB = rightChunk.zipAll(leftChunk).toImmutableArray()
 
     assert.isTrue(
       resultA == ImmutableArray(
@@ -664,7 +664,7 @@ describe.concurrent("Chunk", () => {
   it("zipWithIndex", () => {
     const chunk = Chunk(1, 2, 3, 4)
 
-    const result = chunk.zipWithIndex.asImmutableArray()
+    const result = chunk.zipWithIndex.toImmutableArray()
 
     assert.isTrue(result == ImmutableArray(Tuple(1, 0), Tuple(2, 1), Tuple(3, 2), Tuple(4, 3)))
   })

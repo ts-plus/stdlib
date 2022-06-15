@@ -1,6 +1,6 @@
 /**
- * @tsplus getter HashSet asCollection
+ * @tsplus getter HashSet toCollection
  */
-export function asCollection<A>(self: HashSet<A>): Collection<A> {
+export function toCollection<A>(self: HashSet<A>): Collection<A> {
   return self
 }

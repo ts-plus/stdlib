@@ -40,7 +40,7 @@ describe.concurrent("MutableQueue", () => {
       queue.offer(2)
 
       assert.isTrue(
-        queue.asImmutableArray() == ImmutableArray(0, 1)
+        queue.toImmutableArray() == ImmutableArray(0, 1)
       )
     })
 
@@ -50,7 +50,7 @@ describe.concurrent("MutableQueue", () => {
       queue.offerAll(ImmutableArray(0, 1, 2, 3, 4, 5))
 
       assert.isTrue(
-        queue.asImmutableArray() == ImmutableArray(0, 1)
+        queue.toImmutableArray() == ImmutableArray(0, 1)
       )
     })
 
@@ -126,7 +126,7 @@ describe.concurrent("MutableQueue", () => {
       queue.offer(2)
 
       assert.isTrue(
-        queue.asImmutableArray() == ImmutableArray(0, 1, 2)
+        queue.toImmutableArray() == ImmutableArray(0, 1, 2)
       )
     })
 
@@ -136,7 +136,7 @@ describe.concurrent("MutableQueue", () => {
       queue.offerAll(ImmutableArray(0, 1, 2, 3, 4, 5))
 
       assert.isTrue(
-        queue.asImmutableArray() == ImmutableArray(0, 1, 2, 3, 4, 5)
+        queue.toImmutableArray() == ImmutableArray(0, 1, 2, 3, 4, 5)
       )
     })
 

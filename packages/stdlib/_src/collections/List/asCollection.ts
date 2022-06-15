@@ -1,6 +1,6 @@
 /**
- * @tsplus getter List asCollection
+ * @tsplus getter List toCollection
  */
-export function asCollection<A>(self: List<A>): Collection<A> {
+export function toCollection<A>(self: List<A>): Collection<A> {
   return self
 }

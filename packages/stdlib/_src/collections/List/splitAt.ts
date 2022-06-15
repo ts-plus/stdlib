@@ -4,7 +4,7 @@
  * @tsplus fluent List splitAt
  */
 export function splitAt_<A>(self: List<A>, n: number): Tuple<[List<A>, List<A>]> {
-  return Tuple(self.take(n).asList(), self.drop(n))
+  return Tuple(self.take(n).toList(), self.drop(n))
 }
 
 /**

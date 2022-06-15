@@ -1,6 +1,6 @@
 /**
- * @tsplus getter Chunk asCollection
+ * @tsplus getter Chunk toCollection
  */
-export function asCollection<A>(self: Chunk<A>): Collection<A> {
+export function toCollection<A>(self: Chunk<A>): Collection<A> {
   return self
 }

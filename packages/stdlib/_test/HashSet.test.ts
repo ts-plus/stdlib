@@ -201,10 +201,10 @@ describe.concurrent("HashSet", () => {
     assert.isTrue(result == HashSet(value(0), value(1), value(2)))
   })
 
-  it("asCollection", () => {
+  it("toCollection", () => {
     const hashSet = makeTestHashSet(1, 2, 3)
 
-    const result = hashSet.asCollection
+    const result = hashSet.toCollection
 
     assert.deepEqual([...result], [value(1), value(2), value(3)])
   })
