@@ -1,5 +1,5 @@
 /**
- * @tsplus fluent Tree draw
+ * @tsplus getter Tree draw
  */
 export function drawTree(tree: Tree<string>): string {
   return tree.value + drawForest("\n", tree.forest)

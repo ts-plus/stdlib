@@ -1,6 +1,6 @@
 /**
- * @tsplus fluent SortedMap isNonEmpty
+ * @tsplus getter SortedMap isNonEmpty
  */
 export function isNonEmpty<K, V>(self: SortedMap<K, V>): boolean {
-  return !self.isEmpty()
+  return !self.isEmpty
 }

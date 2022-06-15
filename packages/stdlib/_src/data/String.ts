@@ -83,7 +83,7 @@ export const LF = 0x0a
  * Returns an `IterableIterator` which yields each line contained within the
  * string, trimming off the trailing newline character.
  *
- * @tsplus fluent string linesIterator
+ * @tsplus getter string linesIterator
  */
 export function linesIterator(self: string): LinesIterator {
   return linesSeparated(self, true)
@@ -93,7 +93,7 @@ export function linesIterator(self: string): LinesIterator {
  * Returns an `IterableIterator` which yields each line contained within the
  * string as well as the trailing newline character.
  *
- * @tsplus fluent string linesIterator
+ * @tsplus getter string linesIterator
  */
 export function linesWithSeparators(s: string): LinesIterator {
   return linesSeparated(s, false)
@@ -137,7 +137,7 @@ export const stripMarginWith = Pipeable(stripMarginWith_)
  * For every line in this string, strip a leading prefix consisting of blanks
  * or control characters followed by the `"|"` character from the line.
  *
- * @tsplus fluent string stripMargin
+ * @tsplus getter string stripMargin
  */
 export function stripMargin(self: string): string {
   return self.stripMarginWith("|")

@@ -70,8 +70,8 @@ describe.concurrent("ImmutableMap", () => {
   })
 
   it("isEmpty", () => {
-    assert.isTrue(ImmutableMap.empty<number, string>().isEmpty())
-    assert.isFalse(ImmutableMap(Tuple(1, "a")).isEmpty())
+    assert.isTrue(ImmutableMap.empty<number, string>().isEmpty)
+    assert.isFalse(ImmutableMap(Tuple(1, "a")).isEmpty)
   })
 
   it("map", () => {

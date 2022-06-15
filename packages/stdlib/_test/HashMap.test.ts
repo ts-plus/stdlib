@@ -188,8 +188,8 @@ describe.concurrent("HashMap", () => {
   })
 
   it("isEmpty", () => {
-    assert.isTrue(HashMap().isEmpty())
-    assert.isFalse(HashMap(Tuple(key(0), value("a"))).isEmpty())
+    assert.isTrue(HashMap().isEmpty)
+    assert.isFalse(HashMap(Tuple(key(0), value("a"))).isEmpty)
   })
 
   it("keys", () => {
@@ -287,11 +287,11 @@ describe.concurrent("HashMap", () => {
   it("removeMany", () => {
     const hashMap = HashMap(Tuple(key(0), value("a")), Tuple(key(1), value("b")))
 
-    assert.isFalse(hashMap.isEmpty())
+    assert.isFalse(hashMap.isEmpty)
 
     const result = hashMap.removeMany([key(0), key(1)])
 
-    assert.isTrue(result.isEmpty())
+    assert.isTrue(result.isEmpty)
   })
 
   it("size", () => {

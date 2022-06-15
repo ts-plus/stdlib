@@ -76,16 +76,16 @@ describe.concurrent("SortedMap", () => {
     const map1 = makeSortedMap(Tuple(0, 10), Tuple(1, 20), Tuple(2, 30))
     const map2 = SortedMap.empty<number, number>(Ord.number)
 
-    assert.isFalse(map1.isEmpty())
-    assert.isTrue(map2.isEmpty())
+    assert.isFalse(map1.isEmpty)
+    assert.isTrue(map2.isEmpty)
   })
 
   it("isNonEmpty", () => {
     const map1 = makeSortedMap(Tuple(0, 10), Tuple(1, 20), Tuple(2, 30))
     const map2 = SortedMap.empty<number, number>(Ord.number)
 
-    assert.isTrue(map1.isNonEmpty())
-    assert.isFalse(map2.isNonEmpty())
+    assert.isTrue(map1.isNonEmpty)
+    assert.isFalse(map2.isNonEmpty)
   })
 
   it("keys", () => {

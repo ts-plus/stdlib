@@ -34,7 +34,7 @@ export function optimize(n: number) {
 
 /**
  * @tsplus static HashOps unknown
- * @tsplus fluent Hash hash
+ * @tsplus getter Hash hash
  */
 export function hashUnknown<A>(arg: A): number {
   return optimize(_hash(arg))
