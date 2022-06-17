@@ -1,5 +1,4 @@
 // codegen:start {preset: barrel, include: ./List/*.ts, prefix: "@tsplus/stdlib/collections"}
-export * from "@tsplus/stdlib/collections/List/asCollection"
 export * from "@tsplus/stdlib/collections/List/builder"
 export * from "@tsplus/stdlib/collections/List/concat"
 export * from "@tsplus/stdlib/collections/List/definition"
@@ -25,6 +24,7 @@ export * from "@tsplus/stdlib/collections/List/reverse"
 export * from "@tsplus/stdlib/collections/List/sortWith"
 export * from "@tsplus/stdlib/collections/List/splitAt"
 export * from "@tsplus/stdlib/collections/List/tail"
+export * from "@tsplus/stdlib/collections/List/toCollection"
 export * from "@tsplus/stdlib/collections/List/unsafeHead"
 export * from "@tsplus/stdlib/collections/List/unsafeLast"
 export * from "@tsplus/stdlib/collections/List/unsafeTail"

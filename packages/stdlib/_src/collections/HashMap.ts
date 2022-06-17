@@ -1,7 +1,6 @@
 export { equals, equals_, getHash, getHash_, has, has_ } from "@tsplus/stdlib/collections/HashMap/_internal/hashMap"
 
 // codegen:start {preset: barrel, include: ./HashMap/*.ts, prefix: "@tsplus/stdlib/collections"}
-export * from "@tsplus/stdlib/collections/HashMap/asCollection"
 export * from "@tsplus/stdlib/collections/HashMap/beginMutation"
 export * from "@tsplus/stdlib/collections/HashMap/collect"
 export * from "@tsplus/stdlib/collections/HashMap/collectWithIndex"
@@ -36,6 +35,7 @@ export * from "@tsplus/stdlib/collections/HashMap/removeMany"
 export * from "@tsplus/stdlib/collections/HashMap/set"
 export * from "@tsplus/stdlib/collections/HashMap/setTree"
 export * from "@tsplus/stdlib/collections/HashMap/size"
+export * from "@tsplus/stdlib/collections/HashMap/toCollection"
 export * from "@tsplus/stdlib/collections/HashMap/union"
 export * from "@tsplus/stdlib/collections/HashMap/unsafeGet"
 export * from "@tsplus/stdlib/collections/HashMap/update"
