@@ -351,7 +351,7 @@ export function deriveArray<A extends Array<any>>(
       if (hasFailed) {
         return Result.fail(new DecoderErrorArray(errors))
       }
-      return Result.success(out as A, errors.isEmpty ? Option.none : Option.some(new DecoderErrorArray(errors)))
+      return Result.success(out as A, errors.isEmpty ? Maybe.none : Maybe.some(new DecoderErrorArray(errors)))
     }
     return Result.fail(new DecoderErrorPrimitive(u, "Array"))
   })
@@ -388,15 +388,15 @@ function deriveOptionInternal<A>(
 }
 
 /**
- * @tsplus derive Decoder[Option]<_> 10
+ * @tsplus derive Decoder[Maybe]<_> 10
  */
-export function deriveOption<A extends Option<any>>(
-  ...[value]: [A] extends [Option<infer _A>] ? [value: Decoder<_A>]
+export function deriveOption<A extends Maybe<any>>(
+  ...[value]: [A] extends [Maybe<infer _A>] ? [value: Decoder<_A>]
     : never
 ): Decoder<A> {
   const structural = deriveOptionInternal(value)
   return Decoder((u) =>
-    structural.decodeResult(u).map((e) => e._tag === "Some" ? Option.some(e.value) as A : Option.none as A)
+    structural.decodeResult(u).map((e) => e._tag === "Some" ? Maybe.some(e.value) as A : Maybe.none as A)
   )
 }
 

@@ -24,8 +24,8 @@ function methodGet<R, S>(this: Env<R>, tag: Tag<S>): S {
   return this.unsafeMap.get(tag)! as S
 }
 
-function methodGetOption<R, S>(this: Env<R>, tag: Tag<S>): Option<S> {
-  return this.unsafeMap.has(tag) ? Option.some(this.unsafeMap.get(tag)! as S) : Option.none
+function methodGetOption<R, S>(this: Env<R>, tag: Tag<S>): Maybe<S> {
+  return this.unsafeMap.has(tag) ? Maybe.some(this.unsafeMap.get(tag)! as S) : Maybe.none
 }
 
 function methodMerge<R, R1>(this: Env<R>, that: Env<R1>): Env<R | R1> {
@@ -90,7 +90,7 @@ export interface Env<R> {
   add<R, S, H extends S = S>(this: Env<R>, tag: Tag<S>, service: H): Env<R | S>
   get<R, T extends Tags<R>>(this: Env<R>, tag: T): T extends Tag<infer S> ? S : never
   unsafeGet<R, S>(this: Env<R>, tag: Tag<S>): S
-  getOption<R, S>(this: Env<R>, tag: Tag<S>): Option<S>
+  getOption<R, S>(this: Env<R>, tag: Tag<S>): Maybe<S>
   merge<R, R1>(this: Env<R>, that: Env<R1>): Env<R | R1>
   prune<R, S extends Tags<R>[]>(this: Env<R>, ...tags: S): Env<{ [k in keyof S]: Tag.TagType<S[k]> }[number]>
 }

@@ -38,8 +38,8 @@ export const IterableWeakMap: IterableWeakMapOps = {}
 export function getOption_<K extends object, V>(
   self: IterableWeakMap<K, V>,
   key: K
-): Option<V> {
-  return self.has(key) ? Option.some(self.get(key)!) : Option.none
+): Maybe<V> {
+  return self.has(key) ? Maybe.some(self.get(key)!) : Maybe.none
 }
 
 export const getOption = Pipeable(getOption_)

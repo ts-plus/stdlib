@@ -34,7 +34,7 @@ export function leafNode<K, V>(
   edit: number,
   hash: number,
   key: K,
-  value: Option<V>
+  value: Maybe<V>
 ): Node<K, V> {
   return new LeafNode(edit, hash, key, value)
 }

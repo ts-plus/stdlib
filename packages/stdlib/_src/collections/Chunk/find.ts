@@ -5,9 +5,9 @@ import { concreteChunkId } from "@tsplus/stdlib/collections/Chunk/definition"
  *
  * @tsplus fluent Chunk find
  */
-export function find_<A, B extends A>(self: Chunk<A>, f: Refinement<A, B>): Option<B>
-export function find_<A>(self: Chunk<A>, f: Predicate<A>): Option<A>
-export function find_<A>(self: Chunk<A>, f: Predicate<A>): Option<A> {
+export function find_<A, B extends A>(self: Chunk<A>, f: Refinement<A, B>): Maybe<B>
+export function find_<A>(self: Chunk<A>, f: Predicate<A>): Maybe<A>
+export function find_<A>(self: Chunk<A>, f: Predicate<A>): Maybe<A> {
   const iterator = concreteChunkId(self)._arrayLikeIterator()
   let next
 
@@ -18,13 +18,13 @@ export function find_<A>(self: Chunk<A>, f: Predicate<A>): Option<A> {
     while (i < len) {
       const a = array[i]!
       if (f(a)) {
-        return Option.some(a)
+        return Maybe.some(a)
       }
       i++
     }
   }
 
-  return Option.none
+  return Maybe.none
 }
 
 /**
@@ -32,8 +32,8 @@ export function find_<A>(self: Chunk<A>, f: Predicate<A>): Option<A> {
  *
  * @tsplus static Chunk/Aspects find
  */
-export function find<A, B extends A>(f: Refinement<A, B>): (self: Chunk<A>) => Option<B>
-export function find<A>(f: Predicate<A>): (self: Chunk<A>) => Option<A>
+export function find<A, B extends A>(f: Refinement<A, B>): (self: Chunk<A>) => Maybe<B>
+export function find<A>(f: Predicate<A>): (self: Chunk<A>) => Maybe<A>
 export function find<A>(f: Predicate<A>) {
-  return (self: Chunk<A>): Option<A> => self.find(f)
+  return (self: Chunk<A>): Maybe<A> => self.find(f)
 }

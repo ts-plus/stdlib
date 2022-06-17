@@ -3,9 +3,9 @@ import { concreteImmutableQueue } from "@tsplus/stdlib/collections/ImmutableQueu
 /**
  * @tsplus fluent ImmutableQueue find
  */
-export function find_<A, B extends A>(self: ImmutableQueue<A>, f: Refinement<A, B>): Option<B>
-export function find_<A>(self: ImmutableQueue<A>, f: Predicate<A>): Option<A>
-export function find_<A>(self: ImmutableQueue<A>, f: Predicate<A>): Option<A> {
+export function find_<A, B extends A>(self: ImmutableQueue<A>, f: Refinement<A, B>): Maybe<B>
+export function find_<A>(self: ImmutableQueue<A>, f: Predicate<A>): Maybe<A>
+export function find_<A>(self: ImmutableQueue<A>, f: Predicate<A>): Maybe<A> {
   concreteImmutableQueue(self)
   return self.backingList.find(f)
 }
@@ -13,8 +13,8 @@ export function find_<A>(self: ImmutableQueue<A>, f: Predicate<A>): Option<A> {
 /**
  * @tsplus static ImmutableQueue/Aspects find
  */
-export function find<A, B extends A>(f: Refinement<A, B>): (self: ImmutableQueue<A>) => Option<B>
-export function find<A>(f: Predicate<A>): (self: ImmutableQueue<A>) => Option<A>
+export function find<A, B extends A>(f: Refinement<A, B>): (self: ImmutableQueue<A>) => Maybe<B>
+export function find<A>(f: Predicate<A>): (self: ImmutableQueue<A>) => Maybe<A>
 export function find<A>(f: Predicate<A>) {
-  return (self: ImmutableQueue<A>): Option<A> => self.find(f)
+  return (self: ImmutableQueue<A>): Maybe<A> => self.find(f)
 }

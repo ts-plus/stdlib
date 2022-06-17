@@ -5,15 +5,15 @@
  *
  * @tsplus getter ParSeq first
  */
-export function first<A>(self: ParSeq<A>): Option<A> {
+export function first<A>(self: ParSeq<A>): Maybe<A> {
   // eslint-disable-next-line no-constant-condition
   while (1) {
     switch (self._tag) {
       case "Single": {
-        return Option.some(self.a)
+        return Maybe.some(self.a)
       }
       case "Empty": {
-        return Option.none
+        return Maybe.none
       }
       case "Both": {
         self = self.left

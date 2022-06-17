@@ -92,36 +92,36 @@ export class RedBlackTreeIterator<K, V> implements Iterator<Tuple<[K, V]>> {
   /**
    * Returns the key
    */
-  get key(): Option<K> {
+  get key(): Maybe<K> {
     if (this.stack.length > 0) {
-      return Option.some(this.stack[this.stack.length - 1]!.key)
+      return Maybe.some(this.stack[this.stack.length - 1]!.key)
     }
-    return Option.none
+    return Maybe.none
   }
 
   /**
    * Returns the value
    */
-  get value(): Option<V> {
+  get value(): Maybe<V> {
     if (this.stack.length > 0) {
-      return Option.some(this.stack[this.stack.length - 1]!.value)
+      return Maybe.some(this.stack[this.stack.length - 1]!.value)
     }
-    return Option.none
+    return Maybe.none
   }
 
   /**
    * Returns the key
    */
-  get entry(): Option<Tuple<[K, V]>> {
+  get entry(): Maybe<Tuple<[K, V]>> {
     if (this.stack.length > 0) {
-      return Option.some(
+      return Maybe.some(
         Tuple(
           this.stack[this.stack.length - 1]!.key,
           this.stack[this.stack.length - 1]!.value
         )
       )
     }
-    return Option.none
+    return Maybe.none
   }
 
   /**

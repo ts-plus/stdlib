@@ -196,12 +196,12 @@ export function isGenericAdtElement<T extends string>(
 export function onAdtElement<A extends { _tag: string }, K extends A["_tag"], B>(
   tag: K,
   f: (_: Extract<A, { _tag: K }>) => B
-): (adt: A) => Option<B> {
+): (adt: A) => Maybe<B> {
   return (adt: A) => {
     if (adt["_tag"] === tag) {
-      return Option.some(f(adt as any))
+      return Maybe.some(f(adt as any))
     }
-    return Option.none
+    return Maybe.none
   }
 }
 
@@ -213,10 +213,10 @@ export function onGenericAdtElement<T extends string>(_t: T) {
     tag: K,
     f: (_: Extract<A, { [k in T]: K }>) => B
   ) =>
-    (adt: A): Option<B> => {
+    (adt: A): Maybe<B> => {
       if (adt[_t] === tag) {
-        return Option.some(f(adt as any))
+        return Maybe.some(f(adt as any))
       }
-      return Option.none
+      return Maybe.none
     }
 }

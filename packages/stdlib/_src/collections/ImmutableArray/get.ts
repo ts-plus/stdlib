@@ -5,8 +5,8 @@
 export function get_<A>(
   self: ImmutableArray<A>,
   index: number
-): Option<NonNullable<A>> {
-  return Option.fromNullable(self.array[index])
+): Maybe<NonNullable<A>> {
+  return Maybe.fromNullable(self.array[index])
 }
 
 /**

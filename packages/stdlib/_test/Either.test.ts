@@ -2,13 +2,13 @@ import { Tuple } from "@tsplus/stdlib/data/Tuple"
 
 describe.concurrent("Either", () => {
   it("value right", () => {
-    assert.isTrue(Either.right(0).right == Option.some(0))
-    assert.isTrue(Either.right(0).left == Option.none)
+    assert.isTrue(Either.right(0).right == Maybe.some(0))
+    assert.isTrue(Either.right(0).left == Maybe.none)
   })
 
   it("value left", () => {
-    assert.isTrue(Either.left(0).left == Option.some(0))
-    assert.isTrue(Either.left(0).right == Option.none)
+    assert.isTrue(Either.left(0).left == Maybe.some(0))
+    assert.isTrue(Either.left(0).right == Maybe.none)
   })
 
   it("ap", () => {
@@ -48,8 +48,8 @@ describe.concurrent("Either", () => {
 
   it("compactOption", () => {
     assert.isTrue(Either.left("hello").compactOption(AssociativeIdentity.string) == Either.left("hello"))
-    assert.isTrue(Either.right(Option.none).compactOption(AssociativeIdentity.string) == Either.left(""))
-    assert.isTrue(Either.right(Option.some(0)).compactOption(AssociativeIdentity.string) == Either.right(0))
+    assert.isTrue(Either.right(Maybe.none).compactOption(AssociativeIdentity.string) == Either.left(""))
+    assert.isTrue(Either.right(Maybe.some(0)).compactOption(AssociativeIdentity.string) == Either.right(0))
   })
 
   it("do", () => {
@@ -100,7 +100,7 @@ describe.concurrent("Either", () => {
 
   it("extend", () => {
     assert.isTrue(
-      Either.right(0).extend((either) => either.right) == Either.right(Option.some(0))
+      Either.right(0).extend((either) => either.right) == Either.right(Maybe.some(0))
     )
     assert.isTrue(
       Either.left(0).extend((either) => either.left) == Either.left(0)
@@ -149,11 +149,11 @@ describe.concurrent("Either", () => {
   })
 
   it("forEachF", () => {
-    const forEach = Either.forEachF(Option.Applicative)
-    const f = forEach((n: number) => Option.some(n))
+    const forEach = Either.forEachF(Maybe.Applicative)
+    const f = forEach((n: number) => Maybe.some(n))
 
-    assert.isTrue(f(Either.right(0)) == Option.some(Either.right(0)))
-    assert.isTrue(f(Either.left("error")) == Option.some(Either.left("error")))
+    assert.isTrue(f(Either.right(0)) == Maybe.some(Either.right(0)))
+    assert.isTrue(f(Either.left("error")) == Maybe.some(Either.left("error")))
   })
 
   it("fromNullable", () => {
@@ -162,8 +162,8 @@ describe.concurrent("Either", () => {
   })
 
   it("fromOption", () => {
-    assert.isTrue(Either.fromOption(Option.some(0), () => 1) == Either.right(0))
-    assert.isTrue(Either.fromOption(Option.none, () => 1) == Either.left(1))
+    assert.isTrue(Either.fromOption(Maybe.some(0), () => 1) == Either.right(0))
+    assert.isTrue(Either.fromOption(Maybe.none, () => 1) == Either.left(1))
   })
 
   it("fromPredicate", () => {
@@ -198,23 +198,23 @@ describe.concurrent("Either", () => {
   })
 
   it("getCompactF", () => {
-    const compactF = Either.getCompactF(AssociativeIdentity.string)(Option.Applicative)
+    const compactF = Either.getCompactF(AssociativeIdentity.string)(Maybe.Applicative)
     const p = (n: number) => n > 2
-    const f = compactF((n: number) => Option.some(p(n) ? Option.some(n + 1) : Option.none))
+    const f = compactF((n: number) => Maybe.some(p(n) ? Maybe.some(n + 1) : Maybe.none))
 
-    assert.isTrue(f(Either.left("foo")) == Option.some(Either.left("foo")))
-    assert.isTrue(f(Either.right(1)) == Option.some(Either.left("")))
-    assert.isTrue(f(Either.right(3)) == Option.some(Either.right(4)))
+    assert.isTrue(f(Either.left("foo")) == Maybe.some(Either.left("foo")))
+    assert.isTrue(f(Either.right(1)) == Maybe.some(Either.left("")))
+    assert.isTrue(f(Either.right(3)) == Maybe.some(Either.right(4)))
   })
 
   it("getSeparateF", () => {
-    const separateF = Either.getSeparateF(AssociativeIdentity.string)(Option.Applicative)
+    const separateF = Either.getSeparateF(AssociativeIdentity.string)(Maybe.Applicative)
     const p = (n: number) => n > 2
-    const f = separateF((n: number) => Option.some(p(n) ? Either.right(n + 1) : Either.left(n - 1)))
+    const f = separateF((n: number) => Maybe.some(p(n) ? Either.right(n + 1) : Either.left(n - 1)))
 
-    assert.isTrue(f(Either.left("foo")) == Option.some(Tuple(Either.left("foo"), Either.left("foo"))))
-    assert.isTrue(f(Either.right(1)) == Option.some(Tuple(Either.right(0), Either.left(""))))
-    assert.isTrue(f(Either.right(3)) == Option.some(Tuple(Either.left(""), Either.right(4))))
+    assert.isTrue(f(Either.left("foo")) == Maybe.some(Tuple(Either.left("foo"), Either.left("foo"))))
+    assert.isTrue(f(Either.right(1)) == Maybe.some(Tuple(Either.right(0), Either.left(""))))
+    assert.isTrue(f(Either.right(3)) == Maybe.some(Tuple(Either.left(""), Either.right(4))))
   })
 
   it("getOrElse", () => {
@@ -289,11 +289,11 @@ describe.concurrent("Either", () => {
   })
 
   it("sequence", () => {
-    const sequence = Either.sequence(Option.Applicative)
+    const sequence = Either.sequence(Maybe.Applicative)
 
-    assert.isTrue(sequence(Either.right(Option.some(1))) == Option.some(Either.right(1)))
-    assert.isTrue(sequence(Either.left("a")) == Option.some(Either.left("a")))
-    assert.isTrue(sequence(Either.right(Option.none)) == Option.none)
+    assert.isTrue(sequence(Either.right(Maybe.some(1))) == Maybe.some(Either.right(1)))
+    assert.isTrue(sequence(Either.left("a")) == Maybe.some(Either.left("a")))
+    assert.isTrue(sequence(Either.right(Maybe.none)) == Maybe.none)
   })
 
   it("stringifyJSON", () => {

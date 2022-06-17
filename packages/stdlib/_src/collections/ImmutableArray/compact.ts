@@ -3,6 +3,6 @@
  *
  * @tsplus getter ImmutableArray compact
  */
-export function compact<A>(self: ImmutableArray<Option<A>>): ImmutableArray<A> {
+export function compact<A>(self: ImmutableArray<Maybe<A>>): ImmutableArray<A> {
   return self.collect(identity)
 }

@@ -1,7 +1,7 @@
 describe.concurrent("NonEmptyImmutableArray", () => {
   it("from", () => {
-    assert.isTrue(NonEmptyImmutableArray.from([]) == Option.none)
-    assert.isTrue(NonEmptyImmutableArray.from([1, 2]) == Option.some(NonEmptyImmutableArray(1, 2)))
+    assert.isTrue(NonEmptyImmutableArray.from([]) == Maybe.none)
+    assert.isTrue(NonEmptyImmutableArray.from([1, 2]) == Maybe.some(NonEmptyImmutableArray(1, 2)))
   })
 
   it("head", () => {

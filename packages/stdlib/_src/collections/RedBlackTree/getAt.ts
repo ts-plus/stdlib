@@ -9,9 +9,9 @@ import type { Node } from "@tsplus/stdlib/collections/RedBlackTree/node"
 export function getAt_<K, V>(
   self: RedBlackTree<K, V>,
   index: number
-): Option<Tuple<[K, V]>> {
+): Maybe<Tuple<[K, V]>> {
   if (index < 0) {
-    return Option.none
+    return Maybe.none
   }
   let n = self.root
   let node: Node<K, V> | undefined = undefined
@@ -25,7 +25,7 @@ export function getAt_<K, V>(
       index -= n.left.count
     }
     if (!index) {
-      return Option.some(Tuple(node.key, node.value))
+      return Maybe.some(Tuple(node.key, node.value))
     }
     index -= 1
     if (n.right) {
@@ -37,7 +37,7 @@ export function getAt_<K, V>(
       break
     }
   }
-  return Option.none
+  return Maybe.none
 }
 
 /**

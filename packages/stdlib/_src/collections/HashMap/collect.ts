@@ -6,7 +6,7 @@
  */
 export function collect_<K, A, B>(
   self: HashMap<K, A>,
-  f: (a: A) => Option<B>
+  f: (a: A) => Maybe<B>
 ): HashMap<K, B> {
   return self.collectWithIndex((_, a) => f(a))
 }

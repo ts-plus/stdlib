@@ -1,9 +1,9 @@
 /**
- * Filters out `None` values from a map whose values are of type `Option<V>`.
+ * Filters out `None` values from a map whose values are of type `Maybe<V>`.
  *
  * @tsplus getter ImmutableMap compact
  */
-export function compact<K, V>(self: ImmutableMap<K, Option<V>>): ImmutableMap<K, V> {
+export function compact<K, V>(self: ImmutableMap<K, Maybe<V>>): ImmutableMap<K, V> {
   const map = new Map<K, V>()
   for (const [key, value] of self.internalMap) {
     if (value.isSome()) {

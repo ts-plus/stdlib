@@ -26,7 +26,7 @@ describe.concurrent("Chunk", () => {
 
   it("compactF", () => {
     const compactF = Chunk.compactF(Either.Applicative)((n: number) =>
-      Either.right(n > 2 ? Option.some(n + 1) : Option.none)
+      Either.right(n > 2 ? Maybe.some(n + 1) : Maybe.none)
     )
 
     assert.isTrue(compactF(Chunk.empty()) == Either.right(Chunk.empty()))
@@ -35,7 +35,7 @@ describe.concurrent("Chunk", () => {
 
   it("compactWithIndexF", () => {
     const compactWithIndexF = Chunk.compactWithIndexF(Either.Applicative)((i, n: number) =>
-      Either.right((i + n) % 2 === 0 ? Option.some(n + 1) : Option.none)
+      Either.right((i + n) % 2 === 0 ? Maybe.some(n + 1) : Maybe.none)
     )
 
     assert.isTrue(compactWithIndexF(Chunk.empty()) == Either.right(Chunk.empty()))
@@ -138,15 +138,15 @@ describe.concurrent("Chunk", () => {
   it("find", () => {
     const chunk = Chunk(0, 1, 2, 3, 4)
 
-    assert.isTrue(chunk.find((n) => n > 2) == Option.some(3))
-    assert.isTrue(chunk.find((n) => n === 6) == Option.none)
+    assert.isTrue(chunk.find((n) => n > 2) == Maybe.some(3))
+    assert.isTrue(chunk.find((n) => n === 6) == Maybe.none)
   })
 
   it("find & concat", () => {
     const chunk = Chunk(4, 5, 6) + Chunk(1, 2, 3)
     const result = chunk.find((v) => v === 3)
 
-    assert.isTrue(result == Option.some(3))
+    assert.isTrue(result == Maybe.some(3))
   })
 
   it("findIndex", () => {
@@ -154,7 +154,7 @@ describe.concurrent("Chunk", () => {
 
     const result = chunk.findIndex((n) => n === 5)
 
-    assert.isTrue(result == Option.some(4))
+    assert.isTrue(result == Maybe.some(4))
   })
 
   it("findLast - found", () => {
@@ -165,7 +165,7 @@ describe.concurrent("Chunk", () => {
 
     const result = chunk.findLast(({ n }) => n === 5)
 
-    assert.deepEqual(result, Option.some({ id: 7, n: 5 }))
+    assert.deepEqual(result, Maybe.some({ id: 7, n: 5 }))
   })
 
   it("findLast - not found", () => {
@@ -176,7 +176,7 @@ describe.concurrent("Chunk", () => {
 
     const result = chunk.findLast(({ n }) => n === 25)
 
-    assert.isTrue(result == Option.none)
+    assert.isTrue(result == Maybe.none)
   })
 
   it("findLastIndex - found", () => {
@@ -187,7 +187,7 @@ describe.concurrent("Chunk", () => {
 
     const result = chunk.findLastIndex(({ n }) => n === 5)
 
-    assert.isTrue(result == Option.some(7))
+    assert.isTrue(result == Maybe.some(7))
   })
 
   it("findLastIndex - not found", () => {
@@ -198,7 +198,7 @@ describe.concurrent("Chunk", () => {
 
     const result = chunk.findLastIndex(({ n }) => n === 25)
 
-    assert.isTrue(result == Option.none)
+    assert.isTrue(result == Maybe.none)
   })
 
   it("filter", () => {
@@ -220,30 +220,30 @@ describe.concurrent("Chunk", () => {
   })
 
   it("forEachF", () => {
-    const forEachF = Chunk.forEachF(Option.Applicative)(
-      (n: number): Option<number> => (n % 2 === 0 ? Option.none : Option.some(n))
+    const forEachF = Chunk.forEachF(Maybe.Applicative)(
+      (n: number): Maybe<number> => (n % 2 === 0 ? Maybe.none : Maybe.some(n))
     )
 
-    assert.isTrue(forEachF(Chunk(1, 2)) == Option.none)
-    assert.isTrue(forEachF(Chunk(1, 3)) == Option.some(Chunk(1, 3)))
+    assert.isTrue(forEachF(Chunk(1, 2)) == Maybe.none)
+    assert.isTrue(forEachF(Chunk(1, 3)) == Maybe.some(Chunk(1, 3)))
   })
 
   it("forEachWithIndexF", () => {
     assert.isTrue(
       pipe(
         Chunk("a", "bb"),
-        Chunk.forEachWithIndexF(Option.Applicative)(
-          (i, s) => (s.length >= 1 ? Option.some(s + i) : Option.none)
+        Chunk.forEachWithIndexF(Maybe.Applicative)(
+          (i, s) => (s.length >= 1 ? Maybe.some(s + i) : Maybe.none)
         )
-      ) == Option.some(Chunk("a0", "bb1"))
+      ) == Maybe.some(Chunk("a0", "bb1"))
     )
     assert.isTrue(
       pipe(
         Chunk("a", "bb"),
-        Chunk.forEachWithIndexF(Option.Applicative)(
-          (i, s) => (s.length > 1 ? Option.some(s + i) : Option.none)
+        Chunk.forEachWithIndexF(Maybe.Applicative)(
+          (i, s) => (s.length > 1 ? Maybe.some(s + i) : Maybe.none)
         )
-      ) == Option.none
+      ) == Maybe.none
     )
   })
 
@@ -257,8 +257,8 @@ describe.concurrent("Chunk", () => {
   it("get", () => {
     const chunk = Chunk(1, 2, 3, 4, 5)
 
-    assert.isTrue(chunk.get(3) == Option.some(4))
-    assert.isTrue(chunk.get(5) == Option.none)
+    assert.isTrue(chunk.get(3) == Maybe.some(4))
+    assert.isTrue(chunk.get(5) == Maybe.none)
   })
 
   it("indexWhere", () => {
@@ -411,26 +411,26 @@ describe.concurrent("Chunk", () => {
   })
 
   it("separateF", () => {
-    const separateF = Chunk.separateF(Option.Applicative)((n: number) =>
-      Option.some(n > 2 ? Either.right(n + 1) : Either.left(n - 1))
+    const separateF = Chunk.separateF(Maybe.Applicative)((n: number) =>
+      Maybe.some(n > 2 ? Either.right(n + 1) : Either.left(n - 1))
     )
 
     assert.isTrue(
-      separateF(Chunk.empty<number>()) == Option.some(Tuple(Chunk.empty(), Chunk.empty()))
+      separateF(Chunk.empty<number>()) == Maybe.some(Tuple(Chunk.empty(), Chunk.empty()))
     )
-    assert.isTrue(separateF(Chunk(1, 3)) == Option.some(Tuple(Chunk(0), Chunk(4))))
+    assert.isTrue(separateF(Chunk(1, 3)) == Maybe.some(Tuple(Chunk(0), Chunk(4))))
   })
 
   it("separateWithIndexF", () => {
-    const separateWithIndexF = Chunk.separateWithIndexF(Option.Applicative)((i, n: number) =>
-      Option.some(n > 2 ? Either.right(n + i) : Either.left(n - i))
+    const separateWithIndexF = Chunk.separateWithIndexF(Maybe.Applicative)((i, n: number) =>
+      Maybe.some(n > 2 ? Either.right(n + i) : Either.left(n - i))
     )
 
     assert.isTrue(
       separateWithIndexF(Chunk.empty<number>()) ==
-        Option.some(Tuple(Chunk.empty(), Chunk.empty()))
+        Maybe.some(Tuple(Chunk.empty(), Chunk.empty()))
     )
-    assert.isTrue(separateWithIndexF(Chunk(1, 3)) == Option.some(Tuple(Chunk(1), Chunk(4))))
+    assert.isTrue(separateWithIndexF(Chunk(1, 3)) == Maybe.some(Tuple(Chunk(1), Chunk(4))))
   })
 
   describe.concurrent("sort", () => {
@@ -645,20 +645,20 @@ describe.concurrent("Chunk", () => {
 
     assert.isTrue(
       resultA == ImmutableArray(
-        Tuple(Option.some(0), Option.some(0)),
-        Tuple(Option.some(1), Option.some(1)),
-        Tuple(Option.some(2), Option.some(2)),
-        Tuple(Option.some(3), Option.some(3)),
-        Tuple(Option.none, Option.some(4))
+        Tuple(Maybe.some(0), Maybe.some(0)),
+        Tuple(Maybe.some(1), Maybe.some(1)),
+        Tuple(Maybe.some(2), Maybe.some(2)),
+        Tuple(Maybe.some(3), Maybe.some(3)),
+        Tuple(Maybe.none, Maybe.some(4))
       )
     )
     assert.isTrue(
       resultB == ImmutableArray(
-        Tuple(Option.some(0), Option.some(0)),
-        Tuple(Option.some(1), Option.some(1)),
-        Tuple(Option.some(2), Option.some(2)),
-        Tuple(Option.some(3), Option.some(3)),
-        Tuple(Option.some(4), Option.none)
+        Tuple(Maybe.some(0), Maybe.some(0)),
+        Tuple(Maybe.some(1), Maybe.some(1)),
+        Tuple(Maybe.some(2), Maybe.some(2)),
+        Tuple(Maybe.some(3), Maybe.some(3)),
+        Tuple(Maybe.some(4), Maybe.none)
       )
     )
   })

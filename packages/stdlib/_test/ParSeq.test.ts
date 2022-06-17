@@ -1,7 +1,7 @@
 describe.concurrent("ParSeq", () => {
   it("first", () => {
-    assert.isTrue(ParSeq.empty().first == Option.none)
-    assert.isTrue(ParSeq.single("ok").first == Option.some("ok"))
+    assert.isTrue(ParSeq.empty().first == Maybe.none)
+    assert.isTrue(ParSeq.single("ok").first == Maybe.some("ok"))
   })
 
   it("flatMap", () => {

@@ -103,8 +103,8 @@ export function isRight<E, A>(ma: Either<E, A>): ma is Right<A> {
 /**
  * @tsplus getter Either left
  */
-export function getLeft<E, A>(self: Either<E, A>): Option<E> {
-  return self._tag === "Left" ? Option.some(self.left) : Option.none
+export function getLeft<E, A>(self: Either<E, A>): Maybe<E> {
+  return self._tag === "Left" ? Maybe.some(self.left) : Maybe.none
 }
 
 /**
@@ -122,8 +122,8 @@ export function isEither(u: unknown): u is Either<unknown, unknown> {
 /**
  * @tsplus getter Either right
  */
-export function getRight<E, A>(self: Either<E, A>): Option<A> {
-  return self._tag === "Right" ? Option.some(self.right) : Option.none
+export function getRight<E, A>(self: Either<E, A>): Maybe<A> {
+  return self._tag === "Right" ? Maybe.some(self.right) : Maybe.none
 }
 
 /**

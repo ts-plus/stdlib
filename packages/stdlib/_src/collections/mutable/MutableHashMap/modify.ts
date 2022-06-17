@@ -12,7 +12,7 @@
 export function modify_<K, V>(
   self: MutableHashMap<K, V>,
   key: K,
-  f: (value: Option<V>) => Option<V>
+  f: (value: Maybe<V>) => Maybe<V>
 ) {
   const result = f(self.get(key))
   if (result.isSome()) {

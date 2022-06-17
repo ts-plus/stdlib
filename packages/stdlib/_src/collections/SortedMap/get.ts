@@ -3,7 +3,7 @@ import { concreteSortedMap } from "@tsplus/stdlib/collections/SortedMap/_interna
 /**
  * @tsplus fluent SortedMap get
  */
-export function get_<K, V>(self: SortedMap<K, V>, key: K): Option<V> {
+export function get_<K, V>(self: SortedMap<K, V>, key: K): Maybe<V> {
   concreteSortedMap(self)
   return self.tree.findFirst(key)
 }

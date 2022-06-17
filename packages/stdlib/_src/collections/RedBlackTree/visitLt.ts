@@ -9,8 +9,8 @@ export function visitLt<K, V, A>(
   node: Node<K, V>,
   max: K,
   ord: Ord<K>,
-  visit: (key: K, value: V) => Option<A>
-): Option<A> {
+  visit: (key: K, value: V) => Maybe<A>
+): Maybe<A> {
   let current: Node<K, V> | undefined = node
   let stack: Stack<Node<K, V>> | undefined = undefined
   let done = false
@@ -33,5 +33,5 @@ export function visitLt<K, V, A>(
     }
   }
 
-  return Option.none
+  return Maybe.none
 }

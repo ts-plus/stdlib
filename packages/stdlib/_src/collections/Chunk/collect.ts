@@ -5,7 +5,7 @@ import { ArrTypeId, concreteChunk } from "@tsplus/stdlib/collections/Chunk/defin
  *
  * @tsplus fluent Chunk collect
  */
-export function collect_<A, B>(self: Chunk<A>, f: (a: A) => Option<B>): Chunk<B> {
+export function collect_<A, B>(self: Chunk<A>, f: (a: A) => Maybe<B>): Chunk<B> {
   concreteChunk(self)
 
   switch (self._typeId) {

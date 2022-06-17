@@ -10,7 +10,7 @@ export const compactF = Witherable.implementCompactF<Chunk.HKT>()(
     FE: FE
   }) =>
     (G: Applicative<G>) =>
-      (f: (a: A) => HKT.Kind<G, FR, FE, Option<B>>) =>
+      (f: (a: A) => HKT.Kind<G, FR, FE, Maybe<B>>) =>
         (fa: Chunk<A>): HKT.Kind<G, FR, FE, Chunk<B>> =>
-          G.map((self: Chunk<Option<B>>) => self.compact)(Chunk.forEachF(G)(f)(fa))
+          G.map((self: Chunk<Maybe<B>>) => self.compact)(Chunk.forEachF(G)(f)(fa))
 )

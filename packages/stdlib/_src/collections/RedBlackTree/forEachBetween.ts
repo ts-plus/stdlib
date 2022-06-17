@@ -13,7 +13,7 @@ export function forEachBetween_<K, V>(
   if (self.root) {
     RedBlackTree.visitBetween(self.root, min, max, self.ord, (key, value) => {
       visit(key, value)
-      return Option.none
+      return Maybe.none
     })
   }
 }

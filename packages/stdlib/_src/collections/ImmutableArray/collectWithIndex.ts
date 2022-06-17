@@ -4,7 +4,7 @@
  *
  * @tsplus fluent ImmutableArray collectWithIndex
  */
-export function collectWithIndex_<A, B>(self: ImmutableArray<A>, f: (i: number, a: A) => Option<B>): ImmutableArray<B> {
+export function collectWithIndex_<A, B>(self: ImmutableArray<A>, f: (i: number, a: A) => Maybe<B>): ImmutableArray<B> {
   const results: Array<B> = []
   for (let i = 0; i < self.array.length; i = i + 1) {
     const optionB = f(i, self.array[i]!)

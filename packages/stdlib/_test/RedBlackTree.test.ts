@@ -103,9 +103,9 @@ describe.concurrent("RedBlackTree", () => {
       .insert(-2, "d")
       .insert(3, "e")
 
-    assert.isTrue(tree.first == Option.some(Tuple(-2, "d")))
-    assert.isTrue(tree.last == Option.some(Tuple(3, "e")))
-    assert.isTrue(tree.getAt(1) == Option.some(Tuple(-1, "c")))
+    assert.isTrue(tree.first == Maybe.some(Tuple(-2, "d")))
+    assert.isTrue(tree.last == Maybe.some(Tuple(3, "e")))
+    assert.isTrue(tree.getAt(1) == Maybe.some(Tuple(-1, "c")))
   })
 
   it("forEachGe", () => {

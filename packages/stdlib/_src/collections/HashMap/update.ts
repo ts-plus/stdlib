@@ -8,7 +8,7 @@ export function update_<K, V>(
   key: K,
   f: (v: V) => V
 ): HashMap<K, V> {
-  return self.modify(key, (option) => option.map(f))
+  return self.modify(key, (maybe) => maybe.map(f))
 }
 
 /**

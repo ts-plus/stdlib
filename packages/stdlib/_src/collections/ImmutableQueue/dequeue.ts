@@ -6,13 +6,13 @@ import {
 /**
  * @tsplus getter ImmutableQueue dequeue
  */
-export function dequeue<A>(self: ImmutableQueue<A>): Option<Tuple<[NonNullable<A>, ImmutableQueue<A>]>> {
+export function dequeue<A>(self: ImmutableQueue<A>): Maybe<Tuple<[NonNullable<A>, ImmutableQueue<A>]>> {
   concreteImmutableQueue(self)
   const size = self.backingList.length
   if (size === 0) {
-    return Option.none
+    return Maybe.none
   }
-  return Option.some(
+  return Maybe.some(
     Tuple(
       self.backingList.unsafeHead!,
       size === 1

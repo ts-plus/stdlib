@@ -4,8 +4,8 @@
  *
  * @tsplus fluent ImmutableMap get
  */
-export function get_<K, V>(self: ImmutableMap<K, V>, key: K): Option<V> {
-  return self.internalMap.has(key) ? Option.some(self.internalMap.get(key)!) : Option.none
+export function get_<K, V>(self: ImmutableMap<K, V>, key: K): Maybe<V> {
+  return self.internalMap.has(key) ? Maybe.some(self.internalMap.get(key)!) : Maybe.none
 }
 
 /**
