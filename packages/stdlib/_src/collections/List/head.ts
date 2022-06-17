@@ -1,6 +1,6 @@
 /**
  * @tsplus getter List head
  */
-export function head<A>(self: List<A>): Option<A> {
-  return self.isNil() ? Option.none : Option.some(self.head)
+export function head<A>(self: List<A>): Maybe<A> {
+  return self.isNil() ? Maybe.none : Maybe.some(self.head)
 }

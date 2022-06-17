@@ -11,7 +11,7 @@ export function forEachGe_<K, V>(
   if (self.root) {
     RedBlackTree.visitGe(self.root, min, self.ord, (key, value) => {
       visit(key, value)
-      return Option.none
+      return Maybe.none
     })
   }
 }

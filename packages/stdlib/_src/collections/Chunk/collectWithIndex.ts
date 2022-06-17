@@ -7,7 +7,7 @@ import { ArrTypeId, concreteChunk } from "@tsplus/stdlib/collections/Chunk/defin
  */
 export function collectWithIndex_<A, B>(
   self: Chunk<A>,
-  f: (index: number, a: A) => Option<B>
+  f: (index: number, a: A) => Maybe<B>
 ): Chunk<B> {
   concreteChunk(self)
 

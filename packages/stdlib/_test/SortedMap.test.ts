@@ -53,8 +53,8 @@ describe.concurrent("SortedMap", () => {
   it("get", () => {
     const map = makeSortedMap(Tuple(0, 10), Tuple(1, 20), Tuple(2, 30))
 
-    assert.isTrue(map.get(key(0)) == Option.some(value(10)))
-    assert.isTrue(map.get(key(4)) == Option.none)
+    assert.isTrue(map.get(key(0)) == Maybe.some(value(10)))
+    assert.isTrue(map.get(key(4)) == Maybe.none)
   })
 
   it("has", () => {
@@ -68,8 +68,8 @@ describe.concurrent("SortedMap", () => {
     const map1 = makeSortedMap(Tuple(0, 10), Tuple(1, 20), Tuple(2, 30))
     const map2 = SortedMap.empty<number, number>(Ord.number)
 
-    assert.isTrue(map1.headOption == Option.some(Tuple(key(0), value(10))))
-    assert.isTrue(map2.headOption == Option.none)
+    assert.isTrue(map1.headOption == Maybe.some(Tuple(key(0), value(10))))
+    assert.isTrue(map2.headOption == Maybe.none)
   })
 
   it("isEmpty", () => {

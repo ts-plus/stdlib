@@ -91,11 +91,11 @@ describe.concurrent("Encoder", () => {
     assert.deepEqual(encoder.encode(Either.left(0)), Either.left(0))
     assert.deepEqual(encoder.encode(Either.right("ok")), Either.right("ok"))
   })
-  it("option", () => {
-    const encoder: Encoder<Option<string>> = Derive()
-    assert.deepEqual(encoder.encode(Option.none), Option.none)
-    assert.deepEqual(encoder.encodeJSON(Option.none), "{\"_tag\":\"None\"}")
-    assert.deepEqual(encoder.encode(Option.some("ok")), Option.some("ok"))
+  it("maybe", () => {
+    const encoder: Encoder<Maybe<string>> = Derive()
+    assert.deepEqual(encoder.encode(Maybe.none), Maybe.none)
+    assert.deepEqual(encoder.encodeJSON(Maybe.none), "{\"_tag\":\"None\"}")
+    assert.deepEqual(encoder.encode(Maybe.some("ok")), Maybe.some("ok"))
   })
   it("validated", () => {
     /** @tsplus implicit local */

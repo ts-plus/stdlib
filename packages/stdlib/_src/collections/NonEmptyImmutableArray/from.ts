@@ -4,7 +4,7 @@
  *
  * @tsplus static NonEmptyImmutableArray/Ops from
  */
-export function from<A>(collection: Collection<A>): Option<NonEmptyImmutableArray<A>> {
+export function from<A>(collection: Collection<A>): Maybe<NonEmptyImmutableArray<A>> {
   const array = Array.from(collection)
-  return array.length === 0 ? Option.none : Option.some(new ImmutableArray(array as any) as NonEmptyImmutableArray<A>)
+  return array.length === 0 ? Maybe.none : Maybe.some(new ImmutableArray(array as any) as NonEmptyImmutableArray<A>)
 }

@@ -14,9 +14,9 @@
 export function update_<K, V>(
   self: ImmutableMap<K, V>,
   key: K,
-  f: (value: Option<V>) => Option<V>
+  f: (value: Maybe<V>) => Maybe<V>
 ): ImmutableMap<K, V> {
-  const previousValue = Option.fromNullable(self.internalMap.get(key))
+  const previousValue = Maybe.fromNullable(self.internalMap.get(key))
   const nextValue = f(previousValue)
   if (previousValue.isSome()) {
     return self.remove(key)

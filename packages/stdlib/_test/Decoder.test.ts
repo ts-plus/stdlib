@@ -225,18 +225,18 @@ describe.concurrent("Decoder", () => {
         )
     )
   })
-  it("option", () => {
-    const decoder: Decoder<Option<string>> = Derive()
+  it("maybe", () => {
+    const decoder: Decoder<Maybe<string>> = Derive()
     assert.isTrue(
       decoder.decode({
         _tag: "Some",
         value: "ok"
-      }) == Either.right(Option.some("ok"))
+      }) == Either.right(Maybe.some("ok"))
     )
     assert.isTrue(
       decoder.decode({
         _tag: "None"
-      }) == Either.right(Option.none)
+      }) == Either.right(Maybe.none)
     )
     assert.isTrue(
       decoder.decode({

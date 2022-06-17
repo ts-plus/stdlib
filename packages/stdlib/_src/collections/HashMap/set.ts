@@ -5,7 +5,7 @@
  * @tsplus fluent HashMap set
  */
 export function set_<K, V>(self: HashMap<K, V>, key: K, value: V): HashMap<K, V> {
-  return self.modify(key, () => Option.some(value))
+  return self.modify(key, () => Maybe.some(value))
 }
 
 /**

@@ -98,18 +98,18 @@ export function realHashMap<K, V>(
 export function applyCont<K, V, A>(cont: Cont<K, V, A>) {
   return cont
     ? visitLazyChildren(cont[0], cont[1], cont[2], cont[3], cont[4])
-    : Option.none
+    : Maybe.none
 }
 
 export function visitLazy<K, V, A>(
   node: Node<K, V>,
   f: TraversalFn<K, V, A>,
   cont: Cont<K, V, A> = undefined
-): Option<VisitResult<K, V, A>> {
+): Maybe<VisitResult<K, V, A>> {
   switch (node._tag) {
     case "LeafNode": {
       return node.value.isSome()
-        ? Option.some({
+        ? Maybe.some({
           value: f(Tuple(node.key, node.value.value)),
           cont
         })
@@ -133,7 +133,7 @@ export function visitLazyChildren<K, V, A>(
   i: number,
   f: TraversalFn<K, V, A>,
   cont: Cont<K, V, A>
-): Option<VisitResult<K, V, A>> {
+): Maybe<VisitResult<K, V, A>> {
   while (i < len) {
     const child = children[i++]
     if (child && !isEmptyNode(child)) {
@@ -148,7 +148,7 @@ export function visitLazyChildren<K, V, A>(
  *
  * @tsplus fluent HashMap getHash
  */
-export function getHash_<K, V>(self: HashMap<K, V>, key: K, hash: number): Option<V> {
+export function getHash_<K, V>(self: HashMap<K, V>, key: K, hash: number): Maybe<V> {
   realHashMap(self)
   let node = self._root
   let shift = 0
@@ -156,7 +156,7 @@ export function getHash_<K, V>(self: HashMap<K, V>, key: K, hash: number): Optio
   while (true) {
     switch (node._tag) {
       case "LeafNode": {
-        return Equals.equals(key, node.key) ? node.value : Option.none
+        return Equals.equals(key, node.key) ? node.value : Maybe.none
       }
       case "CollisionNode": {
         if (hash === node.hash) {
@@ -166,7 +166,7 @@ export function getHash_<K, V>(self: HashMap<K, V>, key: K, hash: number): Optio
             if ("key" in child && Equals.equals(key, child.key)) return child.value
           }
         }
-        return Option.none
+        return Maybe.none
       }
       case "IndexedNode": {
         const frag = hashFragment(shift, hash)
@@ -176,7 +176,7 @@ export function getHash_<K, V>(self: HashMap<K, V>, key: K, hash: number): Optio
           shift += SIZE
           break
         }
-        return Option.none
+        return Maybe.none
       }
       case "ArrayNode": {
         node = node.children[hashFragment(shift, hash)]!
@@ -184,10 +184,10 @@ export function getHash_<K, V>(self: HashMap<K, V>, key: K, hash: number): Optio
           shift += SIZE
           break
         }
-        return Option.none
+        return Maybe.none
       }
       default:
-        return Option.none
+        return Maybe.none
     }
   }
 }

@@ -1,6 +1,6 @@
 /**
  * @tsplus getter List last
  */
-export function last<A>(self: List<A>): Option<A> {
-  return self.isNil() ? Option.none : Option.some(self.unsafeLast!)
+export function last<A>(self: List<A>): Maybe<A> {
+  return self.isNil() ? Maybe.none : Maybe.some(self.unsafeLast!)
 }

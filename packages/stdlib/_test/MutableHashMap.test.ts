@@ -46,7 +46,7 @@ describe.concurrent("MutableHashMap", () => {
 
     const result = map.get(key(0, 0))
 
-    assert.isTrue(result == Option.some(value(1, 1)))
+    assert.isTrue(result == Maybe.some(value(1, 1)))
   })
 
   it("has", () => {
@@ -67,15 +67,15 @@ describe.concurrent("MutableHashMap", () => {
       .set(key(0, 0), value(0, 0))
       .set(key(1, 1), value(1, 1))
 
-    map.modify(key(0, 0), () => Option.some(value(0, 1)))
+    map.modify(key(0, 0), () => Maybe.some(value(0, 1)))
 
     assert.strictEqual(map.size, 2)
-    assert.isTrue(map.get(key(0, 0)) == Option.some(value(0, 1)))
+    assert.isTrue(map.get(key(0, 0)) == Maybe.some(value(0, 1)))
 
-    map.modify(key(2, 2), (option) => option.fold(Option.some(value(2, 2)), Option.some))
+    map.modify(key(2, 2), (maybe) => maybe.fold(Maybe.some(value(2, 2)), Maybe.some))
 
     assert.strictEqual(map.size, 3)
-    assert.isTrue(map.get(key(2, 2)) == Option.some(value(2, 2)))
+    assert.isTrue(map.get(key(2, 2)) == Maybe.some(value(2, 2)))
   })
 
   it("remove", () => {
@@ -126,6 +126,6 @@ describe.concurrent("MutableHashMap", () => {
 
     map.update(key(0, 0), (v) => value(v.c + 1, v.d + 1))
 
-    assert.isTrue(map.get(key(0, 0)) == Option.some(value(1, 1)))
+    assert.isTrue(map.get(key(0, 0)) == Maybe.some(value(1, 1)))
   })
 })

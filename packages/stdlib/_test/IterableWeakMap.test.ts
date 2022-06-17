@@ -21,9 +21,9 @@ describe.concurrent("IterableWeakMap", () => {
       [a, 0],
       [b, 1]
     ])
-    assert.isTrue(map[a] == Option.some(0))
-    assert.isTrue(map[b] == Option.some(1))
-    assert.isTrue(map[c] == Option.none)
+    assert.isTrue(map[a] == Maybe.some(0))
+    assert.isTrue(map[b] == Maybe.some(1))
+    assert.isTrue(map[c] == Maybe.none)
   })
   it("keys", () => {
     const a = {}

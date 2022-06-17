@@ -142,10 +142,10 @@ function deriveOptionInternal<A>(
 }
 
 /**
- * @tsplus derive Encoder[Option]<_> 10
+ * @tsplus derive Encoder[Maybe]<_> 10
  */
-export function deriveOption<A extends Option<any>>(
-  ...[value]: [A] extends [Option<infer _A>] ? [value: Encoder<_A>]
+export function deriveOption<A extends Maybe<any>>(
+  ...[value]: [A] extends [Maybe<infer _A>] ? [value: Encoder<_A>]
     : never
 ): Encoder<A> {
   const structural = deriveOptionInternal(value)

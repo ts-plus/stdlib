@@ -72,7 +72,7 @@ describe.concurrent("Tree", () => {
 
     it("implicit", () => {
       const y = Tree(2, Chunk(Tree(1)) + Chunk(Tree(1, Chunk(Tree(0)))))
-      assert.isTrue(Option(y) == Option(y))
+      assert.isTrue(Maybe(y) == Maybe(y))
     })
   })
 
@@ -143,13 +143,13 @@ describe.concurrent("Tree", () => {
   })
 
   it("forEachF", () => {
-    const forEachF = Tree.forEachF(Option.Applicative)(
-      (n: number) => n % 2 === 0 ? Option.none : Option.some(n)
+    const forEachF = Tree.forEachF(Maybe.Applicative)(
+      (n: number) => n % 2 === 0 ? Maybe.none : Maybe.some(n)
     )
-    assert.isTrue(forEachF(Tree(1, Chunk(Tree(2)))) == Option.none)
+    assert.isTrue(forEachF(Tree(1, Chunk(Tree(2)))) == Maybe.none)
     assert.isTrue(
       forEachF(Tree(1, Chunk(Tree(3)))) ==
-        Option.some(Tree(1, Chunk(Tree(3))))
+        Maybe.some(Tree(1, Chunk(Tree(3))))
     )
   })
 

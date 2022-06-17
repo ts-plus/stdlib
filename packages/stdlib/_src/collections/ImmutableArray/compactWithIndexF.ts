@@ -10,7 +10,7 @@ export const compactWithIndexF = WitherableWithIndex.implementCompactWithIndexF<
     FE: FE
   }) =>
     (G: Applicative<G>) =>
-      (f: (k: number, a: A) => HKT.Kind<G, FR, FE, Option<B>>) =>
+      (f: (k: number, a: A) => HKT.Kind<G, FR, FE, Maybe<B>>) =>
         (fa: ImmutableArray<A>): HKT.Kind<G, FR, FE, ImmutableArray<B>> =>
-          G.map((self: ImmutableArray<Option<B>>) => self.compact)(ImmutableArray.forEachWithIndexF(G)(f)(fa))
+          G.map((self: ImmutableArray<Maybe<B>>) => self.compact)(ImmutableArray.forEachWithIndexF(G)(f)(fa))
 )

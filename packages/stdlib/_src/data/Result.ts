@@ -55,7 +55,7 @@ export function unifyResult<X extends Result<any, any, any>>(
  */
 export function fold<W, E, A, T0, T1>(
   self: Result<W, E, A>,
-  onSuccess: (a: A, w: Option<W>) => T0,
+  onSuccess: (a: A, w: Maybe<W>) => T0,
   onFailure: (e: E) => T1
 ) {
   switch (self._tag) {
@@ -63,10 +63,10 @@ export function fold<W, E, A, T0, T1>(
       return onFailure(self.failure)
     }
     case "Success": {
-      return onSuccess(self.success, Option.none)
+      return onSuccess(self.success, Maybe.none)
     }
     case "SuccessWithWarning": {
-      return onSuccess(self.success, Option.some(self.warning))
+      return onSuccess(self.success, Maybe.some(self.warning))
     }
   }
 }
@@ -75,8 +75,8 @@ export function fold<W, E, A, T0, T1>(
  * @tsplus static ResultOps success
  */
 export function success<A>(result: A): Result<never, never, A>
-export function success<A, W>(result: A, warning: Option<W>): Result<W, never, A>
-export function success<A, W>(result: A, warning?: Option<W>): Result<W, never, A> {
+export function success<A, W>(result: A, warning: Maybe<W>): Result<W, never, A>
+export function success<A, W>(result: A, warning?: Maybe<W>): Result<W, never, A> {
   if (warning && warning.isSome()) {
     return {
       _tag: "SuccessWithWarning",
@@ -136,28 +136,28 @@ export function isSuccessWihWarning<W, E, A>(self: Result<W, E, A>): self is Suc
  * @tsplus fluent Result getSuccess
  */
 export function getSuccess<W, E, A>(self: Result<W, E, A>) {
-  return self.isFailure() ? Option.none : Option.some(self.success)
+  return self.isFailure() ? Maybe.none : Maybe.some(self.success)
 }
 
 /**
  * @tsplus fluent Result getFailure
  */
 export function getFailure<W, E, A>(self: Result<W, E, A>) {
-  return self.isFailure() ? Option.some(self.failure) : Option.none
+  return self.isFailure() ? Maybe.some(self.failure) : Maybe.none
 }
 
 /**
  * @tsplus fluent Result getWarning
  */
 export function getWarning<W, E, A>(self: Result<W, E, A>) {
-  return self.isSuccessWihWarning() ? Option.some(self.warning) : Option.none
+  return self.isSuccessWihWarning() ? Maybe.some(self.warning) : Maybe.none
 }
 
 /**
  * @tsplus fluent Result getWarningOrFailure
  */
 export function getWarningOrError<W, E, A>(self: Result<W, E, A>) {
-  return self.fold((_, w) => w.map(Either.left), (e) => Option.some(Either.right(e)))
+  return self.fold((_, w) => w.map(Either.left), (e) => Maybe.some(Either.right(e)))
 }
 
 /**

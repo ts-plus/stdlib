@@ -5,7 +5,7 @@
  * @tsplus fluent HashMap get
  * @tsplus index HashMap
  */
-export function get_<K, V>(self: HashMap<K, V>, key: K): Option<V> {
+export function get_<K, V>(self: HashMap<K, V>, key: K): Maybe<V> {
   return self.getHash(key, Hash.unknown(key))
 }
 

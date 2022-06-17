@@ -9,28 +9,28 @@ describe.concurrent("ImmutableArray", () => {
   })
 
   it("collect", () => {
-    const f = (n: number) => (n % 2 === 0 ? Option.none : Option.some(n))
+    const f = (n: number) => (n % 2 === 0 ? Maybe.none : Maybe.some(n))
 
     assert.isTrue(ImmutableArray(1, 2, 3).collect(f) == ImmutableArray(1, 3))
     assert.isTrue(ImmutableArray.empty<number>().collect(f) == ImmutableArray.empty<number>())
   })
 
   it("collectWithIndex", () => {
-    const f = (i: number, n: number) => ((i + n) % 2 === 0 ? Option.none : Option.some(n))
+    const f = (i: number, n: number) => ((i + n) % 2 === 0 ? Maybe.none : Maybe.some(n))
 
     assert.isTrue(ImmutableArray(1, 2, 4).collectWithIndex(f) == ImmutableArray(1, 2))
     assert.isTrue(ImmutableArray.empty<number>().collectWithIndex(f) == ImmutableArray.empty<number>())
   })
 
   it("compact", () => {
-    assert.isTrue(ImmutableArray.empty<Option<number>>().compact == ImmutableArray.empty())
-    assert.isTrue(ImmutableArray(Option.some(1), Option.some(2), Option.some(3)).compact == ImmutableArray(1, 2, 3))
-    assert.isTrue(ImmutableArray(Option.some(1), Option.none, Option.some(3)).compact == ImmutableArray(1, 3))
+    assert.isTrue(ImmutableArray.empty<Maybe<number>>().compact == ImmutableArray.empty())
+    assert.isTrue(ImmutableArray(Maybe.some(1), Maybe.some(2), Maybe.some(3)).compact == ImmutableArray(1, 2, 3))
+    assert.isTrue(ImmutableArray(Maybe.some(1), Maybe.none, Maybe.some(3)).compact == ImmutableArray(1, 3))
   })
 
   it("compactF", () => {
     const compactF = ImmutableArray.compactF(Either.Applicative)((n: number) =>
-      Either.right(n > 2 ? Option.some(n + 1) : Option.none)
+      Either.right(n > 2 ? Maybe.some(n + 1) : Maybe.none)
     )
 
     assert.isTrue(compactF(ImmutableArray.empty()) == Either.right(ImmutableArray.empty()))
@@ -39,7 +39,7 @@ describe.concurrent("ImmutableArray", () => {
 
   it("compactWithIndexF", () => {
     const compactWithIndexF = ImmutableArray.compactWithIndexF(Either.Applicative)((i, n: number) =>
-      Either.right((i + n) % 2 === 0 ? Option.some(n + 1) : Option.none)
+      Either.right((i + n) % 2 === 0 ? Maybe.some(n + 1) : Maybe.none)
     )
 
     assert.isTrue(compactWithIndexF(ImmutableArray.empty()) == Either.right(ImmutableArray.empty()))
@@ -96,12 +96,12 @@ describe.concurrent("ImmutableArray", () => {
 
   it("filter", () => {
     const g = (n: number) => n % 2 === 1
-    const x = ImmutableArray(Option.some(3), Option.some(2), Option.some(1)).filter((_) => _.isSome())
-    const y = ImmutableArray(Option.some(3), Option.none, Option.some(1)).filter((_) => _.isSome())
+    const x = ImmutableArray(Maybe.some(3), Maybe.some(2), Maybe.some(1)).filter((_) => _.isSome())
+    const y = ImmutableArray(Maybe.some(3), Maybe.none, Maybe.some(1)).filter((_) => _.isSome())
 
     assert.isTrue(ImmutableArray(1, 2, 3).filter(g) == ImmutableArray(1, 3))
-    assert.isTrue(x == ImmutableArray(Option.some(3), Option.some(2), Option.some(1)))
-    assert.isTrue(y == ImmutableArray(Option.some(3), Option.some(1)))
+    assert.isTrue(x == ImmutableArray(Maybe.some(3), Maybe.some(2), Maybe.some(1)))
+    assert.isTrue(y == ImmutableArray(Maybe.some(3), Maybe.some(1)))
   })
 
   it("filterWithIndex", () => {
@@ -133,30 +133,30 @@ describe.concurrent("ImmutableArray", () => {
   })
 
   it("forEachF", () => {
-    const forEachF = ImmutableArray.forEachF(Option.Applicative)(
-      (n: number): Option<number> => (n % 2 === 0 ? Option.none : Option.some(n))
+    const forEachF = ImmutableArray.forEachF(Maybe.Applicative)(
+      (n: number): Maybe<number> => (n % 2 === 0 ? Maybe.none : Maybe.some(n))
     )
 
-    assert.isTrue(forEachF(ImmutableArray(1, 2)) == Option.none)
-    assert.isTrue(forEachF(ImmutableArray(1, 3)) == Option.some(ImmutableArray(1, 3)))
+    assert.isTrue(forEachF(ImmutableArray(1, 2)) == Maybe.none)
+    assert.isTrue(forEachF(ImmutableArray(1, 3)) == Maybe.some(ImmutableArray(1, 3)))
   })
 
   it("forEachWithIndexF", () => {
     assert.isTrue(
       pipe(
         ImmutableArray("a", "bb"),
-        ImmutableArray.forEachWithIndexF(Option.Applicative)(
-          (i, s) => (s.length >= 1 ? Option.some(s + i) : Option.none)
+        ImmutableArray.forEachWithIndexF(Maybe.Applicative)(
+          (i, s) => (s.length >= 1 ? Maybe.some(s + i) : Maybe.none)
         )
-      ) == Option.some(ImmutableArray("a0", "bb1"))
+      ) == Maybe.some(ImmutableArray("a0", "bb1"))
     )
     assert.isTrue(
       pipe(
         ImmutableArray("a", "bb"),
-        ImmutableArray.forEachWithIndexF(Option.Applicative)(
-          (i, s) => (s.length > 1 ? Option.some(s + i) : Option.none)
+        ImmutableArray.forEachWithIndexF(Maybe.Applicative)(
+          (i, s) => (s.length > 1 ? Maybe.some(s + i) : Maybe.none)
         )
-      ) == Option.none
+      ) == Maybe.none
     )
   })
 
@@ -164,15 +164,15 @@ describe.concurrent("ImmutableArray", () => {
     assert.isTrue(
       ImmutableArray.gen(function*($) {
         const a = yield* $(ImmutableArray(1))
-        const b = yield* $(Option.some(2))
+        const b = yield* $(Maybe.some(2))
         return a + b
       }) == ImmutableArray(3)
     )
   })
 
   it("get", () => {
-    assert.isTrue(ImmutableArray.empty().get(0) == Option.none)
-    assert.isTrue(ImmutableArray(1, 2, 3).get(0) == Option.some(1))
+    assert.isTrue(ImmutableArray.empty().get(0) == Maybe.none)
+    assert.isTrue(ImmutableArray(1, 2, 3).get(0) == Maybe.some(1))
   })
 
   it("getAssociativeIdentity", () => {
@@ -223,10 +223,10 @@ describe.concurrent("ImmutableArray", () => {
 
   it("index", () => {
     const array = ImmutableArray(0, 1, 2)
-    assert.isTrue(array[0] == Option(0))
-    assert.isTrue(array[1] == Option(1))
-    assert.isTrue(array[2] == Option(2))
-    assert.isTrue(array[3] == Option.none)
+    assert.isTrue(array[0] == Maybe(0))
+    assert.isTrue(array[1] == Maybe(1))
+    assert.isTrue(array[2] == Maybe(2))
+    assert.isTrue(array[3] == Maybe.none)
   })
 
   it("intersection", () => {
@@ -296,10 +296,10 @@ describe.concurrent("ImmutableArray", () => {
   })
 
   it("sequence", () => {
-    const sequence = ImmutableArray.sequence(Option.Applicative)
+    const sequence = ImmutableArray.sequence(Maybe.Applicative)
 
-    assert.isTrue(sequence(ImmutableArray(Option.some(1), Option.some(3))) == Option.some(ImmutableArray(1, 3)))
-    assert.isTrue(sequence(ImmutableArray(Option.some(1), Option.none)) == Option.none)
+    assert.isTrue(sequence(ImmutableArray(Maybe.some(1), Maybe.some(3))) == Maybe.some(ImmutableArray(1, 3)))
+    assert.isTrue(sequence(ImmutableArray(Maybe.some(1), Maybe.none)) == Maybe.none)
   })
 
   it("separate", () => {
@@ -376,26 +376,26 @@ describe.concurrent("ImmutableArray", () => {
   })
 
   it("separateF", () => {
-    const separateF = ImmutableArray.separateF(Option.Applicative)((n: number) =>
-      Option.some(n > 2 ? Either.right(n + 1) : Either.left(n - 1))
+    const separateF = ImmutableArray.separateF(Maybe.Applicative)((n: number) =>
+      Maybe.some(n > 2 ? Either.right(n + 1) : Either.left(n - 1))
     )
 
     assert.isTrue(
-      separateF(ImmutableArray.empty<number>()) == Option.some(Tuple(ImmutableArray.empty(), ImmutableArray.empty()))
+      separateF(ImmutableArray.empty<number>()) == Maybe.some(Tuple(ImmutableArray.empty(), ImmutableArray.empty()))
     )
-    assert.isTrue(separateF(ImmutableArray(1, 3)) == Option.some(Tuple(ImmutableArray(0), ImmutableArray(4))))
+    assert.isTrue(separateF(ImmutableArray(1, 3)) == Maybe.some(Tuple(ImmutableArray(0), ImmutableArray(4))))
   })
 
   it("separateWithIndexF", () => {
-    const separateWithIndexF = ImmutableArray.separateWithIndexF(Option.Applicative)((i, n: number) =>
-      Option.some(n > 2 ? Either.right(n + i) : Either.left(n - i))
+    const separateWithIndexF = ImmutableArray.separateWithIndexF(Maybe.Applicative)((i, n: number) =>
+      Maybe.some(n > 2 ? Either.right(n + i) : Either.left(n - i))
     )
 
     assert.isTrue(
       separateWithIndexF(ImmutableArray.empty<number>()) ==
-        Option.some(Tuple(ImmutableArray.empty(), ImmutableArray.empty()))
+        Maybe.some(Tuple(ImmutableArray.empty(), ImmutableArray.empty()))
     )
-    assert.isTrue(separateWithIndexF(ImmutableArray(1, 3)) == Option.some(Tuple(ImmutableArray(1), ImmutableArray(4))))
+    assert.isTrue(separateWithIndexF(ImmutableArray(1, 3)) == Maybe.some(Tuple(ImmutableArray(1), ImmutableArray(4))))
   })
 
   it("size", () => {

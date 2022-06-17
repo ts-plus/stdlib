@@ -1,6 +1,6 @@
 describe.concurrent("ImmutableMap", () => {
   it("compact", () => {
-    const map = ImmutableMap(Tuple(1, Option.some("a")), Tuple(2, Option.none))
+    const map = ImmutableMap(Tuple(1, Maybe.some("a")), Tuple(2, Maybe.none))
 
     const result = map.compact
 
@@ -40,7 +40,7 @@ describe.concurrent("ImmutableMap", () => {
   it("filterMap", () => {
     const map = ImmutableMap(Tuple(1, "a"), Tuple(2, "b"), Tuple(3, "c"))
 
-    const result = map.filterMap((char) => char === "b" ? Option.some(char.toUpperCase()) : Option.none)
+    const result = map.filterMap((char) => char === "b" ? Maybe.some(char.toUpperCase()) : Maybe.none)
 
     assert.isTrue(result == ImmutableMap(Tuple(2, "B")))
   })
@@ -49,7 +49,7 @@ describe.concurrent("ImmutableMap", () => {
     const map = ImmutableMap(Tuple(1, "a"), Tuple(2, "b"), Tuple(3, "c"))
 
     const result = map.filterMapWithIndex((key, char) =>
-      key < 2 || char === "b" ? Option.some(char.toUpperCase()) : Option.none
+      key < 2 || char === "b" ? Maybe.some(char.toUpperCase()) : Maybe.none
     )
 
     assert.isTrue(result == ImmutableMap(Tuple(1, "A"), Tuple(2, "B")))
@@ -58,8 +58,8 @@ describe.concurrent("ImmutableMap", () => {
   it("get", () => {
     const map = ImmutableMap(Tuple(1, "a"), Tuple(2, "b"), Tuple(3, "c"))
 
-    assert.isTrue(map.get(1) == Option.some("a"))
-    assert.isTrue(map.get(4) == Option.none)
+    assert.isTrue(map.get(1) == Maybe.some("a"))
+    assert.isTrue(map.get(4) == Maybe.none)
   })
 
   it("has", () => {
@@ -124,8 +124,8 @@ describe.concurrent("ImmutableMap", () => {
   it("update", () => {
     const map = ImmutableMap(Tuple(1, "a"), Tuple(2, "b"), Tuple(3, "c"))
 
-    const result1 = map.update(1, Option.$.fold(Option.some("-"), (char) => Option.some(char.toUpperCase())))
-    const result2 = map.update(4, Option.$.fold(Option.some("-"), (char) => Option.some(char.toUpperCase())))
+    const result1 = map.update(1, Maybe.$.fold(Maybe.some("-"), (char) => Maybe.some(char.toUpperCase())))
+    const result2 = map.update(4, Maybe.$.fold(Maybe.some("-"), (char) => Maybe.some(char.toUpperCase())))
 
     assert.isTrue(result1 == ImmutableMap(Tuple(2, "b"), Tuple(3, "c")))
     assert.isTrue(result2 == ImmutableMap(Tuple(1, "a"), Tuple(2, "b"), Tuple(3, "c"), Tuple(4, "-")))

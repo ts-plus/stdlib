@@ -7,11 +7,11 @@ describe("Guard", () => {
     assert.isTrue(guardNum.is(0))
     assert.isFalse(guardNum.is(1))
   })
-  it("option", () => {
-    const guard: Guard<Option<string>> = Derive()
-    assert.isTrue(guard.is(Option("ok")))
-    assert.isTrue(guard.is(Option.none))
-    assert.isFalse(guard.is(Option(1)))
+  it("maybe", () => {
+    const guard: Guard<Maybe<string>> = Derive()
+    assert.isTrue(guard.is(Maybe("ok")))
+    assert.isTrue(guard.is(Maybe.none))
+    assert.isFalse(guard.is(Maybe(1)))
     assert.isFalse(guard.is("nope"))
   })
   it("chunk", () => {
@@ -86,17 +86,17 @@ describe("Guard", () => {
     interface Person {
       name: string
       age?: number
-      org: Option<string>
+      org: Maybe<string>
     }
     const guard: Guard<Person> = Derive()
     assert.isTrue(guard.is({
       name: "Mike",
       age: 30,
-      org: Option("Effect")
+      org: Maybe("Effect")
     }))
     assert.isTrue(guard.is({
       name: "Mike",
-      org: Option.none
+      org: Maybe.none
     }))
     assert.isFalse(guard.is({
       age: 30
@@ -106,7 +106,7 @@ describe("Guard", () => {
   it("intersection", () => {
     interface Person {
       name: string
-      org: Option<string>
+      org: Maybe<string>
     }
     interface Aged {
       age?: number
@@ -115,15 +115,15 @@ describe("Guard", () => {
     assert.isTrue(guard.is({
       name: "Mike",
       age: 30,
-      org: Option("Effect")
+      org: Maybe("Effect")
     }))
     assert.isTrue(guard.is({
       name: "Mike",
-      org: Option.none
+      org: Maybe.none
     }))
     assert.isFalse(guard.is({
       name: "Mike",
-      org: Option.none,
+      org: Maybe.none,
       age: "30"
     }))
     assert.isFalse(guard.is({

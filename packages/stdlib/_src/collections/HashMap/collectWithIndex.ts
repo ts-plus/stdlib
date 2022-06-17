@@ -6,7 +6,7 @@
  */
 export function collectWithIndex_<K, A, B>(
   self: HashMap<K, A>,
-  f: (k: K, a: A) => Option<B>
+  f: (k: K, a: A) => Maybe<B>
 ): HashMap<K, B> {
   const m = HashMap.empty<K, B>()
   return m.mutate((m) => {

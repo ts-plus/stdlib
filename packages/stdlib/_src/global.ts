@@ -124,7 +124,7 @@ import { Match } from "@tsplus/stdlib/data/Match"
 /**
  * @tsplus global
  */
-import { Option } from "@tsplus/stdlib/data/Option/definition"
+import { Maybe } from "@tsplus/stdlib/data/Maybe/definition"
 /**
  * @tsplus global
  */

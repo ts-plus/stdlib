@@ -48,15 +48,15 @@ describe.concurrent("HashMap", () => {
   it("get", () => {
     const hashMap = HashMap(Tuple(key(0), value("a")))
 
-    assert.isTrue(hashMap[key(0)] == Option.some(value("a")))
-    assert.isTrue(hashMap[key(1)] == Option.none)
+    assert.isTrue(hashMap[key(0)] == Maybe.some(value("a")))
+    assert.isTrue(hashMap[key(1)] == Maybe.none)
   })
 
   it("getHash", () => {
     const hashMap = HashMap(Tuple(key(0), value("a")))
 
-    assert.isTrue(hashMap.getHash(key(0), Hash.unknown(0)) == Option.some(value("a")))
-    assert.isTrue(hashMap.getHash(key(1), Hash.unknown(0)) == Option.none)
+    assert.isTrue(hashMap.getHash(key(0), Hash.unknown(0)) == Maybe.some(value("a")))
+    assert.isTrue(hashMap.getHash(key(1), Hash.unknown(0)) == Maybe.none)
   })
 
   it("set", () => {
@@ -64,7 +64,7 @@ describe.concurrent("HashMap", () => {
 
     hashMap = hashMap.set(key(0), value("a"))
 
-    assert.isTrue(hashMap[key(0)] == Option.some(value("a")))
+    assert.isTrue(hashMap[key(0)] == Maybe.some(value("a")))
   })
 
   it("mutation", () => {
@@ -88,8 +88,8 @@ describe.concurrent("HashMap", () => {
       map.set(0, "a")
     })
 
-    assert.isTrue(result[0] == Option.some("a"))
-    assert.isTrue(result[1] == Option.none)
+    assert.isTrue(result[0] == Maybe.some("a"))
+    assert.isTrue(result[1] == Maybe.none)
   })
 
   it("flatMap", () => {
@@ -101,9 +101,9 @@ describe.concurrent("HashMap", () => {
       return HashMap.empty<Key, Value>().set(newKey, newValue)
     })
 
-    assert.isTrue(result[key(1)] == Option.some(value("a")))
-    assert.isTrue(result[key(2)] == Option.some(value("bb")))
-    assert.isTrue(result[key(3)] == Option.none)
+    assert.isTrue(result[key(1)] == Maybe.some(value("a")))
+    assert.isTrue(result[key(2)] == Maybe.some(value("bb")))
+    assert.isTrue(result[key(3)] == Maybe.none)
   })
 
   it("chainWithIndex", () => {
@@ -115,31 +115,31 @@ describe.concurrent("HashMap", () => {
       return HashMap.empty<Key, Value>().set(newKey, newValue)
     })
 
-    assert.isTrue(result[key(2)] == Option.some(value("a")))
-    assert.isTrue(result[key(4)] == Option.some(value("bb")))
-    assert.isTrue(result[key(6)] == Option.none)
+    assert.isTrue(result[key(2)] == Maybe.some(value("a")))
+    assert.isTrue(result[key(4)] == Maybe.some(value("bb")))
+    assert.isTrue(result[key(6)] == Maybe.none)
   })
 
   it("collect", () => {
     const hashMap = HashMap(Tuple(key(0), value("a")), Tuple(key(1), value("bb")))
 
-    const result = hashMap.collect(({ s }) => s.length > 1 ? Option.some(value(s)) : Option.none)
+    const result = hashMap.collect(({ s }) => s.length > 1 ? Maybe.some(value(s)) : Maybe.none)
 
-    assert.isTrue(result[key(0)] == Option.none)
-    assert.isTrue(result[key(1)] == Option.some(value("bb")))
+    assert.isTrue(result[key(0)] == Maybe.none)
+    assert.isTrue(result[key(1)] == Maybe.some(value("bb")))
   })
 
   it("collectWithIndex", () => {
     const hashMap = HashMap(Tuple(key(0), value("a")), Tuple(key(1), value("bb")))
 
-    const result = hashMap.collectWithIndex(({ n }, v) => n > 0 ? Option.some(v) : Option.none)
+    const result = hashMap.collectWithIndex(({ n }, v) => n > 0 ? Maybe.some(v) : Maybe.none)
 
-    assert.isTrue(result[key(0)] == Option.none)
-    assert.isTrue(result[key(1)] == Option.some(value("bb")))
+    assert.isTrue(result[key(0)] == Maybe.none)
+    assert.isTrue(result[key(1)] == Maybe.some(value("bb")))
   })
 
   it("compact", () => {
-    const hashMap = HashMap(Tuple(0, Option.some("a")), Tuple(1, Option.none))
+    const hashMap = HashMap(Tuple(0, Maybe.some("a")), Tuple(1, Maybe.none))
 
     const result = hashMap.compact
 
@@ -152,8 +152,8 @@ describe.concurrent("HashMap", () => {
 
     const result = hashMap.filter(({ s }) => s.length > 1)
 
-    assert.isTrue(result[key(0)] == Option.none)
-    assert.isTrue(result[key(1)] == Option.some(value("bb")))
+    assert.isTrue(result[key(0)] == Maybe.none)
+    assert.isTrue(result[key(1)] == Maybe.some(value("bb")))
   })
 
   it("filterWithIndex", () => {
@@ -161,8 +161,8 @@ describe.concurrent("HashMap", () => {
 
     const result = hashMap.filterWithIndex(({ n }, { s }) => n > 0 && s.length > 0)
 
-    assert.isTrue(result[key(0)] == Option.none)
-    assert.isTrue(result[key(1)] == Option.some(value("bb")))
+    assert.isTrue(result[key(0)] == Maybe.none)
+    assert.isTrue(result[key(1)] == Maybe.some(value("bb")))
   })
 
   it("forEach", () => {
@@ -217,9 +217,9 @@ describe.concurrent("HashMap", () => {
 
     const result = hashMap.map(({ s }) => s.length)
 
-    assert.isTrue(result[key(0)] == Option.some(1))
-    assert.isTrue(result[key(1)] == Option.some(2))
-    assert.isTrue(result[key(2)] == Option.none)
+    assert.isTrue(result[key(0)] == Maybe.some(1))
+    assert.isTrue(result[key(1)] == Maybe.some(2))
+    assert.isTrue(result[key(2)] == Maybe.none)
   })
 
   it("mapWithIndex", () => {
@@ -227,19 +227,19 @@ describe.concurrent("HashMap", () => {
 
     const result = hashMap.mapWithIndex(({ n }, { s }) => n + s.length)
 
-    assert.isTrue(result[key(0)] == Option.some(1))
-    assert.isTrue(result[key(1)] == Option.some(3))
-    assert.isTrue(result[key(2)] == Option.none)
+    assert.isTrue(result[key(0)] == Maybe.some(1))
+    assert.isTrue(result[key(1)] == Maybe.some(3))
+    assert.isTrue(result[key(2)] == Maybe.none)
   })
 
   it("modify", () => {
     const hashMap = HashMap(Tuple(key(0), value("a")), Tuple(key(1), value("b")))
 
-    const result = hashMap.modify(key(0), (option) => option.isSome() ? Option.some(value("test")) : Option.none)
+    const result = hashMap.modify(key(0), (maybe) => maybe.isSome() ? Maybe.some(value("test")) : Maybe.none)
 
-    assert.isTrue(result[key(0)] == Option.some(value("test")))
-    assert.isTrue(result[key(1)] == Option.some(value("b")))
-    assert.isTrue(result[key(2)] == Option.none)
+    assert.isTrue(result[key(0)] == Maybe.some(value("test")))
+    assert.isTrue(result[key(1)] == Maybe.some(value("b")))
+    assert.isTrue(result[key(2)] == Maybe.none)
   })
 
   it("modifyHash", () => {
@@ -248,12 +248,12 @@ describe.concurrent("HashMap", () => {
     const result = hashMap.modifyHash(
       key(0),
       Hash.unknown(key(0)),
-      (option) => option.isSome() ? Option.some(value("test")) : Option.none
+      (maybe) => maybe.isSome() ? Maybe.some(value("test")) : Maybe.none
     )
 
-    assert.isTrue(result[key(0)] == Option.some(value("test")))
-    assert.isTrue(result[key(1)] == Option.some(value("b")))
-    assert.isTrue(result[key(2)] == Option.none)
+    assert.isTrue(result[key(0)] == Maybe.some(value("test")))
+    assert.isTrue(result[key(1)] == Maybe.some(value("b")))
+    assert.isTrue(result[key(2)] == Maybe.none)
   })
 
   it("reduce", () => {
@@ -280,8 +280,8 @@ describe.concurrent("HashMap", () => {
 
     const result = hashMap.remove(key(0))
 
-    assert.isTrue(result[key(0)] == Option.none)
-    assert.isTrue(result[key(1)] == Option.some(value("b")))
+    assert.isTrue(result[key(0)] == Maybe.none)
+    assert.isTrue(result[key(1)] == Maybe.some(value("b")))
   })
 
   it("removeMany", () => {
@@ -308,10 +308,10 @@ describe.concurrent("HashMap", () => {
 
     const result = map1 + map2
 
-    assert.isTrue(result[0] == Option.some("a"))
-    assert.isTrue(result[1] == Option.some("b"))
-    assert.isTrue(result["foo"] == Option.some(true))
-    assert.isTrue(result["bar"] == Option.some(false))
+    assert.isTrue(result[0] == Maybe.some("a"))
+    assert.isTrue(result[1] == Maybe.some("b"))
+    assert.isTrue(result["foo"] == Maybe.some(true))
+    assert.isTrue(result["bar"] == Maybe.some(false))
   })
 
   it("update", () => {
@@ -319,9 +319,9 @@ describe.concurrent("HashMap", () => {
 
     const result = hashMap.update(key(0), ({ s }) => value(`${s}-${s}`))
 
-    assert.isTrue(result[key(0)] == Option.some(value("a-a")))
-    assert.isTrue(result[key(1)] == Option.some(value("b")))
-    assert.isTrue(result[key(2)] == Option.none)
+    assert.isTrue(result[key(0)] == Maybe.some(value("a-a")))
+    assert.isTrue(result[key(1)] == Maybe.some(value("b")))
+    assert.isTrue(result[key(2)] == Maybe.none)
   })
 
   it("values", () => {

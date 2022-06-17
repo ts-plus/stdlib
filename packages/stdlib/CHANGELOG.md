@@ -84,7 +84,7 @@
 
 - [#153](https://github.com/ts-plus/stdlib/pull/153) [`ec5b67a`](https://github.com/ts-plus/stdlib/commit/ec5b67af17fa7997681ed1923333eece82b1ebc0) Thanks [@IMax153](https://github.com/IMax153)! - fix `this is undefined` bug in Env
 
-* [#150](https://github.com/ts-plus/stdlib/pull/150) [`e84407b`](https://github.com/ts-plus/stdlib/commit/e84407b169e7c5cb5bd66e419d4c8b603f66e02f) Thanks [@mikearnaldi](https://github.com/mikearnaldi)! - Fix Option getLastAssociative and revise getAssociative
+* [#150](https://github.com/ts-plus/stdlib/pull/150) [`e84407b`](https://github.com/ts-plus/stdlib/commit/e84407b169e7c5cb5bd66e419d4c8b603f66e02f) Thanks [@mikearnaldi](https://github.com/mikearnaldi)! - Fix Maybe getLastAssociative and revise getAssociative
 
 - [#148](https://github.com/ts-plus/stdlib/pull/148) [`b63bfb3`](https://github.com/ts-plus/stdlib/commit/b63bfb3f318c84e8aaf21a941ca75b4b49981ea0) Thanks [@IMax153](https://github.com/IMax153)! - death to semicolons
 
@@ -148,7 +148,7 @@
 
 * [#129](https://github.com/ts-plus/stdlib/pull/129) [`2678d5c`](https://github.com/ts-plus/stdlib/commit/2678d5c937c868add307d0fc61ed8dff618bad8b) Thanks [@IMax153](https://github.com/IMax153)! - add HKTs for Chunk
 
-- [#126](https://github.com/ts-plus/stdlib/pull/126) [`5938a3f`](https://github.com/ts-plus/stdlib/commit/5938a3fc01bc3895aaeaa8035e683933c442c033) Thanks [@IMax153](https://github.com/IMax153)! - add HKTs for Option
+- [#126](https://github.com/ts-plus/stdlib/pull/126) [`5938a3f`](https://github.com/ts-plus/stdlib/commit/5938a3fc01bc3895aaeaa8035e683933c442c033) Thanks [@IMax153](https://github.com/IMax153)! - add HKTs for Maybe
 
 * [#125](https://github.com/ts-plus/stdlib/pull/125) [`8f2afc0`](https://github.com/ts-plus/stdlib/commit/8f2afc0c75fd8bf4cec4515537a0a60dd094b8ba) Thanks [@IMax153](https://github.com/IMax153)! - add NonEmptyImmutableArray module
 
@@ -448,7 +448,7 @@
 
 - [`6c75520`](https://github.com/ts-plus/stdlib/commit/6c755200e20ab65ca8fc6ff880d2a555004044ae) Thanks [@mikearnaldi](https://github.com/mikearnaldi)! - Add pipeable \_\_call to modules
 
-* [`3acfd4a`](https://github.com/ts-plus/stdlib/commit/3acfd4a37bebc1e0d6a6c3e32d9798c315735382) Thanks [@mikearnaldi](https://github.com/mikearnaldi)! - Remove pipe operator from option as >>> in favour of callable pipe
+* [`3acfd4a`](https://github.com/ts-plus/stdlib/commit/3acfd4a37bebc1e0d6a6c3e32d9798c315735382) Thanks [@mikearnaldi](https://github.com/mikearnaldi)! - Remove pipe operator from maybe as >>> in favour of callable pipe
 
 ## 0.0.23
 
@@ -494,7 +494,7 @@
 
 - [`2cd4270`](https://github.com/ts-plus/stdlib/commit/2cd4270865b226296edadc64354164cc02cd2d41) Thanks [@mikearnaldi](https://github.com/mikearnaldi)! - Rename Identity to AssociativeIdentity
 
-* [`a9e50e2`](https://github.com/ts-plus/stdlib/commit/a9e50e26cfedbada04af8ff308e821ccc2452f51) Thanks [@mikearnaldi](https://github.com/mikearnaldi)! - Add zipWith to Option
+* [`a9e50e2`](https://github.com/ts-plus/stdlib/commit/a9e50e26cfedbada04af8ff308e821ccc2452f51) Thanks [@mikearnaldi](https://github.com/mikearnaldi)! - Add zipWith to Maybe
 
 - [`a9e50e2`](https://github.com/ts-plus/stdlib/commit/a9e50e26cfedbada04af8ff308e821ccc2452f51) Thanks [@mikearnaldi](https://github.com/mikearnaldi)! - Begin Environment Module
 
@@ -506,7 +506,7 @@
 
 ### Patch Changes
 
-- [`b8b6d27`](https://github.com/ts-plus/stdlib/commit/b8b6d271b4e8fc45401630b806da38a123179d97) Thanks [@mikearnaldi](https://github.com/mikearnaldi)! - Add Option pipe operator (>>>) and aspects (Option.\$)
+- [`b8b6d27`](https://github.com/ts-plus/stdlib/commit/b8b6d271b4e8fc45401630b806da38a123179d97) Thanks [@mikearnaldi](https://github.com/mikearnaldi)! - Add Maybe pipe operator (>>>) and aspects (Maybe.\$)
 
 * [`c585433`](https://github.com/ts-plus/stdlib/commit/c5854332f38836cb4b4204f5cb2345d2f1a61d18) Thanks [@mikearnaldi](https://github.com/mikearnaldi)! - Add more operators to Duration
 
@@ -578,7 +578,7 @@
 
 - [`58cd4f2`](https://github.com/ts-plus/stdlib/commit/58cd4f2d8d6d1969f1ff3ba97ecd7d321a576a7b) Thanks [@mikearnaldi](https://github.com/mikearnaldi)! - Improve AutoImports
 
-* [`dbf4ca7`](https://github.com/ts-plus/stdlib/commit/dbf4ca7d503be412719c9136cc190e846f092718) Thanks [@mikearnaldi](https://github.com/mikearnaldi)! - Add Option.orElse
+* [`dbf4ca7`](https://github.com/ts-plus/stdlib/commit/dbf4ca7d503be412719c9136cc190e846f092718) Thanks [@mikearnaldi](https://github.com/mikearnaldi)! - Add Maybe.orElse
 
 ## 0.0.6
 
@@ -616,4 +616,4 @@
 
 ### Patch Changes
 
-- [`8e4f870`](https://github.com/ts-plus/stdlib/commit/8e4f8708b2611b05083a056e87883651807607a5) Thanks [@mikearnaldi](https://github.com/mikearnaldi)! - Port Option, List, ListBuffer, Equivalence, Ord, Utilities, Tuple, Function, Predicate
+- [`8e4f870`](https://github.com/ts-plus/stdlib/commit/8e4f8708b2611b05083a056e87883651807607a5) Thanks [@mikearnaldi](https://github.com/mikearnaldi)! - Port Maybe, List, ListBuffer, Equivalence, Ord, Utilities, Tuple, Function, Predicate

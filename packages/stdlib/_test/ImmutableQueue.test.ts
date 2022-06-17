@@ -22,22 +22,22 @@ describe.concurrent("ImmutableQueue", () => {
     const result2 = result1.value!.get(1).dequeue
     const result3 = result2.value!.get(1).dequeue
 
-    assert.isTrue(result1 == Option.some(Tuple(1, ImmutableQueue(2))))
-    assert.isTrue(result2 == Option.some(Tuple(2, ImmutableQueue.empty<number>())))
-    assert.isTrue(result3 == Option.none)
+    assert.isTrue(result1 == Maybe.some(Tuple(1, ImmutableQueue(2))))
+    assert.isTrue(result2 == Maybe.some(Tuple(2, ImmutableQueue.empty<number>())))
+    assert.isTrue(result3 == Maybe.none)
   })
 
   it("head", () => {
     const queue = ImmutableQueue(1, 2, 3, 4, 5)
 
-    assert.isTrue(queue.head == Option.some(1))
+    assert.isTrue(queue.head == Maybe.some(1))
   })
 
   it("find", () => {
     const queue = ImmutableQueue(1, 2, 3)
 
-    assert.isTrue(queue.find((n) => n % 2 === 0) == Option.some(2))
-    assert.isTrue(queue.find((n) => n % 5 === 0) == Option.none)
+    assert.isTrue(queue.find((n) => n % 2 === 0) == Maybe.some(2))
+    assert.isTrue(queue.find((n) => n % 5 === 0) == Maybe.none)
   })
 
   it("filter", () => {

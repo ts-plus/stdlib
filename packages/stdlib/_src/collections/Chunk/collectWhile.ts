@@ -6,7 +6,7 @@ import { ArrTypeId, concreteChunk, SingletonTypeId } from "@tsplus/stdlib/collec
  *
  * @tsplus fluent Chunk collectWhile
  */
-export function collectWhile_<A, B>(self: Chunk<A>, f: (a: A) => Option<B>): Chunk<B> {
+export function collectWhile_<A, B>(self: Chunk<A>, f: (a: A) => Maybe<B>): Chunk<B> {
   concreteChunk(self)
 
   switch (self._typeId) {

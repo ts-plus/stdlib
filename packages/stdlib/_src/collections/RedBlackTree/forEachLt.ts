@@ -11,7 +11,7 @@ export function forEachLt_<K, V>(
   if (self.root) {
     RedBlackTree.visitLt(self.root, max, self.ord, (key, value) => {
       visit(key, value)
-      return Option.none
+      return Maybe.none
     })
   }
 }

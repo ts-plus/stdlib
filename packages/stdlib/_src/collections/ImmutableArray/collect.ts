@@ -4,7 +4,7 @@
  *
  * @tsplus fluent ImmutableArray collect
  */
-export function collect_<A, B>(self: ImmutableArray<A>, f: (a: A) => Option<B>): ImmutableArray<B> {
+export function collect_<A, B>(self: ImmutableArray<A>, f: (a: A) => Maybe<B>): ImmutableArray<B> {
   return self.collectWithIndex((_, a) => f(a))
 }
 

@@ -5,7 +5,7 @@ import { concreteChunkId } from "@tsplus/stdlib/collections/Chunk/definition"
  *
  * @tsplus fluent Chunk findIndex
  */
-export function findIndex_<A>(self: Chunk<A>, f: Predicate<A>): Option<number> {
+export function findIndex_<A>(self: Chunk<A>, f: Predicate<A>): Maybe<number> {
   const iterator = concreteChunkId(self)._arrayLikeIterator()
   let next
   let index = 0
@@ -17,14 +17,14 @@ export function findIndex_<A>(self: Chunk<A>, f: Predicate<A>): Option<number> {
     while (i < len) {
       const a = array[i]!
       if (f(a)) {
-        return Option.some(index)
+        return Maybe.some(index)
       }
       i++
       index++
     }
   }
 
-  return Option.none
+  return Maybe.none
 }
 
 /**

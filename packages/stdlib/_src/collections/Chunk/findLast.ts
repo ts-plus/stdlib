@@ -8,9 +8,9 @@ import { concreteChunkId } from "@tsplus/stdlib/collections/Chunk/definition"
 export function findLast_<A, B extends A>(
   self: Chunk<A>,
   f: Refinement<A, B>
-): Option<B>
-export function findLast_<A>(self: Chunk<A>, f: Predicate<A>): Option<A>
-export function findLast_<A>(self: Chunk<A>, f: Predicate<A>): Option<A> {
+): Maybe<B>
+export function findLast_<A>(self: Chunk<A>, f: Predicate<A>): Maybe<A>
+export function findLast_<A>(self: Chunk<A>, f: Predicate<A>): Maybe<A> {
   const iterator = concreteChunkId(self)._reverseArrayLikeIterator()
   let next
 
@@ -21,13 +21,13 @@ export function findLast_<A>(self: Chunk<A>, f: Predicate<A>): Option<A> {
     while (i >= 0) {
       const a = array[i]!
       if (f(a)) {
-        return Option.some(a)
+        return Maybe.some(a)
       }
       i--
     }
   }
 
-  return Option.none
+  return Maybe.none
 }
 
 /**
@@ -37,8 +37,8 @@ export function findLast_<A>(self: Chunk<A>, f: Predicate<A>): Option<A> {
  */
 export function findLast<A, B extends A>(
   f: Refinement<A, B>
-): (self: Chunk<A>) => Option<B>
-export function findLast<A>(f: Predicate<A>): (self: Chunk<A>) => Option<A>
+): (self: Chunk<A>) => Maybe<B>
+export function findLast<A>(f: Predicate<A>): (self: Chunk<A>) => Maybe<A>
 export function findLast<A>(f: Predicate<A>) {
-  return (self: Chunk<A>): Option<A> => self.findLast(f)
+  return (self: Chunk<A>): Maybe<A> => self.findLast(f)
 }

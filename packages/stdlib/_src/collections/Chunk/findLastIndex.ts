@@ -5,7 +5,7 @@ import { concreteChunk, concreteChunkId } from "@tsplus/stdlib/collections/Chunk
  *
  * @tsplus fluent Chunk findLastIndex
  */
-export function findLastIndex_<A>(self: Chunk<A>, f: Predicate<A>): Option<number> {
+export function findLastIndex_<A>(self: Chunk<A>, f: Predicate<A>): Maybe<number> {
   concreteChunk(self)
 
   const iterator = concreteChunkId(self)._reverseArrayLikeIterator()
@@ -19,14 +19,14 @@ export function findLastIndex_<A>(self: Chunk<A>, f: Predicate<A>): Option<numbe
     while (i >= 0) {
       const a = array[i]!
       if (f(a)) {
-        return Option.some(index)
+        return Maybe.some(index)
       }
       i--
       index--
     }
   }
 
-  return Option.none
+  return Maybe.none
 }
 
 /**

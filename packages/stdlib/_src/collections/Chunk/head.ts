@@ -3,6 +3,6 @@
  *
  * @tsplus getter Chunk head
  */
-export function head<A>(self: Chunk<A>): Option<A> {
+export function head<A>(self: Chunk<A>): Maybe<A> {
   return self.get(0)
 }

@@ -5,7 +5,7 @@
  * @tsplus fluent HashMap remove
  */
 export function remove_<K, V>(self: HashMap<K, V>, key: K) {
-  return self.modify(key, () => Option.none)
+  return self.modify(key, () => Maybe.none)
 }
 
 /**

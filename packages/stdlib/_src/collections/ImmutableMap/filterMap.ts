@@ -6,7 +6,7 @@
  */
 export function filterMap_<K, V, B>(
   self: ImmutableMap<K, V>,
-  pf: (value: V) => Option<B>
+  pf: (value: V) => Maybe<B>
 ): ImmutableMap<K, B> {
   return self.filterMapWithIndex((_, value) => pf(value))
 }

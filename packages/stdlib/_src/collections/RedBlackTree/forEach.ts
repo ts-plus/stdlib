@@ -10,7 +10,7 @@ export function forEach_<K, V>(
   if (self.root) {
     RedBlackTree.visitFull(self.root, (key, value) => {
       visit(key, value)
-      return Option.none
+      return Maybe.none
     })
   }
 }

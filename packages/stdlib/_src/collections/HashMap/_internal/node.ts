@@ -33,7 +33,7 @@ export class EmptyNode<K, V> {
     key: K,
     size: SizeRef
   ): Node<K, V> {
-    const v = f(Option.none)
+    const v = f(Maybe.none)
     if (v.isNone()) return new EmptyNode()
     ;++size.value
     return new LeafNode(edit, hash, key, v)
@@ -56,7 +56,7 @@ export function canEditNode<K, V>(node: Node<K, V>, edit: number): boolean {
 
 export type KeyEq<K> = Equivalence<K>["equals"]
 
-export type UpdateFn<V> = (v: Option<V>) => Option<V>
+export type UpdateFn<V> = (v: Maybe<V>) => Maybe<V>
 
 export class LeafNode<K, V> {
   readonly _tag = "LeafNode"
@@ -65,7 +65,7 @@ export class LeafNode<K, V> {
     readonly edit: number,
     readonly hash: number,
     readonly key: K,
-    public value: Option<V>
+    public value: Maybe<V>
   ) {}
 
   modify(
@@ -89,7 +89,7 @@ export class LeafNode<K, V> {
       }
       return new LeafNode(edit, hash, key, v)
     }
-    const v = f(Option.none)
+    const v = f(Maybe.none)
     if (v.isNone()) return this
     ;++size.value
     return mergeLeaves(
@@ -135,7 +135,7 @@ export class CollisionNode<K, V> {
 
       return list.length > 1 ? new CollisionNode(edit, this.hash, list) : list[0]! // collapse single element collision list
     }
-    const v = f(Option.none)
+    const v = f(Maybe.none)
     if (v.isNone()) return this
     ;++size.value
     return mergeLeaves(
@@ -172,7 +172,7 @@ export class CollisionNode<K, V> {
       }
     }
 
-    const newValue = f(Option.none)
+    const newValue = f(Maybe.none)
     if (newValue.isNone()) return list
     ;++size.value
     return arrayUpdate(mutate, len, new LeafNode(edit, hash, key, newValue), list)

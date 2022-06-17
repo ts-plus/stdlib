@@ -1,6 +1,6 @@
 import { Cons, Nil } from "@tsplus/stdlib/collections/List/definition"
 import { Left, Right } from "@tsplus/stdlib/data/Either/definition"
-import { None, Some } from "@tsplus/stdlib/data/Option/definition"
+import { None, Some } from "@tsplus/stdlib/data/Maybe/definition"
 
 /**
  * A Guard<A> is a type representing the ability to identify when a value is of type A at runtime
@@ -131,10 +131,10 @@ export function deriveLiteral<A extends string | number>(
 }
 
 /**
- * @tsplus derive Guard[Option]<_> 10
+ * @tsplus derive Guard[Maybe]<_> 10
  */
-export function deriveOption<A extends Option<any>>(
-  ...[element]: [A] extends [Option<infer _A>] ? [element: Guard<_A>]
+export function deriveOption<A extends Maybe<any>>(
+  ...[element]: [A] extends [Maybe<infer _A>] ? [element: Guard<_A>]
     : never
 ): Guard<A> {
   return Guard((u): u is A => {

@@ -9,12 +9,12 @@
 export function zipAll_<A, B>(
   self: Chunk<A>,
   that: Chunk<B>
-): Chunk<Tuple<[Option<A>, Option<B>]>> {
+): Chunk<Tuple<[Maybe<A>, Maybe<B>]>> {
   return self.zipAllWith(
     that,
-    (a, b) => Tuple(Option.some(a), Option.some(b)),
-    (a) => Tuple(Option.some(a), Option.none),
-    (b) => Tuple(Option.none, Option.some(b))
+    (a, b) => Tuple(Maybe.some(a), Maybe.some(b)),
+    (a) => Tuple(Maybe.some(a), Maybe.none),
+    (b) => Tuple(Maybe.none, Maybe.some(b))
   )
 }
 

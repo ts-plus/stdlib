@@ -8,10 +8,10 @@ export function getCompactF<E>(M: AssociativeIdentity<E>): Wither<Either.FixedLe
   const compact = Either.$.compactOption(M)
   return HKT.instance(
     <G extends HKT>(G: Applicative<G>) =>
-      <GR, GE, A, B>(f: (a: A) => HKT.Kind<G, GR, GE, Option<B>>) =>
+      <GR, GE, A, B>(f: (a: A) => HKT.Kind<G, GR, GE, Maybe<B>>) =>
         (either: Either<E, A>) => {
           const traverseF = Either.forEachF(G)
-          return G.map((e: Either<E, Option<B>>) => compact(e))(traverseF(f)(either))
+          return G.map((e: Either<E, Maybe<B>>) => compact(e))(traverseF(f)(either))
         }
   )
 }

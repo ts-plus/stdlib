@@ -25,24 +25,24 @@ export class MutableHashMap<K, V> implements Collection<Tuple<[K, V]>> {
     return this.length.get
   }
 
-  get(k: K): Option<V> {
+  get(k: K): Maybe<V> {
     const hash = Hash.unknown(k)
     const arr = this.backingMap.get(hash)
 
     if (arr == null) {
-      return Option.none
+      return Maybe.none
     }
 
     let c: Node<K, V> | undefined = arr
 
     while (c) {
       if (Equals.equals(k, c.k)) {
-        return Option.some(c.v)
+        return Maybe.some(c.v)
       }
       c = c.next
     }
 
-    return Option.none
+    return Maybe.none
   }
 
   remove(k: K): MutableHashMap<K, V> {
