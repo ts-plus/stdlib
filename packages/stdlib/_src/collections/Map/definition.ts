@@ -9,9 +9,3 @@ declare global {
   export interface MapConstructor {
   }
 }
-
-/**
- * @tsplus macro pipe
- * @tsplus fluent Map __call
- */
-export const MapPipe: typeof pipe = pipe

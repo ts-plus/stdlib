@@ -43,7 +43,7 @@ describe.concurrent("RedBlackTree", () => {
     const tree = RedBlackTree.empty<number, string>(Ord.number)
 
     assert.strictEqual(tree.size, 0)
-    assert.isTrue(tree.toImmutableArray() == ImmutableArray.empty())
+    assert.isTrue(tree.toImmutableArray == ImmutableArray.empty())
   })
 
   it("backwards", () => {
@@ -68,7 +68,7 @@ describe.concurrent("RedBlackTree", () => {
     const tree = RedBlackTree.empty<number, string>(Ord.number)
 
     assert.strictEqual(tree.size, 0)
-    assert.isTrue(tree.backwards.toImmutableArray() == ImmutableArray.empty())
+    assert.isTrue(tree.backwards.toImmutableArray == ImmutableArray.empty())
   })
 
   it("values", () => {

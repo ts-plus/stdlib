@@ -1,3 +1,5 @@
+import "@tsplus/stdlib/global"
+
 /**
  * @tsplus global
  */
