@@ -139,9 +139,3 @@ export class ListBuffer<A> implements Collection<A> {
 export function toCollection<A>(self: ListBuffer<A>): Collection<A> {
   return self
 }
-
-/**
- * @tsplus macro pipe
- * @tsplus fluent ListBuffer __call
- */
-export const listBufferPipe: typeof pipe = pipe

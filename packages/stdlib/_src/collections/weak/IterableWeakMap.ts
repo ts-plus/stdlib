@@ -161,9 +161,3 @@ const ConcreteImpl: {
 export function toCollection<K extends object, V>(self: IterableWeakMap<K, V>): Collection<[K, V]> {
   return self
 }
-
-/**
- * @tsplus macro pipe
- * @tsplus fluent IterableWeakMap __call
- */
-export const iterableWeakMapPipe: typeof pipe = pipe

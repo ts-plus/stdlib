@@ -9,9 +9,3 @@ declare global {
   export interface SetConstructor {
   }
 }
-
-/**
- * @tsplus macro pipe
- * @tsplus fluent Set __call
- */
-export const SetPipe: typeof pipe = pipe

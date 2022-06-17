@@ -8,7 +8,7 @@ import {
  */
 export function appendAll_<A>(self: ImmutableQueue<A>, value: Collection<A>): ImmutableQueue<A> {
   concreteImmutableQueue(self)
-  return new ImmutableQueueInternal(self.backingList + value.toList())
+  return new ImmutableQueueInternal(self.backingList + value.toList)
 }
 
 /**

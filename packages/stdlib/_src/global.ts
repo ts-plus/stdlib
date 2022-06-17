@@ -1,11 +1,10 @@
 /**
  * Ensure types are in scope
- */
-import type {} from "@tsplus/stdlib"
-/**
+ *
  * @tsplus global
  */
-import { Array } from "@tsplus/stdlib/collections/Array/definition"
+import "@tsplus/stdlib"
+
 /**
  * @tsplus global
  */
@@ -41,10 +40,6 @@ import { List } from "@tsplus/stdlib/collections/List/definition"
 /**
  * @tsplus global
  */
-import { Map } from "@tsplus/stdlib/collections/Map/definition"
-/**
- * @tsplus global
- */
 import { DoublyLinkedList } from "@tsplus/stdlib/collections/mutable/DoublyLinkedList"
 /**
  * @tsplus global
@@ -74,10 +69,6 @@ import { ParSeq } from "@tsplus/stdlib/collections/ParSeq/definition"
  * @tsplus global
  */
 import { RedBlackTree } from "@tsplus/stdlib/collections/RedBlackTree/definition"
-/**
- * @tsplus global
- */
-import { Set } from "@tsplus/stdlib/collections/Set/definition"
 /**
  * @tsplus global
  */

@@ -20,9 +20,3 @@ export const NonEmptyImmutableArray: NonEmptyImmutableArrayOps = {
  * @tsplus type NonEmptyImmutableArray/Aspects
  */
 export interface NonEmptyImmutableArrayAspects {}
-
-/**
- * @tsplus macro pipe
- * @tsplus fluent NonEmptyImmutableArray __call
- */
-export const nonEmptyImmutableArrayPipe: typeof pipe = pipe

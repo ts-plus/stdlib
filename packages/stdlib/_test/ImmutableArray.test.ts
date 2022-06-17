@@ -75,11 +75,11 @@ describe.concurrent("ImmutableArray", () => {
 
   it("equals", () => {
     assert.isTrue(
-      [1, 2].immutable()
+      [1, 2].immutable
         == ImmutableArray(1, 2)
     )
     assert.isFalse(
-      [1, 2].immutable()
+      [1, 2].immutable
         == ImmutableArray(1, 3)
     )
   })
@@ -121,7 +121,7 @@ describe.concurrent("ImmutableArray", () => {
     assert.isTrue(
       ImmutableArray(0, 1)
         .flatMap((n) => [n + 1])
-        .toImmutableArray() == ImmutableArray(1, 2)
+        .toImmutableArray == ImmutableArray(1, 2)
     )
   })
 
@@ -143,14 +143,16 @@ describe.concurrent("ImmutableArray", () => {
 
   it("forEachWithIndexF", () => {
     assert.isTrue(
-      ImmutableArray("a", "bb")(
+      pipe(
+        ImmutableArray("a", "bb"),
         ImmutableArray.forEachWithIndexF(Option.Applicative)(
           (i, s) => (s.length >= 1 ? Option.some(s + i) : Option.none)
         )
       ) == Option.some(ImmutableArray("a0", "bb1"))
     )
     assert.isTrue(
-      ImmutableArray("a", "bb")(
+      pipe(
+        ImmutableArray("a", "bb"),
         ImmutableArray.forEachWithIndexF(Option.Applicative)(
           (i, s) => (s.length > 1 ? Option.some(s + i) : Option.none)
         )

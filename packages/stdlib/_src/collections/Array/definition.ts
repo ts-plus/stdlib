@@ -9,9 +9,3 @@ declare global {
   export interface ArrayConstructor {
   }
 }
-
-/**
- * @tsplus macro pipe
- * @tsplus fluent Array __call
- */
-export const ArrayPipe: typeof pipe = pipe

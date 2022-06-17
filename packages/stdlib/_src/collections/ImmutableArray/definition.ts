@@ -38,9 +38,3 @@ export interface ImmutableArrayAspects {}
  * @tsplus static ImmutableArray/Ops $
  */
 export const ImmutableArrayAspects: ImmutableArrayAspects = {}
-
-/**
- * @tsplus macro pipe
- * @tsplus fluent ImmutableArray __call
- */
-export const immutableArrayPipe: typeof pipe = pipe

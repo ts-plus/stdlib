@@ -195,12 +195,6 @@ export function equals_<A, B>(self: List<A>, that: List<B>) {
 export const equals = Pipeable(equals_)
 
 /**
- * @tsplus macro pipe
- * @tsplus fluent List __call
- */
-export const listPipe: typeof pipe = pipe
-
-/**
  * Type guard
  *
  * @tsplus static List/Ops isList
