@@ -68,8 +68,8 @@ describe.concurrent("SortedMap", () => {
     const map1 = makeSortedMap(Tuple(0, 10), Tuple(1, 20), Tuple(2, 30))
     const map2 = SortedMap.empty<number, number>(Ord.number)
 
-    assert.isTrue(map1.headOption == Maybe.some(Tuple(key(0), value(10))))
-    assert.isTrue(map2.headOption == Maybe.none)
+    assert.isTrue(map1.headMaybe == Maybe.some(Tuple(key(0), value(10))))
+    assert.isTrue(map2.headMaybe == Maybe.none)
   })
 
   it("isEmpty", () => {

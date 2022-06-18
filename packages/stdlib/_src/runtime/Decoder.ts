@@ -359,10 +359,7 @@ export function deriveArray<A extends Array<any>>(
 
 type EitherStructural<E, A> = { _tag: "Left"; left: E } | { _tag: "Right"; right: A }
 
-function deriveEitherInternal<E, A>(
-  /** @tsplus implicit local */ left: Decoder<E>,
-  /** @tsplus implicit local */ right: Decoder<A>
-): Decoder<EitherStructural<E, A>> {
+function deriveEitherInternal<E, A>(left: Decoder<E>, right: Decoder<A>): Decoder<EitherStructural<E, A>> {
   return Derive()
 }
 
@@ -370,8 +367,7 @@ function deriveEitherInternal<E, A>(
  * @tsplus derive Decoder[Either]<_> 10
  */
 export function deriveEither<A extends Either<any, any>>(
-  ...[left, right]: [A] extends [Either<infer _E, infer _A>] ? [left: Decoder<_E>, right: Decoder<_A>]
-    : never
+  ...[left, right]: [A] extends [Either<infer _E, infer _A>] ? [left: Decoder<_E>, right: Decoder<_A>] : never
 ): Decoder<A> {
   const structural = deriveEitherInternal(left, right)
   return Decoder((u) =>
@@ -381,8 +377,8 @@ export function deriveEither<A extends Either<any, any>>(
 
 type OptionStructural<A> = { _tag: "None" } | { _tag: "Some"; value: A }
 
-function deriveOptionInternal<A>(
-  /** @tsplus implicit local */ value: Decoder<A>
+function deriveMaybeInternal<A>(
+  value: Decoder<A>
 ): Decoder<OptionStructural<A>> {
   return Derive()
 }
@@ -390,11 +386,11 @@ function deriveOptionInternal<A>(
 /**
  * @tsplus derive Decoder[Maybe]<_> 10
  */
-export function deriveOption<A extends Maybe<any>>(
+export function deriveMaybe<A extends Maybe<any>>(
   ...[value]: [A] extends [Maybe<infer _A>] ? [value: Decoder<_A>]
     : never
 ): Decoder<A> {
-  const structural = deriveOptionInternal(value)
+  const structural = deriveMaybeInternal(value)
   return Decoder((u) =>
     structural.decodeResult(u).map((e) => e._tag === "Some" ? Maybe.some(e.value) as A : Maybe.none as A)
   )

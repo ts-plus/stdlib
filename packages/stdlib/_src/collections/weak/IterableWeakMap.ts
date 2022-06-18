@@ -33,16 +33,16 @@ export const IterableWeakMap: IterableWeakMapOps = {}
 
 /**
  * @tsplus index IterableWeakMap
- * @tsplus fluent IterableWeakMap getOption
+ * @tsplus fluent IterableWeakMap getMaybe
  */
-export function getOption_<K extends object, V>(
+export function getMaybe_<K extends object, V>(
   self: IterableWeakMap<K, V>,
   key: K
 ): Maybe<V> {
   return self.has(key) ? Maybe.some(self.get(key)!) : Maybe.none
 }
 
-export const getOption = Pipeable(getOption_)
+export const getMaybe = Pipeable(getMaybe_)
 
 /**
  * @tsplus static IterableWeakMapOps make

@@ -286,12 +286,12 @@ describe.concurrent("Maybe", () => {
   })
 
   it("aspects", () => {
-    const result = Maybe(0)(
+    const result = pipe(
+      Maybe(0),
       Maybe.$.map((n) => n + 1),
       Maybe.$.map((n) => n + 1),
       Maybe.$.flatMap((n) => Maybe(`ok: ${n}`))
     )
-
     assert.isTrue(
       result == Maybe("ok: 2")
     )

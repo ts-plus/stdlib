@@ -5,7 +5,7 @@
  * @tsplus static Either/Ops getCompactF
  */
 export function getCompactF<E>(M: AssociativeIdentity<E>): Wither<Either.FixedLeftHKT<E>> {
-  const compact = Either.$.compactOption(M)
+  const compact = Either.$.compactMaybe(M)
   return HKT.instance(
     <G extends HKT>(G: Applicative<G>) =>
       <GR, GE, A, B>(f: (a: A) => HKT.Kind<G, GR, GE, Maybe<B>>) =>

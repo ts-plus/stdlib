@@ -6,6 +6,6 @@
  *
  * @tsplus static Maybe/Ops getRefinement
  */
-export function getRefinement<A, B extends A>(getOption: (a: A) => Maybe<B>): Refinement<A, B> {
-  return (a: A): a is B => getOption(a).isSome()
+export function getRefinement<A, B extends A>(getMaybe: (a: A) => Maybe<B>): Refinement<A, B> {
+  return (a: A): a is B => getMaybe(a).isSome()
 }
