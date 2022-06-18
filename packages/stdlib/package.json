@@ -1,6 +1,6 @@
 {
   "name": "@tsplus/stdlib",
-  "version": "0.1.6",
+  "version": "0.1.7",
   "type": "module",
   "repository": "https://github.com/ts-plus/stdlib.git",
   "author": "Michael Arnaldi <arnaldimichael@gmail.com>",
