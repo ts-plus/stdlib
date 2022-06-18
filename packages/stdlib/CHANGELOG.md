@@ -1,5 +1,11 @@
 # @tsplus/stdlib
 
+## 0.1.8
+
+### Patch Changes
+
+- [#180](https://github.com/ts-plus/stdlib/pull/180) [`456579b`](https://github.com/ts-plus/stdlib/commit/456579bd4096c1c25eae6f71a28ef34473579431) Thanks [@mikearnaldi](https://github.com/mikearnaldi)! - Finish renaming of Option => Maybe
+
 ## 0.1.7
 
 ### Patch Changes
