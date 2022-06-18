@@ -1,5 +1,17 @@
 # @tsplus/stdlib
 
+## 0.1.7
+
+### Patch Changes
+
+- [#177](https://github.com/ts-plus/stdlib/pull/177) [`c3b9368`](https://github.com/ts-plus/stdlib/commit/c3b9368266da660e86eedbdd2941e7b86b8b9f65) Thanks [@mikearnaldi](https://github.com/mikearnaldi)! - Use global imports in plain TS file to have type-check
+
+* [#178](https://github.com/ts-plus/stdlib/pull/178) [`dc3de0e`](https://github.com/ts-plus/stdlib/commit/dc3de0ea47843f874765aafc418a06df216b321d) Thanks [@wesselvdv](https://github.com/wesselvdv)! - Rename Option to Maybe to prevent conflicts with dom.lib.ts
+
+- [#178](https://github.com/ts-plus/stdlib/pull/178) [`1be4dfe`](https://github.com/ts-plus/stdlib/commit/1be4dfee2141383570f25a67cf15b3cc0a583d44) Thanks [@wesselvdv](https://github.com/wesselvdv)! - Rename files to correspond with their exported operator
+
+* [#177](https://github.com/ts-plus/stdlib/pull/177) [`c3b9368`](https://github.com/ts-plus/stdlib/commit/c3b9368266da660e86eedbdd2941e7b86b8b9f65) Thanks [@mikearnaldi](https://github.com/mikearnaldi)! - Remove implicit pipe from types
+
 ## 0.1.6
 
 ### Patch Changes
