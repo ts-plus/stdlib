@@ -47,9 +47,9 @@ describe.concurrent("Either", () => {
   })
 
   it("compactOption", () => {
-    assert.isTrue(Either.left("hello").compactOption(AssociativeIdentity.string) == Either.left("hello"))
-    assert.isTrue(Either.right(Maybe.none).compactOption(AssociativeIdentity.string) == Either.left(""))
-    assert.isTrue(Either.right(Maybe.some(0)).compactOption(AssociativeIdentity.string) == Either.right(0))
+    assert.isTrue(Either.left("hello").compactMaybe(AssociativeIdentity.string) == Either.left("hello"))
+    assert.isTrue(Either.right(Maybe.none).compactMaybe(AssociativeIdentity.string) == Either.left(""))
+    assert.isTrue(Either.right(Maybe.some(0)).compactMaybe(AssociativeIdentity.string) == Either.right(0))
   })
 
   it("do", () => {
@@ -162,8 +162,8 @@ describe.concurrent("Either", () => {
   })
 
   it("fromOption", () => {
-    assert.isTrue(Either.fromOption(Maybe.some(0), () => 1) == Either.right(0))
-    assert.isTrue(Either.fromOption(Maybe.none, () => 1) == Either.left(1))
+    assert.isTrue(Either.fromMaybe(Maybe.some(0), () => 1) == Either.right(0))
+    assert.isTrue(Either.fromMaybe(Maybe.none, () => 1) == Either.left(1))
   })
 
   it("fromPredicate", () => {

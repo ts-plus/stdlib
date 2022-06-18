@@ -4,28 +4,28 @@
  */
 export type Maybe<A> = None | Some<A>
 
-export interface OptionF extends HKT {
+export interface MaybeF extends HKT {
   readonly type: Maybe<this["A"]>
+}
+
+export declare namespace Maybe {
+  export type HKT = MaybeF
 }
 
 /**
  * @tsplus type Maybe/Ops
  */
-export interface OptionOps {
-  $: OptionAspects
+export interface MaybeOps {
+  $: MaybeAspects
 }
-export const Maybe: OptionOps = {
+export const Maybe: MaybeOps = {
   $: {}
 }
 
 /**
  * @tsplus type Maybe/Aspects
  */
-export interface OptionAspects {}
-
-export declare namespace Maybe {
-  export type HKT = OptionF
-}
+export interface MaybeAspects {}
 
 const _noneHash = Hash.string("Maybe/None")
 const _someHash = Hash.string("Maybe/Some")
@@ -67,13 +67,13 @@ export class Some<A> implements Equals {
  * @tsplus unify Maybe/Some
  * @tsplus unify Maybe/None
  */
-export function unifyOption<X extends Maybe<any>>(
+export function unifyMaybe<X extends Maybe<any>>(
   self: X
 ): Maybe<[X] extends [Maybe<infer A>] ? A : never> {
   return self
 }
 
-export type ArrayOfOptions<Ts extends Maybe<any>[]> = {
+export type ArrayOfMaybies<Ts extends Maybe<any>[]> = {
   [k in keyof Ts]: Ts[k] extends Maybe<infer A> ? A : never
 }[number]
 
@@ -121,9 +121,9 @@ export function isSome<A>(fa: Maybe<A>): fa is Some<A> {
 }
 
 /**
- * @tsplus static Maybe/Ops isOption
+ * @tsplus static Maybe/Ops isMaybe
  */
-export function isOption(u: unknown): u is Maybe<unknown> {
+export function isMaybe(u: unknown): u is Maybe<unknown> {
   return (
     typeof u === "object" &&
     u != null &&
@@ -131,9 +131,3 @@ export function isOption(u: unknown): u is Maybe<unknown> {
     (u["_tag"] === "Some" || u["_tag"] === "None")
   )
 }
-
-/**
- * @tsplus macro pipe
- * @tsplus fluent Maybe __call
- */
-export const optionPipe: typeof pipe = pipe

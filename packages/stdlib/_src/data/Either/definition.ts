@@ -222,9 +222,3 @@ export function widenA<A1>() {
     <E, A>(self: Either<E, A>): Either<E, A | A1> => self
   )
 }
-
-/**
- * @tsplus macro pipe
- * @tsplus fluent Either __call
- */
-export const eitherPipe: typeof pipe = pipe

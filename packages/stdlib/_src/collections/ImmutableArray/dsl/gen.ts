@@ -6,7 +6,7 @@ const adapter: {
 } = (_: () => any) =>
   new GenLazyHKT(() => {
     const x = _()
-    if (Maybe.isOption(x)) {
+    if (Maybe.isMaybe(x)) {
       return x._tag === "None" ? ImmutableArray.empty() : ImmutableArray(x.value)
     }
     return x

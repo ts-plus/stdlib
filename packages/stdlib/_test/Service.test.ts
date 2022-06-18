@@ -18,8 +18,8 @@ describe.concurrent("Environment", () => {
     const env = Service.Env(A, { a: 0 }).add(B, { b: 1 })
 
     assert.deepEqual(env.get(A), { a: 0 })
-    assert.deepEqual(env.getOption(B).value, { b: 1 })
-    assert.isTrue(env.getOption(C).isNone())
+    assert.deepEqual(env.getMaybe(B).value, { b: 1 })
+    assert.isTrue(env.getMaybe(C).isNone())
     assert.throw(() => env.unsafeGet(C))
   })
 
@@ -27,8 +27,8 @@ describe.concurrent("Environment", () => {
     const env = Service.Env(A, { a: 0 }).merge(Service.Env(B, { b: 1 }).add(C, { c: 2 }))
     const pruned = env.prune(A, B)
     assert.deepEqual(pruned.get(A), { a: 0 })
-    assert.deepEqual(pruned.getOption(B).value, { b: 1 })
-    assert.isTrue(pruned.getOption(C).isNone())
+    assert.deepEqual(pruned.getMaybe(B).value, { b: 1 })
+    assert.isTrue(pruned.getMaybe(C).isNone())
     assert.throw(() => pruned.unsafeGet(C))
     assert.deepEqual(env.get(C), { c: 2 })
   })
@@ -44,9 +44,9 @@ describe.concurrent("Environment", () => {
 
       const result = patch.patch(oldEnv)
 
-      assert.isTrue(result.getOption(A).isSome())
-      assert.isTrue(result.getOption(B).isSome())
-      assert.isTrue(result.getOption(C).isNone())
+      assert.isTrue(result.getMaybe(A).isSome())
+      assert.isTrue(result.getMaybe(B).isSome())
+      assert.isTrue(result.getMaybe(C).isNone())
       assert.strictEqual(result.get(B).b, 3)
     })
 
