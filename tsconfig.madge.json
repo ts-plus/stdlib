@@ -1,26 +1,25 @@
 {
-    "compilerOptions": {
-        "noEmit": true,
-        "allowJs": true,
-        "baseUrl": ".",
-        "paths": {
-            "@tsplus/stdlib": [
-                "./packages/stdlib/build/esm/index.js"
-            ],
-            "@tsplus/stdlib/test/*": [
-                "./packages/stdlib/build/test/*"
-            ],
-            "@tsplus/stdlib/examples/*": [
-                "./packages/stdlib/build/examples/*"
-            ],
-            "@tsplus/stdlib/*": [
-                "./packages/stdlib/build/esm/*"
-            ],
-        }
-    },
-    "include": [
-        "./packages/stdlib/build/esm/**/*.js",
-        "./packages/stdlib/build/test/**/*.js",
-        "./packages/stdlib/build/examples/**/*.js"
-    ]
+  "compilerOptions": {
+    "noEmit": true,
+    "allowJs": true,
+    "baseUrl": ".",
+    "paths": {
+      "@tsplus/stdlib": ["./packages/stdlib/build/esm/index.js"],
+      "@tsplus/stdlib/test/*": ["./packages/stdlib/build/test/*"],
+      "@tsplus/stdlib/examples/*": ["./packages/stdlib/build/examples/*"],
+      "@tsplus/stdlib/*": ["./packages/stdlib/build/esm/*"],
+      "@tsplus/runtime": ["./packages/runtime/build/esm/index.js"],
+      "@tsplus/runtime/test/*": ["./packages/runtime/build/test/*"],
+      "@tsplus/runtime/examples/*": ["./packages/runtime/build/examples/*"],
+      "@tsplus/runtime/*": ["./packages/runtime/build/esm/*"]
+    }
+  },
+  "include": [
+    "./packages/stdlib/build/esm/**/*.js",
+    "./packages/stdlib/build/test/**/*.js",
+    "./packages/stdlib/build/examples/**/*.js",
+    "./packages/runtime/build/esm/**/*.js",
+    "./packages/runtime/build/test/**/*.js",
+    "./packages/runtime/build/examples/**/*.js"
+  ]
 }

@@ -1,62 +1,52 @@
 {
-    "compilerOptions": {
-        "moduleDetection": "force",
-        "composite": true,
-        "downlevelIteration": true,
-        "resolveJsonModule": true,
-        "esModuleInterop": true,
-        "declaration": true,
-        "skipLibCheck": true,
-        "emitDecoratorMetadata": true,
-        "experimentalDecorators": true,
-        "preserveSymlinks": true,
-        "moduleResolution": "node",
-        "noEmit": false,
-        "lib": [
-            "ES2021"
-        ],
-        "sourceMap": true,
-        "declarationMap": true,
-        "strict": true,
-        "noImplicitReturns": false,
-        "noUnusedLocals": true,
-        "noUnusedParameters": false,
-        "noFallthroughCasesInSwitch": true,
-        "noEmitOnError": false,
-        "noErrorTruncation": false,
-        "allowJs": false,
-        "checkJs": false,
-        "forceConsistentCasingInFileNames": true,
-        "suppressImplicitAnyIndexErrors": true,
-        "stripInternal": true,
-        "noImplicitAny": true,
-        "noImplicitThis": true,
-        "noUncheckedIndexedAccess": true,
-        "strictNullChecks": true,
-        "baseUrl": ".",
-        "target": "ES2021",
-        "module": "ES6",
-        "incremental": true,
-        "removeComments": false,
-        "paths": {
-            "@tsplus/stdlib": [
-                "./packages/stdlib/_src/index.ts"
-            ],
-            "@tsplus/stdlib/test/*": [
-                "./packages/stdlib/_test/*"
-            ],
-            "@tsplus/stdlib/examples/*": [
-                "./packages/stdlib/_examples/*"
-            ],
-            "@tsplus/stdlib/*": [
-                "./packages/stdlib/_src/*"
-            ],
-        }
-    },
-    "include": [],
-    "exclude": [
-        "node_modules",
-        "build",
-        "lib"
-    ]
+  "compilerOptions": {
+    "moduleDetection": "force",
+    "composite": true,
+    "downlevelIteration": true,
+    "resolveJsonModule": true,
+    "esModuleInterop": true,
+    "declaration": true,
+    "skipLibCheck": true,
+    "emitDecoratorMetadata": true,
+    "experimentalDecorators": true,
+    "preserveSymlinks": true,
+    "moduleResolution": "node",
+    "noEmit": false,
+    "lib": ["ES2021"],
+    "sourceMap": true,
+    "declarationMap": true,
+    "strict": true,
+    "noImplicitReturns": false,
+    "noUnusedLocals": true,
+    "noUnusedParameters": false,
+    "noFallthroughCasesInSwitch": true,
+    "noEmitOnError": false,
+    "noErrorTruncation": false,
+    "allowJs": false,
+    "checkJs": false,
+    "forceConsistentCasingInFileNames": true,
+    "suppressImplicitAnyIndexErrors": true,
+    "stripInternal": true,
+    "noImplicitAny": true,
+    "noImplicitThis": true,
+    "noUncheckedIndexedAccess": true,
+    "strictNullChecks": true,
+    "baseUrl": ".",
+    "target": "ES2021",
+    "module": "ES6",
+    "incremental": true,
+    "removeComments": false,
+    "paths": {
+      "@tsplus/stdlib": ["./packages/stdlib/_src/index.ts"],
+      "@tsplus/stdlib/test/*": ["./packages/stdlib/_test/*"],
+      "@tsplus/stdlib/examples/*": ["./packages/stdlib/_examples/*"],
+      "@tsplus/stdlib/*": ["./packages/stdlib/_src/*"],
+      "@tsplus/runtime": ["./packages/runtime/_src/index.ts"],
+      "@tsplus/runtime/test/*": ["./packages/runtime/_test/*"],
+      "@tsplus/runtime/examples/*": ["./packages/runtime/_examples/*"],
+      "@tsplus/runtime/*": ["./packages/runtime/_src/*"]
+    }
+  },
+  "include": [],
+  "exclude": ["node_modules", "build", "lib"]
 }

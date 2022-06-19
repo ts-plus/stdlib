@@ -1,4 +1,3 @@
-export * as array from "@tsplus/stdlib/collections/Array"
 export * as chunk from "@tsplus/stdlib/collections/Chunk"
 export * as collection from "@tsplus/stdlib/collections/Collection"
 export * as hashMap from "@tsplus/stdlib/collections/HashMap"

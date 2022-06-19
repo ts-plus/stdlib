@@ -99,12 +99,12 @@ describe.concurrent("Encoder", () => {
   })
   it("validated", () => {
     /** @tsplus implicit local */
-    const Int = Validation<number, "Int">((n) => Number.isInteger(n))
-    type Int = Validation.Type<typeof Int>
+    const Int = Brand.validation<number, "Int">((n) => Number.isInteger(n))
+    type Int = Brand.ValidatedWith<typeof Int>
     const encoderInt: Encoder<Int> = Derive()
     /** @tsplus implicit local */
-    const Id = Validation<string, "Id">((n) => n.startsWith("id:"))
-    type Id = Validation.Type<typeof Id>
+    const Id = Brand.validation<string, "Id">((n) => n.startsWith("id:"))
+    type Id = Brand.ValidatedWith<typeof Id>
     const encoderId: Encoder<Id> = Derive()
 
     assert.equal(encoderInt.encode(1 as Int), 1)

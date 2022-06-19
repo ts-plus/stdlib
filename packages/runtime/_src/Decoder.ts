@@ -9,8 +9,9 @@ export declare namespace Decoder {
 
 /**
  * @tsplus type Decoder
+ * @tsplus derive nominal
  */
-export interface Decoder<A> {
+export interface Decoder<in out A> {
   readonly decodeResult: (u: unknown) => Result<Decoder.Error, Decoder.Error, A>
 }
 
@@ -33,6 +34,21 @@ export function make<A>(decodeResult: (u: unknown) => Result<Decoder.Error, Deco
 // Utilities
 //
 
+export class DecodePayloadFailure {
+  readonly _tag = "DecodePayloadFailure"
+  constructor(readonly error: Decoder.Error) {}
+  get message(): string {
+    return this.error.render().draw
+  }
+}
+
+export class DecodeJsonFailure {
+  readonly _tag = "DecodeJsonFailure"
+  get message(): string {
+    return `Invalid JSON value`
+  }
+}
+
 /**
  * @tsplus fluent Decoder decodeJSON
  */
@@ -40,7 +56,7 @@ export function decodeJSON<A>(decoder: Decoder<A>, json: string) {
   try {
     return decoder.decode(JSON.parse(json))
   } catch {
-    return Either.left(`Invalid json string: ${json}`)
+    return Either.left(new DecodeJsonFailure())
   }
 }
 
@@ -50,7 +66,8 @@ export function decodeJSON<A>(decoder: Decoder<A>, json: string) {
 export function decode<A>(decoder: Decoder<A>, value: unknown) {
   const result = decoder.decodeResult(value)
   if (result.isFailure()) {
-    return Either.left(result.failure.render().draw)
+    const error = result.failure
+    return Either.left(new DecodePayloadFailure(error))
   }
   return Either.right(result.success)
 }
@@ -151,7 +168,6 @@ export class DecoderErrorUnion implements Decoder.Error {
 
 export class DecoderErrorArray implements Decoder.Error {
   constructor(readonly errors: Chunk<[number, Decoder.Error]>) {}
-
   render = () =>
     Tree(
       `Encountered while processing an Array of elements`,
@@ -209,13 +225,6 @@ export const number: Decoder<number> = Decoder((u) =>
 /**
  * @tsplus implicit
  */
-export const record: Decoder<{}> = Decoder((u) =>
-  Derive<Guard<{}>>().is(u) ? Result.success(u) : Result.fail(new DecoderErrorPrimitive(u, "{}"))
-)
-
-/**
- * @tsplus implicit
- */
 export const date: Decoder<Date> = Decoder((u) => {
   const strRes = string.decodeResult(u)
   if (strRes.isFailure()) {
@@ -255,16 +264,30 @@ export function deriveLazy<A>(
 /**
  * @tsplus derive Decoder<_> 10
  */
-export function deriveValidation<A extends Validation.Brand<any, any>>(
-  ...[base, brands]: Check<Validation.IsValidated<A>> extends Check.True ? [
-    base: Decoder<Validation.Unbranded<A>>,
+export function deriveNamed<A extends Brand<any>>(
+  ...[base]: Check<Check.IsUnion<A>> extends Check.False ? [
+    base: Decoder<Brand.Unnamed<A>>
+  ]
+    : never
+): Decoder<A> {
+  // @ts-expect-error
+  return base
+}
+
+/**
+ * @tsplus derive Decoder<_> 10
+ */
+export function deriveValidation<A extends Brand.Valid<any, any>>(
+  ...[base, brands]: Check<Brand.IsValidated<A>> extends Check.True ? [
+    base: Decoder<Brand.Unbranded<A>>,
     brands: {
-      [k in (keyof A[typeof Validation.sym]) & string]: Validation<A[typeof Validation.sym][k], k>
+      [k in (keyof A[Brand.valid]) & string]: Brand.Validation<A[Brand.valid][k], k>
     }
   ]
     : never
 ): Decoder<A> {
   const brandKeys = Object.keys(brands)
+  // @ts-expect-error
   return Decoder((u) =>
     base.decodeResult(u).fold(
       (baseValue, warning) => {
@@ -422,6 +445,17 @@ export class DecoderErrorRecordMissingKeys implements Decoder.Error {
 }
 
 /**
+ * @tsplus derive Decoder<_> 10
+ */
+export function deriveEmptyRecord<A extends {}>(
+  ..._: Check<Check.IsEqual<A, {}>> extends Check.True ? [] : never
+): Decoder<A> {
+  const record = Derive<Guard<{}>>()
+  // @ts-expect-error
+  return Decoder((u) => record.is(u) ? Result.success(u) : Result.fail(new DecoderErrorPrimitive(u, "{}")))
+}
+
+/**
  * @tsplus derive Decoder<_> 15
  */
 export function deriveRecord<A extends Record<string, any>>(
@@ -432,7 +466,7 @@ export function deriveRecord<A extends Record<string, any>>(
     : never
 ): Decoder<A> {
   return Decoder((u) => {
-    const asRecordResult = record.decodeResult(u)
+    const asRecordResult = Derive<Decoder<{}>>().decodeResult(u)
     if (asRecordResult.isFailure()) {
       return Result.fail(asRecordResult.failure)
     }
@@ -501,7 +535,7 @@ export function deriveStruct<A extends Record<string, any>>(
     : never
 ): Decoder<A> {
   return Decoder((u) => {
-    const decodeRecordResult = record.decodeResult(u)
+    const decodeRecordResult = Derive<Decoder<{}>>().decodeResult(u)
     if (decodeRecordResult.isFailure()) {
       return decodeRecordResult
     }
@@ -574,6 +608,7 @@ export function deriveTagged<A extends { _tag: string }>(
   const structure = Guard<{ _tag: A["_tag"] }>((u): u is { _tag: A["_tag"] } =>
     typeof u === "object" && u != null && "_tag" in u && tags.is(u["_tag"])
   )
+  // @ts-expect-error
   return Decoder((u) => {
     if (structure.is(u)) {
       return elements[u["_tag"]].decodeResult(u).fold(
