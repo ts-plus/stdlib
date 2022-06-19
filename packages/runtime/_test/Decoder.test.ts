@@ -5,7 +5,7 @@ describe.concurrent("Decoder", () => {
       _true.decodeJSON(JSON.stringify(true)) == Either.right(true)
     )
     assert.equal(
-      _true.decodeJSON(JSON.stringify(1)).left.value,
+      _true.decodeJSON(JSON.stringify(1)).left.value?.message,
       `Expected a value of type "true" but received one of type "number"`
     )
   })
@@ -15,7 +15,7 @@ describe.concurrent("Decoder", () => {
       _false.decodeJSON(JSON.stringify(false)) == Either.right(false)
     )
     assert.equal(
-      _false.decodeJSON(JSON.stringify(1)).left.value,
+      _false.decodeJSON(JSON.stringify(1)).left.value?.message,
       `Expected a value of type "false" but received one of type "number"`
     )
   })
@@ -28,7 +28,7 @@ describe.concurrent("Decoder", () => {
       boolean.decodeJSON(JSON.stringify(false)) == Either.right(false)
     )
     assert.equal(
-      boolean.decodeJSON(JSON.stringify(1)).left.value,
+      boolean.decodeJSON(JSON.stringify(1)).left.value?.message,
       `Expected a value of type "boolean" but received one of type "number"`
     )
   })
@@ -38,7 +38,7 @@ describe.concurrent("Decoder", () => {
       string.decodeJSON(JSON.stringify("hello")) == Either.right("hello")
     )
     assert.equal(
-      string.decodeJSON(JSON.stringify(1)).left.value,
+      string.decodeJSON(JSON.stringify(1)).left.value?.message,
       `Expected a value of type "string" but received one of type "number"`
     )
   })
@@ -48,7 +48,7 @@ describe.concurrent("Decoder", () => {
       number.decodeJSON(JSON.stringify(1)) == Either.right(1)
     )
     assert.equal(
-      number.decodeJSON(JSON.stringify("hello")).left.value,
+      number.decodeJSON(JSON.stringify("hello")).left.value?.message,
       `Expected a value of type "number" but received one of type "string"`
     )
   })
@@ -57,11 +57,11 @@ describe.concurrent("Decoder", () => {
     const date = new Date()
     assert.deepEqual(string.decodeJSON(JSON.stringify(date)).right.value, date)
     assert.deepEqual(
-      string.decodeJSON(JSON.stringify({})).left.value,
+      string.decodeJSON(JSON.stringify({})).left.value?.message,
       `Expected a value of type "string" but received one of type "object"`
     )
     assert.deepEqual(
-      string.decodeJSON(JSON.stringify("hello")).left.value,
+      string.decodeJSON(JSON.stringify("hello")).left.value?.message,
       `Expected a Date represented as an iso string instead received "hello"`
     )
   })
@@ -72,11 +72,11 @@ describe.concurrent("Decoder", () => {
       "hello"
     )
     assert.deepEqual(
-      decoder.decodeJSON(JSON.stringify("no-hello")).left.value,
+      decoder.decodeJSON(JSON.stringify("no-hello")).left.value?.message,
       `Expected literal "hello" instead received "no-hello"`
     )
     assert.deepEqual(
-      decoder.decodeJSON(JSON.stringify(1)).left.value,
+      decoder.decodeJSON(JSON.stringify(1)).left.value?.message,
       `Expected literal "hello" instead received one of type "number"`
     )
   })
@@ -84,11 +84,11 @@ describe.concurrent("Decoder", () => {
     const decoder: Decoder<1> = Derive()
     assert.deepEqual(decoder.decodeJSON(JSON.stringify(1)).right.value, 1)
     assert.deepEqual(
-      decoder.decodeJSON(JSON.stringify("no-hello")).left.value,
+      decoder.decodeJSON(JSON.stringify("no-hello")).left.value?.message,
       `Expected literal "1" of type "number" instead received one of type "string"`
     )
     assert.deepEqual(
-      decoder.decodeJSON(JSON.stringify(200)).left.value,
+      decoder.decodeJSON(JSON.stringify(200)).left.value?.message,
       `Expected literal "1" of type "number" instead received "200"`
     )
   })
@@ -108,21 +108,21 @@ describe.concurrent("Decoder", () => {
       { firstName: "Michael", lastName: "Arnaldi", age: 30 }
     )
     assert.isTrue(
-      decoder.decode({ firstName: "Michael", lastName: "Arnaldi", age: "30" }) ==
-        Either.left(
+      decoder.decode({ firstName: "Michael", lastName: "Arnaldi", age: "30" }).left.value?.message ===
+        (
           "Encountered while parsing an object structure\n" +
-            "└─ Field \"age\"\n" +
-            "   └─ Expected a value of type \"number\" but received one of type \"string\""
+          "└─ Field \"age\"\n" +
+          "   └─ Expected a value of type \"number\" but received one of type \"string\""
         )
     )
     assert.isTrue(
-      decoder.decode({ lastName: "Arnaldi", age: "30" }) ==
-        Either.left(
+      decoder.decode({ lastName: "Arnaldi", age: "30" }).left.value?.message ===
+        (
           "Encountered while parsing an object structure\n" +
-            "├─ Field \"firstName\"\n" +
-            "│  └─ Missing\n" +
-            "└─ Field \"age\"\n" +
-            "   └─ Expected a value of type \"number\" but received one of type \"string\""
+          "├─ Field \"firstName\"\n" +
+          "│  └─ Missing\n" +
+          "└─ Field \"age\"\n" +
+          "   └─ Expected a value of type \"number\" but received one of type \"string\""
         )
     )
   })
@@ -143,16 +143,16 @@ describe.concurrent("Decoder", () => {
     assert.deepEqual(decoder.decode({ _tag: "B" }).right.value, { _tag: "B" })
     assert.deepEqual(decoder.decode({ _tag: "C", field: "F" }).right.value, { _tag: "C", field: "F" })
     assert.isTrue(
-      decoder.decode({ _tag: "D" }) ==
-        Either.left("Expected a tagged object of the form \"{ _tag: \"A\" | \"B\" | \"C\" }\"")
+      decoder.decode({ _tag: "D" }).left.value?.message ===
+        "Expected a tagged object of the form \"{ _tag: \"A\" | \"B\" | \"C\" }\""
     )
     assert.isTrue(
-      decoder.decode({ _tag: "C" }) ==
-        Either.left(
+      decoder.decode({ _tag: "C" }).left.value?.message ===
+        (
           "Encountered while processing tagged object \"C\"\n" +
-            "└─ Encountered while parsing an object structure\n" +
-            "   └─ Field \"field\"\n" +
-            "      └─ Missing"
+          "└─ Encountered while parsing an object structure\n" +
+          "   └─ Field \"field\"\n" +
+          "      └─ Missing"
         )
     )
   })
@@ -161,13 +161,13 @@ describe.concurrent("Decoder", () => {
     assert.equal(decoder.decode("ok").right.value, "ok")
     assert.equal(decoder.decode(1).right.value, 1)
     assert.isTrue(
-      decoder.decode({}) ==
-        Either.left(
+      decoder.decode({}).left.value?.message ===
+        (
           "Encountered while processing union\n" +
-            "├─ Encountered while processing a union member\n" +
-            "│  └─ Expected a value of type \"string\" but received one of type \"object\"\n" +
-            "└─ Encountered while processing a union member\n" +
-            "   └─ Expected a value of type \"number\" but received one of type \"object\""
+          "├─ Encountered while processing a union member\n" +
+          "│  └─ Expected a value of type \"string\" but received one of type \"object\"\n" +
+          "└─ Encountered while processing a union member\n" +
+          "   └─ Expected a value of type \"number\" but received one of type \"object\""
         )
     )
   })
@@ -175,31 +175,34 @@ describe.concurrent("Decoder", () => {
     const decoder: Decoder<string[]> = Derive()
     assert.deepEqual(decoder.decode(["a", "b", "c"]).right.value, ["a", "b", "c"])
     assert.isTrue(
-      decoder.decode(["a", 0, "b", 1, "c"]) ==
-        Either.left(
+      decoder.decode(["a", 0, "b", 1, "c"]).left.value?.message ===
+        (
           "Encountered while processing an Array of elements\n" +
-            "├─ Encountered while processing element \"1\"\n" +
-            "│  └─ Expected a value of type \"string\" but received one of type \"number\"\n" +
-            "└─ Encountered while processing element \"3\"\n" +
-            "   └─ Expected a value of type \"string\" but received one of type \"number\""
+          "├─ Encountered while processing element \"1\"\n" +
+          "│  └─ Expected a value of type \"string\" but received one of type \"number\"\n" +
+          "└─ Encountered while processing element \"3\"\n" +
+          "   └─ Expected a value of type \"string\" but received one of type \"number\""
         )
     )
     assert.isTrue(
-      decoder.decode(0) == Either.left("Expected a value of type \"Array\" but received one of type \"number\"")
+      decoder.decode(0).left.value?.message ===
+        "Expected a value of type \"Array\" but received one of type \"number\""
     )
   })
   it("chunk", () => {
     const decoder: Decoder<Chunk<string>> = Derive()
     assert.isTrue(decoder.decode(["a", "b", "c"]) == Either.right(Chunk("a", "b", "c")))
     assert.isTrue(
-      decoder.decode(0) == Either.left("Expected a value of type \"Array\" but received one of type \"number\"")
+      decoder.decode(0).left.value?.message ===
+        "Expected a value of type \"Array\" but received one of type \"number\""
     )
   })
   it("list", () => {
     const decoder: Decoder<List<string>> = Derive()
     assert.isTrue(decoder.decode(["a", "b", "c"]) == Either.right(List("a", "b", "c")))
     assert.isTrue(
-      decoder.decode(0) == Either.left("Expected a value of type \"Array\" but received one of type \"number\"")
+      decoder.decode(0).left.value?.message ===
+        "Expected a value of type \"Array\" but received one of type \"number\""
     )
   })
   it("immutable array", () => {
@@ -208,7 +211,7 @@ describe.concurrent("Decoder", () => {
       decoder.decode(["a", "b", "c"]) == Either.right(ImmutableArray("a", "b", "c"))
     )
     assert.isTrue(
-      decoder.decode(0) == Either.left("Expected a value of type \"Array\" but received one of type \"number\"")
+      decoder.decode(0).left.value?.message === "Expected a value of type \"Array\" but received one of type \"number\""
     )
   })
   it("either", () => {
@@ -216,12 +219,12 @@ describe.concurrent("Decoder", () => {
     assert.isTrue(decoder.decode({ _tag: "Left", left: 0 }) == Either.right(Either.left(0)))
     assert.isTrue(decoder.decode({ _tag: "Right", right: "ok" }) == Either.right(Either.right("ok")))
     assert.isTrue(
-      decoder.decode({ _tag: "Left", left: "ok" }) ==
-        Either.left(
+      decoder.decode({ _tag: "Left", left: "ok" }).left.value?.message ==
+        (
           "Encountered while processing tagged object \"Left\"\n" +
-            "└─ Encountered while parsing an object structure\n" +
-            "   └─ Field \"left\"\n" +
-            "      └─ Expected a value of type \"number\" but received one of type \"string\""
+          "└─ Encountered while parsing an object structure\n" +
+          "   └─ Field \"left\"\n" +
+          "      └─ Expected a value of type \"number\" but received one of type \"string\""
         )
     )
   })
@@ -241,32 +244,37 @@ describe.concurrent("Decoder", () => {
     assert.isTrue(
       decoder.decode({
         _tag: "Left"
-      }) == Either.left("Expected a tagged object of the form \"{ _tag: \"None\" | \"Some\" }\"")
+      }).left.value?.message === "Expected a tagged object of the form \"{ _tag: \"None\" | \"Some\" }\""
     )
   })
   it("validated", () => {
     /** @tsplus implicit local */
-    const Int = Validation<number, "Int">((n) => Number.isInteger(n))
-    type Int = Validation.Type<typeof Int>
+    const Int = Brand.validation<number, "Int">((n) => Number.isInteger(n))
+    type Int = Brand.ValidatedWith<typeof Int>
     const decoder: Decoder<Int> = Derive()
 
     assert.isTrue(decoder.decode(1) == Either.right(1))
     assert.isTrue(
-      decoder.decode("1") == Either.left("Expected a value of type \"number\" but received one of type \"string\"")
+      decoder.decode("1").left.value?.message ===
+        "Expected a value of type \"number\" but received one of type \"string\""
     )
 
     /** @tsplus implicit local */
-    const Positive = Validation<number, "Positive">((n) => n >= 0)
-    type Positive = Validation.Type<typeof Positive>
+    const Positive = Brand.validation<number, "Positive">((n) => n >= 0)
+    type Positive = Brand.ValidatedWith<typeof Positive>
     const decoderPositive: Decoder<Positive> = Derive()
 
     assert.isTrue(decoderPositive.decode(1) == Either.right(1))
-    assert.isTrue(decoderPositive.decode(-1) == Either.left("Encountered while processing validations: Positive"))
+    assert.isTrue(
+      decoderPositive.decode(-1).left.value?.message === "Encountered while processing validations: Positive"
+    )
 
     const positiveInt: Decoder<Positive & Int> = Derive()
 
-    assert.isTrue(positiveInt.decode(-1.5) == Either.left("Encountered while processing validations: Int, Positive"))
-    assert.isTrue(positiveInt.decode(-1) == Either.left("Encountered while processing validations: Positive"))
+    assert.isTrue(
+      positiveInt.decode(-1.5).left.value?.message === "Encountered while processing validations: Int, Positive"
+    )
+    assert.isTrue(positiveInt.decode(-1).left.value?.message === "Encountered while processing validations: Positive")
   })
   it("record", () => {
     const decoder: Decoder<Record<string, { foo: string }>> = Derive()
@@ -275,18 +283,16 @@ describe.concurrent("Decoder", () => {
     assert.deepEqual(decoder.decode({ a: { foo: "ok" } }), Either.right({ a: { foo: "ok" } }))
     assert.deepEqual(decoder2.decode({ a: { foo: "ok" } }), Either.right({ a: { foo: "ok" } }))
     assert.deepEqual(
-      decoder2.decode({}),
-      Either.left("Encountered while parsing a record structure, missing keys: \"a\"")
+      decoder2.decode({}).left.value?.message,
+      "Encountered while parsing a record structure, missing keys: \"a\""
     )
     assert.deepEqual(
-      decoder3.decode({}),
-      Either.left("Encountered while parsing a record structure, missing keys: \"a\", \"b\"")
+      decoder3.decode({}).left.value?.message,
+      "Encountered while parsing a record structure, missing keys: \"a\", \"b\""
     )
     assert.deepEqual(
-      decoder2.decode({ b: { foo: "ok" } }),
-      Either.left(
-        "Encountered while parsing a record structure, missing keys: \"a\""
-      )
+      decoder2.decode({ b: { foo: "ok" } }).left.value?.message,
+      "Encountered while parsing a record structure, missing keys: \"a\""
     )
   })
 })

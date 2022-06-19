@@ -1,8 +1,4 @@
 {
-    "extends": "./tsconfig.base.json",
-    "references": [
-        {
-            "path": "packages/stdlib"
-        }
-    ]
+  "extends": "./tsconfig.base.json",
+  "references": [{ "path": "packages/stdlib" }, { "path": "packages/runtime" }]
 }

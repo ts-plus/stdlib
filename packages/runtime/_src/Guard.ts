@@ -6,8 +6,9 @@ import { None, Some } from "@tsplus/stdlib/data/Maybe/definition"
  * A Guard<A> is a type representing the ability to identify when a value is of type A at runtime
  *
  * @tsplus type Guard
+ * @tsplus derive nominal
  */
-export interface Guard<A> {
+export interface Guard<in out A> {
   readonly is: (u: unknown) => u is A
 }
 
@@ -70,13 +71,6 @@ export const string: Guard<string> = Guard((u): u is string => typeof u === "str
 export const date: Guard<Date> = Guard((u): u is Date => u instanceof Date)
 
 /**
- * Guard for a {}
- *
- * @tsplus implicit
- */
-export const record: Guard<{}> = Guard((u): u is {} => typeof u === "object" && u !== null)
-
-/**
  * Guard for an object shaped like { _tag: string }
  *
  * @tsplus implicit
@@ -108,11 +102,24 @@ export function deriveLazy<A>(
 /**
  * @tsplus derive Guard<_> 10
  */
-export function deriveValidation<A extends Validation.Brand<any, any>>(
-  ...[base, brands]: Check<Validation.IsValidated<A>> extends Check.True ? [
-    base: Guard<Validation.Unbranded<A>>,
+export function deriveNamed<A extends Brand<any>>(
+  ...[base]: Check<Check.IsUnion<A>> extends Check.False ? [
+    base: Guard<Brand.Unnamed<A>>
+  ]
+    : never
+): Guard<A> {
+  // @ts-expect-error
+  return base
+}
+
+/**
+ * @tsplus derive Guard<_> 10
+ */
+export function deriveValidation<A extends Brand.Valid<any, any>>(
+  ...[base, brands]: Check<Brand.IsValidated<A>> extends Check.True ? [
+    base: Guard<Brand.Unbranded<A>>,
     brands: {
-      [k in (keyof A[typeof Validation.sym]) & string]: Validation<A[typeof Validation.sym][k], k>
+      [k in (keyof A[Brand.valid]) & string]: Brand.Validation<A[Brand.valid][k], k>
     }
   ]
     : never
@@ -263,6 +270,15 @@ export function deriveEither<A extends Either<any, any>>(
 }
 
 /**
+ * @tsplus derive Guard<_> 10
+ */
+export function deriveEmptyRecord<A extends {}>(
+  ..._: Check<Check.IsEqual<A, {}>> extends Check.True ? [] : never
+): Guard<A> {
+  return Guard((u): u is A => typeof u === "object" && u !== null)
+}
+
+/**
  * @tsplus derive Guard<_> 15
  */
 export function deriveRecord<A extends Record<string, any>>(
@@ -274,7 +290,7 @@ export function deriveRecord<A extends Record<string, any>>(
 ): Guard<A> {
   return Guard((u): u is A => {
     const missing = new Set(Object.keys(requiredKeysRecord))
-    if (record.is(u)) {
+    if (Derive<Guard<{}>>().is(u)) {
       for (const k of Object.keys(u)) {
         if (keyGuard.is(k)) {
           if (!valueGuard.is(u[k])) {
@@ -308,7 +324,7 @@ export function deriveStruct<A extends Record<string, any>>(
     : never
 ): Guard<A> {
   return Guard((u): u is A => {
-    if (record.is(u)) {
+    if (Derive<Guard<{}>>().is(u)) {
       for (const field of Object.keys(requiredFields)) {
         if (!(field in u) || !(requiredFields[field] as Guard<any>).is(u[field])) {
           return false

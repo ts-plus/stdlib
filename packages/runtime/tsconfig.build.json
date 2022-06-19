@@ -7,5 +7,6 @@
     "tsPlusConfig": "../../tsplus.config.json",
     "rootDir": "_src"
   },
-  "include": ["_src/**/*.ts"]
+  "include": ["_src/**/*.ts"],
+  "references": [{ "path": "../stdlib" }]
 }

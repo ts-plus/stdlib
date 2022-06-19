@@ -2,8 +2,9 @@
  * A Encoder<A> is a type representing the ability to identify when a value is of type A at runtime
  *
  * @tsplus type Encoder
+ * @tsplus derive nominal
  */
-export interface Encoder<A> {
+export interface Encoder<in out A> {
   readonly encode: (a: A) => unknown
 }
 
@@ -66,13 +67,6 @@ export const string: Encoder<string> = Encoder((u) => u)
 export const date: Encoder<Date> = Encoder((u) => u.toISOString())
 
 /**
- * Encoder for a {}
- *
- * @tsplus implicit
- */
-export const record: Encoder<{}> = Encoder((u) => u)
-
-/**
  * Encoder for an object shaped like { _tag: string }
  *
  * @tsplus implicit
@@ -88,13 +82,26 @@ export const taggedObject: Encoder<{
 /**
  * @tsplus derive Encoder<_> 10
  */
-export function deriveValidation<A extends Validation.Brand<any, any>>(
-  ...[base]: Check<Validation.IsValidated<A>> extends Check.True ? [
-    base: Encoder<Validation.Unbranded<A>>
+export function deriveNamed<A extends Brand<any>>(
+  ...[base]: Check<Check.IsUnion<A>> extends Check.False ? [
+    base: Encoder<Brand.Unnamed<A>>
   ]
     : never
 ): Encoder<A> {
-  return Encoder((a) => base.encode(a as Validation.Unbranded<A>))
+  // @ts-expect-error
+  return base
+}
+
+/**
+ * @tsplus derive Encoder<_> 10
+ */
+export function deriveValidation<A extends Brand.Valid<any, any>>(
+  ...[base]: Check<Brand.IsValidated<A>> extends Check.True ? [
+    base: Encoder<Brand.Unbranded<A>>
+  ]
+    : never
+): Encoder<A> {
+  return Encoder((a) => base.encode(a as Brand.Unbranded<A>))
 }
 
 /**
@@ -115,10 +122,7 @@ export function deriveLazy<A>(
 
 type EitherStructural<E, A> = { _tag: "Left"; left: E } | { _tag: "Right"; right: A }
 
-function deriveEitherInternal<E, A>(
-  /** @tsplus implicit local */ left: Encoder<E>,
-  /** @tsplus implicit local */ right: Encoder<A>
-): Encoder<EitherStructural<E, A>> {
+function deriveEitherInternal<E, A>(left: Encoder<E>, right: Encoder<A>): Encoder<EitherStructural<E, A>> {
   return Derive()
 }
 
@@ -210,6 +214,15 @@ export function deriveSortedSet<A extends SortedSet<any>>(
     : never
 ): Encoder<A> {
   return Encoder((u) => Array.from(u).map((a) => element.encode(a)))
+}
+
+/**
+ * @tsplus derive Encoder<_> 10
+ */
+export function deriveEmptyRecord<A extends {}>(
+  ..._: Check<Check.IsEqual<A, {}>> extends Check.True ? [] : never
+): Encoder<A> {
+  return Encoder((a) => a)
 }
 
 /**
