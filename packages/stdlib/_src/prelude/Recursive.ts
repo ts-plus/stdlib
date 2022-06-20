@@ -29,7 +29,7 @@ export declare namespace Recursive {
    * The value of the computation at the previous step is provided, along
    * with the *original* recursive term.  This is for breadth-first (left) folds
    */
-  export type FoldDownFn<F extends HKT, Z> = (accum: Z, r: HKT.Kind<F, unknown, unknown, Recursive<F>>) => Z
+  export type FoldDownFn<F extends HKT, Z> = (accum: Z, r: Recursive<F>) => Z
 }
 
 /**
@@ -114,13 +114,55 @@ export function foldDown_<F extends HKT, Z>(
   z: Z,
   f: Recursive.FoldDownFn<F, Z>
 ): Z {
-  return F.reduceRight(f(z, self.unfix()), (r: Recursive<F>, z0) => r.foldDown(F, z0, f))(self.unfix())
+  return F.reduce(f(z, self), (z0, r: Recursive<F>) => r.foldDown(F, z0, f))(self.unfix())
 }
 
 /**
  * @tsplus static Recursive/Ops foldDown
  */
 export const foldDown = Pipeable(foldDown_)
+
+/**
+ * @tsplus fluent Recursive foldDownSome
+ */
+export function foldDownSome_<F extends HKT, Z>(
+  self: Recursive<F>,
+  F: Foldable<F>,
+  z: Z,
+  pf: (accum: Z, current: HKT.Kind<F, unknown, unknown, Recursive<F>>) => Maybe<Z>
+): Z {
+  return self.foldDown(F, z, (accum, recursive) =>
+    pf(accum, recursive.caseValue).fold(
+      () => accum,
+      identity
+    ))
+}
+/**
+ * @tsplus static Recursive/Ops foldDownSome
+ */
+export const foldDownSome = Pipeable(foldDownSome_)
+
+/**
+ * @tsplus fluent Recursive foldUp
+ */
+export function foldUp_<F extends HKT, Z>(
+  self: Recursive<F>,
+  F: Foldable<F>,
+  z: Z,
+  f: Recursive.FoldDownFn<F, Z>
+): Z {
+  const ff = F.reduceRight(z, (r: Recursive<F>, accum) => r.foldUp(F, accum, f))
+  void ff
+  return pipe(
+    self.caseValue,
+    ff,
+    (z0) => f(z0, self)
+  )
+}
+/**
+ * @tsplus static Recursive/Ops foldUp
+ */
+export const foldUp = Pipeable(foldUp_)
 
 /**
  * Use a `Covariant<F>` and an `Unfolder.Fn<F, Z>` function to generate a Recurisve<F>
