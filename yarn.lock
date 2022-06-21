@@ -886,11 +886,11 @@ __metadata:
   version: 0.0.0-use.local
   resolution: "@tsplus/runtime@workspace:packages/runtime"
   dependencies:
-    "@tsplus/stdlib": 0.x
+    "@tsplus/stdlib": 0.2.0
   languageName: unknown
   linkType: soft
 
-"@tsplus/stdlib@0.x, @tsplus/stdlib@workspace:packages/stdlib":
+"@tsplus/stdlib@0.2.0, @tsplus/stdlib@workspace:packages/stdlib":
   version: 0.0.0-use.local
   resolution: "@tsplus/stdlib@workspace:packages/stdlib"
   languageName: unknown
