@@ -71,9 +71,7 @@ export const date: Encoder<Date> = Encoder((u) => u.toISOString())
  *
  * @tsplus implicit
  */
-export const taggedObject: Encoder<{
-  _tag: string
-}> = Derive()
+export const taggedObject: Encoder<{ _tag: string }> = Derive()
 
 //
 // Derivation Rules
@@ -83,10 +81,7 @@ export const taggedObject: Encoder<{
  * @tsplus derive Encoder<_> 10
  */
 export function deriveNamed<A extends Brand<any>>(
-  ...[base]: Check<Check.IsUnion<A>> extends Check.False ? [
-    base: Encoder<Brand.Unnamed<A>>
-  ]
-    : never
+  ...[base]: Check<Check.IsUnion<A>> extends Check.False ? [base: Encoder<Brand.Unnamed<A>>] : never
 ): Encoder<A> {
   // @ts-expect-error
   return base
@@ -96,10 +91,7 @@ export function deriveNamed<A extends Brand<any>>(
  * @tsplus derive Encoder<_> 10
  */
 export function deriveValidation<A extends Brand.Valid<any, any>>(
-  ...[base]: Check<Brand.IsValidated<A>> extends Check.True ? [
-    base: Encoder<Brand.Unbranded<A>>
-  ]
-    : never
+  ...[base]: Check<Brand.IsValidated<A>> extends Check.True ? [base: Encoder<Brand.Unbranded<A>>] : never
 ): Encoder<A> {
   return Encoder((a) => base.encode(a as Brand.Unbranded<A>))
 }
@@ -107,9 +99,7 @@ export function deriveValidation<A extends Brand.Valid<any, any>>(
 /**
  * @tsplus derive Encoder lazy
  */
-export function deriveLazy<A>(
-  fn: (_: Encoder<A>) => Encoder<A>
-): Encoder<A> {
+export function deriveLazy<A>(fn: (_: Encoder<A>) => Encoder<A>): Encoder<A> {
   let cached: Encoder<A> | undefined
   const encoder: Encoder<A> = Encoder((a) => {
     if (!cached) {
@@ -130,8 +120,7 @@ function deriveEitherInternal<E, A>(left: Encoder<E>, right: Encoder<A>): Encode
  * @tsplus derive Encoder[Either]<_> 10
  */
 export function deriveEither<A extends Either<any, any>>(
-  ...[left, right]: [A] extends [Either<infer _E, infer _A>] ? [left: Encoder<_E>, right: Encoder<_A>]
-    : never
+  ...[left, right]: [A] extends [Either<infer _E, infer _A>] ? [left: Encoder<_E>, right: Encoder<_A>] : never
 ): Encoder<A> {
   const structural = deriveEitherInternal(left, right)
   return Encoder((u) => structural.encode(u))
@@ -139,9 +128,7 @@ export function deriveEither<A extends Either<any, any>>(
 
 type OptionStructural<A> = { _tag: "None" } | { _tag: "Some"; value: A }
 
-function deriveOptionInternal<A>(
-  /** @tsplus implicit local */ value: Encoder<A>
-): Encoder<OptionStructural<A>> {
+function deriveOptionInternal<A>(value: Encoder<A>): Encoder<OptionStructural<A>> {
   return Derive()
 }
 
@@ -228,17 +215,32 @@ export function deriveEmptyRecord<A extends {}>(
 /**
  * @tsplus derive Encoder<_> 15
  */
-export function deriveRecord<A extends Record<string, any>>(
-  ...[keyEncoder, valueEncoder]: [A] extends [Record<infer X, infer Y>] ? Check<
-    Check.IsEqual<A, Record<X, Y>> & Check.Not<Check.IsUnion<A>>
-  > extends Check.True ? [key: Encoder<X>, value: Encoder<Y>]
-  : never
-    : never
+export function deriveDictionary<A extends Record<string, any>>(
+  ...[value]: Check<Check.IsDictionary<A>> extends Check.True ? [value: Encoder<A[keyof A]>] : never
 ): Encoder<A> {
   return Encoder((u) => {
     const encoded = {}
     for (const k of Object.keys(u)) {
-      encoded[keyEncoder.encode(k) as any] = valueEncoder.encode(u[k])
+      encoded[k] = value.encode(u[k])
+    }
+    return encoded
+  })
+}
+
+/**
+ * @tsplus derive Encoder<_> 15
+ */
+export function deriveRecord<A extends Record<string, any>>(
+  ...[value, requiredKeys]: Check<Check.IsRecord<A>> extends Check.True ? [
+    value: Encoder<A[keyof A]>,
+    requiredKeys: { [k in keyof A]: 0 }
+  ]
+    : never
+): Encoder<A> {
+  return Encoder((u) => {
+    const encoded = {}
+    for (const k of Object.keys(requiredKeys)) {
+      encoded[k] = value.encode(u[k])
     }
     return encoded
   })

@@ -458,12 +458,8 @@ export function deriveEmptyRecord<A extends {}>(
 /**
  * @tsplus derive Decoder<_> 15
  */
-export function deriveRecord<A extends Record<string, any>>(
-  ...[keyGuard, valueDecoder, requiredKeysRecord]: [A] extends [Record<infer X, infer Y>] ? Check<
-    Check.Not<Check.IsUnion<A>> & Check.IsEqual<A, Record<X, Y>>
-  > extends Check.True ? [keyGuard: Guard<X>, valueDecoder: Decoder<Y>, requiredKeysRecord: { [k in X]: 0 }]
-  : never
-    : never
+export function deriveDictionary<A extends Record<string, any>>(
+  ...[value]: Check<Check.IsDictionary<A>> extends Check.True ? [value: Decoder<A[keyof A]>] : never
 ): Decoder<A> {
   return Decoder((u) => {
     const asRecordResult = Derive<Decoder<{}>>().decodeResult(u)
@@ -473,11 +469,57 @@ export function deriveRecord<A extends Record<string, any>>(
     const asRecord = asRecordResult.success
     const fieldErrors = Chunk.builder<Decoder.Error>()
     let isFailure = false
-    const missing = new Set(Object.keys(requiredKeysRecord))
     const res = {}
     for (const k of Object.keys(asRecord)) {
-      if (keyGuard.is(k)) {
-        const valueResult = valueDecoder.decodeResult(asRecord[k])
+      const valueResult = value.decodeResult(asRecord[k])
+      if (valueResult.isFailure()) {
+        isFailure = true
+      }
+      const valueError = valueResult.getWarningOrFailure()
+      if (valueError.isSome()) {
+        fieldErrors.append(new DecoderErrorRecordValue(k, valueError.value.merge))
+      }
+      const valueSuccess = valueResult.getSuccess()
+      if (valueSuccess.isNone()) {
+        continue
+      }
+      res[k] = valueSuccess.value
+    }
+    const errors = fieldErrors.build()
+    if (isFailure) {
+      return Result.fail(new DecoderErrorRecordFields(errors))
+    }
+    if (errors.size > 0) {
+      return Result.successWithWarning(res as A, new DecoderErrorRecordFields(errors))
+    }
+    return Result.success(res as A)
+  })
+}
+
+/**
+ * @tsplus derive Decoder<_> 15
+ */
+export function deriveRecord<A extends Record<string, any>>(
+  ...[value, requiredKeys]: Check<Check.IsRecord<A>> extends Check.True ? [
+    value: Decoder<A[keyof A]>,
+    requiredKeys: { [k in keyof A]: 0 }
+  ]
+    : never
+): Decoder<A> {
+  const keys = new Set(Object.keys(requiredKeys))
+  return Decoder((u) => {
+    const asRecordResult = Derive<Decoder<{}>>().decodeResult(u)
+    if (asRecordResult.isFailure()) {
+      return Result.fail(asRecordResult.failure)
+    }
+    const asRecord = asRecordResult.success
+    const fieldErrors = Chunk.builder<Decoder.Error>()
+    let isFailure = false
+    const missing = new Set(Object.keys(requiredKeys))
+    const res = {}
+    for (const k of Object.keys(asRecord)) {
+      if (keys.has(k)) {
+        const valueResult = value.decodeResult(asRecord[k])
         if (valueResult.isFailure()) {
           isFailure = true
         }

@@ -279,33 +279,6 @@ export function deriveEmptyRecord<A extends {}>(
 }
 
 /**
- * @tsplus derive Guard<_> 15
- */
-export function deriveRecord<A extends Record<string, any>>(
-  ...[keyGuard, valueGuard, requiredKeysRecord]: [A] extends [Record<infer X, infer Y>] ? Check<
-    Check.IsEqual<A, Record<X, Y>> & Check.Not<Check.IsUnion<A>>
-  > extends Check.True ? [key: Guard<X>, value: Guard<Y>, requiredKeysRecord: { [k in X]: 0 }]
-  : never
-    : never
-): Guard<A> {
-  return Guard((u): u is A => {
-    const missing = new Set(Object.keys(requiredKeysRecord))
-    if (Derive<Guard<{}>>().is(u)) {
-      for (const k of Object.keys(u)) {
-        if (keyGuard.is(k)) {
-          if (!valueGuard.is(u[k])) {
-            return false
-          }
-          missing.delete(k)
-        }
-      }
-      return missing.size === 0
-    }
-    return false
-  })
-}
-
-/**
  * @tsplus derive Guard<_> 20
  */
 export function deriveStruct<A extends Record<string, any>>(
@@ -338,6 +311,51 @@ export function deriveStruct<A extends Record<string, any>>(
         }
       }
       return true
+    }
+    return false
+  })
+}
+
+/**
+ * @tsplus derive Guard<_> 15
+ */
+export function deriveDictionary<A extends Record<string, any>>(
+  ...[valueGuard]: Check<Check.IsDictionary<A>> extends Check.True ? [value: Guard<A[keyof A]>] : never
+): Guard<A> {
+  return Guard((u): u is A => {
+    if (Derive<Guard<{}>>().is(u)) {
+      for (const k of Object.keys(u)) {
+        if (!valueGuard.is(u[k])) {
+          return false
+        }
+      }
+      return true
+    }
+    return false
+  })
+}
+
+/**
+ * @tsplus derive Guard<_> 15
+ */
+export function deriveRecord<A extends Record<string, any>>(
+  ...[value, requiredKeys]: Check<Check.IsRecord<A>> extends Check.True ? [
+    value: Guard<A[keyof A]>,
+    requiredKeys: { [k in keyof A]: 0 }
+  ]
+    : never
+): Guard<A> {
+  const keys = new Set(Object.keys(requiredKeys))
+  return Guard((u): u is A => {
+    const missing = new Set(Object.keys(requiredKeys))
+    if (Derive<Guard<{}>>().is(u)) {
+      for (const k of Object.keys(u)) {
+        if (keys.has(k) && !value.is(u[k])) {
+          return false
+        }
+        missing.delete(k)
+      }
+      return missing.size === 0
     }
     return false
   })

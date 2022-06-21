@@ -284,7 +284,9 @@ describe.concurrent("Decoder", () => {
     assert.deepEqual(decoder2.decode({ a: { foo: "ok" } }), Either.right({ a: { foo: "ok" } }))
     assert.deepEqual(
       decoder2.decode({}).left.value?.message,
-      "Encountered while parsing a record structure, missing keys: \"a\""
+      "Encountered while parsing an object structure\n" +
+        "└─ Field \"a\"\n" +
+        "   └─ Missing"
     )
     assert.deepEqual(
       decoder3.decode({}).left.value?.message,
@@ -292,7 +294,9 @@ describe.concurrent("Decoder", () => {
     )
     assert.deepEqual(
       decoder2.decode({ b: { foo: "ok" } }).left.value?.message,
-      "Encountered while parsing a record structure, missing keys: \"a\""
+      "Encountered while parsing an object structure\n" +
+        "└─ Field \"a\"\n" +
+        "   └─ Missing"
     )
   })
 })
