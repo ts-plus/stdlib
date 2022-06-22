@@ -1,5 +1,14 @@
 # @tsplus/runtime
 
+## 0.1.1
+
+### Patch Changes
+
+- [#184](https://github.com/ts-plus/stdlib/pull/184) [`0bb87dc`](https://github.com/ts-plus/stdlib/commit/0bb87dc2c3e117db37c1692e5e568b2e53da5485) Thanks [@mikearnaldi](https://github.com/mikearnaldi)! - Improve Record Derivation
+
+- Updated dependencies [[`0bb87dc`](https://github.com/ts-plus/stdlib/commit/0bb87dc2c3e117db37c1692e5e568b2e53da5485)]:
+  - @tsplus/stdlib@0.2.1
+
 ## 0.1.0
 
 ### Minor Changes
