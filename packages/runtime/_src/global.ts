@@ -3,7 +3,20 @@ import "@tsplus/stdlib/global"
 /**
  * @tsplus global
  */
-import { Brand, Finite, Int, Max, Min, Positive, Range, Regex, UUID } from "@tsplus/runtime/Brand"
+import {
+  Brand,
+  Finite,
+  Int,
+  Max,
+  MaxLen,
+  Min,
+  MinLen,
+  Positive,
+  Range,
+  RangeLen,
+  Regex,
+  UUID
+} from "@tsplus/runtime/Brand"
 /**
  * @tsplus global
  */

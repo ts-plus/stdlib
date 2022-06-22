@@ -251,4 +251,15 @@ describe("Guard", () => {
       assert.isTrue(guard.is(uuid))
     }
   })
+  it("len", () => {
+    type ValidChunk<A> = Chunk<A> & RangeLen<2, 4>
+    const guard = Derive<Guard<ValidChunk<number>>>()
+    assert.isTrue(guard.is(Chunk(0, 1, 2, 3)))
+    assert.isFalse(guard.is(Chunk(0, "1", 2, 3)))
+    assert.isFalse(guard.is(Chunk(0, 1, 2, 3, 5)))
+    assert.isFalse(guard.is(Chunk(0)))
+    const guardStr = Derive<Guard<string & RangeLen<1, 5>>>()
+    assert.isTrue(guardStr.is("ok"))
+    assert.isFalse(guardStr.is("far-too-long"))
+  })
 })
