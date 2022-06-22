@@ -115,6 +115,28 @@ export class FailedValidationError implements Brand.FailedValidation {
   }
 }
 
+export type MinLen<N extends number> = Brand.Valid<{ length: number }, `MinLen(${N})`>
+export type MaxLen<N extends number> = Brand.Valid<{ length: number }, `MaxLen(${N})`>
+export type RangeLen<X extends number, Y extends number> = MinLen<X> & MaxLen<Y>
+
+/**
+ * @tsplus derive Brand.Validation<_, _> 10
+ */
+export function deriveMinLenValidation<B extends { length: number }, V extends `MinLen(${number})`>(
+  ...[min]: V extends `MinLen(${infer N extends number})` ? [N] : never
+): Brand.Validation<B, V> {
+  return validation((b) => b.length >= min)
+}
+
+/**
+ * @tsplus derive Brand.Validation<_, _> 10
+ */
+export function deriveMaxLenValidation<B extends { length: number }, V extends `MaxLen(${number})`>(
+  ...[max]: V extends `MaxLen(${infer N extends number})` ? [N] : never
+): Brand.Validation<B, V> {
+  return validation((b) => b.length <= max)
+}
+
 export type Regex<R extends string> = Brand.Validated<string, `Regex(${R})`>
 
 /**
