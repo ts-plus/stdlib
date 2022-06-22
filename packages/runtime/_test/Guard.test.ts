@@ -1,3 +1,5 @@
+import crypto from "node:crypto"
+
 describe("Guard", () => {
   it("literal", () => {
     const guardStr: Guard<"Tag"> = Derive()
@@ -240,5 +242,13 @@ describe("Guard", () => {
       guardId.asserts(x)
       console.log(x)
     })
+  })
+  it("uuid", () => {
+    const guard = Derive<Guard<UUID>>()
+    assert.isFalse(guard.is("NotValud-UUID"))
+    for (let i = 0; i < 100; i++) {
+      const uuid = crypto.randomUUID()
+      assert.isTrue(guard.is(uuid))
+    }
   })
 })

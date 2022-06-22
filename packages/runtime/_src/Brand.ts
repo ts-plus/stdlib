@@ -123,8 +123,7 @@ export type Regex<R extends string> = Brand.Validated<string, `Regex(${R})`>
 export function deriveRegexValidation<B extends string, V extends `Regex(${string})`>(
   ...[regexStr]: V extends `Regex(${infer R extends string})` ? [R] : never
 ): Brand.Validation<B, V> {
-  const r = new RegExp(regexStr)
-  return validation((b) => r.test(b))
+  return validation((b) => new RegExp(regexStr).test(b))
 }
 
 export type Min<N extends number> = Brand.Validated<number, `Min(${N})`>
@@ -207,3 +206,9 @@ export type Int = Brand.ValidatedWith<typeof Int>
 /** @tsplus implicit */
 export const Finite = Brand.validation<number, "Finite">((n: number) => Number.isFinite(n))
 export type Finite = Brand.ValidatedWith<typeof Finite>
+
+/** @tsplus implicit */
+export const UUID = Brand.validation<string, "UUID">((s) =>
+  /^[0-9a-fA-F]{8}\b-[0-9a-fA-F]{4}\b-[0-9a-fA-F]{4}\b-[0-9a-fA-F]{4}\b-[0-9a-fA-F]{12}$/gi.test(s)
+)
+export type UUID = Brand.ValidatedWith<typeof UUID>
