@@ -17,7 +17,7 @@ export type _Output = typeof _Output
  *
  * @tsplus type Patch
  */
-export interface Patch<Input, Output> {
+export interface Patch<in Input, out Output> {
   readonly [PatchSym]: PatchSym
   readonly [_Input]: (input: Input) => void
   readonly [_Output]: () => Output

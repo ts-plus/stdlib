@@ -1,3 +1,5 @@
+import { Env } from "@tsplus/stdlib/service/Env"
+
 /**
  * @tsplus type Tag/Ops
  */
@@ -8,7 +10,12 @@ export interface TagOps {
 }
 
 export const Tag: TagOps = Object.assign(
-  <S>(): Tag<S> => ({ [Tag.sym]: identity }),
+  <S>(): Tag<S> => ({
+    [Tag.sym]: identity,
+    toEnv(value) {
+      return Env(this, value)
+    }
+  }),
   {
     sym: Symbol("@tsplus/stdlib/environment/Tag") as TagOps["sym"],
     is: (u: unknown): u is Tag<unknown> => typeof u === "object" && u != null && Tag.sym in u
@@ -18,8 +25,10 @@ export const Tag: TagOps = Object.assign(
 /**
  * @tsplus type Tag
  */
-export interface Tag<Service> {
-  readonly [Tag.sym]: (_: never) => Service
+export interface Tag<in out S> {
+  readonly [Tag.sym]: (_: S) => S
+
+  toEnv(value: S): Service.Env<S>
 }
 
 export declare namespace Tag {
