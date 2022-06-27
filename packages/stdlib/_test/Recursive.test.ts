@@ -43,15 +43,14 @@ describe.concurrent("Recursive", () => {
       assert.equal(five.fold(Covariant, fibAlgebra).get(0), 5)
     })
 
-    // it("depth first", () => {
-    //   const f = (r: Nat<number[]>) =>
-    //     r.fold(
-    //       () => [-1],
-    //       (accum) => accum.concat([accum.length + 1])
-    //     )
-
-    //   assert.deepEqual(two.fold(Covariant, f), [-1, 2, 3])
-    // })
+    it("depth first", () => {
+      const f = (r: Nat<number[]>) =>
+        r.fold(
+          () => [-1],
+          (accum) => accum.concat([accum.length + 1])
+        )
+      assert.deepEqual(two.fold(Covariant, f), [-1, 2, 3])
+    })
   })
 
   describe("foldAnnotated", () => {
@@ -143,49 +142,55 @@ describe.concurrent("Recursive", () => {
     })
   })
 
-  // describe("foldDownSome", () => {
-  //   it("max", () => {
-  //     const maxNumber = (max: number) =>
-  //       (accum: number, r: Nat<NatR>): Maybe<number> =>
-  //         r.fold(
-  //           () => Maybe.some(accum),
-  //           () => accum < max ? Maybe.some(accum + 1) : Maybe.none
-  //         )
-  //     assert.equal(five.foldDownSome(Foldable, 0, maxNumber(3)), 3)
-  //     assert.equal(two.foldDownSome(Foldable, 0, maxNumber(3)), 2)
-  //   })
+  describe("foldDownSome", () => {
+    it("max", () => {
+      const maxNumber = (max: number) =>
+        (accum: number, r: Nat<NatR>): Maybe<number> =>
+          r.fold(
+            () => Maybe.some(accum),
+            () => accum < max ? Maybe.some(accum + 1) : Maybe.none
+          )
+      assert.equal(five.foldDownSome(Foldable, 0, maxNumber(3)), 3)
+      assert.equal(two.foldDownSome(Foldable, 0, maxNumber(3)), 2)
+    })
 
-  //   it("breadth-first", () => {
-  //     const maxCollect = (max: number) =>
-  //       (accum: number[], r: Nat<NatR>) =>
-  //         r.fold(
-  //           () => Maybe.some(accum.concat(-1)),
-  //           () => accum.length < max ? Maybe.some(accum.concat(accum.length)) : Maybe.none
-  //         )
-  //     assert.deepEqual(two.foldDownSome(Foldable, [], maxCollect(5)), [0, 1, -1])
-  //     assert.deepEqual(five.foldDownSome(Foldable, [], maxCollect(4)), [0, 1, 2, 3, -1])
-  //   })
-  // })
+    it("breadth-first", () => {
+      const maxCollect = (max: number) =>
+        (accum: number[], r: Nat<NatR>) =>
+          r.fold(
+            () => Maybe.some(accum.concat(-1)),
+            () => accum.length < max ? Maybe.some(accum.concat(accum.length)) : Maybe.none
+          )
+      assert.deepEqual(two.foldDownSome(Foldable, [], maxCollect(5)), [0, 1, -1])
+      assert.deepEqual(five.foldDownSome(Foldable, [], maxCollect(4)), [0, 1, 2, 3, -1])
+    })
+  })
 
-  // describe("foldUp", () => {
-  //   it("sum", () => {
-  //     const sum = (accum: number, r: NatR) =>
-  //       r.caseValue.fold(
-  //         () => accum,
-  //         () => accum + 1
-  //       )
+  describe("foldUp", () => {
+    it("sum", () => {
+      const sum = (accum: number, r: NatR) =>
+        r.caseValue.fold(
+          () => accum,
+          () => accum + 1
+        )
 
-  //     assert.equal(five.foldUp(Foldable, 0, sum), 5)
-  //   })
+      assert.equal(five.foldUp(Foldable, 0, sum), 5)
+    })
 
-  //   it("depth-first", () => {
-  //     const toList = (accum: number[], r: NatR) => {
-  //       return r.caseValue.fold(
-  //         () => accum.concat([-1]),
-  //         () => accum.concat([accum.length])
-  //       )
-  //     }
-  //     assert.deepEqual(five.foldUp(Foldable, [], toList), [-1, 1, 2, 3, 4, 5])
-  //   })
-  // })
+    it("depth-first", () => {
+      const toList = (accum: number[], r: NatR) => {
+        return r.caseValue.fold(
+          () => accum.concat([-1]),
+          () => accum.concat([accum.length])
+        )
+      }
+      assert.deepEqual(five.foldUp(Foldable, [], toList), [-1, 1, 2, 3, 4, 5])
+    })
+  })
+
+  describe('foldM', () => {
+    // Need an HKT<Eval>
+    it.todo('sumAndPrint', () => {
+    })
+  })
 })
