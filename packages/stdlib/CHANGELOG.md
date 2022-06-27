@@ -1,5 +1,11 @@
 # @tsplus/stdlib
 
+## 0.2.2
+
+### Patch Changes
+
+- [#189](https://github.com/ts-plus/stdlib/pull/189) [`c22b62f`](https://github.com/ts-plus/stdlib/commit/c22b62f433e6388230298e7161c113dd18ff03cd) Thanks [@mikearnaldi](https://github.com/mikearnaldi)! - Make Tag Invariant in S and Add Tag.toEnv
+
 ## 0.2.1
 
 ### Patch Changes
