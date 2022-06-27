@@ -7,24 +7,28 @@ export interface EnvOps {
   readonly sym: unique symbol
   readonly empty: Env<never>
 
-  <S, H>(tag: Tag<S>, service: H): Env<S>
+  <S, H extends S>(tag: Tag<S>, service: H): Env<S>
   new(unsafeMap: Env<unknown>["unsafeMap"]): Env<never>
 }
 
 function methodAdd<R, S, H>(this: Env<R>, tag: Tag<S>, service: H): Env<R | S> {
   const map = new Map(this.unsafeMap)
+  // @ts-expect-error
   map.set(tag, service)
   return new Env(map) as Env<R | S>
 }
 
 function methodGet<R, S>(this: Env<R>, tag: Tag<S>): S {
+  // @ts-expect-error
   if (!this.unsafeMap.has(tag)) {
     throw new NoSuchElement()
   }
+  // @ts-expect-error
   return this.unsafeMap.get(tag)! as S
 }
 
 function methodGetMaybe<R, S>(this: Env<R>, tag: Tag<S>): Maybe<S> {
+  // @ts-expect-error
   return this.unsafeMap.has(tag) ? Maybe.some(this.unsafeMap.get(tag)! as S) : Maybe.none
 }
 
