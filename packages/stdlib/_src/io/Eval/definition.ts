@@ -75,3 +75,10 @@ export class FlatMap<A, B> {
 
   constructor(readonly value: EvalInternal<A>, readonly cont: (a: A) => EvalInternal<B>) {}
 }
+
+export interface EvalF extends HKT {
+  readonly type: Eval<this["A"]>
+}
+export declare namespace Eval {
+  export type HKT = EvalF
+}
