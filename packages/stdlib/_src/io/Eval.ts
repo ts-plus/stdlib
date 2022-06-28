@@ -2,6 +2,7 @@
 export * from "@tsplus/stdlib/io/Eval/definition"
 export * from "@tsplus/stdlib/io/Eval/flatMap"
 export * from "@tsplus/stdlib/io/Eval/gen"
+export * from "@tsplus/stdlib/io/Eval/instances"
 export * from "@tsplus/stdlib/io/Eval/map"
 export * from "@tsplus/stdlib/io/Eval/reduce"
 export * from "@tsplus/stdlib/io/Eval/run"
