@@ -19,13 +19,13 @@ export const Recursive: RecursiveOps = {}
 
 export declare namespace Recursive {
   /**
-   * A function operating on a single level of a recursive structure,
-   * with its recursive term(s) replaced by the result of the function's application
-   * on each child. a.k.a `F-Algebra`
+   * A function operating on a single level of a recursive structure, with its recursive term(s) replaced by the result of the function's application on each child. a.k.a `F-Algebra`
    */
-  export type Fn<F extends HKT, Z, R = unknown, E = unknown> = (r: HKT.Kind<F, R, E, Z>) => Z
+  export type Fn<F extends HKT, Z, R = unknown, E = never> = (r: HKT.Kind<F, R, E, Z>) => Z
 
-  export type FnM<F extends HKT, M extends HKT, Z, R = unknown, E = unknown> = (r: HKT.Kind<F, R, E, Z>) => HKT.Kind<M, R, E, Z>
+  export type FnM<F extends HKT, M extends HKT, Z, R = unknown, E = never> = (
+    r: HKT.Kind<F, R, E, Z>
+  ) => HKT.Kind<M, R, E, Z>
 
   /**
    * A function operating on a single level of a recursive structure.
@@ -83,12 +83,11 @@ export function foldM_<F extends HKT, M extends HKT, Z, R = unknown>(
   F: ForEach<F> & Covariant<F>,
   M: IdentityBoth<M> & Monad<M>,
   f: Recursive.FnM<F, M, Z>
-): HKT.Kind<M, R, unknown, Z> {
+): HKT.Kind<M, R, never, Z> {
   const mapM = F.forEachF(M)
   const chain = DSL.flatMapF(M)
-  
   return go(self)
-  function go(term: Recursive<F>): HKT.Kind<M, R, unknown, Z> {
+  function go(term: Recursive<F>): HKT.Kind<M, R, never, Z> {
     return pipe(
       term.caseValue,
       mapM(go),
@@ -96,9 +95,14 @@ export function foldM_<F extends HKT, M extends HKT, Z, R = unknown>(
     )
   }
 }
+
 /**
- * Use a `Covariant<F>` and a `Annotated.Fn` function to perform a *depth-first* reduction of the `Recursive<F>` structure.
- * The supplied function will receive the current term with all of its recursive elements replaced with *both* the computed value of the sub-structure *and* the value of the computation for all of _its_ children.
+ * @tsplus static Recursive/Ops foldM
+ */
+export const foldM = Pipeable(foldM_)
+
+/**
+ * Use a `Covariant<F>` and a `Annotated.Fn` function to perform a *depth-first* reduction of the `Recursive<F>` structure. The supplied function will receive the current term with all of its recursive elements replaced with *both* the computed value of the sub-structure *and* the value of the computation for all of _its_ children.
  * i.e. _histomorphism_
  *
  * @tsplus fluent Recursive foldAnnotated
@@ -189,7 +193,10 @@ export const foldUp = Pipeable(foldUp_)
  *
  * @tsplus static Recursive/Ops unfold
  */
-export function unfold<F extends HKT, Z>(F: Covariant<F>, unfolder: Unfolder.Fn<F, Z>): (a: Z) => Recursive<F> {
+export function unfold<F extends HKT, Z>(
+  F: Covariant<F>,
+  unfolder: Unfolder.Fn<F, Z>
+): (a: Z) => Recursive<F> {
   return function self(a): Recursive<F> {
     return Recursive(F.map(self)(unfolder(a)))
   }
