@@ -1,5 +1,6 @@
 import { Recursive } from "@tsplus/stdlib/prelude/Recursive"
 import type { Annotated } from "@tsplus/stdlib/prelude/Recursive/Annotated"
+import { expect, vi } from "vitest"
 
 describe.concurrent("Recursive", () => {
   type Nat<A> = Maybe<A>
@@ -14,18 +15,30 @@ describe.concurrent("Recursive", () => {
   const three = succ(two)
   const four = succ(three)
   const five = succ(four)
-  const sumAlgebra = (r: Nat<number>): number =>
+  const countAlgebra = (r: Nat<number>): number =>
     r.fold(
       () => 0,
       (r0) => 1 + r0
     )
-  const natsum = Recursive.fold(Maybe.Covariant, sumAlgebra)
+  const natcount = Recursive.fold(Maybe.Covariant, countAlgebra)
+  const natsum = (left: NatR, right: NatR): NatR =>
+    right.fold(Covariant, (f: Nat<NatR>) =>
+      f.fold(
+        () => left,
+        (r) => succ(r)
+      ))
+  const natproduct = (left: NatR, right: NatR): NatR =>
+    right.fold(Covariant, (f: Nat<NatR>) =>
+      f.fold(
+        () => zero,
+        (r) => natsum(r, left)
+      ))
 
   describe("fold", () => {
-    it("sum", () => {
-      assert.equal(natsum(zero), 0)
-      assert.equal(natsum(five), 5)
-      assert.equal(five.fold(Covariant, sumAlgebra), 5)
+    it("count", () => {
+      assert.equal(natcount(zero), 0)
+      assert.equal(natcount(five), 5)
+      assert.equal(five.fold(Covariant, countAlgebra), 5)
     })
 
     it("fib", () => {
@@ -51,22 +64,43 @@ describe.concurrent("Recursive", () => {
         )
       assert.deepEqual(two.fold(Covariant, f), [-1, 2, 3])
     })
+
+    it("sum", () => {
+      assert.equal(natcount(natsum(one, one)), 2)
+      assert.equal(natcount(natsum(five, three)), 8)
+    })
+
+    it("product", () => {
+      assert.equal(natcount(natproduct(one, one)), 1)
+      assert.equal(natcount(natproduct(five, three)), 15)
+    })
+
+    it("even", () => {
+      const evenAlg = (a: Nat<boolean>) =>
+        a.fold(
+          () => true,
+          (p) => !p
+        )
+      const isEven = Recursive.fold(Covariant, evenAlg)
+      assert.isTrue(isEven(zero))
+      assert.isFalse(isEven(one))
+    })
   })
 
   describe("foldAnnotated", () => {
     type NatAnnotated<A> = Nat<Annotated<NatF, A>>
     type Cache<A> = Annotated<NatF, A>
-    it("sum", () => {
-      const sumAlgebra = (r: NatAnnotated<number>): number =>
+    it("count", () => {
+      const countAlgebra = (r: NatAnnotated<number>): number =>
         r.fold(
           () => 0,
           (r0) => 1 + r0.annotations
         )
-      const natsum = Recursive.foldAnnotated(Covariant, sumAlgebra)
-      assert.equal(natsum(zero), 0)
-      assert.equal(natsum(one), 1)
-      assert.equal(natsum(five), 5)
-      assert.equal(five.foldAnnotated(Covariant, sumAlgebra), 5)
+      const natcount = Recursive.foldAnnotated(Covariant, countAlgebra)
+      assert.equal(natcount(zero), 0)
+      assert.equal(natcount(one), 1)
+      assert.equal(natcount(five), 5)
+      assert.equal(five.foldAnnotated(Covariant, countAlgebra), 5)
     })
 
     it("fib", () => {
@@ -99,23 +133,23 @@ describe.concurrent("Recursive", () => {
       const coalgebra = (a: number): Nat<number> => a == 0 ? Zero : Succ(a - 1)
       const expand = Recursive.unfold(Covariant, coalgebra)
 
-      assert.equal(natsum(expand(0)), 0)
-      assert.equal(natsum(expand(5)), 5)
+      assert.equal(natcount(expand(0)), 0)
+      assert.equal(natcount(expand(5)), 5)
     })
   })
 
   describe("foldDown", () => {
-    it("sum", () => {
-      const sumAlgebra = (accum: number, r: Recursive<NatF>) =>
+    it("count", () => {
+      const countAlgebra = (accum: number, r: Recursive<NatF>) =>
         r.caseValue.fold(
           () => accum,
           () => accum + 1
         )
-      const sum = Recursive.foldDown(Maybe.Foldable, 0, sumAlgebra)
-      assert.equal(sum(zero), 0)
-      assert.equal(sum(one), 1)
-      assert.equal(sum(five), 5)
-      assert.equal(five.foldDown(Maybe.Foldable, 0, sumAlgebra), 5)
+      const count = Recursive.foldDown(Maybe.Foldable, 0, countAlgebra)
+      assert.equal(count(zero), 0)
+      assert.equal(count(one), 1)
+      assert.equal(count(five), 5)
+      assert.equal(five.foldDown(Maybe.Foldable, 0, countAlgebra), 5)
     })
 
     it("breadth first", () => {
@@ -154,7 +188,7 @@ describe.concurrent("Recursive", () => {
       assert.equal(two.foldDownSome(Foldable, 0, maxNumber(3)), 2)
     })
 
-    it("breadth-first", () => {
+    it("breadth first", () => {
       const maxCollect = (max: number) =>
         (accum: number[], r: Nat<NatR>) =>
           r.fold(
@@ -167,17 +201,17 @@ describe.concurrent("Recursive", () => {
   })
 
   describe("foldUp", () => {
-    it("sum", () => {
-      const sum = (accum: number, r: NatR) =>
+    it("count", () => {
+      const count = (accum: number, r: NatR) =>
         r.caseValue.fold(
           () => accum,
           () => accum + 1
         )
 
-      assert.equal(five.foldUp(Foldable, 0, sum), 5)
+      assert.equal(five.foldUp(Foldable, 0, count), 5)
     })
 
-    it("depth-first", () => {
+    it("depth first", () => {
       const toList = (accum: number[], r: NatR) => {
         return r.caseValue.fold(
           () => accum.concat([-1]),
@@ -188,9 +222,41 @@ describe.concurrent("Recursive", () => {
     })
   })
 
-  describe('foldM', () => {
-    // Need an HKT<Eval>
-    it.todo('sumAndPrint', () => {
+  describe("foldM", () => {
+    const M = HKT.intersect(
+      Eval.Monad,
+      Eval.IdentityBoth
+    )
+
+    it("count", () => {
+      const countEval = Recursive.foldM<NatF, Eval.HKT, number>(Maybe.ForEach, M, (r) =>
+        r.fold(
+          () => Eval.succeedNow(0),
+          (a) => Eval.succeedNow(a + 1)
+        ))
+
+      assert.equal(countEval(zero).run, 0)
+      assert.equal(countEval(one).run, 1)
+      assert.equal(countEval(five).run, 5)
+    })
+
+    it("depth first", () => {
+      const spy = vi.fn()
+
+      const countEval = Recursive.foldM<NatF, Eval.HKT, number>(Maybe.ForEach, M, (r: Nat<number>) =>
+        r.fold(
+          () => Eval.succeedNow(0).tap((a) => Eval.succeedNow(spy(a))),
+          (a) => Eval.succeedNow(a + 1).tap((a) => Eval.succeedNow(spy(a)))
+        ))
+
+      assert.equal(countEval(zero).run, 0)
+      expect(spy).toHaveBeenCalledOnce()
+      expect(spy).toHaveBeenNthCalledWith(1, 0)
+      spy.mockReset()
+
+      assert.equal(countEval(five).run, 5)
+      expect(spy).toHaveBeenCalledTimes(6)
+      expect(spy).toHaveBeenLastCalledWith(5)
     })
   })
 })
