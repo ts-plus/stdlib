@@ -156,6 +156,18 @@ import { Eval } from "@tsplus/stdlib/io/Eval/definition"
 /**
  * @tsplus global
  */
+import { ArrayInt } from "@tsplus/stdlib/io/Random/Distribution/_internal/ArrayInt"
+/**
+ * @tsplus global
+ */
+import { MutableRandom } from "@tsplus/stdlib/io/Random/MutableRandom"
+/**
+ * @tsplus global
+ */
+import { PCGRandom } from "@tsplus/stdlib/io/Random/PCGRandom"
+/**
+ * @tsplus global
+ */
 import { Any } from "@tsplus/stdlib/prelude/Any"
 /**
  * @tsplus global
@@ -433,10 +445,6 @@ import { isDefined, isIterable, isPlainObject, isPromiseLike, isReactElement } f
  * @tsplus global
  */
 import { lazy } from "@tsplus/stdlib/utilities/Lazy"
-/**
- * @tsplus global
- */
-import { RandomPCG } from "@tsplus/stdlib/utilities/RandomPCG"
 /**
  * @tsplus global
  */
