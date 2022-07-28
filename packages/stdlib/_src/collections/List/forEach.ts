@@ -1,15 +1,13 @@
 /**
- * @tsplus fluent List forEach
+ * @tsplus static List.Aspects forEach
+ * @tsplus pipeable List forEach
  */
-export function forEach_<A, U>(self: List<A>, f: (a: A) => U): void {
-  let these = self
-  while (!these.isNil()) {
-    f(these.head)
-    these = these.tail
+export function forEach<A, U>(f: (a: A) => U) {
+  return (self: List<A>): void => {
+    let these = self
+    while (!these.isNil()) {
+      f(these.head)
+      these = these.tail
+    }
   }
 }
-
-/**
- * @tsplus static List/Ops forEach
- */
-export const forEach = Pipeable(forEach_)

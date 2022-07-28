@@ -2,17 +2,10 @@
  * Combines this computation with the specified computation, returning the
  * value of that computation.
  *
- * @tsplus operator Eval >
- * @tsplus fluent Eval zipRight
+ * @tsplus pipeable-operator Eval >
+ * @tsplus static Eval.Aspects zipRight
+ * @tsplus pipeable Eval zipRight
  */
-export function zipRight_<A, B>(self: Eval<A>, that: LazyArg<Eval<B>>): Eval<B> {
-  return self.zipWith(that, (_, b) => b)
+export function zipRight<B>(that: LazyArg<Eval<B>>) {
+  return <A>(self: Eval<A>): Eval<B> => self.zipWith(that, (_, b) => b)
 }
-
-/**
- * Combines this computation with the specified computation, returning the
- * value of that computation.
- *
- * @tsplus static Eval/Aspects zipRight
- */
-export const zipRight = Pipeable(zipRight_)

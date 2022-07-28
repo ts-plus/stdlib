@@ -1,15 +1,9 @@
 /**
  * Sort the elements of an `ImmutableArray` in increasing order.
  *
- * @tsplus fluent ImmutableArray sort
+ * @tsplus static ImmutableArray.Aspects sort
+ * @tsplus pipeable ImmutableArray sort
  */
-export function sort_<A>(self: ImmutableArray<A>, O: Ord<A>): ImmutableArray<A> {
-  return new ImmutableArray([...self].sort((x, y) => O.compare(x, y)))
+export function sort<A>(O: Ord<A>) {
+  return (self: ImmutableArray<A>): ImmutableArray<A> => new ImmutableArray([...self].sort((x, y) => O.compare(x, y)))
 }
-
-/**
- * Sort the elements of an `ImmutableArray` in increasing order.
- *
- * @tsplus static ImmutableArray/Aspects sort
- */
-export const sort = Pipeable(sort_)

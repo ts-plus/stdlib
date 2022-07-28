@@ -3,15 +3,9 @@ import { concreteChunkId } from "@tsplus/stdlib/collections/Chunk/definition"
 /**
  * Prepends a value to a chunk.
  *
- * @tsplus fluent Chunk prepend
+ * @tsplus static Chunk.Aspects prepend
+ * @tsplus pipeable Chunk prepend
  */
-export function prepend_<A, A1>(self: Chunk<A>, a: A1): Chunk<A | A1> {
-  return concreteChunkId(self)._prepend(a)
+export function prepend<A1>(a: A1) {
+  return <A>(self: Chunk<A>): Chunk<A | A1> => concreteChunkId(self)._prepend(a)
 }
-
-/**
- * Prepends a value to a chunk.
- *
- * @tsplus static Chunk/Aspects prepend
- */
-export const prepend = Pipeable(prepend_)

@@ -1,5 +1,5 @@
 /**
- * @tsplus static ImmutableArray/Ops separateWithIndexF
+ * @tsplus static ImmutableArray.Ops separateWithIndexF
  */
 export const separateWithIndexF = WiltableWithIndex.implementSeparateWithIndexF<number, ImmutableArray.HKT>()(
   <A, B, R, E, G extends HKT>(_: {

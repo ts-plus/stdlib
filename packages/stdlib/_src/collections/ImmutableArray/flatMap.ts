@@ -1,11 +1,7 @@
 /**
- * @tsplus fluent ImmutableArray flatMap
+ * @tsplus static ImmutableArray.Aspects flatMap
+ * @tsplus pipeable ImmutableArray flatMap
  */
-export function flatMap_<A, B>(self: ImmutableArray<A>, f: (a: A) => ImmutableArray<B>) {
-  return new ImmutableArray(self.array.flatMap(x => f(x).array))
+export function flatMap<A, B>(f: (a: A) => ImmutableArray<B>) {
+  return (self: ImmutableArray<A>): ImmutableArray<B> => new ImmutableArray(self.array.flatMap(x => f(x).array))
 }
-
-/**
- * @tsplus static ImmutableArray/Aspects flatMap
- */
-export const flatMap = Pipeable(flatMap_)

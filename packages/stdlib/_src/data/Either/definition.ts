@@ -1,8 +1,8 @@
 /**
  * adapted from https://github.com/gcanti/fp-ts
  */
-const _leftHash = Hash.string("Either/Left")
-const _rightHash = Hash.string("Either/Right")
+const _leftHash = Hash.string("Either.Left")
+const _rightHash = Hash.string("Either.Right")
 /**
  * @tsplus type Either
  */
@@ -17,7 +17,7 @@ export interface EitherFixedLeftF<E> extends HKT {
 }
 
 /**
- * @tsplus type Either/Ops
+ * @tsplus type Either.Ops
  */
 export interface EitherOps {
   $: EitherAspects
@@ -27,7 +27,7 @@ export const Either: EitherOps = {
 }
 
 /**
- * @tsplus type Either/Aspects
+ * @tsplus type Either.Aspects
  */
 export interface EitherAspects {}
 
@@ -37,7 +37,7 @@ export declare namespace Either {
 }
 
 /**
- * @tsplus type Either/Left
+ * @tsplus type Either.Left
  */
 export class Left<E> implements Equals {
   readonly _tag = "Left"
@@ -53,7 +53,7 @@ export class Left<E> implements Equals {
 }
 
 /**
- * @tsplus type Either/Right
+ * @tsplus type Either.Right
  */
 export class Right<A> implements Equals {
   readonly _tag = "Right"
@@ -70,8 +70,8 @@ export class Right<A> implements Equals {
 
 /**
  * @tsplus unify Either
- * @tsplus unify Either/Left
- * @tsplus unify Either/Right
+ * @tsplus unify Either.Left
+ * @tsplus unify Either.Right
  */
 export function unifyEither<X extends Either<any, any>>(
   self: X
@@ -108,7 +108,7 @@ export function getLeft<E, A>(self: Either<E, A>): Maybe<E> {
 }
 
 /**
- * @tsplus static Either/Ops isEither
+ * @tsplus static Either.Ops isEither
  */
 export function isEither(u: unknown): u is Either<unknown, unknown> {
   return (
@@ -130,7 +130,7 @@ export function getRight<E, A>(self: Either<E, A>): Maybe<A> {
  * Constructs a new `Either` holding a `Right` value. This usually represents a
  * successful value due to the right bias of this structure.
  *
- * @tsplus static Either/Ops __call
+ * @tsplus static Either.Ops __call
  */
 export function apply<A>(a: A): Either<never, A> {
   return new Right(a)
@@ -139,7 +139,7 @@ export function apply<A>(a: A): Either<never, A> {
  * Constructs a new `Either` holding a `Right` value. This usually represents a
  * successful value due to the right bias of this structure.
  *
- * @tsplus static Either/Ops right
+ * @tsplus static Either.Ops right
  */
 export function right<A>(a: A): Either<never, A> {
   return new Right(a)
@@ -149,7 +149,7 @@ export function right<A>(a: A): Either<never, A> {
  * Constructs a new `Either` holding a `Right` value. This usually represents a
  * successful value due to the right bias of this structure.
  *
- * @tsplus static Either/Ops rightW
+ * @tsplus static Either.Ops rightW
  */
 export function rightW<A, E = never>(a: A): Either<E, A> {
   return new Right(a)
@@ -159,7 +159,7 @@ export function rightW<A, E = never>(a: A): Either<E, A> {
  * Constructs a new `Either` holding a `Left` value. This usually represents a
  * failure, due to the right-bias of this structure.
  *
- * @tsplus static Either/Ops left
+ * @tsplus static Either.Ops left
  */
 export function left<E>(e: E): Either<E, never> {
   return new Left(e)
@@ -169,7 +169,7 @@ export function left<E>(e: E): Either<E, never> {
  * Constructs a new `Either` holding a `Left` value. This usually represents a
  * failure, due to the right-bias of this structure.
  *
- * @tsplus static Either/Ops leftW
+ * @tsplus static Either.Ops leftW
  */
 export function leftW<E, A = never>(e: E): Either<E, A> {
   return new Left(e)
@@ -188,7 +188,7 @@ export function widenE_<E, A, E1>(self: Either<E, A>): Either<E | E1, A> {
 /**
  * Widen left side `Either[E, A] => Either[E | E1, A]`.
  *
- * @tsplus static Either/Aspects widenE
+ * @tsplus static Either.Aspects widenE
  */
 export function widenE<E1>() {
   return (
@@ -212,7 +212,7 @@ export function widenA_<E, A, A1>(self: Either<E, A>): Either<E, A | A1> {
 /**
  * Widen right side `Either[E, A] => Either[E, A | A1]`.
  *
- * @tsplus static Either/Aspects widenA
+ * @tsplus static Either.Aspects widenA
  */
 export function widenA<A1>() {
   return (

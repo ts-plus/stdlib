@@ -1,5 +1,5 @@
 /**
- * @tsplus static NonEmptyImmutableArray/Ops getOrd
+ * @tsplus static NonEmptyImmutableArray.Ops getOrd
  */
 export function getOrd<A>(O: Ord<A>): Ord<NonEmptyImmutableArray<A>> {
   return Ord((x, y) => {

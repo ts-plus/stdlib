@@ -1,11 +1,7 @@
 /**
- * @tsplus fluent ImmutableArray map
+ * @tsplus static ImmutableArray.Aspects map
+ * @tsplus pipeable ImmutableArray map
  */
-export function map_<A, B>(self: ImmutableArray<A>, f: (a: A, k: number) => B): ImmutableArray<B> {
-  return new ImmutableArray(self.array.map((a, i) => f(a, i)))
+export function map<A, B>(f: (a: A, k: number) => B) {
+  return (self: ImmutableArray<A>): ImmutableArray<B> => new ImmutableArray(self.array.map((a, i) => f(a, i)))
 }
-
-/**
- * @tsplus static ImmutableArray/Aspects map
- */
-export const map = Pipeable(map_)

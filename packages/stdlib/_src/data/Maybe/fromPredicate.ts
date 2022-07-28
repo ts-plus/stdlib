@@ -1,7 +1,7 @@
 /**
  * Returns a smart constructor based on the given predicate.
  *
- * @tsplus static Maybe/Ops fromPredicate
+ * @tsplus static Maybe.Ops fromPredicate
  */
 export function fromPredicate<A, B extends A>(
   a: A,

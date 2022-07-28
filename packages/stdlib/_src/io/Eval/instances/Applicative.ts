@@ -1,4 +1,4 @@
 /**
- * @tsplus static Eval/Ops Applicative
+ * @tsplus static Eval.Ops Applicative
  */
 export const Applicative = DSL.getApplicativeF(Eval.Monad)

@@ -1,8 +1,8 @@
 /**
  * Constructs a new `HashMap` from an array of key/value pairs.
  *
- * @tsplus static HashMap/Ops make
- * @tsplus static HashMap/Ops __call
+ * @tsplus static HashMap.Ops make
+ * @tsplus static HashMap.Ops __call
  */
 export function make<Entries extends Tuple<[any, any]>[]>(
   ...entries: Entries

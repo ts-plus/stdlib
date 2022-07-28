@@ -1,15 +1,13 @@
 import { concreteSortedSet, SortedSetInternal } from "@tsplus/stdlib/collections/SortedSet/_internal/SortedSetInternal"
 
 /**
- * @tsplus operator SortedSet +
- * @tsplus fluent SortedSet add
+ * @tsplus pipeable-operator SortedSet +
+ * @tsplus static SortedSet.Aspects add
+ * @tsplus pipeable SortedSet add
  */
-export function add_<A>(self: SortedSet<A>, value: A): SortedSet<A> {
-  concreteSortedSet(self)
-  return self.keyTree.has(value) ? self : new SortedSetInternal(self.keyTree.insert(value, true))
+export function add<A>(value: A) {
+  return (self: SortedSet<A>): SortedSet<A> => {
+    concreteSortedSet(self)
+    return self.keyTree.has(value) ? self : new SortedSetInternal(self.keyTree.insert(value, true))
+  }
 }
-
-/**
- * @tsplus static SortedSet/Aspects add
- */
-export const add = Pipeable(add_)

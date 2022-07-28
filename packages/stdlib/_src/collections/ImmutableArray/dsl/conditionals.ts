@@ -4,7 +4,7 @@
 export const branch_ = DSL.conditionalF_<ImmutableArray.HKT>()
 
 /**
- * @tsplus static ImmutableArray/Ops if
+ * @tsplus static ImmutableArray.Ops if
  */
 export const branch = DSL.conditionalF<ImmutableArray.HKT>()
 

@@ -1,5 +1,5 @@
 /**
- * @tsplus type EqualsOps
+ * @tsplus type Equals.Ops
  */
 export interface EqualsOps {
   readonly sym: unique symbol
@@ -17,21 +17,21 @@ export interface Equals extends Hash {
 }
 
 /**
- * @tsplus static EqualsOps isEquals
+ * @tsplus static Equals.Ops isEquals
  */
 export function isEquals(u: unknown): u is Equals {
   return Hash.isHash(u) && Equals.sym in u
 }
 
 /**
- * @tsplus static EqualsOps sameValueZeroEqual
+ * @tsplus static Equals.Ops sameValueZeroEqual
  */
 export function sameValueZeroEqual(a: any, b: any) {
   return a === b || (a !== a && b !== b)
 }
 
 /**
- * @tsplus static EqualsOps equals
+ * @tsplus static Equals.Ops equals
  * @tsplus fluent Equals equals
  * @tsplus operator Equals ==
  */

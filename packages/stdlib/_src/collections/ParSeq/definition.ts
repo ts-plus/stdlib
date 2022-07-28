@@ -18,7 +18,7 @@ export type _A = typeof _A
 export type ParSeq<A> = Empty | Single<A> | Then<A> | Both<A>
 
 /**
- * @tsplus type ParSeq/Ops
+ * @tsplus type ParSeq.Ops
  */
 export interface ParSeqOps {
   $: ParSeqAspects
@@ -28,7 +28,7 @@ export const ParSeq: ParSeqOps = {
 }
 
 /**
- * @tsplus type ParSeq/Aspects
+ * @tsplus type ParSeq.Aspects
  */
 export interface ParSeqAspects {}
 
@@ -372,7 +372,7 @@ function hashCode(self: ParSeq<unknown>): number {
 /**
  * Empty collection of events
  *
- * @tsplus static ParSeq/Ops empty
+ * @tsplus static ParSeq.Ops empty
  */
 export function empty<A>(): ParSeq<A> {
   return new Empty()
@@ -381,7 +381,7 @@ export function empty<A>(): ParSeq<A> {
 /**
  * Constructs a new collection of events that contains the specified event.
  *
- * @tsplus static ParSeq/Ops single
+ * @tsplus static ParSeq.Ops single
  */
 export function single<A>(a: A): ParSeq<A> {
   return new Single(a)
@@ -392,7 +392,7 @@ export function single<A>(a: A): ParSeq<A> {
  * return a new collection of events that represents this collection of
  * events in parallel with that collection of events.
  *
- * @tsplus static ParSeq/Ops combinePar
+ * @tsplus static ParSeq.Ops combinePar
  */
 export function combinePar_<A, A1>(left: ParSeq<A>, right: ParSeq<A1>): ParSeq<A | A1> {
   return left.isEmpty ? right : right.isEmpty ? left : new Both<A | A1>(left, right)
@@ -403,7 +403,7 @@ export function combinePar_<A, A1>(left: ParSeq<A>, right: ParSeq<A1>): ParSeq<A
  * return a new collection of events that represents this collection of
  * events in parallel with that collection of events.
  *
- * @tsplus static ParSeq/Aspects combinePar
+ * @tsplus static ParSeq.Aspects combinePar
  */
 export const combinePar = Pipeable(combinePar_)
 
@@ -412,7 +412,7 @@ export const combinePar = Pipeable(combinePar_)
  * return a new collection of events that represents this collection of
  * events followed by that collection of events.
  *
- * @tsplus static ParSeq/Ops combineSeq
+ * @tsplus static ParSeq.Ops combineSeq
  */
 export function combineSeq_<A, A1>(left: ParSeq<A>, right: ParSeq<A1>): ParSeq<A | A1> {
   return left.isEmpty ? right : right.isEmpty ? left : new Then<A | A1>(left, right)
@@ -423,12 +423,12 @@ export function combineSeq_<A, A1>(left: ParSeq<A>, right: ParSeq<A1>): ParSeq<A
  * return a new collection of events that represents this collection of
  * events followed by that collection of events.
  *
- * @tsplus static ParSeq/Aspects combineSeq
+ * @tsplus static ParSeq.Aspects combineSeq
  */
 export const combineSeq = Pipeable(combineSeq_)
 
 /**
- * @tsplus static ParSeq/Ops isParSeq
+ * @tsplus static ParSeq.Ops isParSeq
  */
 export function isParSeq(u: unknown): u is ParSeq<unknown> {
   return typeof u === "object" && u != null && ParSeqSym in u

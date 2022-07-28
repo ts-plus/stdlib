@@ -19,13 +19,10 @@ export function prependOperator<A, B>(a: A, self: ImmutableArray<B>): NonEmptyIm
 /**
  * Prepends `a` to ImmutableArray<A>
  *
- * @tsplus fluent ImmutableArray prepend
+ * @tsplus static ImmutableArray.Aspects prepend
+ * @tsplus pipeable ImmutableArray prepend
  */
-export function prepend_<A, B>(self: ImmutableArray<A>, a: B): NonEmptyImmutableArray<A | B> {
-  return new ImmutableArray([a, ...self.array]) as NonEmptyImmutableArray<A>
+export function prepend<A, B>(a: B) {
+  return (self: ImmutableArray<A>): NonEmptyImmutableArray<A | B> =>
+    new ImmutableArray([a, ...self.array]) as NonEmptyImmutableArray<A>
 }
-
-/**
- * @tsplus static ImmutableArray/Aspects prepend
- */
-export const prepend = Pipeable(prepend_)

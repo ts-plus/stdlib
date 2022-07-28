@@ -13,6 +13,40 @@ export const ListTypeId = Symbol.for("@tsplus/collections/List")
 export type ListTypeId = typeof ListTypeId
 
 /**
+ * @tsplus type List
+ */
+export type List<A> = Cons<A> | Nil<A>
+
+type ConsNS<A> = Cons<A>
+type NilNS<A> = Nil<A>
+export declare namespace List {
+  export type Cons<A> = ConsNS<A>
+  export type Nil<A> = NilNS<A>
+}
+
+/**
+ * @tsplus type List.Ops
+ */
+export interface ListOps {
+  readonly $: ListAspects
+}
+export const List: ListOps = {
+  $: {}
+}
+
+/**
+ * @tsplus type List.Aspects
+ */
+export interface ListAspects {}
+
+export declare namespace List {
+  /**
+   * @tsplus type NonEmptyList
+   */
+  export type NonEmpty<A> = Cons<A>
+}
+
+/**
  * @tsplus type List/Cons
  */
 export class Cons<A> implements Collection<A>, Equals {
@@ -48,7 +82,7 @@ export class Cons<A> implements Collection<A>, Equals {
     return Hash.iterator(this[Symbol.iterator]())
   }
   [Equals.sym](that: unknown): boolean {
-    return that instanceof Cons && equalsWith_(this, that, Equals.equals)
+    return that instanceof Cons && equalsWith(that, Equals.equals)(this)
   }
 }
 
@@ -76,31 +110,6 @@ export class Nil<A> implements Collection<A>, Equals {
 export const _Nil = new Nil<never>()
 
 /**
- * @tsplus type List
- */
-export type List<A> = Cons<A> | Nil<A>
-
-type ConsNS<A> = Cons<A>
-type NilNS<A> = Nil<A>
-export declare namespace List {
-  export type Cons<A> = ConsNS<A>
-  export type Nil<A> = NilNS<A>
-}
-
-/**
- * @tsplus type List/Ops
- */
-export interface ListOps {}
-export const List: ListOps = {}
-
-export declare namespace List {
-  /**
-   * @tsplus type NonEmptyList
-   */
-  export type NonEmpty<A> = Cons<A>
-}
-
-/**
  * @tsplus unify List
  * @tsplus unify List/Nil
  * @tsplus unify List/Cons
@@ -112,14 +121,14 @@ export function unify<X extends List<any>>(
 }
 
 /**
- * @tsplus static List/Ops nil
+ * @tsplus static List.Ops nil
  */
 export function nil<A = never>(): Nil<A> {
   return _Nil
 }
 
 /**
- * @tsplus static List/Ops cons
+ * @tsplus static List.Ops cons
  */
 export function cons<A>(head: A, tail: List<A>): Cons<A> {
   return new Cons(head, tail)
@@ -155,49 +164,48 @@ export function length<A>(self: List<A>): number {
 }
 
 /**
- * @tsplus fluent List equalsWith
+ * @tsplus static List.Aspects equalsWith
+ * @tsplus pipeable List equalsWith
  */
-export function equalsWith_<A, B>(
-  self: List<A>,
+export function equalsWith<A, B>(
   that: List<B>,
   f: (a: A, b: B) => boolean
-): boolean {
-  if (self === that) {
-    return true
-  } else if (length(self) !== length(that)) {
-    return false
-  } else {
-    const i0 = self[Symbol.iterator]()
-    const i1 = that[Symbol.iterator]()
-    let a: IteratorResult<A>
-    let b: IteratorResult<B>
-    while (!(a = i0.next()).done && !(b = i1.next()).done) {
-      if (!f(a.value, b.value)) {
-        return false
+) {
+  return (self: List<A>): boolean => {
+    if (self === that) {
+      return true
+    } else if (length(self) !== length(that)) {
+      return false
+    } else {
+      const i0 = self[Symbol.iterator]()
+      const i1 = that[Symbol.iterator]()
+      let a: IteratorResult<A>
+      let b: IteratorResult<B>
+      while (!(a = i0.next()).done && !(b = i1.next()).done) {
+        if (!f(a.value, b.value)) {
+          return false
+        }
       }
+      return true
     }
-    return true
   }
 }
 
-export const equalsWith = Pipeable(equalsWith_)
-
 /**
- * @tsplus operator List ==
- * @tsplus fluent List equals
+ * @tsplus pipeable-operator List ==
+ * @tsplus static List.Aspects equals
+ * @tsplus pipeable List equals
  */
-export function equals_<A>(self: List<A>, that: List<A>): boolean
-export function equals_<A, B>(self: List<A>, that: List<B>): boolean
-export function equals_<A, B>(self: List<A>, that: List<B>) {
-  return self.equalsWith(that, Equals.equals)
+export function equals<A>(that: List<A>): (self: List<A>) => boolean
+export function equals<B>(that: List<B>): <A>(self: List<A>) => boolean
+export function equals<B>(that: List<B>) {
+  return <A>(self: List<A>): boolean => self.equalsWith(that, Equals.equals)
 }
-
-export const equals = Pipeable(equals_)
 
 /**
  * Type guard
  *
- * @tsplus static List/Ops isList
+ * @tsplus static List.Ops isList
  */
 export function isList<A>(u: Iterable<A>): u is List<A>
 export function isList(u: unknown): u is List<unknown>

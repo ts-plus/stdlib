@@ -1,13 +1,9 @@
 /**
  * Returns `true` if the predicate is satisfied by the wrapped value.
  *
- * @tsplus fluent Maybe exists
+ * @tsplus static Maybe.Aspects exists
+ * @tsplus pipeable Maybe exists
  */
-export function exists_<A>(ma: Maybe<A>, predicate: Predicate<A>): boolean {
-  return ma.isNone() ? false : predicate(ma.value)
+export function exists<A>(predicate: Predicate<A>) {
+  return (self: Maybe<A>): boolean => self.isNone() ? false : predicate(self.value)
 }
-
-/**
- * @tsplus static Maybe/Aspects exists
- */
-export const exists = Pipeable(exists_)

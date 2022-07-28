@@ -1,5 +1,5 @@
 /**
- * @tsplus static Chunk/Ops separateF
+ * @tsplus static Chunk.Ops separateF
  */
 export const separateF = Wiltable.implementSeparateF<Chunk.HKT>()(
   <FR, FE, A, B, B2, G extends HKT>(_: {

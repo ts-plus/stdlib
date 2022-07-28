@@ -1,16 +1,10 @@
 /**
  * Referential equality check.
  *
- * @tsplus operator Chunk ==
- * @tsplus fluent Chunk equals
+ * @tsplus pipeable-operator Chunk ==
+ * @tsplus static Chunk.Aspects equals
+ * @tsplus pipeable Chunk equals
  */
-export function equals_<A, B>(self: Chunk<A>, that: Chunk<B>): boolean {
-  return self.corresponds(that, Equals.equals)
+export function equals<A, B>(that: Chunk<B>) {
+  return (self: Chunk<A>): boolean => self.corresponds(that, Equals.equals)
 }
-
-/**
- * Referential equality check
- *
- * @tsplus static Chunk/Aspects equals
- */
-export const equals = Pipeable(equals_)

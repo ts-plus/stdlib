@@ -14,7 +14,7 @@ export interface SortedSet<A> extends Collection<A>, Equals {
 }
 
 /**
- * @tsplus type SortedSet/Ops
+ * @tsplus type SortedSet.Ops
  */
 export interface SortedSetOps {
   $: SortedSetAspects
@@ -24,14 +24,14 @@ export const SortedSet: SortedSetOps = {
 }
 
 /**
- * @tsplus type SortedSet/Aspects
+ * @tsplus type SortedSet.Aspects
  */
 export interface SortedSetAspects {}
 
 /**
  * Type guard
  *
- * @tsplus static SortedSet/Ops isSortedSet
+ * @tsplus static SortedSet.Ops isSortedSet
  */
 export function isSortedSet<A>(u: Iterable<A>): u is SortedSet<A>
 export function isSortedSet(u: unknown): u is SortedSet<unknown>

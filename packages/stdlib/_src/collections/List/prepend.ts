@@ -1,13 +1,12 @@
 /**
  * Inserts an element at the beginning of a `List`, returning a new `List`
  *
- * @tsplus fluent List prepend
+ * @tsplus static List.Aspects prepend
+ * @tsplus pipeable List prepend
  */
-export function prepend_<A, B>(self: List<A>, elem: B): List.NonEmpty<A | B> {
-  return List.cons<A | B>(elem, self)
+export function prepend<A, B>(elem: B) {
+  return (self: List<A>): List.NonEmpty<A | B> => List.cons<A | B>(elem, self)
 }
-
-export const prepend = Pipeable(prepend_)
 
 /**
  * Inserts an element at the beginning of a `List`, returning a new `List`

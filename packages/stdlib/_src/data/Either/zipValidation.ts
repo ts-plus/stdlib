@@ -1,10 +1,10 @@
 /**
  * Zip combining errors in case of multiple failures.
  *
- * @tsplus static Either/Ops zipValidation
+ * @tsplus static Either.Ops zipValidation
  */
 export function zipValidation<E>(S: Associative<E>) {
-  ;(<A, B>(fa: Either<E, A>, fb: Either<E, B>): Either<E, Tuple<[A, B]>> =>
+  return <A, B>(fa: Either<E, A>, fb: Either<E, B>): Either<E, Tuple<[A, B]>> =>
     fa.fold(
       (ea) =>
         fb.fold(
@@ -12,5 +12,5 @@ export function zipValidation<E>(S: Associative<E>) {
           () => Either.left(ea)
         ),
       (a) => fb.fold(Either.left, (b) => Either.right(Tuple(a, b)))
-    ))
+    )
 }

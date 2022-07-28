@@ -1,19 +1,18 @@
 /**
  * Appends `a` to ImmutableArray<A>
  *
- * @tsplus fluent ImmutableArray append
- * @tsplus operator ImmutableArray <
+ * @tsplus static ImmutableArray.Aspects append
+ * @tsplus pipeable ImmutableArray append
+ * @tsplus pipeable-operator ImmutableArray <
  */
-export function append_<A, B>(self: ImmutableArray<A>, a: B): NonEmptyImmutableArray<A | B> {
-  return new ImmutableArray([...self.array, a] as any) as NonEmptyImmutableArray<A>
+export function append<A, B>(a: B) {
+  return (self: ImmutableArray<A>): NonEmptyImmutableArray<A | B> =>
+    new ImmutableArray([...self.array, a] as any) as NonEmptyImmutableArray<A>
 }
 
 /**
- * @tsplus static ImmutableArray/Aspects append
+ * @tsplus pipeable-operator ImmutableArray + 1.0
  */
-export const append = Pipeable(append_)
-
-/**
- * @tsplus operator ImmutableArray + 1.0
- */
-export const appendOperator: <A>(self: ImmutableArray<A>, a: A) => NonEmptyImmutableArray<A> = append_
+export function appendOperator<A>(a: A) {
+  return (self: ImmutableArray<A>): NonEmptyImmutableArray<A> => self.append(a)
+}

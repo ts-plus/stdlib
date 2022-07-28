@@ -1,5 +1,5 @@
 /**
- * @tsplus static Tree/Ops forEachF
+ * @tsplus static Tree.Ops forEachF
  */
 export const forEachF = ForEach.implementForEachF<Tree.HKT>()(
   (_) =>

@@ -66,7 +66,7 @@ export interface MutableQueue<A> extends Collection<A> {
 }
 
 /**
- * @tsplus type MutableQueue/Ops
+ * @tsplus type MutableQueue.Ops
  */
 export interface MutableQueueOps {}
 export const MutableQueue: MutableQueueOps = {}

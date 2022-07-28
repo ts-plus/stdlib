@@ -1,5 +1,5 @@
 /**
- * @tsplus static Map/Ops from
+ * @tsplus static Map.Ops from
  */
 export function from<K, V>(
   data: Collection<Tuple<[K, V]>>

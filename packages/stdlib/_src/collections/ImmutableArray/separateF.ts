@@ -1,5 +1,5 @@
 /**
- * @tsplus static ImmutableArray/Ops separateF
+ * @tsplus static ImmutableArray.Ops separateF
  */
 export const separateF = Wiltable.implementSeparateF<ImmutableArray.HKT>()(
   <FR, FE, A, B, B2, G extends HKT>(_: {

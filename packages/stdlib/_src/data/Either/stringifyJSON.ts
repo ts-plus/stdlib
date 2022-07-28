@@ -1,7 +1,7 @@
 /**
  * Converts a JavaScript value to a JavaScript Object Notation (JSON) string.
  *
- * @tsplus static Either/Ops stringifyJSON
+ * @tsplus static Either.Ops stringifyJSON
  */
 export function stringifyJSON<E>(
   u: unknown,

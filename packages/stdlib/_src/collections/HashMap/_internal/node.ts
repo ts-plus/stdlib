@@ -3,7 +3,7 @@ import { fromBitmap, hashFragment, toBitmap } from "@tsplus/stdlib/collections/H
 import { MAX_INDEX_NODE, MIN_ARRAY_NODE, SIZE } from "@tsplus/stdlib/collections/HashMap/_internal/config"
 
 /**
- * @tsplus type HashMap/Node
+ * @tsplus type HashMap.Node
  */
 export type Node<K, V> =
   | EmptyNode<K, V>
@@ -13,7 +13,7 @@ export type Node<K, V> =
   | ArrayNode<K, V>
 
 /**
- * @tsplus type HashMap/Node/Ops
+ * @tsplus type HashMap.Node.Ops
  */
 export interface NodeOps {}
 export const Node: NodeOps = {}

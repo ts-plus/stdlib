@@ -1,10 +1,10 @@
 /**
- * @tsplus static Maybe/Ops if
+ * @tsplus static Maybe.Ops if
  */
 export const branch = DSL.conditionalF<Maybe.HKT>()
 
 /**
- * @tsplus static Maybe/Ops if_
+ * @tsplus static Maybe.Ops if_
  */
 export const branch_ = DSL.conditionalF_<Maybe.HKT>()
 

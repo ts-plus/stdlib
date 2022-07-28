@@ -2,7 +2,7 @@
  * Get an `Associative` instance for `Either` that combines both success and failure
  * given `Associative` of `A` & `E`.
  *
- * @tsplus static Either/Ops getValidationAssociative
+ * @tsplus static Either.Ops getValidationAssociative
  */
 export function getValidationAssociative<E, A>(
   SE: Associative<E>,

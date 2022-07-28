@@ -1,26 +1,27 @@
 /**
- * @tsplus fluent List sortWith
+ * @tsplus static List.Aspects sortWith
+ * @tsplus pipeable List sortWith
  */
-export function sortWith_<A>(self: List<A>, ord: Ord<A>): List<A> {
-  const len = self.length
-  const b = new ListBuffer<A>()
-  if (len === 1) {
-    b.append(self.unsafeHead!)
-  } else if (len > 1) {
-    const arr = Array.alloc<[number, A]>(len)
-    copyToArrayWithIndex(self, arr)
-    arr.sort(([i, x], [j, y]) => {
-      const c = ord.compare(x, y)
-      return c !== 0 ? c : i < j ? -1 : 1
-    })
-    for (let i = 0; i < len; i++) {
-      b.append(arr[i]![1])
+export function sortWith<A>(ord: Ord<A>) {
+  return (self: List<A>): List<A> => {
+    const len = self.length
+    const b = new ListBuffer<A>()
+    if (len === 1) {
+      b.append(self.unsafeHead!)
+    } else if (len > 1) {
+      const arr = Array.alloc<[number, A]>(len)
+      copyToArrayWithIndex(self, arr)
+      arr.sort(([i, x], [j, y]) => {
+        const c = ord.compare(x, y)
+        return c !== 0 ? c : i < j ? -1 : 1
+      })
+      for (let i = 0; i < len; i++) {
+        b.append(arr[i]![1])
+      }
     }
+    return b.toList
   }
-  return b.toList
 }
-
-export const sortWith = Pipeable(sortWith_)
 
 function copyToArrayWithIndex<A>(list: List<A>, arr: Array<[number, A]>): void {
   let these = list

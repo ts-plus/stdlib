@@ -3,7 +3,7 @@ import type { Node } from "@tsplus/stdlib/collections/RedBlackTree/node"
 /**
  * Visit nodes greater than or equal to key.
  *
- * @tsplus static RedBlackTree/Ops visitGe
+ * @tsplus static RedBlackTree.Ops visitGe
  */
 export function visitGe<K, V, A>(
   node: Node<K, V>,

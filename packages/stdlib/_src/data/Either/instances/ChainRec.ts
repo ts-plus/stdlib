@@ -1,7 +1,7 @@
 import * as P from "@tsplus/stdlib/prelude/ChainRec"
 
 /**
- * @tsplus static Either/Ops ChainRec
+ * @tsplus static Either.Ops ChainRec
  */
 export const ChainRec = HKT.instance<P.ChainRec<Either.HKT>>({
   chainRec: <A, B, E>(f: (a: A) => Either<E, Either<A, B>>) =>

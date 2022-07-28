@@ -1,8 +1,8 @@
 /**
  * Construct a new `MutableHashSet` from a variable number of values.
  *
- * @tsplus static MutableHashSet/Ops __call
- * @tsplus static MutableHashSet/Ops make
+ * @tsplus static MutableHashSet.Ops __call
+ * @tsplus static MutableHashSet.Ops make
  */
 export function make<As extends any[]>(...elements: As): MutableHashSet<As[number]> {
   const set = MutableHashSet.empty<As[number]>()

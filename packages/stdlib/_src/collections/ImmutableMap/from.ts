@@ -1,7 +1,7 @@
 /**
  * Creates a new `ImmutableMap` from a set of entries.
  *
- * @tsplus static ImmutableMap/Ops from
+ * @tsplus static ImmutableMap.Ops from
  */
 export function from<K, V>(
   entries: Collection<Tuple<[K, V]>>

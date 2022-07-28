@@ -1,7 +1,7 @@
 /**
  * Converts a JavaScript Object Notation (JSON) string into an object.
  *
- * @tsplus static Either/Ops parseJSON
+ * @tsplus static Either.Ops parseJSON
  */
 export function parseJSON<E>(
   s: string,

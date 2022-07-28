@@ -1,7 +1,7 @@
 import type { _A } from "@tsplus/stdlib/io/Eval/definition"
 
 /**
- * @tsplus static Eval/Ops tuple
+ * @tsplus static Eval.Ops tuple
  */
 export function tuple<EN extends readonly Eval<any>[]>(
   ...[e1, e2, ...es]: EN & {

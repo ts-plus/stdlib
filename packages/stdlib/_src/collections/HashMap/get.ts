@@ -2,17 +2,10 @@
  * Safely lookup the value for the specified key in the `HashMap` using the
  * internal hashing function.
  *
- * @tsplus fluent HashMap get
- * @tsplus index HashMap
+ * @tsplus pipeable-index HashMap
+ * @tsplus static HashMap.Aspects get
+ * @tsplus pipeable HashMap get
  */
-export function get_<K, V>(self: HashMap<K, V>, key: K): Maybe<V> {
-  return self.getHash(key, Hash.unknown(key))
+export function get<K, V>(key: K) {
+  return (self: HashMap<K, V>): Maybe<V> => self.getHash(key, Hash.unknown(key))
 }
-
-/**
- * Safely lookup the value for the specified key in the `HashMap` using the
- * internal hashing function.
- *
- * @tsplus static HashMap/Aspects get
- */
-export const get = Pipeable(get_)

@@ -1,15 +1,8 @@
 /**
- * @tsplus index ImmutableArray
- * @tsplus fluent ImmutableArray get
+ * @tsplus pipeable-index ImmutableArray
+ * @tsplus static ImmutableArray.Aspects get
+ * @tsplus pipeable ImmutableArray get
  */
-export function get_<A>(
-  self: ImmutableArray<A>,
-  index: number
-): Maybe<NonNullable<A>> {
-  return Maybe.fromNullable(self.array[index])
+export function get(index: number) {
+  return <A>(self: ImmutableArray<A>): Maybe<NonNullable<A>> => Maybe.fromNullable(self.array[index])
 }
-
-/**
- * @tsplus static ImmutableArray/Aspects get
- */
-export const get = Pipeable(get_)

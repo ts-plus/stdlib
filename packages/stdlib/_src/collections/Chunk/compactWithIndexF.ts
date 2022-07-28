@@ -1,5 +1,5 @@
 /**
- * @tsplus static Chunk/Ops compactWithIndexF
+ * @tsplus static Chunk.Ops compactWithIndexF
  */
 export const compactWithIndexF = WitherableWithIndex.implementCompactWithIndexF<number, Chunk.HKT>()(
   <FR, FE, A, B, G extends HKT>(_: {

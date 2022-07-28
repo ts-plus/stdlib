@@ -1,7 +1,7 @@
 /**
  * Return a chunk of length `n` with element `i` initialized with `f(i)`.
  *
- * @tsplus static Chunk/Ops makeBy
+ * @tsplus static Chunk.Ops makeBy
  */
 export function makeBy<A>(n: number, f: (i: number) => A): Chunk<A> {
   const b = Chunk.builder<A>()

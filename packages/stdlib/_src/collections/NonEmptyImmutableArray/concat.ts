@@ -1,21 +1,11 @@
 /**
- * @tsplus operator NonEmptyImmutableArray &
- * @tsplus fluent NonEmptyImmutableArray concat
+ * @tsplus pipeable-operator NonEmptyImmutableArray &
+ * @tsplus static NonEmptyImmutableArray.Aspects concat
+ * @tsplus pipeable NonEmptyImmutableArray.Aspects concat
  */
-export function concat_<A, B>(
-  self: NonEmptyImmutableArray<A>,
-  that: NonEmptyImmutableArray<B>
-): NonEmptyImmutableArray<A | B>
-export function concat_<A, B>(self: NonEmptyImmutableArray<A>, that: ImmutableArray<B>): NonEmptyImmutableArray<A | B>
-export function concat_<A, B>(self: NonEmptyImmutableArray<A>, that: ImmutableArray<B>): NonEmptyImmutableArray<A | B> {
-  return new ImmutableArray([...self.array, ...that.array] as any) as NonEmptyImmutableArray<A | B>
-}
-
-/**
- * @tsplus static NonEmptyImmutableArray/Aspects concat
- */
-export function concat<B>(that: NonEmptyImmutableArray<B>) {
-  return <A>(self: NonEmptyImmutableArray<A>): NonEmptyImmutableArray<A | B> => self & that
+export function concat<B>(that: ImmutableArray<B>) {
+  return <A>(self: NonEmptyImmutableArray<A>): NonEmptyImmutableArray<A | B> =>
+    new ImmutableArray([...self.array, ...that.array] as any) as NonEmptyImmutableArray<A | B>
 }
 
 /**

@@ -26,27 +26,32 @@ export interface IterableWeakMap<K extends object, V> extends Collection<[K, V]>
 }
 
 /**
- * @tsplus type IterableWeakMapOps
+ * @tsplus type IterableWeakMap.Ops
  */
-export interface IterableWeakMapOps {}
-export const IterableWeakMap: IterableWeakMapOps = {}
-
-/**
- * @tsplus index IterableWeakMap
- * @tsplus fluent IterableWeakMap getMaybe
- */
-export function getMaybe_<K extends object, V>(
-  self: IterableWeakMap<K, V>,
-  key: K
-): Maybe<V> {
-  return self.has(key) ? Maybe.some(self.get(key)!) : Maybe.none
+export interface IterableWeakMapOps {
+  readonly $: IterableWeakMapAspects
+}
+export const IterableWeakMap: IterableWeakMapOps = {
+  $: {}
 }
 
-export const getMaybe = Pipeable(getMaybe_)
+/**
+ * @tsplus type IterableWeakMap.Aspects
+ */
+export interface IterableWeakMapAspects {}
 
 /**
- * @tsplus static IterableWeakMapOps make
- * @tsplus static IterableWeakMapOps __call
+ * @tsplus pipeable-index IterableWeakMap
+ * @tsplus static IterableWeakMap.Aspects getMaybe
+ * @tsplus pipeable IterableWeakMap getMaybe
+ */
+export function getMaybe<K extends object>(key: K) {
+  return <V>(self: IterableWeakMap<K, V>): Maybe<V> => self.has(key) ? Maybe.some(self.get(key)!) : Maybe.none
+}
+
+/**
+ * @tsplus static IterableWeakMap.Ops make
+ * @tsplus static IterableWeakMap.Ops __call
  */
 export function make<K extends object, V>(
   iterable: Collection<[K, V]>

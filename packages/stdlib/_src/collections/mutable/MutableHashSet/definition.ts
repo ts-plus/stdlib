@@ -1,6 +1,6 @@
 /**
  * @tsplus type MutableHashSet
- * @tsplus companion MutableHashSet/Ops
+ * @tsplus companion MutableHashSet.Ops
  */
 export class MutableHashSet<A> implements Collection<A> {
   private backingMap: MutableHashMap<A, boolean>

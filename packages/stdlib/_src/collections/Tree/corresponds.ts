@@ -1,17 +1,13 @@
 /**
- * @tsplus fluent Tree corresponds
+ * @tsplus static Tree.Aspects corresponds
+ * @tsplus pipeable Tree corresponds
  */
-export function corresponds_<A, B>(
-  self: Tree<A>,
+export function corresponds<A, B>(
   that: Tree<B>,
   f: (a: A, b: B) => boolean
-): boolean {
-  return (
+) {
+  return (self: Tree<A>): boolean => (
     f(self.value, that.value) &&
-    self.forest.corresponds(that.forest, (a, b) => corresponds_(a, b, f))
+    self.forest.corresponds(that.forest, (a, b) => a.corresponds(b, f))
   )
 }
-/**
- * @tsplus static Tree/Aspects corresponds
- */
-export const corresponds = Pipeable(corresponds_)

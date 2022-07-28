@@ -1,18 +1,10 @@
 /**
  * Classic Applicative.
  *
- * @tsplus fluent Either ap
+ * @tsplus static Either.Aspects ap
+ * @tsplus pipeable Either ap
  */
-export function ap_<E, A, B, E2>(
-  self: Either<E, (a: A) => B>,
-  that: Either<E2, A>
-): Either<E | E2, B> {
-  return self.isLeft() ? self : that.isLeft() ? that : Either.right(self.right(that.right))
+export function ap<E2, A>(that: Either<E2, A>) {
+  return <E, B>(self: Either<E, (a: A) => B>): Either<E | E2, B> =>
+    self.isLeft() ? self : that.isLeft() ? that : Either.right(self.right(that.right))
 }
-
-/**
- * Classic Applicative.
- *
- * @tsplus static Either/Aspects ap
- */
-export const ap = Pipeable(ap_)

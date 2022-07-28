@@ -1,7 +1,7 @@
 import type { Tag } from "@tsplus/stdlib/service/Tag"
 
 /**
- * @tsplus type Env/Ops
+ * @tsplus type Env.Ops
  */
 export interface EnvOps {
   readonly sym: unique symbol

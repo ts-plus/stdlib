@@ -3,35 +3,28 @@ import type { Direction } from "@tsplus/stdlib/collections/RedBlackTree/definiti
 /**
  * Get the keys of the tree.
  *
- * @tsplus fluent RedBlackTree keys
+ * @tsplus static RedBlackTree.Aspects keys
+ * @tsplus pipeable RedBlackTree keys
  */
-export function keys_<K, V>(
-  self: RedBlackTree<K, V>,
-  direction: Direction = "Forward"
-): IterableIterator<K> {
-  const begin = self[Symbol.iterator]()
-  let count = 0
-  return {
-    [Symbol.iterator]: () => keys_(self, direction),
-    next: (): IteratorResult<K> => {
-      count++
-      const entry = begin.key
-      if (direction === "Forward") {
-        begin.moveNext()
-      } else {
-        begin.movePrev()
+export function keys(direction: Direction = "Forward") {
+  return <K, V>(self: RedBlackTree<K, V>): IterableIterator<K> => {
+    const begin = self[Symbol.iterator]()
+    let count = 0
+    return {
+      [Symbol.iterator]: () => self.keys(direction),
+      next: (): IteratorResult<K> => {
+        count++
+        const entry = begin.key
+        if (direction === "Forward") {
+          begin.moveNext()
+        } else {
+          begin.movePrev()
+        }
+        return entry.fold(
+          () => ({ value: count, done: true }),
+          (entry) => ({ value: entry, done: false })
+        )
       }
-      return entry.fold(
-        () => ({ value: count, done: true }),
-        (entry) => ({ value: entry, done: false })
-      )
     }
   }
 }
-
-/**
- * Get the keys of the tree.
- *
- * @tsplus static RedBlackTree/Aspects keys
- */
-export const keys = Pipeable(keys_)

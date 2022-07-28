@@ -5,7 +5,7 @@
  * with the given `Equivalence`. In case of arrays of different lengths, the
  * result is non equality.
  *
- * @tsplus static ImmutableArray/Ops getEquivalence
+ * @tsplus static ImmutableArray.Ops getEquivalence
  */
 export function getEquivalnce<A>(E: Equivalence<A>): Equivalence<ImmutableArray<A>> {
   return Equivalence((xs, ys) =>

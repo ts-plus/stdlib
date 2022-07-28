@@ -1,11 +1,11 @@
-export const TupleSym: unique symbol = Symbol.for("tsplus/Tuple")
+export const TupleSym: unique symbol = Symbol.for("Tuple")
 export type TupleSym = typeof TupleSym
 
 /**
  * A `Tuple` represents an immutable, finite ordered sequence of elements.
  *
- * @tsplus type tsplus/Tuple
- * @tsplus companion tsplus/TupleOps
+ * @tsplus type Tuple
+ * @tsplus companion Tuple.Ops
  */
 export class Tuple<T extends readonly unknown[]> implements Collection<T[number]>, Equals {
   readonly [TupleSym]: TupleSym = TupleSym
@@ -36,7 +36,17 @@ export class Tuple<T extends readonly unknown[]> implements Collection<T[number]
 }
 
 /**
- * @tsplus unify tsplus/Tuple
+ * @tsplus static Tuple.Ops $
+ */
+export const TupleAspects: TupleAspects = {}
+
+/**
+ * @tsplus type Tuple.Aspects
+ */
+export interface TupleAspects {}
+
+/**
+ * @tsplus unify Tuple
  */
 export function unifyTuple<X extends Tuple<any>>(
   self: X
@@ -47,7 +57,7 @@ export function unifyTuple<X extends Tuple<any>>(
 /**
  * Checks if the provided value is a `Tuple`.
  *
- * @tsplus static tsplus/TupleOps isTuple
+ * @tsplus static Tuple.Ops isTuple
  */
 export function isTuple(self: unknown): self is Tuple<unknown[]> {
   return typeof self === "object" && self != null && TupleSym in self

@@ -1,15 +1,16 @@
 /**
- * @tsplus fluent List exists
+ * @tsplus static List.Aspects exists
+ * @tsplus pipeable List exists
  */
-export function exists_<A>(self: List<A>, p: Predicate<A>): boolean {
-  let these = self
-  while (!these.isNil()) {
-    if (p(these.head)) {
-      return true
+export function exists<A>(p: Predicate<A>) {
+  return (self: List<A>): boolean => {
+    let these = self
+    while (!these.isNil()) {
+      if (p(these.head)) {
+        return true
+      }
+      these = these.tail
     }
-    these = these.tail
+    return false
   }
-  return false
 }
-
-export const exists = Pipeable(exists_)

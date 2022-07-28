@@ -1,7 +1,7 @@
 import type * as P from "@tsplus/stdlib/prelude/ChainRec"
 
 /**
- * @tsplus static Chunk/Ops depthFirstChainRec
+ * @tsplus static Chunk.Ops depthFirstChainRec
  */
 export function depthFirstChainRec_<A, B>(init: A, f: (a: A) => Chunk<Either<A, B>>): Chunk<B> {
   let todo = f(init)
@@ -19,19 +19,19 @@ export function depthFirstChainRec_<A, B>(init: A, f: (a: A) => Chunk<Either<A, 
 }
 
 /**
- * @tsplus static Chunk/Aspects depthFirstChainRec
+ * @tsplus static Chunk.Aspects depthFirstChainRec
  */
 export const depthFirstChainRec = Pipeable(depthFirstChainRec_)
 
 /**
- * @tsplus static Chunk/Ops DepthFirstChainRec
+ * @tsplus static Chunk.Ops DepthFirstChainRec
  */
 export const DepthFirstChainRec = HKT.instance<P.ChainRec<Chunk.HKT>>({
   chainRec: Chunk.$.depthFirstChainRec
 })
 
 /**
- * @tsplus static Chunk/Ops breadthFirstChainRec
+ * @tsplus static Chunk.Ops breadthFirstChainRec
  */
 export function breadthFirstChainRec_<A, B>(init: A, f: (a: A) => Chunk<Either<A, B>>): Chunk<B> {
   let todo = f(init)
@@ -49,12 +49,12 @@ export function breadthFirstChainRec_<A, B>(init: A, f: (a: A) => Chunk<Either<A
 }
 
 /**
- * @tsplus static Chunk/Aspects breadthFirstChainRec
+ * @tsplus static Chunk.Aspects breadthFirstChainRec
  */
 export const breadthFirstChainRec = Pipeable(breadthFirstChainRec_)
 
 /**
- * @tsplus static Chunk/Ops BreadthFirstChainRec
+ * @tsplus static Chunk.Ops BreadthFirstChainRec
  */
 export const BreadthFirstChainRec = HKT.instance<P.ChainRec<Chunk.HKT>>({
   chainRec: Chunk.$.breadthFirstChainRec

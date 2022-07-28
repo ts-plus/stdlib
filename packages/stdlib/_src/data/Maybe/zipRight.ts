@@ -1,14 +1,10 @@
 /**
  * Apply both and return second.
  *
- * @tsplus operator Maybe >
- * @tsplus fluent Maybe zipRight
+ * @tsplus pipeable-operator Maybe >
+ * @tsplus static Maybe.Aspects zipRight
+ * @tsplus pipeable Maybe zipRight
  */
-export function zipRight_<A, B>(fa: Maybe<A>, fb: Maybe<B>): Maybe<B> {
-  return fa.map(() => (b: B) => b).ap(fb)
+export function zipRight<B>(that: Maybe<B>) {
+  return <A>(self: Maybe<A>): Maybe<B> => self.flatMap(() => that)
 }
-
-/**
- * @tsplus static Maybe/Aspects zipRight
- */
-export const zipRight = Pipeable(zipRight_)

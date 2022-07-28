@@ -3,7 +3,7 @@ import type { Node } from "@tsplus/stdlib/collections/RedBlackTree/node"
 /**
  * Visit all nodes in order until a `Some` is returned.
  *
- * @tsplus static RedBlackTree/Ops visitFull
+ * @tsplus static RedBlackTree.Ops visitFull
  */
 export function visitFull<K, V, A>(
   node: Node<K, V>,

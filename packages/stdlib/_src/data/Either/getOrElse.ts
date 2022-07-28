@@ -1,15 +1,9 @@
 /**
  * Get `A` or in case self is left return `onLeft` result.
  *
- * @tsplus fluent Either getOrElse
+ * @tsplus static Either.Aspects getOrElse
+ * @tsplus pipeable Either getOrElse
  */
-export function getOrElse_<E, A, B>(self: Either<E, B>, onLeft: (e: E) => A): A | B {
-  return self.isLeft() ? onLeft(self.left) : self.right
+export function getOrElse<E, A>(onLeft: (e: E) => A) {
+  return <B>(self: Either<E, B>): A | B => self.isLeft() ? onLeft(self.left) : self.right
 }
-
-/**
- * Get `A` or in case self is left return `onLeft` result.
- *
- * @tsplus static Either/Aspects getOrElse
- */
-export const getOrElse = Pipeable(getOrElse_)

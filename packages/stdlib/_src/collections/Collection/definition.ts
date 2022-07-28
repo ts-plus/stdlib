@@ -13,7 +13,16 @@ declare global {
 export type Collection<A> = ESIterable<A>
 
 /**
- * @tsplus type CollectionOps
+ * @tsplus type Collection.Ops
  */
-export interface CollectionOps {}
-export const Collection: CollectionOps = {}
+export interface CollectionOps {
+  readonly $: CollectionAspects
+}
+export const Collection: CollectionOps = {
+  $: {}
+}
+
+/**
+ * @tsplus type Collection.Aspects
+ */
+export interface CollectionAspects {}

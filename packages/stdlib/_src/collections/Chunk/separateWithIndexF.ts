@@ -1,5 +1,5 @@
 /**
- * @tsplus static Chunk/Ops separateWithIndexF
+ * @tsplus static Chunk.Ops separateWithIndexF
  */
 export const separateWithIndexF = WiltableWithIndex.implementSeparateWithIndexF<number, Chunk.HKT>()(
   <A, B, R, E, G extends HKT>(_: {

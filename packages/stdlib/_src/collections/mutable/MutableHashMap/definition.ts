@@ -11,7 +11,7 @@ export type _V = typeof _V
  * A mutable `HashMap`.
  *
  * @tsplus type MutableHashMap
- * @tsplus companion MutableHashMap/Ops
+ * @tsplus companion MutableHashMap.Ops
  */
 export class MutableHashMap<K, V> implements Collection<Tuple<[K, V]>> {
   readonly [MutableHashMapSym]: MutableHashMapSym = MutableHashMapSym
@@ -160,3 +160,13 @@ class Node<K, V> implements Iterable<Tuple<[K, V]>> {
     }
   }
 }
+
+/**
+ * @tsplus static MutableHashMap.Ops $
+ */
+export const MutableHashMapAspects: MutableHashMapAspects = {}
+
+/**
+ * @tsplus type MutableHashMap.Aspects
+ */
+export interface MutableHashMapAspects {}

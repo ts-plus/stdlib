@@ -1,11 +1,9 @@
 /**
  * Prepends a value to a tuple.
  *
- * @tsplus fluent tsplus/Tuple prepend
+ * @tsplus static Tuple.Aspects prepend
+ * @tsplus pipeable Tuple prepend
  */
-export function prepend<Ks extends unknown[], K>(
-  self: Tuple<Ks>,
-  k: K
-): Tuple<[K, ...Ks]> {
-  return new Tuple([k, ...self.tuple])
+export function prepend<K>(k: K) {
+  return <Ks extends unknown[]>(self: Tuple<Ks>): Tuple<[K, ...Ks]> => new Tuple([k, ...self.tuple])
 }

@@ -3,7 +3,7 @@ import * as P from "@tsplus/stdlib/service/Patch"
 import * as T from "@tsplus/stdlib/service/Tag"
 
 /**
- * @tsplus type Service/Ops
+ * @tsplus type Service.Ops
  */
 export interface ServiceOps {
   readonly Tag: T.TagOps

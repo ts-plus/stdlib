@@ -1,7 +1,7 @@
 /**
  * Constructs a new `MutableHashMap` from an array of key/value pairs.
  *
- * @tsplus static MutableHashMap/Ops from
+ * @tsplus static MutableHashMap.Ops from
  */
 export function from<K, V>(
   entries: Collection<Tuple<[K, V]>>

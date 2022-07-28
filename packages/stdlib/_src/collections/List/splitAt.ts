@@ -1,15 +1,9 @@
 /**
  * Returns two splits of this list at the specified index.
  *
- * @tsplus fluent List splitAt
+ * @tsplus static List.Aspects splitAt
+ * @tsplus pipeable List splitAt
  */
-export function splitAt_<A>(self: List<A>, n: number): Tuple<[List<A>, List<A>]> {
-  return Tuple(self.take(n).toList, self.drop(n))
+export function splitAt(n: number) {
+  return <A>(self: List<A>): Tuple<[List<A>, List<A>]> => Tuple(self.take(n).toList, self.drop(n))
 }
-
-/**
- * Returns two splits of this list at the specified index.
- *
- * @tsplus static List/Aspects splitAt
- */
-export const splitAt = Pipeable(splitAt_)

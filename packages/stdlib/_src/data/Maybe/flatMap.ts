@@ -1,13 +1,9 @@
 /**
  * Builds a new maybe constructed using the value of self.
  *
- * @tsplus fluent Maybe flatMap
+ * @tsplus static Maybe.Aspects flatMap
+ * @tsplus pipeable Maybe flatMap
  */
-export function flatMap_<A, B>(self: Maybe<A>, f: (a: A) => Maybe<B>): Maybe<B> {
-  return self.isNone() ? Maybe.none : f(self.value)
+export function flatMap<A, B>(f: (a: A) => Maybe<B>) {
+  return (self: Maybe<A>): Maybe<B> => self.isNone() ? Maybe.none : f(self.value)
 }
-
-/**
- * @tsplus static Maybe/Aspects flatMap
- */
-export const flatMap = Pipeable(flatMap_)

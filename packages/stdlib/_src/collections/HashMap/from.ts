@@ -1,7 +1,7 @@
 /**
  * Constructs a new `HashMap` from an array of key/value pairs.
  *
- * @tsplus static HashMap/Ops from
+ * @tsplus static HashMap.Ops from
  */
 export function from<K, V>(
   entries: Collection<Tuple<[K, V]>>

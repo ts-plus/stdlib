@@ -1,7 +1,7 @@
 import type * as P from "@tsplus/stdlib/prelude/ChainRec"
 
 /**
- * @tsplus static ImmutableArray/Ops depthFirstChainRec
+ * @tsplus static ImmutableArray.Ops depthFirstChainRec
  */
 export function depthFirstChainRec<A, B>(a: A, f: (a: A) => ImmutableArray<Either<A, B>>): ImmutableArray<B> {
   const todo: Array<Either<A, B>> = [...f(a)]
@@ -20,14 +20,14 @@ export function depthFirstChainRec<A, B>(a: A, f: (a: A) => ImmutableArray<Eithe
 }
 
 /**
- * @tsplus static ImmutableArray/Ops DepthFirstChainRec
+ * @tsplus static ImmutableArray.Ops DepthFirstChainRec
  */
 export const DepthFirstChainRec = HKT.instance<P.ChainRec<ImmutableArray.HKT>>({
   chainRec: (f) => (a) => depthFirstChainRec(a, f)
 })
 
 /**
- * @tsplus static ImmutableArray/Ops breadthFirstChainRec
+ * @tsplus static ImmutableArray.Ops breadthFirstChainRec
  */
 export function breadthFirstChainRec<A, B>(a: A, f: (a: A) => ImmutableArray<Either<A, B>>): ImmutableArray<B> {
   const initial = f(a)
@@ -52,7 +52,7 @@ export function breadthFirstChainRec<A, B>(a: A, f: (a: A) => ImmutableArray<Eit
 }
 
 /**
- * @tsplus static ImmutableArray/Ops BreadthFirstChainRec
+ * @tsplus static ImmutableArray.Ops BreadthFirstChainRec
  */
 export const BreadthFirstChainRec = HKT.instance<P.ChainRec<ImmutableArray.HKT>>({
   chainRec: (f) => (a) => breadthFirstChainRec(a, f)

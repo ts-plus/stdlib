@@ -1,7 +1,7 @@
 const DoF = DSL.getDoF(ImmutableArray.Monad)
 
 /**
- * @tsplus static ImmutableArray/Ops Do
+ * @tsplus static ImmutableArray.Ops Do
  */
 export const Do = DoF.Do
 
@@ -17,7 +17,7 @@ export function bind_<Scope, N extends string, A>(
 }
 
 /**
- * @tsplus static ImmutableArray/Aspects bind
+ * @tsplus static ImmutableArray.Aspects bind
  */
 export const bind = DoF.bind
 
@@ -33,6 +33,6 @@ export function bindValue_<Scope, N extends string, B>(
 }
 
 /**
- * @tsplus static ImmutableArray/Aspects bindValue
+ * @tsplus static ImmutableArray.Aspects bindValue
  */
 export const bindValue = DoF.bindValue

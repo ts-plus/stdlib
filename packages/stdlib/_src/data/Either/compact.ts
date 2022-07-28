@@ -1,7 +1,7 @@
 /**
  * Compact types Either<E, A> | Either<E2, B> = Either<E | E2, A | B>
  *
- * @tsplus static Either/Ops compact
+ * @tsplus static Either.Ops compact
  * @tsplus macro identity
  */
 export function compact<E extends Either<any, any>>(

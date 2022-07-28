@@ -1,7 +1,7 @@
 /**
  * Construct a new `HashSet` from a `Collection` of values
  *
- * @tsplus static HashSet/Ops from
+ * @tsplus static HashSet.Ops from
  * @tsplus getter Collection toHashSet
  * @tsplus getter List toHashSet
  */

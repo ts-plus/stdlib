@@ -2,7 +2,7 @@ import { SortedSetInternal } from "@tsplus/stdlib/collections/SortedSet/_interna
 import { Tuple } from "@tsplus/stdlib/data/Tuple"
 
 /**
- * @tsplus static SortedSet/Ops from
+ * @tsplus static SortedSet.Ops from
  */
 export function from_<A>(
   ord: Ord<A>
@@ -15,6 +15,6 @@ export function from_<A>(
 }
 
 /**
- * @tsplus static SortedSet/Aspects from
+ * @tsplus static SortedSet.Aspects from
  */
 export const from = Pipeable(from_)

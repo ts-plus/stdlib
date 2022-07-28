@@ -1,19 +1,9 @@
 /**
  * Maps over both the `Left` and the `Right` values.
  *
- * @tsplus fluent Either mapBoth
+ * @tsplus static Either.Aspects mapBoth
+ * @tsplus pipeable Either mapBoth
  */
-export function mapBoth_<E, A, E1, B>(
-  self: Either<E, A>,
-  f: (e: E) => E1,
-  g: (a: A) => B
-): Either<E1, B> {
-  return self.isLeft() ? Either.left(f(self.left)) : Either.right(g(self.right))
+export function mapBoth<E, A, E1, B>(f: (e: E) => E1, g: (a: A) => B) {
+  return (self: Either<E, A>): Either<E1, B> => self.isLeft() ? Either.left(f(self.left)) : Either.right(g(self.right))
 }
-
-/**
- * Maps over both the `Left` and the `Right` values.
- *
- * @tsplus static Either/Aspects mapBoth
- */
-export const mapBoth = Pipeable(mapBoth_)

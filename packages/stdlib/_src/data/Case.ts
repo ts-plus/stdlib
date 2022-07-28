@@ -1,5 +1,5 @@
 /**
- * @tsplus type CaseOps
+ * @tsplus type Case.Ops
  */
 export interface CaseOps {
   of: <A extends Case>() => Case.Constructor<A>

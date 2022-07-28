@@ -1,4 +1,4 @@
 /**
- * @tsplus static Either/Ops sequence
+ * @tsplus static Either.Ops sequence
  */
 export const sequence = ForEach.sequenceF(Either.ForEach)

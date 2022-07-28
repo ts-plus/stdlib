@@ -1,15 +1,10 @@
 /**
  * Separate elements based on a predicate.
  *
- * @tsplus fluent ImmutableArray partition
+ * @tsplus static ImmutableArray.Aspects partition
+ * @tsplus pipeable ImmutableArray partition
  */
-export function partition_<A>(self: ImmutableArray<A>, f: Predicate<A>): Tuple<[ImmutableArray<A>, ImmutableArray<A>]> {
-  return self.partitionWithIndex((_, a) => f(a))
+export function partition<A>(f: Predicate<A>) {
+  return (self: ImmutableArray<A>): Tuple<[ImmutableArray<A>, ImmutableArray<A>]> =>
+    self.partitionWithIndex((_, a) => f(a))
 }
-
-/**
- * Separate elements based on a predicate.
- *
- * @tsplus static ImmutableArray/Aspects partition
- */
-export const partition = Pipeable(partition_)

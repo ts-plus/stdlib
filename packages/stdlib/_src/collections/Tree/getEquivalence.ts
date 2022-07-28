@@ -1,5 +1,5 @@
 /**
- * @tsplus static Tree/Ops getEquivalence
+ * @tsplus static Tree.Ops getEquivalence
  */
 export function getEquivalence<A>(E: Equivalence<A>): Equivalence<Tree<A>> {
   // eslint-disable-next-line prefer-const

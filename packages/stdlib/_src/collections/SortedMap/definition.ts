@@ -18,12 +18,12 @@ export interface SortedMap<K, V> extends Collection<Tuple<[K, V]>>, Equals {
 }
 
 /**
- * @tsplus type SortedMap/Ops
+ * @tsplus type SortedMap.Ops
  */
 export interface SortedMapOps {}
 export const SortedMap: SortedMapOps = {}
 
 /**
- * @tsplus type SortedMap/Aspects
+ * @tsplus type SortedMap.Aspects
  */
 export interface SortedMapAspects {}
