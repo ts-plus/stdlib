@@ -3,7 +3,7 @@ import { Unbounded } from "@tsplus/stdlib/collections/mutable/MutableQueue/_inte
 /**
  * Creates a new unbounded `MutableQueue`.
  *
- * @tsplus static MutableQueue/Ops unbounded
+ * @tsplus static MutableQueue.Ops unbounded
  */
 export function unbounded<A>(): MutableQueue<A> {
   return new Unbounded()

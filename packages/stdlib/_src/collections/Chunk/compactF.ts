@@ -1,5 +1,5 @@
 /**
- * @tsplus static Chunk/Ops compactF
+ * @tsplus static Chunk.Ops compactF
  */
 export const compactF = Witherable.implementCompactF<Chunk.HKT>()(
   <FR, FE, A, B, G extends HKT>(_: {

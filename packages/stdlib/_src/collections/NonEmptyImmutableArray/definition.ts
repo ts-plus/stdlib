@@ -7,7 +7,7 @@ export interface NonEmptyImmutableArrayBrand {
 export type NonEmptyImmutableArray<A> = ImmutableArray<A> & NonEmptyImmutableArrayBrand
 
 /**
- * @tsplus type NonEmptyImmutableArray/Ops
+ * @tsplus type NonEmptyImmutableArray.Ops
  */
 export interface NonEmptyImmutableArrayOps {
   readonly $: NonEmptyImmutableArrayAspects
@@ -17,6 +17,6 @@ export const NonEmptyImmutableArray: NonEmptyImmutableArrayOps = {
 }
 
 /**
- * @tsplus type NonEmptyImmutableArray/Aspects
+ * @tsplus type NonEmptyImmutableArray.Aspects
  */
 export interface NonEmptyImmutableArrayAspects {}

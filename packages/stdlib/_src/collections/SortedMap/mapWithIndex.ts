@@ -1,14 +1,8 @@
 /**
- * @tsplus fluent SortedMap mapWithIndex
+ * @tsplus static SortedMap.Aspects mapWithIndex
+ * @tsplus pipeable SortedMap mapWithIndex
  */
-export function mapWithIndex_<K, V, A>(
-  self: SortedMap<K, V>,
-  f: (k: K, v: V) => A
-): SortedMap<K, A> {
-  return self.reduceWithIndex(SortedMap.empty<K, A>(self.getOrd), (b, k, v) => b.set(k, f(k, v)))
+export function mapWithIndex<K, V, A>(f: (k: K, v: V) => A) {
+  return (self: SortedMap<K, V>): SortedMap<K, A> =>
+    self.reduceWithIndex(SortedMap.empty<K, A>(self.getOrd), (b, k, v) => b.set(k, f(k, v)))
 }
-
-/**
- * @tsplus static SortedMap/Aspects mapWithIndex
- */
-export const mapWithIndex = Pipeable(mapWithIndex_)

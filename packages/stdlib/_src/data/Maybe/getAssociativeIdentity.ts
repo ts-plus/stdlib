@@ -1,7 +1,7 @@
 /**
  * AssociativeIdentity for `Maybe<A>`
  *
- * @tsplus static Maybe/Ops getAssociativeIdentity
+ * @tsplus static Maybe.Ops getAssociativeIdentity
  */
 export function getAssociativeIdentity<A>(
   M: AssociativeIdentity<A> | "First" | "Last"

@@ -1,11 +1,9 @@
 /**
- * @tsplus fluent SortedMap map
+ * @tsplus static SortedMap.Aspects map
+ * @tsplus pipeable SortedMap map
  */
-export function map_<K, V, B>(self: SortedMap<K, V>, f: (v: V) => B): SortedMap<K, B> {
-  return self.mapWithIndex((_, v: V) => f(v))
+export function map<V, B>(f: (v: V) => B) {
+  return <K>(self: SortedMap<K, V>): SortedMap<K, B> => {
+    return self.mapWithIndex((_, v: V) => f(v))
+  }
 }
-
-/**
- * @tsplus static SortedMap/Aspects map
- */
-export const map = Pipeable(map_)

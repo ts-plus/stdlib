@@ -4,7 +4,7 @@ declare global {
    */
   export interface Array<T> extends Collection<T> {}
   /**
-   * @tsplus type Array/Ops
+   * @tsplus type Array.Ops
    */
   export interface ArrayConstructor {
   }

@@ -1,18 +1,10 @@
 /**
  * Separate elements based on a map function.
  *
- * @tsplus fluent ImmutableArray partitionMap
+ * @tsplus static ImmutableArray.Aspects partitionMap
+ * @tsplus pipeable ImmutableArray partitionMap
  */
-export function partitionMap_<A, B, C>(
-  self: ImmutableArray<A>,
-  f: (a: A) => Either<B, C>
-): Tuple<[ImmutableArray<B>, ImmutableArray<C>]> {
-  return self.partitionMapWithIndex((_, a) => f(a))
+export function partitionMap<A, B, C>(f: (a: A) => Either<B, C>) {
+  return (self: ImmutableArray<A>): Tuple<[ImmutableArray<B>, ImmutableArray<C>]> =>
+    self.partitionMapWithIndex((_, a) => f(a))
 }
-
-/**
- * Separate elements based on a map function.
- *
- * @tsplus static ImmutableArray/Aspects partitionMap
- */
-export const partitionMap = Pipeable(partitionMap_)

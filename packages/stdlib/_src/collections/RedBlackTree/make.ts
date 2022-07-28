@@ -1,8 +1,8 @@
 /**
  * Creates a new Red-Black Tree.
  *
- * @tsplus static RedBlackTree/Ops __call
- * @tsplus static RedBlackTree/Ops make
+ * @tsplus static RedBlackTree.Ops __call
+ * @tsplus static RedBlackTree.Ops make
  */
 export function make<K, Entries extends Tuple<[K, any]>[]>(
   ord: Ord<K>

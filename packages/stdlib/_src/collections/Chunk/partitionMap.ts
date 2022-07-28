@@ -2,19 +2,9 @@
  * Partitions the elements of this chunk into two chunks using the specified
  * function.
  *
- * @tsplus fluent Chunk partitionMap
+ * @tsplus static Chunk.Aspects partitionMap
+ * @tsplus pipeable Chunk partitionMap
  */
-export function partitionMap_<A, B, C>(
-  self: Chunk<A>,
-  f: (a: A) => Either<B, C>
-): Tuple<[Chunk<B>, Chunk<C>]> {
-  return self.partitionMapWithIndex((_, a) => f(a))
+export function partitionMap<A, B, C>(f: (a: A) => Either<B, C>) {
+  return (self: Chunk<A>): Tuple<[Chunk<B>, Chunk<C>]> => self.partitionMapWithIndex((_, a) => f(a))
 }
-
-/**
- * Partitions the elements of this chunk into two chunks using the specified
- * function.
- *
- * @tsplus static Chunk/Aspects partitionMap
- */
-export const partitionMap = Pipeable(partitionMap_)

@@ -2,32 +2,25 @@
  * Folds over the events in this collection of events using the specified
  * functions.
  *
- * @tsplus fluent ParSeq fold
+ * @tsplus static ParSeq.Aspects fold
+ * @tsplus pipeable ParSeq fold
  */
-export function fold_<A, B>(
-  self: ParSeq<A>,
+export function fold<A, B>(
   emptyCase: B,
   singleCase: (a: A) => B,
   thenCase: (l: B, r: B) => B,
   bothCase: (l: B, r: B) => B
-): B {
-  return foldLoop(
-    emptyCase,
-    singleCase,
-    thenCase,
-    bothCase,
-    List(self),
-    List.empty()
-  ).unsafeHead!
+) {
+  return (self: ParSeq<A>): B =>
+    foldLoop(
+      emptyCase,
+      singleCase,
+      thenCase,
+      bothCase,
+      List(self),
+      List.empty()
+    ).unsafeHead!
 }
-
-/**
- * Folds over the events in this collection of events using the specified
- * functions.
- *
- * @tsplus static ParSeq/Aspects fold
- */
-export const fold = Pipeable(fold_)
 
 function foldLoop<A, B>(
   emptyCase: B,

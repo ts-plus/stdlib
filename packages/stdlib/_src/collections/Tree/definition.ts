@@ -4,7 +4,7 @@ export type TreeTypeId = typeof TreeTypeId
 export type Forest<A> = Tree.Forest<A>
 /**
  * @tsplus type Tree
- * @tsplus companion Tree/Ops
+ * @tsplus companion Tree.Ops
  */
 export class Tree<A> implements Equals {
   readonly [TreeTypeId]: TreeTypeId = TreeTypeId
@@ -33,18 +33,18 @@ export declare namespace Tree {
 }
 
 /**
- * @tsplus type Tree/Aspects
+ * @tsplus type Tree.Aspects
  */
 export interface TreeAspects {}
 /**
- * @tsplus static Tree/Ops $
+ * @tsplus static Tree.Ops $
  */
 export const TreeAspects: TreeAspects = {}
 
 const empty = Chunk.empty<never>()
 
 /**
- * @tsplus static Tree/Ops __call
+ * @tsplus static Tree.Ops __call
  */
 export function make<A>(value: A, forest: Forest<A> = empty): Tree<A> {
   return new Tree(value, forest)
@@ -53,7 +53,7 @@ export function make<A>(value: A, forest: Forest<A> = empty): Tree<A> {
 /**
  * Type guard
  *
- * @tsplus static Tree/Ops isTree
+ * @tsplus static Tree.Ops isTree
  */
 export function isTree(t: unknown): t is Tree<unknown> {
   return typeof t === "object" && t instanceof Tree && TreeTypeId in t

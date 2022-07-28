@@ -13,7 +13,7 @@ export interface ImmutableQueue<A> extends Collection<A>, Equals {
 }
 
 /**
- * @tsplus type ImmutableQueue/Ops
+ * @tsplus type ImmutableQueue.Ops
  */
 export interface ImmutableQueueOps {
   $: ImmutableQueueAspects
@@ -23,6 +23,6 @@ export const ImmutableQueue: ImmutableQueueOps = {
 }
 
 /**
- * @tsplus type ImmutableQueue/Aspects
+ * @tsplus type ImmutableQueue.Aspects
  */
 export interface ImmutableQueueAspects {}

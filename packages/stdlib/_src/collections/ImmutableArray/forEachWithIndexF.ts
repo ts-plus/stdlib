@@ -1,5 +1,5 @@
 /**
- * @tsplus static ImmutableArray/Ops forEachWithIndexF
+ * @tsplus static ImmutableArray.Ops forEachWithIndexF
  */
 export const forEachWithIndexF = ForEachWithIndex.implementForEachWithIndexF<number, ImmutableArray.HKT>()(
   (_) =>

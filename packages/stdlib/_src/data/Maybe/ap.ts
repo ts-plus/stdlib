@@ -1,17 +1,14 @@
 /**
  * Classic applicative.
  *
- * @tsplus fluent Maybe ap
+ * @tsplus static Maybe.Aspects ap
+ * @tsplus pipeable Maybe ap
  */
-export function ap_<A, B>(fab: Maybe<(a: A) => B>, fa: Maybe<A>): Maybe<B> {
-  return fab.isNone() ?
-    Maybe.none :
-    fa.isNone() ?
-    Maybe.none :
-    Maybe.some(fab.value(fa.value))
+export function ap<A, B>(that: Maybe<A>) {
+  return (self: Maybe<(a: A) => B>): Maybe<B> =>
+    self.isNone() ?
+      Maybe.none :
+      that.isNone() ?
+      Maybe.none :
+      Maybe.some(self.value(that.value))
 }
-
-/**
- * @tsplus static Maybe/Aspects ap
- */
-export const ap = Pipeable(ap_)

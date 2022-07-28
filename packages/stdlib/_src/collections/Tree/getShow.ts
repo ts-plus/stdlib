@@ -1,5 +1,5 @@
 /**
- * @tsplus static Tree/Ops getShow
+ * @tsplus static Tree.Ops getShow
  */
 export function getShow<A>(S: Show<A>): Show<Tree<A>> {
   return Show(show_)

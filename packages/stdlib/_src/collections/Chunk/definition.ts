@@ -42,7 +42,7 @@ export declare namespace Chunk {
 }
 
 /**
- * @tsplus type Chunk/Ops
+ * @tsplus type Chunk.Ops
  */
 export interface ChunkOps {
   $: ChunkAspects
@@ -52,7 +52,7 @@ export const Chunk: ChunkOps = {
 }
 
 /**
- * @tsplus type Chunk/Aspects
+ * @tsplus type Chunk.Aspects
  */
 export interface ChunkAspects {}
 
@@ -1105,7 +1105,7 @@ export class Concat<A> extends ChunkInternal<A> {
 /**
  * Type guard
  *
- * @tsplus static Chunk/Ops isChunk
+ * @tsplus static Chunk.Ops isChunk
  */
 export function isChunk<A>(u: Iterable<A>): u is Chunk<A>
 export function isChunk(u: unknown): u is Chunk<unknown>
@@ -1133,7 +1133,7 @@ function array_(
 /**
  * Builds a chunk from an array.
  *
- * @tsplus static Chunk/Ops from
+ * @tsplus static Chunk.Ops from
  */
 export function from<A>(array: Iterable<A>): Chunk<A> {
   return array_(array)
@@ -1203,6 +1203,6 @@ export function corresponds_<A, B>(
  * and every pair of corresponding elements of this chunk and the specified
  * chunk satisfy the specified predicate.
  *
- * @tsplus static Chunk/Aspects corresponds
+ * @tsplus static Chunk.Aspects corresponds
  */
 export const corresponds = Pipeable(corresponds_)

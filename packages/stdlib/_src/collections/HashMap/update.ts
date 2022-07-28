@@ -1,19 +1,9 @@
 /**
  * Updates the value of the specified key within the `HashMap` if it exists.
  *
- * @tsplus fluent HashMap update
+ * @tsplus static HashMap.Aspects update
+ * @tsplus pipeable HashMap update
  */
-export function update_<K, V>(
-  self: HashMap<K, V>,
-  key: K,
-  f: (v: V) => V
-): HashMap<K, V> {
-  return self.modify(key, (maybe) => maybe.map(f))
+export function update<K, V>(key: K, f: (v: V) => V) {
+  return (self: HashMap<K, V>): HashMap<K, V> => self.modify(key, (maybe) => maybe.map(f))
 }
-
-/**
- * Updates the value of the specified key within the `HashMap` if it exists.
- *
- * @tsplus static HashMap/Aspects update
- */
-export const update = Pipeable(update_)

@@ -2,7 +2,7 @@
  * Constructs a `Chunk` by repeatedly applying the function `f` as long as it
  * returns `Some`.
  *
- * @tsplus static Chunk/Ops unfold
+ * @tsplus static Chunk.Ops unfold
  */
 export function unfold<A, S>(s: S, f: (s: S) => Maybe<Tuple<[A, S]>>): Chunk<A> {
   let builder = Chunk.empty<A>()

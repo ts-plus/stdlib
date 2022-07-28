@@ -1,26 +1,24 @@
 /**
  * Remove duplicates from an array, keeping the first occurrence of an element.
  *
- * @tsplus fluent ImmutableArray uniq
+ * @tsplus static ImmutableArray.Aspects uniq
+ * @tsplus pipeable ImmutableArray uniq
  */
-export function uniq_<A>(self: ImmutableArray<A>, E: Equivalence<A>): ImmutableArray<A> {
-  const includes = arrayIncludes(E)
-  const result: Array<A> = []
-  const length = self.array.length
-  let i = 0
-  for (; i < length; i = i + 1) {
-    const a = self.array[i]!
-    if (!includes(result, a)) {
-      result.push(a)
+export function uniq<A>(E: Equivalence<A>) {
+  return (self: ImmutableArray<A>): ImmutableArray<A> => {
+    const includes = arrayIncludes(E)
+    const result: Array<A> = []
+    const length = self.array.length
+    let i = 0
+    for (; i < length; i = i + 1) {
+      const a = self.array[i]!
+      if (!includes(result, a)) {
+        result.push(a)
+      }
     }
+    return length === result.length ? self : new ImmutableArray(result)
   }
-  return length === result.length ? self : new ImmutableArray(result)
 }
-
-/**
- * @tsplus static ImmutableArray/Aspects uniq
- */
-export const uniq = Pipeable(uniq_)
 
 function arrayIncludes<A>(E: Equivalence<A>) {
   return (array: Array<A>, value: A): boolean => {

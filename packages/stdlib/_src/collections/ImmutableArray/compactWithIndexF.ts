@@ -1,5 +1,5 @@
 /**
- * @tsplus static ImmutableArray/Ops compactWithIndexF
+ * @tsplus static ImmutableArray.Ops compactWithIndexF
  */
 export const compactWithIndexF = WitherableWithIndex.implementCompactWithIndexF<number, ImmutableArray.HKT>()(
   <FR, FE, A, B, G extends HKT>(_: {

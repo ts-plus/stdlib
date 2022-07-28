@@ -2,7 +2,7 @@
  * Construct `Either<E, A>` by applying a predicate to `A` and constructing
  * `E` if the predicate is `false`.
  *
- * @tsplus static Either/Ops fromPredicate
+ * @tsplus static Either.Ops fromPredicate
  */
 export function fromPredicate<E, A, B extends A>(
   a: A,

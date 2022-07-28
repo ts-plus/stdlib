@@ -3,35 +3,28 @@ import type { Direction } from "@tsplus/stdlib/collections/RedBlackTree/definiti
 /**
  * Get the values of the tree.
  *
- * @tsplus fluent RedBlackTree values
+ * @tsplus static RedBlackTree.Aspects values
+ * @tsplus pipeable RedBlackTree values
  */
-export function values_<K, V>(
-  self: RedBlackTree<K, V>,
-  direction: Direction = "Forward"
-): IterableIterator<V> {
-  const begin = self[Symbol.iterator]()
-  let count = 0
-  return {
-    [Symbol.iterator]: () => values_(self, direction),
-    next: (): IteratorResult<V> => {
-      count++
-      const entry = begin.value
-      if (direction === "Forward") {
-        begin.moveNext()
-      } else {
-        begin.movePrev()
+export function values_<K, V>(direction: Direction = "Forward") {
+  return (self: RedBlackTree<K, V>): IterableIterator<V> => {
+    const begin = self[Symbol.iterator]()
+    let count = 0
+    return {
+      [Symbol.iterator]: () => self.values(direction),
+      next: (): IteratorResult<V> => {
+        count++
+        const entry = begin.value
+        if (direction === "Forward") {
+          begin.moveNext()
+        } else {
+          begin.movePrev()
+        }
+        return entry.fold(
+          () => ({ value: count, done: true }),
+          (entry) => ({ value: entry, done: false })
+        )
       }
-      return entry.fold(
-        () => ({ value: count, done: true }),
-        (entry) => ({ value: entry, done: false })
-      )
     }
   }
 }
-
-/**
- * Get the values of the tree.
- *
- * @tsplus static RedBlackTree/Aspects values
- */
-export const values = Pipeable(values_)

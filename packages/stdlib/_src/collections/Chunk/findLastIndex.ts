@@ -3,35 +3,31 @@ import { concreteChunk, concreteChunkId } from "@tsplus/stdlib/collections/Chunk
 /**
  * Returns the last index of the element that satisfies the predicate.
  *
- * @tsplus fluent Chunk findLastIndex
+ * @tsplus static Chunk.Aspects findLastIndex
+ * @tsplus pipeable Chunk findLastIndex
  */
-export function findLastIndex_<A>(self: Chunk<A>, f: Predicate<A>): Maybe<number> {
-  concreteChunk(self)
+export function findLastIndex<A>(f: Predicate<A>) {
+  return (self: Chunk<A>): Maybe<number> => {
+    concreteChunk(self)
 
-  const iterator = concreteChunkId(self)._reverseArrayLikeIterator()
-  let next
-  let index = self.length - 1
+    const iterator = concreteChunkId(self)._reverseArrayLikeIterator()
+    let next
+    let index = self.length - 1
 
-  while ((next = iterator.next()) && !next.done) {
-    const array = next.value
-    const len = array.length
-    let i = len - 1
-    while (i >= 0) {
-      const a = array[i]!
-      if (f(a)) {
-        return Maybe.some(index)
+    while ((next = iterator.next()) && !next.done) {
+      const array = next.value
+      const len = array.length
+      let i = len - 1
+      while (i >= 0) {
+        const a = array[i]!
+        if (f(a)) {
+          return Maybe.some(index)
+        }
+        i--
+        index--
       }
-      i--
-      index--
     }
+
+    return Maybe.none
   }
-
-  return Maybe.none
 }
-
-/**
- * Returns the last index of the element that satisfies the predicate.
- *
- * @tsplus static Chunk/Aspects findLastIndex
- */
-export const findLastIndex = Pipeable(findLastIndex_)

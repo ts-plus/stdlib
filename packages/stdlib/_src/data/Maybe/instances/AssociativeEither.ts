@@ -1,7 +1,7 @@
 import type * as P from "@tsplus/stdlib/prelude/AssociativeEither"
 
 /**
- * @tsplus static Maybe/Ops AssociativeEither
+ * @tsplus static Maybe.Ops AssociativeEither
  */
 export const AssociativeEither = HKT.instance<P.AssociativeEither<Maybe.HKT>>({
   orElseEither: <B>(fb: LazyArg<Maybe<B>>) =>

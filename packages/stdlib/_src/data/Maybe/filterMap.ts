@@ -1,11 +1,7 @@
 /**
- * @tsplus fluent Maybe filterMap
+ * @tsplus static Maybe.Aspects filterMap
+ * @tsplus pipeable Maybe filterMap
  */
-export function filterMap_<A, B>(self: Maybe<A>, f: (a: A) => Maybe<B>): Maybe<B> {
-  return self.isNone() ? Maybe.none : f(self.value)
+export function filterMap<A, B>(f: (a: A) => Maybe<B>) {
+  return (self: Maybe<A>): Maybe<B> => self.isNone() ? Maybe.none : f(self.value)
 }
-
-/**
- * @tsplus static Maybe/Aspects filterMap
- */
-export const filterMap = Pipeable(filterMap_)

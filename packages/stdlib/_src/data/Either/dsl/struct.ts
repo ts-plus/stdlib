@@ -1,4 +1,4 @@
 /**
- * @tsplus static Either/Ops struct
+ * @tsplus static Either.Ops struct
  */
 export const struct = DSL.structF(Either.Applicative)

@@ -1,5 +1,5 @@
 /**
- * @tsplus static Either/Ops forEachF
+ * @tsplus static Either.Ops forEachF
  */
 export const forEachF: ForEach.Fn<Either.HKT> = <G extends HKT>(G: IdentityBoth<G> & Covariant<G>) =>
   <GR, GE, A, B>(f: (a: A) => HKT.Kind<G, GR, GE, B>) =>

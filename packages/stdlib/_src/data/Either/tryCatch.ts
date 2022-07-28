@@ -1,7 +1,7 @@
 /**
  * Constructs a new `Either` from a function that might throw.
  *
- * @tsplus static Either/Ops tryCatch
+ * @tsplus static Either.Ops tryCatch
  */
 export function tryCatch<E, A>(
   f: LazyArg<A>,

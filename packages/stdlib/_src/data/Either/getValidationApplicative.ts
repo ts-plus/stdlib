@@ -1,5 +1,5 @@
 /**
- * @tsplus static Either/Ops getValidationApplicative
+ * @tsplus static Either.Ops getValidationApplicative
  */
 export const getValidationApplicative = DSL.getValidationF<Either.HKT>(
   HKT.instance({

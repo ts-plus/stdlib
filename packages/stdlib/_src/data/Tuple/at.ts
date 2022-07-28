@@ -1,11 +1,9 @@
 /**
  * Gets an element from the tuple.
  *
- * @tsplus fluent tsplus/Tuple at
+ * @tsplus static Tuple.Aspects at
+ * @tsplus pipeable Tuple at
  */
-export function at<Ks extends unknown[], I extends keyof Ks>(
-  self: Tuple<Ks>,
-  i: I
-): Ks[I] {
-  return self.get(i)
+export function at<Ks extends unknown[], I extends keyof Ks>(i: I) {
+  return (self: Tuple<Ks>): Ks[I] => self.get(i)
 }

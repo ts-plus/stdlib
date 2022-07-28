@@ -4,19 +4,15 @@ import { HashSetInternal, realHashSet } from "@tsplus/stdlib/collections/HashSet
 /**
  * Adds a value to the `HashSet`.
  *
- * @tsplus operator HashSet +
- * @tsplus fluent HashSet add
+ * @tsplus pipeable-operator HashSet +
+ * @tsplus static HashSet.Aspects add
+ * @tsplus pipeable HashSet add
  */
-export function add_<A>(self: HashSet<A>, value: A): HashSet<A> {
-  realHashSet(self)
-  return (self._keyMap as HashMapInternal<A, unknown>)._editable
-    ? (self._keyMap.set(value as A, true), self)
-    : new HashSetInternal(self._keyMap.set(value as A, true))
+export function add<A>(value: A) {
+  return (self: HashSet<A>): HashSet<A> => {
+    realHashSet(self)
+    return (self._keyMap as HashMapInternal<A, unknown>)._editable
+      ? (self._keyMap.set(value as A, true), self)
+      : new HashSetInternal(self._keyMap.set(value as A, true))
+  }
 }
-
-/**
- * Adds a value to the `HashSet`.
- *
- * @tsplus static HashSet/Aspects add
- */
-export const add = Pipeable(add_)

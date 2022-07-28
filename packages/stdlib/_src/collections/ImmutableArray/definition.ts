@@ -1,6 +1,6 @@
 /**
  * @tsplus type ImmutableArray
- * @tsplus companion ImmutableArray/Ops
+ * @tsplus companion ImmutableArray.Ops
  */
 export class ImmutableArray<A> implements Equals, Collection<A> {
   constructor(readonly array: ReadonlyArray<A>) {}
@@ -31,10 +31,10 @@ export declare namespace ImmutableArray {
 }
 
 /**
- * @tsplus type ImmutableArray/Aspects
+ * @tsplus type ImmutableArray.Aspects
  */
 export interface ImmutableArrayAspects {}
 /**
- * @tsplus static ImmutableArray/Ops $
+ * @tsplus static ImmutableArray.Ops $
  */
 export const ImmutableArrayAspects: ImmutableArrayAspects = {}

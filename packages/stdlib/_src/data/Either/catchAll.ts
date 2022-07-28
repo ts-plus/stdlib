@@ -2,19 +2,9 @@
  * Executes the specified `Either` if it is a `Right`, otherwise executes
  * `onLeft`.
  *
- * @tsplus fluent Either catchAll
+ * @tsplus static Either.Aspects catchAll
+ * @tsplus pipeable Either catchAll
  */
-export function catchAll_<E, A, E1, B>(
-  self: Either<E, A>,
-  onLeft: (e: E) => Either<E1, B>
-): Either<E1, A | B> {
-  return self.isLeft() ? onLeft(self.left) : self
+export function catchAll<E, E1, B>(onLeft: (e: E) => Either<E1, B>) {
+  return <A>(self: Either<E, A>): Either<E1, A | B> => self.isLeft() ? onLeft(self.left) : self
 }
-
-/**
- * Executes the specified `Either` if it is a `Right`, otherwise executes
- * `onLeft`.
- *
- * @tsplus static Either/Aspects catchAll
- */
-export const catchAll = Pipeable(catchAll_)

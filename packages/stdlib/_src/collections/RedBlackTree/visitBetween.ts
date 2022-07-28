@@ -3,7 +3,7 @@ import type { Node } from "@tsplus/stdlib/collections/RedBlackTree/node"
 /**
  * Visit nodes with key lower than max and greater then or equal to min.
  *
- * @tsplus static RedBlackTree/Ops visitBetween
+ * @tsplus static RedBlackTree.Ops visitBetween
  */
 export function visitBetween<K, V, A>(
   node: Node<K, V>,

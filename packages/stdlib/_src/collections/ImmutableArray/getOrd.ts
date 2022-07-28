@@ -1,7 +1,7 @@
 /**
  * Returns a `Ord` for an `ImmutableArray<A>` given an `Ord<A>`.
  *
- * @tsplus static ImmutableArray/Ops getOrd
+ * @tsplus static ImmutableArray.Ops getOrd
  */
 export function getOrd<A>(O: Ord<A>): Ord<ImmutableArray<A>> {
   return Ord((a, b) => {

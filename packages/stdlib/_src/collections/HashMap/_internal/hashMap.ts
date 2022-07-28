@@ -195,7 +195,7 @@ export function getHash_<K, V>(self: HashMap<K, V>, key: K, hash: number): Maybe
 /**
  * Lookup the value for the specified key in the `HashMap` using a custom hash.
  *
- * @tsplus static HashMap/Aspects getHash
+ * @tsplus static HashMap.Aspects getHash
  */
 export const getHash = Pipeable(getHash_)
 
@@ -211,7 +211,7 @@ export function has_<K, V>(self: HashMap<K, V>, key: K): boolean {
 /**
  * Checks if the specified key has an entry in the `HashMap`.
  *
- * @tsplus static HashMap/Aspects has
+ * @tsplus static HashMap.Aspects has
  */
 export const has = Pipeable(has_)
 

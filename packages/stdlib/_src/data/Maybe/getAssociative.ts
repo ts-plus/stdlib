@@ -1,7 +1,7 @@
 /**
  * Associative for `Maybe<A>`
  *
- * @tsplus static Maybe/Ops getAssociative
+ * @tsplus static Maybe.Ops getAssociative
  */
 export function getAssociative<A>(S: Associative<A> | "First" | "Last"): Associative<Maybe<A>> {
   switch (S) {

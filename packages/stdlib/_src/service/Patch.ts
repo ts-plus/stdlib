@@ -24,7 +24,7 @@ export interface Patch<in Input, out Output> {
 }
 
 /**
- * @tsplus type Patch/Ops
+ * @tsplus type Patch.Ops
  */
 export interface PatchOps {
   $: PatchAspects
@@ -34,7 +34,7 @@ export const Patch: PatchOps = {
 }
 
 /**
- * @tsplus type Patch/Aspects
+ * @tsplus type Patch.Aspects
  */
 export interface PatchAspects {}
 
@@ -102,33 +102,31 @@ export function concretePatch<Input, Output>(
 /**
  * Applies a `Patch` to the specified `Env` to produce a new patched `Env`.
  *
- * @tsplus fluent Patch patch
+ * @tsplus static Patch.Aspects patch
+ * @tsplus pipeable Patch patch
  */
-export function patch_<Input, Output>(self: Patch<Input, Output>, env: Env<Input>): Env<Output> {
-  const updatedRef = {
-    ref: false
-  }
-  const updated = patchLoop(new Map(env.unsafeMap), List(self as Patch<unknown, unknown>), updatedRef)
-  if (!updatedRef.ref) {
-    return new Env(updated) as Env<Output>
-  }
-  const map = new Map()
-  for (const [tag] of env.unsafeMap) {
-    if (updated.has(tag)) {
-      map.set(tag, updated.get(tag))
-      updated.delete(tag)
+export function patch<Input>(env: Env<Input>) {
+  return <Output>(self: Patch<Input, Output>): Env<Output> => {
+    const updatedRef = {
+      ref: false
     }
+    const updated = patchLoop(new Map(env.unsafeMap), List(self as Patch<unknown, unknown>), updatedRef)
+    if (!updatedRef.ref) {
+      return new Env(updated) as Env<Output>
+    }
+    const map = new Map()
+    for (const [tag] of env.unsafeMap) {
+      if (updated.has(tag)) {
+        map.set(tag, updated.get(tag))
+        updated.delete(tag)
+      }
+    }
+    for (const [tag, s] of updated) {
+      map.set(tag, s)
+    }
+    return new Env(map) as Env<Output>
   }
-  for (const [tag, s] of updated) {
-    map.set(tag, s)
-  }
-  return new Env(map) as Env<Output>
 }
-
-/**
- * @tsplus static Patch/Aspects patch
- */
-export const patch = Pipeable(patch_)
 
 /**
  * @tsplus tailRec
@@ -168,7 +166,7 @@ function patchLoop(
 /**
  * An empty patch which returns the environment unchanged.
  *
- * @tsplus static Patch/Ops empty
+ * @tsplus static Patch.Ops empty
  */
 export function empty<I, O>(): Patch<I, O> {
   return new Empty()
@@ -178,25 +176,15 @@ export function empty<I, O>(): Patch<I, O> {
  * Combines two patches to produce a new patch that describes applying the
  * updates from this patch and then the updates from the specified patch.
  *
- * @tsplus fluent Patch combine
+ * @tsplus static Patch.Aspects combine
+ * @tsplus pipeable Patch combine
  */
-export function combine_<Input, Output, Output2>(
-  self: Patch<Input, Output>,
-  that: Patch<Output, Output2>
-): Patch<Input, Output2> {
-  return new AndThen(self, that)
+export function combine<Output, Output2>(that: Patch<Output, Output2>) {
+  return <Input>(self: Patch<Input, Output>): Patch<Input, Output2> => new AndThen(self, that)
 }
 
 /**
- * Combines two patches to produce a new patch that describes applying the
- * updates from this patch and then the updates from the specified patch.
- *
- * @tsplus static Patch/Aspects combine
- */
-export const combine = Pipeable(combine_)
-
-/**
- * @tsplus static Patch/Ops diff
+ * @tsplus static Patch.Ops diff
  */
 export function diff<Input, Output>(oldValue: Env<Input>, newValue: Env<Output>): Patch<Input, Output> {
   const missingServices = new Map(oldValue.unsafeMap)

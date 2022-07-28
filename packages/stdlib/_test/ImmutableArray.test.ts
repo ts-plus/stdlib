@@ -60,17 +60,14 @@ describe.concurrent("ImmutableArray", () => {
   })
 
   it("difference", () => {
-    const difference = ImmutableArray.$.difference(Equivalence.number)
-    assert.isTrue(difference(ImmutableArray(1, 2))(ImmutableArray(3, 4)) == ImmutableArray(1, 2))
-    assert.isTrue(difference(ImmutableArray(1, 2))(ImmutableArray(2, 3)) == ImmutableArray(1))
-    assert.isTrue(difference(ImmutableArray(1, 2))(ImmutableArray(1, 2)) == ImmutableArray.empty())
+    assert.isTrue(ImmutableArray(1, 2).difference(Equivalence.number, ImmutableArray(3, 4)) == ImmutableArray(1, 2))
+    assert.isTrue(ImmutableArray(1, 2).difference(Equivalence.number, ImmutableArray(2, 3)) == ImmutableArray(1))
+    assert.isTrue(ImmutableArray(1, 2).difference(Equivalence.number, ImmutableArray(1, 2)) == ImmutableArray.empty())
   })
 
   it("elem", () => {
-    const elem = ImmutableArray.$.elem(Equivalence.number)
-
-    assert.isTrue(elem(ImmutableArray(1, 2, 3))(2))
-    assert.isFalse(elem(ImmutableArray(1, 2, 3))(0))
+    assert.isTrue(ImmutableArray(1, 2, 3).elem(Equivalence.number, 2))
+    assert.isFalse(ImmutableArray(1, 2, 3).elem(Equivalence.number, 0))
   })
 
   it("equals", () => {
@@ -231,10 +228,10 @@ describe.concurrent("ImmutableArray", () => {
 
   it("intersection", () => {
     assert.isTrue(
-      ImmutableArray(1, 2).intersection(Equivalence.number)(ImmutableArray(3, 4)) == ImmutableArray.empty()
+      ImmutableArray(1, 2).intersection(Equivalence.number, ImmutableArray(3, 4)) == ImmutableArray.empty()
     )
-    assert.isTrue(ImmutableArray(1, 2).intersection(Equivalence.number)(ImmutableArray(2, 3)) == ImmutableArray(2))
-    assert.isTrue(ImmutableArray(1, 2).intersection(Equivalence.number)(ImmutableArray(1, 2)) == ImmutableArray(1, 2))
+    assert.isTrue(ImmutableArray(1, 2).intersection(Equivalence.number, ImmutableArray(2, 3)) == ImmutableArray(2))
+    assert.isTrue(ImmutableArray(1, 2).intersection(Equivalence.number, ImmutableArray(1, 2)) == ImmutableArray(1, 2))
   })
 
   it("isEmpty", () => {
@@ -463,13 +460,13 @@ describe.concurrent("ImmutableArray", () => {
   it("union", () => {
     const two: ImmutableArray<number> = ImmutableArray(1, 2)
 
-    assert.isTrue(two.union(Equivalence.number)(ImmutableArray(3, 4)) == ImmutableArray(1, 2, 3, 4))
-    assert.isTrue(two.union(Equivalence.number)(ImmutableArray(2, 3)) == ImmutableArray(1, 2, 3))
-    assert.isTrue(two.union(Equivalence.number)(ImmutableArray(1, 2)) == ImmutableArray(1, 2))
-    assert.isTrue(two.union(Equivalence.number)(ImmutableArray.empty()) == ImmutableArray(1, 2))
-    assert.isTrue(ImmutableArray.empty<number>().union(Equivalence.number)(two) == ImmutableArray(1, 2))
+    assert.isTrue(two.union(Equivalence.number, ImmutableArray(3, 4)) == ImmutableArray(1, 2, 3, 4))
+    assert.isTrue(two.union(Equivalence.number, ImmutableArray(2, 3)) == ImmutableArray(1, 2, 3))
+    assert.isTrue(two.union(Equivalence.number, ImmutableArray(1, 2)) == ImmutableArray(1, 2))
+    assert.isTrue(two.union(Equivalence.number, ImmutableArray.empty()) == ImmutableArray(1, 2))
+    assert.isTrue(ImmutableArray.empty<number>().union(Equivalence.number, two) == ImmutableArray(1, 2))
     assert.isTrue(
-      ImmutableArray.empty<number>().union(Equivalence.number)(ImmutableArray.empty()) == ImmutableArray.empty()
+      ImmutableArray.empty<number>().union(Equivalence.number, ImmutableArray.empty()) == ImmutableArray.empty()
     )
   })
 

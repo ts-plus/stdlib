@@ -1,15 +1,9 @@
 /**
  * Returns the first index for which the given predicate is satisfied.
  *
- * @tsplus fluent Chunk indexWhere
+ * @tsplus static Chunk.Aspects indexWhere
+ * @tsplus pipeable Chunk indexWhere
  */
-export function indexWhere_<A>(self: Chunk<A>, f: Predicate<A>): number {
-  return self.indexWhereFrom(0, f)
+export function indexWhere<A>(f: Predicate<A>) {
+  return (self: Chunk<A>): number => self.indexWhereFrom(0, f)
 }
-
-/**
- * Returns the first index for which the given predicate is satisfied.
- *
- * @tsplus static Chunk/Aspects indexWhere
- */
-export const indexWhere = Pipeable(indexWhere_)

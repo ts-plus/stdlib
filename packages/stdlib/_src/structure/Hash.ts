@@ -1,7 +1,7 @@
 // forked from https://github.com/frptools
 
 /**
- * @tsplus type HashOps
+ * @tsplus type Hash.Ops
  */
 export interface HashOps {
   readonly sym: unique symbol
@@ -19,21 +19,21 @@ export interface Hash {
 }
 
 /**
- * @tsplus static HashOps isHash
+ * @tsplus static Hash.Ops isHash
  */
 export function isHash(u: unknown): u is Hash {
   return typeof u === "object" && u !== null && Hash.sym in u
 }
 
 /**
- * @tsplus static HashOps optimize
+ * @tsplus static Hash.Ops optimize
  */
 export function optimize(n: number) {
   return (n & 0xbfffffff) | ((n >>> 1) & 0x40000000)
 }
 
 /**
- * @tsplus static HashOps unknown
+ * @tsplus static Hash.Ops unknown
  * @tsplus getter Hash hash
  */
 export function hashUnknown<A>(arg: A): number {
@@ -41,14 +41,14 @@ export function hashUnknown<A>(arg: A): number {
 }
 
 /**
- * @tsplus static HashOps array
+ * @tsplus static Hash.Ops array
  */
 export function hashArray(arr: readonly unknown[]): number {
   return optimize(_hashArray(arr))
 }
 
 /**
- * @tsplus static HashOps args
+ * @tsplus static Hash.Ops args
  */
 export function hashArgs(...args: unknown[]): number
 export function hashArgs(): number {
@@ -61,56 +61,56 @@ export function hashArgs(): number {
 }
 
 /**
- * @tsplus static HashOps combine
+ * @tsplus static Hash.Ops combine
  */
 export function combine(a: number, b: number): number {
   return optimize(_combineHash(a, b))
 }
 
 /**
- * @tsplus static HashOps object
+ * @tsplus static Hash.Ops object
  */
 export function hashObject(value: object): number {
   return optimize(_hashObject(value))
 }
 
 /**
- * @tsplus static HashOps miscRef
+ * @tsplus static Hash.Ops miscRef
  */
 export function hashMiscRef(o: Object): number {
   return optimize(_hashMiscRef(o))
 }
 
 /**
- * @tsplus static HashOps iterator
+ * @tsplus static Hash.Ops iterator
  */
 export function hashIterator(it: Iterator<any>): number {
   return optimize(_hashIterator(it))
 }
 
 /**
- * @tsplus static HashOps plainObject
+ * @tsplus static Hash.Ops plainObject
  */
 export function hashPlainObject(o: object): number {
   return optimize(_hashPlainObject(o))
 }
 
 /**
- * @tsplus static HashOps number
+ * @tsplus static Hash.Ops number
  */
 export function hashNumber(n: number): number {
   return optimize(_hashNumber(n))
 }
 
 /**
- * @tsplus static HashOps string
+ * @tsplus static Hash.Ops string
  */
 export function hashString(str: string): number {
   return optimize(_hashString(str))
 }
 
 /**
- * @tsplus static HashOps random
+ * @tsplus static Hash.Ops random
  */
 export function hashRandom(): number {
   return optimize(randomInt())

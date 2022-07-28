@@ -1,5 +1,5 @@
 /**
- * @tsplus static Chunk/Ops getOrd
+ * @tsplus static Chunk.Ops getOrd
  */
 export function getOrd<A>(O: Ord<A>): Ord<Chunk<A>> {
   return Ord((x, y) => {

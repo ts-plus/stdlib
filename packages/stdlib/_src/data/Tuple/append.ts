@@ -1,11 +1,9 @@
 /**
  * Appends a value to a tuple.
  *
- * @tsplus fluent tsplus/Tuple append
+ * @tsplus static Tuple.Aspects append
+ * @tsplus pipeable Tuple append
  */
-export function append<Ks extends unknown[], K>(
-  self: Tuple<Ks>,
-  k: K
-): Tuple<[...Ks, K]> {
-  return new Tuple([...self.tuple, k])
+export function append<K>(k: K) {
+  return <Ks extends unknown[]>(self: Tuple<Ks>): Tuple<[...Ks, K]> => new Tuple([...self.tuple, k])
 }

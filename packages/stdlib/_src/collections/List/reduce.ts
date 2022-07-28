@@ -1,14 +1,15 @@
 /**
- * @tsplus fluent List reduce
+ * @tsplus static List.Aspects reduce
+ * @tsplus pipeable List reduce
  */
-export function reduce_<A, B>(self: List<A>, b: B, f: (b: B, a: A) => B): B {
-  let acc = b
-  let these = self
-  while (!these.isNil()) {
-    acc = f(acc, these.head)
-    these = these.tail
+export function reduce<A, B>(b: B, f: (b: B, a: A) => B) {
+  return (self: List<A>): B => {
+    let acc = b
+    let these = self
+    while (!these.isNil()) {
+      acc = f(acc, these.head)
+      these = these.tail
+    }
+    return acc
   }
-  return acc
 }
-
-export const reduce = Pipeable(reduce_)

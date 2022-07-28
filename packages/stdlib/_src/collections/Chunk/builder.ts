@@ -1,7 +1,7 @@
 /**
  * Builder
  *
- * @tsplus static Chunk/Ops builder
+ * @tsplus static Chunk.Ops builder
  */
 export function builder<A>() {
   return new ChunkBuilder<A>(Chunk.empty())

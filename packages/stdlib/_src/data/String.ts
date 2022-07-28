@@ -4,7 +4,7 @@ declare global {
    */
   export interface String {}
   /**
-   * @tsplus type string/Ops
+   * @tsplus type string.Ops
    */
   export interface StringConstructor {}
 }
@@ -19,38 +19,10 @@ declare global {
  *
  * If `n` is a float, it will be rounded down to the nearest integer.
  *
- * @tsplus fluent string takeLeft
+ * @tsplus pipeable string takeLeft
  */
-export function takeLeft_(self: string, n: number): string {
-  return self.slice(0, Math.max(n, 0))
-}
-
-/**
- * Keep the specified number of characters from the start of a string.
- *
- * If `n` is larger than the available number of characters, the string will
- * be returned whole.
- *
- * If `n` is not a positive number, an empty string will be returned.
- *
- * If `n` is a float, it will be rounded down to the nearest integer.
- */
-export const takeLeft = Pipeable(takeLeft_)
-
-/**
- * Keep the specified number of characters from the end of a string.
- *
- * If `n` is larger than the available number of characters, the string will
- * be returned whole.
- *
- * If `n` is not a positive number, an empty string will be returned.
- *
- * If `n` is a float, it will be rounded down to the nearest integer.
- *
- * @tsplus fluent string takeRight
- */
-export function takeRight_(s: string, n: number): string {
-  return s.slice(Math.max(0, s.length - Math.floor(n)), Infinity)
+export function takeLeft(n: number) {
+  return (self: string): string => self.slice(0, Math.max(n, 0))
 }
 
 /**
@@ -62,20 +34,24 @@ export function takeRight_(s: string, n: number): string {
  * If `n` is not a positive number, an empty string will be returned.
  *
  * If `n` is a float, it will be rounded down to the nearest integer.
+ *
+ * @tsplus pipeable string takeRight
  */
-export const takeRight = Pipeable(takeRight_)
+export function takeRight(n: number) {
+  return (s: string): string => s.slice(Math.max(0, s.length - Math.floor(n)), Infinity)
+}
 
 /**
  * Represents the character code of a carriage return character (`"\r"`).
  *
- * @tsplus static string/Ops CR
+ * @tsplus static string.Ops CR
  */
 export const CR = 0x0d
 
 /**
  * Represents the character code of a line-feed character (`"\n"`).
  *
- * @tsplus static string/Ops LF
+ * @tsplus static string.Ops LF
  */
 export const LF = 0x0a
 
@@ -104,34 +80,29 @@ export function linesWithSeparators(s: string): LinesIterator {
  * or control characters followed by the character specified by `marginChar`
  * from the line.
  *
- * @tsplus fluent string stripMarginWith
+ * @tsplus pipeable string stripMarginWith
  */
-export function stripMarginWith_(self: string, marginChar: string): string {
-  let out = ""
+export function stripMarginWith(marginChar: string) {
+  return (self: string): string => {
+    let out = ""
 
-  for (const line of linesWithSeparators(self)) {
-    let index = 0
+    for (const line of linesWithSeparators(self)) {
+      let index = 0
 
-    while (index < line.length && line.charAt(index) <= " ") {
-      index = index + 1
+      while (index < line.length && line.charAt(index) <= " ") {
+        index = index + 1
+      }
+
+      const stripped = index < line.length && line.charAt(index) === marginChar
+        ? line.substring(index + 1)
+        : line
+
+      out = out + stripped
     }
 
-    const stripped = index < line.length && line.charAt(index) === marginChar
-      ? line.substring(index + 1)
-      : line
-
-    out = out + stripped
+    return out
   }
-
-  return out
 }
-
-/**
- * For every line in this string, strip a leading prefix consisting of blanks
- * or control characters followed by the character specified by `marginChar`
- * from the line.
- */
-export const stripMarginWith = Pipeable(stripMarginWith_)
 
 /**
  * For every line in this string, strip a leading prefix consisting of blanks

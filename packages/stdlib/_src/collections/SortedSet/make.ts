@@ -1,6 +1,6 @@
 /**
- * @tsplus static SortedSet/Ops __call
- * @tsplus static SortedSet/Ops make
+ * @tsplus static SortedSet.Ops __call
+ * @tsplus static SortedSet.Ops make
  */
 export function make<A>(
   ord: Ord<A>

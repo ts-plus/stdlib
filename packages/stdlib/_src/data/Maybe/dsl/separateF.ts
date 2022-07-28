@@ -1,5 +1,5 @@
 /**
- * @tsplus static Maybe/Ops separateF
+ * @tsplus static Maybe.Ops separateF
  */
 export const separateF = Wiltable.implementSeparateF<Maybe.HKT>()(
   <FR, FE, A, B, B2, G extends HKT>(_: {

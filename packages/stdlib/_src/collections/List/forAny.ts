@@ -1,20 +1,16 @@
 /**
  * Determines whether a predicate is satisfied for all elements of this List.
  *
- * @tsplus fluent List forAny
+ * @tsplus static List.Aspects forAny
+ * @tsplus pipeable List forAny
  */
-export function forAny_<A>(self: List<A>, f: Predicate<A>): boolean {
-  for (const a of self) {
-    if (f(a)) {
-      return true
+export function forAny<A>(f: Predicate<A>) {
+  return (self: List<A>): boolean => {
+    for (const a of self) {
+      if (f(a)) {
+        return true
+      }
     }
+    return false
   }
-  return false
 }
-
-/**
- * Determines whether a predicate is satisfied for all elements of this List.
- *
- * @tsplus static List/Ops forAny
- */
-export const forAny = Pipeable(forAny_)

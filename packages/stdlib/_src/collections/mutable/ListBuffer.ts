@@ -11,7 +11,7 @@
 
 /**
  * @tsplus type ListBuffer
- * @tsplus companion ListBufferOps
+ * @tsplus companion ListBuffer.Ops
  */
 export class ListBuffer<A> implements Collection<A> {
   private first: List<A> = List.nil()

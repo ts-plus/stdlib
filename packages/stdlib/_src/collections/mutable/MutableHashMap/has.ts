@@ -1,8 +1,7 @@
 /**
- * @tsplus fluent MutableHashMap has
+ * @tsplus static MutableHashMap.Aspects has
+ * @tsplus pipeable MutableHashMap has
  */
-export function has_<K, V>(self: MutableHashMap<K, V>, key: K): boolean {
-  return self.get(key).isSome()
+export function has<K>(key: K) {
+  return <V>(self: MutableHashMap<K, V>): boolean => self.get(key).isSome()
 }
-
-export const has = Pipeable(has_)

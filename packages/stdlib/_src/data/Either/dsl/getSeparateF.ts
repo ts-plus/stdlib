@@ -2,7 +2,7 @@
  * Get `Wiltable`'s `separateF` for an `Either<E, A>` given an
  * `AssociativeIdentity<E>`.
  *
- * @tsplus static Either/Ops getSeparateF
+ * @tsplus static Either.Ops getSeparateF
  */
 export function getSeparateF<E>(M: AssociativeIdentity<E>): Wilt<Either.FixedLeftHKT<E>> {
   const separate = Either.$.separate(M)

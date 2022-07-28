@@ -58,7 +58,7 @@ export const VotesSumAssociative: Associative<Votes> = Associative(zip_)
 type VoteData = HashMap<Topic, Votes>
 /**
  * @tsplus type Example/VoteMap
- * @tsplus companion Example/VoteMap/Ops
+ * @tsplus companion Example/VoteMap.Ops
  */
 export class VoteMap implements Hash, Equals {
   constructor(readonly map: VoteData) {}
@@ -71,19 +71,19 @@ export class VoteMap implements Hash, Equals {
 }
 
 /**
- * @tsplus static Example/VoteMap/Ops __call
+ * @tsplus static Example/VoteMap.Ops __call
  */
 export const makeVoteMap = (map: VoteData) => new VoteMap(map)
 
 /**
- * @tsplus static Example/VoteMap/Ops isVoteMap
+ * @tsplus static Example/VoteMap.Ops isVoteMap
  */
 export function isVoteMap(t: unknown): t is VoteMap {
   return typeof t === "object" && t instanceof VoteMap
 }
 
 /**
- * @tsplus static Example/VoteMap/Ops AssociativeSum
+ * @tsplus static Example/VoteMap.Ops AssociativeSum
  */
 export const VoteMapSumAssociative: Associative<VoteMap> = pipe(
   HashMap.getAssociative<Topic, Votes>(Votes.SumAssociative),

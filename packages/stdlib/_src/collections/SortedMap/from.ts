@@ -1,7 +1,7 @@
 import { SortedMapInternal } from "@tsplus/stdlib/collections/SortedMap/_internal/SortedMapInternal"
 
 /**
- * @tsplus static SortedMap/Ops from
+ * @tsplus static SortedMap.Ops from
  */
 export function from_<K>(
   ord: Ord<K>
@@ -14,6 +14,6 @@ export function from_<K>(
 }
 
 /**
- * @tsplus static SortedMap/Aspects from
+ * @tsplus static SortedMap.Aspects from
  */
 export const from = Pipeable(from_)

@@ -4,136 +4,131 @@ import { Node } from "@tsplus/stdlib/collections/RedBlackTree/node"
 /**
  * Removes the entry with the specified key, if it exists.
  *
- * @tsplus fluent RedBlackTree removeFirst
+ * @tsplus static RedBlackTree.Aspects removeFirst
+ * @tsplus pipeable RedBlackTree removeFirst
  */
-export function removeFirst_<K, V>(
-  self: RedBlackTree<K, V>,
-  key: K
-): RedBlackTree<K, V> {
-  if (!self.has(key)) {
-    return self
-  }
-  const cmp = self.ord.compare
-  let node: Node<K, V> | undefined = self.root
-  const stack = []
-  while (node) {
-    const d = cmp(key, node.key)
-    stack.push(node)
-    if (Equals.equals(key, node.key)) {
-      node = undefined
-    } else if (d <= 0) {
-      node = node.left
-    } else {
-      node = node.right
+export function removeFirst<K>(key: K) {
+  return <V>(self: RedBlackTree<K, V>): RedBlackTree<K, V> => {
+    if (!self.has(key)) {
+      return self
     }
-  }
-
-  if (stack.length === 0) {
-    return self
-  }
-
-  const cstack = Array.alloc<Node<K, V>>(stack.length)
-
-  let n = stack[stack.length - 1]!
-
-  cstack[cstack.length - 1] = new Node(
-    n.color,
-    n.key,
-    n.value,
-    n.left,
-    n.right,
-    n.count
-  )
-
-  for (let i = stack.length - 2; i >= 0; --i) {
-    n = stack[i]!
-    if (n.left === stack[i + 1]) {
-      cstack[i] = new Node(n.color, n.key, n.value, cstack[i + 1], n.right, n.count)
-    } else {
-      cstack[i] = new Node(n.color, n.key, n.value, n.left, cstack[i + 1], n.count)
-    }
-  }
-
-  // Get node
-  n = cstack[cstack.length - 1]!
-
-  // If not leaf, then swap with previous node
-  if (n.left && n.right) {
-    // First walk to previous leaf
-    const split = cstack.length
-    n = n.left
-    while (n.right) {
-      cstack.push(n)
-      n = n.right
-    }
-    // Copy path to leaf
-    const v = cstack[split - 1]
-    cstack.push(new Node(n.color, v!.key, v!.value, n.left, n.right, n.count))
-    cstack[split - 1]!.key = n.key
-    cstack[split - 1]!.value = n.value
-
-    // Fix up stack
-    for (let i = cstack.length - 2; i >= split; --i) {
-      n = cstack[i]!
-      cstack[i] = new Node(n.color, n.key, n.value, n.left, cstack[i + 1], n.count)
-    }
-    cstack[split - 1]!.left = cstack[split]
-  }
-
-  // Remove leaf node
-  n = cstack[cstack.length - 1]!
-  if (n.color === "Red") {
-    // Easy case: removing red leaf
-    const p = cstack[cstack.length - 2]!
-    if (p.left === n) {
-      p.left = undefined
-    } else if (p.right === n) {
-      p.right = undefined
-    }
-    cstack.pop()
-    for (let i = 0; i < cstack.length; ++i) {
-      cstack[i]!.count--
-    }
-    return new RedBlackTreeInternal(self.ord, cstack[0])
-  } else {
-    if (n.left || n.right) {
-      // Second easy case:  Single child black parent
-      if (n.left) {
-        n.swap(n.left)
-      } else if (n.right) {
-        n.swap(n.right)
+    const cmp = self.ord.compare
+    let node: Node<K, V> | undefined = self.root
+    const stack = []
+    while (node) {
+      const d = cmp(key, node.key)
+      stack.push(node)
+      if (Equals.equals(key, node.key)) {
+        node = undefined
+      } else if (d <= 0) {
+        node = node.left
+      } else {
+        node = node.right
       }
-      // Child must be red, so repaint it black to balance color
-      n.color = "Black"
-      for (let i = 0; i < cstack.length - 1; ++i) {
-        cstack[i]!.count--
+    }
+
+    if (stack.length === 0) {
+      return self
+    }
+
+    const cstack = Array.alloc<Node<K, V>>(stack.length)
+
+    let n = stack[stack.length - 1]!
+
+    cstack[cstack.length - 1] = new Node(
+      n.color,
+      n.key,
+      n.value,
+      n.left,
+      n.right,
+      n.count
+    )
+
+    for (let i = stack.length - 2; i >= 0; --i) {
+      n = stack[i]!
+      if (n.left === stack[i + 1]) {
+        cstack[i] = new Node(n.color, n.key, n.value, cstack[i + 1], n.right, n.count)
+      } else {
+        cstack[i] = new Node(n.color, n.key, n.value, n.left, cstack[i + 1], n.count)
       }
-      return new RedBlackTreeInternal(self.ord, cstack[0])
-    } else if (cstack.length === 1) {
-      // Third easy case: root
-      return new RedBlackTreeInternal(self.ord, undefined)
-    } else {
-      // Hard case: Repaint n, and then do some nasty stuff
+    }
+
+    // Get node
+    n = cstack[cstack.length - 1]!
+
+    // If not leaf, then swap with previous node
+    if (n.left && n.right) {
+      // First walk to previous leaf
+      const split = cstack.length
+      n = n.left
+      while (n.right) {
+        cstack.push(n)
+        n = n.right
+      }
+      // Copy path to leaf
+      const v = cstack[split - 1]
+      cstack.push(new Node(n.color, v!.key, v!.value, n.left, n.right, n.count))
+      cstack[split - 1]!.key = n.key
+      cstack[split - 1]!.value = n.value
+
+      // Fix up stack
+      for (let i = cstack.length - 2; i >= split; --i) {
+        n = cstack[i]!
+        cstack[i] = new Node(n.color, n.key, n.value, n.left, cstack[i + 1], n.count)
+      }
+      cstack[split - 1]!.left = cstack[split]
+    }
+
+    // Remove leaf node
+    n = cstack[cstack.length - 1]!
+    if (n.color === "Red") {
+      // Easy case: removing red leaf
+      const p = cstack[cstack.length - 2]!
+      if (p.left === n) {
+        p.left = undefined
+      } else if (p.right === n) {
+        p.right = undefined
+      }
+      cstack.pop()
       for (let i = 0; i < cstack.length; ++i) {
         cstack[i]!.count--
       }
-      const parent = cstack[cstack.length - 2]
-      fixDoubleBlack(cstack)
-      // Fix up links
-      if (parent!.left === n) {
-        parent!.left = undefined
+      return new RedBlackTreeInternal(self.ord, cstack[0])
+    } else {
+      if (n.left || n.right) {
+        // Second easy case:  Single child black parent
+        if (n.left) {
+          n.swap(n.left)
+        } else if (n.right) {
+          n.swap(n.right)
+        }
+        // Child must be red, so repaint it black to balance color
+        n.color = "Black"
+        for (let i = 0; i < cstack.length - 1; ++i) {
+          cstack[i]!.count--
+        }
+        return new RedBlackTreeInternal(self.ord, cstack[0])
+      } else if (cstack.length === 1) {
+        // Third easy case: root
+        return new RedBlackTreeInternal(self.ord, undefined)
       } else {
-        parent!.right = undefined
+        // Hard case: Repaint n, and then do some nasty stuff
+        for (let i = 0; i < cstack.length; ++i) {
+          cstack[i]!.count--
+        }
+        const parent = cstack[cstack.length - 2]
+        fixDoubleBlack(cstack)
+        // Fix up links
+        if (parent!.left === n) {
+          parent!.left = undefined
+        } else {
+          parent!.right = undefined
+        }
       }
     }
+    return new RedBlackTreeInternal(self.ord, cstack[0])
   }
-  return new RedBlackTreeInternal(self.ord, cstack[0])
 }
-
-/**
- * Removes the entry with the specified key, if it exists.
- */
-export const removeFirst = Pipeable(removeFirst_)
 
 /**
  * Fix up a double black node in a Red-Black Tree.

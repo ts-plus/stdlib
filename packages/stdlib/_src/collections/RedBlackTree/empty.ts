@@ -1,7 +1,7 @@
 import { RedBlackTreeInternal } from "@tsplus/stdlib/collections/RedBlackTree/_internal/RedBlackTreeInternal"
 
 /**
- * @tsplus static RedBlackTree/Ops empty
+ * @tsplus static RedBlackTree.Ops empty
  */
 export function empty<K, V>(
   ord: Ord<K>

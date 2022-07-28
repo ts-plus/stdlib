@@ -1,15 +1,8 @@
 /**
- * @tsplus operator Maybe |
- * @tsplus fluent Maybe orElse
+ * @tsplus pipeable-operator Maybe |
+ * @tsplus static Maybe.Aspects orElse
+ * @tsplus pipeable Maybe orElse
  */
-export function orElse_<A, B>(
-  self: Maybe<A>,
-  onNone: LazyArg<Maybe<B>>
-): Maybe<A | B> {
-  return self.isNone() ? onNone() : self
+export function orElse<B>(onNone: LazyArg<Maybe<B>>) {
+  return <A>(self: Maybe<A>): Maybe<A | B> => self.isNone() ? onNone() : self
 }
-
-/**
- * @tsplus static Maybe/Aspects orElse
- */
-export const orElse = Pipeable(orElse_)

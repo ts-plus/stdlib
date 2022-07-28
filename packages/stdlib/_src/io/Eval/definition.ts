@@ -25,7 +25,7 @@ export const _A = Symbol.for("@tsplus/stdlib/io/Eval/A")
 export type _A = typeof _A
 
 /**
- * @tsplus type Eval/Ops
+ * @tsplus type Eval.Ops
  */
 export interface EvalOps {
   $: EvalAspects
@@ -35,7 +35,7 @@ export const Eval: EvalOps = {
 }
 
 /**
- * @tsplus type Eval/Aspects
+ * @tsplus type Eval.Aspects
  */
 export interface EvalAspects {}
 

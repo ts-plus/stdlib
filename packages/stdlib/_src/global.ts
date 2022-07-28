@@ -132,10 +132,6 @@ import { Predicate } from "@tsplus/stdlib/data/Predicate"
 /**
  * @tsplus global
  */
-import { Result } from "@tsplus/stdlib/data/Result"
-/**
- * @tsplus global
- */
 import { Stack } from "@tsplus/stdlib/data/Stack"
 /**
  * @tsplus global

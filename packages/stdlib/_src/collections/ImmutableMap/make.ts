@@ -1,8 +1,8 @@
 /**
  * Creates a new `ImmutableMap` make a set of entries.
  *
- * @tsplus static ImmutableMap/Ops __call
- * @tsplus static ImmutableMap/Ops make
+ * @tsplus static ImmutableMap.Ops __call
+ * @tsplus static ImmutableMap.Ops make
  */
 export function make<Entries extends Tuple<[any, any]>[]>(
   ...entries: Entries

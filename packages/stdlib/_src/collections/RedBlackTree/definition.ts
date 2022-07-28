@@ -26,7 +26,7 @@ export interface RedBlackTree<K, V> extends RedBlackTreeIterable<K, V>, Equals {
 }
 
 /**
- * @tsplus type RedBlackTree/Ops
+ * @tsplus type RedBlackTree.Ops
  */
 export interface RedBlackTreeOps {
   $: RedBlackTreeAspects
@@ -36,7 +36,7 @@ export const RedBlackTree: RedBlackTreeOps = {
 }
 
 /**
- * @tsplus type RedBlackTree/Aspects
+ * @tsplus type RedBlackTree.Aspects
  */
 export interface RedBlackTreeAspects {}
 

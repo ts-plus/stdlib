@@ -1,14 +1,10 @@
 /**
  * Zips `Maybe<A>` and `Maybe<B>` into `Maybe<Tuple<[A, B]>>`.
  *
- * @tsplus operator Maybe +
- * @tsplus fluent Maybe zip
+ * @tsplus pipeable-operator Maybe +
+ * @tsplus static Maybe.Aspects zip
+ * @tsplus pipeable Maybe zip
  */
-export function zip_<A, B>(fa: Maybe<A>, fb: Maybe<B>): Maybe<Tuple<[A, B]>> {
-  return fa.flatMap((a) => fb.map((b) => Tuple(a, b)))
+export function zip<B>(that: Maybe<B>) {
+  return <A>(self: Maybe<A>): Maybe<Tuple<[A, B]>> => self.flatMap((a) => that.map((b) => Tuple(a, b)))
 }
-
-/**
- * @tsplus static Maybe/Aspects zip
- */
-export const zip = Pipeable(zip_)

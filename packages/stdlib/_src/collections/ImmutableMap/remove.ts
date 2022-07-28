@@ -1,17 +1,13 @@
 /**
  * Removes the key/value pair associated with the specified key from the map.
  *
- * @tsplus fluent ImmutableMap remove
+ * @tsplus static ImmutableMap.Aspects remove
+ * @tsplus pipeable ImmutableMap remove
  */
-export function remove_<K, V>(self: ImmutableMap<K, V>, key: K): ImmutableMap<K, V> {
-  const map = self.copy.internalMap as Map<K, V>
-  map.delete(key)
-  return new ImmutableMap(map)
+export function remove<K>(key: K) {
+  return <V>(self: ImmutableMap<K, V>): ImmutableMap<K, V> => {
+    const map = self.copy.internalMap as Map<K, V>
+    map.delete(key)
+    return new ImmutableMap(map)
+  }
 }
-
-/**
- * Removes the key/value pair associated with the specified key from the map.
- *
- * @tsplus static ImmutableMap/Aspects remove
- */
-export const remove = Pipeable(remove_)

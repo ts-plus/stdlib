@@ -1,12 +1,8 @@
 /**
- * @tsplus operator Tree ==
- * @tsplus fluent Tree equals
+ * @tsplus pipeable-operator Tree ==
+ * @tsplus static Tree.Aspects equals
+ * @tsplus pipeable Tree equals
  */
-export function equals_<A, B>(self: Tree<A>, that: Tree<B>): boolean {
-  return self.corresponds(that, Equals.equals)
+export function equals<B>(that: Tree<B>) {
+  return <A>(self: Tree<A>): boolean => self.corresponds(that, Equals.equals)
 }
-
-/**
- * @tsplus static Tree/Aspects equals
- */
-export const equals = Pipeable(equals_)

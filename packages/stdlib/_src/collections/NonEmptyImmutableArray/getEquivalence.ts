@@ -1,5 +1,5 @@
 /**
- * @tsplus static NonEmptyImmutableArray/Ops getEquivalence
+ * @tsplus static NonEmptyImmutableArray.Ops getEquivalence
  */
 export function getEquivalence<A>(E: Equivalence<A>): Equivalence<NonEmptyImmutableArray<A>> {
   return Equivalence((xs, ys) =>

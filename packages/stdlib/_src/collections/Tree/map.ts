@@ -1,14 +1,7 @@
 /**
- * @tsplus fluent Tree map
+ * @tsplus static Tree.Aspects map
+ * @tsplus pipeable Tree map
  */
-export function map_<A, B>(self: Tree<A>, f: (a: A) => B): Tree<B> {
-  return Tree(
-    f(self.value),
-    self.forest.map((fa) => fa.map(f))
-  )
+export function map<A, B>(f: (a: A) => B) {
+  return (self: Tree<A>): Tree<B> => Tree(f(self.value), self.forest.map((fa) => fa.map(f)))
 }
-
-/**
- * @tsplus static Tree/Aspects map
- */
-export const map = Pipeable(map_)

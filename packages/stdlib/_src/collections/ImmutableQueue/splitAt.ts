@@ -5,15 +5,13 @@ import {
 import { Tuple } from "@tsplus/stdlib/data/Tuple"
 
 /**
- * @tsplus fluent ImmutableQueue splitAt
+ * @tsplus static ImmutableQueue.Aspects splitAt
+ * @tsplus pipeable ImmutableQueue splitAt
  */
-export function splitAt_<A>(self: ImmutableQueue<A>, n: number): Tuple<[ImmutableQueue<A>, ImmutableQueue<A>]> {
-  concreteImmutableQueue(self)
-  const { tuple: [a, b] } = self.backingList.splitAt(n)
-  return Tuple.make(new ImmutableQueueInternal(a), new ImmutableQueueInternal(b))
+export function splitAt(n: number) {
+  return <A>(self: ImmutableQueue<A>): Tuple<[ImmutableQueue<A>, ImmutableQueue<A>]> => {
+    concreteImmutableQueue(self)
+    const { tuple: [a, b] } = self.backingList.splitAt(n)
+    return Tuple.make(new ImmutableQueueInternal(a), new ImmutableQueueInternal(b))
+  }
 }
-
-/**
- * @tsplus static ImmutableQueue/Aspects splitAt
- */
-export const splitAt = Pipeable(splitAt_)

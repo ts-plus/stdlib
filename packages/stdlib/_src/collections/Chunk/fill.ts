@@ -1,7 +1,7 @@
 /**
  * Fills a chunk with the result of applying `f` `n` times.
  *
- * @tsplus static Chunk/Ops fill
+ * @tsplus static Chunk.Ops fill
  */
 export function fill<A>(n: number, f: (n: number) => A): Chunk<A> {
   if (n <= 0) {

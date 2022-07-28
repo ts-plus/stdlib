@@ -1,5 +1,5 @@
 /**
- * @tsplus static Maybe/Ops forEachF
+ * @tsplus static Maybe.Ops forEachF
  */
 export const forEachF = ForEach.implementForEachF<Maybe.HKT>()(
   <N, R, E, A, B, G extends HKT>(_: {

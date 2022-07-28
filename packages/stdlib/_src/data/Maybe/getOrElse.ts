@@ -9,6 +9,6 @@ export function getOrElse_<A, B>(self: Maybe<A>, onNone: LazyArg<B>): A | B {
 }
 
 /**
- * @tsplus static Maybe/Aspects getOrElse
+ * @tsplus static Maybe.Aspects getOrElse
  */
 export const getOrElse = Pipeable(getOrElse_)

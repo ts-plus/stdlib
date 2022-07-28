@@ -1,6 +1,6 @@
 /**
  * @tsplus type ImmutableMap
- * @tsplus companion ImmutableMap/Ops
+ * @tsplus companion ImmutableMap.Ops
  */
 export class ImmutableMap<K, V> implements Equals, Collection<Tuple<[K, V]>> {
   constructor(readonly internalMap: ReadonlyMap<K, V>) {}
@@ -45,13 +45,11 @@ export class ImmutableMap<K, V> implements Equals, Collection<Tuple<[K, V]>> {
 }
 
 /**
- * @tsplus type ImmutableMap/Ops
+ * @tsplus static ImmutableMap.Ops $
  */
-export interface ImmutableMapOps {
-  $: ImmutableMapAspects
-}
+export const ImmutableMapAspects: ImmutableMapAspects = {}
 
 /**
- * @tsplus type ImmutableMap/Aspects
+ * @tsplus type ImmutableMap.Aspects
  */
 export interface ImmutableMapAspects {}

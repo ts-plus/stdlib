@@ -1,5 +1,5 @@
 /**
- * @tsplus static ImmutableArray/Ops compactF
+ * @tsplus static ImmutableArray.Ops compactF
  */
 export const compactF = Witherable.implementCompactF<ImmutableArray.HKT>()(
   <FR, FE, A, B, G extends HKT>(_: {

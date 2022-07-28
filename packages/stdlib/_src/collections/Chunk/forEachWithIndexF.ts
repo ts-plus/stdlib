@@ -1,5 +1,5 @@
 /**
- * @tsplus static Chunk/Ops forEachWithIndexF
+ * @tsplus static Chunk.Ops forEachWithIndexF
  */
 export const forEachWithIndexF = ForEachWithIndex.implementForEachWithIndexF<number, Chunk.HKT>()(
   (_) =>

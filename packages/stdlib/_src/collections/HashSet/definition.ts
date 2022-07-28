@@ -10,7 +10,7 @@ export interface HashSet<A> extends Collection<A>, Equals {
 }
 
 /**
- * @tsplus type HashSet/Ops
+ * @tsplus type HashSet.Ops
  */
 export interface HashSetOps {
   $: HashSetAspects
@@ -19,6 +19,9 @@ export const HashSet: HashSetOps = {
   $: {}
 }
 
+/**
+ * @tsplus type HashSet.Aspects
+ */
 export interface HashSetAspects {}
 
 /**
@@ -31,7 +34,7 @@ export function unifyHashSet<X extends HashSet<any>>(
 }
 
 /**
- * @tsplus static HashSet/Ops isHashSet
+ * @tsplus static HashSet.Ops isHashSet
  */
 export function isHashSet<A>(u: Iterable<A>): u is HashSet<A>
 export function isHashSet(u: unknown): u is HashSet<unknown>

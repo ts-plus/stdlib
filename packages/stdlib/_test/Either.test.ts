@@ -144,8 +144,8 @@ describe.concurrent("Either", () => {
   })
 
   it("foldMap", () => {
-    assert.strictEqual(Either.right("a").foldMap(AssociativeIdentity.string)(identity), "a")
-    assert.strictEqual(Either.left(1).foldMap(AssociativeIdentity.string)(identity), "")
+    assert.strictEqual(Either.right("a").foldMap(AssociativeIdentity.string, identity), "a")
+    assert.strictEqual(Either.left(1).foldMap(AssociativeIdentity.string, identity), "")
   })
 
   it("forEachF", () => {

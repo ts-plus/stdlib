@@ -9,6 +9,6 @@ export function remove_<K, V>(self: SortedMap<K, V>, key: K): SortedMap<K, V> {
 }
 
 /**
- * @tsplus static SortedMap/Aspects remove
+ * @tsplus static SortedMap.Aspects remove
  */
 export const remove = Pipeable(remove_)

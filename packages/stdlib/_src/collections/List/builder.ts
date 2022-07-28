@@ -12,7 +12,7 @@ export class ListBuilder<A> {
 }
 
 /**
- * @tsplus static List/Ops builder
+ * @tsplus static List.Ops builder
  */
 export function builder<A>(): ListBuilder<A> {
   return new ListBuilder(new ListBuffer())

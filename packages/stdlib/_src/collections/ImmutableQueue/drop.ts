@@ -4,14 +4,12 @@ import {
 } from "@tsplus/stdlib/collections/ImmutableQueue/_internal/ImmutableQueueInternal"
 
 /**
- * @tsplus fluent ImmutableQueue drop
+ * @tsplus static ImmutableQueue.Aspects drop
+ * @tsplus pipeable ImmutableQueue drop
  */
-export function drop_<A>(self: ImmutableQueue<A>, n: number): ImmutableQueue<A> {
-  concreteImmutableQueue(self)
-  return new ImmutableQueueInternal(self.backingList.drop(n))
+export function drop(n: number) {
+  return <A>(self: ImmutableQueue<A>): ImmutableQueue<A> => {
+    concreteImmutableQueue(self)
+    return new ImmutableQueueInternal(self.backingList.drop(n))
+  }
 }
-
-/**
- * @tsplus static ImmutableQueue/Aspects drop
- */
-export const drop = Pipeable(drop_)

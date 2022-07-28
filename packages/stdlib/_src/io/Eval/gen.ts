@@ -28,7 +28,7 @@ function run_<Eff extends GenEval<any>, AEff>(
 /**
  * Generator
  *
- * @tsplus static Eval/Ops gen
+ * @tsplus static Eval.Ops gen
  */
 export function gen<Eff extends GenEval<any>, AEff>(
   f: (i: { <A>(_: Eval<A>): GenEval<A> }) => Generator<Eff, AEff, any>

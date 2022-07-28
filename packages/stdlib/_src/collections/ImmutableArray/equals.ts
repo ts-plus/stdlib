@@ -1,15 +1,12 @@
 /**
- * @tsplus operator ImmutableArray ==
- * @tsplus fluent ImmutableArray equals
+ * @tsplus pipeable-operator ImmutableArray ==
+ * @tsplus static ImmutableArray.Aspects equals
+ * @tsplus pipeable ImmutableArray equals
  */
-export function equals_<A>(self: ImmutableArray<A>, that: ImmutableArray<A>): boolean
-export function equals_<A, B>(self: ImmutableArray<A>, that: ImmutableArray<B>): boolean
-export function equals_<A, B>(self: ImmutableArray<A>, that: ImmutableArray<B>): boolean {
-  return self.array.length === that.array.length &&
+export function equals<A>(that: ImmutableArray<A>): (self: ImmutableArray<A>) => boolean
+export function equals<B>(that: ImmutableArray<B>): <A>(self: ImmutableArray<A>) => boolean
+export function equals<B>(that: ImmutableArray<B>) {
+  return <A>(self: ImmutableArray<A>): boolean =>
+    self.array.length === that.array.length &&
     self.array.every((v, i) => Equals.equals(v, that.array[i]))
 }
-
-/**
- * @tsplus static ImmutableArray/Aspects equals
- */
-export const equals = Pipeable(equals_)

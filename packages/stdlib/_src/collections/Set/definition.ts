@@ -4,7 +4,7 @@ declare global {
    */
   export interface Set<T> extends Collection<T> {}
   /**
-   * @tsplus type Set/Ops
+   * @tsplus type Set.Ops
    */
   export interface SetConstructor {
   }

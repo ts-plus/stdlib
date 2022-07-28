@@ -3,17 +3,9 @@
  * value is `None` the default value is returned, otherwise the function is
  * applied to the value inside the `Some` and the result is returned.
  *
- * @tsplus fluent Maybe fold
+ * @tsplus static Maybe.Aspects fold
+ * @tsplus pipeable Maybe fold
  */
-export function fold_<A, B, C>(
-  ma: Maybe<A>,
-  onNone: LazyArg<B>,
-  onSome: (a: A) => C
-): B | C {
-  return ma.isNone() ? onNone() : onSome(ma.value)
+export function fold<A, B, C>(onNone: LazyArg<B>, onSome: (a: A) => C) {
+  return (self: Maybe<A>): B | C => self.isNone() ? onNone() : onSome(self.value)
 }
-
-/**
- * @tsplus static Maybe/Aspects fold
- */
-export const fold = Pipeable(fold_)

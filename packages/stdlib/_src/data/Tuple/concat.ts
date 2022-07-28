@@ -1,12 +1,13 @@
 /**
  * Concatenates two tuples.
  *
- * @tsplus operator tsplus/Tuple +
- * @tsplus fluent tsplus/Tuple concat
+ * @tsplus pipeable-operator Tuple +
+ * @tsplus static Tuple.Aspects concat
+ * @tsplus pipeable Tuple concat
  */
-export function concat<Ks extends unknown[], Hs extends unknown[]>(
-  self: Tuple<Ks>,
-  that: Tuple<Hs>
-): Tuple<[...Ks, ...Hs]> {
-  return new Tuple([...self.tuple, ...that.tuple])
+export function concat<Hs extends unknown[]>(that: Tuple<Hs>) {
+  return <Ks extends unknown[]>(self: Tuple<Ks>): Tuple<[...Ks, ...Hs]> =>
+    new Tuple(
+      [...self.tuple, ...that.tuple]
+    )
 }

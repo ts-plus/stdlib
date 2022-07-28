@@ -1,11 +1,12 @@
 /**
- * @tsplus fluent List filter
+ * @tsplus static List.Aspects filter
+ * @tsplus pipeable List filter
  */
-export function filter_<A>(self: List<A>, p: Predicate<A>): List<A> {
-  return filterCommon_(self, p, false)
+export function filter<A, B extends A>(p: Refinement<A, B>): (self: List<A>) => List<B>
+export function filter<A>(p: Predicate<A>): (self: List<A>) => List<A>
+export function filter<A>(p: Predicate<A>) {
+  return (self: List<A>): List<A> => filterCommon_(self, p, false)
 }
-
-export const filter = Pipeable(filter_)
 
 function noneIn<A>(l: List<A>, p: Predicate<A>, isFlipped: boolean): List<A> {
   /* eslint-disable no-constant-condition */

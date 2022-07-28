@@ -1,3 +1,4 @@
+import type { Cont, TraversalFn, VisitResult } from "@tsplus/stdlib/collections/HashMap/_internal/hashMap"
 import {
   visitLazy as visitLazyInternal,
   visitLazyChildren as visitLazyChildrenInternal
@@ -16,19 +17,15 @@ import {
 
 export { Node } from "@tsplus/stdlib/collections/HashMap/_internal/node"
 
-// -----------------------------------------------------------------------------
-// Constructors
-// -----------------------------------------------------------------------------
-
 /**
- * @tsplus static HashMap/Node/Ops empty
+ * @tsplus static HashMap.Node.Ops empty
  */
 export function emptyNode<K, V>(): Node<K, V> {
   return new EmptyNode()
 }
 
 /**
- * @tsplus static HashMap/Node/Ops leaf
+ * @tsplus static HashMap.Node.Ops leaf
  */
 export function leafNode<K, V>(
   edit: number,
@@ -40,7 +37,7 @@ export function leafNode<K, V>(
 }
 
 /**
- * @tsplus static HashMap/Node/Ops collision
+ * @tsplus static HashMap.Node.Ops collision
  */
 export function collisionNode<K, V>(
   edit: number,
@@ -51,7 +48,7 @@ export function collisionNode<K, V>(
 }
 
 /**
- * @tsplus static HashMap/Node/Ops indexed
+ * @tsplus static HashMap.Node.Ops indexed
  */
 export function indexedNode<K, V>(
   edit: number,
@@ -62,7 +59,7 @@ export function indexedNode<K, V>(
 }
 
 /**
- * @tsplus static HashMap/Node/Ops array
+ * @tsplus static HashMap.Node.Ops array
  */
 export function arrayNode<K, V>(
   edit: number,
@@ -77,12 +74,12 @@ export function arrayNode<K, V>(
 // -----------------------------------------------------------------------------
 
 /**
- * @tsplus static HashMap/Node/Ops isEmptyNode
+ * @tsplus static HashMap.Node.Ops isEmptyNode
  */
 export const isEmptyNode = isEmptyNodeInternal
 
 /**
- * @tsplus static HashMap/Node/Ops isLeafNode
+ * @tsplus static HashMap.Node.Ops isLeafNode
  */
 export const isLeafNode = isLeafNodeInternal
 
@@ -91,16 +88,20 @@ export const isLeafNode = isLeafNodeInternal
 // -----------------------------------------------------------------------------
 
 /**
- * @tsplus fluent HashMap/Node canEdit
+ * @tsplus pipeable HashMap.Node canEdit
  */
-export const canEditNode = canEditNodeInternal
+export function canEditNode(edit: number) {
+  return <K, V>(node: Node<K, V>): boolean => canEditNodeInternal(node, edit)
+}
 
 /**
- * @tsplus fluent HashMap/Node visitLazy
+ * @tsplus pipeable HashMap.Node visitLazy
  */
-export const visitLazy = visitLazyInternal
+export function visitLazy<K, V, A>(f: TraversalFn<K, V, A>, cont?: Cont<K, V, A>) {
+  return (node: Node<K, V>): Maybe<VisitResult<K, V, A>> => visitLazyInternal(node, f)
+}
 
 /**
- * @tsplus fluent HashMap/Node visitLazyChildren
+ * @tsplus fluent HashMap.Node.Ops visitLazyChildren
  */
 export const visitLazyChildren = visitLazyChildrenInternal

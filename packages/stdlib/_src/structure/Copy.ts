@@ -14,8 +14,8 @@ export interface Copy {
 }
 
 /**
- * @tsplus fluent Copy copy
+ * @tsplus pipeable Copy copy
  */
-export function copy<A extends Copy>(self: A, that: Partial<A>) {
-  return self[Copy.sym](that)
+export function copy<A extends Copy>(that: Partial<A>) {
+  return (self: A): A => self[Copy.sym](that)
 }

@@ -37,3 +37,7 @@ import { Guard } from "@tsplus/runtime/Guard"
  * @tsplus global
  */
 import { Make } from "@tsplus/runtime/Make"
+/**
+ * @tsplus global
+ */
+import { Result } from "@tsplus/runtime/Result"

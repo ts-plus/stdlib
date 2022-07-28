@@ -13,7 +13,7 @@ export declare namespace Maybe {
 }
 
 /**
- * @tsplus type Maybe/Ops
+ * @tsplus type Maybe.Ops
  */
 export interface MaybeOps {
   $: MaybeAspects
@@ -23,17 +23,17 @@ export const Maybe: MaybeOps = {
 }
 
 /**
- * @tsplus type Maybe/Aspects
+ * @tsplus type Maybe.Aspects
  */
 export interface MaybeAspects {}
 
-const _noneHash = Hash.string("Maybe/None")
-const _someHash = Hash.string("Maybe/Some")
+const _noneHash = Hash.string("Maybe.None")
+const _someHash = Hash.string("Maybe.Some")
 
 /**
  * Definitions
  *
- * @tsplus type Maybe/None
+ * @tsplus type Maybe.None
  */
 export class None implements Equals {
   readonly _tag = "None";
@@ -47,7 +47,7 @@ export class None implements Equals {
 }
 
 /**
- * @tsplus type Maybe/Some
+ * @tsplus type Maybe.Some
  */
 export class Some<A> implements Equals {
   readonly _tag = "Some"
@@ -64,8 +64,8 @@ export class Some<A> implements Equals {
 
 /**
  * @tsplus unify Maybe
- * @tsplus unify Maybe/Some
- * @tsplus unify Maybe/None
+ * @tsplus unify Maybe.Some
+ * @tsplus unify Maybe.None
  */
 export function unifyMaybe<X extends Maybe<any>>(
   self: X
@@ -80,14 +80,14 @@ export type ArrayOfMaybies<Ts extends Maybe<any>[]> = {
 /**
  * Constructs `None`.
  *
- * @tsplus static Maybe/Ops none
+ * @tsplus static Maybe.Ops none
  */
 export const none: Maybe<never> = new None()
 
 /**
  * Constructs `None`.
  *
- * @tsplus static Maybe/Ops emptyOf
+ * @tsplus static Maybe.Ops emptyOf
  */
 export function emptyOf<A>(): Maybe<A> {
   return none
@@ -96,7 +96,7 @@ export function emptyOf<A>(): Maybe<A> {
 /**
  * Constructs `Some<A>`.
  *
- * @tsplus static Maybe/Ops some
+ * @tsplus static Maybe.Ops some
  */
 export function some<A>(a: A): Maybe<A> {
   return new Some(a)
@@ -121,7 +121,7 @@ export function isSome<A>(fa: Maybe<A>): fa is Some<A> {
 }
 
 /**
- * @tsplus static Maybe/Ops isMaybe
+ * @tsplus static Maybe.Ops isMaybe
  */
 export function isMaybe(u: unknown): u is Maybe<unknown> {
   return (

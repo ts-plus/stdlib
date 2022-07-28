@@ -2,16 +2,9 @@
  * Returns `false` if `Left` or returns the result of the application of the
  * given predicate to the `Right` value.
  *
- * @tsplus fluent Either exists
+ * @tsplus static Either.Aspects exists
+ * @tsplus pipeable Either exists
  */
-export function exists_<E, A>(self: Either<E, A>, f: Predicate<A>): boolean {
-  return self.isLeft() ? false : f(self.right)
+export function exists<A>(f: Predicate<A>) {
+  return <E>(self: Either<E, A>): boolean => self.isLeft() ? false : f(self.right)
 }
-
-/**
- * Returns `false` if `Left` or returns the result of the application of the
- * given predicate to the `Right` value.
- *
- * @tsplus static Either/Aspects exists
- */
-export const exists = Pipeable(exists_)

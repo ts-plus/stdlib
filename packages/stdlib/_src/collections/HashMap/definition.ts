@@ -18,7 +18,7 @@ export interface HashMap<K, V> extends Collection<Tuple<[K, V]>>, Equals {
 }
 
 /**
- * @tsplus type HashMap/Ops
+ * @tsplus type HashMap.Ops
  */
 export interface HashMapOps {
   $: HashMapAspects
@@ -28,7 +28,7 @@ export const HashMap: HashMapOps = {
 }
 
 /**
- * @tsplus type HashMap/Aspects
+ * @tsplus type HashMap.Aspects
  */
 export interface HashMapAspects {}
 
@@ -45,7 +45,7 @@ export function unifyHashMap<X extends HashMap<any, any>>(
 }
 
 /**
- * @tsplus static HashMap/Ops isHashMap
+ * @tsplus static HashMap.Ops isHashMap
  */
 export function isHashMap<K, V>(u: Iterable<Tuple<[K, V]>>): u is HashMap<K, V>
 export function isHashMap(u: unknown): u is HashMap<unknown, unknown>

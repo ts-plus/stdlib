@@ -1,5 +1,5 @@
 /**
- * @tsplus static Eval/Ops struct
+ * @tsplus static Eval.Ops struct
  */
 export function struct<NER extends Record<string, Eval<any>>>(
   r: EnforceNonEmptyRecord<NER> & Record<string, Eval<any>>,

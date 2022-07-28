@@ -13,7 +13,7 @@ const adapter: {
   })
 
 /**
- * @tsplus static ImmutableArray/Ops gen
+ * @tsplus static ImmutableArray.Ops gen
  */
 export const gen = DSL.genWithHistoryF(ImmutableArray.Monad, {
   adapter

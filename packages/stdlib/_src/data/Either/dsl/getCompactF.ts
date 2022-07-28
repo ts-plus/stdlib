@@ -2,7 +2,7 @@
  * Get `Witherable`'s `compactF` for an `Either<E, A>` given an
  * `AssociativeIdentity<E>`.
  *
- * @tsplus static Either/Ops getCompactF
+ * @tsplus static Either.Ops getCompactF
  */
 export function getCompactF<E>(M: AssociativeIdentity<E>): Wither<Either.FixedLeftHKT<E>> {
   const compact = Either.$.compactMaybe(M)
