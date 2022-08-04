@@ -20,7 +20,7 @@ export { Node } from "@tsplus/stdlib/collections/HashMap/_internal/node"
 /**
  * @tsplus static HashMap.Node.Ops empty
  */
-export function emptyNode<K, V>(): Node<K, V> {
+export function emptyNode<K = never, V = never>(): Node<K, V> {
   return new EmptyNode()
 }
 

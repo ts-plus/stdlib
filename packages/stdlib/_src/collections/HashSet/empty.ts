@@ -3,6 +3,6 @@ import { HashSetInternal } from "@tsplus/stdlib/collections/HashSet/_internal/ha
 /**
  * @tsplus static HashSet.Ops empty
  */
-export function empty<A>(): HashSet<A> {
+export function empty<A = never>(): HashSet<A> {
   return new HashSetInternal(HashMap.empty<A, unknown>())
 }

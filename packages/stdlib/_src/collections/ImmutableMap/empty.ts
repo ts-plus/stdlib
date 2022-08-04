@@ -3,6 +3,6 @@
  *
  * @tsplus static ImmutableMap.Ops empty
  */
-export function empty<K, V>(): ImmutableMap<K, V> {
+export function empty<K = never, V = never>(): ImmutableMap<K, V> {
   return new ImmutableMap(new Map())
 }

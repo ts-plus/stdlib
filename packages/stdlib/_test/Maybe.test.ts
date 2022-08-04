@@ -129,7 +129,7 @@ describe.concurrent("Maybe", () => {
     )
     assert.isTrue(
       Maybe.gen(function*($) {
-        const s = yield* $(Maybe.emptyOf<string>())
+        const s = yield* $(Maybe.empty<string>())
         return s.length
       }) == Maybe.none
     )

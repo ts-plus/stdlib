@@ -5,6 +5,6 @@ import { _Empty } from "@tsplus/stdlib/collections/Chunk/definition"
  *
  * @tsplus static Chunk.Ops empty
  */
-export function empty<A>(): Chunk<A> {
+export function empty<A = never>(): Chunk<A> {
   return _Empty
 }

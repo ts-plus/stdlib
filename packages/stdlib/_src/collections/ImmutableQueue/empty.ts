@@ -3,6 +3,6 @@ import { ImmutableQueueInternal } from "@tsplus/stdlib/collections/ImmutableQueu
 /**
  * @tsplus static ImmutableQueue.Ops empty
  */
-export function empty<A>(): ImmutableQueue<A> {
+export function empty<A = never>(): ImmutableQueue<A> {
   return new ImmutableQueueInternal(List.nil())
 }
