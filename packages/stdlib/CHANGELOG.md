@@ -1,5 +1,13 @@
 # @tsplus/stdlib
 
+## 0.2.3
+
+### Patch Changes
+
+- [#197](https://github.com/ts-plus/stdlib/pull/197) [`aaf4c50`](https://github.com/ts-plus/stdlib/commit/aaf4c5097e8ddb468f45649221d7073651b0046c) Thanks [@mikearnaldi](https://github.com/mikearnaldi)! - Rename Maybe.emptyOf to Maybe.empty
+
+* [#194](https://github.com/ts-plus/stdlib/pull/194) [`830713a`](https://github.com/ts-plus/stdlib/commit/830713a899d5fd32b75f1a5610e5de7204b34df5) Thanks [@IMax153](https://github.com/IMax153)! - convert annotations to pipeable where possible
+
 ## 0.2.2
 
 ### Patch Changes
