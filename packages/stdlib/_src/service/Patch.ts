@@ -168,7 +168,7 @@ function patchLoop(
  *
  * @tsplus static Patch.Ops empty
  */
-export function empty<I, O>(): Patch<I, O> {
+export function empty<I = never, O = never>(): Patch<I, O> {
   return new Empty()
 }
 

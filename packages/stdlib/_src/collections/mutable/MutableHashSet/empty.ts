@@ -3,6 +3,6 @@
  *
  * @tsplus static MutableHashSet.Ops empty
  */
-export function empty<A>(): MutableHashSet<A> {
+export function empty<A = never>(): MutableHashSet<A> {
   return new MutableHashSet()
 }

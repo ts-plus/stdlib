@@ -374,7 +374,7 @@ function hashCode(self: ParSeq<unknown>): number {
  *
  * @tsplus static ParSeq.Ops empty
  */
-export function empty<A>(): ParSeq<A> {
+export function empty<A = never>(): ParSeq<A> {
   return new Empty()
 }
 

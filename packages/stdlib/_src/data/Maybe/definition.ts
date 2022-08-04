@@ -87,9 +87,9 @@ export const none: Maybe<never> = new None()
 /**
  * Constructs `None`.
  *
- * @tsplus static Maybe.Ops emptyOf
+ * @tsplus static Maybe.Ops empty
  */
-export function emptyOf<A>(): Maybe<A> {
+export function empty<A = never>(): Maybe<A> {
   return none
 }
 
