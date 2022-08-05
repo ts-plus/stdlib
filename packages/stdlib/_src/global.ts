@@ -104,6 +104,10 @@ import { Case } from "@tsplus/stdlib/data/Case"
 /**
  * @tsplus global
  */
+import { Differ } from "@tsplus/stdlib/data/Differ/definition"
+/**
+ * @tsplus global
+ */
 import { Duration } from "@tsplus/stdlib/data/Duration"
 /**
  * @tsplus global
