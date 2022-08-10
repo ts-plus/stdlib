@@ -9,10 +9,18 @@ export type Result<W, E, A> = Success<A> | SuccessWithWarning<W, A> | Failure<E>
 export interface ResultOps {}
 export const Result: ResultOps = {}
 
+export const _T = Symbol.for("@tsplus/runtime/Result/_T")
+export type _T = typeof _T
+
 /**
  * @tsplus type Result/Success
  */
 export interface Success<A> {
+  readonly [_T]?: {
+    _W: (_: never) => never
+    _E: (_: never) => never
+    _A: (_: never) => A
+  }
   readonly _tag: "Success"
   readonly success: A
 }
@@ -21,6 +29,11 @@ export interface Success<A> {
  * @tsplus type Result/SuccessWithWarning
  */
 export interface SuccessWithWarning<W, A> {
+  readonly [_T]?: {
+    _W: (_: never) => W
+    _E: (_: never) => never
+    _A: (_: never) => A
+  }
   readonly _tag: "SuccessWithWarning"
   readonly success: A
   readonly warning: W
@@ -30,12 +43,16 @@ export interface SuccessWithWarning<W, A> {
  * @tsplus type Result/Failure
  */
 export interface Failure<E> {
+  readonly [_T]?: {
+    _W: (_: never) => never
+    _E: (_: never) => E
+    _A: (_: never) => never
+  }
   readonly _tag: "Failure"
   readonly failure: E
 }
 
 /**
- * @tsplus unify Result
  * @tsplus unify Result/Success
  * @tsplus unify Result/SuccessWithWarning
  * @tsplus unify Result/Failure
@@ -43,9 +60,30 @@ export interface Failure<E> {
 export function unifyResult<X extends Result<any, any, any>>(
   self: X
 ): Result<
-  [X] extends [Result<infer W, any, any>] ? W : never,
-  [X] extends [Result<any, infer E, any>] ? E : never,
-  [X] extends [Result<any, any, infer A>] ? A : never
+  [X] extends [{
+    readonly [_T]?: {
+      _W: (_: never) => infer W
+      _E: (_: never) => infer E
+      _A: (_: never) => infer A
+    }
+  }] ? W
+    : never,
+  [X] extends [{
+    readonly [_T]?: {
+      _W: (_: never) => infer W
+      _E: (_: never) => infer E
+      _A: (_: never) => infer A
+    }
+  }] ? E
+    : never,
+  [X] extends [{
+    readonly [_T]?: {
+      _W: (_: never) => infer W
+      _E: (_: never) => infer E
+      _A: (_: never) => infer A
+    }
+  }] ? A
+    : never
 > {
   return self
 }
@@ -128,7 +166,9 @@ export function isFailure<W, E, A>(self: Result<W, E, A>): self is Failure<E> {
 /**
  * @tsplus fluent Result isSuccessWihWarning
  */
-export function isSuccessWihWarning<W, E, A>(self: Result<W, E, A>): self is SuccessWithWarning<W, A> {
+export function isSuccessWihWarning<W, E, A>(
+  self: Result<W, E, A>
+): self is SuccessWithWarning<W, A> {
   return self._tag === "SuccessWithWarning"
 }
 

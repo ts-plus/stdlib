@@ -93,7 +93,9 @@ export function getComposition<F extends HKT, G extends HKT>(
 export function sequenceF<T extends HKT>(T: ForEach<T>) {
   return <F extends HKT>(
     App: Covariant<F> & IdentityBoth<F>
-  ): <R, E, FR, FE, A>(_: HKT.Kind<T, R, E, HKT.Kind<F, FR, FE, A>>) => HKT.Kind<F, FR, FE, HKT.Kind<T, R, E, A>> => {
+  ): <R, E, FR, FE, A>(
+    _: HKT.Kind<T, R, E, HKT.Kind<F, FR, FE, A>>
+  ) => HKT.Kind<F, FR, FE, HKT.Kind<T, R, E, A>> => {
     const traverse = T.forEachF(App)
     return traverse(identity)
   }

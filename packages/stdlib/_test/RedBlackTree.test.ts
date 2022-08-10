@@ -165,7 +165,11 @@ describe.concurrent("RedBlackTree", () => {
       .insert(3, "e")
 
     assert.deepEqual(Array.from(tree.ge(0)), [Tuple(0, "b"), Tuple(1, "a"), Tuple(3, "e")])
-    assert.deepEqual(Array.from(tree.ge(0, "Backward")), [Tuple(0, "b"), Tuple(-1, "c"), Tuple(-2, "d")])
+    assert.deepEqual(Array.from(tree.ge(0, "Backward")), [
+      Tuple(0, "b"),
+      Tuple(-1, "c"),
+      Tuple(-2, "d")
+    ])
   })
 
   it("find", () => {
@@ -203,7 +207,21 @@ describe.concurrent("RedBlackTree", () => {
 
     assert.deepEqual(Array.from(tree.values()), ["g", "f", "e", "b", "a", "c", "d"])
     assert.isTrue(tree.find(new Key(1, "0")) == ImmutableArray("f", "e", "a"))
-    assert.deepEqual(Array.from(tree.removeFirst(new Key(1, "1")).values()), ["f", "e", "b", "a", "c", "d"])
-    assert.deepEqual(Array.from(tree.removeFirst(new Key(1, "0")).values()), ["g", "f", "e", "b", "c", "d"])
+    assert.deepEqual(Array.from(tree.removeFirst(new Key(1, "1")).values()), [
+      "f",
+      "e",
+      "b",
+      "a",
+      "c",
+      "d"
+    ])
+    assert.deepEqual(Array.from(tree.removeFirst(new Key(1, "0")).values()), [
+      "g",
+      "f",
+      "e",
+      "b",
+      "c",
+      "d"
+    ])
   })
 })

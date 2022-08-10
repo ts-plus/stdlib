@@ -3,7 +3,10 @@ import type * as P from "@tsplus/stdlib/prelude/ChainRec"
 /**
  * @tsplus static ImmutableArray.Ops depthFirstChainRec
  */
-export function depthFirstChainRec<A, B>(a: A, f: (a: A) => ImmutableArray<Either<A, B>>): ImmutableArray<B> {
+export function depthFirstChainRec<A, B>(
+  a: A,
+  f: (a: A) => ImmutableArray<Either<A, B>>
+): ImmutableArray<B> {
   const todo: Array<Either<A, B>> = [...f(a)]
   const result: Array<B> = []
 
@@ -29,7 +32,10 @@ export const DepthFirstChainRec = HKT.instance<P.ChainRec<ImmutableArray.HKT>>({
 /**
  * @tsplus static ImmutableArray.Ops breadthFirstChainRec
  */
-export function breadthFirstChainRec<A, B>(a: A, f: (a: A) => ImmutableArray<Either<A, B>>): ImmutableArray<B> {
+export function breadthFirstChainRec<A, B>(
+  a: A,
+  f: (a: A) => ImmutableArray<Either<A, B>>
+): ImmutableArray<B> {
   const initial = f(a)
   const todo: Array<Either<A, B>> = []
   const result: Array<B> = []

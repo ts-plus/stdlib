@@ -1,6 +1,18 @@
-import { arraySpliceIn, arraySpliceOut, arrayUpdate } from "@tsplus/stdlib/collections/HashMap/_internal/array"
-import { fromBitmap, hashFragment, toBitmap } from "@tsplus/stdlib/collections/HashMap/_internal/bitwise"
-import { MAX_INDEX_NODE, MIN_ARRAY_NODE, SIZE } from "@tsplus/stdlib/collections/HashMap/_internal/config"
+import {
+  arraySpliceIn,
+  arraySpliceOut,
+  arrayUpdate
+} from "@tsplus/stdlib/collections/HashMap/_internal/array"
+import {
+  fromBitmap,
+  hashFragment,
+  toBitmap
+} from "@tsplus/stdlib/collections/HashMap/_internal/bitwise"
+import {
+  MAX_INDEX_NODE,
+  MIN_ARRAY_NODE,
+  SIZE
+} from "@tsplus/stdlib/collections/HashMap/_internal/config"
 
 /**
  * @tsplus type HashMap.Node

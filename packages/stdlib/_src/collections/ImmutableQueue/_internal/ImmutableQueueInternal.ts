@@ -22,6 +22,8 @@ export class ImmutableQueueInternal<A> implements ImmutableQueue<A> {
 /**
  * @tsplus macro remove
  */
-export function concreteImmutableQueue<A>(_: ImmutableQueue<A>): asserts _ is ImmutableQueueInternal<A> {
+export function concreteImmutableQueue<A>(
+  _: ImmutableQueue<A>
+): asserts _ is ImmutableQueueInternal<A> {
   //
 }

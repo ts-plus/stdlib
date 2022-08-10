@@ -6,5 +6,6 @@
  * @tsplus pipeable ImmutableArray union
  */
 export function union<A>(E: Equivalence<A>, that: ImmutableArray<A>) {
-  return (self: ImmutableArray<A>): ImmutableArray<A> => self.concat(that.filter((a) => !self.elem(E, a)))
+  return (self: ImmutableArray<A>): ImmutableArray<A> =>
+    self.concat(that.filter((a) => !self.elem(E, a)))
 }

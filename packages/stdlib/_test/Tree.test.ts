@@ -104,7 +104,8 @@ describe.concurrent("Tree", () => {
 
   it("extend", () => {
     const t = Tree(1, Chunk(Tree(2), Tree(3)))
-    const f = (wa: Tree<number>): number => wa.fold((a, bs) => bs.reduce(a, Associative.sum.combine))
+    const f = (wa: Tree<number>): number =>
+      wa.fold((a, bs) => bs.reduce(a, Associative.sum.combine))
 
     const expected = Tree(6, Chunk(Tree(2), Tree(3)))
     assert.isTrue(t.extend(f) == expected)

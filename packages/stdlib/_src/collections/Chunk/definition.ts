@@ -233,7 +233,9 @@ export abstract class ChunkInternal<A> implements Chunk<A>, Equals {
       return this.start._concat(chunk)._concat(that)
     }
     if (that._typeId === PrependNTypeId) {
-      const chunk = array_(that.bufferUsed === 0 ? [] : (that.buffer as A1[]).slice(-that.bufferUsed))
+      const chunk = array_(
+        that.bufferUsed === 0 ? [] : (that.buffer as A1[]).slice(-that.bufferUsed)
+      )
       return this._concat(chunk)._concat(that.end)
     }
     const diff = that.depth - this.depth

@@ -1,4 +1,8 @@
-import type { Cont, TraversalFn, VisitResult } from "@tsplus/stdlib/collections/HashMap/_internal/hashMap"
+import type {
+  Cont,
+  TraversalFn,
+  VisitResult
+} from "@tsplus/stdlib/collections/HashMap/_internal/hashMap"
 import {
   visitLazy as visitLazyInternal,
   visitLazyChildren as visitLazyChildrenInternal

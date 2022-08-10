@@ -1,4 +1,8 @@
-import { fromBitmap, hashFragment, toBitmap } from "@tsplus/stdlib/collections/HashMap/_internal/bitwise"
+import {
+  fromBitmap,
+  hashFragment,
+  toBitmap
+} from "@tsplus/stdlib/collections/HashMap/_internal/bitwise"
 import { SIZE } from "@tsplus/stdlib/collections/HashMap/_internal/config"
 import type { Node } from "@tsplus/stdlib/collections/HashMap/_internal/node"
 import { isEmptyNode } from "@tsplus/stdlib/collections/HashMap/_internal/node"

@@ -22,7 +22,10 @@ describe.concurrent("Show", () => {
 
   it("struct", () => {
     assert.strictEqual(Show.struct({ a: Show.string }).show({ a: "a" }), "{ a: \"a\" }")
-    assert.strictEqual(Show.struct({ a: Show.string, b: Show.number }).show({ a: "a", b: 1 }), "{ a: \"a\", b: 1 }")
+    assert.strictEqual(
+      Show.struct({ a: Show.string, b: Show.number }).show({ a: "a", b: 1 }),
+      "{ a: \"a\", b: 1 }"
+    )
     // Should ignore non own properties
     const shows = Object.create({ a: 1 })
     const s = Show.struct(shows)

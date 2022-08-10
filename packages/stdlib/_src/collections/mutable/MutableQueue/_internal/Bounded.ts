@@ -1,4 +1,7 @@
-import { EmptyMutableQueue, MutableQueueSym } from "@tsplus/stdlib/collections/mutable/MutableQueue/definition"
+import {
+  EmptyMutableQueue,
+  MutableQueueSym
+} from "@tsplus/stdlib/collections/mutable/MutableQueue/definition"
 
 export class Bounded<A> implements MutableQueue<A> {
   readonly [MutableQueueSym]: MutableQueueSym = MutableQueueSym

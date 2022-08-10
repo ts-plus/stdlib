@@ -1,4 +1,7 @@
-import type { Direction, RedBlackTreeIterable } from "@tsplus/stdlib/collections/RedBlackTree/definition"
+import type {
+  Direction,
+  RedBlackTreeIterable
+} from "@tsplus/stdlib/collections/RedBlackTree/definition"
 import { RedBlackTreeIterator } from "@tsplus/stdlib/collections/RedBlackTree/definition"
 import type { Node } from "@tsplus/stdlib/collections/RedBlackTree/node"
 

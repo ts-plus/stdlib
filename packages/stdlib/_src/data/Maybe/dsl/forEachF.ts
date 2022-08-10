@@ -13,6 +13,8 @@ export const forEachF = ForEach.implementForEachF<Maybe.HKT>()(
     (G: AssociativeBoth<G> & Any<G> & Covariant<G>) =>
       (f: (a: A) => HKT.Kind<G, R, E, B>) =>
         (fa: Maybe<A>): HKT.Kind<G, R, E, Maybe<B>> => {
-          return fa.isNone() ? DSL.succeedF(G)(Maybe.none) : G.map((b: B) => Maybe.some(b))(f(fa.value))
+          return fa.isNone() ?
+            DSL.succeedF(G)(Maybe.none) :
+            G.map((b: B) => Maybe.some(b))(f(fa.value))
         }
 )

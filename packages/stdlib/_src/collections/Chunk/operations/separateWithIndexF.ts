@@ -1,7 +1,10 @@
 /**
  * @tsplus static Chunk.Ops separateWithIndexF
  */
-export const separateWithIndexF = WiltableWithIndex.implementSeparateWithIndexF<number, Chunk.HKT>()(
+export const separateWithIndexF = WiltableWithIndex.implementSeparateWithIndexF<
+  number,
+  Chunk.HKT
+>()(
   <A, B, R, E, G extends HKT>(_: {
     A: A
     B: B

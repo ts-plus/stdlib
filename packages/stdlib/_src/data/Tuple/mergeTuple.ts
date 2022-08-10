@@ -1,5 +1,6 @@
-export type MergeTuple<A, B> = A extends Tuple<infer TA> ? B extends Tuple<infer TB> ? Tuple<[...TA, ...TB]>
-: Tuple<[...TA, B]>
+export type MergeTuple<A, B> = A extends Tuple<infer TA>
+  ? B extends Tuple<infer TB> ? Tuple<[...TA, ...TB]>
+  : Tuple<[...TA, B]>
   : B extends Tuple<infer TB> ? Tuple<[A, ...TB]>
   : Tuple<[A, B]>
 

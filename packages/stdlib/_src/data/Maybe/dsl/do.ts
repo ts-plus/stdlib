@@ -13,7 +13,9 @@ export function bind<N extends string, Scope, A>(
   name: N extends keyof Scope ? { error: `binding name '${N}' already in use` } : N,
   f: (_: Scope) => Maybe<A>
 ) {
-  return (self: Maybe<Scope>): Maybe<{ readonly [k in N | keyof Scope]: k extends keyof Scope ? Scope[k] : A }> =>
+  return (
+    self: Maybe<Scope>
+  ): Maybe<{ readonly [k in N | keyof Scope]: k extends keyof Scope ? Scope[k] : A }> =>
     DoF.bind(name, f)(self)
 }
 
@@ -25,6 +27,8 @@ export function bindValue<N extends string, Scope, B>(
   name: N extends keyof Scope ? { error: `binding name '${N}' already in use` } : N,
   f: (_: Scope) => B
 ) {
-  return (self: Maybe<Scope>): Maybe<{ readonly [k in N | keyof Scope]: k extends keyof Scope ? Scope[k] : B }> =>
+  return (
+    self: Maybe<Scope>
+  ): Maybe<{ readonly [k in N | keyof Scope]: k extends keyof Scope ? Scope[k] : B }> =>
     DoF.bindValue(name, f)(self)
 }

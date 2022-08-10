@@ -34,7 +34,8 @@ export declare namespace Brand {
 
   export type Brands<P> = P extends Valid<any, any> ? TypeLevel.UnionToIntersection<
     {
-      [k in keyof P[Brand.valid]]: P extends P[Brand.valid][k] ? k extends string ? Valid<P[Brand.valid][k], k> : never
+      [k in keyof P[Brand.valid]]: P extends P[Brand.valid][k]
+        ? k extends string ? Valid<P[Brand.valid][k], k> : never
         : never
     }[keyof P[Brand.valid]]
   >
@@ -79,18 +80,23 @@ export declare namespace Brand {
     readonly validate: (a: A) => a is A & Brand.Valid<A, K>
   }
 
-  export type ValidatedWith<X extends Validation<any, any>> = X extends Validation<infer A, infer K> ? Validated<A, K>
+  export type ValidatedWith<X extends Validation<any, any>> = X extends Validation<infer A, infer K>
+    ? Validated<A, K>
     : never
 
   /**
    * @tsplus type Brand/Ops
    */
   export interface Ops {
-    readonly validation: <A, K extends string>(predicate: (a: A) => boolean) => Brand.Validation<A, K>
+    readonly validation: <A, K extends string>(
+      predicate: (a: A) => boolean
+    ) => Brand.Validation<A, K>
   }
 }
 
-export function validation<A, K extends string>(predicate: (a: A) => boolean): Brand.Validation<A, K> {
+export function validation<A, K extends string>(
+  predicate: (a: A) => boolean
+): Brand.Validation<A, K> {
   return {
     validate: (value): value is Brand.Validated<A, K> => predicate(value)
   }

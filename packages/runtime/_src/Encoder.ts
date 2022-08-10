@@ -91,7 +91,8 @@ export function deriveNamed<A extends Brand<any>>(
  * @tsplus derive Encoder<_> 10
  */
 export function deriveValidation<A extends Brand.Valid<any, any>>(
-  ...[base]: Check<Brand.IsValidated<A>> extends Check.True ? [base: Encoder<Brand.Unbranded<A>>] : never
+  ...[base]: Check<Brand.IsValidated<A>> extends Check.True ? [base: Encoder<Brand.Unbranded<A>>]
+    : never
 ): Encoder<A> {
   return Encoder((a) => base.encode(a as Brand.Unbranded<A>))
 }
@@ -112,7 +113,10 @@ export function deriveLazy<A>(fn: (_: Encoder<A>) => Encoder<A>): Encoder<A> {
 
 type EitherStructural<E, A> = { _tag: "Left"; left: E } | { _tag: "Right"; right: A }
 
-function deriveEitherInternal<E, A>(left: Encoder<E>, right: Encoder<A>): Encoder<EitherStructural<E, A>> {
+function deriveEitherInternal<E, A>(
+  left: Encoder<E>,
+  right: Encoder<A>
+): Encoder<EitherStructural<E, A>> {
   return Derive()
 }
 
@@ -120,7 +124,9 @@ function deriveEitherInternal<E, A>(left: Encoder<E>, right: Encoder<A>): Encode
  * @tsplus derive Encoder[Either]<_> 10
  */
 export function deriveEither<A extends Either<any, any>>(
-  ...[left, right]: [A] extends [Either<infer _E, infer _A>] ? [left: Encoder<_E>, right: Encoder<_A>] : never
+  ...[left, right]: [A] extends [Either<infer _E, infer _A>]
+    ? [left: Encoder<_E>, right: Encoder<_A>]
+    : never
 ): Encoder<A> {
   const structural = deriveEitherInternal(left, right)
   return Encoder((u) => structural.encode(u))
@@ -250,7 +256,9 @@ export function deriveRecord<A extends Record<string, any>>(
  * @tsplus derive Encoder<_> 20
  */
 export function deriveLiteral<A extends string | number>(
-  ...[value]: Check<Check.IsLiteral<A> & Check.Not<Check.IsUnion<A>>> extends Check.True ? [value: A] : never
+  ...[value]: Check<Check.IsLiteral<A> & Check.Not<Check.IsUnion<A>>> extends Check.True
+    ? [value: A]
+    : never
 ): Encoder<A> {
   return Encoder(() => value)
 }

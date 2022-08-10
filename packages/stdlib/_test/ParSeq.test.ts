@@ -57,24 +57,37 @@ describe.concurrent("ParSeq", () => {
   it("equals", () => {
     assert.isTrue(ParSeq.empty() == ParSeq.empty())
     assert.isTrue(
-      ParSeq.combineSeq(ParSeq.empty(), ParSeq.combineSeq(ParSeq.empty(), ParSeq.empty())) == ParSeq.empty()
+      ParSeq.combineSeq(ParSeq.empty(), ParSeq.combineSeq(ParSeq.empty(), ParSeq.empty())) ==
+        ParSeq.empty()
     )
     assert.isTrue(
-      ParSeq.combineSeq(ParSeq.empty(), ParSeq.combinePar(ParSeq.empty(), ParSeq.empty())) == ParSeq.empty()
+      ParSeq.combineSeq(ParSeq.empty(), ParSeq.combinePar(ParSeq.empty(), ParSeq.empty())) ==
+        ParSeq.empty()
     )
     assert.isTrue(
-      ParSeq.combineSeq(ParSeq.single("ok"), ParSeq.combinePar(ParSeq.empty(), ParSeq.empty())) == ParSeq.single("ok")
+      ParSeq.combineSeq(ParSeq.single("ok"), ParSeq.combinePar(ParSeq.empty(), ParSeq.empty())) ==
+        ParSeq.single("ok")
     )
     assert.isTrue(
-      ParSeq.combineSeq(ParSeq.single("ok"), ParSeq.combinePar(ParSeq.empty(), ParSeq.empty())) == ParSeq.single("ok")
+      ParSeq.combineSeq(ParSeq.single("ok"), ParSeq.combinePar(ParSeq.empty(), ParSeq.empty())) ==
+        ParSeq.single("ok")
     )
     assert.isTrue(
-      ParSeq.combineSeq(ParSeq.single("ok"), ParSeq.combinePar(ParSeq.empty(), ParSeq.single("ok"))) ==
+      ParSeq.combineSeq(
+        ParSeq.single("ok"),
+        ParSeq.combinePar(ParSeq.empty(), ParSeq.single("ok"))
+      ) ==
         ParSeq.combineSeq(ParSeq.single("ok"), ParSeq.single("ok"))
     )
     assert.isTrue(
-      ParSeq.combineSeq(ParSeq.single("ok"), ParSeq.combinePar(ParSeq.single("ok"), ParSeq.single("ok"))) ==
-        ParSeq.combineSeq(ParSeq.single("ok"), ParSeq.combinePar(ParSeq.single("ok"), ParSeq.single("ok")))
+      ParSeq.combineSeq(
+        ParSeq.single("ok"),
+        ParSeq.combinePar(ParSeq.single("ok"), ParSeq.single("ok"))
+      ) ==
+        ParSeq.combineSeq(
+          ParSeq.single("ok"),
+          ParSeq.combinePar(ParSeq.single("ok"), ParSeq.single("ok"))
+        )
     )
   })
 })

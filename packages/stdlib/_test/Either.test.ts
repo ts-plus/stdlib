@@ -28,7 +28,8 @@ describe.concurrent("Either", () => {
       (Either.rightW<number, string>(0).catchAll((s) => Either.right(s.length))) == Either.right(0)
     )
     assert.isTrue(
-      (Either.leftW<string, number>("hello").catchAll((s) => Either.right(s.length))) == Either.right(5)
+      (Either.leftW<string, number>("hello").catchAll((s) => Either.right(s.length))) ==
+        Either.right(5)
     )
   })
 
@@ -47,9 +48,15 @@ describe.concurrent("Either", () => {
   })
 
   it("compactOption", () => {
-    assert.isTrue(Either.left("hello").compactMaybe(AssociativeIdentity.string) == Either.left("hello"))
-    assert.isTrue(Either.right(Maybe.none).compactMaybe(AssociativeIdentity.string) == Either.left(""))
-    assert.isTrue(Either.right(Maybe.some(0)).compactMaybe(AssociativeIdentity.string) == Either.right(0))
+    assert.isTrue(
+      Either.left("hello").compactMaybe(AssociativeIdentity.string) == Either.left("hello")
+    )
+    assert.isTrue(
+      Either.right(Maybe.none).compactMaybe(AssociativeIdentity.string) == Either.left("")
+    )
+    assert.isTrue(
+      Either.right(Maybe.some(0)).compactMaybe(AssociativeIdentity.string) == Either.right(0)
+    )
   })
 
   it("do", () => {
@@ -212,7 +219,9 @@ describe.concurrent("Either", () => {
     const p = (n: number) => n > 2
     const f = separateF((n: number) => Maybe.some(p(n) ? Either.right(n + 1) : Either.left(n - 1)))
 
-    assert.isTrue(f(Either.left("foo")) == Maybe.some(Tuple(Either.left("foo"), Either.left("foo"))))
+    assert.isTrue(
+      f(Either.left("foo")) == Maybe.some(Tuple(Either.left("foo"), Either.left("foo")))
+    )
     assert.isTrue(f(Either.right(1)) == Maybe.some(Tuple(Either.right(0), Either.left(""))))
     assert.isTrue(f(Either.right(3)) == Maybe.some(Tuple(Either.left(""), Either.right(4))))
   })
@@ -297,7 +306,9 @@ describe.concurrent("Either", () => {
   })
 
   it("stringifyJSON", () => {
-    assert.isTrue(Either.stringifyJSON({ foo: "bar" }, () => 0) == Either.right("{\"foo\":\"bar\"}"))
+    assert.isTrue(
+      Either.stringifyJSON({ foo: "bar" }, () => 0) == Either.right("{\"foo\":\"bar\"}")
+    )
   })
 
   it("struct", () => {

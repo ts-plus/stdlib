@@ -428,7 +428,13 @@ import { Check, TypeLevel } from "@tsplus/stdlib/type-level"
 /**
  * @tsplus global
  */
-import { isDefined, isIterable, isPlainObject, isPromiseLike, isReactElement } from "@tsplus/stdlib/utilities/Guards"
+import {
+  isDefined,
+  isIterable,
+  isPlainObject,
+  isPromiseLike,
+  isReactElement
+} from "@tsplus/stdlib/utilities/Guards"
 /**
  * @tsplus global
  */

@@ -12,5 +12,7 @@ export function getAssociative<A>(S: Associative<A> | "First" | "Last"): Associa
       return Associative((x, y) => (y.isNone() ? x : y))
     }
   }
-  return Associative((x, y) => x.isSome() && y.isSome() ? Maybe.some(S.combine(x.value, y.value)) : Maybe.none)
+  return Associative((x, y) =>
+    x.isSome() && y.isSome() ? Maybe.some(S.combine(x.value, y.value)) : Maybe.none
+  )
 }

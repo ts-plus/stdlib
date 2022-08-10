@@ -5,7 +5,8 @@ export function apF_<F extends HKT>(F: Apply<F>) {
   return <R, E, A, R2, E2, B>(
     fab: HKT.Kind<F, R, E, (a: A) => B>,
     fa: HKT.Kind<F, R2, E2, A>
-  ): HKT.Kind<F, R & R2, E | E2, B> => F.map(({ tuple: [a, f] }: Tuple<[A, (a: A) => B]>) => f(a))(F.both(fab)(fa))
+  ): HKT.Kind<F, R & R2, E | E2, B> =>
+    F.map(({ tuple: [a, f] }: Tuple<[A, (a: A) => B]>) => f(a))(F.both(fab)(fa))
 }
 
 /**

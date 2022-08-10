@@ -235,7 +235,10 @@ describe.concurrent("HashMap", () => {
   it("modify", () => {
     const hashMap = HashMap(Tuple(key(0), value("a")), Tuple(key(1), value("b")))
 
-    const result = hashMap.modify(key(0), (maybe) => maybe.isSome() ? Maybe.some(value("test")) : Maybe.none)
+    const result = hashMap.modify(
+      key(0),
+      (maybe) => maybe.isSome() ? Maybe.some(value("test")) : Maybe.none
+    )
 
     assert.isTrue(result[key(0)] == Maybe.some(value("test")))
     assert.isTrue(result[key(1)] == Maybe.some(value("b")))

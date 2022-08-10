@@ -12,7 +12,10 @@ export function prependOperatorStrict<A>(a: A, self: ImmutableArray<A>): NonEmpt
  *
  * @tsplus operator ImmutableArray >
  */
-export function prependOperator<A, B>(a: A, self: ImmutableArray<B>): NonEmptyImmutableArray<A | B> {
+export function prependOperator<A, B>(
+  a: A,
+  self: ImmutableArray<B>
+): NonEmptyImmutableArray<A | B> {
   return new ImmutableArray([a, ...self.array] as any) as NonEmptyImmutableArray<A>
 }
 

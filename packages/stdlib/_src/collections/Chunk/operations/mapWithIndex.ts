@@ -1,4 +1,9 @@
-import { Chunk, concreteChunk, Singleton, SingletonTypeId } from "@tsplus/stdlib/collections/Chunk/definition"
+import {
+  Chunk,
+  concreteChunk,
+  Singleton,
+  SingletonTypeId
+} from "@tsplus/stdlib/collections/Chunk/definition"
 
 /**
  * Returns a chunk with the elements mapped by the specified function.

@@ -1,4 +1,8 @@
-import { ArrTypeId, concreteChunk, SingletonTypeId } from "@tsplus/stdlib/collections/Chunk/definition"
+import {
+  ArrTypeId,
+  concreteChunk,
+  SingletonTypeId
+} from "@tsplus/stdlib/collections/Chunk/definition"
 
 /**
  * Transforms all elements of the chunk for as long as the specified partial

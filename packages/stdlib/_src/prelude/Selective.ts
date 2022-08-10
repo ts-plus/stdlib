@@ -107,5 +107,6 @@ export function ifF<F extends HKT>(F: Selective<F>) {
 export function whenF<F extends HKT>(F: Selective<F>) {
   const succeedF = DSL.succeedF(F)
   return <R2, E2>(act: HKT.Kind<F, R2, E2, void>) =>
-    <R, E>(if_: HKT.Kind<F, R, E, boolean>): HKT.Kind<F, R & R2, E | E2, void> => ifF(F)(act, succeedF(undefined))(if_)
+    <R, E>(if_: HKT.Kind<F, R, E, boolean>): HKT.Kind<F, R & R2, E | E2, void> =>
+      ifF(F)(act, succeedF(undefined))(if_)
 }

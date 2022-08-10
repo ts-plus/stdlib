@@ -1,4 +1,7 @@
-export function getEquivalence<E, A>(EE: Equivalence<E>, EA: Equivalence<A>): Equivalence<Either<E, A>> {
+export function getEquivalence<E, A>(
+  EE: Equivalence<E>,
+  EA: Equivalence<A>
+): Equivalence<Either<E, A>> {
   return Equivalence((x, y) =>
     x === y ||
     (x.isLeft() ?

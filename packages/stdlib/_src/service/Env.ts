@@ -96,5 +96,8 @@ export interface Env<R> {
   unsafeGet<R, S>(this: Env<R>, tag: Tag<S>): S
   getMaybe<R, S>(this: Env<R>, tag: Tag<S>): Maybe<S>
   merge<R, R1>(this: Env<R>, that: Env<R1>): Env<R | R1>
-  prune<R, S extends Tags<R>[]>(this: Env<R>, ...tags: S): Env<{ [k in keyof S]: Tag.TagType<S[k]> }[number]>
+  prune<R, S extends Tags<R>[]>(
+    this: Env<R>,
+    ...tags: S
+  ): Env<{ [k in keyof S]: Tag.TagType<S[k]> }[number]>
 }

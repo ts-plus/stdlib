@@ -1,4 +1,7 @@
-import { concreteSortedSet, SortedSetInternal } from "@tsplus/stdlib/collections/SortedSet/_internal/SortedSetInternal"
+import {
+  concreteSortedSet,
+  SortedSetInternal
+} from "@tsplus/stdlib/collections/SortedSet/_internal/SortedSetInternal"
 
 /**
  * @tsplus pipeable-operator SortedSet +

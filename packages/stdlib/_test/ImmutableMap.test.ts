@@ -40,7 +40,9 @@ describe.concurrent("ImmutableMap", () => {
   it("filterMap", () => {
     const map = ImmutableMap(Tuple(1, "a"), Tuple(2, "b"), Tuple(3, "c"))
 
-    const result = map.filterMap((char) => char === "b" ? Maybe.some(char.toUpperCase()) : Maybe.none)
+    const result = map.filterMap((char) =>
+      char === "b" ? Maybe.some(char.toUpperCase()) : Maybe.none
+    )
 
     assert.isTrue(result == ImmutableMap(Tuple(2, "B")))
   })
@@ -124,10 +126,18 @@ describe.concurrent("ImmutableMap", () => {
   it("update", () => {
     const map = ImmutableMap(Tuple(1, "a"), Tuple(2, "b"), Tuple(3, "c"))
 
-    const result1 = map.update(1, Maybe.$.fold(Maybe.some("-"), (char) => Maybe.some(char.toUpperCase())))
-    const result2 = map.update(4, Maybe.$.fold(Maybe.some("-"), (char) => Maybe.some(char.toUpperCase())))
+    const result1 = map.update(
+      1,
+      Maybe.$.fold(Maybe.some("-"), (char) => Maybe.some(char.toUpperCase()))
+    )
+    const result2 = map.update(
+      4,
+      Maybe.$.fold(Maybe.some("-"), (char) => Maybe.some(char.toUpperCase()))
+    )
 
     assert.isTrue(result1 == ImmutableMap(Tuple(2, "b"), Tuple(3, "c")))
-    assert.isTrue(result2 == ImmutableMap(Tuple(1, "a"), Tuple(2, "b"), Tuple(3, "c"), Tuple(4, "-")))
+    assert.isTrue(
+      result2 == ImmutableMap(Tuple(1, "a"), Tuple(2, "b"), Tuple(3, "c"), Tuple(4, "-"))
+    )
   })
 })
