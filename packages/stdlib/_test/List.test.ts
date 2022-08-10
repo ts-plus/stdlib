@@ -66,7 +66,10 @@ describe.concurrent("List", () => {
     assert.isTrue(List(0, 1).toCollection == List(0, 1))
   })
   it("partition", () => {
-    assert.isTrue(List.empty<number>().partition((n) => n > 2) == Tuple(List.empty<number>(), List.empty<number>()))
+    assert.isTrue(
+      List.empty<number>().partition((n) => n > 2) ==
+        Tuple(List.empty<number>(), List.empty<number>())
+    )
     assert.isTrue(List(1, 3).partition((n) => n > 2) == Tuple(List(1), List(3)))
   })
 

@@ -108,7 +108,8 @@ describe.concurrent("Decoder", () => {
       { firstName: "Michael", lastName: "Arnaldi", age: 30 }
     )
     assert.isTrue(
-      decoder.decode({ firstName: "Michael", lastName: "Arnaldi", age: "30" }).left.value?.message ===
+      decoder.decode({ firstName: "Michael", lastName: "Arnaldi", age: "30" }).left.value
+        ?.message ===
         (
           "Encountered while parsing an object structure\n" +
           "└─ Field \"age\"\n" +
@@ -141,7 +142,10 @@ describe.concurrent("Decoder", () => {
     const decoder: Decoder<Union> = Derive()
     assert.deepEqual(decoder.decode({ _tag: "A" }).right.value, { _tag: "A" })
     assert.deepEqual(decoder.decode({ _tag: "B" }).right.value, { _tag: "B" })
-    assert.deepEqual(decoder.decode({ _tag: "C", field: "F" }).right.value, { _tag: "C", field: "F" })
+    assert.deepEqual(decoder.decode({ _tag: "C", field: "F" }).right.value, {
+      _tag: "C",
+      field: "F"
+    })
     assert.isTrue(
       decoder.decode({ _tag: "D" }).left.value?.message ===
         "Expected a tagged object of the form \"{ _tag: \"A\" | \"B\" | \"C\" }\""
@@ -211,13 +215,16 @@ describe.concurrent("Decoder", () => {
       decoder.decode(["a", "b", "c"]) == Either.right(ImmutableArray("a", "b", "c"))
     )
     assert.isTrue(
-      decoder.decode(0).left.value?.message === "Expected a value of type \"Array\" but received one of type \"number\""
+      decoder.decode(0).left.value?.message ===
+        "Expected a value of type \"Array\" but received one of type \"number\""
     )
   })
   it("either", () => {
     const decoder: Decoder<Either<number, string>> = Derive()
     assert.isTrue(decoder.decode({ _tag: "Left", left: 0 }) == Either.right(Either.left(0)))
-    assert.isTrue(decoder.decode({ _tag: "Right", right: "ok" }) == Either.right(Either.right("ok")))
+    assert.isTrue(
+      decoder.decode({ _tag: "Right", right: "ok" }) == Either.right(Either.right("ok"))
+    )
     assert.isTrue(
       decoder.decode({ _tag: "Left", left: "ok" }).left.value?.message ==
         (
@@ -244,7 +251,8 @@ describe.concurrent("Decoder", () => {
     assert.isTrue(
       decoder.decode({
         _tag: "Left"
-      }).left.value?.message === "Expected a tagged object of the form \"{ _tag: \"None\" | \"Some\" }\""
+      }).left.value?.message ===
+        "Expected a tagged object of the form \"{ _tag: \"None\" | \"Some\" }\""
     )
   })
   it("validated", () => {
@@ -266,15 +274,20 @@ describe.concurrent("Decoder", () => {
 
     assert.isTrue(decoderPositive.decode(1) == Either.right(1))
     assert.isTrue(
-      decoderPositive.decode(-1).left.value?.message === "Encountered while processing validations: Positive"
+      decoderPositive.decode(-1).left.value?.message ===
+        "Encountered while processing validations: Positive"
     )
 
     const positiveInt: Decoder<Positive & Int> = Derive()
 
     assert.isTrue(
-      positiveInt.decode(-1.5).left.value?.message === "Encountered while processing validations: Int, Positive"
+      positiveInt.decode(-1.5).left.value?.message ===
+        "Encountered while processing validations: Int, Positive"
     )
-    assert.isTrue(positiveInt.decode(-1).left.value?.message === "Encountered while processing validations: Positive")
+    assert.isTrue(
+      positiveInt.decode(-1).left.value?.message ===
+        "Encountered while processing validations: Positive"
+    )
   })
   it("record", () => {
     const decoder: Decoder<Record<string, { foo: string }>> = Derive()

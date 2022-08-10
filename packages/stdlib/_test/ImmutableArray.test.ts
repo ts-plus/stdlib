@@ -19,13 +19,19 @@ describe.concurrent("ImmutableArray", () => {
     const f = (i: number, n: number) => ((i + n) % 2 === 0 ? Maybe.none : Maybe.some(n))
 
     assert.isTrue(ImmutableArray(1, 2, 4).collectWithIndex(f) == ImmutableArray(1, 2))
-    assert.isTrue(ImmutableArray.empty<number>().collectWithIndex(f) == ImmutableArray.empty<number>())
+    assert.isTrue(
+      ImmutableArray.empty<number>().collectWithIndex(f) == ImmutableArray.empty<number>()
+    )
   })
 
   it("compact", () => {
     assert.isTrue(ImmutableArray.empty<Maybe<number>>().compact == ImmutableArray.empty())
-    assert.isTrue(ImmutableArray(Maybe.some(1), Maybe.some(2), Maybe.some(3)).compact == ImmutableArray(1, 2, 3))
-    assert.isTrue(ImmutableArray(Maybe.some(1), Maybe.none, Maybe.some(3)).compact == ImmutableArray(1, 3))
+    assert.isTrue(
+      ImmutableArray(Maybe.some(1), Maybe.some(2), Maybe.some(3)).compact == ImmutableArray(1, 2, 3)
+    )
+    assert.isTrue(
+      ImmutableArray(Maybe.some(1), Maybe.none, Maybe.some(3)).compact == ImmutableArray(1, 3)
+    )
   })
 
   it("compactF", () => {
@@ -60,9 +66,17 @@ describe.concurrent("ImmutableArray", () => {
   })
 
   it("difference", () => {
-    assert.isTrue(ImmutableArray(1, 2).difference(Equivalence.number, ImmutableArray(3, 4)) == ImmutableArray(1, 2))
-    assert.isTrue(ImmutableArray(1, 2).difference(Equivalence.number, ImmutableArray(2, 3)) == ImmutableArray(1))
-    assert.isTrue(ImmutableArray(1, 2).difference(Equivalence.number, ImmutableArray(1, 2)) == ImmutableArray.empty())
+    assert.isTrue(
+      ImmutableArray(1, 2).difference(Equivalence.number, ImmutableArray(3, 4)) ==
+        ImmutableArray(1, 2)
+    )
+    assert.isTrue(
+      ImmutableArray(1, 2).difference(Equivalence.number, ImmutableArray(2, 3)) == ImmutableArray(1)
+    )
+    assert.isTrue(
+      ImmutableArray(1, 2).difference(Equivalence.number, ImmutableArray(1, 2)) ==
+        ImmutableArray.empty()
+    )
   })
 
   it("elem", () => {
@@ -82,12 +96,19 @@ describe.concurrent("ImmutableArray", () => {
   })
 
   it("extend", () => {
-    const sum: (self: ImmutableArray<number>) => number = AssociativeIdentity.fold(AssociativeIdentity.sum)
+    const sum: (self: ImmutableArray<number>) => number = AssociativeIdentity.fold(
+      AssociativeIdentity.sum
+    )
 
     assert.isTrue(ImmutableArray(1, 2, 3, 4).extend(sum) == ImmutableArray(10, 9, 7, 4))
     assert.isTrue(
       ImmutableArray(1, 2, 3, 4).extend(identity) ==
-        ImmutableArray(ImmutableArray(1, 2, 3, 4), ImmutableArray(2, 3, 4), ImmutableArray(3, 4), ImmutableArray(4))
+        ImmutableArray(
+          ImmutableArray(1, 2, 3, 4),
+          ImmutableArray(2, 3, 4),
+          ImmutableArray(3, 4),
+          ImmutableArray(4)
+        )
     )
   })
 
@@ -175,7 +196,9 @@ describe.concurrent("ImmutableArray", () => {
   it("getAssociativeIdentity", () => {
     const M = ImmutableArray.getAssociativeIdentity<number>()
 
-    assert.isTrue(M.combine(ImmutableArray(1, 2), ImmutableArray(3, 4)) == ImmutableArray(1, 2, 3, 4))
+    assert.isTrue(
+      M.combine(ImmutableArray(1, 2), ImmutableArray(3, 4)) == ImmutableArray(1, 2, 3, 4)
+    )
     assert.isTrue(M.combine(ImmutableArray(1, 2), M.identity) == ImmutableArray(1, 2))
     assert.isTrue(M.combine(M.identity, ImmutableArray(1, 2)) == ImmutableArray(1, 2))
   })
@@ -228,10 +251,17 @@ describe.concurrent("ImmutableArray", () => {
 
   it("intersection", () => {
     assert.isTrue(
-      ImmutableArray(1, 2).intersection(Equivalence.number, ImmutableArray(3, 4)) == ImmutableArray.empty()
+      ImmutableArray(1, 2).intersection(Equivalence.number, ImmutableArray(3, 4)) ==
+        ImmutableArray.empty()
     )
-    assert.isTrue(ImmutableArray(1, 2).intersection(Equivalence.number, ImmutableArray(2, 3)) == ImmutableArray(2))
-    assert.isTrue(ImmutableArray(1, 2).intersection(Equivalence.number, ImmutableArray(1, 2)) == ImmutableArray(1, 2))
+    assert.isTrue(
+      ImmutableArray(1, 2).intersection(Equivalence.number, ImmutableArray(2, 3)) ==
+        ImmutableArray(2)
+    )
+    assert.isTrue(
+      ImmutableArray(1, 2).intersection(Equivalence.number, ImmutableArray(1, 2)) ==
+        ImmutableArray(1, 2)
+    )
   })
 
   it("isEmpty", () => {
@@ -250,9 +280,12 @@ describe.concurrent("ImmutableArray", () => {
 
   it("partition", () => {
     assert.isTrue(
-      ImmutableArray.empty<number>().partition((n) => n > 2) == Tuple(ImmutableArray.empty(), ImmutableArray.empty())
+      ImmutableArray.empty<number>().partition((n) => n > 2) ==
+        Tuple(ImmutableArray.empty(), ImmutableArray.empty())
     )
-    assert.isTrue(ImmutableArray(1, 3).partition((n) => n > 2) == Tuple(ImmutableArray(1), ImmutableArray(3)))
+    assert.isTrue(
+      ImmutableArray(1, 3).partition((n) => n > 2) == Tuple(ImmutableArray(1), ImmutableArray(3))
+    )
   })
 
   it("partitionMap", () => {
@@ -272,9 +305,11 @@ describe.concurrent("ImmutableArray", () => {
         Tuple(ImmutableArray.empty(), ImmutableArray.empty())
     )
     assert.isTrue(
-      ImmutableArray(Either.right(1), Either.left("foo"), Either.right(2)).partitionMapWithIndex((i, a) =>
-        a.filterOrElse((n) => n > i, () => "error")
-      ) == Tuple(ImmutableArray("foo", "error"), ImmutableArray(1))
+      ImmutableArray(Either.right(1), Either.left("foo"), Either.right(2)).partitionMapWithIndex((
+        i,
+        a
+      ) => a.filterOrElse((n) => n > i, () => "error")) ==
+        Tuple(ImmutableArray("foo", "error"), ImmutableArray(1))
     )
   })
 
@@ -284,7 +319,8 @@ describe.concurrent("ImmutableArray", () => {
         Tuple(ImmutableArray.empty(), ImmutableArray.empty())
     )
     assert.isTrue(
-      ImmutableArray(1, 2).partitionWithIndex((i, n) => i + n > 2) == Tuple(ImmutableArray(1), ImmutableArray(2))
+      ImmutableArray(1, 2).partitionWithIndex((i, n) => i + n > 2) ==
+        Tuple(ImmutableArray(1), ImmutableArray(2))
     )
   })
 
@@ -295,7 +331,9 @@ describe.concurrent("ImmutableArray", () => {
   it("sequence", () => {
     const sequence = ImmutableArray.sequence(Maybe.Applicative)
 
-    assert.isTrue(sequence(ImmutableArray(Maybe.some(1), Maybe.some(3))) == Maybe.some(ImmutableArray(1, 3)))
+    assert.isTrue(
+      sequence(ImmutableArray(Maybe.some(1), Maybe.some(3))) == Maybe.some(ImmutableArray(1, 3))
+    )
     assert.isTrue(sequence(ImmutableArray(Maybe.some(1), Maybe.none)) == Maybe.none)
   })
 
@@ -378,21 +416,28 @@ describe.concurrent("ImmutableArray", () => {
     )
 
     assert.isTrue(
-      separateF(ImmutableArray.empty<number>()) == Maybe.some(Tuple(ImmutableArray.empty(), ImmutableArray.empty()))
+      separateF(ImmutableArray.empty<number>()) ==
+        Maybe.some(Tuple(ImmutableArray.empty(), ImmutableArray.empty()))
     )
-    assert.isTrue(separateF(ImmutableArray(1, 3)) == Maybe.some(Tuple(ImmutableArray(0), ImmutableArray(4))))
+    assert.isTrue(
+      separateF(ImmutableArray(1, 3)) == Maybe.some(Tuple(ImmutableArray(0), ImmutableArray(4)))
+    )
   })
 
   it("separateWithIndexF", () => {
-    const separateWithIndexF = ImmutableArray.separateWithIndexF(Maybe.Applicative)((i, n: number) =>
-      Maybe.some(n > 2 ? Either.right(n + i) : Either.left(n - i))
-    )
+    const separateWithIndexF = ImmutableArray.separateWithIndexF(Maybe.Applicative)((
+      i,
+      n: number
+    ) => Maybe.some(n > 2 ? Either.right(n + i) : Either.left(n - i)))
 
     assert.isTrue(
       separateWithIndexF(ImmutableArray.empty<number>()) ==
         Maybe.some(Tuple(ImmutableArray.empty(), ImmutableArray.empty()))
     )
-    assert.isTrue(separateWithIndexF(ImmutableArray(1, 3)) == Maybe.some(Tuple(ImmutableArray(1), ImmutableArray(4))))
+    assert.isTrue(
+      separateWithIndexF(ImmutableArray(1, 3)) ==
+        Maybe.some(Tuple(ImmutableArray(1), ImmutableArray(4)))
+    )
   })
 
   it("size", () => {
@@ -464,9 +509,12 @@ describe.concurrent("ImmutableArray", () => {
     assert.isTrue(two.union(Equivalence.number, ImmutableArray(2, 3)) == ImmutableArray(1, 2, 3))
     assert.isTrue(two.union(Equivalence.number, ImmutableArray(1, 2)) == ImmutableArray(1, 2))
     assert.isTrue(two.union(Equivalence.number, ImmutableArray.empty()) == ImmutableArray(1, 2))
-    assert.isTrue(ImmutableArray.empty<number>().union(Equivalence.number, two) == ImmutableArray(1, 2))
     assert.isTrue(
-      ImmutableArray.empty<number>().union(Equivalence.number, ImmutableArray.empty()) == ImmutableArray.empty()
+      ImmutableArray.empty<number>().union(Equivalence.number, two) == ImmutableArray(1, 2)
+    )
+    assert.isTrue(
+      ImmutableArray.empty<number>().union(Equivalence.number, ImmutableArray.empty()) ==
+        ImmutableArray.empty()
     )
   })
 
@@ -486,11 +534,14 @@ describe.concurrent("ImmutableArray", () => {
     assert.isTrue(arrUniq.uniq(E) == arrUniq)
     assert.isTrue(ImmutableArray(arrA, arrB, arrC, arrD).uniq(E) == ImmutableArray(arrA, arrC))
     assert.isTrue(ImmutableArray(arrB, arrA, arrC, arrD).uniq(E) == ImmutableArray(arrB, arrC))
-    assert.isTrue(ImmutableArray(arrA, arrA, arrC, arrD, arrA).uniq(E) == ImmutableArray(arrA, arrC))
+    assert.isTrue(
+      ImmutableArray(arrA, arrA, arrC, arrD, arrA).uniq(E) == ImmutableArray(arrA, arrC)
+    )
     assert.isTrue(ImmutableArray(arrA, arrC).uniq(E) == ImmutableArray(arrA, arrC))
     assert.isTrue(ImmutableArray(arrC, arrA).uniq(E) == ImmutableArray(arrC, arrA))
     assert.isTrue(
-      ImmutableArray(true, false, true, false).uniq(Equivalence.boolean) == ImmutableArray(true, false)
+      ImmutableArray(true, false, true, false).uniq(Equivalence.boolean) ==
+        ImmutableArray(true, false)
     )
     assert.isTrue(ImmutableArray.empty<number>().uniq(Equivalence.number) == ImmutableArray.empty())
     assert.isTrue(ImmutableArray(-0, -0).uniq(Equivalence.number) == ImmutableArray(-0))
@@ -498,19 +549,29 @@ describe.concurrent("ImmutableArray", () => {
     assert.isTrue(ImmutableArray(1).uniq(Equivalence.number) == ImmutableArray(1))
     assert.isTrue(ImmutableArray(2, 1, 2).uniq(Equivalence.number) == ImmutableArray(2, 1))
     assert.isTrue(ImmutableArray(1, 2, 1).uniq(Equivalence.number) == ImmutableArray(1, 2))
-    assert.isTrue(ImmutableArray(1, 2, 3, 4, 5).uniq(Equivalence.number) == ImmutableArray(1, 2, 3, 4, 5))
     assert.isTrue(
-      ImmutableArray(1, 1, 2, 2, 3, 3, 4, 4, 5, 5).uniq(Equivalence.number) == ImmutableArray(1, 2, 3, 4, 5)
+      ImmutableArray(1, 2, 3, 4, 5).uniq(Equivalence.number) == ImmutableArray(1, 2, 3, 4, 5)
     )
     assert.isTrue(
-      ImmutableArray(1, 2, 3, 4, 5, 1, 2, 3, 4, 5).uniq(Equivalence.number) == ImmutableArray(1, 2, 3, 4, 5)
+      ImmutableArray(1, 1, 2, 2, 3, 3, 4, 4, 5, 5).uniq(Equivalence.number) ==
+        ImmutableArray(1, 2, 3, 4, 5)
     )
-    assert.isTrue(ImmutableArray("a", "b", "a").uniq(Equivalence.string) == ImmutableArray("a", "b"))
-    assert.isTrue(ImmutableArray("a", "b", "A").uniq(Equivalence.string) == ImmutableArray("a", "b", "A"))
+    assert.isTrue(
+      ImmutableArray(1, 2, 3, 4, 5, 1, 2, 3, 4, 5).uniq(Equivalence.number) ==
+        ImmutableArray(1, 2, 3, 4, 5)
+    )
+    assert.isTrue(
+      ImmutableArray("a", "b", "a").uniq(Equivalence.string) == ImmutableArray("a", "b")
+    )
+    assert.isTrue(
+      ImmutableArray("a", "b", "A").uniq(Equivalence.string) == ImmutableArray("a", "b", "A")
+    )
   })
 
   it("zip", () => {
-    assert.isTrue(ImmutableArray.empty<number>().zip(ImmutableArray(1, 2, 3)) == ImmutableArray.empty())
+    assert.isTrue(
+      ImmutableArray.empty<number>().zip(ImmutableArray(1, 2, 3)) == ImmutableArray.empty()
+    )
     assert.isTrue(
       ImmutableArray(1, 2, 3).zip(ImmutableArray("a", "b", "c")) ==
         ImmutableArray(Tuple(1, "a"), Tuple(2, "b"), Tuple(3, "c"))

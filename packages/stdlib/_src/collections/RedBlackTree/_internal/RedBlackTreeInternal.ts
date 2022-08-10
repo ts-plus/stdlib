@@ -1,5 +1,10 @@
 import type { RedBlackTree } from "@tsplus/stdlib/collections/RedBlackTree/definition"
-import { _K, _V, RedBlackTreeIterator, RedBlackTreeSym } from "@tsplus/stdlib/collections/RedBlackTree/definition"
+import {
+  _K,
+  _V,
+  RedBlackTreeIterator,
+  RedBlackTreeSym
+} from "@tsplus/stdlib/collections/RedBlackTree/definition"
 import type { Node } from "@tsplus/stdlib/collections/RedBlackTree/node"
 
 export class RedBlackTreeInternal<K, V> implements RedBlackTree<K, V> {

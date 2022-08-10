@@ -2,7 +2,9 @@ export declare namespace TypeLevel {
   /**
    * @tsplus type TypeLevel.UnionToIntersection
    */
-  type UnionToIntersection<T> = (T extends any ? (x: T) => any : never) extends (x: infer R) => any ? R : never
+  type UnionToIntersection<T> = (T extends any ? (x: T) => any : never) extends (x: infer R) => any
+    ? R
+    : never
 
   /**
    * @tsplus type TypeLevel.RequiredKeys

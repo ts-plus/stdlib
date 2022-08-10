@@ -6,5 +6,6 @@
  * @tsplus pipeable SortedSet toggle
  */
 export function toggle<A>(value: A) {
-  return (self: SortedSet<A>): SortedSet<A> => self.has(value) ? self.remove(value) : self.add(value)
+  return (self: SortedSet<A>): SortedSet<A> =>
+    self.has(value) ? self.remove(value) : self.add(value)
 }

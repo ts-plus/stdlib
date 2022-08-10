@@ -74,7 +74,11 @@ describe.concurrent("AssociativeIdentity", () => {
 
   it("tuple", () => {
     const M1 = AssociativeIdentity.tuple(AssociativeIdentity.string, AssociativeIdentity.sum)
-    const M2 = AssociativeIdentity.tuple(AssociativeIdentity.string, AssociativeIdentity.sum, AssociativeIdentity.all)
+    const M2 = AssociativeIdentity.tuple(
+      AssociativeIdentity.string,
+      AssociativeIdentity.sum,
+      AssociativeIdentity.all
+    )
 
     assert.deepStrictEqual(M1.combine(["a", 1], ["b", 2]), ["ab", 3])
     assert.deepStrictEqual(M2.combine(["a", 1, true], ["b", 2, false]), ["ab", 3, false])

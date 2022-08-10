@@ -69,7 +69,7 @@ export class Some<A> implements Equals {
  */
 export function unifyMaybe<X extends Maybe<any>>(
   self: X
-): Maybe<[X] extends [Maybe<infer A>] ? A : never> {
+): Maybe<X extends Some<infer A> ? A : never> {
   return self
 }
 

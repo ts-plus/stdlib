@@ -1,6 +1,8 @@
 // codegen:start {preset: barrel, include: ./Eval/*.ts, prefix: "@tsplus/stdlib/io"}
 export * from "@tsplus/stdlib/io/Eval/definition"
+export * from "@tsplus/stdlib/io/Eval/extend"
 export * from "@tsplus/stdlib/io/Eval/flatMap"
+export * from "@tsplus/stdlib/io/Eval/flatten"
 export * from "@tsplus/stdlib/io/Eval/gen"
 export * from "@tsplus/stdlib/io/Eval/instances"
 export * from "@tsplus/stdlib/io/Eval/map"

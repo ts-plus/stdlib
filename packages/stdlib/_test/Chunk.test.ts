@@ -123,7 +123,8 @@ describe.concurrent("Chunk", () => {
 
     assert.isTrue(Chunk(1, 2, 3, 4).extend(sum) == Chunk(10, 9, 7, 4))
     assert.isTrue(
-      Chunk(1, 2, 3, 4).extend(identity) == Chunk(Chunk(1, 2, 3, 4), Chunk(2, 3, 4), Chunk(3, 4), Chunk(4))
+      Chunk(1, 2, 3, 4).extend(identity) ==
+        Chunk(Chunk(1, 2, 3, 4), Chunk(2, 3, 4), Chunk(3, 4), Chunk(4))
     )
   })
 
@@ -278,7 +279,9 @@ describe.concurrent("Chunk", () => {
   })
 
   it("intersection", () => {
-    assert.isTrue(Chunk(1, 2).intersection(Equivalence.number, Chunk(3, 4)) == Chunk.empty<number>())
+    assert.isTrue(
+      Chunk(1, 2).intersection(Equivalence.number, Chunk(3, 4)) == Chunk.empty<number>()
+    )
     assert.isTrue(Chunk(1, 2).intersection(Equivalence.number, Chunk(2, 3)) == Chunk(2))
     assert.isTrue(Chunk(1, 2).intersection(Equivalence.number, Chunk(1, 2)) == Chunk(1, 2))
   })
@@ -317,7 +320,10 @@ describe.concurrent("Chunk", () => {
   })
 
   it("partition", () => {
-    assert.isTrue(Chunk.empty<number>().partition((n) => n > 2) == Tuple(Chunk.empty<number>(), Chunk.empty<number>()))
+    assert.isTrue(
+      Chunk.empty<number>().partition((n) => n > 2) ==
+        Tuple(Chunk.empty<number>(), Chunk.empty<number>())
+    )
     assert.isTrue(Chunk(1, 3).partition((n) => n > 2) == Tuple(Chunk(1), Chunk(3)))
   })
 
@@ -403,7 +409,9 @@ describe.concurrent("Chunk", () => {
   })
 
   it("separate", () => {
-    const chunk = Chunk(1, 2, 3, 4, 5, 6).map((n) => n % 2 === 0 ? Either.right(n) : Either.left(n.toString()))
+    const chunk = Chunk(1, 2, 3, 4, 5, 6).map((n) =>
+      n % 2 === 0 ? Either.right(n) : Either.left(n.toString())
+    )
 
     const result = chunk.separate
 
@@ -526,14 +534,28 @@ describe.concurrent("Chunk", () => {
 
     const chunk = Chunk(0, 1, 2, 3, 4, 5)
 
-    assert.isTrue(flattenArray(chunk.split(2)) == ImmutableArray(ImmutableArray(0, 1, 2), ImmutableArray(3, 4, 5)))
+    assert.isTrue(
+      flattenArray(chunk.split(2)) ==
+        ImmutableArray(ImmutableArray(0, 1, 2), ImmutableArray(3, 4, 5))
+    )
     assert.isTrue(
       flattenArray(chunk.split(4)) ==
-        ImmutableArray(ImmutableArray(0, 1), ImmutableArray(2, 3), ImmutableArray(4), ImmutableArray(5))
+        ImmutableArray(
+          ImmutableArray(0, 1),
+          ImmutableArray(2, 3),
+          ImmutableArray(4),
+          ImmutableArray(5)
+        )
     )
     assert.isTrue(
       flattenArray(chunk.split(5)) ==
-        ImmutableArray(ImmutableArray(0, 1), ImmutableArray(2), ImmutableArray(3), ImmutableArray(4), ImmutableArray(5))
+        ImmutableArray(
+          ImmutableArray(0, 1),
+          ImmutableArray(2),
+          ImmutableArray(3),
+          ImmutableArray(4),
+          ImmutableArray(5)
+        )
     )
   })
 
@@ -587,7 +609,10 @@ describe.concurrent("Chunk", () => {
     assert.isTrue(Chunk(1, 2).union(Equivalence.number, Chunk(1, 2)) == Chunk(1, 2))
     assert.isTrue(Chunk(1, 2).union(Equivalence.number, Chunk.empty<number>()) == Chunk(1, 2))
     assert.isTrue(Chunk.empty<number>().union(Equivalence.number, Chunk(1, 2)) == Chunk(1, 2))
-    assert.isTrue(Chunk.empty<number>().union(Equivalence.number, Chunk.empty<number>()) == Chunk.empty<number>())
+    assert.isTrue(
+      Chunk.empty<number>().union(Equivalence.number, Chunk.empty<number>()) ==
+        Chunk.empty<number>()
+    )
   })
 
   it("uniq", () => {
@@ -619,8 +644,12 @@ describe.concurrent("Chunk", () => {
     assert.isTrue(Chunk(2, 1, 2).uniq(Equivalence.number) == Chunk(2, 1))
     assert.isTrue(Chunk(1, 2, 1).uniq(Equivalence.number) == Chunk(1, 2))
     assert.isTrue(Chunk(1, 2, 3, 4, 5).uniq(Equivalence.number) == Chunk(1, 2, 3, 4, 5))
-    assert.isTrue(Chunk(1, 1, 2, 2, 3, 3, 4, 4, 5, 5).uniq(Equivalence.number) == Chunk(1, 2, 3, 4, 5))
-    assert.isTrue(Chunk(1, 2, 3, 4, 5, 1, 2, 3, 4, 5).uniq(Equivalence.number) == Chunk(1, 2, 3, 4, 5))
+    assert.isTrue(
+      Chunk(1, 1, 2, 2, 3, 3, 4, 4, 5, 5).uniq(Equivalence.number) == Chunk(1, 2, 3, 4, 5)
+    )
+    assert.isTrue(
+      Chunk(1, 2, 3, 4, 5, 1, 2, 3, 4, 5).uniq(Equivalence.number) == Chunk(1, 2, 3, 4, 5)
+    )
     assert.isTrue(Chunk("a", "b", "a").uniq(Equivalence.string) == Chunk("a", "b"))
     assert.isTrue(Chunk("a", "b", "A").uniq(Equivalence.string) == Chunk("a", "b", "A"))
   })

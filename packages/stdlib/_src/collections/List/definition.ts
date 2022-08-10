@@ -12,6 +12,9 @@
 export const ListTypeId = Symbol.for("@tsplus/collections/List")
 export type ListTypeId = typeof ListTypeId
 
+export const _A = Symbol.for("@tsplus/collections/List/_A")
+export type _A = typeof _A
+
 /**
  * @tsplus type List
  */
@@ -51,6 +54,7 @@ export declare namespace List {
  */
 export class Cons<A> implements Collection<A>, Equals {
   readonly _tag = "Cons"
+  readonly [_A]!: (_: never) => A
   readonly [ListTypeId] = ListTypeId
   constructor(readonly head: A, public tail: List<A>) {}
   [Symbol.iterator](): Iterator<A> {
@@ -91,6 +95,7 @@ export class Cons<A> implements Collection<A>, Equals {
  */
 export class Nil<A> implements Collection<A>, Equals {
   readonly _tag = "Nil"
+  readonly [_A]!: (_: never) => A
   readonly [ListTypeId] = ListTypeId;
   [Symbol.iterator](): Iterator<A> {
     return {
@@ -116,7 +121,7 @@ export const _Nil = new Nil<never>()
  */
 export function unify<X extends List<any>>(
   self: X
-): List<[X] extends [List<infer A>] ? A : never> {
+): List<[X] extends [{ readonly [_A]: (_: never) => infer A }] ? A : never> {
   return self
 }
 
@@ -172,7 +177,7 @@ export function equalsWith<A, B>(
   f: (a: A, b: B) => boolean
 ) {
   return (self: List<A>): boolean => {
-    if (self === that) {
+    if ((self as List<A | B>) === that) {
       return true
     } else if (length(self) !== length(that)) {
       return false

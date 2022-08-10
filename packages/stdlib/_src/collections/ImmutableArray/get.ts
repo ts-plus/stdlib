@@ -4,5 +4,6 @@
  * @tsplus pipeable ImmutableArray get
  */
 export function get(index: number) {
-  return <A>(self: ImmutableArray<A>): Maybe<NonNullable<A>> => Maybe.fromNullable(self.array[index])
+  return <A>(self: ImmutableArray<A>): Maybe<NonNullable<A>> =>
+    Maybe.fromNullable(self.array[index])
 }

@@ -42,7 +42,9 @@ export interface EvalAspects {}
 /**
  * @tsplus unify Eval
  */
-export function unifyEval<X extends Eval<any>>(self: X): Eval<[X] extends [Eval<infer AX>] ? AX : never> {
+export function unifyEval<X extends Eval<any>>(
+  self: X
+): Eval<[X] extends [Eval<infer AX>] ? AX : never> {
   return self
 }
 

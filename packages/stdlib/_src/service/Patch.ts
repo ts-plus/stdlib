@@ -110,7 +110,11 @@ export function patch<Input>(env: Env<Input>) {
     const updatedRef = {
       ref: false
     }
-    const updated = patchLoop(new Map(env.unsafeMap), List(self as Patch<unknown, unknown>), updatedRef)
+    const updated = patchLoop(
+      new Map(env.unsafeMap),
+      List(self as Patch<unknown, unknown>),
+      updatedRef
+    )
     if (!updatedRef.ref) {
       return new Env(updated) as Env<Output>
     }
@@ -158,7 +162,11 @@ function patchLoop(
       return patchLoop((env.delete(head.tag), env), tail, updatedRef)
     }
     case "UpdateService": {
-      return patchLoop(env.set(head.tag, head.update(env.get(head.tag))), tail, (updatedRef.ref = true, updatedRef))
+      return patchLoop(
+        env.set(head.tag, head.update(env.get(head.tag))),
+        tail,
+        (updatedRef.ref = true, updatedRef)
+      )
     }
   }
 }
@@ -186,7 +194,10 @@ export function combine<Output, Output2>(that: Patch<Output, Output2>) {
 /**
  * @tsplus static Patch.Ops diff
  */
-export function diff<Input, Output>(oldValue: Env<Input>, newValue: Env<Output>): Patch<Input, Output> {
+export function diff<Input, Output>(
+  oldValue: Env<Input>,
+  newValue: Env<Output>
+): Patch<Input, Output> {
   const missingServices = new Map(oldValue.unsafeMap)
 
   let patch = Patch.empty<any, any>()

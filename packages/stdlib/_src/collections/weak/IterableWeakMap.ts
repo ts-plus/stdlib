@@ -46,7 +46,8 @@ export interface IterableWeakMapAspects {}
  * @tsplus pipeable IterableWeakMap getMaybe
  */
 export function getMaybe<K extends object>(key: K) {
-  return <V>(self: IterableWeakMap<K, V>): Maybe<V> => self.has(key) ? Maybe.some(self.get(key)!) : Maybe.none
+  return <V>(self: IterableWeakMap<K, V>): Maybe<V> =>
+    self.has(key) ? Maybe.some(self.get(key)!) : Maybe.none
 }
 
 /**

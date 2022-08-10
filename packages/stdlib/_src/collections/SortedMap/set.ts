@@ -1,4 +1,7 @@
-import { concreteSortedMap, SortedMapInternal } from "@tsplus/stdlib/collections/SortedMap/_internal/SortedMapInternal"
+import {
+  concreteSortedMap,
+  SortedMapInternal
+} from "@tsplus/stdlib/collections/SortedMap/_internal/SortedMapInternal"
 
 /**
  * @tsplus static SortedMap.Aspects set

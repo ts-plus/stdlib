@@ -1,4 +1,8 @@
-import { ArrTypeId, concreteChunk, SingletonTypeId } from "@tsplus/stdlib/collections/Chunk/definition"
+import {
+  ArrTypeId,
+  concreteChunk,
+  SingletonTypeId
+} from "@tsplus/stdlib/collections/Chunk/definition"
 
 /**
  * Folds over the elements in this chunk from the right.

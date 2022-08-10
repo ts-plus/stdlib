@@ -15,4 +15,5 @@ export interface Associative<A> extends Closure<A> {
 export interface AssociativeOps {
   <A>(combine: (x: A, y: A) => A): Associative<A>
 }
-export const Associative: AssociativeOps = <A>(combine: (x: A, y: A) => A): Associative<A> => HKT.instance({ combine })
+export const Associative: AssociativeOps = <A>(combine: (x: A, y: A) => A): Associative<A> =>
+  HKT.instance({ combine })

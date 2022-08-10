@@ -6,6 +6,6 @@
  * @tsplus static Eval.Aspects zipLeft
  * @tsplus pipeable Eval zipLeft
  */
-export function zipLeft<B>(that: LazyArg<Eval<B>>) {
+export function zipLeft<B>(that: Eval<B>) {
   return <A>(self: Eval<A>): Eval<A> => self.zipWith(that, (a, _) => a)
 }

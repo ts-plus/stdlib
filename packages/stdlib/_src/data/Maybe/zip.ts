@@ -6,5 +6,6 @@
  * @tsplus pipeable Maybe zip
  */
 export function zip<B>(that: Maybe<B>) {
-  return <A>(self: Maybe<A>): Maybe<Tuple<[A, B]>> => self.flatMap((a) => that.map((b) => Tuple(a, b)))
+  return <A>(self: Maybe<A>): Maybe<Tuple<[A, B]>> =>
+    self.flatMap((a) => that.map((b) => Tuple(a, b)))
 }

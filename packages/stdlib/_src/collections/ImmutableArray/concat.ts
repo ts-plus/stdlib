@@ -4,7 +4,8 @@
  * @tsplus pipeable ImmutableArray concat
  */
 export function concat<B>(that: ImmutableArray<B>) {
-  return <A>(self: ImmutableArray<A>): ImmutableArray<A | B> => new ImmutableArray([...self.array, ...that.array])
+  return <A>(self: ImmutableArray<A>): ImmutableArray<A | B> =>
+    new ImmutableArray([...self.array, ...that.array])
 }
 
 /**

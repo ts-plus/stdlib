@@ -15,4 +15,5 @@ export interface Ord<A> {
 export interface OrdOps {
   <A>(compare: (x: A, y: A) => Ordering): Ord<A>
 }
-export const Ord: OrdOps = <A>(compare: (x: A, y: A) => Ordering): Ord<A> => HKT.instance({ compare })
+export const Ord: OrdOps = <A>(compare: (x: A, y: A) => Ordering): Ord<A> =>
+  HKT.instance({ compare })

@@ -125,14 +125,18 @@ export function deriveValidation<A extends Brand.Valid<any, any>>(
     : never
 ): Guard<A> {
   const validateBrands = Object.keys(brands).map((k) => brands[k]!)
-  return Guard((u): u is A => base.is(u) && validateBrands.every((brand) => brand.validate(u as any)))
+  return Guard((u): u is A =>
+    base.is(u) && validateBrands.every((brand) => brand.validate(u as any))
+  )
 }
 
 /**
  * @tsplus derive Guard<_> 20
  */
 export function deriveLiteral<A extends string | number>(
-  ...[value]: Check<Check.IsLiteral<A> & Check.Not<Check.IsUnion<A>>> extends Check.True ? [value: A] : never
+  ...[value]: Check<Check.IsLiteral<A> & Check.Not<Check.IsUnion<A>>> extends Check.True
+    ? [value: A]
+    : never
 ): Guard<A> {
   return Guard((u): u is A => u === value)
 }
@@ -305,7 +309,10 @@ export function deriveStruct<A extends Record<string, any>>(
       }
       if (optionalFields) {
         for (const field of Object.keys(optionalFields)) {
-          if (field in u && typeof u[field] !== "undefined" && !(optionalFields[field] as Guard<any>).is(u[field])) {
+          if (
+            field in u && typeof u[field] !== "undefined" &&
+            !(optionalFields[field] as Guard<any>).is(u[field])
+          ) {
             return false
           }
         }
@@ -320,7 +327,8 @@ export function deriveStruct<A extends Record<string, any>>(
  * @tsplus derive Guard<_> 15
  */
 export function deriveDictionary<A extends Record<string, any>>(
-  ...[valueGuard]: Check<Check.IsDictionary<A>> extends Check.True ? [value: Guard<A[keyof A]>] : never
+  ...[valueGuard]: Check<Check.IsDictionary<A>> extends Check.True ? [value: Guard<A[keyof A]>]
+    : never
 ): Guard<A> {
   return Guard((u): u is A => {
     if (Derive<Guard<{}>>().is(u)) {

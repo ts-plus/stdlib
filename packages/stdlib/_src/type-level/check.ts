@@ -80,7 +80,10 @@ export declare namespace Check {
   /**
    * @tsplus type Check.HaveSameLength
    */
-  type HaveSameLength<A extends { length: number }, B extends { length: number }> = IsEqual<A["length"], B["length"]>
+  type HaveSameLength<A extends { length: number }, B extends { length: number }> = IsEqual<
+    A["length"],
+    B["length"]
+  >
 
   /**
    * @tsplus type Check.IsTagged

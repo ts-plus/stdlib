@@ -12,4 +12,5 @@ export interface Closure<A> {
 export interface ClosureOps {
   <A>(combine: (x: A, y: A) => A): Closure<A>
 }
-export const Closure: ClosureOps = <A>(combine: (x: A, y: A) => A): Closure<A> => HKT.instance({ combine })
+export const Closure: ClosureOps = <A>(combine: (x: A, y: A) => A): Closure<A> =>
+  HKT.instance({ combine })

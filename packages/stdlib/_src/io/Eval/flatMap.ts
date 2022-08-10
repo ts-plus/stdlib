@@ -10,5 +10,6 @@ import { FlatMap } from "@tsplus/stdlib/io/Eval/definition"
  * @tsplus pipeable Eval flatMap
  */
 export function flatMap<A, B>(f: (a: A) => Eval<B>) {
-  return (self: Eval<A>): Eval<B> => new FlatMap(self as EvalInternal<A>, f as (a: A) => EvalInternal<B>)
+  return (self: Eval<A>): Eval<B> =>
+    new FlatMap(self as EvalInternal<A>, f as (a: A) => EvalInternal<B>)
 }

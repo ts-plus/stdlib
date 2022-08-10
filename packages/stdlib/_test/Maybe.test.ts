@@ -93,7 +93,9 @@ describe.concurrent("Maybe", () => {
 
   it("forEachF", () => {
     const p = (n: number) => n > 2
-    const forEachF = Maybe.forEachF(Either.Applicative)((n: number) => p(n) ? Either.right(n + 1) : Either.left(n - 1))
+    const forEachF = Maybe.forEachF(Either.Applicative)((n: number) =>
+      p(n) ? Either.right(n + 1) : Either.left(n - 1)
+    )
 
     assert.isTrue(forEachF(Maybe.some(1)) == Either.left(0))
     assert.isTrue(forEachF(Maybe.some(3)) == Either.right(Maybe.some(4)))
@@ -170,7 +172,9 @@ describe.concurrent("Maybe", () => {
   })
 
   it("getRefinement", () => {
-    const f = (s: string | number): Maybe<string> => (typeof s === "string" ? Maybe.some(s) : Maybe.none)
+    const f = (
+      s: string | number
+    ): Maybe<string> => (typeof s === "string" ? Maybe.some(s) : Maybe.none)
     const isString = Maybe.getRefinement(f)
 
     assert.isTrue(isString("s"))

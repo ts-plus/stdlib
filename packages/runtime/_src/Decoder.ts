@@ -24,7 +24,9 @@ export const Decoder: DecoderOps = {}
 /**
  * @tsplus static Decoder/Ops __call
  */
-export function make<A>(decodeResult: (u: unknown) => Result<Decoder.Error, Decoder.Error, A>): Decoder<A> {
+export function make<A>(
+  decodeResult: (u: unknown) => Result<Decoder.Error, Decoder.Error, A>
+): Decoder<A> {
   return {
     decodeResult
   }
@@ -82,7 +84,10 @@ export class DecoderErrorPrimitive implements Decoder.Error {
     readonly expectedType: string
   ) {}
   render = () => {
-    return Tree(`Expected a value of type "${this.expectedType}" but received one of type "${typeof this.value}"`)
+    return Tree(
+      `Expected a value of type "${this.expectedType}" but received one of type "${typeof this
+        .value}"`
+    )
   }
 }
 
@@ -100,7 +105,10 @@ export class DecoderErrorIsoDateMalformed implements Decoder.Error {
     readonly value: unknown
   ) {}
   render = () => {
-    return Tree(`Expected a Date represented as an iso string instead received one of type "${typeof this.value}"`)
+    return Tree(
+      `Expected a Date represented as an iso string instead received one of type "${typeof this
+        .value}"`
+    )
   }
 }
 
@@ -116,7 +124,9 @@ export class DecoderErrorLiteral implements Decoder.Error {
           ` of type "${typeof this.expected}"` :
           ""
       } instead received ${
-        typeof this.value === typeof this.expected ? `"${this.value}"` : `one of type "${typeof this.value}"`
+        typeof this.value === typeof this.expected ?
+          `"${this.value}"` :
+          `one of type "${typeof this.value}"`
       }`
     )
   }
@@ -138,18 +148,24 @@ export class DecoderErrorStruct implements Decoder.Error {
   constructor(
     readonly fields: Chunk<DecoderErrorStructFieldError>
   ) {}
-  render = () => Tree(`Encountered while parsing an object structure`, this.fields.map((d) => d.render()))
+  render = () =>
+    Tree(`Encountered while parsing an object structure`, this.fields.map((d) => d.render()))
 }
 
 export class DecoderErrorTaggedMalformed implements Decoder.Error {
   constructor(readonly keys: string[]) {}
   render = () =>
-    Tree(`Expected a tagged object of the form "{ _tag: ${this.keys.sort().map(k => `"${k}"`).join(" | ")} }"`)
+    Tree(
+      `Expected a tagged object of the form "{ _tag: ${
+        this.keys.sort().map(k => `"${k}"`).join(" | ")
+      } }"`
+    )
 }
 
 export class DecoderErrorTaggedInner implements Decoder.Error {
   constructor(readonly tag: string, readonly error: Decoder.Error) {}
-  render = () => Tree(`Encountered while processing tagged object "${this.tag}"`, Chunk(this.error.render()))
+  render = () =>
+    Tree(`Encountered while processing tagged object "${this.tag}"`, Chunk(this.error.render()))
 }
 
 export class DecoderErrorUnionMember implements Decoder.Error {
@@ -171,7 +187,9 @@ export class DecoderErrorArray implements Decoder.Error {
   render = () =>
     Tree(
       `Encountered while processing an Array of elements`,
-      this.errors.map(([n, err]) => Tree(`Encountered while processing element "${n}"`, Chunk(err.render())))
+      this.errors.map(([n, err]) =>
+        Tree(`Encountered while processing element "${n}"`, Chunk(err.render()))
+      )
     )
 }
 
@@ -191,35 +209,45 @@ export class DecoderErrorValidation implements Decoder.Error {
  * @tsplus implicit
  */
 export const _true: Decoder<true> = Decoder((u) =>
-  Derive<Guard<true>>().is(u) ? Result.success(u) : Result.fail(new DecoderErrorPrimitive(u, "true"))
+  Derive<Guard<true>>().is(u) ?
+    Result.success(u) :
+    Result.fail(new DecoderErrorPrimitive(u, "true"))
 )
 
 /**
  * @tsplus implicit
  */
 export const _false: Decoder<false> = Decoder((u) =>
-  Derive<Guard<false>>().is(u) ? Result.success(u) : Result.fail(new DecoderErrorPrimitive(u, "false"))
+  Derive<Guard<false>>().is(u) ?
+    Result.success(u) :
+    Result.fail(new DecoderErrorPrimitive(u, "false"))
 )
 
 /**
  * @tsplus implicit
  */
 export const boolean: Decoder<boolean> = Decoder((u) =>
-  Derive<Guard<boolean>>().is(u) ? Result.success(u) : Result.fail(new DecoderErrorPrimitive(u, "boolean"))
+  Derive<Guard<boolean>>().is(u) ?
+    Result.success(u) :
+    Result.fail(new DecoderErrorPrimitive(u, "boolean"))
 )
 
 /**
  * @tsplus implicit
  */
 export const string: Decoder<string> = Decoder((u) =>
-  Derive<Guard<string>>().is(u) ? Result.success(u) : Result.fail(new DecoderErrorPrimitive(u, "string"))
+  Derive<Guard<string>>().is(u) ?
+    Result.success(u) :
+    Result.fail(new DecoderErrorPrimitive(u, "string"))
 )
 
 /**
  * @tsplus implicit
  */
 export const number: Decoder<number> = Decoder((u) =>
-  Derive<Guard<number>>().is(u) ? Result.success(u) : Result.fail(new DecoderErrorPrimitive(u, "number"))
+  Derive<Guard<number>>().is(u) ?
+    Result.success(u) :
+    Result.fail(new DecoderErrorPrimitive(u, "number"))
 )
 
 /**
@@ -374,7 +402,10 @@ export function deriveArray<A extends Array<any>>(
       if (hasFailed) {
         return Result.fail(new DecoderErrorArray(errors))
       }
-      return Result.success(out as A, errors.isEmpty ? Maybe.none : Maybe.some(new DecoderErrorArray(errors)))
+      return Result.success(
+        out as A,
+        errors.isEmpty ? Maybe.none : Maybe.some(new DecoderErrorArray(errors))
+      )
     }
     return Result.fail(new DecoderErrorPrimitive(u, "Array"))
   })
@@ -382,7 +413,10 @@ export function deriveArray<A extends Array<any>>(
 
 type EitherStructural<E, A> = { _tag: "Left"; left: E } | { _tag: "Right"; right: A }
 
-function deriveEitherInternal<E, A>(left: Decoder<E>, right: Decoder<A>): Decoder<EitherStructural<E, A>> {
+function deriveEitherInternal<E, A>(
+  left: Decoder<E>,
+  right: Decoder<A>
+): Decoder<EitherStructural<E, A>> {
   return Derive()
 }
 
@@ -390,11 +424,15 @@ function deriveEitherInternal<E, A>(left: Decoder<E>, right: Decoder<A>): Decode
  * @tsplus derive Decoder[Either]<_> 10
  */
 export function deriveEither<A extends Either<any, any>>(
-  ...[left, right]: [A] extends [Either<infer _E, infer _A>] ? [left: Decoder<_E>, right: Decoder<_A>] : never
+  ...[left, right]: [A] extends [Either<infer _E, infer _A>]
+    ? [left: Decoder<_E>, right: Decoder<_A>]
+    : never
 ): Decoder<A> {
   const structural = deriveEitherInternal(left, right)
   return Decoder((u) =>
-    structural.decodeResult(u).map((e) => e._tag === "Left" ? Either.left(e.left) as A : Either.right(e.right) as A)
+    structural.decodeResult(u).map((e) =>
+      e._tag === "Left" ? Either.left(e.left) as A : Either.right(e.right) as A
+    )
   )
 }
 
@@ -415,7 +453,9 @@ export function deriveMaybe<A extends Maybe<any>>(
 ): Decoder<A> {
   const structural = deriveMaybeInternal(value)
   return Decoder((u) =>
-    structural.decodeResult(u).map((e) => e._tag === "Some" ? Maybe.some(e.value) as A : Maybe.none as A)
+    structural.decodeResult(u).map((e) =>
+      e._tag === "Some" ? Maybe.some(e.value) as A : Maybe.none as A
+    )
   )
 }
 
@@ -424,14 +464,16 @@ export class DecoderErrorRecordValue implements Decoder.Error {
     readonly key: string,
     readonly error: Decoder.Error
   ) {}
-  render = () => Tree(`Encountered while parsing a record value at "${this.key}"`, Chunk(this.error.render()))
+  render = () =>
+    Tree(`Encountered while parsing a record value at "${this.key}"`, Chunk(this.error.render()))
 }
 
 export class DecoderErrorRecordFields implements Decoder.Error {
   constructor(
     readonly fields: Chunk<Decoder.Error>
   ) {}
-  render = () => Tree(`Encountered while parsing a record structure`, this.fields.map((d) => d.render()))
+  render = () =>
+    Tree(`Encountered while parsing a record structure`, this.fields.map((d) => d.render()))
 }
 
 export class DecoderErrorRecordMissingKeys implements Decoder.Error {
@@ -440,7 +482,9 @@ export class DecoderErrorRecordMissingKeys implements Decoder.Error {
   ) {}
   render = () =>
     Tree(
-      `Encountered while parsing a record structure, missing keys: ${this.missing.map((k) => `"${k}"`).join(", ")}`
+      `Encountered while parsing a record structure, missing keys: ${
+        this.missing.map((k) => `"${k}"`).join(", ")
+      }`
     )
 }
 
@@ -452,7 +496,9 @@ export function deriveEmptyRecord<A extends {}>(
 ): Decoder<A> {
   const record = Derive<Guard<{}>>()
   // @ts-expect-error
-  return Decoder((u) => record.is(u) ? Result.success(u) : Result.fail(new DecoderErrorPrimitive(u, "{}")))
+  return Decoder((u) =>
+    record.is(u) ? Result.success(u) : Result.fail(new DecoderErrorPrimitive(u, "{}"))
+  )
 }
 
 /**
@@ -553,9 +599,13 @@ export function deriveRecord<A extends Record<string, any>>(
  * @tsplus derive Decoder<_> 20
  */
 export function deriveLiteral<A extends string | number>(
-  ...[value]: Check<Check.IsLiteral<A> & Check.Not<Check.IsUnion<A>>> extends Check.True ? [value: A] : never
+  ...[value]: Check<Check.IsLiteral<A> & Check.Not<Check.IsUnion<A>>> extends Check.True
+    ? [value: A]
+    : never
 ): Decoder<A> {
-  return Decoder((u) => u === value ? Result.success(u as A) : Result.fail(new DecoderErrorLiteral(value, u)))
+  return Decoder((u) =>
+    u === value ? Result.success(u as A) : Result.fail(new DecoderErrorLiteral(value, u))
+  )
 }
 
 /**

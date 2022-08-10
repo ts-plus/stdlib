@@ -17,7 +17,13 @@ export function concatOperator<A>(
   self: NonEmptyImmutableArray<A>,
   that: NonEmptyImmutableArray<A>
 ): NonEmptyImmutableArray<A>
-export function concatOperator<A>(self: NonEmptyImmutableArray<A>, that: ImmutableArray<A>): NonEmptyImmutableArray<A>
-export function concatOperator<A>(self: NonEmptyImmutableArray<A>, that: ImmutableArray<A>): NonEmptyImmutableArray<A> {
+export function concatOperator<A>(
+  self: NonEmptyImmutableArray<A>,
+  that: ImmutableArray<A>
+): NonEmptyImmutableArray<A>
+export function concatOperator<A>(
+  self: NonEmptyImmutableArray<A>,
+  that: ImmutableArray<A>
+): NonEmptyImmutableArray<A> {
   return self & that
 }
