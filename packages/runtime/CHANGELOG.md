@@ -1,5 +1,14 @@
 # @tsplus/runtime
 
+## 0.1.5
+
+### Patch Changes
+
+- [#200](https://github.com/ts-plus/stdlib/pull/200) [`ff9df55`](https://github.com/ts-plus/stdlib/commit/ff9df55f012e921f9705060d14cc1983833fbf61) Thanks [@mikearnaldi](https://github.com/mikearnaldi)! - Removed Not Needed Lazy and Update TS+
+
+- Updated dependencies [[`ff9df55`](https://github.com/ts-plus/stdlib/commit/ff9df55f012e921f9705060d14cc1983833fbf61), [`eeae117`](https://github.com/ts-plus/stdlib/commit/eeae117ec94c7ef1437b9af9d8792afb05725ddb)]:
+  - @tsplus/stdlib@0.2.4
+
 ## 0.1.4
 
 ### Patch Changes
