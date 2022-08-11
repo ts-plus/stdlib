@@ -1,8 +1,16 @@
+import { it as it_ } from "vitest"
+
 function diffLaws<Value, Patch>(
   differ: Differ<Value, Patch>,
   gen: () => Value,
   equal: (a: Value, b: Value) => boolean
 ): void {
+  const it = (name: string, f: () => void) =>
+    it_(name, () => {
+      for (let i = 0; i < 100; i++) {
+        f()
+      }
+    })
   describe.concurrent("differ laws", () => {
     it("combining patches is associative", () => {
       const value1 = gen()
@@ -57,9 +65,9 @@ function randomChunk(): Chunk<number> {
   return Chunk.fill(20, smallInt)
 }
 
-// function randomHashMap(): HashMap<number, number> {
-//   return HashMap.from(Chunk.fill(20, smallInt).zip(Chunk.fill(20, smallInt)))
-// }
+function randomHashMap(): HashMap<number, number> {
+  return HashMap.from(Chunk.fill(2, smallInt).zip(Chunk.fill(2, smallInt)))
+}
 
 function randomHashSet(): HashSet<number> {
   return HashSet.from(Chunk.fill(20, smallInt))
@@ -93,7 +101,7 @@ describe.concurrent("Differ", () => {
   describe.concurrent("hashMap", () => {
     diffLaws(
       Differ.hashMap<number, number, (n: number) => number>(Differ.update<number>()),
-      () => HashMap(Tuple(1, 2), Tuple(3, 4), Tuple(5, 6)),
+      randomHashMap,
       Equals.equals
     )
   })
