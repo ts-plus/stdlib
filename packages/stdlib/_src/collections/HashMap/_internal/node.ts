@@ -214,15 +214,23 @@ export class IndexedNode<K, V> {
     const bit = toBitmap(frag)
     const indx = fromBitmap(mask, bit)
     const exists = mask & bit
-    const current = exists ? children[indx]! : new EmptyNode<K, V>()
+    const canEdit = canEditNode(this, edit)
+
+    if (!exists) {
+      const _newChild = new EmptyNode<K, V>().modify(edit, shift + SIZE, f, hash, key, size)
+      if (!_newChild) return this
+      return children.length >= MAX_INDEX_NODE ?
+        expand(edit, frag, _newChild, mask, children) :
+        new IndexedNode(edit, mask | bit, arraySpliceIn(canEdit, indx, _newChild, children))
+    }
+
+    const current = children[indx]!
     const child = current.modify(edit, shift + SIZE, f, hash, key, size)
 
     if (current === child) return this
-
-    const canEdit = canEditNode(this, edit)
     let bitmap = mask
     let newChildren
-    if (exists && isEmptyNode(child)) {
+    if (isEmptyNode(child)) {
       // remove
       bitmap &= ~bit
       if (!bitmap) return new EmptyNode()
@@ -231,14 +239,6 @@ export class IndexedNode<K, V> {
       }
 
       newChildren = arraySpliceOut(canEdit, indx, children)
-    } else if (!exists && !isEmptyNode(child)) {
-      // add
-      if (children.length >= MAX_INDEX_NODE) {
-        return expand(edit, frag, child, mask, children)
-      }
-
-      bitmap |= bit
-      newChildren = arraySpliceIn(canEdit, indx, child, children)
     } else {
       // modify
       newChildren = arrayUpdate(canEdit, indx, child, children)
@@ -249,6 +249,7 @@ export class IndexedNode<K, V> {
       this.children = newChildren
       return this
     }
+
     return new IndexedNode(edit, bitmap, newChildren)
   }
 }

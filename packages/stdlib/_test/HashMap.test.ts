@@ -287,6 +287,11 @@ describe.concurrent("HashMap", () => {
     assert.isTrue(result[key(1)] == Maybe.some(value("b")))
   })
 
+  it("remove non existing key doesn't change the array", () => {
+    const map = HashMap(Tuple(13, 95), Tuple(90, 4))
+    assert.deepEqual(map.remove(75).keySet.toArray, map.keySet.toArray)
+  })
+
   it("removeMany", () => {
     const hashMap = HashMap(Tuple(key(0), value("a")), Tuple(key(1), value("b")))
 
