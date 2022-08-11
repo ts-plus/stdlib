@@ -1,5 +1,11 @@
 # @tsplus/stdlib
 
+## 0.2.5
+
+### Patch Changes
+
+- [#201](https://github.com/ts-plus/stdlib/pull/201) [`e951ee4`](https://github.com/ts-plus/stdlib/commit/e951ee46744d97135c361817cd4abb0b3e022cf0) Thanks [@mikearnaldi](https://github.com/mikearnaldi)! - Fix HashMap Modify
+
 ## 0.2.4
 
 ### Patch Changes
