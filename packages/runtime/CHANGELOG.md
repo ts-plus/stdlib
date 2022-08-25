@@ -1,5 +1,12 @@
 # @tsplus/runtime
 
+## 0.1.7
+
+### Patch Changes
+
+- Updated dependencies [[`2c38b88`](https://github.com/ts-plus/stdlib/commit/2c38b883f8613cc4a834de9152a3bb8abf5f45df)]:
+  - @tsplus/stdlib@0.2.6
+
 ## 0.1.6
 
 ### Patch Changes
