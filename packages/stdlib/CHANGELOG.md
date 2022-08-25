@@ -1,5 +1,11 @@
 # @tsplus/stdlib
 
+## 0.2.6
+
+### Patch Changes
+
+- [#203](https://github.com/ts-plus/stdlib/pull/203) [`2c38b88`](https://github.com/ts-plus/stdlib/commit/2c38b883f8613cc4a834de9152a3bb8abf5f45df) Thanks [@mikearnaldi](https://github.com/mikearnaldi)! - Add Ord.tuple
+
 ## 0.2.5
 
 ### Patch Changes
