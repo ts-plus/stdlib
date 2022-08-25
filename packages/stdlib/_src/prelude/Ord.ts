@@ -5,4 +5,5 @@ export * from "@tsplus/stdlib/prelude/Ord/definition"
 export * from "@tsplus/stdlib/prelude/Ord/getAssociative"
 export * from "@tsplus/stdlib/prelude/Ord/getAssociativeIdentity"
 export * from "@tsplus/stdlib/prelude/Ord/operations"
+export * from "@tsplus/stdlib/prelude/Ord/tuple"
 // codegen:end
