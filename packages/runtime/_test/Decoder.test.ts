@@ -92,6 +92,18 @@ describe.concurrent("Decoder", () => {
       `Expected literal "1" of type "number" instead received "200"`
     )
   })
+  it("null", () => {
+    const decoder: Decoder<null> = Derive()
+    assert.deepEqual(decoder.decodeJSON(JSON.stringify(null)).right.value, null)
+    assert.deepEqual(
+      decoder.decodeJSON(JSON.stringify("no-hello")).left.value?.message,
+      `Expected null instead received one of type "string"`
+    )
+    assert.deepEqual(
+      decoder.decodeJSON(JSON.stringify(200)).left.value?.message,
+      `Expected null instead received one of type "number"`
+    )
+  })
   it("struct", () => {
     interface Person {
       firstName: string

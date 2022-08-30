@@ -132,6 +132,17 @@ export class DecoderErrorLiteral implements Decoder.Error {
   }
 }
 
+export class DecoderErrorNull implements Decoder.Error {
+  constructor(
+    readonly value: unknown
+  ) {}
+  render = () => {
+    return Tree(
+      `Expected null instead received one of type "${typeof this.value}"`
+    )
+  }
+}
+
 export class DecoderErrorStructMissingField implements Decoder.Error {
   render = () => Tree(`Missing`)
 }
@@ -248,6 +259,15 @@ export const number: Decoder<number> = Decoder((u) =>
   Derive<Guard<number>>().is(u) ?
     Result.success(u) :
     Result.fail(new DecoderErrorPrimitive(u, "number"))
+)
+
+/**
+ * @tsplus implicit
+ */
+export const _null: Decoder<null> = Decoder((u) =>
+  Derive<Guard<null>>().is(u) ?
+    Result.success(u) :
+    Result.fail(new DecoderErrorNull(u))
 )
 
 /**
@@ -606,6 +626,13 @@ export function deriveLiteral<A extends string | number>(
   return Decoder((u) =>
     u === value ? Result.success(u as A) : Result.fail(new DecoderErrorLiteral(value, u))
   )
+}
+
+/**
+ * @tsplus derive Decoder<_> 20
+ */
+export function deriveNull<A extends null>(): Decoder<A> {
+  return Decoder((u) => u === null ? Result.success(u as A) : Result.fail(new DecoderErrorNull(u)))
 }
 
 /**

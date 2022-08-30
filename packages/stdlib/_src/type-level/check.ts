@@ -54,6 +54,11 @@ export declare namespace Check {
   >
 
   /**
+   * @tsplus type Check.IsNull
+   */
+  type IsNull<A extends null> = Not<Extends<null, A>>
+
+  /**
    * @tsplus type Check.IsStruct
    */
   type IsStruct<A> =
