@@ -631,13 +631,6 @@ export function deriveLiteral<A extends string | number>(
 /**
  * @tsplus derive Decoder<_> 20
  */
-export function deriveNull<A extends null>(): Decoder<A> {
-  return Decoder((u) => u === null ? Result.success(u as A) : Result.fail(new DecoderErrorNull(u)))
-}
-
-/**
- * @tsplus derive Decoder<_> 20
- */
 export function deriveStruct<A extends Record<string, any>>(
   ...[requiredFields, optionalFields]: Check<Check.IsStruct<A>> extends Check.True ? [
     ...[
