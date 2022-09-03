@@ -53,6 +53,13 @@ export const boolean: Encoder<boolean> = Encoder((u) => u)
 export const number: Encoder<number> = Encoder((u) => u)
 
 /**
+ * Encoder for null
+ *
+ * @tsplus implicit
+ */
+export const _null: Encoder<null> = Encoder((u) => u)
+
+/**
  * Encoder for a string
  *
  * @tsplus implicit
