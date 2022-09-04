@@ -1,5 +1,11 @@
 # @tsplus/runtime
 
+## 0.1.8
+
+### Patch Changes
+
+- [#205](https://github.com/ts-plus/stdlib/pull/205) [`4764ae5`](https://github.com/ts-plus/stdlib/commit/4764ae5122e0a674e6fa05958dca63f7d100a3da) Thanks [@tstelzer](https://github.com/tstelzer)! - Add Encoder<null>, Guard<null> and Decoder<null>
+
 ## 0.1.7
 
 ### Patch Changes
