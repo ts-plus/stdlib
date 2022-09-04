@@ -57,6 +57,13 @@ export const boolean: Guard<boolean> = Guard((u): u is boolean => typeof u === "
 export const number: Guard<number> = Guard((u): u is number => typeof u === "number")
 
 /**
+ * Guard for null
+ *
+ * @tsplus implicit
+ */
+export const _null: Guard<null> = Guard((u): u is null => u === null)
+
+/**
  * Guard for a string
  *
  * @tsplus implicit

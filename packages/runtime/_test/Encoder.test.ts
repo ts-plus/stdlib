@@ -12,6 +12,10 @@ describe.concurrent("Encoder", () => {
     const number: Encoder<number> = Derive()
     assert.deepEqual(number.encode(1), 1)
   })
+  it("null", () => {
+    const { encode }: Encoder<null> = Derive()
+    assert.deepEqual(encode(null), null)
+  })
   it("date", () => {
     const string: Encoder<Date> = Derive()
     const date = new Date()
