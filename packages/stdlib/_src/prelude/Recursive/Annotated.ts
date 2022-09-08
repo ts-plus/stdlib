@@ -4,9 +4,9 @@ import type { Recursive } from "@tsplus/stdlib/prelude/Recursive"
  * @tsplus type Recursive/Annotated
  * @tsplus companion Recursive/Annotated/Ops
  */
-export class Annotated<F extends HKT, A> implements Recursive<F> {
+export class Annotated<F extends HKT, A, E = unknown> implements Recursive<F> {
   constructor(
-    readonly caseValue: HKT.Kind<F, unknown, never, Annotated<F, A>>,
+    readonly caseValue: HKT.Kind<F, unknown, unknown, Annotated<F, A>>,
     readonly annotations: A
   ) {}
 }
@@ -36,9 +36,9 @@ export function unfix<F extends HKT, A>({
  * @tsplus static Recursive/Annotated/Ops __call
  * @tsplus static Recursive/Annotated/Ops make
  */
-export function make<F extends HKT, A>(
-  caseValue: HKT.Kind<F, unknown, never, Annotated<F, A>>,
-  annotations: A
-): Annotated<F, A> {
+export function make<F extends HKT, Z, E = unknown>(
+  caseValue: HKT.Kind<F, unknown, E, Annotated<F, Z>>,
+  annotations: Z
+): Annotated<F, Z> {
   return new Annotated(caseValue, annotations)
 }
