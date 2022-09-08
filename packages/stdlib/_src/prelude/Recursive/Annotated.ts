@@ -17,8 +17,8 @@ export declare namespace Annotated {
    * with its recursive terms replaced by a value *and* an annotation, which
    * represents the value computed for each child.  aka `Course-of-Value (CV)Algebra`
    */
-  export type Fn<F extends HKT, Z> = (
-    r: HKT.Kind<F, unknown, unknown, Annotated<F, Z>>
+  export type Fn<F extends HKT, Z, E = unknown, R = unknown> = (
+    r: HKT.Kind<F, R, E, Annotated<F, Z>>
   ) => Z
 }
 
@@ -26,7 +26,7 @@ export declare namespace Annotated {
  * @tsplus fluent Recursive/Annotated unfix
  * @tsplus static Recursive/Annotated/Ops unfix
  */
-export function unfix<F extends HKT, A>({
+export function unfixAnnotated<F extends HKT, A>({
   caseValue
 }: Annotated<F, A>): HKT.Kind<F, unknown, unknown, Annotated<F, A>> {
   return caseValue
@@ -36,7 +36,7 @@ export function unfix<F extends HKT, A>({
  * @tsplus static Recursive/Annotated/Ops __call
  * @tsplus static Recursive/Annotated/Ops make
  */
-export function make<F extends HKT, Z, E = unknown>(
+export function makeAnnotated<F extends HKT, Z, E = unknown>(
   caseValue: HKT.Kind<F, unknown, E, Annotated<F, Z>>,
   annotations: Z
 ): Annotated<F, Z> {
