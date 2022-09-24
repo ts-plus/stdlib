@@ -1,8 +1,7 @@
 /**
  * adapted from https://github.com/gcanti/fp-ts
  */
-const _leftHash = Hash.string("Either.Left")
-const _rightHash = Hash.string("Either.Right")
+
 /**
  * @tsplus type Either
  */
@@ -39,33 +38,17 @@ export declare namespace Either {
 /**
  * @tsplus type Either.Left
  */
-export class Left<E> implements Equals {
-  readonly _tag = "Left"
-
-  constructor(readonly left: E) {}
-
-  [Equals.sym](that: unknown): boolean {
-    return that instanceof Left && Equals.equals(this.left, that.left)
-  }
-  [Hash.sym](): number {
-    return Hash.combine(_leftHash, Hash.unknown(this.left))
-  }
+export interface Left<E> {
+  readonly _tag: "Left"
+  readonly left: E
 }
 
 /**
  * @tsplus type Either.Right
  */
-export class Right<A> implements Equals {
-  readonly _tag = "Right"
-
-  constructor(readonly right: A) {}
-
-  [Equals.sym](that: unknown): boolean {
-    return that instanceof Right && Equals.equals(this.right, that.right)
-  }
-  [Hash.sym](): number {
-    return Hash.combine(_rightHash, Hash.unknown(this.right))
-  }
+export interface Right<A> {
+  readonly _tag: "Right"
+  readonly right: A
 }
 
 /**
@@ -130,19 +113,11 @@ export function getRight<E, A>(self: Either<E, A>): Maybe<A> {
  * Constructs a new `Either` holding a `Right` value. This usually represents a
  * successful value due to the right bias of this structure.
  *
+ * @tsplus static Either.Ops right
  * @tsplus static Either.Ops __call
  */
-export function apply<A>(a: A): Either<never, A> {
-  return new Right(a)
-}
-/**
- * Constructs a new `Either` holding a `Right` value. This usually represents a
- * successful value due to the right bias of this structure.
- *
- * @tsplus static Either.Ops right
- */
 export function right<A>(a: A): Either<never, A> {
-  return new Right(a)
+  return { _tag: "Right", right: a }
 }
 
 /**
@@ -152,7 +127,7 @@ export function right<A>(a: A): Either<never, A> {
  * @tsplus static Either.Ops rightW
  */
 export function rightW<A, E = never>(a: A): Either<E, A> {
-  return new Right(a)
+  return { _tag: "Right", right: a }
 }
 
 /**
@@ -162,7 +137,7 @@ export function rightW<A, E = never>(a: A): Either<E, A> {
  * @tsplus static Either.Ops left
  */
 export function left<E>(e: E): Either<E, never> {
-  return new Left(e)
+  return { _tag: "Left", left: e }
 }
 
 /**
@@ -172,7 +147,7 @@ export function left<E>(e: E): Either<E, never> {
  * @tsplus static Either.Ops leftW
  */
 export function leftW<E, A = never>(e: E): Either<E, A> {
-  return new Left(e)
+  return { _tag: "Left", left: e }
 }
 
 /**
@@ -221,4 +196,11 @@ export function widenA<A1>() {
      */
     <E, A>(self: Either<E, A>): Either<E, A | A1> => self
   )
+}
+
+/**
+ * @tsplus operator Either ==
+ */
+export function equals<E, A, E1, B>(a: Either<E, A>, b: Either<E1, B>) {
+  return Equals.equals(a, b)
 }
