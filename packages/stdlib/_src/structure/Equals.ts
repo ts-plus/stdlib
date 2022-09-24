@@ -30,6 +30,76 @@ export function sameValueZeroEqual(a: any, b: any) {
   return a === b || (a !== a && b !== b)
 }
 
+const protoMap = new Map<any, (a: any, b: any) => boolean>([
+  [
+    Array.prototype,
+    (a: Array<any>, b: Array<any>) => a.length === b.length && a.every((v, i) => equals(v, b[i]))
+  ],
+  [
+    Set.prototype,
+    (a: Set<any>, b: Set<any>) => {
+      if (a.size !== b.size) {
+        return false
+      }
+      for (const va of a.values()) {
+        let found = false
+        for (const vb of b.values()) {
+          if (equals(va, vb)) {
+            found = true
+            break
+          }
+        }
+        if (!found) {
+          return false
+        }
+      }
+      return true
+    }
+  ],
+  [
+    Object.prototype,
+    (a: object, b: object) => {
+      const keysA = Object.keys(a).sort()
+      const keysB = Object.keys(b).sort()
+      if (keysA.length !== keysB.length) {
+        return false
+      }
+      if (!equals(keysA, keysB)) {
+        return false
+      }
+      for (const ka of keysA) {
+        const va = a[ka]
+        const vb = b[ka]
+        if (!equals(va, vb)) {
+          return false
+        }
+      }
+      return true
+    }
+  ],
+  [
+    Map.prototype,
+    (a: Map<any, any>, b: Map<any, any>) => {
+      if (a.size !== b.size) {
+        return false
+      }
+      for (const [ka, va] of a.entries()) {
+        let found = false
+        for (const [kb, vb] of b.entries()) {
+          if (equals(ka, kb) && equals(va, vb)) {
+            found = true
+            break
+          }
+        }
+        if (!found) {
+          return false
+        }
+      }
+      return true
+    }
+  ]
+])
+
 /**
  * @tsplus static Equals.Ops equals
  * @tsplus fluent Equals equals
@@ -41,12 +111,24 @@ export function equals(a: unknown, b: unknown): boolean {
   if (a === b) {
     return true
   }
-  if (!sameValueZeroEqual(Hash.unknown(a), Hash.unknown(b))) {
-    return false
-  } else if (isEquals(a)) {
+  if (isEquals(a)) {
+    if (!isEquals(b)) {
+      return false
+    }
+    if (!sameValueZeroEqual(Hash.unknown(a), Hash.unknown(b))) {
+      return false
+    }
     return a[Equals.sym](b)
-  } else if (isEquals(b)) {
-    return b[Equals.sym](a)
+  }
+  if (typeof a === "object" && typeof b === "object") {
+    const protoA = Object.getPrototypeOf(a)
+    const protoB = Object.getPrototypeOf(b)
+    if (protoA === protoB) {
+      const compare = protoMap.get(protoA)
+      if (compare) {
+        return compare(a, b)
+      }
+    }
   }
   return sameValueZeroEqual(a, b)
 }

@@ -27,39 +27,21 @@ export const Maybe: MaybeOps = {
  */
 export interface MaybeAspects {}
 
-const _noneHash = Hash.string("Maybe.None")
-const _someHash = Hash.string("Maybe.Some")
-
 /**
  * Definitions
  *
  * @tsplus type Maybe.None
  */
-export class None implements Equals {
-  readonly _tag = "None";
-
-  [Equals.sym](that: unknown): boolean {
-    return that instanceof None
-  }
-  [Hash.sym](): number {
-    return _noneHash
-  }
+export interface None {
+  readonly _tag: "None"
 }
 
 /**
  * @tsplus type Maybe.Some
  */
-export class Some<A> implements Equals {
-  readonly _tag = "Some"
-
-  constructor(readonly value: A) {}
-
-  [Equals.sym](that: unknown): boolean {
-    return that instanceof Some && Equals.equals(this.value, that.value)
-  }
-  [Hash.sym](): number {
-    return Hash.combine(_someHash, Hash.unknown(this.value))
-  }
+export interface Some<A> {
+  readonly _tag: "Some"
+  readonly value: A
 }
 
 /**
@@ -82,7 +64,7 @@ export type ArrayOfMaybies<Ts extends Maybe<any>[]> = {
  *
  * @tsplus static Maybe.Ops none
  */
-export const none: Maybe<never> = new None()
+export const none: Maybe<never> = { _tag: "None" }
 
 /**
  * Constructs `None`.
@@ -99,7 +81,7 @@ export function empty<A = never>(): Maybe<A> {
  * @tsplus static Maybe.Ops some
  */
 export function some<A>(a: A): Maybe<A> {
-  return new Some(a)
+  return { _tag: "Some", value: a }
 }
 
 /**
@@ -130,4 +112,11 @@ export function isMaybe(u: unknown): u is Maybe<unknown> {
     "_tag" in u &&
     (u["_tag"] === "Some" || u["_tag"] === "None")
   )
+}
+
+/**
+ * @tsplus operator Maybe ==
+ */
+export function equals<A, B>(a: Maybe<A>, b: Maybe<B>) {
+  return Equals.equals(a, b)
 }

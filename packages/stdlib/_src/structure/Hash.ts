@@ -48,6 +48,20 @@ export function hashArray(arr: readonly unknown[]): number {
 }
 
 /**
+ * @tsplus static Hash.Ops map
+ */
+export function hashMap(arr: Map<unknown, unknown>): number {
+  return optimize(_hashMap(arr))
+}
+
+/**
+ * @tsplus static Hash.Ops set
+ */
+export function hashSet(arr: Set<unknown>): number {
+  return optimize(_hashSet(arr))
+}
+
+/**
  * @tsplus static Hash.Ops args
  */
 export function hashArgs(...args: unknown[]): number
@@ -162,9 +176,32 @@ function _hashArray(arr: readonly any[]): number {
   return h
 }
 
+function _hashMap(arr: Map<any, any>): number {
+  let h = 9744
+  arr.forEach((v, k) => {
+    h ^= _combineHash(_hash(k), _hash(v))
+  })
+  return h
+}
+
+function _hashSet(arr: Set<any>): number {
+  let h = 2362
+  arr.forEach((v) => {
+    h ^= _hash(v)
+  })
+  return h
+}
+
 function _combineHash(a: number, b: number): number {
   return (a * 53) ^ b
 }
+
+const protoMap = new Map<any, (_: any) => number>([
+  [Array.prototype, hashArray],
+  [Map.prototype, hashMap],
+  [Set.prototype, hashSet],
+  [Object.prototype, hashPlainObject]
+])
 
 function _hashObject(value: object): number {
   let h = CACHE.get(value)
@@ -172,7 +209,12 @@ function _hashObject(value: object): number {
   if (isHash(value)) {
     h = value[Hash.sym]()
   } else {
-    h = hashRandom()
+    const primitiveHash = protoMap.get(Object.getPrototypeOf(value))
+    if (primitiveHash) {
+      h = primitiveHash(value as any)
+    } else {
+      h = hashRandom()
+    }
   }
   CACHE.set(value, h)
   return h
@@ -197,11 +239,10 @@ function _hashIterator(it: Iterator<any>): number {
 
 function _hashPlainObject(o: object): number {
   CACHE.set(o, randomInt())
-  const keys = Object.keys(o).sort()
+  const keys = Object.keys(o)
   let h = 12289
   for (let i = 0; i < keys.length; i++) {
-    h = _combineHash(h, _hashString(keys[i]!))
-    h = _combineHash(h, hashUnknown((o as any)[keys[i]!]))
+    h ^= _combineHash(_hashString(keys[i]!), hashUnknown((o as any)[keys[i]!]))
   }
   return h
 }

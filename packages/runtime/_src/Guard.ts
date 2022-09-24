@@ -1,6 +1,4 @@
 import { Cons, Nil } from "@tsplus/stdlib/collections/List/definition"
-import { Left, Right } from "@tsplus/stdlib/data/Either/definition"
-import { None, Some } from "@tsplus/stdlib/data/Maybe/definition"
 
 /**
  * A Guard<A> is a type representing the ability to identify when a value is of type A at runtime
@@ -156,12 +154,24 @@ export function deriveOption<A extends Maybe<any>>(
     : never
 ): Guard<A> {
   return Guard((u): u is A => {
-    if (u instanceof None) {
+    if (typeof u !== "object" || u == null) {
+      return false
+    }
+
+    if (Equals.equals(Maybe.none, u)) {
       return true
     }
-    if (u instanceof Some) {
-      return element.is(u.value)
+
+    const keys = Object.keys(u)
+
+    if (keys.length !== 2) {
+      return false
     }
+
+    if ("_tag" in u && "value" in u && u["_tag"] === "Some") {
+      return element.is(u["value"])
+    }
+
     return false
   })
 }
@@ -270,12 +280,27 @@ export function deriveEither<A extends Either<any, any>>(
     : never
 ): Guard<A> {
   return Guard((u): u is A => {
-    if (u instanceof Left) {
-      return left.is(u.left)
+    if (typeof u !== "object" || u == null) {
+      return false
     }
-    if (u instanceof Right) {
-      return right.is(u.right)
+
+    const keys = Object.keys(u)
+
+    if (keys.length !== 2) {
+      return false
     }
+
+    if ("_tag" in u) {
+      switch (u["_tag"]) {
+        case "Left": {
+          return "left" in u && left.is(u["left"])
+        }
+        case "Right": {
+          return "right" in u && right.is(u["right"])
+        }
+      }
+    }
+
     return false
   })
 }
