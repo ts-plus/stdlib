@@ -19,11 +19,11 @@ describe.concurrent("ImmutableQueue", () => {
     const queue = ImmutableQueue(1, 2)
 
     const result1 = queue.dequeue
-    const result2 = result1.value!.get(1).dequeue
-    const result3 = result2.value!.get(1).dequeue
+    const result2 = result1.value![1].dequeue
+    const result3 = result2.value![1].dequeue
 
-    assert.isTrue(result1 == Maybe.some(Tuple(1, ImmutableQueue(2))))
-    assert.isTrue(result2 == Maybe.some(Tuple(2, ImmutableQueue.empty<number>())))
+    assert.isTrue(result1 == Maybe.some([1, ImmutableQueue(2)]))
+    assert.isTrue(result2 == Maybe.some([2, ImmutableQueue.empty<number>()]))
     assert.isTrue(result3 == Maybe.none)
   })
 
@@ -49,9 +49,7 @@ describe.concurrent("ImmutableQueue", () => {
   it("splitAt", () => {
     const queue = ImmutableQueue(0, 1, 2, 3, 4, 5)
 
-    const {
-      tuple: [left, right]
-    } = queue.splitAt(3)
+    const [left, right] = queue.splitAt(3)
 
     assert.isTrue(left == ImmutableQueue(0, 1, 2))
     assert.isTrue(right == ImmutableQueue(3, 4, 5))
@@ -60,9 +58,7 @@ describe.concurrent("ImmutableQueue", () => {
   it("splitAt - empty leftover", () => {
     const queue = ImmutableQueue(0, 1, 2, 3, 4, 5)
 
-    const {
-      tuple: [left, right]
-    } = queue.splitAt(6)
+    const [left, right] = queue.splitAt(6)
 
     assert.isTrue(left == ImmutableQueue(0, 1, 2, 3, 4, 5))
     assert.isTrue(right == ImmutableQueue())

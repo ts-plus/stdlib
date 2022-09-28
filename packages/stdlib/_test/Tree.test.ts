@@ -77,7 +77,7 @@ describe.concurrent("Tree", () => {
   })
 
   it("unfold", () => {
-    const y = Tree.unfold(2, (a) => Tuple(a, a > 1 ? Chunk.range(0, a - 1) : Chunk.empty()))
+    const y = Tree.unfold(2, (a) => [a, a > 1 ? Chunk.range(0, a - 1) : Chunk.empty()])
     const x = Tree(2, Chunk(Tree(0)) + Chunk(Tree(1)))
     assert.isTrue(x == y)
   })
@@ -158,8 +158,8 @@ describe.concurrent("Tree", () => {
     const a = Tree("a", Chunk(Tree("b"), Tree("c")))
     const b = Tree("a", Chunk(Tree("b"), Tree("c"), Tree("d")))
     const expected = Tree(
-      Tuple("a", "a"),
-      Chunk(Tree(Tuple("b", "b")), Tree(Tuple("c", "c")))
+      ["a", "a"],
+      Chunk(Tree(["b", "b"]), Tree(["c", "c"]))
     )
     assert.isTrue(a.zip(b) == b.zip(a))
     assert.isTrue(a.zip(b) == expected)
@@ -169,11 +169,11 @@ describe.concurrent("Tree", () => {
     const a = Tree("a", Chunk(Tree("b"), Tree("c")))
     const b = Tree("a", Chunk(Tree("b"), Tree("c"), Tree("d")))
     const expected = Tree(
-      Tuple("a", "a"),
-      Chunk(Tree(Tuple("b", "b")), Tree(Tuple("c", "c")))
+      ["a", "a"],
+      Chunk(Tree(["b", "b"]), Tree(["c", "c"]))
     )
-    assert.isTrue(a.zipWith(b, Tuple.make) == expected)
-    assert.isTrue(pipe(a, Tree.$.zipWith(b, Tuple.make)) == expected)
+    assert.isTrue(a.zipWith(b, (a, b) => [a, b]) == expected)
+    assert.isTrue(pipe(a, Tree.$.zipWith(b, (a, b) => [a, b])) == expected)
   })
 
   it("isTree", () => {

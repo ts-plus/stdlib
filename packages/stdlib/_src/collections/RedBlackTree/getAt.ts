@@ -8,7 +8,7 @@ import type { Node } from "@tsplus/stdlib/collections/RedBlackTree/node"
  * @tsplus pipeable RedBlackTree getAt
  */
 export function getAt(index: number) {
-  return <K, V>(self: RedBlackTree<K, V>): Maybe<Tuple<[K, V]>> => {
+  return <K, V>(self: RedBlackTree<K, V>): Maybe<readonly [K, V]> => {
     if (index < 0) {
       return Maybe.none
     }
@@ -24,7 +24,7 @@ export function getAt(index: number) {
         index -= n.left.count
       }
       if (!index) {
-        return Maybe.some(Tuple(node.key, node.value))
+        return Maybe.some([node.key, node.value])
       }
       index -= 1
       if (n.right) {

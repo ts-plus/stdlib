@@ -5,7 +5,7 @@
  * @tsplus pipeable ImmutableArray partitionWithIndex
  */
 export function partitionWithIndex<A>(f: PredicateWithIndex<number, A>) {
-  return (self: ImmutableArray<A>): Tuple<[ImmutableArray<A>, ImmutableArray<A>]> => {
+  return (self: ImmutableArray<A>): readonly [ImmutableArray<A>, ImmutableArray<A>] => {
     const left: Array<A> = []
     const right: Array<A> = []
     for (let i = 0; i < self.array.length; i = i + 1) {
@@ -16,6 +16,6 @@ export function partitionWithIndex<A>(f: PredicateWithIndex<number, A>) {
         left.push(a)
       }
     }
-    return Tuple(new ImmutableArray(left), new ImmutableArray(right))
+    return [new ImmutableArray(left), new ImmutableArray(right)]
   }
 }

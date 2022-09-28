@@ -1,14 +1,14 @@
 describe.concurrent("ImmutableMap", () => {
   it("compact", () => {
-    const map = ImmutableMap(Tuple(1, Maybe.some("a")), Tuple(2, Maybe.none))
+    const map = ImmutableMap([1, Maybe.some("a")], [2, Maybe.none])
 
     const result = map.compact
 
-    assert.isTrue(result == ImmutableMap(Tuple(1, "a")))
+    assert.isTrue(result == ImmutableMap([1, "a"]))
   })
 
   it("copy", () => {
-    const map = ImmutableMap(Tuple(1, "a"))
+    const map = ImmutableMap([1, "a"])
 
     const result = map.copy
 
@@ -22,50 +22,50 @@ describe.concurrent("ImmutableMap", () => {
   })
 
   it("filter", () => {
-    const map = ImmutableMap(Tuple(1, "a"), Tuple(2, "b"), Tuple(3, "c"))
+    const map = ImmutableMap([1, "a"], [2, "b"], [3, "c"])
 
     const result = map.filter((char) => char === "b")
 
-    assert.isTrue(result == ImmutableMap(Tuple(2, "b")))
+    assert.isTrue(result == ImmutableMap([2, "b"]))
   })
 
   it("filterWithIndex", () => {
-    const map = ImmutableMap(Tuple(1, "a"), Tuple(2, "b"), Tuple(3, "c"))
+    const map = ImmutableMap([1, "a"], [2, "b"], [3, "c"])
 
     const result = map.filterWithIndex((key, char) => key < 2 || char === "b")
 
-    assert.isTrue(result == ImmutableMap(Tuple(1, "a"), Tuple(2, "b")))
+    assert.isTrue(result == ImmutableMap([1, "a"], [2, "b"]))
   })
 
   it("filterMap", () => {
-    const map = ImmutableMap(Tuple(1, "a"), Tuple(2, "b"), Tuple(3, "c"))
+    const map = ImmutableMap([1, "a"], [2, "b"], [3, "c"])
 
     const result = map.filterMap((char) =>
       char === "b" ? Maybe.some(char.toUpperCase()) : Maybe.none
     )
 
-    assert.isTrue(result == ImmutableMap(Tuple(2, "B")))
+    assert.isTrue(result == ImmutableMap([2, "B"]))
   })
 
   it("filterMapWithIndex", () => {
-    const map = ImmutableMap(Tuple(1, "a"), Tuple(2, "b"), Tuple(3, "c"))
+    const map = ImmutableMap([1, "a"], [2, "b"], [3, "c"])
 
     const result = map.filterMapWithIndex((key, char) =>
       key < 2 || char === "b" ? Maybe.some(char.toUpperCase()) : Maybe.none
     )
 
-    assert.isTrue(result == ImmutableMap(Tuple(1, "A"), Tuple(2, "B")))
+    assert.isTrue(result == ImmutableMap([1, "A"], [2, "B"]))
   })
 
   it("get", () => {
-    const map = ImmutableMap(Tuple(1, "a"), Tuple(2, "b"), Tuple(3, "c"))
+    const map = ImmutableMap([1, "a"], [2, "b"], [3, "c"])
 
     assert.isTrue(map.get(1) == Maybe.some("a"))
     assert.isTrue(map.get(4) == Maybe.none)
   })
 
   it("has", () => {
-    const map = ImmutableMap(Tuple(1, "a"), Tuple(2, "b"), Tuple(3, "c"))
+    const map = ImmutableMap([1, "a"], [2, "b"], [3, "c"])
 
     assert.isTrue(map.has(1))
     assert.isFalse(map.has(4))
@@ -73,37 +73,37 @@ describe.concurrent("ImmutableMap", () => {
 
   it("isEmpty", () => {
     assert.isTrue(ImmutableMap.empty<number, string>().isEmpty)
-    assert.isFalse(ImmutableMap(Tuple(1, "a")).isEmpty)
+    assert.isFalse(ImmutableMap([1, "a"]).isEmpty)
   })
 
   it("map", () => {
-    const map = ImmutableMap(Tuple(1, "a"), Tuple(2, "b"), Tuple(3, "c"))
+    const map = ImmutableMap([1, "a"], [2, "b"], [3, "c"])
 
     const result = map.map((v) => v.toUpperCase())
 
-    assert.isTrue(result == ImmutableMap(Tuple(1, "A"), Tuple(2, "B"), Tuple(3, "C")))
+    assert.isTrue(result == ImmutableMap([1, "A"], [2, "B"], [3, "C"]))
   })
 
   it("mapWithIndex", () => {
-    const map = ImmutableMap(Tuple(1, "a"), Tuple(2, "b"), Tuple(3, "c"))
+    const map = ImmutableMap([1, "a"], [2, "b"], [3, "c"])
 
     const result = map.mapWithIndex((k, v) => k + v.toUpperCase())
 
-    assert.isTrue(result == ImmutableMap(Tuple(1, "1A"), Tuple(2, "2B"), Tuple(3, "3C")))
+    assert.isTrue(result == ImmutableMap([1, "1A"], [2, "2B"], [3, "3C"]))
   })
 
   it("remove", () => {
-    const map = ImmutableMap(Tuple(1, "a"), Tuple(2, "b"), Tuple(3, "c"))
+    const map = ImmutableMap([1, "a"], [2, "b"], [3, "c"])
 
     const result1 = map.remove(1)
     const result2 = result1.remove(1)
 
-    assert.isTrue(result1 == ImmutableMap(Tuple(2, "b"), Tuple(3, "c")))
-    assert.isTrue(result2 == ImmutableMap(Tuple(2, "b"), Tuple(3, "c")))
+    assert.isTrue(result1 == ImmutableMap([2, "b"], [3, "c"]))
+    assert.isTrue(result2 == ImmutableMap([2, "b"], [3, "c"]))
   })
 
   it("removeMany", () => {
-    const map = ImmutableMap(Tuple(1, "a"), Tuple(2, "b"), Tuple(3, "c"))
+    const map = ImmutableMap([1, "a"], [2, "b"], [3, "c"])
 
     const result = map.removeMany([1, 2, 3])
 
@@ -115,16 +115,16 @@ describe.concurrent("ImmutableMap", () => {
 
     const result = map.set(1, "a")
 
-    assert.isTrue(result == ImmutableMap(Tuple(1, "a")))
+    assert.isTrue(result == ImmutableMap([1, "a"]))
   })
 
   it("size", () => {
     assert.strictEqual(ImmutableMap.empty<number, string>().size, 0)
-    assert.strictEqual(ImmutableMap(Tuple(1, "a")).size, 1)
+    assert.strictEqual(ImmutableMap([1, "a"]).size, 1)
   })
 
   it("update", () => {
-    const map = ImmutableMap(Tuple(1, "a"), Tuple(2, "b"), Tuple(3, "c"))
+    const map = ImmutableMap([1, "a"], [2, "b"], [3, "c"])
 
     const result1 = map.update(
       1,
@@ -135,9 +135,9 @@ describe.concurrent("ImmutableMap", () => {
       Maybe.$.fold(Maybe.some("-"), (char) => Maybe.some(char.toUpperCase()))
     )
 
-    assert.isTrue(result1 == ImmutableMap(Tuple(2, "b"), Tuple(3, "c")))
+    assert.isTrue(result1 == ImmutableMap([2, "b"], [3, "c"]))
     assert.isTrue(
-      result2 == ImmutableMap(Tuple(1, "a"), Tuple(2, "b"), Tuple(3, "c"), Tuple(4, "-"))
+      result2 == ImmutableMap([1, "a"], [2, "b"], [3, "c"], [4, "-"])
     )
   })
 })

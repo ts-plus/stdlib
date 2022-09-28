@@ -11,8 +11,8 @@ export const separateF = Wiltable.implementSeparateF<Maybe.HKT>()(
   }) =>
     (G: Applicative<G>) =>
       (f: (a: A) => HKT.Kind<G, FR, FE, Either<B, B2>>) =>
-        (fa: Maybe<A>): HKT.Kind<G, FR, FE, Tuple<[Maybe<B>, Maybe<B2>]>> => {
-          const maybe = fa.map((a) => G.map((e: Either<B, B2>) => Tuple(e.left, e.right))(f(a)))
-          return maybe.isNone() ? DSL.succeedF(G)(Tuple(Maybe.none, Maybe.none)) : maybe.value
+        (fa: Maybe<A>): HKT.Kind<G, FR, FE, readonly [Maybe<B>, Maybe<B2>]> => {
+          const maybe = fa.map((a) => G.map((e: Either<B, B2>) => [e.left, e.right] as const)(f(a)))
+          return maybe.isNone() ? DSL.succeedF(G)([Maybe.none, Maybe.none]) : maybe.value
         }
 )

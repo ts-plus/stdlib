@@ -10,11 +10,11 @@ export type _V = typeof _V
 /**
  * @tsplus type SortedMap
  */
-export interface SortedMap<K, V> extends Collection<Tuple<[K, V]>>, Equals {
+export interface SortedMap<K, V> extends Collection<readonly [K, V]>, Equals {
   readonly [SortedMapSym]: SortedMapSym
   readonly [_K]: () => K
   readonly [_V]: () => V
-  [Symbol.iterator](): Iterator<Tuple<[K, V]>>
+  [Symbol.iterator](): Iterator<readonly [K, V]>
 }
 
 /**

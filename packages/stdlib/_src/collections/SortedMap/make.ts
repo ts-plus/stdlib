@@ -2,11 +2,11 @@
  * @tsplus static SortedMap.Ops __call
  * @tsplus static SortedMap.Ops make
  */
-export function make<K, Entries extends Tuple<[K, any]>[]>(
+export function make<K>(
   ord: Ord<K>
-): (...entries: Entries) => SortedMap<
+): <Entries extends (readonly [K, any])[]>(...entries: Entries) => SortedMap<
   K,
-  Entries[number] extends Tuple<[any, infer V]> ? V : never
+  Entries[number] extends (readonly [any, infer V]) ? V : never
 > {
-  return (...entries: Entries) => SortedMap.from(ord)(entries)
+  return (...entries) => SortedMap.from(ord)(entries)
 }

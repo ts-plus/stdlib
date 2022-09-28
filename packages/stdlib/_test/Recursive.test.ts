@@ -42,18 +42,18 @@ describe.concurrent("Recursive", () => {
     })
 
     it("fib", () => {
-      type T = Tuple<[number, number]>
+      type T = readonly [number, number]
       type NatT = Nat<T>
       const fibAlgebra = (r: NatT): T =>
         r.fold(
-          () => Tuple(0, 1),
-          ({ tuple: [n1, n2] }) => Tuple(n1 + n2, n1)
+          () => [0, 1],
+          ([n1, n2]) => [n1 + n2, n1]
         )
       const fib = Recursive.$.fold(Covariant, fibAlgebra)
-      assert.equal(fib(zero).get(0), 0)
-      assert.equal(fib(one).get(0), 1)
-      assert.equal(fib(five).get(0), 5)
-      assert.equal(five.fold(Covariant, fibAlgebra).get(0), 5)
+      assert.equal(fib(zero)[0], 0)
+      assert.equal(fib(one)[0], 1)
+      assert.equal(fib(five)[0], 5)
+      assert.equal(five.fold(Covariant, fibAlgebra)[0], 5)
     })
 
     it("depth first", () => {
@@ -163,16 +163,16 @@ describe.concurrent("Recursive", () => {
     })
 
     it("fib", () => {
-      type FibDownR = Recursive.FoldDownFn<NatF, Tuple<[number, number]>>
-      const fibAlgebra: FibDownR = ({ tuple: [n1, n2] }, r) =>
+      type FibDownR = Recursive.FoldDownFn<NatF, readonly [number, number]>
+      const fibAlgebra: FibDownR = ([n1, n2], r) =>
         r.caseValue.fold(
-          () => Tuple(n1, n2),
-          (_) => Tuple(n1 + n2, n1)
+          () => [n1, n2],
+          (_) => [n1 + n2, n1]
         )
-      const fib = Recursive.$.foldDown(Maybe.Foldable, Tuple(0, 1), fibAlgebra)
-      assert.equal(fib(zero).get(0), 0)
-      assert.equal(fib(one).get(0), 1)
-      assert.equal(fib(five).get(0), 5)
+      const fib = Recursive.$.foldDown(Maybe.Foldable, [0, 1], fibAlgebra)
+      assert.equal(fib(zero)[0], 0)
+      assert.equal(fib(one)[0], 1)
+      assert.equal(fib(five)[0], 5)
     })
   })
 

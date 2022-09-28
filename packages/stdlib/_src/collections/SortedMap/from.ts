@@ -6,10 +6,10 @@ import { SortedMapInternal } from "@tsplus/stdlib/collections/SortedMap/_interna
 export function from_<K>(
   ord: Ord<K>
 ): <V>(
-  iterable: Collection<Tuple<[K, V]>>
+  iterable: Collection<readonly [K, V]>
 ) => SortedMap<K, V> {
   return <V>(
-    iterable: Collection<Tuple<[K, V]>>
+    iterable: Collection<readonly [K, V]>
   ) => new SortedMapInternal(RedBlackTree.from<K, V>(ord)(iterable))
 }
 

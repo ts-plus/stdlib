@@ -6,6 +6,6 @@
  * @tsplus pipeable ImmutableArray zip
  */
 export function zip<B>(that: ImmutableArray<B>) {
-  return <A>(self: ImmutableArray<A>): ImmutableArray<Tuple<[A, B]>> =>
-    self.zipWith(that, (a, b) => Tuple(a, b))
+  return <A>(self: ImmutableArray<A>): ImmutableArray<readonly [A, B]> =>
+    self.zipWith(that, (a, b) => [a, b])
 }

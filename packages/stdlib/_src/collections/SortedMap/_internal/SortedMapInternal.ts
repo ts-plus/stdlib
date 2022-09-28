@@ -15,7 +15,7 @@ export class SortedMapInternal<K, V> implements SortedMap<K, V> {
     return this.tree[Equals.sym](that)
   }
 
-  [Symbol.iterator](): Iterator<Tuple<[K, V]>> {
+  [Symbol.iterator](): Iterator<readonly [K, V]> {
     return this.tree[Symbol.iterator]()
   }
 }

@@ -4,11 +4,11 @@
  * @tsplus static MutableHashMap.Ops __call
  * @tsplus static MutableHashMap.Ops make
  */
-export function make<Entries extends Tuple<[any, any]>[]>(
+export function make<Entries extends (readonly [any, any])[]>(
   ...entries: Entries
 ): MutableHashMap<
-  Entries[number] extends Tuple<[infer K, any]> ? K : never,
-  Entries[number] extends Tuple<[any, infer V]> ? V : never
+  Entries[number] extends readonly [infer K, any] ? K : never,
+  Entries[number] extends readonly [any, infer V] ? V : never
 > {
   return MutableHashMap.from(entries)
 }

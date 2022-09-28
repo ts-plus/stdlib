@@ -54,9 +54,7 @@ export function applicativeF<F extends HKT>(F: Applicative<F>): Selective<F> {
     select: <R2, E2, A, B>(fab: HKT.Kind<F, R2, E2, (a: A) => B>) =>
       <R, E, B2>(fa: HKT.Kind<F, R, E, Either<A, B2>>): HKT.Kind<F, R2 & R, E2 | E, B | B2> => {
         const both = F.both(fab)(fa)
-        return F.map(
-          ({ tuple: [ea, f] }: Tuple<[Either<A, B2>, (a: A) => B]>) => ea.fold(f, identity)
-        )(both)
+        return F.map(([ea, f]: readonly [Either<A, B2>, (a: A) => B]) => ea.fold(f, identity))(both)
       }
   })
 }

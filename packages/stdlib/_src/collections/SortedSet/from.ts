@@ -1,5 +1,4 @@
 import { SortedSetInternal } from "@tsplus/stdlib/collections/SortedSet/_internal/SortedSetInternal"
-import { Tuple } from "@tsplus/stdlib/data/Tuple"
 
 /**
  * @tsplus static SortedSet.Ops from
@@ -11,7 +10,7 @@ export function from_<A>(
 ) => SortedSet<A> {
   return (
     iterable: Collection<A>
-  ) => new SortedSetInternal(RedBlackTree.from(ord)(iterable.map((_) => Tuple(_, true))))
+  ) => new SortedSetInternal(RedBlackTree.from(ord)(iterable.map((_) => [_, true])))
 }
 
 /**

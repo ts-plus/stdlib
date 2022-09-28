@@ -140,10 +140,6 @@ import { Stack } from "@tsplus/stdlib/data/Stack"
 /**
  * @tsplus global
  */
-import { Tuple } from "@tsplus/stdlib/data/Tuple/definition"
-/**
- * @tsplus global
- */
 import { IndexOutOfBounds, NoSuchElement, PrematureGeneratorExit } from "@tsplus/stdlib/exceptions"
 /**
  * @tsplus global
@@ -453,7 +449,6 @@ import {
   ESIterable,
   ESReadonlyArray,
   ForcedArray,
-  ForcedTuple,
   IsInt,
   MergeRecord,
   OrElse,

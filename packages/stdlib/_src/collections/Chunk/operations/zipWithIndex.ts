@@ -4,6 +4,6 @@
  *
  * @tsplus getter Chunk zipWithIndex
  */
-export function zipWithIndex<A>(self: Chunk<A>): Chunk<Tuple<[A, number]>> {
+export function zipWithIndex<A>(self: Chunk<A>): Chunk<readonly [A, number]> {
   return self.zipWithIndexOffset(0)
 }

@@ -215,24 +215,24 @@ describe.concurrent("Maybe", () => {
   it("partition", () => {
     const p = (n: number) => n > 2
 
-    assert.isTrue(Maybe.none.partition(p) == Tuple(Maybe.none, Maybe.none))
-    assert.isTrue(Maybe.some(1).partition(p) == Tuple(Maybe.some(1), Maybe.none))
-    assert.isTrue(Maybe.some(3).partition(p) == Tuple(Maybe.none, Maybe.some(3)))
+    assert.isTrue(Maybe.none.partition(p) == [Maybe.none, Maybe.none])
+    assert.isTrue(Maybe.some(1).partition(p) == [Maybe.some(1), Maybe.none])
+    assert.isTrue(Maybe.some(3).partition(p) == [Maybe.none, Maybe.some(3)])
   })
 
   it("partitionMap", () => {
     const p = (n: number) => n > 2
     const f = (n: number) => (p(n) ? Either.right(n + 1) : Either.left(n - 1))
 
-    assert.isTrue(Maybe.none.partitionMap(f) == Tuple(Maybe.none, Maybe.none))
-    assert.isTrue(Maybe.some(1).partitionMap(f) == Tuple(Maybe.some(0), Maybe.none))
-    assert.isTrue(Maybe.some(3).partitionMap(f) == Tuple(Maybe.none, Maybe.some(4)))
+    assert.isTrue(Maybe.none.partitionMap(f) == [Maybe.none, Maybe.none])
+    assert.isTrue(Maybe.some(1).partitionMap(f) == [Maybe.some(0), Maybe.none])
+    assert.isTrue(Maybe.some(3).partitionMap(f) == [Maybe.none, Maybe.some(4)])
   })
 
   it("separate", () => {
-    assert.isTrue(Maybe.none.separate == Tuple(Maybe.none, Maybe.none))
-    assert.isTrue(Maybe.some(Either.left("123")).separate == Tuple(Maybe.some("123"), Maybe.none))
-    assert.isTrue(Maybe.some(Either.right("123")).separate == Tuple(Maybe.none, Maybe.some("123")))
+    assert.isTrue(Maybe.none.separate == [Maybe.none, Maybe.none])
+    assert.isTrue(Maybe.some(Either.left("123")).separate == [Maybe.some("123"), Maybe.none])
+    assert.isTrue(Maybe.some(Either.right("123")).separate == [Maybe.none, Maybe.some("123")])
   })
 
   it("sequence", () => {
@@ -265,7 +265,7 @@ describe.concurrent("Maybe", () => {
   })
 
   it("zip", () => {
-    assert.isTrue((Maybe.some(1) + Maybe.some(2)) == Maybe.some(Tuple(1, 2)))
+    assert.isTrue((Maybe.some(1) + Maybe.some(2)) == Maybe.some([1, 2]))
   })
 
   it("separateF", () => {
@@ -274,9 +274,9 @@ describe.concurrent("Maybe", () => {
       Either.right(p(n) ? Either.right(n + 1) : Either.left(n - 1))
     )
 
-    assert.isTrue(separateF(Maybe.none) == Either.right(Tuple(Maybe.none, Maybe.none)))
-    assert.isTrue(separateF(Maybe.some(1)) == Either.right(Tuple(Maybe.some(0), Maybe.none)))
-    assert.isTrue(separateF(Maybe.some(3)) == Either.right(Tuple(Maybe.none, Maybe.some(4))))
+    assert.isTrue(separateF(Maybe.none) == Either.right([Maybe.none, Maybe.none]))
+    assert.isTrue(separateF(Maybe.some(1)) == Either.right([Maybe.some(0), Maybe.none]))
+    assert.isTrue(separateF(Maybe.some(3)) == Either.right([Maybe.none, Maybe.some(4)]))
   })
 
   it("struct", () => {

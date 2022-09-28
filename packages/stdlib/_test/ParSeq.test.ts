@@ -35,10 +35,10 @@ describe.concurrent("ParSeq", () => {
   })
 
   it("zip", () => {
-    assert.isTrue(ParSeq.single("a").zip(ParSeq.single(0)) == ParSeq.single(Tuple("a", 0)))
+    assert.isTrue(ParSeq.single("a").zip(ParSeq.single(0)) == ParSeq.single(["a", 0]))
     assert.isTrue(
       ParSeq.combinePar(ParSeq.single("a"), ParSeq.single("b")).zip(ParSeq.single("c")) ==
-        ParSeq.combinePar(ParSeq.single(Tuple("b", "c")), ParSeq.single(Tuple("a", "c")))
+        ParSeq.combinePar(ParSeq.single(["b", "c"]), ParSeq.single(["a", "c"]))
     )
   })
 

@@ -41,6 +41,6 @@ export class MutableHashSet<A> implements Collection<A>, Equals {
   }
 
   [Symbol.iterator](): Iterator<A> {
-    return this.backingMap.map(({ tuple: [a] }) => a)[Symbol.iterator]()
+    return this.backingMap.map(([a]) => a)[Symbol.iterator]()
   }
 }

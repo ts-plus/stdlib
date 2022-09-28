@@ -4,7 +4,7 @@
  *
  * @tsplus static Chunk.Ops unfold
  */
-export function unfold<A, S>(s: S, f: (s: S) => Maybe<Tuple<[A, S]>>): Chunk<A> {
+export function unfold<A, S>(s: S, f: (s: S) => Maybe<readonly [A, S]>): Chunk<A> {
   let builder = Chunk.empty<A>()
   let cont = true
   let s1 = s

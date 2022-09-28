@@ -6,7 +6,7 @@ import { concreteChunkId } from "@tsplus/stdlib/collections/Chunk/definition"
  * @tsplus pipeable Chunk splitWhere
  */
 export function splitWhere<A>(f: Predicate<A>) {
-  return (self: Chunk<A>): Tuple<[Chunk<A>, Chunk<A>]> => {
+  return (self: Chunk<A>): readonly [Chunk<A>, Chunk<A>] => {
     const iterator = concreteChunkId(self)._arrayLikeIterator()
     let next
     let cont = true

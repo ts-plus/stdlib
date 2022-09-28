@@ -5,7 +5,7 @@
  * @tsplus pipeable ImmutableArray partitionMapWithIndex
  */
 export function partitionMapWithIndex<A, B, C>(f: (i: number, a: A) => Either<B, C>) {
-  return (self: ImmutableArray<A>): Tuple<[ImmutableArray<B>, ImmutableArray<C>]> => {
+  return (self: ImmutableArray<A>): readonly [ImmutableArray<B>, ImmutableArray<C>] => {
     const left: Array<B> = []
     const right: Array<C> = []
     for (let i = 0; i < self.array.length; i = i + 1) {
@@ -16,6 +16,6 @@ export function partitionMapWithIndex<A, B, C>(f: (i: number, a: A) => Either<B,
         right.push(e.right)
       }
     }
-    return Tuple(new ImmutableArray(left), new ImmutableArray(right))
+    return [new ImmutableArray(left), new ImmutableArray(right)]
   }
 }

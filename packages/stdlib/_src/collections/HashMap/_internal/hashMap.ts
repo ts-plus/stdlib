@@ -8,7 +8,7 @@ import type { Node } from "@tsplus/stdlib/collections/HashMap/_internal/node"
 import { isEmptyNode } from "@tsplus/stdlib/collections/HashMap/_internal/node"
 import { _K, _V, HashMapSym } from "@tsplus/stdlib/collections/HashMap/definition"
 
-export type TraversalFn<K, V, A> = (node: Tuple<[K, V]>) => A
+export type TraversalFn<K, V, A> = (k: K, v: V) => A
 
 export type Cont<K, V, A> =
   | [
@@ -37,14 +37,14 @@ export class HashMapInternal<K, V> implements HashMap<K, V> {
     public _size: number
   ) {}
 
-  [Symbol.iterator](): Iterator<Tuple<[K, V]>> {
-    return new HashMapIterator(this, identity)
+  [Symbol.iterator](): Iterator<readonly [K, V]> {
+    return new HashMapIterator(this, (k, v) => [k, v])
   }
 
   [Hash.sym](): number {
     let hash = Hash.string("HashMap")
     for (const item of this) {
-      hash ^= Hash.combine(Hash.unknown(item.get(0)), Hash.unknown(item.get(1)))
+      hash ^= Hash.combine(Hash.unknown(item[0]), Hash.unknown(item[1]))
     }
     return Hash.optimize(hash)
   }
@@ -56,11 +56,11 @@ export class HashMapInternal<K, V> implements HashMap<K, V> {
         return false
       }
       for (const item of this) {
-        const elem = that.getHash(item.get(0), Hash.unknown(item.get(0)))
+        const elem = that.getHash(item[0], Hash.unknown(item[0]))
         if (elem.isNone()) {
           return false
         } else {
-          if (!Equals.equals(item.get(1), elem.value)) {
+          if (!Equals.equals(item[1], elem.value)) {
             return false
           }
         }
@@ -114,7 +114,7 @@ export function visitLazy<K, V, A>(
     case "LeafNode": {
       return node.value.isSome()
         ? Maybe.some({
-          value: f(Tuple(node.key, node.value.value)),
+          value: f(node.key, node.value.value),
           cont
         })
         : applyCont(cont)

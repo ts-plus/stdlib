@@ -7,5 +7,5 @@
  * @tsplus pipeable ParSeq zip
  */
 export function zip<B>(that: ParSeq<B>) {
-  return <A>(self: ParSeq<A>): ParSeq<Tuple<[A, B]>> => self.zipWith(that, (a, b) => Tuple(a, b))
+  return <A>(self: ParSeq<A>): ParSeq<readonly [A, B]> => self.zipWith(that, (a, b) => [a, b])
 }

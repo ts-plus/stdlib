@@ -5,8 +5,6 @@ export type MergeRecord<K, H> = {
 } extends infer X ? X
   : never
 
-export type ForcedTuple<A> = A extends unknown[] ? Tuple<A> : never
-
 export type ForcedArray<A> = A extends readonly any[] ? A : []
 
 export type UnionToIntersection<U> = (U extends any ? (k: U) => void : never) extends (

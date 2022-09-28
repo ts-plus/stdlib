@@ -4,13 +4,13 @@
  * @tsplus static Either.Ops zipValidation
  */
 export function zipValidation<E>(S: Associative<E>) {
-  return <A, B>(fa: Either<E, A>, fb: Either<E, B>): Either<E, Tuple<[A, B]>> =>
+  return <A, B>(fa: Either<E, A>, fb: Either<E, B>): Either<E, readonly [A, B]> =>
     fa.fold(
       (ea) =>
         fb.fold(
           (eb) => Either.left(S.combine(ea, eb)),
           () => Either.left(ea)
         ),
-      (a) => fb.fold(Either.left, (b) => Either.right(Tuple(a, b)))
+      (a) => fb.fold(Either.left, (b) => Either.right([a, b]))
     )
 }

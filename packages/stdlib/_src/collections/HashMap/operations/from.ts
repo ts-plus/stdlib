@@ -4,12 +4,12 @@
  * @tsplus static HashMap.Ops from
  */
 export function from<K, V>(
-  entries: Collection<Tuple<[K, V]>>
+  entries: Collection<readonly [K, V]>
 ): HashMap<K, V> {
   const map = HashMap.empty<K, V>().beginMutation
 
   for (const entry of entries) {
-    map.set(entry.get(0), entry.get(1))
+    map.set(entry[0], entry[1])
   }
 
   return map.endMutation

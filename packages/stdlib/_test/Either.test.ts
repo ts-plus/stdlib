@@ -1,5 +1,3 @@
-import { Tuple } from "@tsplus/stdlib/data/Tuple"
-
 describe.concurrent("Either", () => {
   it("value right", () => {
     assert.isTrue(Either.right(0).right == Maybe.some(0))
@@ -220,10 +218,10 @@ describe.concurrent("Either", () => {
     const f = separateF((n: number) => Maybe.some(p(n) ? Either.right(n + 1) : Either.left(n - 1)))
 
     assert.isTrue(
-      f(Either.left("foo")) == Maybe.some(Tuple(Either.left("foo"), Either.left("foo")))
+      f(Either.left("foo")) == Maybe.some([Either.left("foo"), Either.left("foo")])
     )
-    assert.isTrue(f(Either.right(1)) == Maybe.some(Tuple(Either.right(0), Either.left(""))))
-    assert.isTrue(f(Either.right(3)) == Maybe.some(Tuple(Either.left(""), Either.right(4))))
+    assert.isTrue(f(Either.right(1)) == Maybe.some([Either.right(0), Either.left("")]))
+    assert.isTrue(f(Either.right(3)) == Maybe.some([Either.left(""), Either.right(4)]))
   })
 
   it("getOrElse", () => {
@@ -347,7 +345,7 @@ describe.concurrent("Either", () => {
   })
 
   it("zip", () => {
-    assert.isTrue(Either.right(0).zip(Either.right(1)) == Either.right(Tuple(0, 1)))
+    assert.isTrue(Either.right(0).zip(Either.right(1)) == Either.right([0, 1]))
     assert.isTrue(Either.right(0).zip(Either.left(1)) == Either.left(1))
   })
 

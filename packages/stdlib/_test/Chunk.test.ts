@@ -303,18 +303,18 @@ describe.concurrent("Chunk", () => {
   it("mapWithIndex", () => {
     const chunk = Chunk(1, 2, 3, 4, 5, 6, 7)
 
-    const result = chunk.mapWithIndex((i, n) => Tuple(i, n)).toImmutableArray
+    const result = chunk.mapWithIndex((i, n) => [i, n]).toImmutableArray
 
     assert.isTrue(
       result ==
         ImmutableArray(
-          Tuple(0, 1),
-          Tuple(1, 2),
-          Tuple(2, 3),
-          Tuple(3, 4),
-          Tuple(4, 5),
-          Tuple(5, 6),
-          Tuple(6, 7)
+          [0, 1],
+          [1, 2],
+          [2, 3],
+          [3, 4],
+          [4, 5],
+          [5, 6],
+          [6, 7]
         )
     )
   })
@@ -322,40 +322,40 @@ describe.concurrent("Chunk", () => {
   it("partition", () => {
     assert.isTrue(
       Chunk.empty<number>().partition((n) => n > 2) ==
-        Tuple(Chunk.empty<number>(), Chunk.empty<number>())
+        [Chunk.empty<number>(), Chunk.empty<number>()]
     )
-    assert.isTrue(Chunk(1, 3).partition((n) => n > 2) == Tuple(Chunk(1), Chunk(3)))
+    assert.isTrue(Chunk(1, 3).partition((n) => n > 2) == [Chunk(1), Chunk(3)])
   })
 
   it("partitionMap", () => {
     assert.isTrue(
       Chunk.empty<Either<string, number>>().partitionMap(identity) ==
-        Tuple(Chunk.empty<string>(), Chunk.empty<number>())
+        [Chunk.empty<string>(), Chunk.empty<number>()]
     )
     assert.isTrue(
       Chunk(Either.right(1), Either.left("foo"), Either.right(2)).partitionMap(identity) ==
-        Tuple(Chunk("foo"), Chunk(1, 2))
+        [Chunk("foo"), Chunk(1, 2)]
     )
   })
 
   it("partitionMapWithIndex", () => {
     assert.isTrue(
       Chunk.empty<Either<string, number>>().partitionMapWithIndex((_, a) => a) ==
-        Tuple(Chunk.empty<string>(), Chunk.empty<number>())
+        [Chunk.empty<string>(), Chunk.empty<number>()]
     )
     assert.isTrue(
       Chunk(Either.right(1), Either.left("foo"), Either.right(2))
         .partitionMapWithIndex((i, a) => a.filterOrElse((n) => n > i, () => "woops")) ==
-        Tuple(Chunk("foo", "woops"), Chunk(1))
+        [Chunk("foo", "woops"), Chunk(1)]
     )
   })
 
   it("partitionWithIndex", () => {
     assert.isTrue(
       Chunk.empty<number>().partitionWithIndex((i, n) => i + n > 2) ==
-        Tuple(Chunk.empty<number>(), Chunk.empty<number>())
+        [Chunk.empty<number>(), Chunk.empty<number>()]
     )
-    assert.isTrue(Chunk(1, 2).partitionWithIndex((i, n) => i + n > 2) == Tuple(Chunk(1), Chunk(2)))
+    assert.isTrue(Chunk(1, 2).partitionWithIndex((i, n) => i + n > 2) == [Chunk(1), Chunk(2)])
   })
 
   it("prepend", () => {
@@ -369,19 +369,19 @@ describe.concurrent("Chunk", () => {
     const chunk = Chunk(1, 2, 3, 4, 5, 6, 7)
 
     const result = chunk.reduceWithIndex(
-      ImmutableArray.empty<Tuple<[number, number]>>(),
-      (i, acc, n) => acc + Tuple(i, n)
+      ImmutableArray.empty<readonly [number, number]>(),
+      (i, acc, n) => acc + [i, n]
     )
 
     assert.isTrue(
       result == ImmutableArray(
-        Tuple(0, 1),
-        Tuple(1, 2),
-        Tuple(2, 3),
-        Tuple(3, 4),
-        Tuple(4, 5),
-        Tuple(5, 6),
-        Tuple(6, 7)
+        [0, 1],
+        [1, 2],
+        [2, 3],
+        [3, 4],
+        [4, 5],
+        [5, 6],
+        [6, 7]
       )
     )
   })
@@ -390,20 +390,20 @@ describe.concurrent("Chunk", () => {
     const chunk = Chunk(1, 2, 3, 4, 5, 6, 7)
 
     const result = chunk.reduceRightWithIndex(
-      ImmutableArray.empty<Tuple<[number, number]>>(),
-      (i, n, acc) => acc + Tuple(i, n)
+      ImmutableArray.empty<readonly [number, number]>(),
+      (i, n, acc) => acc + [i, n]
     )
 
     assert.isTrue(
       result ==
         ImmutableArray(
-          Tuple(6, 7),
-          Tuple(5, 6),
-          Tuple(4, 5),
-          Tuple(3, 4),
-          Tuple(2, 3),
-          Tuple(1, 2),
-          Tuple(0, 1)
+          [6, 7],
+          [5, 6],
+          [4, 5],
+          [3, 4],
+          [2, 3],
+          [1, 2],
+          [0, 1]
         )
     )
   })
@@ -415,7 +415,7 @@ describe.concurrent("Chunk", () => {
 
     const result = chunk.separate
 
-    assert.isTrue(result == Tuple(Chunk("1", "3", "5"), Chunk(2, 4, 6)))
+    assert.isTrue(result == [Chunk("1", "3", "5"), Chunk(2, 4, 6)])
   })
 
   it("separateF", () => {
@@ -424,9 +424,9 @@ describe.concurrent("Chunk", () => {
     )
 
     assert.isTrue(
-      separateF(Chunk.empty<number>()) == Maybe.some(Tuple(Chunk.empty(), Chunk.empty()))
+      separateF(Chunk.empty<number>()) == Maybe.some([Chunk.empty(), Chunk.empty()])
     )
-    assert.isTrue(separateF(Chunk(1, 3)) == Maybe.some(Tuple(Chunk(0), Chunk(4))))
+    assert.isTrue(separateF(Chunk(1, 3)) == Maybe.some([Chunk(0), Chunk(4)]))
   })
 
   it("separateWithIndexF", () => {
@@ -436,9 +436,9 @@ describe.concurrent("Chunk", () => {
 
     assert.isTrue(
       separateWithIndexF(Chunk.empty<number>()) ==
-        Maybe.some(Tuple(Chunk.empty(), Chunk.empty()))
+        Maybe.some([Chunk.empty(), Chunk.empty()])
     )
-    assert.isTrue(separateWithIndexF(Chunk(1, 3)) == Maybe.some(Tuple(Chunk(1), Chunk(4))))
+    assert.isTrue(separateWithIndexF(Chunk(1, 3)) == Maybe.some([Chunk(1), Chunk(4)]))
   })
 
   describe.concurrent("sort", () => {
@@ -562,9 +562,7 @@ describe.concurrent("Chunk", () => {
   it("splitWhere", () => {
     const chunk = Chunk(0, 1, 2, 3, 4, 5)
 
-    const {
-      tuple: [left, right]
-    } = chunk.splitWhere((n) => n === 3)
+    const [left, right] = chunk.splitWhere((n) => n === 3)
 
     assert.isTrue(left == Chunk(0, 1, 2))
     assert.isTrue(right == Chunk(3, 4, 5))
@@ -661,8 +659,8 @@ describe.concurrent("Chunk", () => {
     const resultA = leftChunk.zip(rightChunk).toImmutableArray
     const resultB = rightChunk.zip(leftChunk).toImmutableArray
 
-    assert.isTrue(resultA == ImmutableArray(Tuple(0, 0), Tuple(1, 1), Tuple(2, 2), Tuple(3, 3)))
-    assert.isTrue(resultB == ImmutableArray(Tuple(0, 0), Tuple(1, 1), Tuple(2, 2), Tuple(3, 3)))
+    assert.isTrue(resultA == ImmutableArray([0, 0], [1, 1], [2, 2], [3, 3]))
+    assert.isTrue(resultB == ImmutableArray([0, 0], [1, 1], [2, 2], [3, 3]))
   })
 
   it("zipAll", () => {
@@ -674,20 +672,20 @@ describe.concurrent("Chunk", () => {
 
     assert.isTrue(
       resultA == ImmutableArray(
-        Tuple(Maybe.some(0), Maybe.some(0)),
-        Tuple(Maybe.some(1), Maybe.some(1)),
-        Tuple(Maybe.some(2), Maybe.some(2)),
-        Tuple(Maybe.some(3), Maybe.some(3)),
-        Tuple(Maybe.none, Maybe.some(4))
+        [Maybe.some(0), Maybe.some(0)],
+        [Maybe.some(1), Maybe.some(1)],
+        [Maybe.some(2), Maybe.some(2)],
+        [Maybe.some(3), Maybe.some(3)],
+        [Maybe.none, Maybe.some(4)]
       )
     )
     assert.isTrue(
       resultB == ImmutableArray(
-        Tuple(Maybe.some(0), Maybe.some(0)),
-        Tuple(Maybe.some(1), Maybe.some(1)),
-        Tuple(Maybe.some(2), Maybe.some(2)),
-        Tuple(Maybe.some(3), Maybe.some(3)),
-        Tuple(Maybe.some(4), Maybe.none)
+        [Maybe.some(0), Maybe.some(0)],
+        [Maybe.some(1), Maybe.some(1)],
+        [Maybe.some(2), Maybe.some(2)],
+        [Maybe.some(3), Maybe.some(3)],
+        [Maybe.some(4), Maybe.none]
       )
     )
   })
@@ -697,6 +695,6 @@ describe.concurrent("Chunk", () => {
 
     const result = chunk.zipWithIndex.toImmutableArray
 
-    assert.isTrue(result == ImmutableArray(Tuple(1, 0), Tuple(2, 1), Tuple(3, 2), Tuple(4, 3)))
+    assert.isTrue(result == ImmutableArray([1, 0], [2, 1], [3, 2], [4, 3]))
   })
 })

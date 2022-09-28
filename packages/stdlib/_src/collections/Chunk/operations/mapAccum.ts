@@ -6,8 +6,8 @@ import { concreteChunkId } from "@tsplus/stdlib/collections/Chunk/definition"
  * @tsplus static Chunk.Aspects mapAccum
  * @tsplus pipeable Chunk mapAccum
  */
-export function mapAccum<A, B, S>(s: S, f: (s: S, a: A) => Tuple<[S, B]>) {
-  return (self: Chunk<A>): Tuple<[S, Chunk<B>]> => {
+export function mapAccum<A, B, S>(s: S, f: (s: S, a: A) => readonly [S, B]) {
+  return (self: Chunk<A>): readonly [S, Chunk<B>] => {
     const iterator = concreteChunkId(self)._arrayLikeIterator()
     let next
     let s1 = s
@@ -20,12 +20,12 @@ export function mapAccum<A, B, S>(s: S, f: (s: S, a: A) => Tuple<[S, B]>) {
       while (i < len) {
         const a = array[i]!
         const x = f(s1, a)
-        s1 = x.get(0)
-        builder = builder.append(x.get(1))
+        s1 = x[0]
+        builder = builder.append(x[1])
         i++
       }
     }
 
-    return Tuple(s1, builder)
+    return [s1, builder]
   }
 }

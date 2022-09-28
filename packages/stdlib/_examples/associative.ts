@@ -2,10 +2,10 @@ main()
 
 function main() {
   /* one namespace per module with "aliased" constructor! */
-  const map0 = VoteMap(HashMap(Tuple("TsPlus", Votes(1)), Tuple("Effect", Votes(2))))
+  const map0 = VoteMap(HashMap(["TsPlus", Votes(1)], ["Effect", Votes(2)]))
 
   /* configure global imports that are still tree-shakeable */
-  const map1 = VoteMap(HashMap(Tuple("TsPlus", Votes(4)), Tuple("Effect-2", Votes(2))))
+  const map1 = VoteMap(HashMap(["TsPlus", Votes(4)], ["Effect-2", Votes(2)]))
 
   /* custom binary operators */
   console.assert(map0.sum(map1) == (map0 + map1))

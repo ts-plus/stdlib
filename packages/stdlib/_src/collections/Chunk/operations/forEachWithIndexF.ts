@@ -10,7 +10,7 @@ export const forEachWithIndexF = ForEachWithIndex.implementForEachWithIndexF<num
           let base = succeed<Chunk<typeof _.B>, typeof _.R, typeof _.E>(Chunk.empty())
           for (let i = 0; i < fa.length; i = i + 1) {
             base = G.map(
-              ({ tuple: [bs, b] }: Tuple<[Chunk<typeof _.B>, typeof _.B]>) => bs.append(b)
+              ([bs, b]: readonly [Chunk<typeof _.B>, typeof _.B]) => bs.append(b)
             )(G.both(f(i, fa.unsafeGet(i)!))(base))
           }
           return base

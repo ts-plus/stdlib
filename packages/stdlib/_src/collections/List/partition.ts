@@ -5,7 +5,7 @@
  * @tsplus pipeable List partition
  */
 export function partition<A>(f: Predicate<A>) {
-  return (self: List<A>): Tuple<[List<A>, List<A>]> => {
+  return (self: List<A>): readonly [List<A>, List<A>] => {
     const left: Array<A> = []
     const right: Array<A> = []
     for (const a of self) {
@@ -15,6 +15,6 @@ export function partition<A>(f: Predicate<A>) {
         left.push(a)
       }
     }
-    return Tuple(List.from(left), List.from(right))
+    return [List.from(left), List.from(right)]
   }
 }

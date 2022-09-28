@@ -10,11 +10,11 @@ export type _V = typeof _V
 /**
  * @tsplus type HashMap
  */
-export interface HashMap<K, V> extends Collection<Tuple<[K, V]>>, Equals {
+export interface HashMap<K, V> extends Collection<readonly [K, V]>, Equals {
   readonly [HashMapSym]: HashMapSym
   readonly [_K]: () => K
   readonly [_V]: () => V
-  [Symbol.iterator](): Iterator<Tuple<[K, V]>>
+  [Symbol.iterator](): Iterator<readonly [K, V]>
 }
 
 /**
@@ -47,7 +47,7 @@ export function unifyHashMap<X extends HashMap<any, any>>(
 /**
  * @tsplus static HashMap.Ops isHashMap
  */
-export function isHashMap<K, V>(u: Iterable<Tuple<[K, V]>>): u is HashMap<K, V>
+export function isHashMap<K, V>(u: Iterable<readonly [K, V]>): u is HashMap<K, V>
 export function isHashMap(u: unknown): u is HashMap<unknown, unknown>
 export function isHashMap(u: unknown): u is HashMap<unknown, unknown> {
   return typeof u === "object" && u != null && HashMapSym in u

@@ -7,5 +7,5 @@ import { HashMapIterator, realHashMap } from "@tsplus/stdlib/collections/HashMap
  */
 export function values<K, V>(self: HashMap<K, V>): IterableIterator<V> {
   realHashMap(self)
-  return new HashMapIterator(self, ({ tuple: [, value] }) => value)
+  return new HashMapIterator(self, (_, value) => value)
 }

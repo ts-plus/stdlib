@@ -74,7 +74,7 @@ describe.concurrent("Eval", () => {
 
     const result = program.run
 
-    assert.isTrue(result == Tuple(0, "a", true))
+    assert.isTrue(result == [0, "a", true])
   })
 
   it("unit", () => {
@@ -88,7 +88,7 @@ describe.concurrent("Eval", () => {
 
     const result = program.run
 
-    assert.isTrue(result == Tuple(0, 1))
+    assert.isTrue(result == [0, 1])
   })
 
   it("zipLeft", () => {

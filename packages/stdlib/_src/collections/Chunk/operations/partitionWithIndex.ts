@@ -6,7 +6,7 @@
  * @tsplus pipeable Chunk partitionWithIndex
  */
 export function partitionWithIndex<A>(f: PredicateWithIndex<number, A>) {
-  return (self: Chunk<A>): Tuple<[Chunk<A>, Chunk<A>]> => {
+  return (self: Chunk<A>): readonly [Chunk<A>, Chunk<A>] => {
     const left: Array<A> = []
     const right: Array<A> = []
     for (let i = 0; i < self.length; i++) {
@@ -17,6 +17,6 @@ export function partitionWithIndex<A>(f: PredicateWithIndex<number, A>) {
         left.push(a)
       }
     }
-    return Tuple(Chunk.from(left), Chunk.from(right))
+    return [Chunk.from(left), Chunk.from(right)]
   }
 }

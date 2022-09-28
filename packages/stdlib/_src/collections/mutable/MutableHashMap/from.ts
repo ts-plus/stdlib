@@ -4,12 +4,12 @@
  * @tsplus static MutableHashMap.Ops from
  */
 export function from<K, V>(
-  entries: Collection<Tuple<[K, V]>>
+  entries: Collection<readonly [K, V]>
 ): MutableHashMap<K, V> {
   const map = MutableHashMap.empty<K, V>()
 
   for (const entry of entries) {
-    map.set(entry.get(0), entry.get(1))
+    map.set(entry[0], entry[1])
   }
 
   return map

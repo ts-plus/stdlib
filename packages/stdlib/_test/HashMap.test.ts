@@ -32,28 +32,28 @@ describe.concurrent("HashMap", () => {
   }
 
   it("has", () => {
-    const hashMap = HashMap(Tuple(key(0), value("a")))
+    const hashMap = HashMap([key(0), value("a")])
 
     assert.isTrue(hashMap.has(key(0)))
     assert.isFalse(hashMap.has(key(1)))
   })
 
   it("hasHash", () => {
-    const hashMap = HashMap(Tuple(key(0), value("a")))
+    const hashMap = HashMap([key(0), value("a")])
 
     assert.isTrue(hashMap.hasHash(key(0), Hash.unknown(key(0))))
     assert.isFalse(hashMap.hasHash(key(1), Hash.unknown(key(0))))
   })
 
   it("get", () => {
-    const hashMap = HashMap(Tuple(key(0), value("a")))
+    const hashMap = HashMap([key(0), value("a")])
 
     assert.isTrue(hashMap[key(0)] == Maybe.some(value("a")))
     assert.isTrue(hashMap[key(1)] == Maybe.none)
   })
 
   it("getHash", () => {
-    const hashMap = HashMap(Tuple(key(0), value("a")))
+    const hashMap = HashMap([key(0), value("a")])
 
     assert.isTrue(hashMap.getHash(key(0), Hash.unknown(0)) == Maybe.some(value("a")))
     assert.isTrue(hashMap.getHash(key(1), Hash.unknown(0)) == Maybe.none)
@@ -93,7 +93,7 @@ describe.concurrent("HashMap", () => {
   })
 
   it("flatMap", () => {
-    const hashMap = HashMap(Tuple(key(0), value("a")), Tuple(key(1), value("bb")))
+    const hashMap = HashMap([key(0), value("a")], [key(1), value("bb")])
 
     const result = hashMap.flatMap(({ s }) => {
       const newKey = key(s.length)
@@ -107,7 +107,7 @@ describe.concurrent("HashMap", () => {
   })
 
   it("chainWithIndex", () => {
-    const hashMap = HashMap(Tuple(key(1), value("a")), Tuple(key(2), value("bb")))
+    const hashMap = HashMap([key(1), value("a")], [key(2), value("bb")])
 
     const result = hashMap.flatMapWithIndex(({ n }, { s }) => {
       const newKey = key(s.length + n)
@@ -121,7 +121,7 @@ describe.concurrent("HashMap", () => {
   })
 
   it("collect", () => {
-    const hashMap = HashMap(Tuple(key(0), value("a")), Tuple(key(1), value("bb")))
+    const hashMap = HashMap([key(0), value("a")], [key(1), value("bb")])
 
     const result = hashMap.collect(({ s }) => s.length > 1 ? Maybe.some(value(s)) : Maybe.none)
 
@@ -130,7 +130,7 @@ describe.concurrent("HashMap", () => {
   })
 
   it("collectWithIndex", () => {
-    const hashMap = HashMap(Tuple(key(0), value("a")), Tuple(key(1), value("bb")))
+    const hashMap = HashMap([key(0), value("a")], [key(1), value("bb")])
 
     const result = hashMap.collectWithIndex(({ n }, v) => n > 0 ? Maybe.some(v) : Maybe.none)
 
@@ -139,7 +139,7 @@ describe.concurrent("HashMap", () => {
   })
 
   it("compact", () => {
-    const hashMap = HashMap(Tuple(0, Maybe.some("a")), Tuple(1, Maybe.none))
+    const hashMap = HashMap([0, Maybe.some("a")], [1, Maybe.none])
 
     const result = hashMap.compact
 
@@ -148,7 +148,7 @@ describe.concurrent("HashMap", () => {
   })
 
   it("filter", () => {
-    const hashMap = HashMap(Tuple(key(0), value("a")), Tuple(key(1), value("bb")))
+    const hashMap = HashMap([key(0), value("a")], [key(1), value("bb")])
 
     const result = hashMap.filter(({ s }) => s.length > 1)
 
@@ -157,7 +157,7 @@ describe.concurrent("HashMap", () => {
   })
 
   it("filterWithIndex", () => {
-    const hashMap = HashMap(Tuple(key(0), value("a")), Tuple(key(1), value("bb")))
+    const hashMap = HashMap([key(0), value("a")], [key(1), value("bb")])
 
     const result = hashMap.filterWithIndex(({ n }, { s }) => n > 0 && s.length > 0)
 
@@ -166,7 +166,7 @@ describe.concurrent("HashMap", () => {
   })
 
   it("forEach", () => {
-    const hashMap = HashMap(Tuple(key(0), value("a")), Tuple(key(1), value("b")))
+    const hashMap = HashMap([key(0), value("a")], [key(1), value("b")])
     const result: Array<string> = []
 
     hashMap.forEach((v) => {
@@ -177,7 +177,7 @@ describe.concurrent("HashMap", () => {
   })
 
   it("forEachWithIndex", () => {
-    const hashMap = HashMap(Tuple(key(0), value("a")), Tuple(key(1), value("b")))
+    const hashMap = HashMap([key(0), value("a")], [key(1), value("b")])
     const result: Array<[number, string]> = []
 
     hashMap.forEachWithIndex(({ n }, { s }) => {
@@ -189,11 +189,11 @@ describe.concurrent("HashMap", () => {
 
   it("isEmpty", () => {
     assert.isTrue(HashMap().isEmpty)
-    assert.isFalse(HashMap(Tuple(key(0), value("a"))).isEmpty)
+    assert.isFalse(HashMap([key(0), value("a")]).isEmpty)
   })
 
   it("keys", () => {
-    const hashMap = HashMap(Tuple(0, "a"), Tuple(1, "b"))
+    const hashMap = HashMap([0, "a"], [1, "b"])
 
     const result = hashMap.keys
 
@@ -202,9 +202,9 @@ describe.concurrent("HashMap", () => {
 
   it("keySet", () => {
     const hashMap = HashMap(
-      Tuple(key(0), value("a")),
-      Tuple(key(1), value("b")),
-      Tuple(key(1), value("c"))
+      [key(0), value("a")],
+      [key(1), value("b")],
+      [key(1), value("c")]
     )
 
     const result = hashMap.keySet
@@ -213,7 +213,7 @@ describe.concurrent("HashMap", () => {
   })
 
   it("map", () => {
-    const hashMap = HashMap(Tuple(key(0), value("a")), Tuple(key(1), value("bb")))
+    const hashMap = HashMap([key(0), value("a")], [key(1), value("bb")])
 
     const result = hashMap.map(({ s }) => s.length)
 
@@ -223,7 +223,7 @@ describe.concurrent("HashMap", () => {
   })
 
   it("mapWithIndex", () => {
-    const hashMap = HashMap(Tuple(key(0), value("a")), Tuple(key(1), value("bb")))
+    const hashMap = HashMap([key(0), value("a")], [key(1), value("bb")])
 
     const result = hashMap.mapWithIndex(({ n }, { s }) => n + s.length)
 
@@ -233,7 +233,7 @@ describe.concurrent("HashMap", () => {
   })
 
   it("modify", () => {
-    const hashMap = HashMap(Tuple(key(0), value("a")), Tuple(key(1), value("b")))
+    const hashMap = HashMap([key(0), value("a")], [key(1), value("b")])
 
     const result = hashMap.modify(
       key(0),
@@ -246,7 +246,7 @@ describe.concurrent("HashMap", () => {
   })
 
   it("modifyHash", () => {
-    const hashMap = HashMap(Tuple(key(0), value("a")), Tuple(key(1), value("b")))
+    const hashMap = HashMap([key(0), value("a")], [key(1), value("b")])
 
     const result = hashMap.modifyHash(
       key(0),
@@ -260,7 +260,7 @@ describe.concurrent("HashMap", () => {
   })
 
   it("reduce", () => {
-    const hashMap = HashMap(Tuple(key(0), value("a")), Tuple(key(1), value("b")))
+    const hashMap = HashMap([key(0), value("a")], [key(1), value("b")])
 
     const result = hashMap.reduce("", (acc, { s }) => acc.length > 0 ? `${acc},${s}` : s)
 
@@ -268,7 +268,7 @@ describe.concurrent("HashMap", () => {
   })
 
   it("reduceWithIndex", () => {
-    const hashMap = HashMap(Tuple(key(0), value("a")), Tuple(key(1), value("b")))
+    const hashMap = HashMap([key(0), value("a")], [key(1), value("b")])
 
     const result = hashMap.reduceWithIndex(
       "",
@@ -279,7 +279,7 @@ describe.concurrent("HashMap", () => {
   })
 
   it("remove", () => {
-    const hashMap = HashMap(Tuple(key(0), value("a")), Tuple(key(1), value("b")))
+    const hashMap = HashMap([key(0), value("a")], [key(1), value("b")])
 
     const result = hashMap.remove(key(0))
 
@@ -288,12 +288,12 @@ describe.concurrent("HashMap", () => {
   })
 
   it("remove non existing key doesn't change the array", () => {
-    const map = HashMap(Tuple(13, 95), Tuple(90, 4))
+    const map = HashMap([13, 95], [90, 4])
     assert.deepEqual(map.remove(75).keySet.toArray, map.keySet.toArray)
   })
 
   it("removeMany", () => {
-    const hashMap = HashMap(Tuple(key(0), value("a")), Tuple(key(1), value("b")))
+    const hashMap = HashMap([key(0), value("a")], [key(1), value("b")])
 
     assert.isFalse(hashMap.isEmpty)
 
@@ -303,7 +303,7 @@ describe.concurrent("HashMap", () => {
   })
 
   it("size", () => {
-    const hashMap = HashMap(Tuple(key(0), value("a")), Tuple(key(1), value("b")))
+    const hashMap = HashMap([key(0), value("a")], [key(1), value("b")])
 
     const result = hashMap.size
 
@@ -311,8 +311,8 @@ describe.concurrent("HashMap", () => {
   })
 
   it("union", () => {
-    const map1 = HashMap(Tuple(0, "a"), Tuple(1, "b"))
-    const map2 = HashMap(Tuple("foo", true), Tuple("bar", false))
+    const map1 = HashMap([0, "a"], [1, "b"])
+    const map2 = HashMap(["foo", true], ["bar", false])
 
     const result = map1 + map2
 
@@ -323,7 +323,7 @@ describe.concurrent("HashMap", () => {
   })
 
   it("update", () => {
-    const hashMap = HashMap(Tuple(key(0), value("a")), Tuple(key(1), value("b")))
+    const hashMap = HashMap([key(0), value("a")], [key(1), value("b")])
 
     const result = hashMap.update(key(0), ({ s }) => value(`${s}-${s}`))
 
@@ -333,7 +333,7 @@ describe.concurrent("HashMap", () => {
   })
 
   it("values", () => {
-    const hashMap = HashMap(Tuple(key(0), value("a")), Tuple(key(1), value("b")))
+    const hashMap = HashMap([key(0), value("a")], [key(1), value("b")])
 
     const result = hashMap.values
 
@@ -341,16 +341,16 @@ describe.concurrent("HashMap", () => {
   })
 
   it("equals", () => {
-    const a = HashMap(Tuple(key(0), value("a")), Tuple(key(1), value("b")))
-    const b = HashMap(Tuple(key(0), value("a")), Tuple(key(1), value("b")))
+    const a = HashMap([key(0), value("a")], [key(1), value("b")])
+    const b = HashMap([key(0), value("a")], [key(1), value("b")])
 
     assert.isTrue(a == b)
   })
 
   it("getAssociative", () => {
-    const a = HashMap(Tuple(key(0), value("a")), Tuple(key(1), value("b")))
-    const b = HashMap(Tuple(key(0), value("a")), Tuple(key(1), value("b")))
-    const expected = HashMap(Tuple(key(0), value("aa")), Tuple(key(1), value("bb")))
+    const a = HashMap([key(0), value("a")], [key(1), value("b")])
+    const b = HashMap([key(0), value("a")], [key(1), value("b")])
+    const expected = HashMap([key(0), value("aa")], [key(1), value("bb")])
     const A = HashMap.getAssociative<Key, Value>(
       Associative((x: Value, y: Value) => value(Associative.string.combine(x.s, y.s)))
     )

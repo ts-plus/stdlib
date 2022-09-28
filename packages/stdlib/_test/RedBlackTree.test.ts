@@ -31,11 +31,11 @@ describe.concurrent("RedBlackTree", () => {
 
     assert.strictEqual(tree.size, 5)
     assert.deepEqual(Array.from(tree), [
-      Tuple(-2, "d"),
-      Tuple(-1, "c"),
-      Tuple(0, "b"),
-      Tuple(1, "a"),
-      Tuple(3, "e")
+      [-2, "d"],
+      [-1, "c"],
+      [0, "b"],
+      [1, "a"],
+      [3, "e"]
     ])
   })
 
@@ -56,11 +56,11 @@ describe.concurrent("RedBlackTree", () => {
 
     assert.strictEqual(tree.size, 5)
     assert.deepEqual(Array.from(tree.backwards), [
-      Tuple(3, "e"),
-      Tuple(1, "a"),
-      Tuple(0, "b"),
-      Tuple(-1, "c"),
-      Tuple(-2, "d")
+      [3, "e"],
+      [1, "a"],
+      [0, "b"],
+      [-1, "c"],
+      [-2, "d"]
     ])
   })
 
@@ -103,9 +103,9 @@ describe.concurrent("RedBlackTree", () => {
       .insert(-2, "d")
       .insert(3, "e")
 
-    assert.isTrue(tree.first == Maybe.some(Tuple(-2, "d")))
-    assert.isTrue(tree.last == Maybe.some(Tuple(3, "e")))
-    assert.isTrue(tree.getAt(1) == Maybe.some(Tuple(-1, "c")))
+    assert.isTrue(tree.first == Maybe.some([-2, "d"]))
+    assert.isTrue(tree.last == Maybe.some([3, "e"]))
+    assert.isTrue(tree.getAt(1) == Maybe.some([-1, "c"]))
   })
 
   it("forEachGe", () => {
@@ -164,11 +164,11 @@ describe.concurrent("RedBlackTree", () => {
       .insert(-2, "d")
       .insert(3, "e")
 
-    assert.deepEqual(Array.from(tree.ge(0)), [Tuple(0, "b"), Tuple(1, "a"), Tuple(3, "e")])
+    assert.deepEqual(Array.from(tree.ge(0)), [[0, "b"], [1, "a"], [3, "e"]])
     assert.deepEqual(Array.from(tree.ge(0, "Backward")), [
-      Tuple(0, "b"),
-      Tuple(-1, "c"),
-      Tuple(-2, "d")
+      [0, "b"],
+      [-1, "c"],
+      [-2, "d"]
     ])
   })
 

@@ -10,14 +10,14 @@
  */
 export function partition<A, B extends A>(
   f: Refinement<A, B>
-): (self: HashSet<A>) => Tuple<[HashSet<A>, HashSet<B>]>
+): (self: HashSet<A>) => readonly [HashSet<A>, HashSet<B>]
 export function partition<A>(
   f: Predicate<A>
-): (self: HashSet<A>) => Tuple<[HashSet<A>, HashSet<A>]>
+): (self: HashSet<A>) => readonly [HashSet<A>, HashSet<A>]
 export function partition<A>(
   f: Predicate<A>
 ) {
-  return (self: HashSet<A>): Tuple<[HashSet<A>, HashSet<A>]> => {
+  return (self: HashSet<A>): readonly [HashSet<A>, HashSet<A>] => {
     const vs = self.values
     let e: IteratorResult<A, any>
     const right = HashSet.empty<A>().beginMutation
@@ -30,6 +30,6 @@ export function partition<A>(
         left.add(value)
       }
     }
-    return Tuple(left.endMutation, right.endMutation)
+    return [left.endMutation, right.endMutation]
   }
 }

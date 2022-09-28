@@ -19,7 +19,7 @@ export interface WiltWithIndex<K, F extends HKT> extends HKT.Typeclass<F> {
     f: (k: K, a: A) => HKT.Kind<G, GR, GE, Either<B, B2>>
   ) => <FR, FE>(
     ta: HKT.Kind<F, FR, FE, A>
-  ) => HKT.Kind<G, GR, GE, Tuple<[HKT.Kind<F, FR, FE, B>, HKT.Kind<F, FR, FE, B2>]>>
+  ) => HKT.Kind<G, GR, GE, readonly [HKT.Kind<F, FR, FE, B>, HKT.Kind<F, FR, FE, B2>]>
 }
 
 /**
@@ -38,7 +38,7 @@ export function implementSeparateWithIndexF<K, F extends HKT>(): (
     f: (k: K, a: A) => HKT.Kind<G, R, E, Either<B, B2>>
   ) => (
     ta: HKT.Kind<F, R, E, A>
-  ) => HKT.Kind<G, R, E, Tuple<[HKT.Kind<F, R, E, B>, HKT.Kind<F, R, E, B2>]>>
+  ) => HKT.Kind<G, R, E, readonly [HKT.Kind<F, R, E, B>, HKT.Kind<F, R, E, B2>]>
 ) => WiltWithIndex<K, F>
 export function implementSeparateWithIndexF() {
   return (i: any) => i()

@@ -281,46 +281,46 @@ describe.concurrent("ImmutableArray", () => {
   it("partition", () => {
     assert.isTrue(
       ImmutableArray.empty<number>().partition((n) => n > 2) ==
-        Tuple(ImmutableArray.empty(), ImmutableArray.empty())
+        [ImmutableArray.empty(), ImmutableArray.empty()]
     )
     assert.isTrue(
-      ImmutableArray(1, 3).partition((n) => n > 2) == Tuple(ImmutableArray(1), ImmutableArray(3))
+      ImmutableArray(1, 3).partition((n) => n > 2) == [ImmutableArray(1), ImmutableArray(3)]
     )
   })
 
   it("partitionMap", () => {
     assert.isTrue(
       ImmutableArray.empty<Either<string, number>>().partitionMap(identity) ==
-        Tuple(ImmutableArray.empty(), ImmutableArray.empty())
+        [ImmutableArray.empty(), ImmutableArray.empty()]
     )
     assert.isTrue(
       ImmutableArray(Either.right(1), Either.left("foo"), Either.right(2)).partitionMap(identity) ==
-        Tuple(ImmutableArray("foo"), ImmutableArray(1, 2))
+        [ImmutableArray("foo"), ImmutableArray(1, 2)]
     )
   })
 
   it("partitionMapWithIndex", () => {
     assert.isTrue(
       ImmutableArray.empty<Either<string, number>>().partitionMapWithIndex((_, a) => a) ==
-        Tuple(ImmutableArray.empty(), ImmutableArray.empty())
+        [ImmutableArray.empty(), ImmutableArray.empty()]
     )
     assert.isTrue(
       ImmutableArray(Either.right(1), Either.left("foo"), Either.right(2)).partitionMapWithIndex((
         i,
         a
       ) => a.filterOrElse((n) => n > i, () => "error")) ==
-        Tuple(ImmutableArray("foo", "error"), ImmutableArray(1))
+        [ImmutableArray("foo", "error"), ImmutableArray(1)]
     )
   })
 
   it("partitionWithIndex", () => {
     assert.isTrue(
       ImmutableArray.empty<number>().partitionWithIndex((i, n) => i + n > 2) ==
-        Tuple(ImmutableArray.empty(), ImmutableArray.empty())
+        [ImmutableArray.empty(), ImmutableArray.empty()]
     )
     assert.isTrue(
       ImmutableArray(1, 2).partitionWithIndex((i, n) => i + n > 2) ==
-        Tuple(ImmutableArray(1), ImmutableArray(2))
+        [ImmutableArray(1), ImmutableArray(2)]
     )
   })
 
@@ -340,11 +340,11 @@ describe.concurrent("ImmutableArray", () => {
   it("separate", () => {
     assert.isTrue(
       ImmutableArray.empty<Either<string, number>>().separate ==
-        Tuple(ImmutableArray.empty(), ImmutableArray.empty())
+        [ImmutableArray.empty(), ImmutableArray.empty()]
     )
     assert.isTrue(
       ImmutableArray(Either.left(123), Either.right("123")).separate ==
-        Tuple(ImmutableArray(123), ImmutableArray("123"))
+        [ImmutableArray(123), ImmutableArray("123")]
     )
   })
 
@@ -417,10 +417,10 @@ describe.concurrent("ImmutableArray", () => {
 
     assert.isTrue(
       separateF(ImmutableArray.empty<number>()) ==
-        Maybe.some(Tuple(ImmutableArray.empty(), ImmutableArray.empty()))
+        Maybe.some([ImmutableArray.empty(), ImmutableArray.empty()])
     )
     assert.isTrue(
-      separateF(ImmutableArray(1, 3)) == Maybe.some(Tuple(ImmutableArray(0), ImmutableArray(4)))
+      separateF(ImmutableArray(1, 3)) == Maybe.some([ImmutableArray(0), ImmutableArray(4)])
     )
   })
 
@@ -432,11 +432,11 @@ describe.concurrent("ImmutableArray", () => {
 
     assert.isTrue(
       separateWithIndexF(ImmutableArray.empty<number>()) ==
-        Maybe.some(Tuple(ImmutableArray.empty(), ImmutableArray.empty()))
+        Maybe.some([ImmutableArray.empty(), ImmutableArray.empty()])
     )
     assert.isTrue(
       separateWithIndexF(ImmutableArray(1, 3)) ==
-        Maybe.some(Tuple(ImmutableArray(1), ImmutableArray(4)))
+        Maybe.some([ImmutableArray(1), ImmutableArray(4)])
     )
   })
 
@@ -574,7 +574,7 @@ describe.concurrent("ImmutableArray", () => {
     )
     assert.isTrue(
       ImmutableArray(1, 2, 3).zip(ImmutableArray("a", "b", "c")) ==
-        ImmutableArray(Tuple(1, "a"), Tuple(2, "b"), Tuple(3, "c"))
+        ImmutableArray([1, "a"], [2, "b"], [3, "c"])
     )
   })
 })

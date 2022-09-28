@@ -12,5 +12,5 @@ export interface AssociativeBoth<F extends HKT> extends HKT.Typeclass<F> {
     fb: HKT.Kind<F, R2, E2, B>
   ) => <R, E, A>(
     fa: HKT.Kind<F, R, E, A>
-  ) => HKT.Kind<F, R2 & R, E2 | E, Tuple<[A, B]>>
+  ) => HKT.Kind<F, R2 & R, E2 | E, readonly [A, B]>
 }

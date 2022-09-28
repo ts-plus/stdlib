@@ -478,13 +478,11 @@ function flattenLoop<A>(
 ): List<HashSet<ParSeq<A>>> {
   // eslint-disable-next-line no-constant-condition
   while (1) {
-    const {
-      tuple: [parallel, sequential]
-    } = causes.reduce(
-      Tuple(HashSet.empty<ParSeq<A>>(), List.empty<ParSeq<A>>()),
-      ({ tuple: [parallel, sequential] }, cause) => {
-        const [set, seq] = step(cause).tuple
-        return Tuple(parallel.union(set), sequential + seq)
+    const [parallel, sequential] = causes.reduce(
+      [HashSet.empty<ParSeq<A>>(), List.empty<ParSeq<A>>()] as const,
+      ([parallel, sequential], cause) => {
+        const [set, seq] = step(cause)
+        return [parallel.union(set), sequential + seq]
       }
     )
     const updated = parallel.size > 0 ? flattened.prepend(parallel) : flattened
@@ -498,7 +496,7 @@ function flattenLoop<A>(
   throw new Error("Bug")
 }
 
-function step<A>(self: ParSeq<A>): Tuple<[HashSet<ParSeq<A>>, List<ParSeq<A>>]> {
+function step<A>(self: ParSeq<A>): readonly [HashSet<ParSeq<A>>, List<ParSeq<A>>] {
   return stepLoop(self, List.empty(), HashSet.empty(), List.empty())
 }
 
@@ -507,13 +505,13 @@ function stepLoop<A>(
   stack: List<ParSeq<A>>,
   parallel: HashSet<ParSeq<A>>,
   sequential: List<ParSeq<A>>
-): Tuple<[HashSet<ParSeq<A>>, List<ParSeq<A>>]> {
+): readonly [HashSet<ParSeq<A>>, List<ParSeq<A>>] {
   // eslint-disable-next-line no-constant-condition
   while (1) {
     switch (cause._tag) {
       case "Empty": {
         if (stack.isNil()) {
-          return Tuple(parallel, sequential)
+          return [parallel, sequential]
         } else {
           cause = stack.head!
           stack = stack.tail
@@ -550,7 +548,7 @@ function stepLoop<A>(
       }
       default: {
         if (stack.isNil()) {
-          return Tuple(parallel.add(cause), sequential)
+          return [parallel.add(cause), sequential]
         } else {
           parallel = parallel.add(cause)
           cause = stack.head
