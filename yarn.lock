@@ -936,11 +936,11 @@ __metadata:
   version: 0.0.0-use.local
   resolution: "@tsplus/runtime@workspace:packages/runtime"
   dependencies:
-    "@tsplus/stdlib": 0.2.6
+    "@tsplus/stdlib": 0.2.7
   languageName: unknown
   linkType: soft
 
-"@tsplus/stdlib@0.2.6, @tsplus/stdlib@workspace:packages/stdlib":
+"@tsplus/stdlib@0.2.7, @tsplus/stdlib@workspace:packages/stdlib":
   version: 0.0.0-use.local
   resolution: "@tsplus/stdlib@workspace:packages/stdlib"
   languageName: unknown

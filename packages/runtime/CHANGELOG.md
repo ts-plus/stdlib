@@ -1,5 +1,16 @@
 # @tsplus/runtime
 
+## 0.1.9
+
+### Patch Changes
+
+- [#211](https://github.com/ts-plus/stdlib/pull/211) [`077932f`](https://github.com/ts-plus/stdlib/commit/077932f52944897911af59d686f4596dc916b789) Thanks [@mikearnaldi](https://github.com/mikearnaldi)! - Cleanup Array and fix mutable comparison
+
+- [#209](https://github.com/ts-plus/stdlib/pull/209) [`c116a39`](https://github.com/ts-plus/stdlib/commit/c116a39985ce9a0b11a794c430f15401fd1654e8) Thanks [@mikearnaldi](https://github.com/mikearnaldi)! - Change Equals to work Structurally, change Either/Maybe to be plain objects
+
+- Updated dependencies [[`6411fc9`](https://github.com/ts-plus/stdlib/commit/6411fc9032a4db21a8d34b057fc3477fa7506476), [`077932f`](https://github.com/ts-plus/stdlib/commit/077932f52944897911af59d686f4596dc916b789), [`6225db5`](https://github.com/ts-plus/stdlib/commit/6225db551ffe5ef64af1c7ee412b073bdeb79677), [`c116a39`](https://github.com/ts-plus/stdlib/commit/c116a39985ce9a0b11a794c430f15401fd1654e8)]:
+  - @tsplus/stdlib@0.2.7
+
 ## 0.1.8
 
 ### Patch Changes
