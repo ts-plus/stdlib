@@ -1,5 +1,5 @@
 console.log(ImmutableArray.from(List(0, 1, 2)) == ImmutableArray(0, 1, 2))
-console.log([0, 1, 2].immutable == ImmutableArray(0, 1, 2))
+console.log(ImmutableArray.from([0, 1, 2]) == ImmutableArray(0, 1, 2))
 console.log(
   pipe(
     Maybe(0),

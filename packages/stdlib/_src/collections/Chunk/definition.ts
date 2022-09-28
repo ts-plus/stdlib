@@ -85,7 +85,7 @@ export abstract class ChunkInternal<A> implements Chunk<A>, Equals {
     if (this.arrayLikeCache) {
       return this.arrayLikeCache as IterableArrayLike<A>
     }
-    const arr = this.binary ? alloc(this.length) : Array.alloc<any>(this.length)
+    const arr = this.binary ? alloc(this.length) : new Array<any>(this.length)
 
     this._copyToArray(0, arr)
     this.arrayLikeCache = arr
@@ -98,7 +98,7 @@ export abstract class ChunkInternal<A> implements Chunk<A>, Equals {
     if (this.arrayCache) {
       return this.arrayCache as readonly A[]
     }
-    const arr = Array.alloc<A>(this.length)
+    const arr = new Array<A>(this.length)
     this._copyToArray(0, arr)
     this.arrayCache = arr
     return arr
@@ -178,14 +178,14 @@ export abstract class ChunkInternal<A> implements Chunk<A>, Equals {
 
   _append<A1>(a1: A1): ChunkInternal<A | A1> {
     const binary = this.binary && isByte(a1)
-    const buffer = this.binary && binary ? alloc(BufferSize) : Array.alloc(BufferSize)
+    const buffer = this.binary && binary ? alloc(BufferSize) : new Array(BufferSize)
     buffer[0] = a1
     return new AppendN(this, buffer, 1, new AtomicNumber(1), this.binary && binary)
   }
 
   _prepend<A1>(a1: A1): ChunkInternal<A | A1> {
     const binary = this.binary && isByte(a1)
-    const buffer = this.binary && binary ? alloc(BufferSize) : Array.alloc(BufferSize)
+    const buffer = this.binary && binary ? alloc(BufferSize) : new Array(BufferSize)
     buffer[BufferSize - 1] = a1
     return new PrependN(this, buffer, 1, new AtomicNumber(1), this.binary && binary)
   }
@@ -409,7 +409,7 @@ export class AppendN<A> extends ChunkInternal<A> {
       this.chain.compareAndSet(this.bufferUsed, this.bufferUsed + 1)
     ) {
       if (this.binary && !binary) {
-        const buffer = Array.alloc(BufferSize)
+        const buffer = new Array(BufferSize)
         for (let i = 0; i < BufferSize; i++) {
           buffer[i] = this.buffer[i]
         }
@@ -431,7 +431,7 @@ export class AppendN<A> extends ChunkInternal<A> {
         this.binary && binary
       )
     } else {
-      const buffer = this.binary && binary ? alloc(BufferSize) : Array.alloc(BufferSize)
+      const buffer = this.binary && binary ? alloc(BufferSize) : new Array(BufferSize)
       buffer[0] = a1
       const chunk = array_(this.buffer as A1[])._take(this.bufferUsed)
       return new AppendN(
@@ -901,7 +901,7 @@ export class PrependN<A> extends ChunkInternal<A> {
       this.chain.compareAndSet(this.bufferUsed, this.bufferUsed + 1)
     ) {
       if (this.binary && !binary) {
-        const buffer = Array.alloc(BufferSize)
+        const buffer = new Array(BufferSize)
         for (let i = 0; i < BufferSize; i++) {
           buffer[i] = this.buffer[i]
         }
@@ -917,7 +917,7 @@ export class PrependN<A> extends ChunkInternal<A> {
         this.binary && binary
       )
     } else {
-      const buffer = binary ? alloc(BufferSize) : Array.alloc(BufferSize)
+      const buffer = binary ? alloc(BufferSize) : new Array(BufferSize)
       buffer[BufferSize - 1] = a1
       const chunk = array_(
         "subarray" in this.buffer

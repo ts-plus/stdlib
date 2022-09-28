@@ -13,7 +13,7 @@ export type _V = typeof _V
  * @tsplus type MutableHashMap
  * @tsplus companion MutableHashMap.Ops
  */
-export class MutableHashMap<K, V> implements Collection<Tuple<[K, V]>> {
+export class MutableHashMap<K, V> implements Collection<Tuple<[K, V]>>, Equals {
   readonly [MutableHashMapSym]: MutableHashMapSym = MutableHashMapSym
   readonly [_K]!: () => K
   readonly [_V]!: () => V
@@ -23,6 +23,14 @@ export class MutableHashMap<K, V> implements Collection<Tuple<[K, V]>> {
 
   get size(): number {
     return this.length.get
+  }
+
+  [Hash.sym]() {
+    return Hash.randomCached(this)
+  }
+
+  [Equals.sym](that: unknown) {
+    return this === that
   }
 
   get(k: K): Maybe<V> {

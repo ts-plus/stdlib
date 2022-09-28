@@ -2,11 +2,19 @@
  * @tsplus type MutableHashSet
  * @tsplus companion MutableHashSet.Ops
  */
-export class MutableHashSet<A> implements Collection<A> {
+export class MutableHashSet<A> implements Collection<A>, Equals {
   private backingMap: MutableHashMap<A, boolean>
 
   constructor() {
     this.backingMap = MutableHashMap.empty()
+  }
+
+  [Hash.sym]() {
+    return Hash.randomCached(this)
+  }
+
+  [Equals.sym](that: unknown) {
+    return this === that
   }
 
   get size(): number {

@@ -457,3 +457,10 @@ export function equals<B>(that: Collection<B>) {
 export function make<A extends readonly any[]>(...as: A): Collection<A[number]> {
   return as
 }
+
+/**
+ * @tsplus getter Collection toArray
+ */
+export function toArray<A>(data: Collection<A>): Array<A> {
+  return Array.from(data)
+}
