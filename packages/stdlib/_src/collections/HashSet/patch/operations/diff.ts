@@ -12,13 +12,13 @@ export function diff<Value>(
   oldValue: HashSet<Value>,
   newValue: HashSet<Value>
 ): Differ.HashSet.Patch<Value> {
-  const { tuple: [removed, patch] } = newValue.reduce(
-    Tuple(oldValue, Differ.HashSet.empty<Value>()),
-    ({ tuple: [set, patch] }, value) => {
+  const [removed, patch] = newValue.reduce(
+    [oldValue, Differ.HashSet.empty<Value>()] as const,
+    ([set, patch], value) => {
       if (set.has(value)) {
-        return Tuple(set.remove(value), patch)
+        return [set.remove(value), patch]
       }
-      return Tuple(set, patch.combine(new AddHashSetPatch(value)))
+      return [set, patch.combine(new AddHashSetPatch(value))]
     }
   )
   return removed.reduce(patch, (patch, value) => patch.combine(new RemoveHashSetPatch(value)))

@@ -7,7 +7,7 @@
 export function reduceWithIndex<K, V, Z>(z: Z, f: (z: Z, k: K, v: V) => Z) {
   return (self: RedBlackTree<K, V>): Z => {
     let x = z
-    for (const { tuple: [k, v] } of self) {
+    for (const [k, v] of self) {
       x = f(x, k, v)
     }
     return x

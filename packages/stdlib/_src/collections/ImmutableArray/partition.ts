@@ -5,6 +5,6 @@
  * @tsplus pipeable ImmutableArray partition
  */
 export function partition<A>(f: Predicate<A>) {
-  return (self: ImmutableArray<A>): Tuple<[ImmutableArray<A>, ImmutableArray<A>]> =>
+  return (self: ImmutableArray<A>): readonly [ImmutableArray<A>, ImmutableArray<A>] =>
     self.partitionWithIndex((_, a) => f(a))
 }

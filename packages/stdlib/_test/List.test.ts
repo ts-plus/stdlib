@@ -30,9 +30,7 @@ describe.concurrent("List", () => {
   it("splitAt", () => {
     const list = List(0, 1, 2, 3, 4, 5)
 
-    const {
-      tuple: [left, right]
-    } = list.splitAt(3)
+    const [left, right] = list.splitAt(3)
 
     assert.isTrue(left == List(0, 1, 2))
     assert.isTrue(right == List(3, 4, 5))
@@ -68,19 +66,19 @@ describe.concurrent("List", () => {
   it("partition", () => {
     assert.isTrue(
       List.empty<number>().partition((n) => n > 2) ==
-        Tuple(List.empty<number>(), List.empty<number>())
+        [List.empty<number>(), List.empty<number>()]
     )
-    assert.isTrue(List(1, 3).partition((n) => n > 2) == Tuple(List(1), List(3)))
+    assert.isTrue(List(1, 3).partition((n) => n > 2) == [List(1), List(3)])
   })
 
   it("partitionMap", () => {
     assert.isTrue(
       List.empty<Either<string, number>>().partitionMap(identity) ==
-        Tuple(List.empty<string>(), List.empty<number>())
+        [List.empty<string>(), List.empty<number>()]
     )
     assert.isTrue(
       List(Either.right(1), Either.left("foo"), Either.right(2)).partitionMap(identity) ==
-        Tuple(List("foo"), List(1, 2))
+        [List("foo"), List(1, 2)]
     )
   })
 })

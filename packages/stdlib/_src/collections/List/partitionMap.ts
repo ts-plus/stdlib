@@ -6,7 +6,7 @@
  * @tsplus pipeable List partitionMap
  */
 export function partitionMap<A, B, C>(f: (a: A) => Either<B, C>) {
-  return (self: List<A>): Tuple<[List<B>, List<C>]> => {
+  return (self: List<A>): readonly [List<B>, List<C>] => {
     const left: Array<B> = []
     const right: Array<C> = []
     for (const a of self) {
@@ -17,6 +17,6 @@ export function partitionMap<A, B, C>(f: (a: A) => Either<B, C>) {
         right.push(e.right)
       }
     }
-    return Tuple(List.from(left), List.from(right))
+    return [List.from(left), List.from(right)]
   }
 }

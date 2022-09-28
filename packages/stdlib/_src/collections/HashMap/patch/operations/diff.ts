@@ -15,20 +15,20 @@ export function diff<Key, Value, Patch>(
   newValue: HashMap<Key, Value>,
   differ: Differ<Value, Patch>
 ): Differ.HashMap.Patch<Key, Value, Patch> {
-  const { tuple: [removed, patch] } = newValue.reduceWithIndex(
-    Tuple(oldValue, Differ.HashMap.empty<Key, Value, Patch>()),
-    ({ tuple: [map, patch] }, key, newValue) => {
+  const [removed, patch] = newValue.reduceWithIndex(
+    [oldValue, Differ.HashMap.empty<Key, Value, Patch>()] as const,
+    ([map, patch], key, newValue) => {
       const maybe = map.get(key)
       switch (maybe._tag) {
         case "Some": {
           const valuePatch = differ.diff(maybe.value, newValue)
           if (Equals.equals(valuePatch, differ.empty)) {
-            return Tuple(map.remove(key), patch)
+            return [map.remove(key), patch]
           }
-          return Tuple(map.remove(key), patch.combine(new UpdateHashMapPatch(key, valuePatch)))
+          return [map.remove(key), patch.combine(new UpdateHashMapPatch(key, valuePatch))]
         }
         case "None": {
-          return Tuple(map, patch.combine(new AddHashMapPatch(key, newValue)))
+          return [map, patch.combine(new AddHashMapPatch(key, newValue))]
         }
       }
     }

@@ -215,13 +215,13 @@ describe.concurrent("SortedSet", () => {
     const result = set.partition((member) => member.id.endsWith("1") || member.id.endsWith("3"))
 
     assert.isTrue(
-      result.get(0).toImmutableArray == ImmutableArray(
+      result[0].toImmutableArray == ImmutableArray(
         new Member("worker_000000"),
         new Member("worker_000002")
       )
     )
     assert.isTrue(
-      result.get(1).toImmutableArray == ImmutableArray(
+      result[1].toImmutableArray == ImmutableArray(
         new Member("worker_000001"),
         new Member("worker_000003")
       )

@@ -8,9 +8,9 @@
 export function zip_<A, B>(
   self: Equivalence<A>,
   that: Equivalence<B>
-): Equivalence<Tuple<[A, B]>> {
+): Equivalence<readonly [A, B]> {
   return Equivalence(
-    ({ tuple: [x0, x1] }, { tuple: [y0, y1] }) => self.equals(x0, y0) && that.equals(x1, y1)
+    ([x0, x1], [y0, y1]) => self.equals(x0, y0) && that.equals(x1, y1)
   )
 }
 

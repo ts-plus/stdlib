@@ -141,8 +141,8 @@ describe.concurrent("HashSet", () => {
 
     const result = hashSet.partition(({ n }) => n > 2)
 
-    assert.isTrue(result.get(0) == HashSet(value(0), value(1), value(2)))
-    assert.isTrue(result.get(1) == HashSet(value(3), value(4), value(5)))
+    assert.isTrue(result[0] == HashSet(value(0), value(1), value(2)))
+    assert.isTrue(result[1] == HashSet(value(3), value(4), value(5)))
   })
 
   it("remove", () => {

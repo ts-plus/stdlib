@@ -5,5 +5,5 @@
  * @tsplus pipeable Chunk zip
  */
 export function zip<B>(that: Chunk<B>) {
-  return <A>(self: Chunk<A>): Chunk<Tuple<[A, B]>> => self.zipWith(that, (a, b) => Tuple(a, b))
+  return <A>(self: Chunk<A>): Chunk<[A, B]> => self.zipWith(that, (a, b) => [a, b])
 }

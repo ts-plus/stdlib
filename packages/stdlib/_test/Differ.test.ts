@@ -77,8 +77,8 @@ function randomEither(): Either<number, number> {
   return Math.random() < 0.5 ? Either.left(smallInt()) : Either.right(smallInt())
 }
 
-function randomTuple(): Tuple<[number, number]> {
-  return Tuple(smallInt(), smallInt())
+function randomTuple(): readonly [number, number] {
+  return [smallInt(), smallInt()]
 }
 
 describe.concurrent("Differ", () => {

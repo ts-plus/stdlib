@@ -6,8 +6,8 @@
  * @tsplus pipeable Either zip
  */
 export function zip<E, A, E2, B>(that: Either<E2, B>) {
-  return <E, A>(self: Either<E, A>): Either<E | E2, Tuple<[A, B]>> =>
+  return <E, A>(self: Either<E, A>): Either<E | E2, readonly [A, B]> =>
     self.flatMap(
-      (a) => that.map((b) => Tuple(a, b))
+      (a) => that.map((b) => [a, b])
     )
 }

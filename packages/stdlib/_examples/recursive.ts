@@ -26,22 +26,22 @@ function main() {
 // use the string's length to lookup neighboring cells and the answer pops out at the head
 function editDistance(s: string, t: string) {
   return pipe(
-    Tuple(s, t),
+    [s, t],
     Recursive.unfold(Functor, substrings(s)),
     Recursive.$.foldAnnotated(Functor, editDistanceAnnotatedAlgebra(s.length))
   )
 }
 function substrings(s0: string): Unfolder.Fn<ListF, Carrier> {
-  return ({ tuple: [s, t] }) => {
+  return ([s, t]) => {
     const [, ...ss] = s
     const [, ...ts] = t
     switch (s.length) {
       case 0:
         return t.length == 0 ?
-          new Leaf(Tuple("", "")) :
-          new Node(Tuple("", t), Tuple(s0, ts.join("")))
+          new Leaf(["", ""]) :
+          new Node(["", t], [s0, ts.join("")])
       default:
-        return new Node(Tuple(s, t), Tuple(ss.join(""), t))
+        return new Node([s, t], [ss.join(""), t])
     }
   }
 }
@@ -54,7 +54,7 @@ function editDistanceAnnotatedAlgebra(len: number): Annotated.Fn<ListF, number> 
       "cons": minDistance
     })
 
-  function minDistance({ head: { tuple: [[a], [b]] }, tail }: AnnotatedNode): number {
+  function minDistance({ head: [[a], [b]], tail }: AnnotatedNode): number {
     return Math.min(
       lookup(0, tail) + 1, // insert
       lookup(len, tail) + 1, // delete
@@ -72,7 +72,7 @@ function editDistanceAnnotatedAlgebra(len: number): Annotated.Fn<ListF, number> 
 }
 // Type definitions
 type MyNonEmptyList<A> = Leaf<A> | Node<A>
-type Carrier = Tuple<[string, string]>
+type Carrier = readonly [string, string]
 interface ListF extends HKT {
   readonly type: MyNonEmptyList<this["A"]>
 }

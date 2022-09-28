@@ -32,7 +32,7 @@ function value(c: number, d: number): Value {
 
 describe.concurrent("MutableHashMap", () => {
   it("from", () => {
-    const map = MutableHashMap(Tuple(key(0, 0), value(0, 0)), Tuple(key(1, 1), value(1, 1)))
+    const map = MutableHashMap([key(0, 0), value(0, 0)], [key(1, 1), value(1, 1)])
 
     assert.strictEqual(map.size, 2)
     assert.isTrue(map.has(key(0, 0)))
@@ -102,8 +102,8 @@ describe.concurrent("MutableHashMap", () => {
 
     assert.isTrue(
       map.toImmutableArray == ImmutableArray(
-        Tuple(key(0, 0), value(4, 4)),
-        Tuple(key(1, 1), value(3, 3))
+        [key(0, 0), value(4, 4)],
+        [key(1, 1), value(3, 3)]
       )
     )
   })

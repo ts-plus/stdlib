@@ -9,7 +9,7 @@ export function tuple<EN extends readonly Eval<any>[]>(
     readonly 1: Eval<any>
   }
 ): Eval<
-  Tuple<
+  Readonly<
     {
       [K in keyof EN]: [EN[K]] extends [Eval<infer A>] ? A : never
     }
@@ -17,7 +17,7 @@ export function tuple<EN extends readonly Eval<any>[]>(
 > {
   const init = e1.zip(e2)
   return es.reduce(
-    (acc, v) => acc.zipWith(v, (a, b) => Tuple.mergeTuple(a, b)),
+    (acc: Eval<any[]>, v) => acc.zipWith(v, (a, b) => [...a, b]),
     init
   )
 }

@@ -6,5 +6,6 @@
  * @tsplus pipeable Chunk partitionMap
  */
 export function partitionMap<A, B, C>(f: (a: A) => Either<B, C>) {
-  return (self: Chunk<A>): Tuple<[Chunk<B>, Chunk<C>]> => self.partitionMapWithIndex((_, a) => f(a))
+  return (self: Chunk<A>): readonly [Chunk<B>, Chunk<C>] =>
+    self.partitionMapWithIndex((_, a) => f(a))
 }

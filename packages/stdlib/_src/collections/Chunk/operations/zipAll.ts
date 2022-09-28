@@ -8,12 +8,12 @@
  * @tsplus pipeable Chunk zipAll
  */
 export function zipAll<B>(that: Chunk<B>) {
-  return <A>(self: Chunk<A>): Chunk<Tuple<[Maybe<A>, Maybe<B>]>> => {
+  return <A>(self: Chunk<A>): Chunk<readonly [Maybe<A>, Maybe<B>]> => {
     return self.zipAllWith(
       that,
-      (a, b) => Tuple(Maybe.some(a), Maybe.some(b)),
-      (a) => Tuple(Maybe.some(a), Maybe.none),
-      (b) => Tuple(Maybe.none, Maybe.some(b))
+      (a, b) => [Maybe.some(a), Maybe.some(b)],
+      (a) => [Maybe.some(a), Maybe.none],
+      (b) => [Maybe.none, Maybe.some(b)]
     )
   }
 }

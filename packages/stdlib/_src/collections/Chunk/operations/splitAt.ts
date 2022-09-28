@@ -5,5 +5,5 @@
  * @tsplus pipeable Chunk splitAt
  */
 export function splitAt(n: number) {
-  return <A>(self: Chunk<A>): Tuple<[Chunk<A>, Chunk<A>]> => Tuple(self.take(n), self.drop(n))
+  return <A>(self: Chunk<A>): readonly [Chunk<A>, Chunk<A>] => [self.take(n), self.drop(n)]
 }

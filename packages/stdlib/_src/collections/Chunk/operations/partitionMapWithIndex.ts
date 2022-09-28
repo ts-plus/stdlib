@@ -6,7 +6,7 @@
  * @tsplus pipeable Chunk partitionMapWithIndex
  */
 export function partitionMapWithIndex<A, B, C>(f: (i: number, a: A) => Either<B, C>) {
-  return (self: Chunk<A>): Tuple<[Chunk<B>, Chunk<C>]> => {
+  return (self: Chunk<A>): readonly [Chunk<B>, Chunk<C>] => {
     const left: Array<B> = []
     const right: Array<C> = []
     for (let i = 0; i < self.length; i++) {
@@ -17,6 +17,6 @@ export function partitionMapWithIndex<A, B, C>(f: (i: number, a: A) => Either<B,
         right.push(e.right)
       }
     }
-    return Tuple(Chunk.from(left), Chunk.from(right))
+    return [Chunk.from(left), Chunk.from(right)]
   }
 }

@@ -8,26 +8,23 @@
 export function zip<Value2, Patch2>(that: Differ<Value2, Patch2>) {
   return <Value, Patch>(
     self: Differ<Value, Patch>
-  ): Differ<Tuple<[Value, Value2]>, Tuple<[Patch, Patch2]>> =>
+  ): Differ<readonly [Value, Value2], readonly [Patch, Patch2]> =>
     Differ.make({
-      empty: Tuple(
-        self.empty,
-        that.empty
-      ),
-      combine: (first, second) =>
-        Tuple(
-          self.combine(first.get(0), second.get(0)),
-          that.combine(first.get(1), second.get(1))
-        ),
-      diff: (oldValue, newValue) =>
-        Tuple(
-          self.diff(oldValue.get(0), newValue.get(0)),
-          that.diff(oldValue.get(1), newValue.get(1))
-        ),
-      patch: (patch, oldValue) =>
-        Tuple(
-          self.patch(patch.get(0), oldValue.get(0)),
-          that.patch(patch.get(1), oldValue.get(1))
-        )
+      empty: [self.empty, that.empty] as const,
+      combine: (
+        first,
+        second
+      ) => [self.combine(first[0], second[0]), that.combine(first[1], second[1])],
+      diff: (
+        oldValue,
+        newValue
+      ) => [
+        self.diff(oldValue[0], newValue[0]),
+        that.diff(oldValue[1], newValue[1])
+      ],
+      patch: (
+        patch,
+        oldValue
+      ) => [self.patch(patch[0], oldValue[0]), that.patch(patch[1], oldValue[1])]
     })
 }

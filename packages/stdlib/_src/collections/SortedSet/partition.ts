@@ -8,13 +8,13 @@ import { concreteSortedSet } from "@tsplus/stdlib/collections/SortedSet/_interna
  */
 export function partition<A, B extends A>(
   f: Refinement<A, B>
-): (self: SortedSet<A>) => Tuple<[SortedSet<A>, SortedSet<B>]>
+): (self: SortedSet<A>) => readonly [SortedSet<A>, SortedSet<B>]
 export function partition<A>(
   f: Predicate<A>
-): (self: SortedSet<A>) => Tuple<[SortedSet<A>, SortedSet<A>]>
+): (self: SortedSet<A>) => readonly [SortedSet<A>, SortedSet<A>]
 export function partition<A>(
   f: Predicate<A>
-): (self: SortedSet<A>) => Tuple<[SortedSet<A>, SortedSet<A>]> {
+): (self: SortedSet<A>) => readonly [SortedSet<A>, SortedSet<A>] {
   return (self) => {
     concreteSortedSet(self)
     let right = SortedSet.empty(self.keyTree.ord)
@@ -26,6 +26,6 @@ export function partition<A>(
         left = left.add(value)
       }
     }
-    return Tuple(left, right)
+    return [left, right]
   }
 }

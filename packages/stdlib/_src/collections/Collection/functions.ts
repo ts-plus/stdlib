@@ -102,7 +102,8 @@ export function map<A, B>(f: (a: A, k: number) => B) {
  * @tsplus pipeable Collection zip
  */
 export function zip<B>(that: Collection<B>) {
-  return <A>(self: Collection<A>): Collection<Tuple<[A, B]>> => self.zipWith(that, Tuple.make)
+  return <A>(self: Collection<A>): Collection<readonly [A, B]> =>
+    self.zipWith(that, (a, b) => [a, b])
 }
 
 /**

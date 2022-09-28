@@ -18,7 +18,7 @@ export function getValidationF<F extends HKT>(M: Monad<F> & Run<F> & Fail<F> & A
         <A, R = unknown>(fa: HKT.Kind<F, R, Z, A>) => {
           const both = M.both(M.either(fb))(M.either(fa))
           return M.flatten(
-            M.map(({ tuple: [eitherA, eitherB] }: Tuple<[Either<Z, A>, Either<Z, B>]>) =>
+            M.map(([eitherA, eitherB]: readonly [Either<Z, A>, Either<Z, B>]) =>
               eitherA.fold(
                 (ea) =>
                   eitherB.fold(
@@ -28,7 +28,7 @@ export function getValidationF<F extends HKT>(M: Monad<F> & Run<F> & Fail<F> & A
                 (a) =>
                   eitherB.fold(
                     (e) => M.fail(e),
-                    (b) => DSL.succeedF(M)(Tuple(a, b))
+                    (b) => DSL.succeedF(M)([a, b] as const)
                   )
               )
             )(both)

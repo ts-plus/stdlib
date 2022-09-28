@@ -5,6 +5,6 @@
  * @tsplus pipeable ImmutableArray partitionMap
  */
 export function partitionMap<A, B, C>(f: (a: A) => Either<B, C>) {
-  return (self: ImmutableArray<A>): Tuple<[ImmutableArray<B>, ImmutableArray<C>]> =>
+  return (self: ImmutableArray<A>): readonly [ImmutableArray<B>, ImmutableArray<C>] =>
     self.partitionMapWithIndex((_, a) => f(a))
 }

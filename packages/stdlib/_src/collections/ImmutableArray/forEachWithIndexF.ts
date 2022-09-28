@@ -15,7 +15,7 @@ export const forEachWithIndexF = ForEachWithIndex.implementForEachWithIndexF<
           )
           for (let i = 0; i < fa.array.length; i = i + 1) {
             base = G.map(
-              ({ tuple: [bs, b] }: Tuple<[ImmutableArray<typeof _.B>, typeof _.B]>) => bs.append(b)
+              ([bs, b]: readonly [ImmutableArray<typeof _.B>, typeof _.B]) => bs.append(b)
             )(G.both(f(i, fa.array[i]!))(base))
           }
           return base

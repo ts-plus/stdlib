@@ -19,7 +19,7 @@ export interface Wilt<F extends HKT> {
     f: (a: A) => HKT.Kind<G, GR, GE, Either<B, B2>>
   ) => <FR, FE>(
     ta: HKT.Kind<F, FR, FE, A>
-  ) => HKT.Kind<G, GR, GE, Tuple<[HKT.Kind<F, FR, FE, B>, HKT.Kind<F, FR, FE, B2>]>>
+  ) => HKT.Kind<G, GR, GE, readonly [HKT.Kind<F, FR, FE, B>, HKT.Kind<F, FR, FE, B2>]>
 }
 
 /**
@@ -44,7 +44,7 @@ export function implementSeparateF<F extends HKT>(): (
     f: (a: A) => HKT.Kind<G, FR, FE, Either<B, B2>>
   ) => (
     ta: HKT.Kind<F, FR, FE, A>
-  ) => HKT.Kind<G, FR, FE, Tuple<[HKT.Kind<F, FR, FE, B>, HKT.Kind<F, FR, FE, B2>]>>
+  ) => HKT.Kind<G, FR, FE, readonly [HKT.Kind<F, FR, FE, B>, HKT.Kind<F, FR, FE, B2>]>
 ) => Wilt<F>
 export function implementSeparateF() {
   return (i: any) => i()

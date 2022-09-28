@@ -1,6 +1,6 @@
 /**
  * @tsplus getter SortedMap entries
  */
-export function entries<K, V>(self: SortedMap<K, V>): Iterator<Tuple<[K, V]>> {
+export function entries<K, V>(self: SortedMap<K, V>): Iterator<readonly [K, V]> {
   return self[Symbol.iterator]()
 }

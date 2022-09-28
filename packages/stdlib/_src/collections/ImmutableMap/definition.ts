@@ -2,10 +2,10 @@
  * @tsplus type ImmutableMap
  * @tsplus companion ImmutableMap.Ops
  */
-export class ImmutableMap<K, V> implements Equals, Collection<Tuple<[K, V]>> {
+export class ImmutableMap<K, V> implements Equals, Collection<readonly [K, V]> {
   constructor(readonly internalMap: ReadonlyMap<K, V>) {}
 
-  [Symbol.iterator](): Iterator<Tuple<[K, V]>> {
+  [Symbol.iterator](): Iterator<readonly [K, V]> {
     const iterator = this.internalMap[Symbol.iterator]()
     return {
       next: () => {
@@ -13,7 +13,7 @@ export class ImmutableMap<K, V> implements Equals, Collection<Tuple<[K, V]>> {
         if (next.done) {
           return { done: true, value: undefined }
         }
-        return { done: false, value: Tuple(next.value[0], next.value[1]) }
+        return { done: false, value: [next.value[0], next.value[1]] }
       }
     }
   }
@@ -38,7 +38,7 @@ export class ImmutableMap<K, V> implements Equals, Collection<Tuple<[K, V]>> {
   [Hash.sym](): number {
     let hash = Hash.string("ImmutableMap")
     for (const item of this) {
-      hash ^= Hash.combine(Hash.unknown(item.get(0)), Hash.unknown(item.get(1)))
+      hash ^= Hash.combine(Hash.unknown(item[0]), Hash.unknown(item[1]))
     }
     return Hash.optimize(hash)
   }

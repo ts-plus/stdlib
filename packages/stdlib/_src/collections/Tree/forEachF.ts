@@ -11,7 +11,7 @@ export const forEachF = ForEach.implementForEachF<Tree.HKT>()(
           return pipe(
             f(fa.value),
             G.both(forEachFChunk(go)(fa.forest)),
-            G.map(({ tuple: [b, bs] }) => Tree(b, bs))
+            G.map(([b, bs]) => Tree(b, bs))
           )
         }
       }
