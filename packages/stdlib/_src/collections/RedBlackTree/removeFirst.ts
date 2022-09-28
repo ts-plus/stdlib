@@ -31,7 +31,7 @@ export function removeFirst<K>(key: K) {
       return self
     }
 
-    const cstack = Array.alloc<Node<K, V>>(stack.length)
+    const cstack = new Array<Node<K, V>>(stack.length)
 
     let n = stack[stack.length - 1]!
 

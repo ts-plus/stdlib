@@ -130,6 +130,18 @@ export function hashRandom(): number {
   return optimize(randomInt())
 }
 
+/**
+ * @tsplus static Hash.Ops randomCached
+ */
+export function hashRandomCached(o: object): number {
+  if (CACHE.has(o)) {
+    return CACHE.get(o)!
+  }
+  const h = optimize(randomInt())
+  CACHE.set(o, h)
+  return h
+}
+
 function isZero(value: any): boolean {
   return value === null || value === void 0 || value === false
 }

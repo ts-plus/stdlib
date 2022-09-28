@@ -319,7 +319,7 @@ function pack<K, V>(
   removed: number,
   elements: Node<K, V>[]
 ) {
-  const children = Array.alloc<Node<K, V>>(count - 1)
+  const children = new Array<Node<K, V>>(count - 1)
   let g = 0
   let bitmap = 0
   for (let i = 0, len = elements.length; i < len; ++i) {

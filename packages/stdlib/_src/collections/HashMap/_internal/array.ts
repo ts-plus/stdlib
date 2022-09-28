@@ -2,7 +2,7 @@ export function arrayUpdate<A>(mutate: boolean, at: number, v: A, arr: A[]) {
   let out = arr
   if (!mutate) {
     const len = arr.length
-    out = Array.alloc(len)
+    out = new Array(len)
     for (let i = 0; i < len; ++i) out[i] = arr[i]!
   }
   out[at] = v
@@ -17,7 +17,7 @@ export function arraySpliceOut<A>(mutate: boolean, at: number, arr: A[]) {
   if (mutate) {
     i = g = at
   } else {
-    out = Array.alloc(newLen)
+    out = new Array(newLen)
     while (i < at) out[g++] = arr[i++]!
   }
   ;++i
@@ -38,7 +38,7 @@ export function arraySpliceIn<A>(mutate: boolean, at: number, v: A, arr: A[]) {
   }
   let i = 0,
     g = 0
-  const out = Array.alloc<A>(len + 1)
+  const out = new Array<A>(len + 1)
   while (i < at) out[g++] = arr[i++]!
   out[at] = v
   while (i < len) out[++g] = arr[i++]!

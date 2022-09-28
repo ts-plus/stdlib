@@ -14,9 +14,17 @@ type Node<T> = LinkedListNode<T> | undefined
 /**
  * @tsplus type DoublyLinkedList
  */
-export class DoublyLinkedList<T> implements Collection<T> {
+export class DoublyLinkedList<T> implements Collection<T>, Equals {
   public get head(): T | undefined {
     return this.headN === undefined ? undefined : this.headN.value
+  }
+
+  [Hash.sym]() {
+    return Hash.randomCached(this)
+  }
+
+  [Equals.sym](that: unknown) {
+    return this === that
   }
 
   public get isEmpty(): boolean {

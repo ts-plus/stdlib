@@ -13,13 +13,21 @@
  * @tsplus type ListBuffer
  * @tsplus companion ListBuffer.Ops
  */
-export class ListBuffer<A> implements Collection<A> {
+export class ListBuffer<A> implements Collection<A>, Equals {
   private first: List<A> = List.nil()
   private last0: List.Cons<A> | undefined = undefined
   private len = 0;
 
   [Symbol.iterator](): Iterator<A> {
     return this.first[Symbol.iterator]()
+  }
+
+  [Hash.sym]() {
+    return Hash.randomCached(this)
+  }
+
+  [Equals.sym](that: unknown) {
+    return this === that
   }
 
   static empty<A>(): ListBuffer<A> {

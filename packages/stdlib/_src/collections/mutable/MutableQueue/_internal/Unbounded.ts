@@ -6,7 +6,15 @@ import {
 export class Unbounded<A> implements MutableQueue<A> {
   readonly [MutableQueueSym]: MutableQueueSym = MutableQueueSym
 
-  private queue = new DoublyLinkedList<A>()
+  private queue = new DoublyLinkedList<A>();
+
+  [Hash.sym]() {
+    return Hash.randomCached(this)
+  }
+
+  [Equals.sym](that: unknown) {
+    return this === that
+  }
 
   get size(): number {
     return this.queue.length

@@ -7,7 +7,7 @@ export type EmptyMutableQueue = typeof EmptyMutableQueue
 /**
  * @tsplus type MutableQueue
  */
-export interface MutableQueue<A> extends Collection<A> {
+export interface MutableQueue<A> extends Collection<A>, Equals {
   readonly [MutableQueueSym]: MutableQueueSym
 
   /**

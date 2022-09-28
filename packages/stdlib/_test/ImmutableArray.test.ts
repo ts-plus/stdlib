@@ -86,11 +86,11 @@ describe.concurrent("ImmutableArray", () => {
 
   it("equals", () => {
     assert.isTrue(
-      [1, 2].immutable
+      ImmutableArray.from([1, 2])
         == ImmutableArray(1, 2)
     )
     assert.isFalse(
-      [1, 2].immutable
+      ImmutableArray.from([1, 2])
         == ImmutableArray(1, 3)
     )
   })

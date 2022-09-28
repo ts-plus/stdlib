@@ -14,6 +14,14 @@ export class Bounded<A> implements MutableQueue<A> {
     this.max = max
   }
 
+  [Hash.sym]() {
+    return Hash.randomCached(this)
+  }
+
+  [Equals.sym](that: unknown) {
+    return this === that
+  }
+
   get size(): number {
     return this.queue.length
   }
