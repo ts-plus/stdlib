@@ -1,5 +1,11 @@
 # @tsplus/stdlib
 
+## 0.2.8
+
+### Patch Changes
+
+- [#212](https://github.com/ts-plus/stdlib/pull/212) [`55fe672`](https://github.com/ts-plus/stdlib/commit/55fe672b1c5b00564a0d2fdd99d99a41315e50cb) Thanks [@mikearnaldi](https://github.com/mikearnaldi)! - Improve Equals on Object, fix Tag/Eval equality
+
 ## 0.2.7
 
 ### Patch Changes

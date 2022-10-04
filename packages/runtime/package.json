@@ -1,6 +1,6 @@
 {
   "name": "@tsplus/runtime",
-  "version": "0.1.9",
+  "version": "0.1.10",
   "type": "module",
   "repository": "https://github.com/ts-plus/stdlib.git",
   "author": "Michael Arnaldi <arnaldimichael@gmail.com>",
@@ -34,7 +34,7 @@
     }
   },
   "dependencies": {
-    "@tsplus/stdlib": "0.2.7"
+    "@tsplus/stdlib": "0.2.8"
   },
   "config": {
     "side": [],
