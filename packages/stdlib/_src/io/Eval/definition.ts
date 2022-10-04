@@ -49,33 +49,57 @@ export function unifyEval<X extends Eval<any>>(
 }
 
 export interface Succeed<A> extends Eval<A> {}
-export class Succeed<A> {
+export class Succeed<A> implements Equals {
   readonly _tag = "Succeed"
 
   readonly [EvalSym]: EvalSym = EvalSym
   readonly [_A]!: () => A
 
   constructor(readonly a: Lazy<A>) {}
+
+  [Equals.sym](that: unknown) {
+    return this === that
+  }
+
+  [Hash.sym]() {
+    return Hash.randomCached(this)
+  }
 }
 
 export interface Suspend<A> extends Eval<A> {}
-export class Suspend<A> {
+export class Suspend<A> implements Equals {
   readonly _tag = "Suspend"
 
   readonly [EvalSym]: EvalSym = EvalSym
   readonly [_A]!: () => A
 
   constructor(readonly f: Lazy<EvalInternal<A>>) {}
+
+  [Equals.sym](that: unknown) {
+    return this === that
+  }
+
+  [Hash.sym]() {
+    return Hash.randomCached(this)
+  }
 }
 
 export interface FlatMap<A, B> extends Eval<B> {}
-export class FlatMap<A, B> {
+export class FlatMap<A, B> implements Equals {
   readonly _tag = "FlatMap"
 
   readonly [EvalSym]: EvalSym = EvalSym
   readonly [_A]!: () => A
 
   constructor(readonly value: EvalInternal<A>, readonly cont: (a: A) => EvalInternal<B>) {}
+
+  [Equals.sym](that: unknown) {
+    return this === that
+  }
+
+  [Hash.sym]() {
+    return Hash.randomCached(this)
+  }
 }
 
 export interface EvalF extends HKT {

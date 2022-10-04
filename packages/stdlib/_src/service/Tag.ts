@@ -14,6 +14,12 @@ export const Tag: TagOps = Object.assign(
     [Tag.sym]: identity,
     toEnv(value) {
       return Env(this, value)
+    },
+    [Equals.sym](that) {
+      return this === that
+    },
+    [Hash.sym]() {
+      return Hash.randomCached(this)
     }
   }),
   {
@@ -25,7 +31,7 @@ export const Tag: TagOps = Object.assign(
 /**
  * @tsplus type Tag
  */
-export interface Tag<in out S> {
+export interface Tag<in out S> extends Equals {
   readonly [Tag.sym]: (_: S) => S
 
   toEnv(value: S): Service.Env<S>

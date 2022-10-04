@@ -59,6 +59,15 @@ const protoMap = new Map<any, (a: any, b: any) => boolean>([
   [
     Object.prototype,
     (a: object, b: object) => {
+      if ("_tag" in a) {
+        if ("_tag" in b) {
+          if (a["_tag"] !== b["_tag"]) {
+            return false
+          }
+        } else {
+          return false
+        }
+      }
       const keysA = Object.keys(a).sort()
       const keysB = Object.keys(b).sort()
       if (keysA.length !== keysB.length) {
